@@ -1,0 +1,85 @@
+﻿
+<h1>Ativações</h1>
+<hr />
+<div ng-controller="AtivacoesController as vm">
+    <div ng-if="vm.adm" class="row">
+        <div class="col-md-12" style="margin-bottom:20px">
+            <a href="#/ativacoes/new" role="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>&nbsp;Ativação</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive" loading-container="vm.tableparams.settings().$loading" ng-hide="vm.mensagem" style="position:relative">
+                <table ng-table="vm.tableParams" class="table table-hover">
+                    <tr ng-repeat="ativacao in $data">
+                        <td ng-if="!vm.adm">
+                            <button class="btn btn-default btn-xs" type="button" ng-click="vm.acoes(ativacao)">
+                                <span class="glyphicon glyphicon-modal-window"></span>
+                            </button>
+                        </td>
+                        <td ng-if="vm.adm">
+                            <a ng-href="/#/ativacoes/edit/{{ativacao.IDAtivacao}}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+                        </td>
+                        <td ng-if="vm.adm">
+                            <button type="button" data-target="#modal-info" data-toggle="modal" data-dados="{{ ativacao.Licencas }}" data-titulo="{{ ativacao.ChaveAtivacao }}" class="btn btn-default btn-xs">
+                                <span class="glyphicon glyphicon-th-list"></span>
+                            </button>
+                        </td>
+                        <td ng-if="vm.adm">
+                            <ativacao-offline ativacao="{{ ativacao.ChaveAtivacao }}"></ativacao-offline>
+                        </td>
+                        <td ng-if="vm.adm">
+                            <licenca-download id="{{ativacao.IDAtivacao}}" arquivo="{{ativacao.Cliente.Nome | lowercase | removerEspacos}}.lic"></licenca-download>
+                        </td>
+                        <td data-title="'Cliente'" filter="{cliente: 'text'}">
+                            <nobr>
+                                <a ng-if="vm.adm" ng-href="/#/clientes/edit/{{ativacao.Cliente.IDCliente}}">{{ativacao.Cliente.Nome}}</a>
+                                <span ng-if="!vm.adm">{{ ativacao.Cliente.Nome }}</span>
+                            </nobr>
+                        </td>
+                        <td ng-if="vm.adm" data-title="'Chave Ativação'" filter="{chaveAtivacao:'text'}"><nobr>{{ ativacao.ChaveAtivacao }}</nobr></td>
+                        <td ng-if="vm.adm" data-title="'Última Verificação'"><nobr>{{ ativacao.DtUltimaVerificacao | date: 'dd/MM/yyyy HH:mm:ss' }}</nobr></td>
+                        <td ng-if="vm.adm" data-title="'Dias de Validade'"><nobr>{{ ativacao.DiasValidadeAtivacao }}</nobr></td>
+                        <td data-title="'  Ativo  '" filter="{ativo:'select'}" filter-data="vm.ativofilter"><span class="glyphicon" ng-class="{'glyphicon-ok-sign success' : ativacao.Ativo, 'danger glyphicon-remove-sign' : !ativacao.Ativo}"></span></td>
+                        <td ng-if="vm.adm" data-title="'Duplicidade'" filter="{duplicidade:'select'}" filter-data="vm.duplicidadeFilter"><span class="glyphicon" ng-class="{'glyphicon-ok-sign success' : ativacao.Duplicidade, 'danger glyphicon-remove-sign' : !ativacao.Duplicidade}"></span></td>
+                        <td data-title="'Reativado Suporte'" filter="{reativadoSuporte: 'select'}" filter-data="vm.reativadoFilter"><span class="glyphicon" ng-class="{'glyphicon-ok-sign success' : ativacao.ReativadoSuporte, 'danger glyphicon-remove-sign' : !ativacao.ReativadoSuporte}"></span></td>
+                        <td ng-if="vm.adm" data-title="'Observações'" filter="{observacao: 'text'}">{{ ativacao.Observacao }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="alert alert-danger" ng-show="vm.mensagem">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Erro!</strong> {{vm.mensagem}}
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Licenças</h4>
+                </div>
+                <div class="modal-body">
+                    <span></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#modal-info').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var titulo = button.data('titulo');
+            var dados = button.data('dados');
+            var modal = $(this)
+            modal.find('.modal-title').text(titulo);
+            modal.find('.modal-body span').empty();
+            modal.find('.modal-body span').append(unescape(dados));
+        });
+    });
+</script>

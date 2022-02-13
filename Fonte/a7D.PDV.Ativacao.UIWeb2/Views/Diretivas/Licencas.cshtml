@@ -1,0 +1,29 @@
+﻿<div class="panel panel-default" ng-form="form">
+    <div class="panel-heading">
+        <strong>{{ngModel.Nome}}</strong>
+        <button type="button" class="btn btn-danger btn-sm pull-right" ng-click="remover(ngModel)"><span class="glyphicon glyphicon-trash"></span></button>
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel-body">
+        <div style="padding: 15px">
+            <div class="form-group" ng-class="{ 'has-error': !form.tipopdv.$valid }">
+                <label class="control-label" for="inputTipoPdv">Tipo PDV</label>
+                <select id="inputTipoPdv" name="tipopdv"
+                        class="form-control"
+                        required
+                        ng-model="ngModel.IDTipoPDV"
+                        ng-controller="TipoPdvListaController"
+                        ng-options="tipo.IDTipoPDV as tipo.Nome for tipo in tiposPdv"></select>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': !form.pdvnome.$valid }">
+                <label class="control-label" for="inputNomePdv">Nome</label>
+                <input type="text" name="pdvnome" class="form-control" required ng-model="ngModel.Nome" />
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="ngModel.Ativo" /> Ativo
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

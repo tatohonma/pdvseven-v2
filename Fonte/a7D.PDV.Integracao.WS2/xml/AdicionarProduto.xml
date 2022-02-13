@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<adicionarProdutos>
+  <idTipoPedido>10</idTipoPedido>
+  <numero>1</numero>
+  <idUsuario>1</idUsuario>
+  <idPDV>11</idPDV>
+  <!--<guidPedido>7FBE993D-3D23-4231-B9B4-7DA9C3FAEBD9</guidPedido>-->
+  <listaProdutos>
+    <produto>
+      <idProduto>124</idProduto>
+      <qtd>3</qtd>
+      <notas></notas>
+      <idAreaImpressao>6</idAreaImpressao>
+      <listaModificacoes>
+      </listaModificacoes>
+    </produto>
+  </listaProdutos>
+</adicionarProdutos>
+
+
+
+
+
+
+<adicionarProdutos>
+  <guidIdentificacao>B9C46593-6243-41D6-A426-17CA60BA1F45</guidIdentificacao>
+  <idTipoPedido>10</idTipoPedido>
+  <idPedido>0</idPedido>
+  <idUsuario>1</idUsuario>
+  <idPDV>1</idPDV>
+  <listaProdutos>
+    <produto>
+      <idProduto>159</idProduto>
+      <qtd>3</qtd>
+      <notas></notas>
+      <idAreaImpressao>5</idAreaImpressao>
+      <listaModificacoes>
+        <idProduto>246</idProduto>
+      </listaModificacoes>
+    </produto>
+  </listaProdutos>
+</adicionarProdutos>

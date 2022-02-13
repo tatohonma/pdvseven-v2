@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+</head>
+<body>
+    Teste, veja o console!!!
+    <script type="text/javascript">
+        for (var i = 1150; i < 2850; i++) {
+            var v1 = i / 100;
+            var v2 = v1 * 100;
+            var s1 = String(v1);
+            var s2 = String(v2);
+            var s3 = parseInt(Math.round(v2));
+            //var s3 = v2.toFixed(0); // Retorna String
+            if (s1.replace(".", "") !== s2)
+                console.log(s1 + " => " + s2 + " !! " + s3);
+            else if (s1.replace(".", "") !== s3)
+                console.log(s1 + " == " + s2 + " != " + s3);
+            else
+                console.log(s1 + " == " + s2 + " == " + s3);
+        }
+        console.log("FIM");
+    </script>
+</body>
+</html>

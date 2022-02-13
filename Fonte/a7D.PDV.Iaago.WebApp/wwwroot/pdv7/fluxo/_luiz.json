@@ -1,0 +1,12 @@
+[
+  {
+    "luis": [
+      {
+        "nome": "IaagoPDV7",
+        "appid": "1a33bd24-086c-41c8-81c0-f12e01c7f719",
+        "chave": "f8baa6ec30334ca3b2b9b56b5bd0be71",
+        "endpoint": "https://brazilsouth.api.cognitive.microsoft.com"
+      }
+    ]
+  }
+]

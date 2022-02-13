@@ -1,0 +1,23 @@
+﻿<listarPaineisModificacoes>
+  <status>1</status>
+  <retorno>
+    <listaPainelModificacao>
+      <painelModificacao>
+        <idPainelModificacao></idPainelModificacao>
+        <titulo></titulo>
+        <min>0</min>
+        <max>0</max>
+        <listaProdutoModificacao>
+          <produtoModificacao>
+            <selecionado>0</selecionado>
+            <tratamentoValor>sobrepor/somar/ignorar</tratamentoValor>
+            <ordem></ordem>
+            <produto>
+              <idProduto></idProduto>
+            </produto>
+          </produtoModificacao>
+        </listaProdutoModificacao>
+      </painelModificacao>
+    </listaPainelModificacao>
+  </retorno>
+</listarPaineisModificacoes>

@@ -1,0 +1,99 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <CodeAnalysisRuleSet>BasicBot.ruleset</CodeAnalysisRuleSet>
+    <Authors>PDVSeven</Authors>
+    <Company>PDV7</Company>
+    <Product>Iaago</Product>
+    <AssemblyVersion>1.19.1.27</AssemblyVersion>
+    <FileVersion>1.19.1.27</FileVersion>
+    <UserSecretsId>4a9227f1-5bdb-4423-adb6-ed0766c3f670</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ChatBot\Dialogs\**" />
+    <Compile Remove="Services\**" />
+    <Content Remove="ChatBot\Dialogs\**" />
+    <Content Remove="Services\**" />
+    <EmbeddedResource Remove="ChatBot\Dialogs\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="ChatBot\Dialogs\**" />
+    <None Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ChatBot\MyLuisModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="LUIS.json" />
+    <Content Remove="wwwroot\chats-20190128-18.txt" />
+    <Content Remove="wwwroot\chats-20190128-19.txt" />
+    <Content Remove="wwwroot\chats-20190128-20.txt" />
+    <Content Remove="wwwroot\chats-20190213-09.txt" />
+    <Content Remove="wwwroot\chats-20190213-10.txt" />
+    <Content Remove="wwwroot\chats-20190214-08.txt" />
+    <Content Remove="wwwroot\chats-20190214-09.txt" />
+    <Content Remove="wwwroot\chats-20190214-10.txt" />
+    <Content Remove="wwwroot\chats-20190214-11.txt" />
+    <Content Remove="wwwroot\chats-20190214-12.txt" />
+    <Content Remove="wwwroot\chats-20190214-14.txt" />
+    <Content Remove="wwwroot\chats-20190215-11.txt" />
+    <Content Remove="wwwroot\chats-20190218-09.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove=".deployment" />
+    <None Remove=".gitattributes" />
+    <None Remove=".gitignore" />
+    <None Remove="build.cmd" />
+    <None Remove="deploy.cmd" />
+    <None Remove="publish.cmd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Services\Email.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.2" />
+    <PackageReference Include="Microsoft.Azure.CognitiveServices.ContentModerator" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Azure.CognitiveServices.Language" Version="1.0.1-preview" />
+    <PackageReference Include="Microsoft.Bot.Builder" Version="4.3.1" />
+    <PackageReference Include="Microsoft.Bot.Builder.AI.Luis" Version="4.3.1" />
+    <PackageReference Include="Microsoft.Bot.Builder.AI.QnA" Version="4.3.1" />
+    <PackageReference Include="Microsoft.Bot.Builder.Azure" Version="4.3.1" />
+    <PackageReference Include="Microsoft.Bot.Builder.Dialogs" Version="4.3.1" />
+    <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.3.1" />
+    <PackageReference Include="Microsoft.Bot.Configuration" Version="4.3.1" />
+    <PackageReference Include="Microsoft.Bot.Connector" Version="4.3.1" />
+    <PackageReference Include="Microsoft.Bot.Schema" Version="4.3.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="2.10.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.2" />
+    <PackageReference Include="Microsoft.Graph" Version="1.12.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+
+ <ItemGroup>
+    <None Update="*.bot">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+ <ItemGroup>
+   <Folder Include="Connected Services\" />
+ </ItemGroup>
+
+ <Import Project="..\a7D.PDV.Iaago.Dialogo\a7D.PDV.Iaago.Dialogo.projitems" Label="Shared" /> 
+
+  <Import Project="PostDeployScripts\IncludeSources.targets" Condition="Exists('PostDeployScripts\IncludeSources.targets')" />
+  <Import Project="..\PostDeployScripts\IncludeSources.targets" Condition="Exists('..\PostDeployScripts\IncludeSources.targets')" />
+</Project>

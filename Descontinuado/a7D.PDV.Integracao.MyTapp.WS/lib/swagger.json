@@ -1,0 +1,163 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Integração PDVSeven MyTapp",
+        "description": "API de integração entre os sistemas PDVSeven e MyTapp",
+        "contact": {
+            "name": "Alberson Melo",
+            "url": "www.pdvseven.com.br",
+            "email": "alberson@pdvseven.com.br"
+        }
+    },
+    "host": "mytapp.pdvseven.com.br",
+    "paths": {
+        "/api/comandas/status/{numeroComanda}": {
+            "get": {
+                "description": "Retorna o status de uma comanda",
+                "parameters": [
+                    {
+                        "name": "numeroComanda",
+                        "type": "integer",
+                        "format": "int64",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "operationId": "RetornarStatusComanda",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comanda está liberada para receber pedidos"
+                    },
+                    "400": {
+                        "description": "Comanda não pode receber pedidos",
+                        "schema": {
+                            "$ref": "#/definitions/retornoComanda"
+                        }
+                    },
+                    "404": {
+                        "description": "Comanda não cadastrada"
+                    },
+                    "500": {
+                        "description": "Erro inesperado ao processar a request"
+                    }
+                },
+                "tags": [
+                    "Comanda"
+                ]
+            }
+        },
+        "/api/pedidos": {
+            "post": {
+                "description": "Insere um item no pedido",
+                "operationId": "AdicionarPedido",
+                "parameters": [
+                    {
+                        "name": "pedido",
+                        "schema": {
+                            "$ref": "#/definitions/pedido"
+                        },
+                        "in": "body",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Pedido adicionado com sucesso"
+                    },
+                    "400": {
+                        "description": "Erro ao inserir pedido",
+                        "schema": {
+                            "$ref": "#/definitions/retornoPedido"
+                        }
+                    },
+                    "500": {
+                        "description": "Erro inesperado ao processar a request"
+                    }
+                },
+                "tags": [
+                    "Pedido"
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "retornoComanda": {
+            "type": "object",
+            "properties": {
+                "motivo": {
+                    "type": "integer",
+                    "description": "Motivo para a comanda não poder receber pedidos. 0: Comanda fechada, 1: Comanda Perdida, 2: Comanda Cancelada"
+                }
+            }
+        },
+        "pedido": {
+            "type": "object",
+            "properties": {
+                "comanda": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Número da comanda a inserir o pedido"
+                },
+                "produto": {
+                    "type": "string",
+                    "description": "Código do chopp que está sendo consumido"
+                },
+                "descricao": {
+                    "type": "string",
+                    "description": "Descrição do chopp que está sendo consumido"
+                },
+                "quantidade": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "Quantidade (em L) de chopp consumido"
+                },
+                "valorUnitario": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "Valor unitário (do L) de chopp"
+                },
+                "valorTotal": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "Valor total deste item"
+                },
+                "guid": {
+                    "type": "string",
+                    "description": "GUID gerado para evitar duplicidade de transação"
+                }
+            },
+            "required": [
+                "comanda",
+                "produto",
+                "descricao",
+                "quantidade",
+                "valorUnitario",
+                "valorTotal",
+                "guid"
+            ]
+        },
+        "retornoPedido": {
+            "type": "object",
+            "properties": {
+                "motivo": {
+                    "type": "integer",
+                    "description": "Codigo do erro ao inserir o pedido"
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Comanda",
+            "description": "Operações com comanda"
+        },
+      {
+        "name": "Pedido",
+        "description": "Operações com pedido"
+      }
+    ]
+}

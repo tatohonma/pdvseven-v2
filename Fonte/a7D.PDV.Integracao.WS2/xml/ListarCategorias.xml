@@ -1,0 +1,17 @@
+﻿<listarCategorias>
+  <status>1</status>
+  <retorno>
+    <listaCategoria>
+      <categoria>
+        <idCategoriaProduto></idCategoriaProduto>
+        <nome></nome>
+        <ordem></ordem>
+      </categoria>
+      <categoria>
+        <idCategoriaProduto></idCategoriaProduto>
+        <nome></nome>
+        <ordem></ordem>
+      </categoria>
+    </listaCategoria>
+  </retorno>
+</listarCategorias>

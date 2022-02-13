@@ -1,0 +1,59 @@
+.content {
+  margin-top: 75px;
+}
+.item-conta {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.media-valor-pagamento {
+  font-size: 1.4em;
+  align-content: center;
+  font-weight: 600;
+}
+.media-data-vencimento {
+  font-size: 1.4em;
+  align-content: center;
+  font-weight: 500;
+}
+.media .vencido {
+  color: #a94442;
+}
+.active > .media .vencido {
+  font-size: 1.4em;
+  color: #ffff17;
+  align-content: center;
+  font-weight: 500;
+}
+.media-title {
+  font-size: 1.6em;
+  font-weight: 600;
+}
+.total {
+  margin: 8px 0px;
+}
+.valor-total {
+  font-size: 1.4em;
+  font-weight: 600;
+}
+.media-left {
+  vertical-align: middle;
+}
+.panel-heading {
+  cursor: pointer;
+}
+.fake-a {
+  cursor: pointer;
+}
+@keyframes changedAnim {
+  50% { color: #F00 }
+}
+.changed {
+  animation: changedAnim 2s ease-in-out;
+}
+
+.relatorio-body {
+  margin-top: 30px;
+}

@@ -1,0 +1,51 @@
+Luis AppID
+
+	Ferreira: f2f9783f-ee89-43a6-8a49-299dba068935
+	Aiello: b65b295b-9fa3-4301-8db5-782113597eb1
+	
+	#luis Ajuda 1a33bd24-086c-41c8-81c0-f12e01c7f719
+	#luis Suporte 0c68a928-56ee-4727-951c-586ed2aef530
+	#luis Pedidos de8e9654-b9ae-4621-8899-9d291cf42d29
+
+Azure
+
+	Chave: f8baa6ec30334ca3b2b9b56b5bd0be71
+	Assinaura: c50c71c3-ace5-462e-a969-7b1506050402
+
+Arquivo.bot
+
+	region: brazilsouth 
+	endpoint(https://brazilsouth.api.cognitive.microsoft.com)
+
+
+Contexto (versão 1)
+
+	Luis atual é o contexto
+	Ao iniciar, quando não há conexto, primeira intenção define contexto inicial.
+	Uma intençao é aceita dentro do contexto quando a intenção é maior que 30%
+	Uma intenção de outro conexto ocorre quando quando o score é de 70%
+	Quando 2 perguntas dentro do mesmo contexto é feita, há a troca do contexto
+	No Luis.ia, está configurado para retornar apenas o 'top intent score' e o código só avalia as intenção do TopScore
+	O cache de respostas só grava o resultado do contexto que faz sentido a pergunta (maior score)
+	No Suporte outras intenção de meno score podem ser sugestões
+	É importante é fazer treinamento negativo, pois as vezes um LUIS pega a intenção do outro
+	
+	Para proxima versão:
+
+	 	Outras intenções do mesmo contexto podem virar 'temas' (sub-contextos)
+	 	A fim de otimizar tempo de buscas, trafego e custo, pode-se fazer requisições a outros luis de outros contextos somente se não encontrou um score aceitável no atual.
+
+Links
+
+	https://meulta.com/en/2017/04/17/bot-framework-web-chat-and-push-notifications/
+	https://developer.microsoft.com/en-us/microsoft-edge/platform/status/serviceworker/
+
+
+intenção inicial: saudacao
+bem vindo inicial: requestWelcomeDialog para ler histórico
+card de bem vindo: welcomeCard.json
+
+
+os cards precisam terminar com *Card.json
+imagens aprnas *.jpg e *.png
+criar intenção 'ajuda' para a palavra ajuda, help

@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="a7D.PDV.Integracao.WS2.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="VersaoComanda" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1.21.2</Value>
+    </Setting>
+    <Setting Name="VersaoCardapio" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1.12.2</Value>
+    </Setting>
+    <Setting Name="VersaoSaida" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1.0.0</Value>
+    </Setting>
+    <Setting Name="VersaoAutoatendimento" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">2.19.3.2</Value>
+    </Setting>
+    <Setting Name="VersaoTorneira" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1.0.1</Value>
+    </Setting>
+    <Setting Name="VersaoSaidaWindows" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">2.20.2.0</Value>
+    </Setting>
+    <Setting Name="TraceLog" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>

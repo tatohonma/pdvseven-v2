@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.botframework.com/botframework-webchat/latest/botchat.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="/favicon.ico">
+    <style>
+        html, body {
+            height: 100%
+        }
+
+        body {
+            margin: 0
+        }
+
+        #webchat {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="webchat" role="main"></div>
+    <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+    <script>
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href.toLocaleLowerCase();
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        var usr = getParameterByName("userid");
+        if (usr == null || usr == '') {
+            usr = 'iaago-site-' + Math.random().toString(36).substring(7);
+        }
+
+        // https://blog.botframework.com/2017/10/11/customize-web-chat-websites/
+        console.log("user: " + usr);
+
+        // https://github.com/Microsoft/BotFramework-WebChat/tree/master/samples
+        window.WebChat.renderWebChat({
+            directLine: window.WebChat.createDirectLine({ token: 'O-UhUUcZQOw.cwA.1xc.VxYkQYAOtgTGbE5ftXSdtC1Xy-el0cTERmSqGrHYvRE' }),
+            userID: usr,
+            username: 'Web Chat User',
+            locale: 'pt-BR',
+            botAvatarInitials: 'Iaago',
+            userAvatarInitials: 'User'
+        }, document.getElementById('webchat'));
+    </script>
+</body>
+</html>

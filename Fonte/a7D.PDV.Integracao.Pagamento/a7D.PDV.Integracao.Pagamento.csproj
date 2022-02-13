@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{26083FD7-642B-4F53-BAB3-1C8F0AC8EABF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>a7D.PDV.Integracao.Pagamento</RootNamespace>
+    <AssemblyName>a7D.PDV.Integracao.Pagamento</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Communication.Sdk, Version=2.0.1.0, Culture=neutral, PublicKeyToken=e69de3f267bd7561, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\Communication.Sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="crypto, Version=1.7.0.0, Culture=neutral, PublicKeyToken=52d7d8cd84e8295f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\Microsoft.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microtef.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=9933f889438cc1ec, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\Microtef.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microtef.CrossPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=b64391aecf921c4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\Microtef.CrossPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microtef.Platform.Desktop, Version=4.0.2.0, Culture=neutral, PublicKeyToken=38ae2303208e40c0, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\Microtef.Platform.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Pinpad.Sdk, Version=3.3.1.0, Culture=neutral, PublicKeyToken=cbdc063925c03358, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\Pinpad.Sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="Pinpad.Sdk.Model, Version=3.3.1.0, Culture=neutral, PublicKeyToken=d3ab5135d4a3f3fd, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\Pinpad.Sdk.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Poi.Sdk, Version=2.2.9.0, Culture=neutral, PublicKeyToken=db6dd16e1146c3af, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\Poi.Sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="PoiDownloadManager.Sdk, Version=1.0.3.0, Culture=neutral, PublicKeyToken=3a803cdb6b3230e4, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\PoiDownloadManager.Sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="PoiDownloadManager.Sdk.Model, Version=1.0.2.0, Culture=neutral, PublicKeyToken=7a2cb89e0d72f0c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\PoiDownloadManager.Sdk.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Receipt.Sdk, Version=1.2.2.0, Culture=neutral, PublicKeyToken=ff637024e13a8607, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\Receipt.Sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="Receipt.Sdk.Model, Version=1.2.2.0, Culture=neutral, PublicKeyToken=283ccf3020a50bc6, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\Receipt.Sdk.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=2.5.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Diagnostics, Version=2.5.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\SimpleInjector.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO, Version=1.5.11.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Tms.Sdk, Version=2.2.4.0, Culture=neutral, PublicKeyToken=d7939abca1b2a093, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicroPos.Desktop.Pack.3.8.6\lib\net45\Tms.Sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="AutomacaoConstantes.cs" />
+    <Compile Include="frmFidelidade.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFidelidade.Designer.cs">
+      <DependentUpon>frmFidelidade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IModalTEF.cs" />
+    <Compile Include="ITEF.cs" />
+    <Compile Include="ModalTEF.xaml.cs">
+      <DependentUpon>ModalTEF.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StoneTEF\AuthorizationCore.cs" />
+    <Compile Include="StoneTEF\PinpadStoneTEF.cs" />
+    <Compile Include="TipoOperacao.cs" />
+    <Compile Include="NTKTEFDLL\NTKPinpadPayGoWeb.cs" />
+    <Compile Include="NTKTEFDLL\PGWebLib.cs" />
+    <Compile Include="NTKTEFDLL\TelasAuxiliares\FactoryNoScreen.cs" />
+    <Compile Include="NTKTEFDLL\TelasAuxiliares\FactoryWPF.cs" />
+    <Compile Include="NTKTEFDLL\TelasAuxiliares\IInformativo.cs" />
+    <Compile Include="NTKTEFDLL\TelasAuxiliares\LeituraDados.xaml.cs">
+      <DependentUpon>LeituraDados.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NTKTEFDLL\TelasAuxiliares\Menu.xaml.cs">
+      <DependentUpon>Menu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NTKTEF\NTKPinpadPayGo.cs" />
+    <Compile Include="PagamentoResultado.cs" />
+    <Compile Include="NTKPos\Classes\PGWEnus.cs" />
+    <Compile Include="NTKPos\Classes\PGWParam.cs" />
+    <Compile Include="NTKPos\Classes\PGWTerminal.cs" />
+    <Compile Include="NTKPos\Classes\StringExt.cs" />
+    <Compile Include="NTKPos\Classes\TerminalFunctions.cs" />
+    <Compile Include="NTKPos\Classes\TerminalInformation.cs" />
+    <Compile Include="NTKPos\Const.cs" />
+    <Compile Include="NTKPos\ITerminalClient.cs" />
+    <Compile Include="NTKPos\ServerNTKPos.cs" />
+    <Compile Include="NTKTEF\NTKComandos.cs" />
+    <Compile Include="NTKTEF\NTKEtapa.cs" />
+    <Compile Include="NTKTEF\NTKCampos.cs" />
+    <Compile Include="Extender.cs" />
+    <Compile Include="NTKTEF\NTKValores.cs" />
+    <Compile Include="NTKTEF\NTKWriter.cs" />
+    <Compile Include="NTKTEF\NTKBuilder.cs" />
+    <Compile Include="GranitoTEF\GranitoLogin.cs" />
+    <Compile Include="GranitoTEF\GranitoPinpad.cs" />
+    <Compile Include="GranitoTEF\GranitoEnuns.cs" />
+    <Compile Include="GranitoTEF\GranitoWrapperAPI.CS" />
+    <Compile Include="GranitoTEF\StringPdvSMS.cs" />
+    <Compile Include="GranitoTEF\StringPdvResponse.cs" />
+    <Compile Include="GranitoTEF\StringTefPdvInit.cs" />
+    <Compile Include="GranitoTEF\StringTefAprovado.cs" />
+    <Compile Include="GranitoTEF\StringTefResult.cs" />
+    <Compile Include="PinpadTEF.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TipoTEF.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Donus\" />
+    <Folder Include="TodoCartoes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frmFidelidade.resx">
+      <DependentUpon>frmFidelidade.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MuxxLib\MuxxLib.csproj">
+      <Project>{61a3b8e0-67eb-4e70-93e1-795468bd4904}</Project>
+      <Name>MuxxLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="ModalTEF.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NTKTEFDLL\TelasAuxiliares\LeituraDados.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NTKTEFDLL\TelasAuxiliares\Menu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PGBC.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

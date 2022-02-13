@@ -1,0 +1,52 @@
+[
+  {
+    "intencao": "verificaConexao",
+    "acaoResposta": [
+      {
+        "retorno": [
+          {
+            "condicao": "@AUTH==null",
+            "intencao": "verificaConexao.AutoLogin"
+          },
+          {
+            "retorno": true // Volta a intenção anterior, se houver
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intencao": "verificaConexao.AutoLogin",
+    "mensagem": "Iniciando conexão ao estabelecimento...",
+    "api": {
+      "url": "https://pdvsevenbd.azurewebsites.net/api/iaago/login",
+      "post": [
+        "cnpj=auto",
+        "senha=auto",
+        "channelId=@_channelId",
+        "fromId=@_fromId"
+      ]
+    },
+    "atribuir": [
+      "@AUTH=@@api.Auth",
+      "@estabelecimento=@@api.estabelecimento",
+      "@nome=@@api.nome",
+      "@apelido=@@api.apelido",
+      "@email=@@api.email"
+    ],
+    "acaoResposta": [
+      {
+        "retorno": [
+          {
+            "condicao": "@AUTH==null",
+            "intencao": "iniciarConexao"
+          },
+          {
+            "mensagemx": "Ola **@nome**, estou conectado ao @estabelecimento",
+            "retorno": true
+          }
+        ]
+      }
+    ]
+  }
+]

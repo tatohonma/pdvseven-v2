@@ -1,0 +1,9 @@
+﻿<validarPDV>
+  <status>1</status>
+  <retorno>
+    <pdv>
+      <idPdv></idPdv>
+      <nome></nome>
+    </pdv>
+  </retorno>
+</validarPDV>

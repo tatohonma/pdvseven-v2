@@ -1,0 +1,63 @@
+﻿<style type="text/css">
+    .float-message {
+        position: fixed;
+        top: 5%;
+        left: 50%;
+        margin-left: -150px;
+        width: 300px;
+        z-index: 9999;
+    }
+</style>
+<br />
+<form name="formulario" ng-submit="formulario.$valid && salvar(cliente)" ng-controller="ClienteController" novalidate>
+    <div class="form-horizontal">
+        <div class="float-message alert alert-danger" ng-show="mensagemErr">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Erro!</strong> {{mensagemErr}}
+        </div>
+
+        <div class="float-message alert alert-success" ng-show="mensagem">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Successo!</strong> {{mensagem}}
+        </div>
+
+        <div class="progress" ng-hide="carregado">
+            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                Carregando...
+            </div>
+        </div>
+        <div ng-show="carregado">
+            <legend>{{cliente.Nome}}</legend>
+            <div class="form-group" ng-class="{'has-error': !formulario.revenda.$valid && (formulario.revenda.$dirty || formulario.$submitted)}">
+                <label class="control-label col-md-2" for="inputCliente">Revenda</label>
+                <div class="col-md-10">
+                    <select name="revenda"
+                            id="inputCliente"
+                            ng-model="cliente.IDRevenda"
+                            class="form-control"
+                            required
+                            ng-controller="RevendasListaController"
+                            ng-options="revenda.IDRevenda as revenda.Nome for revenda in revendas"
+                            ng-disabled="!carregado || erro">
+                        <option value="" ng-show="!carregado">Escolha uma Revenda</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': !formulario.nome.$valid && (formulario.nome.$dirty || formulario.$submitted)}">
+                <label class="control-label col-md-2" for="inputNome">Nome</label>
+                <div class="col-md-10">
+                    <input type="text" required name="nome" id="inputNome" class="form-control" ng-model="cliente.Nome">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-default" value="Salvar" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div>
+    <a href="#/clientes">Voltar à lista</a>
+</div>
+

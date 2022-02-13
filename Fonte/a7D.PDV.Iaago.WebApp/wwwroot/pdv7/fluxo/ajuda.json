@@ -1,0 +1,32 @@
+// #luis Ajuda 1a33bd24-086c-41c8-81c0-f12e01c7f719
+[
+  // ==========
+  {
+    "intencao": "ajuda",
+    "mensagem": "No começo todos precisamos de ajuda!\nPara facilitar vou mostrar algumas perguntas que já sei responder",
+    "acaoResposta": [
+      {
+        "retorno": [
+          {
+            "intencao": "ajuda.Card"
+          }
+        ]
+      }
+    ]
+  },
+  // ==========
+  {
+    "intencao": "ajuda.Card",
+    "card": "ajudaCard.json",
+    "sugestao": [
+      {
+        "titulo": "Faturamento",
+        "texto": "Qual o faturamento de ontem?"
+      },
+      {
+        "titulo": "Estoque",
+        "texto": "Quantas água tenho no estoque?"
+      }
+    ]
+  }
+]

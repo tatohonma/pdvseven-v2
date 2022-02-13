@@ -1,0 +1,273 @@
+{
+  "luis_schema_version": "3.2.0",
+  "versionId": "0.1",
+  "name": "FabioTeste1",
+  "desc": "",
+  "culture": "pt-br",
+  "tokenizerVersion": "1.0.0",
+  "intents": [
+    {
+      "name": "fazerCotacao"
+    },
+    {
+      "name": "None"
+    },
+    {
+      "name": "verificarEstoque"
+    }
+  ],
+  "entities": [
+    {
+      "name": "produtoEmbalagem",
+      "roles": []
+    },
+    {
+      "name": "produtoMarca",
+      "roles": []
+    },
+    {
+      "name": "produtoNome",
+      "roles": []
+    }
+  ],
+  "composites": [
+    {
+      "name": "produto",
+      "children": [
+        "produtoNome",
+        "produtoMarca",
+        "produtoEmbalagem"
+      ],
+      "roles": []
+    }
+  ],
+  "closedLists": [],
+  "patternAnyEntities": [
+    {
+      "name": "produto1",
+      "explicitList": [],
+      "roles": []
+    }
+  ],
+  "regex_entities": [],
+  "prebuiltEntities": [],
+  "model_features": [],
+  "regex_features": [],
+  "patterns": [
+    {
+      "pattern": "qual a quantidade de heineken {produtoEmbalagem} que tem?",
+      "intent": "verificarEstoque"
+    },
+    {
+      "pattern": "qual o estoque de {produto1}?",
+      "intent": "verificarEstoque"
+    },
+    {
+      "pattern": "qual a quantidade de {produto1} que temos no estoque?",
+      "intent": "verificarEstoque"
+    },
+    {
+      "pattern": "quantos pés de {produtoNome} ainda temos?",
+      "intent": "verificarEstoque"
+    },
+    {
+      "pattern": "quantas {produto} tem?",
+      "intent": "verificarEstoque"
+    },
+    {
+      "pattern": "qual a quantidade de {produto} que tem?",
+      "intent": "verificarEstoque"
+    },
+    {
+      "pattern": "qual estoque de {produtoNome}?",
+      "intent": "verificarEstoque"
+    },
+    {
+      "pattern": "quantas {produto} tem no estoque?",
+      "intent": "verificarEstoque"
+    },
+    {
+      "pattern": "quantas {produtoEmbalagem} de {produtoNome} tem?",
+      "intent": "verificarEstoque"
+    },
+    {
+      "pattern": "quantos {produto} ainda temos?",
+      "intent": "verificarEstoque"
+    },
+    {
+      "pattern": "no depósito, quantas {produto1} tem?",
+      "intent": "verificarEstoque"
+    },
+    {
+      "pattern": "qual estoque de {produto}?",
+      "intent": "verificarEstoque"
+    }
+  ],
+  "utterances": [
+    {
+      "text": "meu nome é fábio anaia",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "qual a movimentação do dia 10/02?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "qual a quantidade de heineken longneck que tem?",
+      "intent": "verificarEstoque",
+      "entities": [
+        {
+          "entity": "produto",
+          "startPos": 21,
+          "endPos": 37
+        },
+        {
+          "entity": "produtoEmbalagem",
+          "startPos": 30,
+          "endPos": 37
+        }
+      ]
+    },
+    {
+      "text": "qual estoque de cerveja?",
+      "intent": "verificarEstoque",
+      "entities": [
+        {
+          "entity": "produto",
+          "startPos": 16,
+          "endPos": 22
+        },
+        {
+          "entity": "produtoNome",
+          "startPos": 16,
+          "endPos": 22
+        }
+      ]
+    },
+    {
+      "text": "qual o preço da cerveja?",
+      "intent": "fazerCotacao",
+      "entities": [
+        {
+          "entity": "produto",
+          "startPos": 16,
+          "endPos": 22
+        }
+      ]
+    },
+    {
+      "text": "qual o preço do melão?",
+      "intent": "fazerCotacao",
+      "entities": [
+        {
+          "entity": "produto",
+          "startPos": 16,
+          "endPos": 20
+        }
+      ]
+    },
+    {
+      "text": "qual o valor de 10 garrafas de heineken?",
+      "intent": "fazerCotacao",
+      "entities": [
+        {
+          "entity": "produtoEmbalagem",
+          "startPos": 19,
+          "endPos": 26
+        },
+        {
+          "entity": "produto",
+          "startPos": 19,
+          "endPos": 38
+        },
+        {
+          "entity": "produtoMarca",
+          "startPos": 31,
+          "endPos": 38
+        }
+      ]
+    },
+    {
+      "text": "quantas bolachas tem no estoque?",
+      "intent": "verificarEstoque",
+      "entities": [
+        {
+          "entity": "produto",
+          "startPos": 8,
+          "endPos": 15
+        }
+      ]
+    },
+    {
+      "text": "quantas latas de leite em pó tem?",
+      "intent": "verificarEstoque",
+      "entities": [
+        {
+          "entity": "produtoEmbalagem",
+          "startPos": 8,
+          "endPos": 12
+        },
+        {
+          "entity": "produto",
+          "startPos": 8,
+          "endPos": 27
+        },
+        {
+          "entity": "produtoNome",
+          "startPos": 17,
+          "endPos": 27
+        }
+      ]
+    },
+    {
+      "text": "quanto custa uma caixa de skol?",
+      "intent": "fazerCotacao",
+      "entities": [
+        {
+          "entity": "produtoEmbalagem",
+          "startPos": 17,
+          "endPos": 21
+        },
+        {
+          "entity": "produto",
+          "startPos": 17,
+          "endPos": 29
+        },
+        {
+          "entity": "produtoMarca",
+          "startPos": 26,
+          "endPos": 29
+        }
+      ]
+    },
+    {
+      "text": "quanto eu vendi ontem?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "quantos pacotes de salgadinhos vendemos?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "quantos pés de alface ainda temos?",
+      "intent": "verificarEstoque",
+      "entities": [
+        {
+          "entity": "produto",
+          "startPos": 8,
+          "endPos": 20
+        },
+        {
+          "entity": "produtoNome",
+          "startPos": 15,
+          "endPos": 20
+        }
+      ]
+    }
+  ],
+  "settings": []
+}

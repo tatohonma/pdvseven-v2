@@ -1,0 +1,38 @@
+[
+  // ==========
+  {
+    "intencao": "login",
+    "mensagem": "Acesando API...",
+    "api": {
+      "url": "http://localhost:50560/api/iaago/login",
+      "post": [
+        "cnpj=12345678900",
+        "senha=123456",
+        "channelId=console",
+        "fromId=teste"
+      ]
+    },
+    "atribuir": [
+      "@AUTH=@@api.Auth",
+      "@estabelecimento=@@api.estabelecimento",
+      "@nome=@@api.nome",
+      "@apelido=@@api.apelido",
+      "@email=@@api.email"
+    ],
+    "acaoResposta": [
+      {
+        "retorno": [
+          {
+            "mensagem": "Retorno da API: @@api.Mensagem (@@api.Entidade)\r\n\t",
+            "intencao": "teste.ok"
+          }
+        ]
+      }
+    ]
+  },
+  // ==========
+  {
+    "intencao": "teste.ok",
+    "mensagem": "FIM @nome - @AUTH"
+  }
+]

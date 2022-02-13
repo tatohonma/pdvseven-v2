@@ -1,0 +1,77 @@
+{
+   "swagger":"2.0",
+   "info":{
+      "version":"v1",
+      "title":"a7D.PDV.Integracao.WS2"
+   },
+   "host":"localhost:7777",
+   "schemes":[
+      "http"
+   ],
+   "paths":{
+    "/api/configuracao/chaves": {
+      "post": {
+        "tags": [
+          "Configuracao"
+        ],
+        "operationId": "Configuracao_LerChaves",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "chaves",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "tipoPDV",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "idPDV",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sistema",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+   },
+   "definitions":{
+   }
+}

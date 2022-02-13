@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AutoAtendimento versao="1">
+
+  <Imagens base="F:\PDVSeven\PDVSeven\Autoatendimento\Axado\">
+
+    <inicial>Inicial</inicial>
+    <fundo>Fundo</fundo>
+    <confirmacao>Confirmacao</confirmacao>
+    <consulta>Consulta</consulta>
+    <imprimir>Imprimir</imprimir>
+    <pagar>Pagar</pagar>
+    <fechar>Fechar</fechar>
+    <fim>Fim</fim>
+
+    <tefmodal>TEFmodal</tefmodal>
+    <tefdebito>TEFDebito</tefdebito>
+    <tefcredito>TEFCredito</tefcredito>
+    <tefimagem>TEFimagem</tefimagem>
+    <tefrecibo>TEFrecibo</tefrecibo>
+    <teffechar>TEFfechar</teffechar>
+
+  </Imagens>
+
+  <!-- 1366 x 768 -->
+
+  <Inicial background="inicial">
+    <ComandaNumeroPage visible="false"/>
+    <VendaSimples visible="false"/>
+    <ComandaNumero top="10" left="10" width="1346" height="748"/>
+  </Inicial>
+
+  <Teclado>
+    <Digitos background="#DDDDDD" border="2" fontsize="36" fontweight="Black"/>
+    <Enter background="#00A532" border="2" fontsize="26" foreground="White"/>
+    <Cancel background="#FF0514" border="2" fontsize="26" foreground="White"/>
+    <Backspace background="#DDDDDD" border="2" fontsize="36" fontweight="Black"/>
+    <Texto background="#C3A261" border="2" fontsize="32"/>
+  </Teclado>
+
+  <ModalSimNao>
+    <Sim width="100" height="50" background="#00A532" fontsize="26" fontweight="Bold" foreground="White"/>
+    <Nao width="100" height="50" background="#FF0514" fontsize="26" fontweight="Bold" foreground="White"/>
+  </ModalSimNao>
+
+  <ModalTEF>
+    <Modal width="996" height="565" background="tefmodal"/>
+    <Status width="900" top="30" left="40" fontsize="30" />
+    <Debito top="140" left="160" background="tefdebito"/>
+    <Credito top="140" left="590" background="tefcredito"/>
+    <Cancelar2 top="5" left="950" background="teffechar"/>
+    <ImagemTef top="120" left="100" background="tefimagem"/>
+    <ReciboTef top="120" left="100" background="tefrecibo"/>
+  </ModalTEF>
+
+  <Sair background="fundo">
+    <Home top="0" left="0" width="270" height="150"/>
+    <Titulo top="170" left="283" width="800" fontsize="40" fontweight="Black"/>
+    <Teclado top="260" left="530"/>
+  </Sair>
+
+  <ComandaNumero background="fundo">
+    <Home top="0" left="0" width="200" height="150"/>
+    <Titulo top="150" left="500"/>
+    <Teclado top="200" left="530"/>
+    <Cancelar top="620" left="0" width="150" height="100"/>
+  </ComandaNumero>
+
+  <ComandaConfirmacao background="confirmacao">
+    <Home top="0" left="0" width="200" height="150"/>
+    <Nome top="340" left="433" width="500" fontsize="38" fontweight="Black" textalignment="Center"/>
+    <Numero top="380" left="160" width="300" fontsize="68" foreground="#BAA266" fontweight="Black"/>
+    <Sim top="280" left="980" width="250" height="250" />
+    <Nao top="290" left="483" width="400" height="250" />
+    <Voltar top="600" left="0" width="200" height="168"/>
+  </ComandaConfirmacao>
+
+  <ComandaMenu background="consulta">
+    <Home top="0" left="0" width="200" height="150"/>
+    <Numero top="360" left="160" fontsize="68" foreground="#BAA266" fontweight="Black"/>
+    <Nome top="430" left="160" fontsize="38" width="360" fontweight="Black"/>
+    <Pedido top="145" left="525" width="330" height="460"/>
+    <TotalPedido top="620" left="530" width="300" fontweight="Bold" textalignment="Right" fontsize="20" foreground="#B7A263" />
+    <TotalAPagar top="670" left="530" width="300" fontweight="Bold" textalignment="Right" fontsize="20" foreground="#B7A263" />
+    <Pagar top="300" left="950" background="pagar"/>
+    <Fechar top="300" left="950" background="fechar"/>
+    <Imprimir top="650" left="1166" background="imprimir"/>
+    <Voltar top="600" left="0" width="200" height="168"/>
+  </ComandaMenu>
+
+  <Fim background="fim">
+    <Home top="10" left="10" width="1346" height="748"/>
+    <Numero visible="false"/>
+    <Nome visible="false"/>
+    <Mensagem top="460" left="250" width="866" fontweight="Black" fontsize="40" textalignment="Center"/>
+  </Fim>
+
+</AutoAtendimento>

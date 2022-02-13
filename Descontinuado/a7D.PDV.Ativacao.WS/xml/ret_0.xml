@@ -1,0 +1,7 @@
+﻿<ativacao>
+  <status>0</status>
+  <retorno>
+    <descricaoErro>Chave de acesso inválida!</descricaoErro>
+    <descricaoDetalhadaErro>Chave de acesso inválida!</descricaoDetalhadaErro>
+  </retorno>
+</ativacao>

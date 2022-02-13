@@ -1,0 +1,45 @@
+[ // ==========
+  {
+    "luis": [
+      {
+        "nome": "Iaago",
+        "appid": "1a33bd24-086c-41c8-81c0-f12e01c7f719",
+        "chave": "f8baa6ec30334ca3b2b9b56b5bd0be71",
+        "endpoint": "https://brazilsouth.api.cognitive.microsoft.com"
+      }
+    ],
+    "intencao": "saudacao",
+    "acaoResposta": [
+      {
+        "retorno": [
+          {
+            "condicao": "@_count%3==1",
+            "intencao": "bemvindo.card"
+          },
+          {
+            "mensagem": [
+              "Ola, Sou o Iaago, o que deseja?",
+              "Oi, diga de forma natual o que quer saber",
+              "Se precisar use o comando #ajuda"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  // ==========
+  {
+    "intencao": "bemvindo.card",
+    "card": "welcomeCard.json",
+    "sugestao": [
+      {
+        "titulo": "Ir para ambiente PDV7",
+        "texto": "#ambiente pdv7"
+      },
+      {
+        "titulo": "Listar comandos de ajuda",
+        "texto": "#ajuda"
+      }
+    ]
+  }
+]

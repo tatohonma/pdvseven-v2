@@ -1,0 +1,57 @@
+{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "size": "ExtraLarge",
+              "weight": "Bolder",
+              "text": "IAAGO"
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "size": "Small",
+              "text": "Inteligencia artificial de apoio à gestao e operação",
+              "isSubtle": true
+            },
+            {
+              "type": "TextBlock",
+              "size": "Small",
+              "text": "**Bem Vindo**! Escreva de forma natural o que deseja saber.\nPor exemplo: Qual o clima em São Paulo ?",
+              "wrap": true
+            }
+          ],
+          "width": 2
+        },
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "Image",
+              "url": "https://devbotpdv7app.azurewebsites.net/imagens/pdv7.png"
+            }
+          ],
+          "width": 1
+        }
+      ]
+    }
+  ],
+  // https://adaptivecards.io/designer/
+  // https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/cards/cards-actions
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Abrir Site PDV7",
+      "url": "http://www.pdvseven.com.br"
+    },
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.0"
+}

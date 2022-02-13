@@ -1,0 +1,15 @@
+﻿<Window x:Class="a7D.PDV.SATService.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:a7D.PDV.SATService.UI"
+        mc:Ignorable="d"
+        Title="Serviços SAT" Height="350" Width="653.049" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="Window_Loaded">
+    <Grid Height="321" Margin="0,0,0.4,-0.2" VerticalAlignment="Bottom">
+        <DataGrid x:Name="dgItens" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="301" Width="626">
+            <DataGrid.Columns>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

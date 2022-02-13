@@ -1,0 +1,49 @@
+[
+  // ==========
+  {
+    "intencao": "sat_xml",
+    "mensagem": "No backoffice, na opção '**S@ T**', clique em '**Histórico CF-e**', selecione o periodo desejado, e depois clique no botão 'Enviar por email', note que será pedido o email de sua contabilidade, ao confirmar o sistema irá processar a solicitação, que dependendo do numero de notas e da velocidade de sua internet pode demorar um pouco"
+  },
+  {
+    "intencao": "rede",
+    "mensagem": "Parece ser um problema de rede, verifique as conexões, cabos, e se o problea persitir ligue para nosso suporte (11) 4210-0122"
+  },
+  {
+    "intencao": "erro_impressora",
+    "mensagem": "Para começar, verifique se o programa '**Integração**' está ativo no servidor, se não estiver abra-o.\nEste programa geralmente fica no Desktop do Servidor apenas.\nIsso deu certo?",
+    "acaoResposta": [
+      {
+        "tipoResposta": "bool",
+        "retorno": [
+          {
+            "condicao": "nao",
+            "mensagem": "Então pode ser um problema de rede ou os cabos da impressora.\nVerifique se todos os cabos da impressora estão conectados corretamente e se elas estão devidamente ligadas e com papel.\nNote que na tela do programa '**Integração**' as impressoras são exibidas em cores diferentes de acordo com a situação delas:\n * **Verde** indica que está tudo certo\n * **Vermelho** indica um problema\n\nSe há alguma impressora exibida em vermelho passe o mouse por cima do nome desta e deve aparecer alguma mensagem que possa te dar uma dica de resolução do problema.\n\nConseguiu resolver?",
+            "intencao": "erro_impressora.parte2"
+          },
+          {
+            "condicao": "sim",
+            "mensagem": "Ótimo, fico feliz em ter ajudado! :D"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intencao": "erro_impressora.parte2",
+    "acaoResposta": [
+      {
+        "tipoResposta": "bool",
+        "retorno": [
+          {
+            "condicao": "nao",
+            "mensagem": "Então peço que ligue para nosso suporte (11) 4210-0122"
+          },
+          {
+            "condicao": "sim",
+            "mensagem": "Ótimo, que bom que resolvemos juntos esse problema! :D"
+          }
+        ]
+      }
+    ]
+  }
+]

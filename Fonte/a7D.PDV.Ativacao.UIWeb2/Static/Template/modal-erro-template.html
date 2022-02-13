@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <button class="close" type="button" ng-click="vm.fechar()">
+        <span>&times;</span>
+    </button>
+    <h4 class="modal-title">Erro!</h4>
+</div>
+<div class="modal-body">
+    <p class="bg-danger">{{ vm.erroTexto }}</p>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default"  type="button" data-dismiss="modal" ng-click="vm.fechar()">OK</button>
+</div>

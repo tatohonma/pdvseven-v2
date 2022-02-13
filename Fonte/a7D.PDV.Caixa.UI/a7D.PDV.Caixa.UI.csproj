@@ -1,0 +1,770 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{125BD11C-AC02-4973-9C2D-0720FE1C5C46}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>a7D.PDV.Caixa.UI</RootNamespace>
+    <AssemblyName>a7D.PDV.Caixa.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>d:\deploy\pdv7\caixa\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>7DB10F708AA7BE5F8603A7B558A8DB1BA162C4E5</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>a7D.OrderDesk-Fiscal.UI_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Caixa.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>a7D.PDV.Caixa.UI.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ACBrFramework.Net, Version=0.9.6.5, Culture=neutral, PublicKeyToken=4ca716d5e1bd4ba3, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Componentes\ACBrFramework.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="DFe.Classes, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\DFe.Classes.dll</HintPath>
+    </Reference>
+    <Reference Include="DFe.Utils, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\DFe.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="DFe.Wsdl, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\DFe.Wsdl.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Humanizer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Humanizer.Core.2.2.0\lib\netstandard1.0\Humanizer.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Classes, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\NFe.Classes.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Servicos, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\NFe.Servicos.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Utils, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\NFe.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Wsdl, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\NFe.Wsdl.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Controles\ListaPedidoComanda.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\ListaPedidoComanda.Designer.cs">
+      <DependentUpon>ListaPedidoComanda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ListaPedidoComandaSemCheckin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\ListaPedidoComandaSemCheckin.Designer.cs">
+      <DependentUpon>ListaPedidoComandaSemCheckin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ListaPedidoEntrega.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\ListaPedidoEntrega.Designer.cs">
+      <DependentUpon>ListaPedidoEntrega.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ListaPedidoMesa.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\ListaPedidoMesa.Designer.cs">
+      <DependentUpon>ListaPedidoMesa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\PedidoPagamentoCliente.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\PedidoPagamentoCliente.Designer.cs">
+      <DependentUpon>PedidoPagamentoCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\PedidoPagamentoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\PedidoPagamentoControl.Designer.cs">
+      <DependentUpon>PedidoPagamentoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\PedidoPagamentoFormas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\PedidoPagamentoFormas.Designer.cs">
+      <DependentUpon>PedidoPagamentoFormas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\PedidoPagamentoProdutos.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\PedidoPagamentoProdutos.Designer.cs">
+      <DependentUpon>PedidoPagamentoProdutos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\PedidoProduto.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\PedidoProduto.Designer.cs">
+      <DependentUpon>PedidoProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConfirmarDelivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfirmarDelivery.Designer.cs">
+      <DependentUpon>frmConfirmarDelivery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmContaCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmContaCliente.Designer.cs">
+      <DependentUpon>frmContaCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmExtratoCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExtratoCliente.Designer.cs">
+      <DependentUpon>frmExtratoCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmExtratoCreditos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExtratoCreditos.Designer.cs">
+      <DependentUpon>frmExtratoCreditos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCancelarTEF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCancelarTEF.Designer.cs">
+      <DependentUpon>frmCancelarTEF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPedidoPagamentoTouch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPedidoPagamentoTouch.Designer.cs">
+      <DependentUpon>frmPedidoPagamentoTouch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPedidoProdutosTouch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPedidoProdutosTouch.Designer.cs">
+      <DependentUpon>frmPedidoProdutosTouch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Service\ComandaUtil.cs" />
+    <Compile Include="Service\Extenders.cs" />
+    <Compile Include="Service\FecharVenda.cs" />
+    <Compile Include="frmAbrirCaixa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAbrirCaixa.Designer.cs">
+      <DependentUpon>frmAbrirCaixa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAbrirComanda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAbrirComanda.Designer.cs">
+      <DependentUpon>frmAbrirComanda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAdicionarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAdicionarCliente.Designer.cs">
+      <DependentUpon>frmAdicionarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAgruparComanda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAgruparComanda.Designer.cs">
+      <DependentUpon>frmAgruparComanda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAguardandoSAT.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAguardandoSAT.Designer.cs">
+      <DependentUpon>frmAguardandoSAT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAlterarEntrada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAlterarEntrada.Designer.cs">
+      <DependentUpon>frmAlterarEntrada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAlterarNomePDV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAlterarNomePDV.Designer.cs">
+      <DependentUpon>frmAlterarNomePDV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAlterarStatusComanda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAlterarStatusComanda.Designer.cs">
+      <DependentUpon>frmAlterarStatusComanda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCancelarPedido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCancelarPedido.Designer.cs">
+      <DependentUpon>frmCancelarPedido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCancelarFiscal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCancelarFiscal.Designer.cs">
+      <DependentUpon>frmCancelarFiscal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDetalhesPedidoProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDetalhesPedidoProduto.Designer.cs">
+      <DependentUpon>frmDetalhesPedidoProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDisponibilidadeProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDisponibilidadeProduto.Designer.cs">
+      <DependentUpon>frmDisponibilidadeProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEstornarProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEstornarProduto.Designer.cs">
+      <DependentUpon>frmEstornarProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFecharCaixa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFecharCaixa.Designer.cs">
+      <DependentUpon>frmFecharCaixa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmForcarFechamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmForcarFechamento.Designer.cs">
+      <DependentUpon>frmForcarFechamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNovoDelivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNovoDelivery.Designer.cs">
+      <DependentUpon>frmNovoDelivery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmImprimirConta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImprimirConta.Designer.cs">
+      <DependentUpon>frmImprimirConta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPedidoPagamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPedidoPagamento.Designer.cs">
+      <DependentUpon>frmPedidoPagamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPedidoProdutoCancelamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPedidoProdutoCancelamento.Designer.cs">
+      <DependentUpon>frmPedidoProdutoCancelamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPedidoProdutoDesconto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPedidoProdutoDesconto.Designer.cs">
+      <DependentUpon>frmPedidoProdutoDesconto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPedidoProdutos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPedidoProdutos.Designer.cs">
+      <DependentUpon>frmPedidoProdutos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPedidoProdutosValor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPedidoProdutosValor.Designer.cs">
+      <DependentUpon>frmPedidoProdutosValor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPedidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPedidos.Designer.cs">
+      <DependentUpon>frmPedidos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPesquisarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPesquisarCliente.Designer.cs">
+      <DependentUpon>frmPesquisarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrincipal.Designer.cs">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAjusteCaixa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAjusteCaixa.Designer.cs">
+      <DependentUpon>frmAjusteCaixa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReimprimirFechamentoDiario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReimprimirFechamentoDiario.Designer.cs">
+      <DependentUpon>frmReimprimirFechamentoDiario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReimprimirFiscal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReimprimirFiscal.Designer.cs">
+      <DependentUpon>frmReimprimirFiscal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmResumoDia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmResumoDia.Designer.cs">
+      <DependentUpon>frmResumoDia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSaidaAvulsa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSaidaAvulsa.Designer.cs">
+      <DependentUpon>frmSaidaAvulsa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTipoDesconto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTipoDesconto.Designer.cs">
+      <DependentUpon>frmTipoDesconto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTransferirProdutos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTransferirProdutos.Designer.cs">
+      <DependentUpon>frmTransferirProdutos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPedidoProdutosModificacoes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPedidoProdutosModificacoes.Designer.cs">
+      <DependentUpon>frmPedidoProdutosModificacoes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Service\NormalOuTouch.cs" />
+    <Compile Include="Service\PagamentoVenda.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Content Include="Caixa.ico" />
+    <Content Include="Caixa.png" />
+    <None Include="Resources\keyboard-icon2.png" />
+    <None Include="Telefone.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\pdv7.png" />
+    <None Include="Resources\ifood.png" />
+    <EmbeddedResource Include="Controles\ListaPedidoComanda.resx">
+      <DependentUpon>ListaPedidoComanda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\ListaPedidoComandaSemCheckin.resx">
+      <DependentUpon>ListaPedidoComandaSemCheckin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\ListaPedidoEntrega.resx">
+      <DependentUpon>ListaPedidoEntrega.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\ListaPedidoMesa.resx">
+      <DependentUpon>ListaPedidoMesa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\PedidoPagamentoCliente.resx">
+      <DependentUpon>PedidoPagamentoCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\PedidoPagamentoControl.resx">
+      <DependentUpon>PedidoPagamentoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\PedidoPagamentoFormas.resx">
+      <DependentUpon>PedidoPagamentoFormas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\PedidoPagamentoProdutos.resx">
+      <DependentUpon>PedidoPagamentoProdutos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\PedidoProduto.resx">
+      <DependentUpon>PedidoProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAbrirCaixa.resx">
+      <DependentUpon>frmAbrirCaixa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAbrirComanda.resx">
+      <DependentUpon>frmAbrirComanda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAdicionarCliente.resx">
+      <DependentUpon>frmAdicionarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAgruparComanda.resx">
+      <DependentUpon>frmAgruparComanda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAguardandoSAT.resx">
+      <DependentUpon>frmAguardandoSAT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAlterarEntrada.resx">
+      <DependentUpon>frmAlterarEntrada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAlterarNomePDV.resx">
+      <DependentUpon>frmAlterarNomePDV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAlterarStatusComanda.resx">
+      <DependentUpon>frmAlterarStatusComanda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCancelarPedido.resx">
+      <DependentUpon>frmCancelarPedido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCancelarFiscal.resx">
+      <DependentUpon>frmCancelarFiscal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfirmarDelivery.resx">
+      <DependentUpon>frmConfirmarDelivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmContaCliente.resx">
+      <DependentUpon>frmContaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExtratoCliente.resx">
+      <DependentUpon>frmExtratoCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExtratoCreditos.resx">
+      <DependentUpon>frmExtratoCreditos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDetalhesPedidoProduto.resx">
+      <DependentUpon>frmDetalhesPedidoProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDisponibilidadeProduto.resx">
+      <DependentUpon>frmDisponibilidadeProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEstornarProduto.resx">
+      <DependentUpon>frmEstornarProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCancelarTEF.resx">
+      <DependentUpon>frmCancelarTEF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFecharCaixa.resx">
+      <DependentUpon>frmFecharCaixa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmForcarFechamento.resx">
+      <DependentUpon>frmForcarFechamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNovoDelivery.resx">
+      <DependentUpon>frmNovoDelivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImprimirConta.resx">
+      <DependentUpon>frmImprimirConta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPedidoPagamentoTouch.resx">
+      <DependentUpon>frmPedidoPagamentoTouch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPedidoPagamento.resx">
+      <DependentUpon>frmPedidoPagamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPedidoProdutoCancelamento.resx">
+      <DependentUpon>frmPedidoProdutoCancelamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPedidoProdutoDesconto.resx">
+      <DependentUpon>frmPedidoProdutoDesconto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPedidoProdutos.resx">
+      <DependentUpon>frmPedidoProdutos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPedidoProdutosTouch.resx">
+      <DependentUpon>frmPedidoProdutosTouch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPedidoProdutosValor.resx">
+      <DependentUpon>frmPedidoProdutosValor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPedidos.resx">
+      <DependentUpon>frmPedidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPesquisarCliente.resx">
+      <DependentUpon>frmPesquisarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrincipal.resx">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAjusteCaixa.resx">
+      <DependentUpon>frmAjusteCaixa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReimprimirFechamentoDiario.resx">
+      <DependentUpon>frmReimprimirFechamentoDiario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReimprimirFiscal.resx">
+      <DependentUpon>frmReimprimirFiscal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmResumoDia.resx">
+      <DependentUpon>frmResumoDia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSaidaAvulsa.resx">
+      <DependentUpon>frmSaidaAvulsa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTipoDesconto.resx">
+      <DependentUpon>frmTipoDesconto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTransferirProdutos.resx">
+      <DependentUpon>frmTransferirProdutos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPedidoProdutosModificacoes.resx">
+      <DependentUpon>frmPedidoProdutosModificacoes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Redist\SQLSysClrTypes_x86.msi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnExcluir1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\circulo.png" />
+    <None Include="Resources\desconto.png" />
+    <None Include="Resources\pdv7.jpg" />
+    <None Include="Resources\semImagem.png" />
+    <None Include="Resources\semImagem.bmp" />
+    <None Include="Resources\bg-Pizzaria.png" />
+    <None Include="Resources\bg-txt1.png" />
+    <None Include="Resources\btnFechar.png" />
+    <None Include="Resources\bg-Titulo.png" />
+    <None Include="Resources\bg-Titulo2.png" />
+    <None Include="Resources\ico anotacao.png" />
+    <Content Include="Resources\spinner.gif" />
+    <Content Include="Resources\logo2_baixa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\a7D.PDV.Balanca\a7D.PDV.Integracao.Balanca.csproj">
+      <Project>{3511148b-317b-4b99-873a-9b328b771410}</Project>
+      <Name>a7D.PDV.Integracao.Balanca</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.BLL\a7D.PDV.BLL.csproj">
+      <Project>{1B8AD873-6B0A-45D6-803E-E6CC104BCE81}</Project>
+      <Name>a7D.PDV.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Componentes\a7D.PDV.Componentes.csproj">
+      <Project>{06274b88-cf73-4e1f-80b1-1cb73b3930d6}</Project>
+      <Name>a7D.PDV.Componentes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.EF\a7D.PDV.EF.csproj">
+      <Project>{75ef9713-861a-4c6b-8f7f-1343fdcbbffb}</Project>
+      <Name>a7D.PDV.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Fiscal\a7D.PDV.Fiscal.csproj">
+      <Project>{c506bd2c-fcb7-49e2-9759-661573b1c60a}</Project>
+      <Name>a7D.PDV.Fiscal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Impressora\a7D.PDV.Impressora.csproj">
+      <Project>{86D34513-7E1D-4DD1-AB22-6A2AC809EA93}</Project>
+      <Name>a7D.PDV.Impressora</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.Loggi\a7D.PDV.Integracao.Loggi.csproj">
+      <Project>{fd64fdc4-8b7a-480a-a38f-2588dba12711}</Project>
+      <Name>a7D.PDV.Integracao.Loggi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.Pagamento\a7D.PDV.Integracao.Pagamento.csproj">
+      <Project>{26083fd7-642b-4f53-bab3-1c8f0ac8eabf}</Project>
+      <Name>a7D.PDV.Integracao.Pagamento</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.Servico.Core\a7D.PDV.Integracao.Core.csproj">
+      <Project>{79DCF4FA-291F-4A15-A41B-F915938B8536}</Project>
+      <Name>a7D.PDV.Integracao.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Model\a7D.PDV.Model.csproj">
+      <Project>{22BA05B8-59D7-4E09-8471-7C8012F1B100}</Project>
+      <Name>a7D.PDV.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MuxxLib\MuxxLib.csproj">
+      <Project>{61a3b8e0-67eb-4e70-93e1-795468bd4904}</Project>
+      <Name>MuxxLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WindowsInstaller">
+      <Guid>{000C1092-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>1033</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

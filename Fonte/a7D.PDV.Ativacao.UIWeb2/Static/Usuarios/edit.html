@@ -1,0 +1,80 @@
+<style type="text/css">
+    .float-message {
+        position: fixed;
+        top: 5%;
+        left: 50%;
+        margin-left: -150px;
+        width: 300px;
+        z-index: 9999;
+    }
+</style>
+<br />
+<form name="formulario" ng-submit="formulario.$valid && vm.valido && vm.salvar()" novalidate>
+    <div class="form-horizontal">
+        <div class="float-message alert alert-danger" ng-show="vm.mensagemErr">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Erro!</strong> {{vm.mensagemErr}}
+        </div>
+
+        <div class="float-message alert alert-success" ng-show="vm.mensagem">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Successo!</strong> {{vm.mensagem}}
+        </div>
+
+        <div class="progress" ng-hide="vm.carregado">
+            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                Carregando...
+            </div>
+        </div>
+        <div ng-show="vm.carregado">
+            <legend>{{vm.usuario.Nome}}</legend>
+            <div class="form-group" ng-class="{'has-error': !formulario.nome.$valid && (formulario.nome.$dirty || formulario.$submitted)}">
+                <label class="control-label col-md-2" for="inputNome">Nome</label>
+                <div class="col-md-10">
+                    <input type="text" required name="nome" id="inputNome" class="form-control" ng-model="vm.usuario.Nome">
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': !formulario.email.$valid && (formulario.email.$dirty || formulario.$submitted)}">
+                <label class="control-label col-md-2" for="inputEmail">E-mail</label>
+                <div class="col-md-10">
+                    <input ng-model-options="{ debounce: { 'default': 500, 'blur': 0 }}"
+                        ng-change="vm.checkEmail()"
+                        type="email" required name="email" id="inputEmail" class="form-control" ng-model="vm.usuario.Email">
+                    <div class="alert alert-danger" ng-hide="vm.valido">E-mail inválido ou já cadastrado</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Ativo</label>
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="ativo" ng-model="vm.usuario.Ativo">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-if="vm.editando">
+                <label class="control-label col-md-2">Admin</label>
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="admin" ng-model="vm.usuario.Adm">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <button ng-disabled="vm.enviando || !vm.valido || !formulario.$valid" type="submit" class="btn btn-primary btn-lg">
+                        <span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Salvar
+                    </button>
+                    <img ng-if="vm.enviando" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div>
+    <a href="#/usuarios">Voltar à lista</a>
+</div>
+

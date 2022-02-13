@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teste Pagamentos</title>
+  <link rel="stylesheet" href="./test/css/bootstrap.min.css">
+  <style type="text/css">
+    .pagamento {
+      border-radius: 3px;
+      border-style: solid;
+      border-width: 1px;
+      border-color: #E0E0E0;
+      padding: 18px;
+      margin: 10px 0;
+    }
+    .centralizado {
+      text-align: center;
+    }
+    .content {
+      padding-top: 50px;
+    }
+    .titulo {
+      font-weight: normal;
+      text-transform: uppercase;
+      color: #AAA;
+    }
+    .data {
+      text-align: center;
+    }
+    .mes:before {
+      content: '';
+      width: 50%;
+      display: block;
+      height: 1px;
+      background: #BBB;
+      margin: 0 auto;
+    }
+    .mes:after {
+      content: '';
+      width: 40%;
+      display: block;
+      height: 1px;
+      background: #BBB;
+      margin: 0 auto;
+    }
+    .dia {
+      font-size: 1.4em;
+    }
+    .acoes {
+      margin: auto 0;
+    }
+    .row.vdivide [class*='col-']:not(:last-child):after {
+      background: #e0e0e0;
+      width: 1px;
+      content: "";
+      display:block;
+      position: absolute;
+      top:0;
+      bottom: 0;
+      right: 0;
+      min-height: 70px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a href="" class="navbar-brand">
+            <img src="./src/favicon.ico" alt="Brand">
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div class="content">
+      <h1>Faturas</h1>
+      <div class="row pagamento vdivide">
+        <div class="col-md-1 vencimento">
+          <h4 class="titulo centralizado">Venc.</h4>
+          <div class="data">
+            <div class="dia">15</div>
+            <div class="mes">Set</div>
+            <div class="ano">2016</div>
+          </div>
+        </div>
+        <div class="col-md-6 servicos">
+          <h4 class="titulo">Serviços</h4>
+          <h4 class="servico-titulo">Revenda I</h4>
+          <span class="servico-descricao"></span>
+        </div>
+        <div class="col-md-2 total">
+          <h4 class="titulo centralizado">Total</h4>
+          <h4 class="valor-total centralizado">R$ 336,24</h4>
+        </div>
+        <div class="col-md-3 acoes">
+          <h4 class="titulo"></h4>
+          <button class="btn btn-danger btn-block" type="button">Pagar com Boleto</button>
+          <button class="btn btn-danger btn-block" type="button">Pagar com cartão de Crédito</button>
+        </div>
+      </div>
+      <div class="row pagamento vdivide">
+        <div class="col-md-1 vencimento">
+          <h4 class="titulo centralizado">Venc.</h4>
+          <div class="data">
+            <div class="dia">15</div>
+            <div class="mes">Set</div>
+            <div class="ano">2016</div>
+          </div>
+        </div>
+        <div class="col-md-6 servicos">
+          <h4 class="titulo">Serviços</h4>
+          <h4 class="servico-titulo">Revenda I</h4>
+          <span class="servico-descricao"></span>
+        </div>
+        <div class="col-md-2 total">
+          <h4 class="titulo centralizado">Total</h4>
+          <h4 class="valor-total centralizado">R$ 336,24</h4>
+        </div>
+        <div class="col-md-3 acoes">
+          <h4 class="titulo"></h4>
+          <button class="btn btn-danger btn-block" type="button">Pagar com Boleto</button>
+          <button class="btn btn-danger btn-block" type="button">Pagar com cartão de Crédito</button>
+        </div>
+      </div>
+      <h2>Atuais</h2>
+      <h2>Próximas</h2>
+    </div>
+  </div>
+  <script src="./test/jquery.min.js"></script>
+  <script src="./test/js/bootstrap.min.js"></script>
+</body>
+</html>

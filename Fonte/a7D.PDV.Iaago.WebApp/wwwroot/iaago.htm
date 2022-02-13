@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="https://cdn.botframework.com/botframework-webchat/latest/botchat.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="bot" />
+    <script src="https://cdn.botframework.com/botframework-webchat/latest/botchat.js"></script>
+    <script>
+
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href.toLocaleLowerCase();
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        var usr = getParameterByName("userid");
+        if (usr == null || usr == '') {
+            usr = 'iaago-site-' + Math.random().toString(36).substring(7);
+        }
+
+        // https://blog.botframework.com/2017/10/11/customize-web-chat-websites/
+        console.log("user: " + usr);
+
+        var user = {
+            id: usr,
+            name: 'Web'
+        };
+
+        // https://github.com/Microsoft/BotFramework-DirectLineJS/issues/9
+        var botConnection = new BotChat.DirectLine({
+            token: 'O-UhUUcZQOw.cwA.1xc.VxYkQYAOtgTGbE5ftXSdtC1Xy-el0cTERmSqGrHYvRE',
+            // watermark: '5R5rL6yt3Eo96RjfbLpR23-3',
+            // conversationId: "5R5rL6yt3Eo96RjfbLpR23-3" // Funciona, mas precisa existir a conversa
+        });
+
+        BotChat.App({
+            user: user,
+            botConnection: botConnection,
+            bot: { id: 'Iaago', name: 'Iaago Bot' },
+            resize: 'detect'
+        }, document.getElementById("bot"));
+
+        // https://blog.botframework.com/2018/07/12/how-to-properly-send-a-greeting-message-and-common-issues-from-customers/
+        botConnection.postActivity({
+            from: user,
+            name: 'requestWelcomeDialog',
+            type: 'event',
+            value: ''
+        }).subscribe(function (id) {
+            console.log('"trigger requestWelcomeDialog" sent');
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<div ng-if="ativacao.Ativo === true">
+  <p ng-if="dadosObtidos">{{ dados }}</p>
+  <a href="" ng-if="!dadosObtidos && !buscando" ng-click="gerarAtivacaoOffline()">Gerar Ativação Offline</a>
+  <p ng-if="buscando">Aguarde...</p>
+</div>

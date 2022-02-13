@@ -1,0 +1,40 @@
+﻿<listarProdutos>
+  <status>1</status>
+  <retorno>
+    <listaProduto>
+      <produto>
+        
+        <idProduto></idProduto>
+        <nome></nome>
+        <descricao></descricao>
+        <valorUnitario></valorUnitario>
+        <textoAdicionar></textoAdicionar>
+        <disponivel></disponivel>
+        <urlImagemThumb></urlImagemThumb>
+        <urlImagem></urlImagem>
+        <exibicaoPainelModificacao>lista/dialog</exibicaoPainelModificacao>
+        <ordem></ordem>
+        
+        <listaCategoria>
+          <categoria>
+            <idCategoriaProduto></idCategoriaProduto>
+          </categoria>
+        </listaCategoria>
+        
+        <listaPainelModificacao>
+          <painelModificacao>
+            <idPainelModificacao></idPainelModificacao>
+            <ordem></ordem>
+          </painelModificacao>
+        </listaPainelModificacao>
+
+        <listaAreaImpressao>
+          <areaImpressao>
+            <idAreaImpressao></idAreaImpressao>
+          </areaImpressao>
+        </listaAreaImpressao>
+        
+      </produto>
+    </listaProduto>
+  </retorno>
+</listarProdutos>

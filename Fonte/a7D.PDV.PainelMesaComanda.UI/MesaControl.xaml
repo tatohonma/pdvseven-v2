@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="a7D.PDV.PainelMesaComanda.UI.MesaControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:a7D.PDV.PainelMesaComanda.UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="100">
+    <Grid x:Name="GridBox" Background="White">
+        <!--<Border Name="BorderBox" BorderThickness="4" BorderBrush="Red">-->
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="8">
+                <Viewbox>
+                    <Label Padding="0" Name="MesaText">Mesa AA</Label>
+                </Viewbox>
+                <Viewbox >
+                    <Label TextBlock.TextAlignment="Center" Padding="0" Name="ComandaText">4 Comandas
+                        R$ 1.234,56</Label>
+                </Viewbox>
+            </StackPanel>
+        <!--</Border>-->
+    </Grid>
+</UserControl>

@@ -1,0 +1,42 @@
+﻿<Window x:Class="a7D.PDV.Integracao.NTK.UI.TestePagamento"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:a7D.PDV.Integracao.NTK.UI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="400" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBox Height="Auto" Grid.Column="1" Grid.Row="0" Grid.RowSpan="5" Name="txtResp" TextWrapping="Wrap" Margin="10" Text="Sss" />
+        <ComboBox Name="cmbTipo" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Width="160" HorizontalAlignment="Center">
+            <ComboBoxItem IsSelected="True" >Stone</ComboBoxItem>
+            <ComboBoxItem>NTK PayGo Client</ComboBoxItem>
+            <ComboBoxItem>NTK DLL PayGo Web</ComboBoxItem>
+            <ComboBoxItem>Pago DLL</ComboBoxItem>
+        </ComboBox>
+
+        <StackPanel Grid.Column="0" Grid.Row="1" >
+            <TextBlock TextAlignment="Center">Valor:</TextBlock>
+            <TextBox Name="txtValor" Text="1,23" Width="80" VerticalAlignment="Top" Margin="5"/>
+            <TextBlock TextAlignment="Center">Parcelas:</TextBlock>
+            <TextBox Name="txtParcelas" Text="1" Width="80" VerticalAlignment="Top" Margin="5"/>
+            <Button Content="Pagar" Width="100" Height="40" Margin="5" Click="Pagar_Click"/>
+        </StackPanel>
+
+        <Button Content="Administrar" Grid.Column="0" Grid.Row="2" Width="100" Margin="10" Click="Administrar_Click"/>
+        <Button Content="Conf Pendente" Grid.Column="0" Grid.Row="3" Width="100" Margin="10" Click="ConfirmarPendente_Click"/>
+        <Button Content="Cancelar Pend." Grid.Column="0" Grid.Row="4" Width="100" Margin="10" Click="CancelarPendente_Click"/>
+
+    </Grid>
+</Window>

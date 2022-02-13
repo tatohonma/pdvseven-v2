@@ -1,0 +1,6 @@
+F:\PDVSeven\PDVSeven\Fonte\a7D.PDV.Testes\sintegra.txt;
+Contribuinte: 32040741000192 EMPORIUM MR ART BAR E RESTAURANTE L;01/05/2019 a 05/05/2019
+0000000001         110       Código do convênio 0033193620076                         0Código de identificação do convênio inválido para este validador.                                   Rejeição   
+0000000002         110     Código das operações 0033193620076                         0Código de identificação da natureza das operações inválido.                                         Rejeição   
+0000000003         110     Código da finalidade 0033193620076                         0Finalidade inválida.                                                                                Rejeição   
+0000000004         110               Data final 0033193620076                  20190505Verifique se Dia deve ser 31.                                                                       Advertência

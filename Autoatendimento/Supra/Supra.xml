@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AutoAtendimento versao="1">
+
+  <Imagens base="F:\PDVSeven\PDVSeven\Autoatendimento\Supra\">
+
+    <inicial>Inicial</inicial>
+    <fundo>Fundo</fundo>
+    <confirmacao>Confirmacao</confirmacao>
+    <entrada>Entrada</entrada>
+    <credito>Credito</credito>
+    <creditovalor>CreditoValor</creditovalor>
+    <consulta>Consulta</consulta>
+    
+    <creditoitem>CreditoItem</creditoitem>
+    <creditoitem_selecionado>CreditoItem_Selecionado</creditoitem_selecionado>
+    <pagar>Pagar</pagar>
+    <fim>Fim</fim>
+    <cpf>CPF</cpf>
+    <imprimir>Imprimir</imprimir>
+
+    <tefmodal>TEFmodal</tefmodal>
+    <tefdebito>TEFDebito</tefdebito>
+    <tefcredito>TEFCredito</tefcredito>
+    <tefimagem>TEFimagem</tefimagem>
+    <tefrecibo>TEFrecibo</tefrecibo>
+    <teffechar>TEFfechar</teffechar>
+    
+  </Imagens>
+
+  <!-- 1366 x 768 -->
+
+  <Inicial background="inicial">
+    <VendaCategoriaProduto visible="false"/>
+    <ComandaNumero visible="false"/>
+    <!--<ComandaNumero text="Fechar Comanda" top="10" left="10" background="gray"/>-->
+    <ClienteCheckin top="50" left="50" width="1346" height="748"/>
+  </Inicial>
+  
+  <Teclado>
+    <Digitos background="#DCDCDC" border="2" fontsize="36" fontweight="Black"/>
+    <Enter background="#17A33F" border="2" fontsize="26" foreground="White"/>
+    <Cancel background="#EF0D1A" border="2" fontsize="26" foreground="White"/>
+    <Backspace background="#DCDCDC" border="2" fontsize="36" fontweight="Black"/>
+    <Texto background="#F4ED37" border="2" fontsize="32"/>
+  </Teclado>
+
+  <ModalSimNao>
+    <Sim width="100" height="50" background="#00A532" fontsize="26" fontweight="Bold" foreground="White"/>
+    <Nao width="100" height="50" background="#FF0514" fontsize="26" fontweight="Bold" foreground="White"/>
+  </ModalSimNao>
+
+  <ModalTEF>
+    <Modal width="996" height="565" background="tefmodal"/>
+    <Status width="900" top="30" left="40" fontsize="30" />
+    <Debito top="140" left="160" background="tefdebito"/>
+    <Credito top="140" left="590" background="tefcredito"/>
+    <Cancelar2 top="5" left="950" background="teffechar"/>
+    <ImagemTef top="120" left="100" background="tefimagem"/>
+    <ReciboTef top="120" left="100" background="tefrecibo"/>
+  </ModalTEF>
+  
+  <Sair background="fundo">
+    <Home top="0" left="0" width="270" height="150"/>
+    <Titulo top="170" left="283" width="800" fontsize="40" fontweight="Black"/>
+    <Teclado top="260" left="530"/>
+  </Sair>
+
+  <ClienteCheckin background="fundo">
+    <Home top="0" left="0" width="200" height="150"/>
+    <Titulo top="150" left="483" width="400" textalignment="Center"/>
+    <Teclado top="200" left="530"/>
+  </ClienteCheckin>
+
+  <ClienteCPF background="cpf">
+    <Home top="0" left="0" width="200" height="150"/>
+    <Titulo top="150" left="483" width="400" textalignment="Center"/>
+    <Teclado top="200" left="530"/>
+    <Numero top="380" left="160" width="300" fontsize="68" foreground="#A7252A" fontweight="Black"/>
+    <Cancelar top="620" left="0" width="150" height="100"/>
+  </ClienteCPF>
+  
+  <ComandaConfirmacao background="confirmacao">
+    <Home top="0" left="0" width="200" height="150"/>
+    <Numero top="380" left="160" width="300" fontsize="68" foreground="#A7252A" fontweight="Black"/>
+    <Nome top="340" left="433" width="500" fontsize="38" fontweight="Black" textalignment="Center"/>
+    <Sim top="280" left="980" width="250" height="250" />
+    <Nao top="290" left="483" width="400" height="250" />
+    <Voltar top="600" left="0" width="200" height="168"/>
+  </ComandaConfirmacao>
+  
+  <ClienteEntrada background="entrada">
+    <Home top="0" left="0" width="200" height="150"/>
+    <Numero top="14" left="460" fontsize="44" foreground="#F4ED37" fontweight="Black"/>
+    <Saldo top="26" left="680" fontsize="35" foreground="#F4ED37" />
+    <Nome top="26" left="900" width="400" fontsize="35" foreground="White" fontweight="Black" textalignment="Right"/>
+    <Entrada top="340" left="433" width="500" fontsize="50" fontweight="Black" textalignment="Center" />
+    <Creditos top="500" left="320" width="350" height="200" />
+    <Pagar top="500" left="700" width="350" height="200" />
+    <Cancelar top="600" left="0" width="200" height="168"/>
+  </ClienteEntrada>
+
+  <ClienteCredito background="credito">
+    <Home top="0" left="0" width="200" height="150"/>
+    <Numero top="14" left="460" fontsize="44" foreground="#F4ED37" fontweight="Black"/>
+    <Saldo top="26" left="680" fontsize="35" foreground="#F4ED37" />
+    <Consulta top="100" left="1000" fontsize="30" fontweight="Bold" foreground="#A7252A" text="Consultar Consumo" />
+    <Nome top="26" left="900" width="400" fontsize="35" foreground="White" fontweight="Black" textalignment="Right"/>
+    <Pagar top="562" left="500" background="pagar" />
+    <Cancelar top="600" left="0" width="200" height="168" />
+
+    <!-- Definição da lista de Crédito e o layout individual dos botões de credito -->
+    <ListaCreditos top="227" left="0" width="1366" />
+    <Credito fontsize="40" foreground="white" fontweight="Black" margin="25,0,25,0" background="creditoitem"/>
+    <CreditoSelecionado fontsize="45" foreground="Red" fontweight="Black" margin="25,0,25,0" background="creditoitem_selecionado"/>
+    <Titulo top="120" left="283" width="800" fontsize="60" textalignment="Center" fontweight="Black"/>
+    <Total top="480" left="83" width="1200" fontsize="40" textalignment="Center"/>
+    
+  </ClienteCredito>
+
+  <ComandaExtrato background="consulta">
+    <Home top="0" left="0" width="200" height="150"/>
+    <Numero top="380" left="160" width="300" fontsize="68" foreground="#A7252A" fontweight="Black"/>
+    <Nome top="26" left="900" width="400" fontsize="35" foreground="White" fontweight="Black" textalignment="Right"/>
+    <Pedido top="145" left="480" width="430" height="540"/>
+    <Imprimir top="600" left="1100" background="imprimir"/>
+    <Voltar top="600" left="0" width="200" height="168"/>
+  </ComandaExtrato>
+
+  <ClienteCreditoValor background="creditovalor">
+    <Home top="0" left="0" width="200" height="150"/>
+    <Numero top="14" left="460" fontsize="44" foreground="#F4ED37" fontweight="Black"/>
+    <Saldo top="26" left="680" fontsize="35" foreground="#F4ED37" />
+    <Nome top="26" left="900" width="400" fontsize="35" foreground="White" fontweight="Black" textalignment="Right"/>
+    <Titulo top="120" left="283" width="800" fontsize="60" textalignment="Center" fontweight="Black"/>
+
+    <!-- Definição da lista de Crédito e o layout individual dos botões de credito -->
+    <Teclado top="227" left="300"/>
+    <Total top="300" left="700" width="500" fontsize="40" textalignment="Center"/>
+    <Pagar top="400" left="800" background="pagar" />
+    <Cancelar top="600" left="0" width="200" height="168" />
+    
+  </ClienteCreditoValor>
+
+  <ComandaNumero background="fundo">
+    <Home top="0" left="0" width="200" height="150"/>
+    <Titulo top="150" left="500"/>
+    <Teclado top="200" left="530"/>
+    <Cancelar top="620" left="0" width="150" height="100"/>
+  </ComandaNumero>
+  
+  <ComandaMenu background="fundo">
+    <Home top="0" left="0" width="200" height="150"/>
+    <Numero top="360" left="160" fontsize="68" foreground="#BAA266" fontweight="Black"/>
+    <Nome top="430" left="160" fontsize="38" fontweight="Black"/>
+    <Pedido top="145" left="525" width="330" height="460"/>
+    <TotalPedido top="620" left="530" width="300" fontweight="Bold" textalignment="Right" fontsize="20" foreground="#B7A263" />
+    <TotalAPagar top="670" left="530" width="300" fontweight="Bold" textalignment="Right" fontsize="20" foreground="#B7A263" />
+    <Pagar top="300" left="950" text="pagar"/>
+    <Fechar top="300" left="950" text="fechar"/>
+    <Imprimir top="650" left="1166" text="imprimir"/>
+    <Voltar top="600" left="0" width="200" height="168"/> 
+  </ComandaMenu>
+
+  <Fim background="fim">
+    <Home top="10" left="10" width="1346" height="748"/>
+    <Numero top="14" left="460" fontsize="44" foreground="#F4ED37" fontweight="Black"/>
+    <Nome top="26" left="900" width="400" fontsize="35" foreground="White" fontweight="Black" textalignment="Right"/>
+    <Mensagem top="460" left="250" width="866" fontweight="Black" fontsize="40" textalignment="Center"/>
+  </Fim>
+    
+</AutoAtendimento>

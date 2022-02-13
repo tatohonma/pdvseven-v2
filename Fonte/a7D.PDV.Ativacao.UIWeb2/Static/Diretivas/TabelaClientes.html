@@ -1,0 +1,31 @@
+﻿<h1>Clientes</h1>
+<hr />
+<div class="row">
+    <div class="col-md-12" style="margin-bottom:20px">
+        <a href="#/clientes/new" role="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>&nbsp;Cliente</a>
+    </div>
+</div>
+
+<div class="row" ng-controller="ClientesController as vm">
+    <div class="col-md-12">
+
+        <div class="table-responsive" loading-container="vm.tableparams.settings().$loading" ng-hide="vm.mensagem" style="position:relative">
+            <table ng-table="vm.tableParams" class="table table-hover">
+                <tr ng-repeat="cliente in $data">
+                    <td>
+                        <a ng-href="/#/clientes/edit/{{cliente.IDCliente}}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+                    </td>
+                    <td data-title="'Revenda'" filter="{revenda: 'select'}" filter-data="vm.revendas">{{cliente.Revenda.Nome}}</td>
+                    <td data-title="'Nome'" filter="{nome: 'text'}">{{cliente.Nome}}</td>
+                    <td data-title="'Razão Social'" filter="{razaoSocial: 'text'}">{{cliente.RazaoSocial}}</td>
+                    <td data-title="'Documento'" filter="{documento: 'text'}">{{cliente.CNPJCPF}}</td>
+                    <td data-title="'Telefone'" filter="{telefone: 'text'}">{{cliente.Telefone}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="alert alert-danger" ng-show="vm.mensagem">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Erro!</strong> {{vm.mensagem}}
+        </div>
+    </div>
+</div>

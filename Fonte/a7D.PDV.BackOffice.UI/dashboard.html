@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <title>Dashboards</title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/ng-table.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .maozinha {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body ng-app="backoffice">
+    <h1></h1>
+    <div class="container">
+        <carregando class="carregando"></carregando>
+        <ul class="nav nav-pills nav-justified conteudo" role="tablist" style="display:none">
+            <li role="presentation" class="active"><a href="#home" data-toggle="tab">Evolução Faturamento</a></li>
+            <li role="presentation"><a href="#detalhes" data-toggle="tab">Detalhes Faturamento</a></li>
+            <li role="presentation"><a href="#resumo" data-toggle="tab">Ticket Médio</a></li>
+            <li role="presentation"><a href="#vendas" data-toggle="tab">Produtos</a></li>
+            <li role="presentation"><a href="#clientes" data-toggle="tab">Clientes</a></li>
+            <li role="presentation"><a href="#fechamento" data-toggle="tab">Fechamento</a></li>
+        </ul>
+        <br />
+        <div class="tab-content conteudo" style="display:none">
+            <div class="tab-pane active" id="home" role="tabpanel">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Faturamento por Dia</h3>
+                            </div>
+                            <div class="panel-body">
+                                <canvas id="faturamentoDia" width="21" height="9"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Faturamento por Dia</h3>
+                            </div>
+                            <div class="panel-body">
+                                <canvas id="faturamentoMensal" width="21" height="9"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="detalhes" role="tabpanel" ng-controller="detalhes as vm">
+                <carregando ng-hide="vm.carregado"></carregando>
+                <div class="row" ng-show="vm.carregado">
+                    <div class="col-md-12">
+                        <div class="pull-right" ng-show="vm.carregado">
+                            <filtro-data acoes="vm.acoes"></filtro-data>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-show="vm.carregado">
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Faturamento por Categoria</h3>
+                            </div>
+                            <div class="panel-body">  
+                                <canvas id="faturamentoCategoria" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Faturamento por Tipo de Pagamento</h3>
+                            </div>
+                            <div class="panel-body">
+                                <canvas id="faturamentoTipoPagamento" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Faturamento por Tipo de Pedido</h3>
+                            </div>
+                            <div class="panel-body">
+                                <canvas id="faturamentoTipoPedido" width="400" height="400"></canvas>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-show="vm.carregado">
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Volume por Garçom</h3>
+                            </div>
+                            <div class="panel-body">
+                                <canvas id="volumeGarcom" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Faturamento por Dia da Semana</h3>
+                            </div>
+                            <div class="panel-body">
+                                <canvas id="faturamentoDiaSemana" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Motivos de Cancelamento</h3>
+                            </div>
+                            <div class="panel-body">
+                                <canvas id="motivosCancelamento" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="resumo" role="tabpanel" ng-controller="resumo as vm">
+                <carregando ng-hide="vm.carregado"></carregando>
+                <div class="row" ng-show="vm.carregado">
+                    <div class="col-md-12">
+                        <div class="pull-right">
+                            <filtro-data acoes="vm.acoes"></filtro-data>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-show="vm.carregado">
+                    <div class="col-md-12">
+                        <h1>Ticket Médio</h1>
+                        <ul>
+                            <li><h3>Volume total de vendas: {{ vm.ticketMedio.totalVendas | reais }}</h3></li>
+                            <li>
+                                <h3>Ticket médio por pedido: {{ vm.ticketMedio.pedido.total | reais }} (qtd. {{ vm.ticketMedio.pedido.quantidade | quantidade }})</h3>
+                                <ul>
+                                    <li>Mesa: R$ {{ vm.ticketMedio.pedido.mesa.valor | reais }} (qtd. {{ vm.ticketMedio.pedido.mesa.quantidade | quantidade }})</li>
+                                    <li>Comanda: R$ {{ vm.ticketMedio.pedido.comanda.valor | reais }} (qtd. {{ vm.ticketMedio.pedido.comanda.quantidade | quantidade }})</li>
+                                    <li>Delivery: R$ {{ vm.ticketMedio.pedido.delivery.valor | reais }} (qtd. {{ vm.ticketMedio.pedido.delivery.quantidade | quantidade }})</li>
+                                    <li>Balcão: R$ {{ vm.ticketMedio.pedido.balcao.valor | reais }} (qtd. {{ vm.ticketMedio.pedido.balcao.quantidade | quantidade }})</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h3>Ticket médio por cliente: {{ vm.ticketMedio.cliente.total | reais }} (qtd. {{ vm.ticketMedio.cliente.quantidade | quantidade }})</h3>
+                                <ul>
+                                    <li>Mesa: R$ {{ vm.ticketMedio.cliente.mesa.valor | reais }} (qtd. {{ vm.ticketMedio.cliente.mesa.quantidade | quantidade }})</li>
+                                    <li>Comanda: R$ {{ vm.ticketMedio.cliente.comanda.valor | reais }} (qtd. {{ vm.ticketMedio.cliente.comanda.quantidade | quantidade }})</li>
+                                    <li>Delivery: R$ {{ vm.ticketMedio.cliente.delivery.valor | reais }} (qtd. {{ vm.ticketMedio.cliente.delivery.quantidade | quantidade }})</li>
+                                    <li>Balcão: R$ {{ vm.ticketMedio.cliente.balcao.valor | reais }} (qtd. {{ vm.ticketMedio.cliente.balcao.quantidade | quantidade }})</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="vendas" role="tabpanel" ng-controller="produtosVendidos as vm">
+                <carregando ng-hide="vm.carregadoTotal"></carregando>
+                <div ng-show="vm.carregadoTotal">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <filtro-data acoes="vm.acoes"></filtro-data>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="nav nav-pills nav-justified" role="tablist">
+                                <li role="presentation" class="active"><a href="#produtosquantidade" data-toggle="pill">Por Quantidade</a></li>
+                                <li role="presentation"><a href="#produtosvalor" data-toggle="pill">Por Valor</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="produtosquantidade" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h3>Produtos mais vendidos</h3>
+                                            <table class="table table-striped table-bordered" ng-table="vm.maisVendidos" show-filter="false">
+                                                <tr ng-repeat="produto in $data">
+                                                    <td title="'Ranking'">{{produto.ranking}}</td>
+                                                    <td title="'Produto'">{{produto.produto}}</td>
+                                                    <td title="'Qtd.'">{{produto.qtd | quantidade}}</td>
+                                                    <td title="'Valor (R$)'">{{produto.valor | reais }}</td>
+                                                    <td title="'%'">{{produto.percentual | percentual }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h3>Produtos menos vendidos</h3>
+                                            <table class="table table-striped table-bordered" ng-table="vm.menosVendidos" show-filter="false">
+                                                <tr ng-repeat="produto in $data">
+                                                    <td title="'Ranking'">{{produto.ranking}}</td>
+                                                    <td title="'Produto'">{{produto.produto}}</td>
+                                                    <td title="'Qtd.'">{{produto.qtd | quantidade}}</td>
+                                                    <td title="'Valor (R$)'">{{produto.valor | reais }}</td>
+                                                    <td title="'%'">{{produto.percentual | percentual }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="produtosvalor" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h3>Produtos mais vendidos</h3>
+                                            <table class="table table-striped table-bordered" ng-table="vm.maisVendidosValor" show-filter="false">
+                                                <tr ng-repeat="produto in $data">
+                                                    <td title="'Ranking'">{{produto.ranking}}</td>
+                                                    <td title="'Produto'">{{produto.produto}}</td>
+                                                    <td title="'Qtd.'">{{produto.qtd | quantidade}}</td>
+                                                    <td title="'Valor (R$)'">{{produto.valor | reais }}</td>
+                                                    <td title="'%'">{{produto.percentual | percentual }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h3>Produtos menos vendidos</h3>
+                                            <table class="table table-striped table-bordered" ng-table="vm.menosVendidosValor" show-filter="false">
+                                                <tr ng-repeat="produto in $data">
+                                                    <td title="'Ranking'">{{produto.ranking}}</td>
+                                                    <td title="'Produto'">{{produto.produto}}</td>
+                                                    <td title="'Qtd.'">{{produto.qtd | quantidade}}</td>
+                                                    <td title="'Valor (R$)'">{{produto.valor | reais }}</td>
+                                                    <td title="'%'">{{produto.percentual | percentual }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="clientes" role="tabpanel" ng-controller="clientes as vm">
+                <carregando ng-hide="vm.carregado"></carregando>
+                <div ng-show="vm.carregado" class="row">
+                    <div class="col-md-12">
+                        <div class="pull-right">
+                            <filtro-data acoes="vm.acoes"></filtro-data>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="vm.carregado" class="row">
+                    <div class="col-md-12">
+                        <h2>Melhores clientes</h2>
+                        <table ng-table="vm.clientes" show-filter="false" class="table table-striped table-bordered">
+                            <tr ng-repeat="cliente in $data">
+                                <td title="'Ranking *'" sortable="'ranking'">{{cliente.ranking}}</td>
+                                <td title="'Nome'" sortable="'name'">{{cliente.nome}}</td>
+                                <td title="'Total Vendas (R$)'" sortable="'totalVendas'">{{cliente.totalVendas | reais}}</td>
+                                <td title="'Qtd. visitas'" sortable="'qtdVisitas'">{{cliente.qtdVisitas | quantidade}}</td>
+                                <td title="'Ticket Médio (R$)'" sortable="'ticketMedio'">{{cliente.ticketMedio | reais}}</td>
+                                <td title="'Data última visita'" sortable="'ultimaVisita'">{{cliente.ultimaVisita | relativo}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div ng-show="vm.carregado" class="row">
+                    <div class="col-md-12">
+                        <p class="text-muted">* Ranking basedo no valor total de vendas (R$)</p>
+                    </div>
+                </div>
+            </div>
+            <div id="fechamento" class="tab-pane" role="tabpanel" ng-controller="fechamento as vm">
+                <carregando ng-hide="vm.carregado"></carregando>
+                <div ng-show="vm.carregado && !vm.semFechamento">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="dropdown">
+                                <h1 data-toggle="dropdown" class="maozinha">Fechamento {{ vm.fechamento.fechamento | diaemeseano }} - {{ vm.fechamento.fechamento | diasemana }} <small>({{ vm.fechamento.abertura | diaemesehora }} até {{ vm.fechamento.fechamento | diaemesehora }})</small><span class="caret"></span></h1>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li ng-repeat="fechamento in vm.fechamento.fechamentos"><a href="#" ng-click="vm.filtrar(fechamento.id)">{{ fechamento.nome }}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Faturamento total: {{vm.fechamento.faturamentoTotal | reais}}</h2>
+                            <h3>Descontos: {{ vm.fechamento.descontos | reais }} / Cancelamentos: {{ vm.fechamento.cancelamentos | reais }}</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>
+                                    <h3>Por tipo de pagamento</h3>
+                                    <ul>
+                                        <li ng-repeat="tipoPagamento in vm.fechamento.tipoPagamento">
+                                            {{ tipoPagamento.tipo }}: {{ tipoPagamento.valor | reais }} ({{ tipoPagamento.percentual | percentual }})
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul>
+                                <li>
+                                    <h3>Por garçom</h3>
+                                    <ul>
+                                        <li ng-repeat="garcom in vm.fechamento.garcom">
+                                            {{ garcom.nome }}: {{ garcom.valor | reais }} ({{ garcom.percentual | percentual }})
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>
+                                    <h3>Por tipo de pedido (Qtd. total: {{ vm.fechamento.totalPedidos }})</h3>
+                                    <ul>
+                                        <li ng-repeat="tipoPedido in vm.fechamento.tipoPedido">
+                                            {{ tipoPedido.tipo }}: {{ tipoPedido.valor | reais }} ({{ tipoPedido.quantidade | quantidade }})
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul>
+                                <li>
+                                    <h3>Por caixa</h3>
+                                    <ul>
+                                        <li ng-repeat="caixa in vm.fechamento.caixa">
+                                            {{ caixa.nome }} ({{ caixa.usuario }}): {{ caixa.valor | reais }}
+                                            <caixa-diferenca valor="caixa.diferenca"></caixa-diferenca>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-show="vm.semFechamento">
+                    <div class="col-md-12">
+                        <h1>Nenhum fechamento do dia realizado!</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="Scripts/jquery-3.1.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/Chart.min.js"></script>
+    <script src="Scripts/moment-with-locales.js"></script>
+    <script src="Scripts/numeral/numeral.min.js"></script>
+    <script src="Scripts/numeral/locales/pt-br.min.js"></script>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/ng-table.min.js"></script>
+    <script src="Scripts/ng/backoffice.js"></script>
+    <script src="Scripts/ng/detalhes.controller.js"></script>
+    <script src="Scripts/ng/produtosvendidos.controller.js"></script>
+    <script src="Scripts/ng/clientes.controller.js"></script>
+    <script src="Scripts/ng/resumo.controller.js"></script>
+    <script src="Scripts/ng/fechamento.controller.js"></script>
+    <script src="Scripts/ng/diaemes.filter.js"></script>
+    <script src="Scripts/ng/diaemesehora.filter.js"></script>
+    <script src="Scripts/ng/diaemeseano.filter.js"></script>
+    <script src="Scripts/ng/diasemana.filter.js"></script>
+    <script src="Scripts/ng/reais.filter.js"></script>
+    <script src="Scripts/ng/relativo.filter.js"></script>
+    <script src="Scripts/ng/percentual.filter.js"></script>
+    <script src="Scripts/ng/quantidade.filter.js"></script>
+    <script src="Scripts/ng/caixa-diferenca.directive.js"></script>
+    <script src="Scripts/ng/carregando.directive.js"></script>
+    <script src="Scripts/ng/filtro-data.directive.js"></script>
+    <script type="text/javascript">
+        numeral.locale('pt-br');
+        moment.locale('pt-br');
+        Chart.pluginService.register({
+          beforeRender: function (chart) {
+            if (chart.config.options.showAllTooltips) {
+                // create an array of tooltips
+                // we can't use the chart tooltip because there is only one tooltip per chart
+                chart.pluginTooltips = [];
+                chart.config.data.datasets.forEach(function (dataset, i) {
+                    chart.getDatasetMeta(i).data.forEach(function (sector, j) {
+                        chart.pluginTooltips.push(new Chart.Tooltip({
+                            _chart: chart.chart,
+                            _chartInstance: chart,
+                            _data: chart.data,
+                            _options: chart.options.tooltips,
+                            _active: [sector]
+                        }, chart));
+                    });
+                });
+
+                // turn off normal tooltips
+                chart.options.tooltips.enabled = false;
+            }
+        },
+          afterDraw: function (chart, easing) {
+            if (chart.config.options.showAllTooltips) {
+                // we don't want the permanent tooltips to animate, so don't do anything till the animation runs atleast once
+                if (!chart.allTooltipsOnce) {
+                    if (easing !== 1)
+                        return;
+                    chart.allTooltipsOnce = true;
+                }
+
+                // turn on tooltips
+                chart.options.tooltips.enabled = true;
+                Chart.helpers.each(chart.pluginTooltips, function (tooltip) {
+                    tooltip.initialize();
+                    tooltip.update();
+                    // we don't actually need this since we are not animating tooltips
+                    tooltip.pivot();
+                    tooltip.transition(easing).draw();
+                });
+                chart.options.tooltips.enabled = false;
+            }
+          }
+        });
+    </script>
+</body>
+</html>

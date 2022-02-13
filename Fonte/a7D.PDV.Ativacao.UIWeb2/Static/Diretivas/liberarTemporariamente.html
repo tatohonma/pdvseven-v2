@@ -1,0 +1,5 @@
+<div>
+  <p ng-if="ativacao.ReativadoSuporte === true && !buscando">Liberado até {{ ativacao.DataValidadeProvisoria | dataCompleta }}</p>
+  <p ng-if="mostrarReativar && !buscando" ><a href="" ng-click="liberar()">Liberar temporariamente</a></p>
+  <p ng-if="buscando">Aguarde...</p>
+</div>

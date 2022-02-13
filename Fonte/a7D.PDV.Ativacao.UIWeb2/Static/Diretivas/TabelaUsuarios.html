@@ -1,0 +1,40 @@
+<h1>Usuários</h1>
+<hr />
+<div class="row">
+    <div class="col-md-12" style="margin-bottom:20px">
+        <a href="#/usuarios/new" role="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>&nbsp;Usuário</a>
+    </div>
+</div>
+
+<div class="row" ng-controller="UsuariosController as vm">
+    <div class="col-md-12">
+        <div class="table-responsive" loading-container="vm.tableparams.settings().$loading" ng-hide="vm.mensagem" style="position:relative">
+            <table ng-table="vm.tableParams" class="table table-hover">
+                <tr ng-repeat="usuario in $data">
+                    <td>
+                        <a ng-href="/#/usuarios/edit/{{usuario.IDUsuario}}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+                    </td>
+                    <td>
+                      <button ng-click="vm.deletar(usuario)" class="btn btn-default btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                    </td>
+                    <td>
+                      <button ng-click="vm.resetarSenha(usuario)" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-lock"></span>
+                    </td>
+                    <td>
+                      <button ng-click="vm.reenviarEmail(usuario)" ng-if="usuario.CadastroPendente" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-send"></span>
+                    </td>
+                    <td data-title="'E-mail'" filter="{email: 'text'}" >{{usuario.Email}}</td>
+                    <td data-title="'Nome'" filter="{nome: 'text'}">{{usuario.Nome}}</td>
+                    <td data-title="'Ativo'" filter="{ativo:'select'}" filter-data="vm.ativofilter"><span class="glyphicon" ng-class="{'glyphicon-ok-sign success' : usuario.Ativo, 'danger glyphicon-remove-sign' : !usuario.Ativo}"></span></td>
+                    <td data-title="'Admin'" filter="{admin:'select'}" filter-data="vm.ativofilter"><span class="glyphicon" ng-class="{'glyphicon-ok-sign success' : usuario.Adm, 'danger glyphicon-remove-sign' : !usuario.Adm}"></span></td>
+                    <td data-title="'Cadastro Pendente'" filter="{cadastroPendente:'select'}" filter-data="vm.ativofilter"><span class="glyphicon" ng-class="{'glyphicon-ok-sign success' : usuario.CadastroPendente, 'danger glyphicon-remove-sign' : !usuario.CadastroPendente}"></span></td>
+                    <td data-title="'Excluido'" filter="{excluido:'select'}" filter-data="vm.ativofilter"><span class="glyphicon" ng-class="{'glyphicon-ok-sign success' : usuario.Excluido, 'danger glyphicon-remove-sign' : !usuario.Excluido}"></span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="alert alert-danger" ng-show="vm.mensagem">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Erro!</strong> {{vm.mensagem}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,195 @@
+<style type="text/css">
+    .float-message {
+        position: fixed;
+        top: 5%;
+        left: 50%;
+        margin-left: -150px;
+        width: 300px;
+        z-index: 9999;
+    }
+</style>
+<br />
+    <form name="formulario" ng-submit="formulario.$valid && vm.salvar(ativacao)" ng-controller="AtivacaoController as vm" novalidate>
+        <div class="form-horizontal">
+            <div class="float-message alert alert-danger" ng-show="vm.mensagemErr">
+                <button type="button" class="close" ng-click="vm.fecharErro()" aria-hidden="true">&times;</button>
+                <strong>Erro!</strong> {{vm.mensagemErr}}
+            </div>
+
+            <div class="float-message alert alert-success" ng-show="vm.mensagem">
+                <button type="button" class="close" ng-click="vm.fecharMensagem()" aria-hidden="true">&times;</button>
+                <strong>Successo!</strong> {{vm.mensagem}}
+            </div>
+
+            <div class="progress" ng-hide="vm.carregado">
+                <div ng-class="{'progress-bar-striped': !vm.erro, 'progress-bar-danger': vm.erro, 'active': !vm.erro}" class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                    Carregando...
+                </div>
+            </div>
+            <div ng-show="vm.carregado">
+                <legend>{{vm.ativacao.ChaveAtivacao}}</legend>
+                <div class="form-group" ng-class="{'has-error': !formulario.cliente.$valid && (formulario.cliente.$dirty || formulario.$submitted)}">
+                    <label class="control-label col-md-2" for="inputCliente">Cliente</label>
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">{{vm.ativacao.Cliente.IDCliente}}</span>
+                            <input required type="text" name="cliente" id="inputCliente" class="form-control" typeahead-editable="false" ng-model="vm.ativacao.Cliente" placeholder="Buscar cliente..." uib-typeahead="cliente as cliente.Nome for cliente in vm.getClientes($viewValue)"
+                                   typeahead-loading="carregandoAtivacoes" typeahead-no-results="noResults" typeahead-wait-ms="500" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{'has-error': !formulario.chave.$valid && (formulario.chave.$dirty || formulario.$submitted)}">
+                    <label class="control-label col-md-2" for="inputChave">Chave Ativação</label>
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            <input type="text" name="chave" id="inputChave" disabled class="form-control" ng-model="vm.ativacao.ChaveAtivacao" required />
+                            <span class="input-group-btn">
+                                <button type="button" data-toggle="modal" data-target="#modal" class="btn btn-default">Gerar Chave</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="inputUltima">Data Última Verificação</label>
+                    <div class="col-md-10">
+                        <input type="text" name="ultimaVerificacao" disabled class="form-control" id="inputUltima" value="{{vm.ativacao.DtUltimaVerificacao | date : 'dd-MM-yyyy HH:mm:ss'}}" />
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{'has-error': !formulario.diasValidade.$valid && (formulario.diasValidade.$dirty || formulario.$submitted)}">
+                    <label class="control-label col-md-2" for="inputDiasValidade">Validade (dias)</label>
+                    <div class="col-md-10">
+                        <input name="diasValidade" type="number" class="form-control" id="inputDiasValidade" ng-model="vm.ativacao.DiasValidadeAtivacao" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Ativo</label>
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="ativo" ng-model="vm.ativacao.Ativo">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Reativado pelo Suporte</label>
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="reativadoSuporte" ng-model="vm.ativacao.ReativadoSuporte">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-show="vm.ativacao.ReativadoSuporte">
+                    <label class="control-label col-md-2" for="inputUltima">Data de Reativação pelo Suporte</label>
+                    <div class="col-md-10">
+                        <input type="text" name="dataReativacaoSuporte" disabled class="form-control" id="inputUltima" value="{{vm.ativacao.DataReativacaoSuporte | date : 'dd-MM-yyyy HH:mm:ss'}}" />
+                    </div>
+                </div>
+                <div class="form-group" ng-show="vm.ativacao.ReativadoSuporte">
+                    <label class="control-label col-md-2" for="inputUltima">Data de Validade Provisória</label>
+                    <div class="col-md-10">
+                        <input type="text" name="dataValidadeProvisoria" disabled class="form-control" id="inputUltima" value="{{vm.ativacao.DataValidadeProvisoria | date : 'dd-MM-yyyy HH:mm:ss'}}" />
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{'has-error': !formulario.observacao.$valid && (formulario.observacao.$dirty || formulario.$submitted)}">
+                    <label class="control-label col-md-2" for="inputObservacao">Observações</label>
+                    <div class="col-md-10">
+                        <textarea name="observacao" id="inputObservacao" class="form-control" ng-model="vm.ativacao.Observacao" />
+                    </div>
+                </div>
+                <hr />
+                <h3>Licenças</h3>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <input class="form-control" type="search" ng-model="vm.filtro" placeholder="Buscar licenças..." ng-model-options="{ debounce:500 }" />
+                    </div>
+                    <div class="col-md-6"></div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input type="text" ng-model="vm.quantidade" class="form-control" aria-label="quantidade" placeholder="insira a quantidade" value="1" />
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Adicionar Licenças <span class="caret"></span></button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li ng-repeat="pdv in vm.tiposPdv">
+                                        <a ng-click="vm.adicionarLicenca(pdv.IDTipoPDV)" href="">{{pdv.Nome}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">PDV</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Hardware</th>
+                            <th scope="col">Versão</th>
+                            <th scope="col">Ultima Alteração</th>
+                            <th scope="col">Ativo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="pdv in vm.ativacao.PDVs | filter: vm.filtro as lfiltradas">
+                            <th scope="row">{{pdv.IDPDV_instalacao}}</th>
+                            <td>{{vm.nomePDV(pdv.IDTipoPDV)}}</td>
+                            <td>{{pdv.Nome}}</td>
+                            <td>{{pdv.ChaveHardware}}</td>
+                            <td>{{pdv.Versao}}</td>
+                            <td>{{pdv.DtUltimaAlteracao | date : 'dd/MM/yyyy HH:mm:ss'}}</td>
+                            <td><a ng-click="vm.alterarStatus(pdv)">
+                                <span class="glyphicon" ng-class="{'success glyphicon-ok-sign' : pdv.Ativo, 'danger glyphicon-remove-sign' : !pdv.Ativo}"></span></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="well" ng-hide="vm.ativacao.PDVs.length && vm.ativacao.PDVs.length > 0">
+                    <span class="glyphicon glyphicon-info-sign"></span>&nbsp; Nenhuma licença ainda.
+                </div>
+
+                <br />
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <button ng-disabled="vm.enviando || !formulario.$valid" type="submit" class="btn btn-primary btn-lg">
+                            <span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Salvar
+                        </button>
+                        <img ng-if="vm.enviando" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                    </div>
+                </div>
+
+                <hr />
+            </div>
+            <div class="modal fade" id="modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Nova Chave de Ativação</h4>
+                        </div>
+                        <div class="modal-body">
+                            <label for="inputRevenda">Revenda</label>
+                            <select id="inputRevenda"
+                                    name="revenda"
+                                    ng-model="vm.ativacao.Revenda"
+                                    ng-controller="RevendasListaController"
+                                    ng-options="revenda.IDRevenda as revenda.Nome for revenda in revendas"
+                                    class="form-control">
+                                <option value="">Selecione uma Revenda</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="!vm.ativacao.Revenda" ng-click="vm.gerarChave()">Gerar Chave</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <a href="#/ativacoes">Voltar à lista</a>

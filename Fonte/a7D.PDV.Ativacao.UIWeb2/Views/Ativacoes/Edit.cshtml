@@ -1,0 +1,128 @@
+﻿<style type="text/css">
+    .float-message {
+        position: fixed;
+        top: 5%;
+        left: 50%;
+        margin-left: -150px;
+        width: 300px;
+        z-index: 9999;
+    }
+</style>
+<br />
+<form name="formulario" ng-submit="formulario.$valid && salvar(ativacao)" ng-controller="AtivacaoController" novalidate>
+    <div class="form-horizontal">
+        <div class="float-message alert alert-danger" ng-show="mensagemErr">
+            <button type="button" class="close" ng-click="fecharErro()" aria-hidden="true">&times;</button>
+            <strong>Erro!</strong> {{mensagemErr}}
+        </div>
+
+        <div class="float-message alert alert-success" ng-show="mensagem">
+            <button type="button" class="close" ng-click="fecharMensagem()" aria-hidden="true">&times;</button>
+            <strong>Successo!</strong> {{mensagem}}
+        </div>
+
+        <div class="progress" ng-hide="carregado">
+            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                Carregando...
+            </div>
+        </div>
+        <div ng-show="carregado">
+            <legend>{{ativacao.ChaveAtivacao}}</legend>
+            <div class="form-group" ng-class="{'has-error': !formulario.cliente.$valid && (formulario.cliente.$dirty || formulario.$submitted)}">
+                <label class="control-label col-md-2" for="inputCliente">Cliente</label>
+                <div class="col-md-10">
+                    <select name="cliente"
+                            id="inputCliente"
+                            ng-model="ativacao.IDCliente"
+                            class="form-control"
+                            required
+                            ng-controller="ClientesListaController"
+                            ng-options="cliente.IDCliente as cliente.Nome for cliente in clientes"
+                            ng-disabled="!carregado || erro">
+                        <option value="" ng-show="!carregado">Escolha um Cliente</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': !formulario.chave.$valid && (formulario.chave.$dirty || formulario.$submitted)}">
+                <label class="control-label col-md-2" for="inputChave">Chave Ativação</label>
+                <div class="col-md-10">
+                    <div class="input-group">
+                        <input type="text" name="chave" id="inputChave" disabled class="form-control" ng-model="ativacao.ChaveAtivacao" required />
+                        <span class="input-group-btn">
+                            <button type="button" data-toggle="modal" data-target="#modal" class="btn btn-default">Gerar Chave</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="inputUltima">Data Última Verificação</label>
+                <div class="col-md-10">
+                    <input type="text" name="ultimaVerificacao" disabled class="form-control" id="inputUltima" value="{{ativacao.DtUltimaVerificacao | date}}" />
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': !formulario.diasValidade.$valid && (formulario.diasValidade.$dirty || formulario.$submitted)}">
+                <label class="control-label col-md-2" for="inputDiasValidade">Validade (dias)</label>
+                <div class="col-md-10">
+                    <input name="diasValidade" type="number" class="form-control" id="inputDiasValidade" ng-model="ativacao.DiasValidadeAtivacao" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Ativo</label>
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="ativo" ng-model="ativacao.Ativo">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': !formulario.observacao.$valid && (formulario.observacao.$dirty || formulario.$submitted)}">
+                <label class="control-label col-md-2" for="inputObservacao">Observações</label>
+                <div class="col-md-10">
+                    <textarea name="observacao" id="inputObservacao" class="form-control" ng-model="ativacao.Observacao" />
+                </div>
+            </div>
+            <hr />
+            <h3>Licenças<button type="button" class="btn btn-default btn-sm pull-right" ng-click="adicionarLicenca()"><span class="glyphicon glyphicon-plus"></span>&nbsp;Adicionar Licença</button><span class="clearfix"></span></h3>
+            <licencas ng-repeat="l in ativacao.PDVs | filter:{Deletado: false}" ng-model="l" remover="removerLicenca(l)"></licencas>
+            <div class="well" ng-hide="ativacao.PDVs.length && ativacao.PDVs.length > 0">
+                <span class="glyphicon glyphicon-info-sign"></span>&nbsp; Nenhuma licença ainda. <a href="" ng-click="adicionarLicenca()">Adicionar uma agora</a>
+            </div>
+            <hr />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-default" value="Salvar" />
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Nova Chave de Ativação</h4>
+                    </div>
+                    <div class="modal-body">
+                        <label for="inputRevenda">Revenda</label>
+                        <select id="inputRevenda"
+                                name="revenda"
+                                ng-model="ativacao.Revenda"
+                                ng-controller="RevendasListaController"
+                                ng-options="revenda.IDRevenda as revenda.Nome for revenda in revendas"
+                                class="form-control">
+                            <option value="">Selecione uma Revenda</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="!ativacao.Revenda" ng-click="gerarChave()">Gerar Chave</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div>
+    <a href="#/ativacoes">Voltar à lista</a>
+</div>
+

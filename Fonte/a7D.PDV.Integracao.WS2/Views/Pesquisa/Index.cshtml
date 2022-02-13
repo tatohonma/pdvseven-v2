@@ -1,0 +1,35 @@
+﻿<style>
+    body {
+        background-color: black;
+        color: white;
+    }
+    button {
+        width: 90%;
+        font-size: 20pt !important;
+        background: transparent !important;
+    }
+</style>
+<div class="jumbotron text-center" style="background: transparent !important">
+    <h1>Como foi sua experiência?</h1>
+</div>
+<div class="row">
+
+    <div class="col-sm-4 col-md-4 col-xs-4 text-right">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("Obrigado", "Pesquisa", new { nota=1 } )'">
+            <img src="/Ruim.png" /><br />
+            RUIM
+        </button>
+    </div>
+    <div class="col-sm-4 col-md-4 col-xs-4 text-center">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("Obrigado", "Pesquisa", new { nota=2 } )'">
+            <img src="/Bom.png" /><br />
+            BOA
+        </button>
+    </div>
+    <div class="col-sm-4 col-md-4 col-xs-4 text-left">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("Obrigado", "Pesquisa", new { nota=3 } )'">
+            <img src="/Otimo.png" /><br />
+            ÓTIMA
+        </button>
+    </div>
+</div>

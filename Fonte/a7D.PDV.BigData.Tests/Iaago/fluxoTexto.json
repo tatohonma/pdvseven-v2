@@ -1,0 +1,27 @@
+{
+  "dialogo": [
+    {
+      "intencao": "pergunta1",
+      "mensagem": "responda sim ou não",
+      "acaoResposta": [
+        {
+          "tipoResposta": "text",
+          "retorno": [
+            {
+              "condicao": [ "api['idEstabelecimento'] != null" ],
+              "mensagem": "Você digitou um texto"
+            },
+            {
+              "condicao": [ "api['idEstabelecimento'] == null", "ciclo <= 2" ],
+              "mensagem": "Não encontrei nenhum estabelecimento com esses dados.\nFavor informar o Nome ou CNPJ/CPF do estabelecimento novamente!",
+            },
+            {
+              "condicao": [ "api['idEstabelecimento'] == null" ],
+              "mensagem": "Acho que você ainda não está cadastrado. caso queira apenas conhecer a ferramenta, pode usar os seguintes dados de testes:\n Estabelecimento:\"Quero conhecer mais\" \nChave de acesso:\"123456\" \n\nou se preferir, ligue no nosso suporte: (11) 4210-0122",
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

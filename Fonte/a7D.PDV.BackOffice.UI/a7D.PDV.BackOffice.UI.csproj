@@ -1,0 +1,1201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\CefSharp.WinForms.57.0.0\build\CefSharp.WinForms.props" Condition="Exists('..\packages\CefSharp.WinForms.57.0.0\build\CefSharp.WinForms.props')" />
+  <Import Project="..\packages\CefSharp.Common.57.0.0\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.57.0.0\build\CefSharp.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7CAAD278-4001-4CE7-8F16-6573892D12E9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>a7D.PDV.BackOffice.UI</RootNamespace>
+    <AssemblyName>a7D.PDV.BackOffice.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>BackOffice.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Gma.QrCodeNet.Encoding">
+      <HintPath>..\..\Componentes\Gma.QrCodeNet.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="Impactro.Cobranca">
+      <HintPath>..\..\Componentes\Impactro.Cobranca.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Windows.11.0.3452\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Windows.11.0.3452\lib\net40\Microsoft.ReportViewer.DataVisualization.DLL</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Windows.11.0.3452\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Windows.11.0.3452\lib\net40\Microsoft.ReportViewer.WinForms.DLL</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.1016.290\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="BackofficeUtil.cs" />
+    <Compile Include="CEFAsyncBoundObjects\BackofficeAsyncObject.cs" />
+    <Compile Include="EditarPainelModificacao.cs" />
+    <Compile Include="EnumTipoProduto.cs" />
+    <Compile Include="frmAguardandoSAT.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAguardandoSAT.Designer.cs">
+      <DependentUpon>frmAguardandoSAT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAreaImpressao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAreaImpressao.Designer.cs">
+      <DependentUpon>frmAreaImpressao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAreaImpressaoEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAreaImpressaoEditar.Designer.cs">
+      <DependentUpon>frmAreaImpressaoEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCardapioDigital.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCardapioDigital.Designer.cs">
+      <DependentUpon>frmCardapioDigital.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCardapioDigitalEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCardapioDigitalEditar.Designer.cs">
+      <DependentUpon>frmCardapioDigitalEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCategoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCategoria.Designer.cs">
+      <DependentUpon>frmCategoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCategoriaEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCategoriaEditar.Designer.cs">
+      <DependentUpon>frmCategoriaEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCFE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCFE.Designer.cs">
+      <DependentUpon>frmCFE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmClassificacaoFiscal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmClassificacaoFiscal.Designer.cs">
+      <DependentUpon>frmClassificacaoFiscal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmClassificacaoFiscalEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmClassificacaoFiscalEditar.Designer.cs">
+      <DependentUpon>frmClassificacaoFiscalEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmComanda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmComanda.Designer.cs">
+      <DependentUpon>frmComanda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmComandaDiversas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmComandaDiversas.Designer.cs">
+      <DependentUpon>frmComandaDiversas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmComandaEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmComandaEditar.Designer.cs">
+      <DependentUpon>frmComandaEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConversaoUnidade.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConversaoUnidade.Designer.cs">
+      <DependentUpon>frmConversaoUnidade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConversaoUnidadeEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConversaoUnidadeEditar.Designer.cs">
+      <DependentUpon>frmConversaoUnidadeEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEntregador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEntregador.Designer.cs">
+      <DependentUpon>frmEntregador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEntregadorEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEntregadorEditar.Designer.cs">
+      <DependentUpon>frmEntregadorEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDashboard.Designer.cs">
+      <DependentUpon>frmDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFichaInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFichaInventario.Designer.cs">
+      <DependentUpon>frmFichaInventario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmImagemTema.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImagemTema.Designer.cs">
+      <DependentUpon>frmImagemTema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmImagemTemaEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImagemTemaEditar.Designer.cs">
+      <DependentUpon>frmImagemTemaEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInventario.Designer.cs">
+      <DependentUpon>frmInventario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInventarioEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInventarioEditar.Designer.cs">
+      <DependentUpon>frmInventarioEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLoading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLoading.Designer.cs">
+      <DependentUpon>frmLoading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMapearProdutosAreaProducao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMapearProdutosAreaProducao.Designer.cs">
+      <DependentUpon>frmMapearProdutosAreaProducao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMesaEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMesaEditar.Designer.cs">
+      <DependentUpon>frmMesaEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMesa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMesa.Designer.cs">
+      <DependentUpon>frmMesa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMotivoCancelamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMotivoCancelamento.Designer.cs">
+      <DependentUpon>frmMotivoCancelamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMotivoCancelamentoEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMotivoCancelamentoEditar.Designer.cs">
+      <DependentUpon>frmMotivoCancelamentoEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMovimentacaoSelecionarTipo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMovimentacaoSelecionarTipo.Designer.cs">
+      <DependentUpon>frmMovimentacaoSelecionarTipo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMovimentacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMovimentacao.Designer.cs">
+      <DependentUpon>frmMovimentacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMovimentacaoEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMovimentacaoEditar.Designer.cs">
+      <DependentUpon>frmMovimentacaoEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMovimentacaoTodosProdutos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMovimentacaoTodosProdutos.Designer.cs">
+      <DependentUpon>frmMovimentacaoTodosProdutos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPainelModificacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPainelModificacao.Designer.cs">
+      <DependentUpon>frmPainelModificacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPainelModificacaoEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPainelModificacaoEditar.Designer.cs">
+      <DependentUpon>frmPainelModificacaoEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPainelModificacaoEditarAvancado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPainelModificacaoEditarAvancado.Designer.cs">
+      <DependentUpon>frmPainelModificacaoEditarAvancado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPDV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPDV.Designer.cs">
+      <DependentUpon>frmPDV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrincipal.Designer.cs">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProduto.Designer.cs">
+      <DependentUpon>frmProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProdutoEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProdutoEditar.Designer.cs">
+      <DependentUpon>frmProdutoEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProdutoReceitaEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProdutoReceitaEditar.Designer.cs">
+      <DependentUpon>frmProdutoReceitaEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProdutoTraducao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProdutoTraducao.Designer.cs">
+      <DependentUpon>frmProdutoTraducao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRelatorioEstoqueAtual.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRelatorioEstoqueAtual.Designer.cs">
+      <DependentUpon>frmRelatorioEstoqueAtual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRelatorioInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRelatorioInventario.Designer.cs">
+      <DependentUpon>frmRelatorioInventario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRelatorioMovimentacoes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRelatorioMovimentacoes.Designer.cs">
+      <DependentUpon>frmRelatorioMovimentacoes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRelatoriosFechamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRelatoriosFechamento.Designer.cs">
+      <DependentUpon>frmRelatoriosFechamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRelatoriosGerais.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRelatoriosGerais.Designer.cs">
+      <DependentUpon>frmRelatoriosGerais.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRelatoriosPorData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRelatoriosPorData.Designer.cs">
+      <DependentUpon>frmRelatoriosPorData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRelatorioMovDetalhado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRelatorioMovDetalhado.Designer.cs">
+      <DependentUpon>frmRelatorioMovDetalhado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRelatorioValorizacaoEstoque.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRelatorioValorizacaoEstoque.Designer.cs">
+      <DependentUpon>frmRelatorioValorizacaoEstoque.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRenomearPDV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRenomearPDV.Designer.cs">
+      <DependentUpon>frmRenomearPDV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTaxaEntrega.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTaxaEntrega.Designer.cs">
+      <DependentUpon>frmTaxaEntrega.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTaxaEntregaEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTaxaEntregaEditar.Designer.cs">
+      <DependentUpon>frmTaxaEntregaEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTema.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTema.Designer.cs">
+      <DependentUpon>frmTema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTemaEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTemaEditar.Designer.cs">
+      <DependentUpon>frmTemaEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTipoDesconto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTipoDesconto.Designer.cs">
+      <DependentUpon>frmTipoDesconto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTipoDescontoEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTipoDescontoEditar.Designer.cs">
+      <DependentUpon>frmTipoDescontoEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTipoEntrada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTipoEntrada.Designer.cs">
+      <DependentUpon>frmTipoEntrada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTipoEntradaEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTipoEntradaEditar.Designer.cs">
+      <DependentUpon>frmTipoEntradaEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTipoMovimentacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTipoMovimentacao.Designer.cs">
+      <DependentUpon>frmTipoMovimentacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTipoMovimentacaoEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTipoMovimentacaoEditar.Designer.cs">
+      <DependentUpon>frmTipoMovimentacaoEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTipoPagamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTipoPagamento.Designer.cs">
+      <DependentUpon>frmTipoPagamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTipoPagamentoEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTipoPagamentoEditar.Designer.cs">
+      <DependentUpon>frmTipoPagamentoEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTipoTributacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTipoTributacao.Designer.cs">
+      <DependentUpon>frmTipoTributacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTipoTributacaoEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTipoTributacaoEditar.Designer.cs">
+      <DependentUpon>frmTipoTributacaoEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUnidade.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUnidade.Designer.cs">
+      <DependentUpon>frmUnidade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUnidadeEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUnidadeEditar.Designer.cs">
+      <DependentUpon>frmUnidadeEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUsuario.Designer.cs">
+      <DependentUpon>frmUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUsuarioEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUsuarioEditar.Designer.cs">
+      <DependentUpon>frmUsuarioEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MoreLinq\MoreEnumerable.DistinctBy.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="QRCodeControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Resources\Relatorios\dsEstoque.cs">
+      <DependentUpon>dsEstoque.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Relatorios\dsEstoque.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEstoque.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Relatorios\dsPedidos.cs">
+      <DependentUpon>dsPedidos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Relatorios\dsPedidos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPedidos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Relatorios\dsResumoFechamento.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsResumoFechamento.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Renderer.cs" />
+    <Compile Include="Sintegra\Layout.cs" />
+    <Compile Include="Sintegra\SintegraServices.cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <EmbeddedResource Include="frmAguardandoSAT.resx">
+      <DependentUpon>frmAguardandoSAT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAreaImpressao.resx">
+      <DependentUpon>frmAreaImpressao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAreaImpressaoEditar.resx">
+      <DependentUpon>frmAreaImpressaoEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCardapioDigital.resx">
+      <DependentUpon>frmCardapioDigital.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCardapioDigitalEditar.resx">
+      <DependentUpon>frmCardapioDigitalEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCategoria.resx">
+      <DependentUpon>frmCategoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCategoriaEditar.resx">
+      <DependentUpon>frmCategoriaEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCFE.resx">
+      <DependentUpon>frmCFE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmClassificacaoFiscal.resx">
+      <DependentUpon>frmClassificacaoFiscal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmClassificacaoFiscalEditar.resx">
+      <DependentUpon>frmClassificacaoFiscalEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmComanda.resx">
+      <DependentUpon>frmComanda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmComandaDiversas.resx">
+      <DependentUpon>frmComandaDiversas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmComandaEditar.resx">
+      <DependentUpon>frmComandaEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConversaoUnidade.resx">
+      <DependentUpon>frmConversaoUnidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConversaoUnidadeEditar.resx">
+      <DependentUpon>frmConversaoUnidadeEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEntregador.resx">
+      <DependentUpon>frmEntregador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEntregadorEditar.resx">
+      <DependentUpon>frmEntregadorEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDashboard.resx">
+      <DependentUpon>frmDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFichaInventario.resx">
+      <DependentUpon>frmFichaInventario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImagemTema.resx">
+      <DependentUpon>frmImagemTema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImagemTemaEditar.resx">
+      <DependentUpon>frmImagemTemaEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInventario.resx">
+      <DependentUpon>frmInventario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInventarioEditar.resx">
+      <DependentUpon>frmInventarioEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLoading.resx">
+      <DependentUpon>frmLoading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMapearProdutosAreaProducao.resx">
+      <DependentUpon>frmMapearProdutosAreaProducao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMesa.resx">
+      <DependentUpon>frmMesa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMesaEditar.resx">
+      <DependentUpon>frmMesaEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMotivoCancelamento.resx">
+      <DependentUpon>frmMotivoCancelamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMotivoCancelamentoEditar.resx">
+      <DependentUpon>frmMotivoCancelamentoEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMovimentacaoSelecionarTipo.resx">
+      <DependentUpon>frmMovimentacaoSelecionarTipo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMovimentacao.resx">
+      <DependentUpon>frmMovimentacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMovimentacaoEditar.resx">
+      <DependentUpon>frmMovimentacaoEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMovimentacaoTodosProdutos.resx">
+      <DependentUpon>frmMovimentacaoTodosProdutos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPainelModificacao.resx">
+      <DependentUpon>frmPainelModificacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPainelModificacaoEditar.resx">
+      <DependentUpon>frmPainelModificacaoEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPainelModificacaoEditarAvancado.resx">
+      <DependentUpon>frmPainelModificacaoEditarAvancado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPDV.resx">
+      <DependentUpon>frmPDV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrincipal.resx">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProduto.resx">
+      <DependentUpon>frmProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProdutoEditar.resx">
+      <DependentUpon>frmProdutoEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProdutoReceitaEditar.resx">
+      <DependentUpon>frmProdutoReceitaEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProdutoTraducao.resx">
+      <DependentUpon>frmProdutoTraducao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRelatorioEstoqueAtual.resx">
+      <DependentUpon>frmRelatorioEstoqueAtual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRelatorioInventario.resx">
+      <DependentUpon>frmRelatorioInventario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRelatorioMovimentacoes.resx">
+      <DependentUpon>frmRelatorioMovimentacoes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRelatoriosFechamento.resx">
+      <DependentUpon>frmRelatoriosFechamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRelatoriosGerais.resx">
+      <DependentUpon>frmRelatoriosGerais.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRelatoriosPorData.resx">
+      <DependentUpon>frmRelatoriosPorData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRelatorioMovDetalhado.resx">
+      <DependentUpon>frmRelatorioMovDetalhado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRelatorioValorizacaoEstoque.resx">
+      <DependentUpon>frmRelatorioValorizacaoEstoque.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRenomearPDV.resx">
+      <DependentUpon>frmRenomearPDV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTaxaEntrega.resx">
+      <DependentUpon>frmTaxaEntrega.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTaxaEntregaEditar.resx">
+      <DependentUpon>frmTaxaEntregaEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTema.resx">
+      <DependentUpon>frmTema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTemaEditar.resx">
+      <DependentUpon>frmTemaEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTipoDesconto.resx">
+      <DependentUpon>frmTipoDesconto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTipoDescontoEditar.resx">
+      <DependentUpon>frmTipoDescontoEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTipoEntrada.resx">
+      <DependentUpon>frmTipoEntrada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTipoEntradaEditar.resx">
+      <DependentUpon>frmTipoEntradaEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTipoMovimentacao.resx">
+      <DependentUpon>frmTipoMovimentacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTipoMovimentacaoEditar.resx">
+      <DependentUpon>frmTipoMovimentacaoEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTipoPagamento.resx">
+      <DependentUpon>frmTipoPagamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTipoPagamentoEditar.resx">
+      <DependentUpon>frmTipoPagamentoEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTipoTributacao.resx">
+      <DependentUpon>frmTipoTributacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTipoTributacaoEditar.resx">
+      <DependentUpon>frmTipoTributacaoEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUnidade.resx">
+      <DependentUpon>frmUnidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUnidadeEditar.resx">
+      <DependentUpon>frmUnidadeEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUsuario.resx">
+      <DependentUpon>frmUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUsuarioEditar.resx">
+      <DependentUpon>frmUsuarioEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Relatorios\rptDetalhesMovimentacaoDiaria.rdlc" />
+    <EmbeddedResource Include="Resources\Relatorios\rptFichaInventario.rdlc" />
+    <EmbeddedResource Include="Resources\Relatorios\rptInventario.rdlc" />
+    <EmbeddedResource Include="Resources\Relatorios\rptResumoFechamento.rdlc" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="app.manifest" />
+    <None Include="Content\bootstrap-theme.css.map" />
+    <None Include="Content\bootstrap-theme.min.css.map" />
+    <None Include="Content\bootstrap.css.map" />
+    <None Include="Content\bootstrap.min.css.map" />
+    <None Include="Content\ng-table.css.map" />
+    <None Include="Content\ng-table.min.css.map" />
+    <None Include="fonts\glyphicons-halflings-regular.eot">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="fonts\glyphicons-halflings-regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="fonts\glyphicons-halflings-regular.woff">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="fonts\glyphicons-halflings-regular.woff2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\a7D.PDV.BLL.Relatorios.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="redist\SQLSysClrTypes_x86.msi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\angular.min.js.map" />
+    <None Include="Scripts\jquery-3.1.1.min.map" />
+    <None Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <None Include="Scripts\ng-table.js.map" />
+    <None Include="Scripts\ng-table.min.js.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\a7D.PDV.BLL\a7D.PDV.BLL.csproj">
+      <Project>{1B8AD873-6B0A-45D6-803E-E6CC104BCE81}</Project>
+      <Name>a7D.PDV.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Componentes\a7D.PDV.Componentes.csproj">
+      <Project>{06274b88-cf73-4e1f-80b1-1cb73b3930d6}</Project>
+      <Name>a7D.PDV.Componentes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.EF\a7D.PDV.EF.csproj">
+      <Project>{75ef9713-861a-4c6b-8f7f-1343fdcbbffb}</Project>
+      <Name>a7D.PDV.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Fiscal\a7D.PDV.Fiscal.csproj">
+      <Project>{c506bd2c-fcb7-49e2-9759-661573b1c60a}</Project>
+      <Name>a7D.PDV.Fiscal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Model\a7D.PDV.Model.csproj">
+      <Project>{22BA05B8-59D7-4E09-8471-7C8012F1B100}</Project>
+      <Name>a7D.PDV.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorios\dsEstoque.xsc">
+      <DependentUpon>dsEstoque.xsd</DependentUpon>
+    </None>
+    <None Include="Resources\Relatorios\dsEstoque.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEstoque.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\Relatorios\dsEstoque.xss">
+      <DependentUpon>dsEstoque.xsd</DependentUpon>
+    </None>
+    <None Include="Resources\Relatorios\dsPedidos.xsc">
+      <DependentUpon>dsPedidos.xsd</DependentUpon>
+    </None>
+    <None Include="Resources\Relatorios\dsPedidos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPedidos.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\Relatorios\dsPedidos.xss">
+      <DependentUpon>dsPedidos.xsd</DependentUpon>
+    </None>
+    <None Include="Resources\Relatorios\dsResumoFechamento.xsc">
+      <DependentUpon>dsResumoFechamento.xsd</DependentUpon>
+    </None>
+    <None Include="Resources\Relatorios\dsResumoFechamento.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsResumoFechamento.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\Relatorios\dsResumoFechamento.xss">
+      <DependentUpon>dsResumoFechamento.xsd</DependentUpon>
+    </None>
+    <None Include="Resources\btnExcluir1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\setaDescer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\setaSubir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BackOffice.png" />
+    <Content Include="BackOffice.ico" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\ng-table.css" />
+    <Content Include="Content\ng-table.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dashboard.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="redist\vcredist_x86.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\btEditar.png" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\ic_email_black_24dp_1x.png" />
+    <Content Include="Resources\ic_file_download_black_24dp_1x.png" />
+    <Content Include="Resources\ic_search_black_24dp_1x.png" />
+    <None Include="Resources\load.gif" />
+    <None Include="Resources\sat48px.png" />
+    <None Include="Resources\sat32px.png" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\bluebird.3.5.0.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\moment-with-locales.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\mychart.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ng-table.js" />
+    <Content Include="Scripts\ng-table.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ng\backoffice.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ng\caixa-diferenca.directive.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ng\carregando.directive.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ng\clientes.controller.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ng\detalhes.controller.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ng\diaemes.filter.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ng\diaemeseano.filter.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ng\diaemesehora.filter.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ng\diasemana.filter.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ng\fechamento.controller.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ng\filtro-data.directive.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ng\percentual.filter.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ng\produtosvendidos.controller.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ng\quantidade.filter.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ng\reais.filter.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ng\relativo.filter.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\ng\resumo.controller.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\numeral\locales.js" />
+    <Content Include="Scripts\numeral\locales.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\numeral\locales\be-nl.js" />
+    <Content Include="Scripts\numeral\locales\be-nl.min.js" />
+    <Content Include="Scripts\numeral\locales\bg.js" />
+    <Content Include="Scripts\numeral\locales\bg.min.js" />
+    <Content Include="Scripts\numeral\locales\chs.js" />
+    <Content Include="Scripts\numeral\locales\chs.min.js" />
+    <Content Include="Scripts\numeral\locales\cs.js" />
+    <Content Include="Scripts\numeral\locales\cs.min.js" />
+    <Content Include="Scripts\numeral\locales\da-dk.js" />
+    <Content Include="Scripts\numeral\locales\da-dk.min.js" />
+    <Content Include="Scripts\numeral\locales\de-ch.js" />
+    <Content Include="Scripts\numeral\locales\de-ch.min.js" />
+    <Content Include="Scripts\numeral\locales\de.js" />
+    <Content Include="Scripts\numeral\locales\de.min.js" />
+    <Content Include="Scripts\numeral\locales\en-au.js" />
+    <Content Include="Scripts\numeral\locales\en-au.min.js" />
+    <Content Include="Scripts\numeral\locales\en-gb.js" />
+    <Content Include="Scripts\numeral\locales\en-gb.min.js" />
+    <Content Include="Scripts\numeral\locales\en-za.js" />
+    <Content Include="Scripts\numeral\locales\en-za.min.js" />
+    <Content Include="Scripts\numeral\locales\es-es.js" />
+    <Content Include="Scripts\numeral\locales\es-es.min.js" />
+    <Content Include="Scripts\numeral\locales\es.js" />
+    <Content Include="Scripts\numeral\locales\es.min.js" />
+    <Content Include="Scripts\numeral\locales\et.js" />
+    <Content Include="Scripts\numeral\locales\et.min.js" />
+    <Content Include="Scripts\numeral\locales\fi.js" />
+    <Content Include="Scripts\numeral\locales\fi.min.js" />
+    <Content Include="Scripts\numeral\locales\fr-ca.js" />
+    <Content Include="Scripts\numeral\locales\fr-ca.min.js" />
+    <Content Include="Scripts\numeral\locales\fr-ch.js" />
+    <Content Include="Scripts\numeral\locales\fr-ch.min.js" />
+    <Content Include="Scripts\numeral\locales\fr.js" />
+    <Content Include="Scripts\numeral\locales\fr.min.js" />
+    <Content Include="Scripts\numeral\locales\hu.js" />
+    <Content Include="Scripts\numeral\locales\hu.min.js" />
+    <Content Include="Scripts\numeral\locales\it.js" />
+    <Content Include="Scripts\numeral\locales\it.min.js" />
+    <Content Include="Scripts\numeral\locales\ja.js" />
+    <Content Include="Scripts\numeral\locales\ja.min.js" />
+    <Content Include="Scripts\numeral\locales\lv.js" />
+    <Content Include="Scripts\numeral\locales\lv.min.js" />
+    <Content Include="Scripts\numeral\locales\nl-nl.js" />
+    <Content Include="Scripts\numeral\locales\nl-nl.min.js" />
+    <Content Include="Scripts\numeral\locales\no.js" />
+    <Content Include="Scripts\numeral\locales\no.min.js" />
+    <Content Include="Scripts\numeral\locales\pl.js" />
+    <Content Include="Scripts\numeral\locales\pl.min.js" />
+    <Content Include="Scripts\numeral\locales\pt-br.js" />
+    <Content Include="Scripts\numeral\locales\pt-br.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\numeral\locales\pt-pt.js" />
+    <Content Include="Scripts\numeral\locales\pt-pt.min.js" />
+    <Content Include="Scripts\numeral\locales\ru-ua.js" />
+    <Content Include="Scripts\numeral\locales\ru-ua.min.js" />
+    <Content Include="Scripts\numeral\locales\ru.js" />
+    <Content Include="Scripts\numeral\locales\ru.min.js" />
+    <Content Include="Scripts\numeral\locales\sk.js" />
+    <Content Include="Scripts\numeral\locales\sk.min.js" />
+    <Content Include="Scripts\numeral\locales\sl.js" />
+    <Content Include="Scripts\numeral\locales\sl.min.js" />
+    <Content Include="Scripts\numeral\locales\th.js" />
+    <Content Include="Scripts\numeral\locales\th.min.js" />
+    <Content Include="Scripts\numeral\locales\tr.js" />
+    <Content Include="Scripts\numeral\locales\tr.min.js" />
+    <Content Include="Scripts\numeral\locales\uk-ua.js" />
+    <Content Include="Scripts\numeral\locales\uk-ua.min.js" />
+    <Content Include="Scripts\numeral\numeral.js" />
+    <Content Include="Scripts\numeral\numeral.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\loading.gif" />
+    <None Include="Resources\custom-reports.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="MSHTML">
+      <Guid>{3050F1C5-98B5-11CF-BB82-00AA00BDCE0B}</Guid>
+      <VersionMajor>4</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\cef.redist.x64.3.2987.1601\build\cef.redist.x64.targets" Condition="Exists('..\packages\cef.redist.x64.3.2987.1601\build\cef.redist.x64.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\cef.redist.x64.3.2987.1601\build\cef.redist.x64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.3.2987.1601\build\cef.redist.x64.targets'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x86.3.2987.1601\build\cef.redist.x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.3.2987.1601\build\cef.redist.x86.targets'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.57.0.0\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.57.0.0\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.57.0.0\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.57.0.0\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.WinForms.57.0.0\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.57.0.0\build\CefSharp.WinForms.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.WinForms.57.0.0\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.57.0.0\build\CefSharp.WinForms.targets'))" />
+  </Target>
+  <Import Project="..\packages\cef.redist.x86.3.2987.1601\build\cef.redist.x86.targets" Condition="Exists('..\packages\cef.redist.x86.3.2987.1601\build\cef.redist.x86.targets')" />
+  <Import Project="..\packages\CefSharp.Common.57.0.0\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.57.0.0\build\CefSharp.Common.targets')" />
+  <Import Project="..\packages\CefSharp.WinForms.57.0.0\build\CefSharp.WinForms.targets" Condition="Exists('..\packages\CefSharp.WinForms.57.0.0\build\CefSharp.WinForms.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

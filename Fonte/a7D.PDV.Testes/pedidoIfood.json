@@ -1,0 +1,175 @@
+﻿{
+  "id": "ff808081690ed23501691634a98e25da",
+  "reference": "3519962720643030",
+  "shortReference": "1511",
+  "createdAt": "2019-02-22T17:15:43.731Z",
+  "type": "DELIVERY",
+  "merchant": {
+    "id": "19392",
+    "name": "Hajime Sushi Tucuruvi",
+    "address": {
+      "formattedAddress": "Av. Tucuruvi",
+      "country": "BR",
+      "state": "SP",
+      "city": "SAO PAULO",
+      "neighborhood": "TUCURUVI",
+      "streetName": "Av. Tucuruvi",
+      "streetNumber": "554",
+      "postalCode": "02304001"
+    }
+  },
+  "payments": [
+    {
+      "name": "VALE - ALELO REFEIÇÃO (CARTÃO)",
+      "code": "VVREST",
+      "value": 95.40,
+      "prepaid": false
+    }
+  ],
+  "customer": {
+    "id": "11636528",
+    "name": "NATÁLIA BIFI",
+    "taxPayerIdentificationNumber": "41824051883",
+    "phone": "0800 608 1015 ID: 45306019",
+    "ordersCountOnRestaurant": 1
+  },
+  "items": [
+    {
+      "name": "#novidade# monte seu combinado",
+      "quantity": 1,
+      "price": 0.0,
+      "subItemsPrice": 68.4,
+      "totalPrice": 68.4,
+      "discount": 0.0,
+      "addition": 0.0,
+      "externalCode": "1540",
+      "subItems": [
+        {
+          "name": "Uramaki salmao unidade",
+          "quantity": 2,
+          "price": 2.0,
+          "totalPrice": 2.0,
+          "discount": 0.0,
+          "addition": 0.0,
+          "externalCode": "1553"
+        },
+        {
+          "name": "Hossomaki de salmao unidade",
+          "quantity": 2,
+          "price": 2.0,
+          "totalPrice": 2.0,
+          "discount": 0.0,
+          "addition": 0.0,
+          "externalCode": "1549"
+        },
+        {
+          "name": "Niguiri de salmao unidade",
+          "quantity": 2,
+          "price": 2.0,
+          "totalPrice": 2.0,
+          "discount": 0.0,
+          "addition": 0.0,
+          "externalCode": "1545"
+        },
+        {
+          "name": "Sashimi de salmao unidade",
+          "quantity": 5,
+          "price": 2.5,
+          "totalPrice": 2.5,
+          "discount": 0.0,
+          "addition": 0.0,
+          "externalCode": "1541"
+        },
+        {
+          "name": "Mini temaki salmao",
+          "quantity": 1,
+          "price": 13.9,
+          "totalPrice": 13.9,
+          "discount": 0.0,
+          "addition": 0.0,
+          "externalCode": "1568"
+        },
+        {
+          "name": "Hot holl unidade",
+          "quantity": 5,
+          "price": 2.0,
+          "totalPrice": 2.0,
+          "discount": 0.0,
+          "addition": 0.0,
+          "externalCode": "1561"
+        },
+        {
+          "name": "Sushi joe salmao unidade",
+          "quantity": 5,
+          "price": 2.0,
+          "totalPrice": 2.0,
+          "discount": 0.0,
+          "addition": 0.0,
+          "externalCode": "1557"
+        },
+        {
+          "name": "Uramaki filadelfia unidadeia unidade",
+          "quantity": 5,
+          "price": 2.0,
+          "totalPrice": 2.0,
+          "discount": 0.0,
+          "addition": 0.0,
+          "externalCode": "1554"
+        }
+      ]
+    },
+    {
+      "name": "REFRIGERANTE LATA",
+      "quantity": 1,
+      "price": 0.0,
+      "subItemsPrice": 7.2,
+      "totalPrice": 7.2,
+      "discount": 0.0,
+      "addition": 0.0,
+      "externalCode": "327",
+      "subItems": [
+        {
+          "name": "COCA COLA",
+          "quantity": 1,
+          "price": 7.2,
+          "totalPrice": 7.2,
+          "discount": 0.0,
+          "addition": 0.0,
+          "externalCode": "319"
+        }
+      ]
+    },
+    {
+      "name": "ROLINHO DE QUEIJO",
+      "quantity": 2,
+      "price": 9.9,
+      "subItemsPrice": 0,
+      "totalPrice": 9.9,
+      "discount": 0.0,
+      "addition": 0.0,
+      "externalCode": "104"
+    }
+  ],
+  "subTotal": 95.4,
+  "totalPrice": 95.4,
+  "deliveryFee": 0.0,
+  "deliveryAddress": {
+    "formattedAddress": "R ANACLETO, 101",
+    "country": "BR",
+    "state": "SP",
+    "city": "SAO PAULO",
+    "coordinates": {
+      "latitude": -23.493323,
+      "longitude": -46.599698
+    },
+    "neighborhood": "VILA ISOLINA MAZZEI",
+    "streetName": "R ANACLETO",
+    "streetNumber": "101",
+    "postalCode": "02083020",
+    "reference": "Predio branco e azul",
+    "complement": "84 borgonha"
+  },
+  "deliveryDateTime": "2019-02-22T18:05:43.731Z",
+  "localizer": { "id": "45306019" },
+  "preparationTimeInSeconds": 2099
+}

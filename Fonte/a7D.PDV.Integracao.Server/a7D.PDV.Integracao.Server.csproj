@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7A68F400-0913-4550-B0AE-DD322F200F27}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>a7D.PDV.Integracao.Server</RootNamespace>
+    <AssemblyName>a7D.PDV.Integracao.Server</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Refit, Version=4.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Refit.4.6.90\lib\net461\Refit.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Ativador.cs" />
+    <Compile Include="Atualizacao.cs" />
+    <Compile Include="Backup.cs" />
+    <Compile Include="BigData\DTO.cs" />
+    <Compile Include="BigData\BigDataServices.cs" />
+    <Compile Include="BigData\IBigDataAPI.cs" />
+    <Compile Include="IntegraServer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UDPServer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\A7D.PDV.Ativacao.Shared\a7D.PDV.Ativacao.Shared.csproj">
+      <Project>{D22EC4D8-FF56-4A5D-9505-033FC072D291}</Project>
+      <Name>a7D.PDV.Ativacao.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.BigData.Shared\a7D.PDV.BigData.Shared.csproj">
+      <Project>{8ee48aad-6620-4ce6-91f8-51f0416f7174}</Project>
+      <Name>a7D.PDV.BigData.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.BLL\a7D.PDV.BLL.csproj">
+      <Project>{1B8AD873-6B0A-45D6-803E-E6CC104BCE81}</Project>
+      <Name>a7D.PDV.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Componentes\a7D.PDV.Componentes.csproj">
+      <Project>{06274b88-cf73-4e1f-80b1-1cb73b3930d6}</Project>
+      <Name>a7D.PDV.Componentes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.DAL\a7D.PDV.DAL.csproj">
+      <Project>{A4B2AB32-5D8E-4AE9-8350-CB75759A9B11}</Project>
+      <Name>a7D.PDV.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.EF\a7D.PDV.EF.csproj">
+      <Project>{75ef9713-861a-4c6b-8f7f-1343fdcbbffb}</Project>
+      <Name>a7D.PDV.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.API2.Client\a7D.PDV.Integracao.API2.Client.csproj">
+      <Project>{546A83D6-ECD2-4FD5-920C-DD9763033FC5}</Project>
+      <Name>a7D.PDV.Integracao.API2.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.API2.Model\a7D.PDV.Integracao.API2.Model.csproj">
+      <Project>{F24C813D-011C-4665-A36C-75F4080F0F7B}</Project>
+      <Name>a7D.PDV.Integracao.API2.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.Servico.Core\a7D.PDV.Integracao.Core.csproj">
+      <Project>{79DCF4FA-291F-4A15-A41B-F915938B8536}</Project>
+      <Name>a7D.PDV.Integracao.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Model\a7D.PDV.Model.csproj">
+      <Project>{22BA05B8-59D7-4E09-8471-7C8012F1B100}</Project>
+      <Name>a7D.PDV.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Refit.4.6.90\build\net461\refit.targets" Condition="Exists('..\packages\Refit.4.6.90\build\net461\refit.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Refit.4.6.90\build\net461\refit.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Refit.4.6.90\build\net461\refit.targets'))" />
+  </Target>
+</Project>

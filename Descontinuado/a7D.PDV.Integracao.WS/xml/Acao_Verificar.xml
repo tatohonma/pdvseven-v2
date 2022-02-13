@@ -1,0 +1,25 @@
+﻿<Verificar>
+  <status>1</status>
+  <retorno>
+    <acao>
+      <nome>LimparCache</nome>
+      <parametro></parametro>
+    </acao>
+    <acao>
+      <nome>AtualizarProdutos</nome>
+      <parametro></parametro>
+    </acao>
+    <acao>
+      <nome>AtualizarCategorias</nome>
+      <parametro></parametro>
+    </acao>
+    <acao>
+      <nome>AtualizarPaineisModificacoes</nome>
+      <parametro></parametro>
+    </acao>
+    <acao>
+      <nome>AtualizarTema</nome>
+      <parametro></parametro>
+    </acao>
+  </retorno>
+</Verificar>

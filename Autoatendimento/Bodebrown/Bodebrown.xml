@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AutoAtendimento versao="1">
+  <!-- Local fisico base das imagens, ou deixar em branco quando colocar em produção para buscar do WS2 -->
+  <Imagens base="F:\PDVSeven\PDVSeven\Autoatendimento\Bodebrown\">
+    <!-- O nome do elemento (tag) setá o nome usado como referencia, o valor é o nome fisico do arquivo dentro da base em uso -->
+    <inicial>A-Inicial</inicial>
+    <teclado>teclado</teclado>
+    <alfabetico>teclado-alfabetico</alfabetico>
+    <numerico>teclado-numerico</numerico>
+    <produto>B-Produto</produto>
+    <leitora>C-LeitoraComanda</leitora>
+    <modificacao>B-modificacao</modificacao>
+    <resumo>B-resumo</resumo>
+    <clienteconfirma>C-clienteconfirma</clienteconfirma>
+    <clientenovo>C-clientenovo</clientenovo>
+    <adicionarcredito>C-adicionarcredito</adicionarcredito>
+    <botaocredito>C-botaocredito</botaocredito>
+    <botaocredito2>C-botaocredito2</botaocredito2>
+    <mais>mais</mais>
+    <menos>menos</menos>
+    <editar>editar</editar>
+    <cancelar>cancelar</cancelar>
+    <confirmar>confirmar</confirmar>
+    <adicionar>adicionar</adicionar>
+    <voltar>voltar</voltar>
+    <fim>fim</fim>
+    <tefmodal>TEFmodal</tefmodal>
+    <tefdebito>TEFDebito</tefdebito>
+    <tefcredito>TEFCredito</tefcredito>
+    <tefimagem>TEFimagem</tefimagem>
+    <tefrecibo>TEFrecibo</tefrecibo>
+  </Imagens>
+
+  <!-- Full HD 1080 x 1920 -->
+  <Inicial background="inicial">
+    <VendaCategoriaProduto top="10" left="10" width="1060" height="1900"/>
+    <ComandaNumero visible="false"/>
+  </Inicial>
+
+  <Teclado layout="2">
+    <Texto background="transparent" foreground="#FF8500" height="110" fontsize="65" />
+    <Enter background="transparent" foreground="Transparent" height="120" margin="5" />
+    <Digitos background="transparent" foreground="Transparent" margin="5" />
+    <Cancel background="transparent" foreground="Transparent" />
+    <Backspace background="transparent" foreground="Transparent"/>
+  </Teclado>
+
+  <Pedido1GridItem>
+    <Menos background="menos" margin="30,0,0,0"/>
+    <Quantidate fontsize="35" margin="10" verticalalignment="Center" textalignment="Center" foreground="White"/>
+    <Mais background="mais"/>
+    <Produto margin="20,0,0,0" verticalalignment="Center"/>
+    <!-- stackpanel que contem a descrição e modificação -->
+    <Descricao fontsize="35" foreground="White"/>
+    <Modificacoes fontsize="20" foreground="White" textwrapping="Wrap"/>
+    <Total fontsize="35" verticalalignment="Center" textalignment="Right" foreground="White"/>
+    <Editar background="editar" margin="50,0,0,0" />
+  </Pedido1GridItem>
+
+  <Produto1GridItem background="#F0F0F0">
+    <Foto height="150"/>
+    <Produto margin="10,0,10,0"/>
+    <!-- Stackpanel com Nome e Descrição -->
+    <Nome margin="0,5,0,0" fontfamily="segoe condensed" fontsize="22" textwrapping="Wrap" fontweight="Bold"/>
+    <Decricao fontfamily="segoe condensed" fontsize="18" foreground="Black" textwrapping="Wrap"/>
+    <Preco margin="0,0,10,10" fontfamily="segoe condensed" textalignment="Right" fontsize="24" foreground="#ff8501" textwrapping="Nowrap" fontweight="Bold"/>
+    <Image Name="Foto" Height="150" VerticalAlignment="Top" Grid.Row="0" />
+  </Produto1GridItem>
+
+  <TecladoAlfanumerico background1="alfabetico" background2="numerico">
+    <Teclas width="90" height="90" fontsize="50" foreground="#FFFFFF"/>
+    <!-- Linha 1 QWERTYUIOP -->
+    <Q left="014" top="20" width="90" />
+    <W left="123" top="20" width="90" />
+    <E left="227" top="20" width="90" />
+    <R left="334" top="20" width="90" />
+    <T left="440" top="20" width="90" />
+    <Y left="545" top="20" width="90" />
+    <U left="650" top="20" width="90" />
+    <I left="757" top="20" width="90" />
+    <O left="864" top="20" width="90" />
+    <P left="969" top="20" width="90" />
+    <!-- Linha 2 ASDFGHJKL -->
+    <A left="015" top="135" width="110"/>
+    <S left="135" top="135" width="110"/>
+    <D left="253" top="135" width="110"/>
+    <F left="368" top="135" width="110"/>
+    <G left="486" top="135" width="110"/>
+    <H left="604" top="135" width="110"/>
+    <J left="722" top="135" width="110"/>
+    <K left="839" top="135" width="110"/>
+    <L left="957" top="135" width="110"/>
+    <!-- Linha 3 ZXCVBNM -->
+    <Z left="081" top="250" width="110"/>
+    <X left="200" top="250" width="110"/>
+    <C left="323" top="250" width="110"/>
+    <V left="440" top="250" width="110"/>
+    <B left="561" top="250" width="110"/>
+    <N left="683" top="250" width="110"/>
+    <M left="798" top="250" width="110"/>
+    <Space left="148" top="365" width="650"/>
+    <Backspace left="815" top="365" width="246"/>
+    <!-- Numerico -->
+    <N1 left="354" top="020" width="100"/>
+    <N2 left="482" top="020" width="100"/>
+    <N3 left="618" top="020" width="100"/>
+    <N4 left="354" top="135" width="100"/>
+    <N5 left="482" top="135" width="100"/>
+    <N6 left="618" top="135" width="100"/>
+    <N7 left="354" top="250" width="100"/>
+    <N8 left="482" top="250" width="100"/>
+    <N9 left="618" top="250" width="100"/>
+    <N0 left="482" top="365" width="100"/>
+    <NBackspace left="618" top="365" width="100"/>
+  </TecladoAlfanumerico>
+
+  <ModalSimNao>
+    <Sim width="100" height="50" background="#00A532" fontsize="26" fontweight="Bold" foreground="White"/>
+    <Nao width="100" height="50" background="#FF0514" fontsize="26" fontweight="Bold" foreground="White"/>
+  </ModalSimNao>
+
+  <ModalTEF>
+    <Modal width="1080" height="1920" background="tefmodal"/>
+    <Debito top="550" left="120" background="tefdebito"/>
+    <Credito top="550" left="590" background="tefcredito"/>
+    <Status top="1000" left="40" width="900" fontsize="30" />
+    <Cancelar2 top="1720" left="300" background="voltar"/>
+    <ImagemTef top="550" left="120" background="tefimagem"/>
+    <ReciboTef top="550" left="120" background="tefrecibo"/>
+  </ModalTEF>
+
+  <Sair background="teclado">
+    <Home top="0" left="0" width="1080" height="160" />
+    <Titulo top="450" left="50" fontsize="50" width="980" textalignment="Center"/>
+    <Teclado top="710" left="300" width="480" height="790"/>
+  </Sair>
+
+  <VendaCategoriaProduto background="produto">
+    <Home top="0" left="0" width="1080" height="160" />
+    <!-- Limpa para área de Número da Comanda -->
+    <ComandaNumero top="168" left="5" width="205" height="257"/>
+    <!-- Veja a tag 'Categorias' -->
+    <Categorias top="435" left="5" width="205" height="1070" orientation="Vertical"/>
+    <!-- Lista de produtos de acordo com a categoria selecionado ou default -->
+    <Produtos top="168" left="220" width="856" height="1070" />
+    <!-- Item unico de cada produto  -->
+    <Produto width="220" height="280" margin="20" control="Produto2"/>
+    <!-- Área do Resumo do Pedido -->
+    <Pedido top="1250" left="5" width="1070" height="360" />
+    <TotalPedido top="1640" left="430" fontweight="Bold" textalignment="Right" width="600" fontsize="60" foreground="#FF8500"/>
+    <Cancelar top="1740" left="40" background="cancelar" />
+    <Confirmar top="1740" left="560" background="confirmar"/>
+  </VendaCategoriaProduto>
+
+  <VendaResumo background="resumo">
+    <Home top="0" left="0" width="1080" height="160"/>
+    <Numero top="325" left="260" width="550" fontsize="60" textalignment="Center" fontweight="Bold"/>
+    <Pedido top="350" left="5" width="1070" height="1250" />
+    <TotalPedido top="1640" left="430" fontweight="Bold" textalignment="Right" width="600" fontsize="60" foreground="#FF8500"/>
+    <Cancelar top="1740" left="40" background="cancelar" />
+    <Confirmar top="1740" left="560" background="confirmar"/>
+  </VendaResumo>
+
+  <VendaModificacaoProduto background="modificacao">
+    <Preco top="180" left="700" width="280" fontsize="50" fontweight="Bold" textalignment="Right" foreground="#FF8500"/>
+    <TotalProduto top="1640" left="430" fontweight="Bold" textalignment="Right" width="600" fontsize="60" foreground="#FF8500"/>
+    <Foto top="260" left="250" height="400"/>
+    <Produto top="670" left="100" width="880" fontsize="50" fontweight="Bold" textalignment="Center" />
+    <Descricao top="750" left="100" width="880" height="80" fontsize="30" textalignment="Center" textwrapping="Wrap" />
+    <Titulo top="830" left="100" width="880" height="70" fontsize="45" textalignment="Center" text="Personalize seu pedido" foreground="#FF8500" />
+    <Modificacoes top="900" left="100" width="880" height="650" />
+    <Cancelar top="1740" left="40" background="cancelar" />
+    <Adicionar top="1740" left="560" background="adicionar"/>
+  </VendaModificacaoProduto>
+
+  <Categorias inicial="2">
+    <!-- Sequencia para as margens: left, top, right, bottom -->
+    <BotaoPadrao            margin="5" width="195" height="257" />
+    <BotaoPadraoSelecionada margin="5" width="195" height="257" />
+    <Categoria id="7" />
+    <Categoria id="3" />
+    <Categoria id="4" />
+    <Categoria id="5" />
+  </Categorias>
+
+  <ComandaLeitora background="leitora">
+    <Home top="0" left="0" width="1080" height="160"/>
+    <Titulo top="600" left="50" fontsize="50" width="980" textalignment="Center" text="PASSE A COMANDA NA LEITORA"/>
+    <Numero top="325" left="260" width="550" fontsize="50" textalignment="Center" fontweight="Bold"/>
+  </ComandaLeitora>
+
+  <ComandaClienteConfirmacao background="clienteconfirma">
+    <Home top="0" left="0" width="1080" height="160"/>
+    <Numero top="325" left="260" width="550" fontsize="50" textalignment="Center" fontweight="Bold"/>
+    <Nome top="594" left="380" fontsize="50" text="Fabio Ferreira" fontweight="Bold" />
+    <Trocar top="670" left="560" width="170" height="90"/>
+    <Confirmar top="1060" left="300" width="480" height="120" />
+  </ComandaClienteConfirmacao>
+
+  <ComandaClienteCPF background="teclado">
+    <Home top="0" left="0" width="1080" height="160"/>
+    <Numero top="325" left="260" width="550" fontsize="50" textalignment="Center" fontweight="Bold"/>
+    <Titulo top="450" left="50" fontsize="50" width="980" textalignment="Center" text="INFORME SEU CPF"/>
+    <Teclado top="710" left="300" width="480" height="790"/>
+    <Cancelar top="620" left="0" width="150" height="100"/>
+  </ComandaClienteCPF>
+
+  <ComandaClienteNovo background="clientenovo">
+    <Home top="0" left="0" width="1080" height="160"/>
+    <CPF top="400" left="160" width="770" fontsize="50" fontweight="Bold" />
+    <Nome top="560" left="160" width="770" fontsize="50" fontweight="Bold" background="Transparent"/>
+    <Telefone top="760" left="160" width="770" fontsize="50" fontweight="Bold" background="Transparent"/>
+    <Cadastrar top="960" left="300" width="480" height="120" />
+    <Teclado top="1440" left="0" width="1080" height="480"></Teclado>
+  </ComandaClienteNovo>
+
+  <ComandaClienteCredito background="adicionarcredito">
+    <Home top="0" left="0" width="1080" height="160"/>
+    <Numero top="325" left="260" width="550" fontsize="50" textalignment="Center" fontweight="Bold"/>
+    <Nome top="594" left="380" fontsize="50" text="Fabio Ferreira" fontweight="Bold" />
+    <Cancelar top="1740" left="40" background="cancelar" />
+    <Adicionar top="1740" left="560" background="adicionar"/>
+
+    <BotaoPadrao      width="330" height="166" background="botaocredito"  fontsize="60" fontweight="Bold"/>
+    <BotaoSelecionado width="330" height="166" background="botaocredito2" fontsize="60" fontweight="Bold"/>
+
+    <Credito1 top="690" left="150" width="330" />
+    <Credito2 top="690" left="600" width="330" />
+    <Credito3 top="900" left="150" width="330" />
+    <Credito4 top="900" left="600" width="330" />
+
+    <NovaComanda top="1250" left="100" width="880" height="200" tag="5" foreground="#FF8500" fontsize="40" text="Será acrescido o valor de {0:C} referente a compra da comanda" textalignment="Center" fontweight="Bold"/>
+  </ComandaClienteCredito>
+
+  <ComandaClienteCreditoValor background="teclado">
+    <Home top="0" left="0" width="1080" height="160"/>
+    <Numero top="325" left="260" width="550" fontsize="50" textalignment="Center" fontweight="Bold"/>
+    <Titulo top="450" left="50" fontsize="50" width="980" textalignment="Center" text="DIGITE O VALOR"/>
+    <Teclado top="710" left="300" width="480" height="790"/>
+    <Cancelar top="620" left="0" width="150" height="100"/>
+  </ComandaClienteCreditoValor>
+
+  <VendaCPF background="teclado">
+    <Home top="0" left="0" width="1080" height="160"/>
+    <SemCPF top="500" left="50" fontsize="50" width="980" background="#FF8500" foreground="#FFFFFF" textalignment="Center" text="CONTINUAR SEM INFORMAR O CPF"/>
+    <Titulo top="350" left="50" fontsize="50" width="980" textalignment="Center" text="INFORME SEU CPF PARA NOTA FISCAL"/>
+    <Teclado top="710" left="300" width="480" height="790"/>
+    <Cancelar top="620" left="0" width="150" height="100"/>
+  </VendaCPF>
+
+  <Fim background="fim">
+    <Home top="0" left="0" width="1080" height="1920"/>
+    <Numero visible="false"/>
+    <Nome visible="false"/>
+    <Mensagem top="1150" left="100" width="880" foreground="#FFFFFF" fontsize="70" textalignment="Center" fontweight="Bold"/>
+  </Fim>
+</AutoAtendimento>
+
+
+

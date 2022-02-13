@@ -1,0 +1,13 @@
+﻿<autenticacao>
+  <status>1</status>
+  <retorno>
+    <usuario>
+      <idUsuario></idUsuario>
+      <nome></nome>
+      <permissaoAdm></permissaoAdm>
+      <permissaoCaixa></permissaoCaixa>
+      <permissaoGarcom></permissaoGarcom>
+      <permissaoGerente></permissaoGerente>
+    </usuario>
+  </retorno>
+</autenticacao>

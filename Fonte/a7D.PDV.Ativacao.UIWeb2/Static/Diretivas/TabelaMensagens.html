@@ -1,0 +1,13 @@
+﻿<div ng-controller="MensagensController as vm">
+    <div class="table-responsive" loading-container="vm.tableparams.settings().$loading" ng-hide="vm.mensagem" style="position:relative">
+        <table ng-table="vm.tableParams" class="table table-hover">
+            <tr ng-repeat="mensagem in $data">
+                <td data-title="'Data Criada'"><nobr>{{ mensagem.DataCriada | date: 'dd/MM/yyyy HH:mm:ss' }}</nobr></td>
+                <td data-title="'Tipo'" filter="{Tipo:'select'}" filter-data="vm.tiposFilter"><nobr>{{ mensagem.Tipo | tipoMensagem }}</nobr></td>
+                <td data-title="'Data Recebida'"><nobr>{{ mensagem.DataRecebida | date: 'dd/MM HH:mm:ss' }}</nobr></td>
+                <td data-title="'Cliente'" filter="{Cliente:'text'}"><nobr>{{ mensagem.Cliente }}</nobr></td>
+                <td data-title="'Texto'"><nobr>{{ mensagem.Texto }}</nobr></td>
+            </tr>
+        </table>
+    </div>
+</div>

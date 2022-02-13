@@ -1,0 +1,101 @@
+[
+  // ==========
+  {
+    "condicao": "verificaConexao",
+    "intencao": "prod_vendidos",
+    "acaoResposta": [
+      {
+        "retorno": [
+          {
+            "condicao": "@@intencao.valor==null",
+            "intencao": "prod_vendidos.informadata"
+          },
+          {
+            "atribuir": [
+              "@valor=@@intencao.valor",
+              "@valor2=@@intencao.valor2"
+            ],
+            "intencao": "prod_vendidos.data"
+          }
+        ]
+      }
+    ]
+  },
+  // ==========
+  {
+    "intencao": "prod_vendidos.informadata",
+    "mensagem": "Informe a data desejada 'dia/mês', 'dia/mês/ano', nome do mês ou ano para períodos",
+    "sugestao": [
+      {
+        "titulo": "Ontem",
+        "texto": "ontem"
+      },
+      {
+        "titulo": "Hoje",
+        "texto": "hoje"
+      },
+      {
+        "titulo": "Mês",
+        "texto": "mes"
+      },
+      {
+        "titulo": "Janeiro",
+        "texto": "Janeiro"
+      },
+      {
+        "titulo": "2019",
+        "texto": "2019"
+      }
+    ],
+    "acaoResposta": [
+      {
+        "tipoResposta": "datetime",
+        "retorno": [
+          {
+            "atribuir": [
+              "@valor=@@datetime",
+              "@valor2=@@datetime2"
+            ],
+            "intencao": "prod_vendidos.data"
+          }
+        ]
+      },
+      {
+        "retorno": [
+          {
+            "mensagem": "Valor não reconhecido, informe o período desejado",
+            "ignorarMensagemIntencao": true,
+            "intencao": "prod_vendidos.informadata"
+          }
+        ]
+      }
+    ]
+  },
+  // ==========
+  {
+    "condicao": "verificaConexao",
+    "intencao": "prod_vendidos.data",
+    "api": {
+      "url": "https://pdvsevenbd.azurewebsites.net/api/iaago/query/maisvendidos?auth=@AUTH",
+      "post": [
+        "dataInicial=@valor('yyyy-MM-dd')",
+        "dataFinal=@valor2('yyyy-MM-dd')"
+      ]
+    },
+    "acaoResposta": [
+      {
+        "retorno": [
+          {
+            "condicao": "@@api==null",
+            "mensagem": "Não há dados no periodo"
+          },
+          {
+            "condicao": "@@api!=null",
+            "mensagem": "Quantidades e valor total dos 10 produtos mais vendidos\n| QTD | Produto | Total $ |\n|---:|:---|---:|",
+            "resultado": "| @QTD | @Produto | @Total('C') |"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,53 @@
+﻿<div class="panel" ng-class="{'panel-primary' : ngModel.IDPDV && ngModel.Ativo, 'panel-success': !ngModel.IDPDV, 'panel-default': ngModel.IDPDV && !ngModel.Ativo}" ng-form="form">
+    <div class="panel-heading">
+        <strong>{{ngModel.Nome}}</strong>
+    </div>
+    <div class="panel-body">
+        <div style="padding: 15px">
+            <div class="form-group" ng-class="{ 'has-error': !form.tipopdv.$valid }">
+                <label class="control-label" for="inputTipoPdv">Tipo PDV</label>
+                <select id="inputTipoPdv" name="tipopdv"
+                        class="form-control"
+                        required
+                        ng-model="ngModel.IDTipoPDV"
+                        ng-options="l.IDTipoPDV as l.Nome for l in pdvs">
+                </select>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': !form.pdvnome.$valid }">
+                <label class="control-label" for="inputNomePdv">Nome</label>
+                <input type="text" name="pdvnome" class="form-control" required ng-model="ngModel.Nome" />
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="ngModel.Ativo" /> Ativo
+                </label>
+            </div>
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="" data-target="#collapseinformacoes{{ngModel.IDPDV}}" aria-expanded="false">Informações</a>
+                    </h4>
+                </div>
+                <div id="collapseinformacoes{{ngModel.IDPDV}}" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div style="padding: 15px">
+                            <div class="form-group">
+                                <label class="control-label">Chave Hardware</label>
+                                <input type="text" class="form-control" name="pdvchavehardware" value="{{ngModel.ChaveHardware}}" disabled />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Ultima Alteração</label>
+                                <input type="text" class="form-control" name="pdvchavehardware" value="{{ngModel.DtUltimaAlteracao | date : 'dd/MM/yyyy HH:mm:ss'}}" disabled />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Versão</label>
+                                <input type="text" class="form-control" name="pdvchavehardware" value="{{ngModel.Versao}}" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

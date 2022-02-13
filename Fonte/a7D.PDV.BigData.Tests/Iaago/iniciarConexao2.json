@@ -1,0 +1,129 @@
+{
+  "api": [
+    {
+      "entidade": {
+        "url": "https://pdvsevenbd.azurewebsites.net/api/entidade",
+        // Por enquanto, preciso consegui "tipar" os dados de retorno e resposta da API
+        "typeRequest": "RequestSimpleText", // RequestParValues
+        // (sempre deriva de ResultInfo) ResultObject, ResultParValue, ResultObjectArray
+        "typeResult": "ResultParValue" // .value / indexador['nome']
+        // ResultInfo (tem a propriedade: '.erro', '.debug')
+      }
+    }
+  ],
+  "dialogo": [
+    {
+      "intencao": "iniciarConexao",
+      "mensagem": "Olá! Sou o Iaago, seu Assistente Virtual.\nAntes de mais nada, vou precisar de algumas informações.\n\nQual o Nome ou CNPJ/CPF do seu estabelecimento?",
+      "acaoResposta": [
+        {
+          "tipoResposta": "text",
+          "api": "entidade(text)",
+          "retorno": [
+            {
+              "condicao": [ "api['idEstabelecimento'] != null" ],
+              "intencao": "iniciarConexao.identificarEstabelecimento"
+            },
+            {
+              "condicao": [ "api['idEstabelecimento'] == null", "ciclo <= 2" ],
+              "mensagem": "Não encontrei nenhum estabelecimento com esses dados.\nFavor informar o Nome ou CNPJ/CPF do estabelecimento novamente!",
+              "ignorarMensagemIntencao": "sim",
+              "intencao": "iniciarConexao"
+            },
+            {
+              "condicao": [ "api['idEstabelecimento'] == null" ],
+              "mensagem": "Acho que você ainda não está cadastrado. caso queira apenas conhecer a ferramenta, pode usar os seguintes dados de testes:\n Estabelecimento:\"Quero conhecer mais\" \nChave de acesso:\"123456\" \n\nou se preferir, ligue no nosso suporte: (11) 4210-0122",
+              "intencao": "iniciarConexao"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intencao": "iniciarConexao.identificarEstabelecimento",
+      "mensagem": "Encontrei.\n- Estabelecimento: {api>nomeEstabelecimento}\n- CNPJ/CPF: {api>documento}\n\nEstá correto?",
+      "acaoResposta": [
+        {
+          "tipoResposta": "bool",
+          "retorno": [
+            {
+              "condicao": [ "text == não" ],
+              "mensagem": "Ops, posso ter me confundido ou foi algum erro de digitação! Informar o Nome ou CNPJ/CPF novamente.",
+              "ignorarMensagemIntencao": "sim",
+              "intencao": "iniciarConexao"
+            },
+            {
+              "condicao": [ "text == sim" ],
+              "intencao": "iniciarConexao.identificarUsuario"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intencao": "iniciarConexao.identificarUsuario",
+      "mensagem": "E qual é a sua chave de acesso?\nColocar a mesma \"senha\" que você usa para acessar o sistema da PDVSeven.",
+      "acaoResposta": [
+        {
+          "tipoResposta": "text",
+          "retorno": [
+            {
+              "condicao": [ "api(text).idUsuario != null" ],
+              "intencao": "iniciarConexao.identificarUsuario.confirmacao"
+            },
+            {
+              "condicao": [ "api(text).idUsuario == null", "@ciclo <= 2" ],
+              "mensagem": "Chave de acesso inválida! Digite sua chave novamente.",
+              "ignorarMensagemIntencao": "sim",
+              "intencao": "iniciarConexao.identificarUsuario"
+            },
+            {
+              "condicao": [ "api(text).idUsuario == null", "@ciclo > 2" ],
+              "mensagem": "Desculpe, seu acesso termina aqui! Favor entrar em contato no suporte para podermos te ajudar: (11) 4210-0122.",
+              "intencao": "iniciarConexao"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intencao": "iniciarConexao.identificarUsuario.confirmacao",
+      "mensagem": "Certo. Seja bem vindo {api>nomeUsuario}! Posso te chamar assim?",
+      "acaoResposta": [
+        {
+          "tipoResposta": "bool",
+          "retorno": [
+            {
+              "condicao": [ "text == sim" ],
+              "intencao": "iniciarConexao.fimAutenticacao"
+            },
+            {
+              "condicao": [ "text == não" ],
+              "intencao": "iniciarConexao.identificarUsuario.mudarNome"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intencao": "iniciarConexao.identificarUsuario.mudarNome",
+      "mensagem": "Como gostaria de ser chamado?",
+      "acaoResposta": [
+        {
+          "tipoResposta": "text",
+          "retorno": [
+            {
+              "mensagem": "{nome}! Prefere assim?",
+              "ignorarMensagemIntencao": "sim",
+              "intencao": "iniciarConexao.identificarUsuario.confirmacao"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "intencao": "iniciarConexao.fimAutenticacao",
+      "mensagem": "ok {nomeUsuario}, agora já estou pronto para poder te ajudar.\n\nSegue algumas das coisas que posso te auxiliar:\n- Informar sobre seu estoque de produto;\n- O faturamento do seu estabelecimento;\n- Fazer cotação de produtos;\n- Comprar produtos para reposição de estoque.\n\nSe tiver qualquer outra dúvida, não custa tentar. rs Estou sempre aprendendo coisas novas!"
+    }
+  ]
+}

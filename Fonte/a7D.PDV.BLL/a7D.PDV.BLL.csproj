@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1B8AD873-6B0A-45D6-803E-E6CC104BCE81}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>a7D.PDV.BLL</RootNamespace>
+    <AssemblyName>a7D.PDV.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="a7D.Fwk.CRUD.DAL, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Componentes\a7D.Fwk.CRUD.DAL.dll</HintPath>
+    </Reference>
+    <Reference Include="BCrypt.Net, Version=0.1.4141.31969, Culture=neutral, PublicKeyToken=f3bc8f8c31beeb49, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net.0.1.0\lib\net35\BCrypt.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MessagingToolkit.QRCode">
+      <HintPath>..\..\Componentes\MessagingToolkit.QRCode.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Caixa.cs" />
+    <Compile Include="CaixaAjuste.cs" />
+    <Compile Include="CaixaTipoAjuste.cs" />
+    <Compile Include="CaixaValorRegistro.cs" />
+    <Compile Include="CFE.cs" />
+    <Compile Include="AC.cs" />
+    <Compile Include="ClassificacaoFiscal.cs" />
+    <Compile Include="CodigoInfo.cs" />
+    <Compile Include="CodigoErro.cs" />
+    <Compile Include="Configuracao\Configuracao.cs" />
+    <Compile Include="AreaImpressao.cs" />
+    <Compile Include="Cliente.cs" />
+    <Compile Include="Comanda.cs" />
+    <Compile Include="CategoriaProduto.cs" />
+    <Compile Include="CategoriaImposto.cs" />
+    <Compile Include="Configuracao\ConfiguracaoBD.cs" />
+    <Compile Include="Configuracao\ConfiguracoesComumPedidos.cs" />
+    <Compile Include="Configuracao\ConfiguracoesEasyChopp.cs" />
+    <Compile Include="Configuracao\ConfiguracoesNFCe.cs" />
+    <Compile Include="Configuracao\ConfiguracoesTorneira.cs" />
+    <Compile Include="Constantes.cs" />
+    <Compile Include="Extension\ConfiguracaoExtensions.cs" />
+    <Compile Include="Configuracao\ConfiguracoesERP.cs" />
+    <Compile Include="Configuracao\ConfiguracoesLoggi.cs" />
+    <Compile Include="Configuracao\ConfiguracoesIFood.cs" />
+    <Compile Include="Configuracao\ConfiguracoesSaida.cs" />
+    <Compile Include="Configuracao\ConfiguracoesCaixa.cs" />
+    <Compile Include="Configuracao\ConfiguracoesCardapio.cs" />
+    <Compile Include="Configuracao\ConfiguracoesAutoatendimento.cs" />
+    <Compile Include="Configuracao\ConfiguracoesComandaTerminal.cs" />
+    <Compile Include="Configuracao\ConfiguracoesGerenciadorImpressao.cs" />
+    <Compile Include="Configuracao\ConfiguracoesSAT.cs" />
+    <Compile Include="Configuracao\ConfiguracoesAtivacao.cs" />
+    <Compile Include="Configuracao\ConfiguracoesSistema.cs" />
+    <Compile Include="Configuracao\ConfiguracoesTerminalWindows.cs" />
+    <Compile Include="Bandeira.cs" />
+    <Compile Include="ContaRecebivel.cs" />
+    <Compile Include="ConversaoUnidade.cs" />
+    <Compile Include="ConversorByteArrayParaImagem.cs" />
+    <Compile Include="ConversorImagemParaByteArray.cs" />
+    <Compile Include="ConvertImageParaJpeg.cs" />
+    <Compile Include="Dashboard.cs" />
+    <Compile Include="Extension\ImpressaoExtensions.cs" />
+    <Compile Include="GA.cs" />
+    <Compile Include="ValueObject\SaldoClientes.cs" />
+    <Compile Include="ValueObject\ImpressaoOrdemProducao.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ContaServices.cs" />
+    <Compile Include="Services\ExpedicaoServices.cs" />
+    <Compile Include="Services\ImpressoraWindows.cs" />
+    <Compile Include="Logs.cs" />
+    <Compile Include="Services\TiketServices.cs" />
+    <Compile Include="Saldo.cs" />
+    <Compile Include="Services\BarCodeServices.cs" />
+    <Compile Include="Utils\ExceptionHelper.cs" />
+    <Compile Include="Licencas.cs" />
+    <Compile Include="EntradaSaida.cs" />
+    <Compile Include="Entregador.cs" />
+    <Compile Include="ExceptionPDV.cs" />
+    <Compile Include="Idioma.cs" />
+    <Compile Include="ImagemTema.cs" />
+    <Compile Include="Inventario.cs" />
+    <Compile Include="InventarioProdutos.cs" />
+    <Compile Include="JWT.cs" />
+    <Compile Include="MeioPagamentoSAT.cs" />
+    <Compile Include="MoreLinq\MoreEnumerable.DistinctBy.cs" />
+    <Compile Include="Movimentacao.cs" />
+    <Compile Include="MovimentacaoProdutos.cs" />
+    <Compile Include="MudarIdioma.cs" />
+    <Compile Include="PrecoAssistente.cs" />
+    <Compile Include="PainelModificacaoOperacao.cs" />
+    <Compile Include="PainelModificacaoCategoria.cs" />
+    <Compile Include="PainelModificacaoRelacionado.cs" />
+    <Compile Include="PDV.cs" />
+    <Compile Include="PedidoProdutoEqualityComparer.cs" />
+    <Compile Include="ProcessamentoSAT.cs" />
+    <Compile Include="ProdutoCategoriaProduto.cs" />
+    <Compile Include="ProdutoImagem.cs" />
+    <Compile Include="ProdutoReceita.cs" />
+    <Compile Include="ProdutoTraducao.cs" />
+    <Compile Include="RelatorioFechamento.cs" />
+    <Compile Include="RetornoSAT.cs" />
+    <Compile Include="SATServer.cs" />
+    <Compile Include="StackAssistente.cs" />
+    <Compile Include="StringCipher.cs" />
+    <Compile Include="TaxaEntrega.cs" />
+    <Compile Include="TemaCardapioPDV.cs" />
+    <Compile Include="ProdutoImposto.cs" />
+    <Compile Include="Imagem.cs" />
+    <Compile Include="MotivoCancelamento.cs" />
+    <Compile Include="Fechamento.cs" />
+    <Compile Include="TemaCardapio.cs" />
+    <Compile Include="TipoApp.cs" />
+    <Compile Include="TipoAreaImpressao.cs" />
+    <Compile Include="TipoDesconto.cs" />
+    <Compile Include="TipoMovimentacao.cs" />
+    <Compile Include="TipoPDV.cs" />
+    <Compile Include="ProdutoPainelModificacao.cs" />
+    <Compile Include="PainelModificacaoProduto.cs" />
+    <Compile Include="PainelModificacao.cs" />
+    <Compile Include="TipoEntrada.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="TipoPedido.cs" />
+    <Compile Include="StatusComanda.cs" />
+    <Compile Include="Estado.cs" />
+    <Compile Include="Mesa.cs" />
+    <Compile Include="MapAreaImpressaoProduto.cs" />
+    <Compile Include="Services\OrdemProducaoServices.cs" />
+    <Compile Include="Teclado.cs" />
+    <Compile Include="TipoProduto.cs" />
+    <Compile Include="TipoTributacao.cs" />
+    <Compile Include="Unidade.cs" />
+    <Compile Include="Utils\EmailUtil.cs" />
+    <Compile Include="Utils\ImageUtil.cs" />
+    <Compile Include="Utils\InformacaoXML.cs" />
+    <Compile Include="Extension\StringExtensions.cs" />
+    <Compile Include="Utils\ValidacaoEan.cs" />
+    <Compile Include="ValueObject\ImpressaoHelper.cs" />
+    <Compile Include="ValueObject\ItemValor.cs" />
+    <Compile Include="ValueObject\PDVNomeID.cs" />
+    <Compile Include="ValueObject\PedidosCFe.cs" />
+    <Compile Include="ValueObject\ExtratoItens.cs" />
+    <Compile Include="ValueObject\ExtratoCreditos.cs" />
+    <Compile Include="ValueObject\InformacoesRemetente.cs" />
+    <Compile Include="ValidacaoSistema.cs" />
+    <Compile Include="Produto.cs" />
+    <Compile Include="PedidoProduto.cs" />
+    <Compile Include="PedidoPagamento.cs" />
+    <Compile Include="Pedido.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Relatorio.cs" />
+    <Compile Include="TipoPagamento.cs" />
+    <Compile Include="Usuario.cs" />
+    <Compile Include="ValidacaoDocumento.cs" />
+    <Compile Include="ValueObject\SelectIDValor.cs" />
+    <Compile Include="Web References\Ativacoes\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="XML.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\A7D.PDV.Ativacao.Shared\a7D.PDV.Ativacao.Shared.csproj">
+      <Project>{d22ec4d8-ff56-4a5d-9505-033fc072d291}</Project>
+      <Name>a7D.PDV.Ativacao.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.DAL\a7D.PDV.DAL.csproj">
+      <Project>{A4B2AB32-5D8E-4AE9-8350-CB75759A9B11}</Project>
+      <Name>a7D.PDV.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.EF\a7D.PDV.EF.csproj">
+      <Project>{75EF9713-861A-4C6B-8F7F-1343FDCBBFFB}</Project>
+      <Name>a7D.PDV.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.Pagamento\a7D.PDV.Integracao.Pagamento.csproj">
+      <Project>{26083FD7-642B-4F53-BAB3-1C8F0AC8EABF}</Project>
+      <Name>a7D.PDV.Integracao.Pagamento</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Model\a7D.PDV.Model.csproj">
+      <Project>{22BA05B8-59D7-4E09-8471-7C8012F1B100}</Project>
+      <Name>a7D.PDV.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Ativacoes\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Ativacoes\wsutil.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://apipdvseven.azurewebsites.net/wsUtil.asmx">
+      <UrlBehavior>Static</UrlBehavior>
+      <RelPath>Web References\Ativacoes\</RelPath>
+      <UpdateFromURL>http://apipdvseven.azurewebsites.net/wsUtil.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>a7D_PDV_BLL_wsUtil_wsUtil</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\Ativacoes\wsutil.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PDV7_horizontal_PB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ViagemSacola.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,36 @@
+﻿<pedido>
+  <idTipoPedido>10</idTipoPedido>
+  <numero>13</numero>
+</pedido>
+
+
+
+
+
+
+
+
+
+
+
+
+<pedido>
+  <status>1</status>
+  <retorno>
+    <pedido>
+      <idPedido>0</idPedido>      
+      <listaProduto>
+        <produto>
+          <idProduto>1</idProduto>
+          <valorUnitario>1,00</valorUnitario>
+          <qtd>1</qtd>
+          <notas>teste teste</notas>
+          <listaModificacoes>
+            <idProduto>246</idProduto>
+          </listaModificacoes>
+        </produto>
+      </listaProduto>
+    </pedido>
+  </retorno>
+</pedido>
+

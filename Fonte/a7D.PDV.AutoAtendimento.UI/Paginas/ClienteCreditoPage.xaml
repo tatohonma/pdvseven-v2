@@ -1,0 +1,32 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:Controls="clr-namespace:a7D.PDV.AutoAtendimento.UI.Controles"
+      x:Class="a7D.PDV.AutoAtendimento.UI.Paginas.ClienteCreditoPage"
+      mc:Ignorable="d" 
+      Loaded="Page_Loaded"
+      d:DesignHeight="600" d:DesignWidth="800">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\Controles\StyleButtons.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Canvas>
+        <Button Name="Home" Click="Home_Click"/>
+        <Button Name="Pagar" Click="Pagar_Click"/>
+        <Button Name="Cancelar" Click="Cancelar_Click"/>
+        <Button Name="Consulta" Click="Consulta_Click"/>
+        <TextBlock Name="Numero" />
+        <TextBlock Name="Saldo" />
+        <TextBlock Name="Nome" />
+        <TextBlock Name="Titulo" />
+        <TextBlock Name="Total" />
+        <Grid Name="ListaCreditos">
+            <StackPanel Orientation="Horizontal" Name="CreditoItens" HorizontalAlignment="Center" />
+        </Grid>
+    </Canvas>
+</Page>

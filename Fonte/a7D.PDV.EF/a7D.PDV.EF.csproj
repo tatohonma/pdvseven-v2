@@ -1,0 +1,477 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{75EF9713-861A-4C6B-8F7F-1343FDCBBFFB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>a7D.PDV.EF</RootNamespace>
+    <AssemblyName>a7D.PDV.EF</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="a7D.Fwk.CRUD.DAL">
+      <HintPath>..\..\Componentes\a7D.Fwk.CRUD.DAL.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="DAO\ClienteDAO.cs" />
+    <Compile Include="DAO\ComandaDAO.cs" />
+    <Compile Include="DAO\Pagamentos.cs" />
+    <Compile Include="DAO\CategoriaDAO.cs" />
+    <Compile Include="DAO\ProdutosDAO.cs" />
+    <Compile Include="DTO\PagamentoTEF.cs" />
+    <Compile Include="Enum\ECodigosPagamentoSAT.cs" />
+    <Compile Include="Enum\EConfig.cs" />
+    <Compile Include="Enum\EStatusMesa.cs" />
+    <Compile Include="Enum\EStatusPedido.cs" />
+    <Compile Include="Enum\ETamanhoPacote.cs" />
+    <Compile Include="Enum\ETipoGerenciadorImpressao.cs" />
+    <Compile Include="Enum\ETipoAreaImpressao.cs" />
+    <Compile Include="Enum\ETipoOrdemImpressao.cs" />
+    <Compile Include="Enum\ETipoIntegracao.cs" />
+    <Compile Include="Enum\ETipoProduto.cs" />
+    <Compile Include="Enum\ETipoPedido.cs" />
+    <Compile Include="Enum\EStatusComanda.cs" />
+    <Compile Include="Enum\ETipoPDV.cs" />
+    <Compile Include="Enum\EBandeira.cs" />
+    <Compile Include="Enum\EContaRecebivel.cs" />
+    <Compile Include="Enum\EMetodoPagamento.cs" />
+    <Compile Include="Enum\ETipoUsuario.cs" />
+    <Compile Include="IERP.cs" />
+    <Compile Include="IValueName.cs" />
+    <Compile Include="Migrations\201711081839391_2_17_A_Gateways.cs" />
+    <Compile Include="Migrations\201711081839391_2_17_A_Gateways.Designer.cs">
+      <DependentUpon>201711081839391_2_17_A_Gateways.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711211201050_2_17_B_PedidoPagamentos.cs" />
+    <Compile Include="Migrations\201711211201050_2_17_B_PedidoPagamentos.Designer.cs">
+      <DependentUpon>201711211201050_2_17_B_PedidoPagamentos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711222001305_2_17_C_RecebiveisBandeiras.cs" />
+    <Compile Include="Migrations\201711222001305_2_17_C_RecebiveisBandeiras.Designer.cs">
+      <DependentUpon>201711222001305_2_17_C_RecebiveisBandeiras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711301228526_2_17_D_TipoPagamento.cs" />
+    <Compile Include="Migrations\201711301228526_2_17_D_TipoPagamento.Designer.cs">
+      <DependentUpon>201711301228526_2_17_D_TipoPagamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711301252521_2_17_E_TipoPagamento.cs" />
+    <Compile Include="Migrations\201711301252521_2_17_E_TipoPagamento.Designer.cs">
+      <DependentUpon>201711301252521_2_17_E_TipoPagamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801191259197_2_19_A_Saldos.cs" />
+    <Compile Include="Migrations\201801191259197_2_19_A_Saldos.Designer.cs">
+      <DependentUpon>201801191259197_2_19_A_Saldos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801221634174_2_19_B_Saldos.cs" />
+    <Compile Include="Migrations\201801221634174_2_19_B_Saldos.Designer.cs">
+      <DependentUpon>201801221634174_2_19_B_Saldos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803091703422_2_17_C_ClienteRG.cs" />
+    <Compile Include="Migrations\201803091703422_2_17_C_ClienteRG.Designer.cs">
+      <DependentUpon>201803091703422_2_17_C_ClienteRG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804221454298_2_17_F_LOG.cs" />
+    <Compile Include="Migrations\201804221454298_2_17_F_LOG.Designer.cs">
+      <DependentUpon>201804221454298_2_17_F_LOG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804251741412_2_17_G_Pesquisa.cs" />
+    <Compile Include="Migrations\201804251741412_2_17_G_Pesquisa.Designer.cs">
+      <DependentUpon>201804251741412_2_17_G_Pesquisa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805080553112_2_17_H_CodigoSAT.cs" />
+    <Compile Include="Migrations\201805080553112_2_17_H_CodigoSAT.Designer.cs">
+      <DependentUpon>201805080553112_2_17_H_CodigoSAT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806281340113_2_17_17_1.cs" />
+    <Compile Include="Migrations\201806281340113_2_17_17_1.Designer.cs">
+      <DependentUpon>201806281340113_2_17_17_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807191759469_2_18_Loggi.cs" />
+    <Compile Include="Migrations\201807191759469_2_18_Loggi.Designer.cs">
+      <DependentUpon>201807191759469_2_18_Loggi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810181409372_2_19_Limpeza_Mensagens_Iaago.cs" />
+    <Compile Include="Migrations\201810181409372_2_19_Limpeza_Mensagens_Iaago.Designer.cs">
+      <DependentUpon>201810181409372_2_19_Limpeza_Mensagens_Iaago.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902190011236_2_20_ContaCliente_IFood_OrdemImpressao.cs" />
+    <Compile Include="Migrations\201902190011236_2_20_ContaCliente_IFood_OrdemImpressao.Designer.cs">
+      <DependentUpon>201902190011236_2_20_ContaCliente_IFood_OrdemImpressao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906100032210_2_21_Ticket_Integracoes.cs" />
+    <Compile Include="Migrations\201906100032210_2_21_Ticket_Integracoes.Designer.cs">
+      <DependentUpon>201906100032210_2_21_Ticket_Integracoes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbBandeira.cs" />
+    <Compile Include="Models\Mapping\tbBandeiraMap.cs" />
+    <Compile Include="Models\Mapping\tbTamanhoPacoteMAP.cs" />
+    <Compile Include="Models\Mapping\tbHorarioDeliveryMap.cs" />
+    <Compile Include="Models\tbTicket.cs" />
+    <Compile Include="Models\tbMensagem.cs" />
+    <Compile Include="Models\tbIntegracao.cs" />
+    <Compile Include="Models\tbTamanhoPacote.cs" />
+    <Compile Include="Models\Mapping\tbPesquisaMap.cs" />
+    <Compile Include="Models\tbPesquisa.cs" />
+    <Compile Include="Models\tbContaRecebivel.cs" />
+    <Compile Include="Models\Mapping\tbLOGMap.cs" />
+    <Compile Include="Models\Mapping\tbSaldoMap.cs" />
+    <Compile Include="Models\tbLOGInformation.cs" />
+    <Compile Include="Models\tbSaldo.cs" />
+    <Compile Include="Models\Mapping\tbContaRecebivelMap.cs" />
+    <Compile Include="Models\tbPDV.cs" />
+    <Compile Include="Models\tbTipoIntegracao.cs" />
+    <Compile Include="Models\tbTipoPedido.cs" />
+    <Compile Include="Models\tbTipoPDV.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigAttribute.cs" />
+    <Compile Include="Repositorio.cs" />
+    <Compile Include="UtilSha256Hash.cs" />
+    <Compile Include="ValoresPadrao\ValoresConfiguracoes.cs" />
+    <Compile Include="ValoresPadrao\ValoresContasRecebiveis.cs" />
+    <Compile Include="ValoresPadrao\ValoresTaxa.cs" />
+    <Compile Include="ValoresPadrao\ValoresProdutos.cs" />
+    <Compile Include="ValoresPadrao\ValoresRelatorios.cs" />
+    <Compile Include="ValueName.cs" />
+    <Compile Include="Enum\EGateway.cs" />
+    <Compile Include="ValueNameExtensions.cs" />
+    <Compile Include="Migrations\201711071610129_initial.cs" />
+    <Compile Include="Migrations\201711071610129_initial.Designer.cs">
+      <DependentUpon>201711071610129_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Mapping\tbVersaoMap.cs" />
+    <Compile Include="Models\tbVersao.cs" />
+    <Compile Include="Models\Mapping\tbAreaImpressaoMap.cs" />
+    <Compile Include="Models\Mapping\tbCaixaAjusteMap.cs" />
+    <Compile Include="Models\Mapping\tbCaixaMap.cs" />
+    <Compile Include="Models\Mapping\tbCaixaTipoAjusteMap.cs" />
+    <Compile Include="Models\Mapping\tbCaixaValorRegistroMap.cs" />
+    <Compile Include="Models\Mapping\tbCategoriaProdutoMap.cs" />
+    <Compile Include="Models\Mapping\tbClassificacaoFiscalMap.cs" />
+    <Compile Include="Models\Mapping\tbClienteMap.cs" />
+    <Compile Include="Models\Mapping\tbComandaMap.cs" />
+    <Compile Include="Models\Mapping\tbConfiguracaoBDMap.cs" />
+    <Compile Include="Models\Mapping\tbConversaoUnidadeMap.cs" />
+    <Compile Include="Models\Mapping\tbEntradaSaidaMap.cs" />
+    <Compile Include="Models\Mapping\tbEntregadorMap.cs" />
+    <Compile Include="Models\Mapping\tbEstadoMap.cs" />
+    <Compile Include="Models\Mapping\tbFechamentoMap.cs" />
+    <Compile Include="Models\Mapping\tbIdiomaMap.cs" />
+    <Compile Include="Models\Mapping\tbImagemMap.cs" />
+    <Compile Include="Models\Mapping\tbImagemTemaMap.cs" />
+    <Compile Include="Models\Mapping\tbInventarioMap.cs" />
+    <Compile Include="Models\Mapping\tbInventarioProdutoMap.cs" />
+    <Compile Include="Models\Mapping\tbMapAreaImpressaoProdutoMap.cs" />
+    <Compile Include="Models\Mapping\tbMeioPagamentoSATMap.cs" />
+    <Compile Include="Models\Mapping\tbMesaMap.cs" />
+    <Compile Include="Models\Mapping\tbMotivoCancelamentoMap.cs" />
+    <Compile Include="Models\Mapping\tbMovimentacaoMap.cs" />
+    <Compile Include="Models\Mapping\tbMovimentacaoProdutoMap.cs" />
+    <Compile Include="Models\Mapping\tbOrdemImpressaoMap.cs" />
+    <Compile Include="Models\Mapping\tbPainelModificacaoCategoriaMap.cs" />
+    <Compile Include="Models\Mapping\tbPainelModificacaoMap.cs" />
+    <Compile Include="Models\Mapping\tbPainelModificacaoOperacaoMap.cs" />
+    <Compile Include="Models\Mapping\tbPainelModificacaoProdutoMap.cs" />
+    <Compile Include="Models\Mapping\tbPainelModificacaoRelacionadoMap.cs" />
+    <Compile Include="Models\Mapping\tbPDVMap.cs" />
+    <Compile Include="Models\Mapping\tbPedidoMap.cs" />
+    <Compile Include="Models\Mapping\tbPedidoPagamentoMap.cs" />
+    <Compile Include="Models\Mapping\tbPedidoProdutoMap.cs" />
+    <Compile Include="Models\Mapping\tbProcessamentoSATMap.cs" />
+    <Compile Include="Models\Mapping\tbProdutoCategoriaProdutoMap.cs" />
+    <Compile Include="Models\Mapping\tbProdutoImagemMap.cs" />
+    <Compile Include="Models\Mapping\tbProdutoMap.cs" />
+    <Compile Include="Models\Mapping\tbProdutoPainelModificacaoMap.cs" />
+    <Compile Include="Models\Mapping\tbProdutoReceitaMap.cs" />
+    <Compile Include="Models\Mapping\tbProdutoTraducaoMap.cs" />
+    <Compile Include="Models\Mapping\tbRelatorioMap.cs" />
+    <Compile Include="Models\Mapping\tbRetornoSATMap.cs" />
+    <Compile Include="Models\Mapping\tbStatusComandaMap.cs" />
+    <Compile Include="Models\Mapping\tbStatusMesaMap.cs" />
+    <Compile Include="Models\Mapping\tbStatusPedidoMap.cs" />
+    <Compile Include="Models\Mapping\tbStatusProcessamentoSATMap.cs" />
+    <Compile Include="Models\Mapping\tbTaxaEntregaMap.cs" />
+    <Compile Include="Models\Mapping\tbTemaCardapioMap.cs" />
+    <Compile Include="Models\Mapping\tbTemaCardapioPDVMap.cs" />
+    <Compile Include="Models\Mapping\tbTipoAreaImpressaoMap.cs" />
+    <Compile Include="Models\Mapping\tbTipoDescontoMap.cs" />
+    <Compile Include="Models\Mapping\tbTipoEntradaMap.cs" />
+    <Compile Include="Models\Mapping\tbTipoMovimentacaoMap.cs" />
+    <Compile Include="Models\Mapping\tbTipoPagamentoMap.cs" />
+    <Compile Include="Models\Mapping\tbTipoPDVMap.cs" />
+    <Compile Include="Models\Mapping\tbTipoPedidoMap.cs" />
+    <Compile Include="Models\Mapping\tbTipoProdutoMap.cs" />
+    <Compile Include="Models\Mapping\tbTipoRelatorioMap.cs" />
+    <Compile Include="Models\Mapping\tbTipoSolicitacaoSATMap.cs" />
+    <Compile Include="Models\Mapping\tbTipoTributacaoMap.cs" />
+    <Compile Include="Models\Mapping\tbUnidadeMap.cs" />
+    <Compile Include="Models\Mapping\tbUsuarioMap.cs" />
+    <Compile Include="Models\Mapping\tbGatewayMap.cs" />
+    <Compile Include="Models\pdv7Context.cs" />
+    <Compile Include="Models\tbAreaImpressao.cs" />
+    <Compile Include="Models\tbCaixa.cs" />
+    <Compile Include="Models\tbCaixaAjuste.cs" />
+    <Compile Include="Models\tbCaixaTipoAjuste.cs" />
+    <Compile Include="Models\tbCaixaValorRegistro.cs" />
+    <Compile Include="Models\tbCategoriaProduto.cs" />
+    <Compile Include="Models\tbClassificacaoFiscal.cs" />
+    <Compile Include="Models\tbCliente.cs" />
+    <Compile Include="Models\tbComanda.cs" />
+    <Compile Include="Models\tbConfiguracaoBD.cs" />
+    <Compile Include="Models\tbConversaoUnidade.cs" />
+    <Compile Include="Models\tbEntradaSaida.cs" />
+    <Compile Include="Models\tbEntregador.cs" />
+    <Compile Include="Models\tbEstado.cs" />
+    <Compile Include="Models\tbFechamento.cs" />
+    <Compile Include="Models\tbIdioma.cs" />
+    <Compile Include="Models\tbImagem.cs" />
+    <Compile Include="Models\tbImagemTema.cs" />
+    <Compile Include="Models\tbInventario.cs" />
+    <Compile Include="Models\tbInventarioProduto.cs" />
+    <Compile Include="Models\tbMapAreaImpressaoProduto.cs" />
+    <Compile Include="Models\tbMeioPagamento.cs" />
+    <Compile Include="Models\tbMesa.cs" />
+    <Compile Include="Models\tbMotivoCancelamento.cs" />
+    <Compile Include="Models\tbMovimentacao.cs" />
+    <Compile Include="Models\tbMovimentacaoProduto.cs" />
+    <Compile Include="Models\tbOrdemImpressao.cs" />
+    <Compile Include="Models\tbPainelModificacao.cs" />
+    <Compile Include="Models\tbPainelModificacaoCategoria.cs" />
+    <Compile Include="Models\tbPainelModificacaoOperacao.cs" />
+    <Compile Include="Models\tbPainelModificacaoProduto.cs" />
+    <Compile Include="Models\tbPainelModificacaoRelacionado.cs" />
+    <Compile Include="Models\tbPedido.cs" />
+    <Compile Include="Models\tbPedidoPagamento.cs" />
+    <Compile Include="Models\tbPedidoProduto.cs" />
+    <Compile Include="Models\tbProcessamentoSAT.cs" />
+    <Compile Include="Models\tbProduto.cs" />
+    <Compile Include="Models\tbProdutoCategoriaProduto.cs" />
+    <Compile Include="Models\tbProdutoImagem.cs" />
+    <Compile Include="Models\tbProdutoPainelModificacao.cs" />
+    <Compile Include="Models\tbProdutoReceita.cs" />
+    <Compile Include="Models\tbProdutoTraducao.cs" />
+    <Compile Include="Models\tbRelatorio.cs" />
+    <Compile Include="Models\tbRetornoSAT.cs" />
+    <Compile Include="Models\tbStatusComanda.cs" />
+    <Compile Include="Models\tbStatusMesa.cs" />
+    <Compile Include="Models\tbStatusPedido.cs" />
+    <Compile Include="Models\tbStatusProcessamentoSAT.cs" />
+    <Compile Include="Models\tbTaxaEntrega.cs" />
+    <Compile Include="Models\tbTemaCardapio.cs" />
+    <Compile Include="Models\tbTemaCardapioPDV.cs" />
+    <Compile Include="Models\tbTipoAreaImpressao.cs" />
+    <Compile Include="Models\tbTipoDesconto.cs" />
+    <Compile Include="Models\tbTipoEntrada.cs" />
+    <Compile Include="Models\tbTipoMovimentacao.cs" />
+    <Compile Include="Models\tbTipoPagamento.cs" />
+    <Compile Include="Models\tbHorarioDelivery.cs" />
+    <Compile Include="Models\tbTipoProduto.cs" />
+    <Compile Include="Models\tbTipoRelatorio.cs" />
+    <Compile Include="Models\tbTipoSolicitacaoSAT.cs" />
+    <Compile Include="Models\tbTipoTributacao.cs" />
+    <Compile Include="Models\tbUnidade.cs" />
+    <Compile Include="Models\tbUsuario.cs" />
+    <Compile Include="Models\tbGateway.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711071610129_initial.resx">
+      <DependentUpon>201711071610129_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711081839391_2_17_A_Gateways.resx">
+      <DependentUpon>201711081839391_2_17_A_Gateways.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711211201050_2_17_B_PedidoPagamentos.resx">
+      <DependentUpon>201711211201050_2_17_B_PedidoPagamentos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711222001305_2_17_C_RecebiveisBandeiras.resx">
+      <DependentUpon>201711222001305_2_17_C_RecebiveisBandeiras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711301228526_2_17_D_TipoPagamento.resx">
+      <DependentUpon>201711301228526_2_17_D_TipoPagamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711301252521_2_17_E_TipoPagamento.resx">
+      <DependentUpon>201711301252521_2_17_E_TipoPagamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801191259197_2_19_A_Saldos.resx">
+      <DependentUpon>201801191259197_2_19_A_Saldos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801221634174_2_19_B_Saldos.resx">
+      <DependentUpon>201801221634174_2_19_B_Saldos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803091703422_2_17_C_ClienteRG.resx">
+      <DependentUpon>201803091703422_2_17_C_ClienteRG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804221454298_2_17_F_LOG.resx">
+      <DependentUpon>201804221454298_2_17_F_LOG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804251741412_2_17_G_Pesquisa.resx">
+      <DependentUpon>201804251741412_2_17_G_Pesquisa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805080553112_2_17_H_CodigoSAT.resx">
+      <DependentUpon>201805080553112_2_17_H_CodigoSAT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806281340113_2_17_17_1.resx">
+      <DependentUpon>201806281340113_2_17_17_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807191759469_2_18_Loggi.resx">
+      <DependentUpon>201807191759469_2_18_Loggi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810181409372_2_19_Limpeza_Mensagens_Iaago.resx">
+      <DependentUpon>201810181409372_2_19_Limpeza_Mensagens_Iaago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902190011236_2_20_ContaCliente_IFood_OrdemImpressao.resx">
+      <DependentUpon>201902190011236_2_20_ContaCliente_IFood_OrdemImpressao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906100032210_2_21_Ticket_Integracoes.resx">
+      <DependentUpon>201906100032210_2_21_Ticket_Integracoes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Outros.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tipos.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Motivo_Desconto.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Saidas_Avulsas.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Sangria.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Taxa_Entrega_Delivery.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Taxa_Servico_Com_e_Sem_Desconto.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Creditos.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Desconto_por_cliente.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Lista_de_Clientes.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Lista_de_Pedidos.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Motivos_de_Desconto.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Pedidos_com_Desconto.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Produtos_Cancelados.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Produtos_Cancelados_Usuario_Cancelamento.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Produtos_Cancelados_Usuario_Lancamento.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Produtos_Vendidos.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Produtos_Vendidos_2.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Produtos_Vendidos_por_Cliente.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Produtos_Vendidos_Resumo.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Produtos_Vendidos_Resumo_2.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Resumo_por_Sexo.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Resumo_por_Tipo_de_Entrada.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Resumo_por_Tipo_Pagamento.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Taxa_de_Entrega_Delivery.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Taxa_de_servico_por_garcom.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Tipos_Metodo_Bandeira.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\A7D.PDV.Ativacao.Shared\a7D.PDV.Ativacao.Shared.csproj">
+      <Project>{D22EC4D8-FF56-4A5D-9505-033FC072D291}</Project>
+      <Name>a7D.PDV.Ativacao.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relatorio_Lista_Produtos_Impostos.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

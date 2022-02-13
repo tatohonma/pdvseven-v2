@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AutoAtendimento versao="1">
+
+  <Imagens base="F:\PDVSeven\PDVSeven\Autoatendimento\Dome\">
+
+    <inicial>Inicial</inicial>
+    <produto>Produto</produto>
+    <sair>Sair</sair>
+    <tefmodal>TEFmodal</tefmodal>
+    <fim>Fim</fim>
+
+    <botao>Botao</botao>
+    <tefdebito>TEFDebito</tefdebito>
+    <tefcredito>TEFCredito</tefcredito>
+    <tefimagem>TEFimagem</tefimagem>
+    <tefrecibo>TEFrecibo</tefrecibo>
+    <teffechar>TEFfechar</teffechar>
+
+    <bebidas>btn_bebidas_branco</bebidas>
+    <drinks>btn_drinks_branco</drinks>
+    <espetos>btn_espetos_branco</espetos>
+    <japonesa>btn_japonesa_branco</japonesa>
+    <paes>btn_paes_branco</paes>
+    <porcoes>btn_porcoes_branco</porcoes>
+
+    <bebidas_selecionada>btn_bebidas_dourado</bebidas_selecionada>
+    <drinks_selecionada>btn_drinks_dourado</drinks_selecionada>
+    <espetos_selecionada>btn_espetos_dourado</espetos_selecionada>
+    <japonesa_selecionada>btn_japonesa_dourado</japonesa_selecionada>
+    <paes_selecionada>btn_paes_dourado</paes_selecionada>
+    <porcoes_selecionada>btn_porcoes_dourado</porcoes_selecionada>
+
+  </Imagens>
+
+  <!-- 1366 x 768 -->
+
+  <Inicial background="inicial">
+    <VendaCategoriaProduto top="10" left="10" width="1346" height="748" />
+    <PagarComanda visible="false" />
+  </Inicial>
+  
+  <Teclado>
+    <Digitos background="#DDDDDD" border="2" fontsize="36" fontweight="Black"/>
+    <Enter background="#00A532" border="2" fontsize="26" foreground="white"/>
+    <Cancel background="#FF0514" border="2" fontsize="26" foreground="white"/>
+    <Backspace background="#DDDDDD" border="2" fontsize="36" fontweight="Black"/>
+    <Texto background="#C3A261" border="2" fontsize="32"/>
+  </Teclado>
+
+  <Sair background="sair">
+    <Home top="0" left="0" width="270" height="150"/>
+    <Titulo top="110" left="283" width="800" fontsize="40" foreground="White" fontweight="Black"/>
+    <Teclado top="240" left="530"/>
+  </Sair>
+
+  <ModalTEF>
+    <Modal width="996" height="565" background="tefmodal"/>
+    <Status width="900" top="30" left="40" fontsize="30" />
+    <Debito top="140" left="160" background="tefdebito"/>
+    <Credito top="140" left="590" background="tefcredito"/>
+    <Cancelar top="500" left="340" fontsize="20" foreground="#0587DD" text="Voltar e continuar comprando"/>
+    <Cancelar2 top="5" left="950" background="teffechar"/>
+    <ImagemTef top="120" left="100" background="tefimagem"/>
+    <ReciboTef top="120" left="100" background="tefrecibo"/>
+  </ModalTEF>
+
+  <VendaCategoriaProduto background="produto">
+    <Home top="0" left="0" width="270" height="150"/>
+    <Produto width="180" height="180" margin="10" control="Produto1" circle="#A0000000"/>
+
+    <Categorias top="0" left="230" width="800" height="150" />
+    <SubCategorias top="170" left="0" width="170" height="580" />
+
+    <Produtos top="156" left="170" width="850" height="600" background="#F5E9CF" />
+    <!--<Produtos subcategoria="false" top="156" left="0" width="1087" height="609" background="#F5E9CF" />-->
+
+    <Pedido top="100" left="1020" width="350" height="450" />
+    <Cancelar top="30" left="1200" text="Excluir todos os itens" foreground="#0587DD" fontsize="16"/>
+    <TotalPedido top="565" left="1135" fontweight="Bold" textalignment="Right" width="200" fontsize="20" foreground="#B7A263" />
+    <Confirmar top="670" left="1070" background="botao" text="CONFIRMAR" foreground="White" fontsize="20"/>
+
+  </VendaCategoriaProduto>
+
+  <Categorias inicial="15">
+
+    <BotaoPadrao margin="0,0,52,0"/>
+    <BotaoPadraoSelecionada margin="0,0,52,0" background="_selecionada"/>
+
+    <BotaoPadraoSub width="170" height="50" margin="0,0,10,20" fontsize="20" Foreground="#242021" fontfamily="Segoe Condensed"/>
+    <BotaoPadraoSubSelecionada background="#F5E9CF" width="160" height="50" margin="10,0,0,20" fontsize="24" fontfamily="Segoe Condensed"/>
+    <!-- Sequencia para as margens: left, top, right, bottom -->
+    
+    <Categoria background="japonesa" id="29">
+      <Categoria text="Sub Cat 1" id="1" />
+      <Categoria text="Sub Cat 2" id="2" />
+      <Categoria text="Sub Cat 3" id="3" />
+    </Categoria>
+    <Categoria background="bebidas" id="-1">
+      <!-- Categoria negativa é uma virtual, que incluir todos os itens filhos -->
+      <Categoria text="Sub Cat 4" id="1" />
+      <Categoria text="Sub Cat 5" id="2" />
+      <Categoria text="Sub Cat 6" id="3" />
+      <Categoria text="Sub Cat 7" id="7" />
+    </Categoria>
+    <Categoria background="espetos" id="6"/>
+    <Categoria background="paes" id="8"/>
+    <Categoria background="drinks" id="10"/>
+    <Categoria background="porcoes" id="16"/>
+  </Categorias>
+
+  <Fim background="fim">
+    <Home top="10" left="10" width="1346" height="748"/>
+    <Numero visible="false"/>
+    <Nome visible="false"/>
+    <Mensagem top="460" left="250" width="866" foreground="Black" fontweight="Black" fontsize="40" textalignment="Center"/>
+  </Fim>
+
+</AutoAtendimento>

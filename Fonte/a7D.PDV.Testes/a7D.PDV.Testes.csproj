@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9E9626E7-290B-43C8-A6E2-E21A6E5BD896}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>a7D.PDV.Testes</RootNamespace>
+    <AssemblyName>a7D.PDV.Testes</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DFe.Classes, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\DFe.Classes.dll</HintPath>
+    </Reference>
+    <Reference Include="DFe.Utils, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\DFe.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="DFe.Wsdl, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\DFe.Wsdl.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Classes, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\NFe.Classes.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Servicos, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\NFe.Servicos.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Utils, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\NFe.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Wsdl, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\NFe.Wsdl.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Refit, Version=4.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Refit.4.6.107\lib\net461\Refit.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Include="MockCake.cs" />
+    <Compile Include="MyTesteNFCe.cs" />
+    <Compile Include="TestRefitGitHub.cs" />
+    <Compile Include="TesteEF.cs" />
+    <Compile Include="TestEasyChopp.cs" />
+    <Compile Include="TestMath.cs" />
+    <Compile Include="TesteAtualizacao.cs" />
+    <Compile Include="TestMensagem.cs" />
+    <Compile Include="TestLoggi.cs" />
+    <Compile Include="TestConfiguracao.cs" />
+    <Compile Include="TestComandaCredito.cs" />
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="TestERPCake.cs" />
+    <Compile Include="TestiFood.cs" />
+    <Compile Include="TestAPIcomanda.cs" />
+    <Compile Include="TestPedido.cs" />
+    <Compile Include="TestSaldo.cs" />
+    <Compile Include="TestErro.cs" />
+    <Compile Include="TestErroCodes.cs" />
+    <Compile Include="TestDraw.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestPedidoProdutoEquality.cs" />
+    <Compile Include="TestNFCe.cs" />
+    <Compile Include="TestSAT.cs" />
+    <Compile Include="TestPagoTef.cs" />
+    <Compile Include="TestCFe.cs" />
+    <Compile Include="TestStoneTEF.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\A7D.PDV.Ativacao.Shared\a7D.PDV.Ativacao.Shared.csproj">
+      <Project>{D22EC4D8-FF56-4A5D-9505-033FC072D291}</Project>
+      <Name>a7D.PDV.Ativacao.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.BackOffice.UI\a7D.PDV.BackOffice.UI.csproj">
+      <Project>{7CAAD278-4001-4CE7-8F16-6573892D12E9}</Project>
+      <Name>a7D.PDV.BackOffice.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.BLL\a7D.PDV.BLL.csproj">
+      <Project>{1b8ad873-6b0a-45d6-803e-e6cc104bce81}</Project>
+      <Name>a7D.PDV.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Componentes\a7D.PDV.Componentes.csproj">
+      <Project>{06274b88-cf73-4e1f-80b1-1cb73b3930d6}</Project>
+      <Name>a7D.PDV.Componentes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.DAL\a7D.PDV.DAL.csproj">
+      <Project>{a4b2ab32-5d8e-4ae9-8350-cb75759a9b11}</Project>
+      <Name>a7D.PDV.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.EF\a7D.PDV.EF.csproj">
+      <Project>{75EF9713-861A-4C6B-8F7F-1343FDCBBFFB}</Project>
+      <Name>a7D.PDV.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Fiscal.Comunicacao\a7D.PDV.Fiscal.Comunicacao.csproj">
+      <Project>{d557076f-5384-48d9-b483-35c911e46d30}</Project>
+      <Name>a7D.PDV.Fiscal.Comunicacao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Fiscal\a7D.PDV.Fiscal.csproj">
+      <Project>{c506bd2c-fcb7-49e2-9759-661573b1c60a}</Project>
+      <Name>a7D.PDV.Fiscal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.API2.Client\a7D.PDV.Integracao.API2.Client.csproj">
+      <Project>{546A83D6-ECD2-4FD5-920C-DD9763033FC5}</Project>
+      <Name>a7D.PDV.Integracao.API2.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.API2.Model\a7D.PDV.Integracao.API2.Model.csproj">
+      <Project>{F24C813D-011C-4665-A36C-75F4080F0F7B}</Project>
+      <Name>a7D.PDV.Integracao.API2.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.EasyChopp\a7D.PDV.Integracao.EasyChopp.csproj">
+      <Project>{3E8661C3-3BE1-45E0-8B4F-4CC9769EFAA5}</Project>
+      <Name>a7D.PDV.Integracao.EasyChopp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.ERPCake\a7D.PDV.Integracao.ERPCake.csproj">
+      <Project>{3b619658-d613-43fa-b8f4-f9392a55260b}</Project>
+      <Name>a7D.PDV.Integracao.ERPCake</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.iFood\a7D.PDV.Integracao.iFood.csproj">
+      <Project>{bfdcb202-b7a6-4f3d-813f-970ecb7539af}</Project>
+      <Name>a7D.PDV.Integracao.iFood</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.Loggi\a7D.PDV.Integracao.Loggi.csproj">
+      <Project>{FD64FDC4-8B7A-480A-A38F-2588DBA12711}</Project>
+      <Name>a7D.PDV.Integracao.Loggi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.Pagamento\a7D.PDV.Integracao.Pagamento.csproj">
+      <Project>{26083fd7-642b-4f53-bab3-1c8f0ac8eabf}</Project>
+      <Name>a7D.PDV.Integracao.Pagamento</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.Server\a7D.PDV.Integracao.Server.csproj">
+      <Project>{7A68F400-0913-4550-B0AE-DD322F200F27}</Project>
+      <Name>a7D.PDV.Integracao.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.Servico.Core\a7D.PDV.Integracao.Core.csproj">
+      <Project>{79dcf4fa-291f-4a15-a41b-f915938b8536}</Project>
+      <Name>a7D.PDV.Integracao.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Model\a7D.PDV.Model.csproj">
+      <Project>{22ba05b8-59d7-4e09-8471-7c8012f1b100}</Project>
+      <Name>a7D.PDV.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="criticas.txt" />
+    <Content Include="sintegra.txt" />
+    <Content Include="testeMath.html" />
+    <None Include="pedidoIfood.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Refit.4.6.107\build\net461\refit.targets" Condition="Exists('..\packages\Refit.4.6.107\build\net461\refit.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Refit.4.6.107\build\net461\refit.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Refit.4.6.107\build\net461\refit.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,93 @@
+[
+  // ==========
+  {
+    "intencao": "clima",
+    "acaoResposta": [
+      {
+        "retorno": [
+          {
+            "condicao": "@@intencao.valor==null",
+            "intencao": "clima.questao"
+          },
+          {
+            "api": {
+              "url": "http://apiadvisor.climatempo.com.br/api/v1/locale/city?name=@@intencao.valor&token=7e4d3673fbf27d707d4b1e8a78c54ad9"
+            },
+            "atribuir": [
+              "@idlocal=@@api[0].id",
+              "@nome=@@api[0].name",
+              "@state=@@api[0].state"
+            ],
+            "condicao": "@idlocal!=null",
+            "mensagem": "Buscando clima em @@intencao.valor",
+            "intencao": "clima.resultado"
+          },
+          {
+            "mensagem": "Desculpe, não consegui achar a cidade, digite exatamente o nome da cidade, incluindo os acentos, o seriço onde busco a informação tem essa exigência",
+            "ignorarMensagemIntencao": true,
+            "intencao": "clima.questao"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    // https://advisor.climatempo.com.br/home/#!/dashboard
+    "intencao": "clima.questao",
+    "mensagem": "Infome o nome da cidade para obter a previsão do tempo",
+    "acaoResposta": [
+      {
+        "tipoResposta": "text",
+        "api": {
+          "url": "http://apiadvisor.climatempo.com.br/api/v1/locale/city?name=@text&token=7e4d3673fbf27d707d4b1e8a78c54ad9"
+        },
+        // [{"id":3477,"name":"S\u00e3o Paulo","state":"SP","country":"BR  "}]
+        "atribuir": [
+          "@idlocal=@@api[0].id",
+          "@nome=@@api[0].name",
+          "@state=@@api[0].state"
+        ],
+        "retorno": [
+          {
+            "condicao": "@idlocal==null",
+            "mensagem": "Desculpe, não consegui achar a cidade, digite exatamente o nome da cidade, incluindo os acentos, o seriço onde busco a informação tem essa exigência",
+            "ignorarMensagemIntencao": true,
+            "intencao": "clima.questao"
+          },
+          {
+            "intencao": "clima.resultado"
+          }
+        ]
+      }
+    ],
+    "sugestao": [
+      {
+        "titulo": "Santo André",
+        "texto": "Santo André"
+      },
+      {
+        "titulo": "Osasco",
+        "texto": "Osasco"
+      },
+      {
+        "titulo": "SP",
+        "texto": "São Paulo"
+      },
+      {
+        "titulo": "RJ",
+        "texto": "Rio de Janeiro"
+      }
+    ]
+  },
+  {
+    "intencao": "clima.resultado",
+    "api": {
+      "url": "http://apiadvisor.climatempo.com.br/api/v1/weather/locale/@idlocal/current?token=7e4d3673fbf27d707d4b1e8a78c54ad9"
+    },
+    // {"id":3477,"name":"S\u00e3o Paulo","state":"SP","country":"BR  ","data":{"temperature":32,"wind_direction":"WNW","wind_velocity":20,"humidity":49,"condition":"Alguma nebulosidade","pressure":1013,"icon":"2","sensation":34,"date":"2019-02-24 15:49:27"}}
+    "atribuir": [
+      "@data=@@api.data"
+    ],
+    "mensagem": "Agora em **@@api.name / @@api.state**\n@data.condition, Temperatura: **@data.temperature º** Humidade: **@data.humidity %**"
+  }
+]

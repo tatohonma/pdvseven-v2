@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="progress" ng-if="vm.carregando == true">
+    <div class="progress-bar progress-bar-primary progress-bar-striped active" style="width:100%"></div>
+  </div>
+  <div class="alert alert-danger" ng-if="vm.erro">
+    {{ vm.erro }}
+  </div>
+  <div ng-if="(vm.erro == null) && (vm.carregando == false)">
+    <h1 ng-if="vm.usuario.CadastroPendente">Complete seu cadastro</h1>
+    <h1 ng-if="!vm.usuario.CadastroPendente">Alterar sua senha</h1>
+    <div class="col-offset-4 col-md-4">
+      <form name="formulario" ng-submit="(vm.usuario.Senha === vm.usuario.ConfirmarSenha) && formulario.$valid && vm.completar()" novalidate>
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" class="form-control" disabled ng-model="vm.usuario.Email">
+        </div>
+        <div class="form-group" ng-if="vm.usuario.CadastroPendente">
+          <label for="nome">Nome</label>
+          <input required ng-model="vm.usuario.Nome" type="text" class="form-control" placeholder="Nome" id="nome">
+        </div>
+        <div class="form-group">
+          <label for="inputSenha">Senha</label>
+          <input required ng-model="vm.usuario.Senha" name="senha" type="password" class="form-control" placeholder="Senha" id="inputSenha">
+          <div class="alert alert-danger" ng-show="formulario.confirmarSenha.$dirty && (vm.usuario.Senha !== vm.usuario.ConfirmarSenha)">
+            As senhas não coincidem
+          </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': vm.usuario.Senha !== vm.usuario.ConfirmarSenha }">
+          <label for="inputConfirmarSenha">Confirme a senha</label>
+          <input required ng-model="vm.usuario.ConfirmarSenha" name="confirmarSenha" type="password" class="form-control" placeholder="Confirme a senha" ng-match="vm.usuario.ConfirmarSenha" id="inputConfirmarSenha">
+        </div>
+        <button class="btn btn-primary" ng-class="{'disabled': !(formulario.$valid && vm.usuario.Senha === vm.usuario.ConfirmarSenha)}" type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+</div>

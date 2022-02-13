@@ -1,0 +1,50 @@
+[ // ==========
+  {
+    "intencao": "saudacao",
+    "acaoResposta": [
+      {
+        "retorno": [
+          {
+            "condicao": "@apelido!=null",
+            "mensagem": "Ola **@apelido** você já está conectado ao seu estabelecimento.\nO que quer saber hoje?"
+          },
+          {
+            "condicao": "@count<2",
+            "intencao": "bemvindo.card"
+          },
+          {
+            "mensagem": [
+              "Ola, sou o Iaago, seu assitente virtual\nSegue algumas sugestões do que posso fazer?\n* Qual o faturamento de ontem\n* Quantas água tenho no estoque?\nOu digite de forma natural algo que queira saber :D",
+              "Ola, digite alguma pergunta, se eu souber já te respondo, se não irá ficar registrado para que eu possa aprender"
+            ]
+          }
+        ]
+      }
+    ],
+    "sugestao": [
+      {
+        "titulo": "Faturamento",
+        "texto": "Qual o faturamento de ontem?"
+      },
+      {
+        "titulo": "Estoque",
+        "texto": "Quantas água tenho no estoque?"
+      }
+    ]
+  },
+  // ==========
+  {
+    "intencao": "bemvindo.card",
+    "card": "welcomeCard.json",
+    "sugestao": [
+      {
+        "titulo": "Faturamento",
+        "texto": "Qual o faturamento do mês?"
+      },
+      {
+        "titulo": "Estoque",
+        "texto": "Quantas água tenho no estoque?"
+      }
+    ]
+  }
+]

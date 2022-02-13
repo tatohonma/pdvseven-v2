@@ -1,0 +1,32 @@
+[
+  // ==========
+  {
+    "intencao": "teste",
+    "mensagem": "Acesando API...",
+    "api": {
+      "url": "http://localhost:5050/api/iaago/generic?prm=@ola",
+      "post": [
+        "user=@usuario"
+      ]
+    },
+    "atribuir": [
+      "@tt=@@api",
+      "@xx=@@api.data"
+    ],
+    "acaoResposta": [
+      {
+        "retorno": [
+          {
+            "mensagem": "Retorno da API:\r\n\tTexto: @tt.texto \r\n\tNumero: @tt.numero('N2') \r\n\tData: @@api.data('dd/MM HH:mm') \r\n\tPreco: @@api.preco('C') ",
+            "intencao": "teste.ok"
+          }
+        ]
+      }
+    ]
+  },
+  // ==========
+  {
+    "intencao": "teste.ok",
+    "mensagem": "FIM API - @xx('dd/MM HH:mm') @@api.usuario"
+  }
+]

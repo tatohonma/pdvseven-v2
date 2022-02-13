@@ -1,0 +1,34 @@
+[
+  // ==========
+  {
+    "condicao": "verificaConexao",
+    "intencao": "estoque",
+    "acaoResposta": [
+      {
+        "retorno": [
+          {
+            "condicao": "@@intencao.valor==null",
+            "mensagem": "Listando todos produtos\n| QTD | Produto | Total $ |\n|---:|:---|---:|",
+            "api": {
+              "url": "https://pdvsevenbd.azurewebsites.net/api/iaago/query/produto?auth=@AUTH",
+              "post": [
+                "produto=''"
+              ]
+            },
+            "resultado": "| @Estoqueatual | @Nome | @valor('C') |"
+          },
+          {
+            "mensagem": "Produtos com '**@@intencao.valor**':\n| QTD | Produto | Valor |\n|---:|:---|---:|",
+            "api": {
+              "url": "https://pdvsevenbd.azurewebsites.net/api/iaago/query/produto?auth=@AUTH",
+              "post": [
+                "produto=@@intencao.valor" // Entidade do luis!
+              ]
+            },
+            "resultado": "| @Estoqueatual | @Nome | @valor('C') |"
+          }
+        ]
+      }
+    ]
+  }
+]

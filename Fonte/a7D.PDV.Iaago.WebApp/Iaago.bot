@@ -1,0 +1,66 @@
+{
+    "name": "Iaago",
+    "description": "",
+    "services": [
+        {
+            "type": "abs",
+            "appId": "140d9e1f-696e-43c6-84e0-9c76fcdd5230",
+            "id": "1",
+            "name": "DevBotPDV7",
+            "resourceGroup": "Teste",
+            "serviceName": "DevBotPDV7",
+            "subscriptionId": "c50c71c3-ace5-462e-a969-7b1506050402",
+            "tenantId": "d9860fe8-46d8-4d8e-8a1d-eec591fb5832"
+        },
+        {
+            "type": "blob",
+            "connectionString": "9DsLEg66MFg0LirGlh4zyw==!B2T5mDvUTwR0yi2p602kaHcalWEY0v5bBp+DvvFdQBXW4ccQdCewNLJxLhr5sEUUwxVv7aZH4PL9TnnW4Jn6Rh6kwEtQMsGaEDuqYvXs044EyNdCo5lcdNYXcO6fG1carv2sOz7vVeJ/qcRVAMlCHcO2YfNB81CYy5bVNeUBX9rk+sW/+3YunP6+5C+sFviGXp3tW9ic34YEukONOiX4Mw==",
+            "container": "Iaago",
+            "id": "2",
+            "name": "Storage",
+            "resourceGroup": "Teste",
+            "serviceName": "devbotpdvsorage",
+            "subscriptionId": "c50c71c3-ace5-462e-a969-7b1506050402",
+            "tenantId": "d9860fe8-46d8-4d8e-8a1d-eec591fb5832"
+        },
+        {
+            "type": "endpoint",
+            "appId": "",
+            "appPassword": "",
+            "endpoint": "http://localhost:50750/api/messages",
+            "id": "3",
+            "name": "development"
+        },
+        {
+            "type": "endpoint",
+            "appId": "140d9e1f-696e-43c6-84e0-9c76fcdd5230",
+            "appPassword": "B8gt4FKcwl1Ql0HWERe65g==!QZWeaCuAbrT3a6Mp0T2hMlFMr5YUnhhbbkVaOBzHD5M=",
+            "endpoint": "https://devbotpdv7app.azurewebsites.net/api/messages",
+            "id": "4",
+            "name": "production"
+        },
+        {
+            "type": "qna",
+            "endpointKey": "TSqwRbUFJPmhnVrZ/ebGoA==!br2uR0LZhfW1NjQbD4kzX69JErJWYed9vsfU3RUAUx+/F+PKgfdAiFsqedcR/MYN",
+            "hostname": "https://iaagobc.azurewebsites.net",
+            "id": "21",
+            "kbId": "678d9b78-9ad5-489a-b2eb-d225f3bd048b",
+            "name": "IaagoBC",
+            "subscriptionKey": "ydoG8c9ibtuzn3KXd3+e8Q==!EZD9B9vhFmPuWRGQoinoqmcDNDknGvrMdCfmeC+tkhKYmvEZ0MGVMTraNsdvJ1rS"
+        },
+        {
+            "type": "luis",
+            "appId": "1a33bd24-086c-41c8-81c0-f12e01c7f719",
+            "authoringKey": "A9S2djx3YV37ZEnNnLSMnw==!ARg9lX05PJe2a6y6bDLGtfPokGEBx9/2Of2bJoyZUJJRuIdMeirv19dc/0Pc3B3B",
+            "id": "30",
+            "name": "IaagoPDV7",
+            "region": "brazilsouth",
+            "subscriptionKey": "CEws0l7vhkNgq3gxcNt7eg==!FXTRLX9iJ4Hn4wwBIA0Gq7KvP6Ty9tv+Mep0zamckC+ZUFjctoTDTUqO3SqXvxzA",
+            "version": "0.2"
+        }
+    ],
+    "padlock": "UhDBMfrwocHzVPbqfUw4QQ==!D3cd8z9tzIlx9lyB1JY5JY3mBVFEKxldZfKxu9RUHHbv+bXy2z5OJZwmbVtmF/6J",
+    "version": "2.0",
+    "overrides": null,
+    "path": "F:\\PDVSeven\\PDVSeven\\Fonte\\a7D.PDV.Iaago.WebApp\\Iaago.bot"
+}

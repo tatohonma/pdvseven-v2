@@ -1,0 +1,9 @@
+﻿<Application x:Class="a7D.PDV.Integracao.NTK.UI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:a7D.PDV.Integracao.NTK.UI"
+             StartupUri="TestePagamento.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

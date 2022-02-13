@@ -1,0 +1,200 @@
+[
+  // ==========
+  {
+    "intencao": "iniciarConexao",
+    "mensagem": "Olá! Sou o Iaago, seu Assistente Virtual.\nAntes de mais nada, vou precisar de algumas informações.\n\nQual é o CNPJ/CPF do seu estabelecimento?",
+    "acaoResposta": [
+      {
+        "tipoResposta": "text",
+        "api": {
+          "url": "https://pdvsevenbd.azurewebsites.net/api/iaago/login",
+          "post": [
+            "cnpj=@text",
+            "senha=BoT!ValidaCNPJ",
+            "channelId=@_channelId",
+            "fromId=@_fromId"
+          ]
+        },
+        "atribuir": [
+          "@documento=@text"
+        ],
+        "retorno": [
+          {
+            "condicao": "@@api.mensagem=='OK'",
+            "atribuir": [
+              "@estabelecimento=@@api.entidade",
+              "@nome=@@api.nome"
+            ],
+            "intencao": "iniciarConexao.identificarEstabelecimento"
+          },
+          {
+            "mensagem": [
+              "Ops, **@@api.Mensagem**\n\nVerifique se digitou o valor correto.\nTente novamente informando ou CNPJ/CPF do estabelecimento!\nOu digite \"**sair**\" para encerrar essa pergunta",
+              "Ops, **@@api.Mensagem**\n\nAcho que você ainda não está cadastrado. caso queira apenas conhecer a ferramenta, pode usar os seguintes dados de testes:\nCNPJ do estabelecimento:\"**12345678900**\" \nChave de acesso:\"**123456**\" \n\nou se preferir, ligue no nosso suporte: (11) 4210-0122"
+            ],
+            "ignorarMensagemIntencao": true,
+            "intencao": "iniciarConexao",
+            "aguardar": 2
+          }
+        ]
+      }
+    ]
+  },
+  // ==========
+  {
+    "intencao": "iniciarConexao.identificarEstabelecimento",
+    "mensagem": "Encontrei.\n- Estabelecimento: **@estabelecimento**\n* CNPJ/CPF: **@documento**\n\nEstá correto?",
+    "acaoResposta": [
+      {
+        "tipoResposta": "bool",
+        "retorno": [
+          {
+            "condicao": "nao",
+            "mensagem": "Ops, posso ter me confundido ou foi algum erro de digitação! Informar o Nome ou CNPJ/CPF novamente.",
+            "ignorarMensagemIntencao": true,
+            "intencao": "iniciarConexao"
+          },
+          {
+            "condicao": "sim",
+            "intencao": "iniciarConexao.identificarUsuario"
+          }
+        ]
+      },
+      {
+        "tipoResposta": "text",
+        "retorno": [
+          {
+            "mensagem": "Responda apenas 'sim' para prosseguir ou 'não' para informar outro CNPJ/CPF.",
+            "ignorarMensagemIntencao": true,
+            "intencao": "iniciarConexao.identificarEstabelecimento"
+          }
+        ]
+      }
+    ]
+  },
+  // ==========
+  {
+    "intencao": "iniciarConexao.identificarUsuario",
+    "mensagem": "Qual é a sua chave de acesso?\nColocar a mesma \"senha\" que você usa para acessar o sistema da PDVSeven.",
+    "acaoResposta": [
+      {
+        "tipoResposta": "text",
+        "api": {
+          "url": "https://pdvsevenbd.azurewebsites.net/api/iaago/login",
+          "post": [
+            "cnpj=@documento",
+            "senha=@text",
+            "channelId=@_channelId",
+            "fromId=@_fromId"
+          ]
+        },
+        "atribuir": [
+          "@AUTH=@@api.Auth",
+          "@estabelecimento=@@api.entidade",
+          "@nome=@@api.nome",
+          "@email=@@api.email"
+        ],
+        "retorno": [
+          {
+            "condicao": "@@api.mensagem=='OK'",
+            "intencao": "iniciarConexao.identificarUsuario.preconfirmacao"
+          },
+          {
+            "condicao": "@tryS==null",
+            "atribuir": [ "@tryS=1" ],
+            "mensagem": "Ops, **@@api.mensagem**\nTente novamente.",
+            "ignorarMensagemIntencao": true,
+            "intencao": "iniciarConexao.identificarUsuario"
+          },
+          {
+            "atribuir": [ "@tryS=null" ],
+            "mensagem": "Ops, **@@api.mensagem**\nDesculpe, seu acesso termina aqui! Favor entrar em contato no suporte para podermos te ajudar: (11) 4210-0122.",
+            "intencao": "iniciarConexao",
+            "aguardar": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intencao": "iniciarConexao.identificarUsuario.preconfirmacao",
+    "acaoResposta": [
+      {
+        "retorno": [
+          {
+            "condicao": "@apelido==null",
+            "atribuir": [ "@apelido=@nome" ],
+            "intencao": "iniciarConexao.identificarUsuario.confirmacao"
+          },
+          {
+            "intencao": "iniciarConexao.identificarUsuario.fimAutenticacao"
+          }
+        ]
+      }
+    ]
+  },
+  // ==========
+  {
+    "intencao": "iniciarConexao.identificarUsuario.confirmacao",
+    "mensagem": "Certo. Seja bem vindo **@apelido**! Posso te chamar assim?",
+    "acaoResposta": [
+      {
+        "tipoResposta": "bool",
+        "retorno": [
+          {
+            "condicao": "sim",
+            "retorno": true, // Se houver uma intenção anterior irá retornar, ou ir para a especificada
+            "intencao": "iniciarConexao.fimAutenticacao"
+          },
+          {
+            "condicao": "nao",
+            "intencao": "iniciarConexao.identificarUsuario.mudarNome"
+          }
+        ]
+      },
+      {
+        "tipoResposta": "text",
+        "retorno": [
+          {
+            "mensagem": "Responda apenas 'sim' ou 'não', para que eu confirme seu nome.",
+            "ignorarMensagemIntencao": true,
+            "intencao": "iniciarConexao.identificarUsuario.confirmacao"
+          }
+        ]
+      }
+    ]
+  },
+  // ==========
+  {
+    "intencao": "iniciarConexao.identificarUsuario.mudarNome",
+    "mensagem": "Como gostaria de ser chamado?",
+    "acaoResposta": [
+      {
+        "tipoResposta": "text",
+        "retorno": [
+          {
+            "mensagem": "**@text**! Prefere assim?",
+            "atribuir": [ "@apelido=@text" ],
+            "ignorarMensagemIntencao": true,
+            "intencao": "iniciarConexao.identificarUsuario.confirmacao"
+          }
+        ]
+      }
+    ]
+  },
+  // ==========
+  {
+    "intencao": "iniciarConexao.fimAutenticacao",
+    "mensagem": "ok **@apelido**, agora já estou pronto para poder te ajudar.\n\nSegue algumas das coisas que posso te auxiliar:\n- Informar sobre seu estoque de produto;\n- O faturamento do seu estabelecimento;\n- Fazer cotação de produtos;\n- Comprar produtos para reposição de estoque.\n\nSe tiver qualquer outra dúvida, não custa tentar. rs Estou sempre aprendendo coisas novas!",
+    "sugestao": [
+      {
+        "titulo": "Faturamento",
+        "texto": "qual o faturamento de ontem"
+      },
+      {
+        "titulo": "Estoque",
+        "texto": "quantas água tenho no estoque"
+      }
+    ]
+  }
+]

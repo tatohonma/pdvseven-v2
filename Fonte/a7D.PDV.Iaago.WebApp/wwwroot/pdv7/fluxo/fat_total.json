@@ -1,0 +1,100 @@
+[
+  // ==========
+  {
+    "condicao": "verificaConexao",
+    "intencao": "fat_total",
+    "acaoResposta": [
+      {
+        "retorno": [
+          {
+            "condicao": "@@intencao.valor==null",
+            "intencao": "fat_total.informadata"
+          },
+          {
+            "atribuir": [
+              "@valor=@@intencao.valor",
+              "@valor2=@@intencao.valor2"
+            ],
+            "intencao": "fat_total.data"
+          }
+        ]
+      }
+    ]
+  },
+  // ==========
+  {
+    "intencao": "fat_total.informadata",
+    "mensagem": "Informe a data desejada 'dia/mês', 'dia/mês/ano', nome do mês ou ano para períodos",
+    "sugestao": [
+      {
+        "titulo": "Ontem",
+        "texto": "ontem"
+      },
+      {
+        "titulo": "Hoje",
+        "texto": "hoje"
+      },
+      {
+        "titulo": "Mês",
+        "texto": "mes"
+      },
+      {
+        "titulo": "Janeiro",
+        "texto": "Janeiro"
+      },
+      {
+        "titulo": "2019",
+        "texto": "2019"
+      }
+    ],
+    "acaoResposta": [
+      {
+        "tipoResposta": "datetime",
+        "retorno": [
+          {
+            "atribuir": [
+              "@valor=@@datetime",
+              "@valor2=@@datetime2"
+            ],
+            "intencao": "fat_total.data"
+          }
+        ]
+      },
+      {
+        "retorno": [
+          {
+            "mensagem": "Valor não reconhecido, informe o período desejado",
+            "ignorarMensagemIntencao": true,
+            "intencao": "fat_total.informadata"
+          }
+        ]
+      }
+    ]
+  },
+  // ==========
+  {
+    "condicao": "verificaConexao",
+    "intencao": "fat_total.data",
+    "api": {
+      "url": "https://pdvsevenbd.azurewebsites.net/api/iaago/query/faturamentototal?auth=@AUTH",
+      "post": [
+        "dataInicial=@valor('yyyy-MM-dd')",
+        "dataFinal=@valor2('yyyy-MM-dd')"
+      ]
+    },
+    "acaoResposta": [
+      {
+        "retorno": [
+          {
+            "condicao": "@@api==null",
+            "mensagem": "Não há dados no periodo"
+          },
+          {
+            "condicao": "@@api!=null",
+            "resultado": "Total de **@Total('C')** entre **@Data('dd/MM/yyyy')** a **@Data2('dd/MM/yyyy')**"
+          }
+        ]
+      }
+    ]
+  }
+]

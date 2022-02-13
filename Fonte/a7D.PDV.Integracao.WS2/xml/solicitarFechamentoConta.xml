@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<solicitarFechamentoConta>
+  <idTipoPedido>10</idTipoPedido>
+  <numero>4</numero>
+  <ListaTipoPagamentos>
+    <tipoPagamento>
+      <idTipoPagamento></idTipoPagamento>
+    </tipoPagamento>
+    <tipoPagamento>
+      <idTipoPagamento></idTipoPagamento>
+    </tipoPagamento>
+  </ListaTipoPagamentos>
+</solicitarFechamentoConta>
+
+
+
+
+
+
+<solicitarFechamentoConta>
+  <guidIdentificacao>886DE31E-970C-4565-9A36-15D1339E9FD6</guidIdentificacao>
+  <idTipoPedido>10</idTipoPedido>
+  <ListaTipoPagamentos>
+    <tipoPagamento>
+      <idTipoPagamento></idTipoPagamento>
+    </tipoPagamento>
+    <tipoPagamento>
+      <idTipoPagamento></idTipoPagamento>
+    </tipoPagamento>
+  </ListaTipoPagamentos>
+</solicitarFechamentoConta>

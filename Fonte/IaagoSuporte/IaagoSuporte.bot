@@ -1,0 +1,69 @@
+{
+    "name": "IaagoSuporte",
+    "description": "",
+    "services": [
+        {
+            "type": "abs",
+            "appId": "54181142-582b-46da-8518-acb2dd61f598",
+            "id": "1",
+            "name": "IaagoSuporte",
+            "resourceGroup": "Bot",
+            "serviceName": "IaagoSuporte",
+            "subscriptionId": "c50c71c3-ace5-462e-a969-7b1506050402",
+            "tenantId": "d9860fe8-46d8-4d8e-8a1d-eec591fb5832"
+        },
+        {
+            "type": "blob",
+            "connectionString": "lAJvtdm3Jl5UufRYCehh1w==!dlya2jBbnKwPYLfL1hHksUhpfprb2aW0/JVdhYW6tcUfO0mi6khZPoUQSbggkzVmcz1rZ/QnrGzp6e5Iu1vb7hJU0rp+SlW6onuPXB6MpJKK69z5hBfHRBGecnRK8s47zkIFxF5yN+J0gTv3pOpC2JJAG9hIO6u8uTT/T07bPbrpCFhNl609CljDYpzzmRSTfFxR+XnMYAFku7tsyda8tQ==",
+            "container": "suporte",
+            "id": "2",
+            "name": "Storage",
+            "resourceGroup": "Bot",
+            "serviceName": "iaago",
+            "subscriptionId": "c50c71c3-ace5-462e-a969-7b1506050402",
+            "tenantId": "d9860fe8-46d8-4d8e-8a1d-eec591fb5832"
+        },
+        {
+            "type": "endpoint",
+            "appId": "",
+            "appPassword": "",
+            "endpoint": "http://localhost:1031/api/messages",
+            "id": "3",
+            "name": "development"
+        },
+        {
+            "type": "endpoint",
+            "appId": "54181142-582b-46da-8518-acb2dd61f598",
+            "appPassword": "adcOkGKpMVw8IbH2DJbjAQ==!4G/BJpu8XF09f1P41NxXvQTV0y9OffuiJmesX3AWIrE=",
+            "endpoint": "https://iaagosuporte.azurewebsites.net/api/messages",
+            "id": "4",
+            "name": "production"
+        },
+        {
+            "type": "appInsights",
+            "apiKeys": {},
+            "applicationId": "a265a5e6-9786-4a9a-bb8e-2260e2973cd2",
+            "id": "5",
+            "instrumentationKey": "QGfaKODOuCIzh6vx1+L+xQ==!DH2mivQ1Hbjpcm8XkarSnBc0h3KpLw1sENXQtUV7FFIs8sf4k7WMAgsxpMlA3acd",
+            "name": "Telemetria",
+            "resourceGroup": "Bot",
+            "serviceName": "IaagoSuporte67sixw",
+            "subscriptionId": "c50c71c3-ace5-462e-a969-7b1506050402",
+            "tenantId": "d9860fe8-46d8-4d8e-8a1d-eec591fb5832"
+        },
+        {
+            "type": "luis",
+            "appId": "0c68a928-56ee-4727-951c-586ed2aef530",
+            "authoringKey": "NZSrG4Uv58SFC0ZhEyx2UA==!2AxXuBUirm1LIBXJFJNdIjUCjHAbTDOnSpMd5yTwPCyizrZc2jtfWucja4p0X6bn",
+            "id": "6",
+            "name": "Suporte",
+            "region": "brazilsouth",
+            "subscriptionKey": "aoTwg0ADW5HeS1hYRl0wIw==!3ujgdtEIxGUUlhYfhRYBfLTWaNcRcQGLVi1gwtPIHp43ny0ZMiU66LyQihiQ7Dn2",
+            "version": "0.1"
+        }
+    ],
+    "padlock": "xdmwcLOct283chmIx9PRcQ==!5G2mTqLijNQs/utRZmmuu4ubiBVraBX/hbZYEBr9BOj5BvSgOLBqs0sc5w0bZvR/",
+    "version": "2.0",
+    "overrides": null,
+    "path": "C:\\Projetos\\PDVSeven\\PDVSeven\\Fonte\\IaagoSuporte\\IaagoSuporte.bot"
+}
