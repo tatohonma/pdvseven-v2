@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2022")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.21.2.0")]
+[assembly: AssemblyVersion("2.21.1.10")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -64,7 +64,7 @@ Lista das últimas versões e FIX
     O WS2 é responsável em bloquear versão antiga dos aplicativos, e fornecer o link do correto para download
     Especificar o tipo de cada alteração feita: Novo, Melhoria, Correção, TDD, Atualização
 
-2.21.2.0 ======================================================================
+2.21.1.10 ======================================================================
     Migração GitHub
 
 2.21.1.7
