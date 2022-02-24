@@ -96,6 +96,15 @@ namespace a7D.PDV.Componentes.Controles
 
             var produtos = ListaPedidoProduto.Where(p => p.Status != StatusModel.Excluido);
             var novos = produtos.Sum(p => p.ValorTotal);
+
+            foreach (var prods in produtos.Where(p => p.ListaModificacao != null && p.Status != StatusModel.Excluido))
+            {
+                foreach (var adds in prods.ListaModificacao.Where(p => p.Status != StatusModel.Excluido && p.ValorUnitario != null))
+                {
+                    novos += (decimal)adds.ValorUnitario;
+                }
+            }
+
             lblTotalNovos.Text = "R$ " + novos.ToString("N2");
 
             novos *= 1 + taxaServico / 100;
