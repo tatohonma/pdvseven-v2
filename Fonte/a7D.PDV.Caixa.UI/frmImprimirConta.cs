@@ -52,6 +52,12 @@ namespace a7D.PDV.Caixa.UI
 
             if (Pedido1.AplicarDesconto == true & Pedido1.ValorDesconto > 0)
             {
+                //cid
+                if (Pedido1.TipoDesconto.Nome != null)
+                {
+                    ckbAplicaDesconto.Text = Pedido1.TipoDesconto.Nome;
+                }
+                //cid
                 ckbAplicaDesconto.Checked = true;
                 txtDescontoPorcentagem.Enabled = txtDescontoReais.Enabled = true;
                 txtDescontoReais.Text = Pedido1.ValorDesconto.Value.ToString(_formatoNumero, _provider);
@@ -122,6 +128,7 @@ namespace a7D.PDV.Caixa.UI
 
         private void ckbAplicaDesconto_Click(object sender, EventArgs e)
         {
+
             var solicitarSenha = ConfiguracoesSistema.Valores.SolicitarSenhaDesconto;
             DialogResult r = DialogResult.None;
             var usuarioDesconto = default(UsuarioInformation);
@@ -151,9 +158,10 @@ namespace a7D.PDV.Caixa.UI
                     if (solicitarTipoDesconto && tipoR == DialogResult.OK)
                     {
                         Pedido1.UsuarioDesconto = usuarioDesconto;
-                        Pedido1.TipoDesconto = new TipoDescontoInformation { IDTipoDesconto = frmTipoDesconto.IDTipoDesconto };
+                        Pedido1.TipoDesconto = new TipoDescontoInformation { IDTipoDesconto = frmTipoDesconto.IDTipoDesconto, Descricao = frmTipoDesconto.Descricao };
                         txtDescontoPorcentagem.Enabled = true;
                         txtDescontoReais.Enabled = true;
+                        ckbAplicaDesconto.Text = Pedido1.TipoDesconto.Descricao;
                     }
                     else if (solicitarTipoDesconto && tipoR != DialogResult.OK)
                     {
@@ -169,6 +177,7 @@ namespace a7D.PDV.Caixa.UI
                 }
                 else
                 {
+                    ckbAplicaDesconto.Text = "Aplica desconto";
                     Pedido1.TipoDesconto = null;
                     txtDescontoPorcentagem.Text = "0,00";
                     AtualizarDescontoPorcentagem();
