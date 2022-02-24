@@ -155,6 +155,9 @@ SELECT
     ,tp.Nome as 'TipoPedido_Nome'
 	,comanda.Numero as 'NumeroComanda'
 	,mesa.Numero as 'NumeroMesa'
+    
+    ,p.IDTipoDesconto
+    ,td.Nome as 'TipoDescontoNome'
 FROM 
 	tbPedido p (NOLOCK)
 	INNER JOIN tbStatusPedido sp (NOLOCK) ON sp.IDStatusPedido=p.IDStatusPedido
@@ -164,6 +167,10 @@ FROM
 	LEFT JOIN tbCliente c (NOLOCK) ON c.idCliente=p.idCliente
 	LEFT JOIN tbTipoEntrada te (NOLOCK) ON te.IDTipoEntrada=p.IDTipoEntrada
     LEFT JOIN tbCaixa cx (NOLOCK) on cx.IDCaixa = p.IDCaixa
+
+    LEFT JOIN tbTipoDesconto td (NOLOCK) on td.IDTipoDesconto = p.IDTipoDesconto
+
+
 WHERE
 	p.IDPedido=@idPedido
             ";
@@ -287,6 +294,15 @@ WHERE
                 if (dr["NumeroMesa"] != DBNull.Value)
                 {
                     pedido.NumeroMesa = dr["NumeroMesa"].ToString();
+                }
+                
+                if (dr["TipoDescontoNome"] != DBNull.Value)
+                {
+                    pedido.TipoDesconto = new TipoDescontoInformation
+                    {
+                        IDTipoDesconto = Convert.ToInt32(dr["IDTipoDesconto"]),
+                        Nome = dr["TipoDescontoNome"].ToString()
+                    };
                 }
             }
 

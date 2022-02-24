@@ -50,6 +50,7 @@ namespace a7D.PDV.Caixa.UI
 
         private void frmPedidos_Load(object sender, EventArgs e)
         {
+            
             GA.Post(this);
             try
             {
@@ -463,7 +464,7 @@ namespace a7D.PDV.Caixa.UI
                         //,(item.Quantidade.Value * item.ValorUnitario.Value).ToString("#,##0.00")
                     };
 
-                    dgvItens.Rows.Add(row);
+                    dgvItens.Rows.Add(row);                      
                 }
             }
             else
