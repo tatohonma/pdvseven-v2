@@ -66,13 +66,11 @@
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.rb3 = new System.Windows.Forms.RadioButton();
             this.imageList3 = new System.Windows.Forms.ImageList(this.components);
-            this.rb5 = new System.Windows.Forms.RadioButton();
             this.imageList5 = new System.Windows.Forms.ImageList(this.components);
             this.rb1 = new System.Windows.Forms.RadioButton();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.gb2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.pedidoProduto1 = new a7D.PDV.Caixa.UI.Controles.PedidoProduto();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.label3 = new System.Windows.Forms.Label();
@@ -81,7 +79,9 @@
             this.lblLoggiEstimativa = new System.Windows.Forms.Label();
             this.llAlterarCliente = new System.Windows.Forms.LinkLabel();
             this.gbEditarCliente = new System.Windows.Forms.GroupBox();
+            this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
+            this.txtReferencia = new System.Windows.Forms.TextBox();
             this.txtCEP = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.txtRG = new System.Windows.Forms.TextBox();
@@ -229,8 +229,8 @@
             this.lblFinalizarTelefone = new System.Windows.Forms.Label();
             this.lblFinalizarNome = new System.Windows.Forms.Label();
             this.lnkVoltar = new System.Windows.Forms.LinkLabel();
-            this.label26 = new System.Windows.Forms.Label();
-            this.txtReferencia = new System.Windows.Forms.TextBox();
+            this.rb5 = new System.Windows.Forms.RadioButton();
+            this.pedidoProduto1 = new a7D.PDV.Caixa.UI.Controles.PedidoProduto();
             this.groupBox1.SuspendLayout();
             this.gb2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -278,12 +278,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.rb6);
-            this.groupBox1.Controls.Add(this.rb7);
+            this.groupBox1.Controls.Add(this.rb5);
             this.groupBox1.Controls.Add(this.rb4);
+            this.groupBox1.Controls.Add(this.rb3);
+            this.groupBox1.Controls.Add(this.rb7);
             this.groupBox1.Controls.Add(this.rb8);
             this.groupBox1.Controls.Add(this.rb2);
-            this.groupBox1.Controls.Add(this.rb3);
-            this.groupBox1.Controls.Add(this.rb5);
             this.groupBox1.Controls.Add(this.rb1);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox1.Location = new System.Drawing.Point(12, 58);
@@ -295,7 +295,6 @@
             // rb6
             // 
             this.rb6.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rb6.AutoSize = true;
             this.rb6.BackColor = System.Drawing.Color.Transparent;
             this.rb6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.rb6.Enabled = false;
@@ -306,12 +305,12 @@
             this.rb6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rb6.ImageIndex = 0;
             this.rb6.ImageList = this.imageList6;
-            this.rb6.Location = new System.Drawing.Point(517, 20);
+            this.rb6.Location = new System.Drawing.Point(553, 21);
             this.rb6.Name = "rb6";
-            this.rb6.Size = new System.Drawing.Size(86, 74);
+            this.rb6.Size = new System.Drawing.Size(110, 78);
             this.rb6.TabIndex = 7;
             this.rb6.Text = "Resumo e\r\nCompletar\r\n";
-            this.rb6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rb6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.rb6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.rb6.UseVisualStyleBackColor = false;
             this.rb6.CheckedChanged += new System.EventHandler(this.CheckedChanged);
@@ -327,9 +326,9 @@
             // rb7
             // 
             this.rb7.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rb7.AutoSize = true;
             this.rb7.BackColor = System.Drawing.Color.Transparent;
             this.rb7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rb7.Dock = System.Windows.Forms.DockStyle.Right;
             this.rb7.Enabled = false;
             this.rb7.FlatAppearance.BorderSize = 0;
             this.rb7.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
@@ -338,12 +337,12 @@
             this.rb7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rb7.ImageIndex = 0;
             this.rb7.ImageList = this.imageList7;
-            this.rb7.Location = new System.Drawing.Point(797, 20);
+            this.rb7.Location = new System.Drawing.Point(758, 21);
             this.rb7.Name = "rb7";
-            this.rb7.Size = new System.Drawing.Size(90, 74);
+            this.rb7.Size = new System.Drawing.Size(110, 78);
             this.rb7.TabIndex = 6;
             this.rb7.Text = "Envio\r\nEntregador";
-            this.rb7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rb7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.rb7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.rb7.UseVisualStyleBackColor = false;
             this.rb7.CheckedChanged += new System.EventHandler(this.CheckedChanged);
@@ -359,7 +358,6 @@
             // rb4
             // 
             this.rb4.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rb4.AutoSize = true;
             this.rb4.BackColor = System.Drawing.Color.Transparent;
             this.rb4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.rb4.Enabled = false;
@@ -370,12 +368,12 @@
             this.rb4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rb4.ImageIndex = 0;
             this.rb4.ImageList = this.imageList4;
-            this.rb4.Location = new System.Drawing.Point(320, 20);
+            this.rb4.Location = new System.Drawing.Point(333, 21);
             this.rb4.Name = "rb4";
-            this.rb4.Size = new System.Drawing.Size(102, 57);
+            this.rb4.Size = new System.Drawing.Size(110, 78);
             this.rb4.TabIndex = 5;
             this.rb4.Text = "Confirmação";
-            this.rb4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rb4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.rb4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.rb4.UseVisualStyleBackColor = false;
             this.rb4.CheckedChanged += new System.EventHandler(this.CheckedChanged);
@@ -391,9 +389,9 @@
             // rb8
             // 
             this.rb8.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rb8.AutoSize = true;
             this.rb8.BackColor = System.Drawing.Color.Transparent;
             this.rb8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rb8.Dock = System.Windows.Forms.DockStyle.Right;
             this.rb8.Enabled = false;
             this.rb8.FlatAppearance.BorderSize = 0;
             this.rb8.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
@@ -402,12 +400,12 @@
             this.rb8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rb8.ImageIndex = 0;
             this.rb8.ImageList = this.imageList8;
-            this.rb8.Location = new System.Drawing.Point(893, 20);
+            this.rb8.Location = new System.Drawing.Point(868, 21);
             this.rb8.Name = "rb8";
-            this.rb8.Size = new System.Drawing.Size(74, 74);
+            this.rb8.Size = new System.Drawing.Size(110, 78);
             this.rb8.TabIndex = 4;
             this.rb8.Text = "Receber\r\nFinalizar";
-            this.rb8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rb8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.rb8.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.rb8.UseVisualStyleBackColor = false;
             this.rb8.CheckedChanged += new System.EventHandler(this.CheckedChanged);
@@ -423,7 +421,6 @@
             // rb2
             // 
             this.rb2.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rb2.AutoSize = true;
             this.rb2.BackColor = System.Drawing.Color.Transparent;
             this.rb2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.rb2.Enabled = false;
@@ -434,12 +431,12 @@
             this.rb2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rb2.ImageIndex = 0;
             this.rb2.ImageList = this.imageList2;
-            this.rb2.Location = new System.Drawing.Point(109, 20);
+            this.rb2.Location = new System.Drawing.Point(113, 21);
             this.rb2.Name = "rb2";
-            this.rb2.Size = new System.Drawing.Size(77, 57);
+            this.rb2.Size = new System.Drawing.Size(110, 78);
             this.rb2.TabIndex = 3;
             this.rb2.Text = "Produtos";
-            this.rb2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rb2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.rb2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.rb2.UseVisualStyleBackColor = false;
             this.rb2.CheckedChanged += new System.EventHandler(this.CheckedChanged);
@@ -455,7 +452,6 @@
             // rb3
             // 
             this.rb3.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rb3.AutoSize = true;
             this.rb3.BackColor = System.Drawing.Color.Transparent;
             this.rb3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.rb3.Enabled = false;
@@ -466,12 +462,12 @@
             this.rb3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rb3.ImageIndex = 0;
             this.rb3.ImageList = this.imageList3;
-            this.rb3.Location = new System.Drawing.Point(191, 20);
+            this.rb3.Location = new System.Drawing.Point(223, 21);
             this.rb3.Name = "rb3";
-            this.rb3.Size = new System.Drawing.Size(123, 57);
+            this.rb3.Size = new System.Drawing.Size(110, 78);
             this.rb3.TabIndex = 2;
-            this.rb3.Text = "Taxa de Entrega\r\n";
-            this.rb3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rb3.Text = "Taxa Entrega\r\n";
+            this.rb3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.rb3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.rb3.UseVisualStyleBackColor = false;
             this.rb3.CheckedChanged += new System.EventHandler(this.CheckedChanged);
@@ -484,30 +480,6 @@
             this.imageList3.Images.SetKeyName(1, "circulo3-s.png");
             this.imageList3.Images.SetKeyName(2, "circulo3-v.png");
             // 
-            // rb5
-            // 
-            this.rb5.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rb5.AutoSize = true;
-            this.rb5.BackColor = System.Drawing.Color.Transparent;
-            this.rb5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.rb5.Enabled = false;
-            this.rb5.FlatAppearance.BorderSize = 0;
-            this.rb5.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.rb5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.rb5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.rb5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rb5.ImageIndex = 0;
-            this.rb5.ImageList = this.imageList5;
-            this.rb5.Location = new System.Drawing.Point(428, 20);
-            this.rb5.Name = "rb5";
-            this.rb5.Size = new System.Drawing.Size(93, 57);
-            this.rb5.TabIndex = 1;
-            this.rb5.Text = "Pagamento";
-            this.rb5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rb5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.rb5.UseVisualStyleBackColor = false;
-            this.rb5.CheckedChanged += new System.EventHandler(this.CheckedChanged);
-            // 
             // imageList5
             // 
             this.imageList5.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList5.ImageStream")));
@@ -519,7 +491,6 @@
             // rb1
             // 
             this.rb1.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rb1.AutoSize = true;
             this.rb1.BackColor = System.Drawing.Color.Transparent;
             this.rb1.Checked = true;
             this.rb1.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -530,14 +501,14 @@
             this.rb1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rb1.ImageIndex = 0;
             this.rb1.ImageList = this.imageList1;
-            this.rb1.Location = new System.Drawing.Point(5, 20);
+            this.rb1.Location = new System.Drawing.Point(3, 21);
             this.rb1.MinimumSize = new System.Drawing.Size(104, 58);
             this.rb1.Name = "rb1";
-            this.rb1.Size = new System.Drawing.Size(104, 58);
+            this.rb1.Size = new System.Drawing.Size(110, 78);
             this.rb1.TabIndex = 0;
             this.rb1.TabStop = true;
             this.rb1.Text = "Cliente";
-            this.rb1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rb1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.rb1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.rb1.UseMnemonic = false;
             this.rb1.UseVisualStyleBackColor = true;
@@ -576,26 +547,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(969, 485);
             this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // pedidoProduto1
-            // 
-            this.pedidoProduto1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pedidoProduto1.BackColor = System.Drawing.Color.White;
-            this.pedidoProduto1.Cancelar = false;
-            this.pedidoProduto1.Confirmar = null;
-            this.pedidoProduto1.DescontoAplicado = null;
-            this.pedidoProduto1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pedidoProduto1.Fechar = null;
-            this.pedidoProduto1.ListaPedidoProduto = null;
-            this.pedidoProduto1.Location = new System.Drawing.Point(2, 2);
-            this.pedidoProduto1.Margin = new System.Windows.Forms.Padding(2);
-            this.pedidoProduto1.ModificacaoAlterada = null;
-            this.pedidoProduto1.Name = "pedidoProduto1";
-            this.pedidoProduto1.PermitirDesconto = true;
-            this.pedidoProduto1.ProdutoAdicionado = null;
-            this.pedidoProduto1.ProdutoRemovido = null;
-            this.pedidoProduto1.Size = new System.Drawing.Size(965, 481);
-            this.pedidoProduto1.TabIndex = 0;
             // 
             // dataGridViewImageColumn2
             // 
@@ -712,6 +663,16 @@
             this.gbEditarCliente.TabStop = false;
             this.gbEditarCliente.Visible = false;
             // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(7, 284);
+            this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(79, 17);
+            this.label26.TabIndex = 78;
+            this.label26.Text = "Referência";
+            // 
             // label25
             // 
             this.label25.AutoSize = true;
@@ -721,6 +682,19 @@
             this.label25.Size = new System.Drawing.Size(39, 17);
             this.label25.TabIndex = 76;
             this.label25.Text = "CEP";
+            // 
+            // txtReferencia
+            // 
+            this.txtReferencia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.txtReferencia.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtReferencia.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtReferencia.Location = new System.Drawing.Point(7, 302);
+            this.txtReferencia.Margin = new System.Windows.Forms.Padding(4);
+            this.txtReferencia.MaxLength = 500;
+            this.txtReferencia.Multiline = true;
+            this.txtReferencia.Name = "txtReferencia";
+            this.txtReferencia.Size = new System.Drawing.Size(240, 58);
+            this.txtReferencia.TabIndex = 77;
             // 
             // txtCEP
             // 
@@ -2818,28 +2792,48 @@
             this.lnkVoltar.VisitedLinkColor = System.Drawing.Color.Blue;
             this.lnkVoltar.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkVoltar_LinkClicked);
             // 
-            // label26
+            // rb5
             // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(7, 284);
-            this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(79, 17);
-            this.label26.TabIndex = 78;
-            this.label26.Text = "Referência";
+            this.rb5.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rb5.BackColor = System.Drawing.Color.Transparent;
+            this.rb5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rb5.Enabled = false;
+            this.rb5.FlatAppearance.BorderSize = 0;
+            this.rb5.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.rb5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.rb5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.rb5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rb5.ImageIndex = 0;
+            this.rb5.ImageList = this.imageList5;
+            this.rb5.Location = new System.Drawing.Point(443, 21);
+            this.rb5.Name = "rb5";
+            this.rb5.Size = new System.Drawing.Size(110, 78);
+            this.rb5.TabIndex = 1;
+            this.rb5.Text = "Pagamento";
+            this.rb5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.rb5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.rb5.UseVisualStyleBackColor = false;
+            this.rb5.CheckedChanged += new System.EventHandler(this.CheckedChanged);
             // 
-            // txtReferencia
+            // pedidoProduto1
             // 
-            this.txtReferencia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.txtReferencia.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtReferencia.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtReferencia.Location = new System.Drawing.Point(7, 302);
-            this.txtReferencia.Margin = new System.Windows.Forms.Padding(4);
-            this.txtReferencia.MaxLength = 500;
-            this.txtReferencia.Multiline = true;
-            this.txtReferencia.Name = "txtReferencia";
-            this.txtReferencia.Size = new System.Drawing.Size(240, 58);
-            this.txtReferencia.TabIndex = 77;
+            this.pedidoProduto1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pedidoProduto1.BackColor = System.Drawing.Color.White;
+            this.pedidoProduto1.Cancelar = false;
+            this.pedidoProduto1.Confirmar = null;
+            this.pedidoProduto1.DescontoAplicado = null;
+            this.pedidoProduto1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pedidoProduto1.Fechar = null;
+            this.pedidoProduto1.ListaPedidoProduto = null;
+            this.pedidoProduto1.Location = new System.Drawing.Point(2, 2);
+            this.pedidoProduto1.Margin = new System.Windows.Forms.Padding(2);
+            this.pedidoProduto1.ModificacaoAlterada = null;
+            this.pedidoProduto1.Name = "pedidoProduto1";
+            this.pedidoProduto1.PermitirDesconto = true;
+            this.pedidoProduto1.ProdutoAdicionado = null;
+            this.pedidoProduto1.ProdutoRemovido = null;
+            this.pedidoProduto1.Size = new System.Drawing.Size(965, 481);
+            this.pedidoProduto1.TabIndex = 0;
             // 
             // frmNovoDelivery
             // 
@@ -2849,13 +2843,13 @@
             this.BackgroundImage = global::a7D.PDV.Caixa.UI.Properties.Resources.bg_Titulo2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1005, 721);
-            this.Controls.Add(this.gb1);
-            this.Controls.Add(this.gb6);
-            this.Controls.Add(this.gb5);
             this.Controls.Add(this.lnkVoltar);
             this.Controls.Add(this.lblTotalPedido);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gb1);
+            this.Controls.Add(this.gb6);
+            this.Controls.Add(this.gb5);
             this.Controls.Add(this.gb2);
             this.Controls.Add(this.gb3);
             this.Controls.Add(this.gb8);
@@ -2876,7 +2870,6 @@
             this.Load += new System.EventHandler(this.frmNovoDelivery_Load);
             this.Shown += new System.EventHandler(this.frmNovoDelivery_Shown);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.gb2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.gb1.ResumeLayout(false);
@@ -2943,7 +2936,6 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.RadioButton rb2;
         private System.Windows.Forms.RadioButton rb3;
-        private System.Windows.Forms.RadioButton rb5;
         private System.Windows.Forms.RadioButton rb8;
         private System.Windows.Forms.GroupBox gb2;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn2;
@@ -3116,5 +3108,6 @@
         private System.Windows.Forms.TextBox txtCEP;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.TextBox txtReferencia;
+        private System.Windows.Forms.RadioButton rb5;
     }
 }

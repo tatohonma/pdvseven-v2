@@ -104,6 +104,22 @@ namespace a7D.PDV.Caixa.UI
             Pedido1 = Pedido.NovoPedidoDelivery(frmPrincipal.Caixa1);
             _estado = EstadoDelivery.Novo;
             AppDelivery = false;
+
+            EtapasRetirada();
+        }
+
+        private void EtapasRetirada()
+        {
+            rb3.Visible = false;
+            rb5.Visible = false;
+
+            rb6.Location = rb4.Location;
+            rb4.Location = rb3.Location;
+
+            rb8.Image = rb6.Image;
+            rb7.Image = rb5.Image;
+            rb6.Image = rb4.Image;
+            rb4.Image = rb3.Image;
         }
 
         private frmNovoDelivery(string guidIdentificacao, EstadoDelivery estado) : this()
@@ -1184,7 +1200,7 @@ namespace a7D.PDV.Caixa.UI
             if (AppDelivery && Pedido1.ValorEntrega > 0)
             {
                 var stringValor = Pedido1.ValorEntrega.Value.ToString("R$ #,##0.00", _provider);
-                rb3.Text = $"Taxa de Entrega\n{stringValor}";
+                rb3.Text = $"Taxa Entrega\n{stringValor}";
                 lblTaxaEntrega.Text = $"iFood: {stringValor}";
                 lblResumoTaxaEntrega.Text = lblFinalizarTaxaEntrega.Text = stringValor;
                 lblTaxaEntrega.Visible = true;
@@ -1194,7 +1210,7 @@ namespace a7D.PDV.Caixa.UI
             else if (Pedido1.TaxaEntrega != null)
             {
                 var stringValor = Pedido1.TaxaEntrega.Valor.Value.ToString("R$ #,##0.00", _provider);
-                rb3.Text = $"Taxa de Entrega\n{stringValor}";
+                rb3.Text = $"Taxa Entrega\n{stringValor}";
                 lblTaxaEntrega.Text = $"{Pedido1.TaxaEntrega.Nome}: {stringValor}";
                 lblResumoTaxaEntrega.Text = lblFinalizarTaxaEntrega.Text = stringValor;
                 lblTaxaEntrega.Visible = true;
@@ -1203,7 +1219,7 @@ namespace a7D.PDV.Caixa.UI
             else
             {
                 //teste sem taxa de entrega
-                rb3.Text = "Taxa de Entrega";
+                rb3.Text = "Taxa Entrega";
                 lblTaxaEntrega.Text = string.Empty;
                 lblTaxaEntrega.Visible = false;
                 dgvTaxaEntrega.Visible = true;
