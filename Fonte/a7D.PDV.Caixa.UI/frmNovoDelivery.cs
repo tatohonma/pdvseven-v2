@@ -60,6 +60,7 @@ namespace a7D.PDV.Caixa.UI
         public bool AdicionarProdutos { get; set; }
         private EstadoDelivery _estado { get; set; }
         private bool AppDelivery;
+        private bool Retirada { get; set; }
 
         private IFormatProvider _provider = new CultureInfo("pt-BR");
 
@@ -78,9 +79,9 @@ namespace a7D.PDV.Caixa.UI
             Alignment = DataGridViewContentAlignment.MiddleRight
         };
 
-        public static frmNovoDelivery NovoPedidoDelivery()
+        public static frmNovoDelivery NovoPedidoDelivery(bool retirada)
         {
-            return new frmNovoDelivery(true);
+            return new frmNovoDelivery(retirada, true);
         }
 
         public static frmNovoDelivery EditarPedidoDelivery(string guidIdentificacao)
@@ -99,16 +100,18 @@ namespace a7D.PDV.Caixa.UI
             controlePedidoProduto.TipoPedidoSelecionado = ETipoPedido.Delivery;
         }
 
-        private frmNovoDelivery(bool novo) : this()
+        private frmNovoDelivery(bool retirada, bool novo) : this()
         {
             Pedido1 = Pedido.NovoPedidoDelivery(frmPrincipal.Caixa1);
             _estado = EstadoDelivery.Novo;
             AppDelivery = false;
+            Retirada = retirada;
 
-            EtapasRetirada();
+            if (Retirada)
+                AjusteEtapasRetirada();
         }
 
-        private void EtapasRetirada()
+        private void AjusteEtapasRetirada()
         {
             rb3.Visible = false;
             rb5.Visible = false;

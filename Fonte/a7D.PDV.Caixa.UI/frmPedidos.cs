@@ -317,6 +317,7 @@ namespace a7D.PDV.Caixa.UI
 
                 if (pedido?.IDPedido != null)
                 {
+                    // Verificar se o pedido é Delivery e Retirada é false
                     if (tipoPedido_selecionado == ETipoPedido.Delivery)
                     {
                         using (var frmDelivery = frmNovoDelivery.EnviarOuFinalizarPedidoDelivery(GUIDIdentificacao_selecionado))

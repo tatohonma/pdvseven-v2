@@ -162,7 +162,7 @@ namespace a7D.PDV.Caixa.UI.Controles
 
         private void btnNovoPedidoEntrega_Click(object sender, EventArgs e)
         {
-            using (var frm = frmNovoDelivery.NovoPedidoDelivery())
+            using (var frm = frmNovoDelivery.NovoPedidoDelivery(false))
             {
                 frm.ShowDialog();
             }
@@ -328,6 +328,16 @@ namespace a7D.PDV.Caixa.UI.Controles
 
             Cursor = Cursors.Default;
             Refresh();
+        }
+
+        private void btnNovoPedidoRetirada_Click(object sender, EventArgs e)
+        {
+            using (var frm = frmNovoDelivery.NovoPedidoDelivery(true))
+            {
+                frm.ShowDialog();
+            }
+
+            AtualizarLista();
         }
     }
 }
