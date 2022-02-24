@@ -96,13 +96,34 @@ namespace a7D.PDV.Componentes.Controles
 
             var produtos = ListaPedidoProduto.Where(p => p.Status != StatusModel.Excluido);
             var novos = produtos.Sum(p => p.ValorTotal);
-            lblTotalNovos.Text = "R$ " + novos.ToString("N2");
 
-            novos *= 1 + taxaServico / 100;
+            decimal adicionais = 0;
+            int qtdAdicionais = 0;
+            if (novos != 0)
+            {
+                foreach (var prods in produtos.Where(p => p.ListaModificacao != null))
+                {
+                    foreach (var adds in prods.ListaModificacao.Where(p => p.ValorUnitario != null))
+                    {
+                        adicionais += (decimal)adds.ValorUnitario;
+                        qtdAdicionais++;
+                    }
+                }
+
+            }
+            decimal novosMaisAdicionais = novos + adicionais;
+            decimal valorTaxa = novosMaisAdicionais / taxaServico;
+            decimal novosAdicionaisTaxa = novosMaisAdicionais + valorTaxa;
+
+            lblValorServico.Text = $"R$ {valorTaxa.ToString("N2")} ({taxaServico}%)";
+            lblValorProdutos.Text = $"R$ {novosMaisAdicionais.ToString("N2")} ({produtos.Count() + qtdAdicionais} itens)";
+            lblTotalNovos.Text = "R$ " + (novosMaisAdicionais).ToString("N2");
+
+            //novos *= 1 + taxaServico / 100;
             if (retornouCredito)
-                lblValorTotal.Text = "R$ " + (ValorPedido - novos).ToString("N2");
+                lblValorTotal.Text = "R$ " + (ValorPedido - novosAdicionaisTaxa).ToString("N2");
             else
-                lblValorTotal.Text = "R$ " + (ValorPedido + novos).ToString("N2");
+                lblValorTotal.Text = "R$ " + (ValorPedido + novosAdicionaisTaxa).ToString("N2");
 
             foreach (var item in produtos)
             {
