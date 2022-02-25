@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2022")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.21.1.10")]
+[assembly: AssemblyVersion("2.22.0.0")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -63,6 +63,12 @@ Lista das últimas versões e FIX
     Os numeros de cada versão de cada aplicações Android seguirá sua numeração propria.
     O WS2 é responsável em bloquear versão antiga dos aplicativos, e fornecer o link do correto para download
     Especificar o tipo de cada alteração feita: Novo, Melhoria, Correção, TDD, Atualização
+
+2.22.0.0 ======================================================================
+    DB: Inclusao das colunas tbPedido.Retirada, tbPedido.Agendado, tbPedido.dtAgendamento
+    Novo: Opção de Pedido Delivery para Retirada
+    Novo: Opção de Agendamento de Pedidos de Delivery
+
 
 2.21.1.10 ======================================================================
     Migração GitHub
