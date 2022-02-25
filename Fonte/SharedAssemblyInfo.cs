@@ -64,10 +64,19 @@ Lista das últimas versões e FIX
     O WS2 é responsável em bloquear versão antiga dos aplicativos, e fornecer o link do correto para download
     Especificar o tipo de cada alteração feita: Novo, Melhoria, Correção, TDD, Atualização
 
+============================================================================================================================================
+============================================================================================================================================
+
+
 2.22.0.0 ======================================================================
     DB: Inclusao das colunas tbPedido.Retirada, tbPedido.Agendado, tbPedido.dtAgendamento
     Novo: Opção de Pedido Delivery para Retirada
     Novo: Opção de Agendamento de Pedidos de Delivery
+
+2.21.1.11 ======================================================================
+    Correção: o IDTipoPedido estava perdendo quando desconto dado no imprimir conta
+    Correção: o valor do pedido, na tela de adicionar produto, aparecia errado quando tinha modificação com valor
+    Melhoria: exibir o tipo de desconto no CheckBox "aplicar desconto" quando algum tipo selecionado
 
 
 2.21.1.10 ======================================================================
