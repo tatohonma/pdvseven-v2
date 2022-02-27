@@ -13,12 +13,12 @@ namespace a7D.PDV.EF.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202202251722566_2_22_01_Retirada+Agendado"; }
+            get { return "202202271908525_2_22_01_Retirada+Agendado"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return Resources.GetString("Source"); }
+            get { return null; }
         }
         
         string IMigrationMetadata.Target

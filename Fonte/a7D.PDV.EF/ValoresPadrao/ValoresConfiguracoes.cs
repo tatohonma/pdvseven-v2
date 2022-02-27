@@ -29,15 +29,6 @@ namespace a7D.PDV.EF.ValoresPadrao
                 }
             }
 
-            /* SELECT 
-    'new tbConfiguracaoBD() {'+ISNULL(('IDTipoPDV = ' + Cast([IDTipoPDV] as nvarchar) + ','),'')+
-    ' Chave = "' + Chave +
-    '", Valor = ' + ISNULL(('"' + Valor + '"'),'null') +
-	ISNULL(', ValoresAceitos="'+ValoresAceitos+'"', '')+
-    ', Titulo = "' + ISNULL(Titulo, '') + 
-    '", Obrigatorio = ' + CASE Obrigatorio WHEN 1 THEN 'true' else 'false' END +
-    ' },' as CS from tbConfiguracaoBD;
-             */
             var allConfig2 = new List<tbConfiguracaoBD>
             {
                 // TODO: Relatório Fechamento
