@@ -150,10 +150,6 @@
     <Compile Include="Migrations\201906100032210_2_21_Ticket_Integracoes.Designer.cs">
       <DependentUpon>201906100032210_2_21_Ticket_Integracoes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202202251722566_2_22_01_Retirada+Agendado.cs" />
-    <Compile Include="Migrations\202202251722566_2_22_01_Retirada+Agendado.designer.cs">
-      <DependentUpon>202202251722566_2_22_01_Retirada+Agendado.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\tbBandeira.cs" />
     <Compile Include="Models\Mapping\tbBandeiraMap.cs" />
     <Compile Include="Models\Mapping\tbTamanhoPacoteMAP.cs" />
@@ -381,9 +377,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906100032210_2_21_Ticket_Integracoes.resx">
       <DependentUpon>201906100032210_2_21_Ticket_Integracoes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202202251722566_2_22_01_Retirada+Agendado.resx">
-      <DependentUpon>202202251722566_2_22_01_Retirada+Agendado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
