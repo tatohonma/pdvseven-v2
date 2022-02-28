@@ -90,19 +90,20 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblTituloForm = new System.Windows.Forms.Label();
             this.rdbEntrega = new System.Windows.Forms.RadioButton();
-            this.btnBalcao = new System.Windows.Forms.Button();
             this.tmrDelivery = new System.Windows.Forms.Timer(this.components);
             this.tmrStatus = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnAdicionarCreditos = new System.Windows.Forms.Button();
             this.spContainer = new System.Windows.Forms.SplitContainer();
-            this.listaPedidoComandaSemCheckin1 = new a7D.PDV.Caixa.UI.Controles.ListaPedidoComandaSemCheckin();
-            this.listaPedidoComanda1 = new a7D.PDV.Caixa.UI.Controles.ListaPedidoComanda();
             this.listaPedidoEntrega1 = new a7D.PDV.Caixa.UI.Controles.ListaPedidoEntrega();
             this.listaPedidoMesa1 = new a7D.PDV.Caixa.UI.Controles.ListaPedidoMesa();
+            this.listaPedidoComandaSemCheckin1 = new a7D.PDV.Caixa.UI.Controles.ListaPedidoComandaSemCheckin();
+            this.listaPedidoComanda1 = new a7D.PDV.Caixa.UI.Controles.ListaPedidoComanda();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tbMenuTop = new System.Windows.Forms.TableLayoutPanel();
+            this.rdbRetirada = new System.Windows.Forms.RadioButton();
+            this.btnBalcao = new System.Windows.Forms.Button();
             this.menuTEFcancelarTransacao = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).BeginInit();
             this.panel1.SuspendLayout();
@@ -281,7 +282,7 @@
             this.rdbMesas.Location = new System.Drawing.Point(3, 3);
             this.rdbMesas.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.rdbMesas.Name = "rdbMesas";
-            this.rdbMesas.Size = new System.Drawing.Size(250, 44);
+            this.rdbMesas.Size = new System.Drawing.Size(200, 44);
             this.rdbMesas.TabIndex = 0;
             this.rdbMesas.TabStop = true;
             this.rdbMesas.Text = "&MESAS";
@@ -298,10 +299,10 @@
             this.rdbComandas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rdbComandas.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbComandas.ForeColor = System.Drawing.Color.White;
-            this.rdbComandas.Location = new System.Drawing.Point(256, 3);
+            this.rdbComandas.Location = new System.Drawing.Point(206, 3);
             this.rdbComandas.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.rdbComandas.Name = "rdbComandas";
-            this.rdbComandas.Size = new System.Drawing.Size(250, 44);
+            this.rdbComandas.Size = new System.Drawing.Size(200, 44);
             this.rdbComandas.TabIndex = 1;
             this.rdbComandas.Text = "&COMANDAS";
             this.rdbComandas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -743,34 +744,16 @@
             this.rdbEntrega.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rdbEntrega.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbEntrega.ForeColor = System.Drawing.Color.White;
-            this.rdbEntrega.Location = new System.Drawing.Point(509, 3);
+            this.rdbEntrega.Location = new System.Drawing.Point(409, 3);
             this.rdbEntrega.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.rdbEntrega.Name = "rdbEntrega";
-            this.rdbEntrega.Size = new System.Drawing.Size(250, 44);
+            this.rdbEntrega.Size = new System.Drawing.Size(200, 44);
             this.rdbEntrega.TabIndex = 2;
-            this.rdbEntrega.Text = "&DELIVERY";
+            this.rdbEntrega.Text = "&ENTREGA";
             this.rdbEntrega.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rdbEntrega.UseVisualStyleBackColor = false;
             this.rdbEntrega.Visible = false;
             this.rdbEntrega.CheckedChanged += new System.EventHandler(this.rdbEntrega_CheckedChanged);
-            // 
-            // btnBalcao
-            // 
-            this.btnBalcao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnBalcao.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnBalcao.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnBalcao.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBalcao.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBalcao.ForeColor = System.Drawing.Color.White;
-            this.btnBalcao.Location = new System.Drawing.Point(762, 3);
-            this.btnBalcao.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.btnBalcao.Name = "btnBalcao";
-            this.btnBalcao.Size = new System.Drawing.Size(262, 44);
-            this.btnBalcao.TabIndex = 3;
-            this.btnBalcao.Text = "&BALCÃO";
-            this.btnBalcao.UseVisualStyleBackColor = false;
-            this.btnBalcao.Visible = false;
-            this.btnBalcao.Click += new System.EventHandler(this.btnBalcao_Click);
             // 
             // tmrDelivery
             // 
@@ -853,6 +836,28 @@
             this.spContainer.TabIndex = 40;
             this.spContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.spContainer_SplitterMoved);
             // 
+            // listaPedidoEntrega1
+            // 
+            this.listaPedidoEntrega1.BackColor = System.Drawing.Color.White;
+            this.listaPedidoEntrega1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listaPedidoEntrega1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listaPedidoEntrega1.Location = new System.Drawing.Point(0, 0);
+            this.listaPedidoEntrega1.Margin = new System.Windows.Forms.Padding(4);
+            this.listaPedidoEntrega1.Name = "listaPedidoEntrega1";
+            this.listaPedidoEntrega1.Size = new System.Drawing.Size(557, 221);
+            this.listaPedidoEntrega1.TabIndex = 88;
+            // 
+            // listaPedidoMesa1
+            // 
+            this.listaPedidoMesa1.BackColor = System.Drawing.Color.White;
+            this.listaPedidoMesa1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listaPedidoMesa1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listaPedidoMesa1.Location = new System.Drawing.Point(0, 0);
+            this.listaPedidoMesa1.Margin = new System.Windows.Forms.Padding(4);
+            this.listaPedidoMesa1.Name = "listaPedidoMesa1";
+            this.listaPedidoMesa1.Size = new System.Drawing.Size(557, 221);
+            this.listaPedidoMesa1.TabIndex = 1;
+            // 
             // listaPedidoComandaSemCheckin1
             // 
             this.listaPedidoComandaSemCheckin1.BackColor = System.Drawing.Color.White;
@@ -879,28 +884,6 @@
             this.listaPedidoComanda1.TabIndex = 89;
             this.listaPedidoComanda1.Visible = false;
             // 
-            // listaPedidoEntrega1
-            // 
-            this.listaPedidoEntrega1.BackColor = System.Drawing.Color.White;
-            this.listaPedidoEntrega1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listaPedidoEntrega1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listaPedidoEntrega1.Location = new System.Drawing.Point(0, 0);
-            this.listaPedidoEntrega1.Margin = new System.Windows.Forms.Padding(4);
-            this.listaPedidoEntrega1.Name = "listaPedidoEntrega1";
-            this.listaPedidoEntrega1.Size = new System.Drawing.Size(557, 221);
-            this.listaPedidoEntrega1.TabIndex = 88;
-            // 
-            // listaPedidoMesa1
-            // 
-            this.listaPedidoMesa1.BackColor = System.Drawing.Color.White;
-            this.listaPedidoMesa1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listaPedidoMesa1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listaPedidoMesa1.Location = new System.Drawing.Point(0, 0);
-            this.listaPedidoMesa1.Margin = new System.Windows.Forms.Padding(4);
-            this.listaPedidoMesa1.Name = "listaPedidoMesa1";
-            this.listaPedidoMesa1.Size = new System.Drawing.Size(557, 221);
-            this.listaPedidoMesa1.TabIndex = 1;
-            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 1;
@@ -920,21 +903,65 @@
             // 
             this.tbMenuTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbMenuTop.ColumnCount = 4;
+            this.tbMenuTop.ColumnCount = 5;
             this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tbMenuTop.Controls.Add(this.rdbMesas, 0, 0);
-            this.tbMenuTop.Controls.Add(this.btnBalcao, 3, 0);
             this.tbMenuTop.Controls.Add(this.rdbComandas, 1, 0);
             this.tbMenuTop.Controls.Add(this.rdbEntrega, 2, 0);
+            this.tbMenuTop.Controls.Add(this.rdbRetirada, 3, 0);
+            this.tbMenuTop.Controls.Add(this.btnBalcao, 4, 0);
             this.tbMenuTop.Location = new System.Drawing.Point(0, 143);
             this.tbMenuTop.Name = "tbMenuTop";
             this.tbMenuTop.RowCount = 1;
             this.tbMenuTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tbMenuTop.Size = new System.Drawing.Size(1021, 50);
             this.tbMenuTop.TabIndex = 40;
+            // 
+            // rdbRetirada
+            // 
+            this.rdbRetirada.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rdbRetirada.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.rdbRetirada.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rdbRetirada.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rdbRetirada.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbRetirada.ForeColor = System.Drawing.Color.White;
+            this.rdbRetirada.Location = new System.Drawing.Point(612, 3);
+            this.rdbRetirada.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.rdbRetirada.Name = "rdbRetirada";
+            this.rdbRetirada.Size = new System.Drawing.Size(200, 44);
+            this.rdbRetirada.TabIndex = 3;
+            this.rdbRetirada.Text = "&RETIRADA";
+            this.rdbRetirada.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rdbRetirada.UseVisualStyleBackColor = false;
+            this.rdbRetirada.Visible = false;
+            this.rdbRetirada.CheckedChanged += new System.EventHandler(this.rdbRetirada_CheckedChanged);
+            // 
+            // btnBalcao
+            // 
+            this.btnBalcao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnBalcao.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnBalcao.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnBalcao.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBalcao.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBalcao.ForeColor = System.Drawing.Color.White;
+            this.btnBalcao.Location = new System.Drawing.Point(815, 3);
+            this.btnBalcao.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.btnBalcao.Name = "btnBalcao";
+            this.btnBalcao.Size = new System.Drawing.Size(206, 44);
+            this.btnBalcao.TabIndex = 4;
+            this.btnBalcao.Text = "&BALCÃO";
+            this.btnBalcao.UseVisualStyleBackColor = false;
+            this.btnBalcao.Visible = false;
+            this.btnBalcao.Click += new System.EventHandler(this.btnBalcao_Click);
             // 
             // menuTEFcancelarTransacao
             // 
@@ -1019,7 +1046,6 @@
         private System.Windows.Forms.ToolStripMenuItem cancelarSolicitaçãoDeContaToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn descricao;
         private System.Windows.Forms.DataGridViewTextBoxColumn qtd;
-        private System.Windows.Forms.Button btnBalcao;
         private System.Windows.Forms.ToolStripMenuItem fiscalMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cancelarPedidoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem informarPerdaToolStripMenuItem;
@@ -1053,5 +1079,7 @@
         private System.Windows.Forms.TableLayoutPanel tbMenuTop;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.ToolStripMenuItem menuTEFcancelarTransacao;
+        private System.Windows.Forms.Button btnBalcao;
+        private System.Windows.Forms.RadioButton rdbRetirada;
     }
 }

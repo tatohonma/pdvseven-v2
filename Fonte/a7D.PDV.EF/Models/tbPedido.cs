@@ -68,8 +68,5 @@ namespace a7D.PDV.EF.Models
         public virtual ICollection<tbPedidoProduto> tbPedidoProdutoes { get; set; }
         public virtual ICollection<tbPedidoPagamento> tbPedidoPagamentoes { get; set; }
         public virtual ICollection<tbSaldo> Saldos { get; set; }
-        public bool? Retirada { get; set; }
-        public bool? Agendado { get; set; }
-        public DateTime? DtAgendamento { get; set; }
     }
 }

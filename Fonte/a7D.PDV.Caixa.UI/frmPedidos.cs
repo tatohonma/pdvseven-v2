@@ -92,9 +92,11 @@ namespace a7D.PDV.Caixa.UI
             listaPedidoComanda1.PedidoSelecionado += new Controles.ListaPedidoComanda.PedidoSelecionadoEventHandler(ListaPedidoComanda_PedidoSelecionado);
             listaPedidoComanda1.AdicionarCreditos += guid => AdicionarCreditos(guid);
 
-            listaPedidoEntrega1.PedidoSelecionado += new Controles.ListaPedidoEntrega.PedidoSelecionadoEventHandler(ListaPedidoEntrega_PedidoSelecionado);
             listaPedidoComandaSemCheckin1.PedidoSelecionado += new Controles.ListaPedidoComandaSemCheckin.PedidoSelecionadoEventHandler(listaPedidoComandaSemCheckin_PedidoSelecionado);
-            
+
+            listaPedidoEntrega1.PedidoSelecionado += new Controles.ListaPedidoEntrega.PedidoSelecionadoEventHandler(ListaPedidoEntrega_PedidoSelecionado);
+
+
             LoadComplete = true;
         }
 
@@ -116,6 +118,11 @@ namespace a7D.PDV.Caixa.UI
             if (rdbEntrega.Visible = ConfiguracoesCaixa.Valores.TipoPedidoEntrega)
                 totalBotoes++;
             else if (tipoPedido_padrao == ETipoPedido.Delivery)
+                tipoPedido_padrao = ETipoPedido.Retirada;
+
+            if (rdbRetirada.Visible = ConfiguracoesCaixa.Valores.TipoPedidoRetirada)
+                totalBotoes++;
+            else if (tipoPedido_padrao == ETipoPedido.Retirada)
                 tipoPedido_padrao = ETipoPedido.Balcao;
 
             if (btnBalcao.Visible = ConfiguracoesCaixa.Valores.TipoPedidoBalcao)
@@ -128,7 +135,7 @@ namespace a7D.PDV.Caixa.UI
             }
 
             int w = tbMenuTop.Width / totalBotoes;
-            btnBalcao.Width = rdbComandas.Width = rdbMesas.Width = rdbEntrega.Width = w - 7;
+            btnBalcao.Width = rdbComandas.Width = rdbMesas.Width = rdbEntrega.Width = rdbRetirada.Width = w - 7;
 
             if (tipoPedido_padrao == ETipoPedido.Balcao)
             {
@@ -138,6 +145,8 @@ namespace a7D.PDV.Caixa.UI
                     AlterarListaTipoPedido(ETipoPedido.Comanda);
                 else if (rdbEntrega.Visible)
                     AlterarListaTipoPedido(ETipoPedido.Delivery);
+                else if(rdbRetirada.Visible)
+                    AlterarListaTipoPedido(ETipoPedido.Retirada);
                 else
                 {
                     listaPedidoMesa1.Visible = false;
@@ -197,6 +206,10 @@ namespace a7D.PDV.Caixa.UI
                     listaPedidoEntrega1.GUIDIdentificacao_selecionado = null;
                     listaPedidoEntrega1.Visible = true;
                     selecionado = listaPedidoEntrega1;
+                    break;
+                case ETipoPedido.Retirada:
+                    rdbRetirada.Checked = true;
+                    
                     break;
             }
             AtualizarListaPedidos(true);
@@ -870,6 +883,11 @@ namespace a7D.PDV.Caixa.UI
         private void menuTEFcancelarTransacao_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void rdbRetirada_CheckedChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show("Tipo de Pedido não implementado!");
         }
     }
 }

@@ -64,22 +64,12 @@ Lista das últimas versões e FIX
     O WS2 é responsável em bloquear versão antiga dos aplicativos, e fornecer o link do correto para download
     Especificar o tipo de cada alteração feita: Novo, Melhoria, Correção, TDD, Atualização
 
-<<<<<<< Updated upstream
-============================================================================================================================================
-============================================================================================================================================
 
-
-2.22.0.0 ======================================================================
-    DB: Inclusao das colunas tbPedido.Retirada, tbPedido.Agendado, tbPedido.dtAgendamento
-    Novo: Opção de Pedido Delivery para Retirada
-    Novo: Opção de Agendamento de Pedidos de Delivery
-=======
 2.22.0.0 ======================================================================
     Novo: Adicionado o tipo de pedido Retirada
         Incluir opção no configurador para Habilitar Pedido Retirada no Caixa
         Configurador > Caixa > Tipo de pedido Padrão: adicionado opção Retirada
         Configurador > Caixa: adicionado configuracao "Habilitar Tipo de Pedido Retirada"
->>>>>>> Stashed changes
 
 2.21.1.11 ======================================================================
     Correção: o IDTipoPedido estava perdendo quando desconto dado no imprimir conta
