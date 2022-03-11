@@ -32,6 +32,10 @@
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="a7D.Fwk.CRUD.DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Componentes\a7D.Fwk.CRUD.DAL.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -48,17 +52,19 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="API\APIiFood.cs" />
-    <Compile Include="DTO\DTO.cs" />
+    <Compile Include="API\Merchant.cs" />
+    <Compile Include="API\OAuth.cs" />
+    <Compile Include="API\Order.cs" />
+    <Compile Include="DAL\Caixa.cs" />
+    <Compile Include="DAL\Cliente.cs" />
+    <Compile Include="DAL\Pedido.cs" />
+    <Compile Include="DAL\Produto.cs" />
     <Compile Include="IntegraIFood.cs" />
-    <Compile Include="IntegraIFood_Produtos.cs" />
-    <Compile Include="Model\LojaStatusIFood.cs" />
-    <Compile Include="Model\Produto.cs" />
-    <Compile Include="Model\Pedido.cs" />
-    <Compile Include="Model\Evento.cs" />
+    <Compile Include="IntegracaoEstabelecimento.cs" />
+    <Compile Include="IntegracaoPedido.cs" />
+    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\Merchant.cs" />
     <Compile Include="Model\Token.cs" />
-    <Compile Include="Model\EStatusPooling.cs" />
-    <Compile Include="IntegraIFood_Pedido.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +91,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DTO\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

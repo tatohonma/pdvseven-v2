@@ -4,7 +4,7 @@ using System;
 
 namespace a7D.PDV.Integracao.iFood
 {
-    public partial class IntegraIFood
+    public partial class _IntegraIFood
     {
         private void InserePedido(Evento evento)
         {
@@ -47,7 +47,7 @@ namespace a7D.PDV.Integracao.iFood
         {
             try
             {
-                var pedidos = Pedido.ListarDelivery6Horas();
+                var pedidos = BLL.Pedido.ListarDelivery6Horas();
                 foreach (var pedido in pedidos)
                 {
                     string log = pedido.IDPedido.ToString();
@@ -70,7 +70,7 @@ namespace a7D.PDV.Integracao.iFood
                         }
                         else if (pedido.IDStatusPedido == (int)EStatusPedido.Cancelado)
                         {
-                            string cMotivo = Pedido.ObterMotivo(pedido.IDPedido);
+                            string cMotivo = IntegracaoPedido.ObterMotivo(pedido.IDPedido);
                             ifoodAPI.PedidoRejeitado(reference, cMotivo);
                             pedido.GUIDAgrupamentoPedido = "#Cancelado " + pedido.GUIDAgrupamentoPedido;
                             log += " => Cancelado";
@@ -132,7 +132,7 @@ namespace a7D.PDV.Integracao.iFood
                 var pedidoIFood = ifoodAPI.Pedido(evento.correlationId);
                 jsonPedido = ifoodAPI.LastResult;
 
-                var pedidoPDV = Pedido.CarregarPorIdentificacao("ifood#" + pedidoIFood.reference);
+                var pedidoPDV = IntegracaoPedido.CarregarPorIdentificacao("ifood#" + pedidoIFood.reference);
                 if (pedidoPDV == null || pedidoPDV?.StatusPedido == null)
                 {
                     AddLog($"Pedido iFood #{pedidoIFood.shortReference} não existe no sistema");
@@ -147,7 +147,7 @@ namespace a7D.PDV.Integracao.iFood
                 else if (pedidoPDV.StatusPedido.StatusPedido != EStatusPedido.NaoConfirmado)
                 {
                     AddLog($"Pedido {pedidoPDV.IDPedido} Cancelado diretamente por ainda estar aguardando confirmação! iFood #{pedidoIFood.shortReference} CANCELADO");
-                    Pedido.Cancelar(pedidoPDV, ifoodUsuario.IDUsuario.Value);
+                    IntegracaoPedido.Cancelar(pedidoPDV, ifoodUsuario.IDUsuario.Value);
                 }
                 else if (pedidoPDV.StatusPedido.StatusPedido != EStatusPedido.Aberto)
                 {
@@ -159,7 +159,7 @@ namespace a7D.PDV.Integracao.iFood
                 {
                     // Se o Pedido ainda não foi "entregue ou finalziado" ele pode ser cancelado
                     AddLog($"Pedido {pedidoPDV.IDPedido} iFood #{pedidoIFood.shortReference} foi CANCELADO pelo cliente, aguardando cancelamento no caixa");
-                    Pedido.AlterarStatus(pedidoPDV.IDPedido.Value, EStatusPedido.EmCancelamento);
+                    IntegracaoPedido.AlterarStatus(pedidoPDV.IDPedido.Value, EStatusPedido.EmCancelamento);
                 }
             }
             catch (Exception ex)

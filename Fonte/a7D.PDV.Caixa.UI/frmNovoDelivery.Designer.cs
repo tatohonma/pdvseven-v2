@@ -56,21 +56,23 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rb6 = new System.Windows.Forms.RadioButton();
             this.imageList6 = new System.Windows.Forms.ImageList(this.components);
-            this.rb7 = new System.Windows.Forms.RadioButton();
-            this.imageList7 = new System.Windows.Forms.ImageList(this.components);
+            this.rb5 = new System.Windows.Forms.RadioButton();
+            this.imageList5 = new System.Windows.Forms.ImageList(this.components);
             this.rb4 = new System.Windows.Forms.RadioButton();
             this.imageList4 = new System.Windows.Forms.ImageList(this.components);
+            this.rb3 = new System.Windows.Forms.RadioButton();
+            this.imageList3 = new System.Windows.Forms.ImageList(this.components);
+            this.rb7 = new System.Windows.Forms.RadioButton();
+            this.imageList7 = new System.Windows.Forms.ImageList(this.components);
             this.rb8 = new System.Windows.Forms.RadioButton();
             this.imageList8 = new System.Windows.Forms.ImageList(this.components);
             this.rb2 = new System.Windows.Forms.RadioButton();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
-            this.rb3 = new System.Windows.Forms.RadioButton();
-            this.imageList3 = new System.Windows.Forms.ImageList(this.components);
-            this.imageList5 = new System.Windows.Forms.ImageList(this.components);
             this.rb1 = new System.Windows.Forms.RadioButton();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.gb2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.pedidoProduto1 = new a7D.PDV.Caixa.UI.Controles.PedidoProduto();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.label3 = new System.Windows.Forms.Label();
@@ -229,8 +231,6 @@
             this.lblFinalizarTelefone = new System.Windows.Forms.Label();
             this.lblFinalizarNome = new System.Windows.Forms.Label();
             this.lnkVoltar = new System.Windows.Forms.LinkLabel();
-            this.rb5 = new System.Windows.Forms.RadioButton();
-            this.pedidoProduto1 = new a7D.PDV.Caixa.UI.Controles.PedidoProduto();
             this.groupBox1.SuspendLayout();
             this.gb2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -323,37 +323,36 @@
             this.imageList6.Images.SetKeyName(1, "circulo6-s.png");
             this.imageList6.Images.SetKeyName(2, "circulo6-v.png");
             // 
-            // rb7
+            // rb5
             // 
-            this.rb7.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rb7.BackColor = System.Drawing.Color.Transparent;
-            this.rb7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.rb7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.rb7.Enabled = false;
-            this.rb7.FlatAppearance.BorderSize = 0;
-            this.rb7.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.rb7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.rb7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.rb7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rb7.ImageIndex = 0;
-            this.rb7.ImageList = this.imageList7;
-            this.rb7.Location = new System.Drawing.Point(758, 21);
-            this.rb7.Name = "rb7";
-            this.rb7.Size = new System.Drawing.Size(110, 78);
-            this.rb7.TabIndex = 6;
-            this.rb7.Text = "Envio\r\nEntregador";
-            this.rb7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.rb7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.rb7.UseVisualStyleBackColor = false;
-            this.rb7.CheckedChanged += new System.EventHandler(this.CheckedChanged);
+            this.rb5.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rb5.BackColor = System.Drawing.Color.Transparent;
+            this.rb5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rb5.Enabled = false;
+            this.rb5.FlatAppearance.BorderSize = 0;
+            this.rb5.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.rb5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.rb5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.rb5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rb5.ImageIndex = 0;
+            this.rb5.ImageList = this.imageList5;
+            this.rb5.Location = new System.Drawing.Point(443, 21);
+            this.rb5.Name = "rb5";
+            this.rb5.Size = new System.Drawing.Size(110, 78);
+            this.rb5.TabIndex = 1;
+            this.rb5.Text = "Pagamento";
+            this.rb5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.rb5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.rb5.UseVisualStyleBackColor = false;
+            this.rb5.CheckedChanged += new System.EventHandler(this.CheckedChanged);
             // 
-            // imageList7
+            // imageList5
             // 
-            this.imageList7.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList7.ImageStream")));
-            this.imageList7.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList7.Images.SetKeyName(0, "circulo7.png");
-            this.imageList7.Images.SetKeyName(1, "circulo7-s.png");
-            this.imageList7.Images.SetKeyName(2, "circulo7-v.png");
+            this.imageList5.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList5.ImageStream")));
+            this.imageList5.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList5.Images.SetKeyName(0, "circulo5.png");
+            this.imageList5.Images.SetKeyName(1, "circulo5-s.png");
+            this.imageList5.Images.SetKeyName(2, "circulo5-v.png");
             // 
             // rb4
             // 
@@ -385,6 +384,69 @@
             this.imageList4.Images.SetKeyName(0, "circulo4.png");
             this.imageList4.Images.SetKeyName(1, "circulo4-s.png");
             this.imageList4.Images.SetKeyName(2, "circulo4-v.png");
+            // 
+            // rb3
+            // 
+            this.rb3.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rb3.BackColor = System.Drawing.Color.Transparent;
+            this.rb3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rb3.Enabled = false;
+            this.rb3.FlatAppearance.BorderSize = 0;
+            this.rb3.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.rb3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.rb3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.rb3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rb3.ImageIndex = 0;
+            this.rb3.ImageList = this.imageList3;
+            this.rb3.Location = new System.Drawing.Point(223, 21);
+            this.rb3.Name = "rb3";
+            this.rb3.Size = new System.Drawing.Size(110, 78);
+            this.rb3.TabIndex = 2;
+            this.rb3.Text = "Taxa Entrega\r\n";
+            this.rb3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.rb3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.rb3.UseVisualStyleBackColor = false;
+            this.rb3.CheckedChanged += new System.EventHandler(this.CheckedChanged);
+            // 
+            // imageList3
+            // 
+            this.imageList3.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList3.ImageStream")));
+            this.imageList3.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList3.Images.SetKeyName(0, "circulo3.png");
+            this.imageList3.Images.SetKeyName(1, "circulo3-s.png");
+            this.imageList3.Images.SetKeyName(2, "circulo3-v.png");
+            // 
+            // rb7
+            // 
+            this.rb7.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rb7.BackColor = System.Drawing.Color.Transparent;
+            this.rb7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rb7.Dock = System.Windows.Forms.DockStyle.Right;
+            this.rb7.Enabled = false;
+            this.rb7.FlatAppearance.BorderSize = 0;
+            this.rb7.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.rb7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.rb7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.rb7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rb7.ImageIndex = 0;
+            this.rb7.ImageList = this.imageList7;
+            this.rb7.Location = new System.Drawing.Point(758, 21);
+            this.rb7.Name = "rb7";
+            this.rb7.Size = new System.Drawing.Size(110, 78);
+            this.rb7.TabIndex = 6;
+            this.rb7.Text = "Envio\r\nEntregador";
+            this.rb7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.rb7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.rb7.UseVisualStyleBackColor = false;
+            this.rb7.CheckedChanged += new System.EventHandler(this.CheckedChanged);
+            // 
+            // imageList7
+            // 
+            this.imageList7.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList7.ImageStream")));
+            this.imageList7.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList7.Images.SetKeyName(0, "circulo7.png");
+            this.imageList7.Images.SetKeyName(1, "circulo7-s.png");
+            this.imageList7.Images.SetKeyName(2, "circulo7-v.png");
             // 
             // rb8
             // 
@@ -449,45 +511,6 @@
             this.imageList2.Images.SetKeyName(1, "circulo2-s.png");
             this.imageList2.Images.SetKeyName(2, "circulo2-v.png");
             // 
-            // rb3
-            // 
-            this.rb3.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rb3.BackColor = System.Drawing.Color.Transparent;
-            this.rb3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.rb3.Enabled = false;
-            this.rb3.FlatAppearance.BorderSize = 0;
-            this.rb3.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.rb3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.rb3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.rb3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rb3.ImageIndex = 0;
-            this.rb3.ImageList = this.imageList3;
-            this.rb3.Location = new System.Drawing.Point(223, 21);
-            this.rb3.Name = "rb3";
-            this.rb3.Size = new System.Drawing.Size(110, 78);
-            this.rb3.TabIndex = 2;
-            this.rb3.Text = "Taxa Entrega\r\n";
-            this.rb3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.rb3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.rb3.UseVisualStyleBackColor = false;
-            this.rb3.CheckedChanged += new System.EventHandler(this.CheckedChanged);
-            // 
-            // imageList3
-            // 
-            this.imageList3.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList3.ImageStream")));
-            this.imageList3.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList3.Images.SetKeyName(0, "circulo3.png");
-            this.imageList3.Images.SetKeyName(1, "circulo3-s.png");
-            this.imageList3.Images.SetKeyName(2, "circulo3-v.png");
-            // 
-            // imageList5
-            // 
-            this.imageList5.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList5.ImageStream")));
-            this.imageList5.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList5.Images.SetKeyName(0, "circulo5.png");
-            this.imageList5.Images.SetKeyName(1, "circulo5-s.png");
-            this.imageList5.Images.SetKeyName(2, "circulo5-v.png");
-            // 
             // rb1
             // 
             this.rb1.Appearance = System.Windows.Forms.Appearance.Button;
@@ -547,6 +570,26 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(969, 485);
             this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // pedidoProduto1
+            // 
+            this.pedidoProduto1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pedidoProduto1.BackColor = System.Drawing.Color.White;
+            this.pedidoProduto1.Cancelar = false;
+            this.pedidoProduto1.Confirmar = null;
+            this.pedidoProduto1.DescontoAplicado = null;
+            this.pedidoProduto1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pedidoProduto1.Fechar = null;
+            this.pedidoProduto1.ListaPedidoProduto = null;
+            this.pedidoProduto1.Location = new System.Drawing.Point(2, 2);
+            this.pedidoProduto1.Margin = new System.Windows.Forms.Padding(2);
+            this.pedidoProduto1.ModificacaoAlterada = null;
+            this.pedidoProduto1.Name = "pedidoProduto1";
+            this.pedidoProduto1.PermitirDesconto = true;
+            this.pedidoProduto1.ProdutoAdicionado = null;
+            this.pedidoProduto1.ProdutoRemovido = null;
+            this.pedidoProduto1.Size = new System.Drawing.Size(965, 481);
+            this.pedidoProduto1.TabIndex = 0;
             // 
             // dataGridViewImageColumn2
             // 
@@ -2792,49 +2835,6 @@
             this.lnkVoltar.VisitedLinkColor = System.Drawing.Color.Blue;
             this.lnkVoltar.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkVoltar_LinkClicked);
             // 
-            // rb5
-            // 
-            this.rb5.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rb5.BackColor = System.Drawing.Color.Transparent;
-            this.rb5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.rb5.Enabled = false;
-            this.rb5.FlatAppearance.BorderSize = 0;
-            this.rb5.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.rb5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.rb5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.rb5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rb5.ImageIndex = 0;
-            this.rb5.ImageList = this.imageList5;
-            this.rb5.Location = new System.Drawing.Point(443, 21);
-            this.rb5.Name = "rb5";
-            this.rb5.Size = new System.Drawing.Size(110, 78);
-            this.rb5.TabIndex = 1;
-            this.rb5.Text = "Pagamento";
-            this.rb5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.rb5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.rb5.UseVisualStyleBackColor = false;
-            this.rb5.CheckedChanged += new System.EventHandler(this.CheckedChanged);
-            // 
-            // pedidoProduto1
-            // 
-            this.pedidoProduto1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pedidoProduto1.BackColor = System.Drawing.Color.White;
-            this.pedidoProduto1.Cancelar = false;
-            this.pedidoProduto1.Confirmar = null;
-            this.pedidoProduto1.DescontoAplicado = null;
-            this.pedidoProduto1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pedidoProduto1.Fechar = null;
-            this.pedidoProduto1.ListaPedidoProduto = null;
-            this.pedidoProduto1.Location = new System.Drawing.Point(2, 2);
-            this.pedidoProduto1.Margin = new System.Windows.Forms.Padding(2);
-            this.pedidoProduto1.ModificacaoAlterada = null;
-            this.pedidoProduto1.Name = "pedidoProduto1";
-            this.pedidoProduto1.PermitirDesconto = true;
-            this.pedidoProduto1.ProdutoAdicionado = null;
-            this.pedidoProduto1.ProdutoRemovido = null;
-            this.pedidoProduto1.Size = new System.Drawing.Size(965, 481);
-            this.pedidoProduto1.TabIndex = 0;
-            // 
             // frmNovoDelivery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -2847,7 +2847,6 @@
             this.Controls.Add(this.lblTotalPedido);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.gb1);
             this.Controls.Add(this.gb6);
             this.Controls.Add(this.gb5);
             this.Controls.Add(this.gb2);
@@ -2855,6 +2854,7 @@
             this.Controls.Add(this.gb8);
             this.Controls.Add(this.gb4);
             this.Controls.Add(this.gb7);
+            this.Controls.Add(this.gb1);
             this.Font = new System.Drawing.Font("Arial", 11.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);

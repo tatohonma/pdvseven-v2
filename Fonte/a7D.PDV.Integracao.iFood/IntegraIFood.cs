@@ -1,287 +1,288 @@
-﻿using a7D.PDV.BLL;
+﻿using a7D.Fmk.CRUD.DAL;
+using a7D.PDV.BLL;
 using a7D.PDV.EF.Enum;
+using a7D.PDV.EF.Models;
 using a7D.PDV.Integracao.Servico.Core;
 using a7D.PDV.Model;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace a7D.PDV.Integracao.iFood
 {
-    enum StatusLoja
+    enum eStatusLoja
     {
         none, aberta, fechada
     }
 
-    public partial class IntegraIFood : IntegracaoTask
+    public class IntegraIFood : IntegracaoTask
     {
-        APIiFood ifoodAPI = null;
-        PDVInformation ifoodPDV;
-        PDVInformation ifoodCaixaPDV;
-        CaixaInformation ifoodCaixa;
-        UsuarioInformation ifoodUsuario;
-        TipoPagamentoInformation ifoodPagamento;
-        TipoPagamentoInformation ifoodDinheiro;
-        TipoPagamentoInformation ifoodCredito;
-        TipoPagamentoInformation ifoodDebito;
-        TipoPagamentoInformation ifoodRefeicao;
-        TipoPagamentoInformation ifoodOutros;
-        TaxaEntregaInformation ifoodTaxa;
-        ConfiguracoesIFood config;
-        DateTime UltimaVerificacao = DateTime.MinValue;
-        DateTime UltimaAlteracao = DateTime.Now.AddYears(-1);
-        StatusLoja status;
+        public override string Nome => "Delivery iFood";
 
-        public override string Nome => "Delivery IFood";
+        ConfiguracoesIFood ConfigIFood;
+        CaixaInformation CaixaIFood;
+        PDVInformation PDVIFood;
+        UsuarioInformation UsuarioIfood;
+        TipoPagamentoInformation PagamentoIFood;
+        TipoPagamentoInformation PagamentoDinheiro;
+        TipoPagamentoInformation PagamentoCredito;
+        TipoPagamentoInformation PagamentoDebito;
+        TipoPagamentoInformation PagamentoRefeicao;
+        TipoPagamentoInformation PagamentoOutros;
+        TaxaEntregaInformation TaxaEntregaIFood;
+
+        String AccessToken;
 
         public override void Executar()
         {
-            Configurado = false;
+            if (!ValidarLicenca())
+                return;
+
+            if (!ValidarConfiguracoes())
+                return;
+
+            Iniciar(() => Loop());
+        }
+
+        public Boolean ValidarLicenca()
+        {
             Disponivel = BLL.PDV.PossuiIFOOD();
             if (!Disponivel)
             {
                 AddLog("Sem Licenças para iFood");
-                return;
+                return false;
             }
 
-            config = new ConfiguracoesIFood();
-            if (!config.IntegracaoIFood)
+            AddLog("Licença para iFood OK!");
+            return true;
+        }
+
+        public Boolean ValidarConfiguracoes()
+        {
+            Boolean configurado = true;
+
+            ConfigIFood = new ConfiguracoesIFood();
+            if (!ConfigIFood.IntegracaoIFood)
             {
                 AddLog("Integração iFood desligada");
-                return;
+                return false;
             }
 
-            if (string.IsNullOrEmpty(config.merchant_id)
-             || config.CaixaPDV == 0
-             || string.IsNullOrEmpty(config.username)
-             || string.IsNullOrEmpty(config.password)
-             || string.IsNullOrEmpty(config.ChaveUsuario))
+            if (ConfigIFood.CaixaPDV == 0
+             || string.IsNullOrEmpty(ConfigIFood.ChaveUsuario)
+             || string.IsNullOrEmpty(ConfigIFood.ClientId)
+             || string.IsNullOrEmpty(ConfigIFood.ClientSecret)
+             || string.IsNullOrEmpty(ConfigIFood.AuthorizationCodeVerifier)
+             || string.IsNullOrEmpty(ConfigIFood.AuthorizationCode))
             {
                 AddLog("Falta configurar o iFood no Configurador");
-                return;
+                return false;
             }
 
             var pdvs = BLL.PDV.Listar();
-            ifoodPDV = pdvs.FirstOrDefault(p => p.TipoPDV.Tipo == EF.Enum.ETipoPDV.IFOOD);
-            if (ifoodPDV == null)
+            PDVIFood = pdvs.FirstOrDefault(p => p.IDPDV == ConfigIFood.CaixaPDV && p.TipoPDV.Tipo == ETipoPDV.CAIXA);
+            if (PDVIFood == null)
             {
-                Disponivel = false;
-                AddLog("Licenças para iFood removida");
-                return;
+                AddLog($"Caixa ID PDV: {ConfigIFood.CaixaPDV} inválido!");
+                configurado = false;
             }
 
-            bool valido = true;
-
-            ifoodCaixaPDV = pdvs.FirstOrDefault(p => p.IDPDV == config.CaixaPDV && p.TipoPDV.Tipo == ETipoPDV.CAIXA);
-            if (ifoodCaixaPDV == null)
-            {
-                AddLog($"Caixa ID PDV: {config.CaixaPDV} inválido!");
-                valido = false;
-            }
-
-            // Todos os pagamentos priorizando os pagamentos ativos!
             var listaPagamentos = TipoPagamento.Listar().OrderByDescending(p => p.Ativo);
-            ifoodCaixa = null;
-            if ((ifoodPagamento = listaPagamentos.FirstOrDefault(
-                p => p.IDGateway == (int)EGateway.iFood)) == null)
+
+            PagamentoIFood = listaPagamentos.FirstOrDefault(p => p.IDGateway == (int)EGateway.iFood);
+            if (PagamentoIFood == null)
             {
                 AddLog("Não há um meio de pagamento com Gateway 'iFood' cadastrado no Backoffice");
-                valido = false;
+                configurado = false;
             }
 
-            if ((ifoodDinheiro = listaPagamentos.FirstOrDefault(
-                p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Dinheiro))) == null)
+            PagamentoDinheiro = listaPagamentos.FirstOrDefault(p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Dinheiro));
+            if (PagamentoDinheiro == null)
             {
                 AddLog("Não há um meio de pagamento 'Dinheiro' disponível cadastrado no Backoffice");
-                valido = false;
+                configurado = false;
             }
 
-            if ((ifoodDebito = listaPagamentos.FirstOrDefault(
-                p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Debito))) == null)
+            PagamentoDebito = listaPagamentos.FirstOrDefault(p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Debito));
+            if (PagamentoDebito == null)
             {
                 AddLog("Não há um meio de pagamento 'Cartão de Débito' disponível cadastrado no Backoffice");
-                valido = false;
+                configurado = false;
             }
 
-            if ((ifoodCredito = listaPagamentos.FirstOrDefault(
-                p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Credito))) == null)
+            PagamentoCredito = listaPagamentos.FirstOrDefault(p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Credito));
+            if (PagamentoCredito == null)
             {
                 AddLog("Não há um meio de pagamento 'Cartão de Credito' disponível cadastrado no Backoffice");
-                valido = false;
+                configurado = false;
             }
 
-            if ((ifoodRefeicao = listaPagamentos.FirstOrDefault(
-                p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Refeicao))) == null)
+            PagamentoRefeicao = listaPagamentos.FirstOrDefault(p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Refeicao));
+            if (PagamentoRefeicao == null)
             {
                 AddLog("Não há um meio de pagamento 'Vale Refeição' disponível cadastrado no Backoffice");
-                valido = false;
+                configurado = false;
             }
 
-            if ((ifoodOutros = listaPagamentos.FirstOrDefault(
-                p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Outros))) == null)
+            PagamentoOutros = listaPagamentos.FirstOrDefault(p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Outros));
+            if (PagamentoOutros == null)
             {
                 AddLog("Não há um meio de pagamento 'Outros' disponível cadastrado no Backoffice");
-                valido = false;
+                configurado = false;
             }
 
-            if ((ifoodTaxa = TaxaEntrega.CarregarPorNome("iFood")) == null)
+            TaxaEntregaIFood = TaxaEntrega.CarregarPorNome("iFood");
+            if (TaxaEntregaIFood == null)
             {
                 AddLog("Não há uma taxa de entrega com o nome 'iFood' cadastrada no Backoffice");
-                valido = false;
+                configurado = false;
             }
-
-            if (!valido)
-                return;
 
             try
             {
-                ifoodUsuario = Usuario.Autenticar(config.ChaveUsuario);
+                UsuarioIfood = Usuario.Autenticar(ConfigIFood.ChaveUsuario);
             }
             catch (ExceptionPDV ex)
             {
+                configurado = false;
                 AddLog(ex.Message);
-                return;
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao carregar o usuário, pela chave informada", ex);
+                configurado = false;
+                AddLog("Erro ao carregar o usuário, pela chave informada");
+                AddLog(ex.Message);
             }
 
-            Configurado = true;
-            Iniciar(() => Loop());
+            return configurado;
         }
 
         private void Loop()
         {
+            IntegracaoPedido objIntegracaoPedido;
+
             try
             {
                 AddLog("Integração iFood: Ativada");
-                status = StatusLoja.none;
 
                 while (Executando)
                 {
-                    if (ifoodAPI == null)
-                    {
-                        ifoodAPI = new APIiFood();
+                    Autenticar();
 
-                        var auth = ifoodAPI.Autenticar(config.merchant_id, config.username, config.password);
-                        if (Executando = (auth == "OK"))
-                            AddLog($"IFOOD PDV {ifoodPDV.IDPDV}:{ifoodPDV.Nome} - CAIXA PDV: {ifoodCaixaPDV.IDPDV}:{ifoodCaixaPDV.Nome} - Usuário {ifoodUsuario.IDUsuario}:{ifoodUsuario.Nome} => API Token: {ifoodAPI.Token?.Length} Bytes Valido até {ifoodAPI.TokenValidade.ToString("HH:mm:ss")}");
-                        else
-                            AddLog("Erro ao autenticar na API do iFood: " + auth);
+                    objIntegracaoPedido = new IntegracaoPedido(
+                        AccessToken, 
+                        ConfigIFood,
+                        CaixaIFood,
+                        PDVIFood,
+                        UsuarioIfood,
+                        PagamentoIFood,
+                        PagamentoDinheiro,
+                        PagamentoCredito,
+                        PagamentoDebito,
+                        PagamentoRefeicao,
+                        PagamentoOutros,
+                        TaxaEntregaIFood);
 
-                    }
-                    else if (DateTime.Now > ifoodAPI.TokenValidade.AddMinutes(-5))
+                    if (LojaAberta())
                     {
-                        // Antes do token expirar, destroi a instancia para refazer um novo token
-                        AddLog("Recriando Token");
-                        ifoodAPI = null;
-                        continue;
-                    }
+                        objIntegracaoPedido.ImportarPedidos();
+                        AddLog("EventsPolling() ");
 
-                    StatusLoja novoStatus = status;
-                    string statusConfig = ConfiguracaoBD.ValorOuPadrao(EConfig.HabilitarIFood, ifoodPDV);
+                        //objIntegracaoPedido.ExportarAlteracaoStatus();
+                        //AddLog("IntegracaoPedido.ExportarAlteracaoStatus() ");
 
-                    if (statusConfig == "0")
-                    {
-                        // Antes de tudo o que vale é a configuração, se está aberta ou fechada
-                        if (novoStatus == StatusLoja.aberta)
-                        {
-                            novoStatus = StatusLoja.fechada;
-                            AddLog("Loja desativada pela configuração");
-                        }
+                        Sleep(25);
                     }
-                    else if (ifoodCaixa == null)
-                    {
-                        ifoodCaixa = Caixa.ListarAbertos().FirstOrDefault(c => c.PDV.IDPDV == ifoodCaixaPDV.IDPDV);
-                        if (ifoodCaixa == null)
-                        {
-                            // Sem caixa aberto, fecha a loja (notifica só uma vez)
-                            if (novoStatus != StatusLoja.fechada)
-                            {
-                                novoStatus = StatusLoja.fechada;
-                                AddLog($"Aguardando a abertura do caixa {ifoodCaixaPDV.IDPDV}:{ifoodCaixaPDV.Nome}");
-                            }
-                        }
-                        else
-                        {
-                            novoStatus = StatusLoja.aberta;
-                            AddLog($"Caixa {ifoodCaixaPDV.IDPDV}:{ifoodCaixaPDV.Nome} aberto em {ifoodCaixa.DtAbertura}");
-                        }
-                    }
-                    else
-                    {
-                        // Sempre revalida o caixa, pois pode ter sido fechado
-                        ifoodCaixa = Caixa.Carregar(ifoodCaixa.IDCaixa.Value);
-                        if (ifoodCaixa.DtFechamento.HasValue)
-                        {
-                            AddLog($"Caixa {ifoodCaixaPDV.IDPDV}:{ifoodCaixaPDV.Nome} fechado em {ifoodCaixa.DtFechamento}");
-                            ifoodCaixa = null;
-                            novoStatus = StatusLoja.fechada;
-                        }
-                        else if (novoStatus == StatusLoja.fechada)
-                        {
-                            novoStatus = StatusLoja.aberta;
-                            AddLog("Loja ativada pela configuração");
-                        }
-                    }
-
-                    // Controle unificado quando há alteração de estado
-                    if (status != novoStatus)
-                    {
-                        status = novoStatus;
-                        if (status == StatusLoja.aberta)
-                        {
-                            ifoodAPI.StatusLoja(true, "aberto");
-                            AddLog("LOJA IFOOD ABERTA! Aguardando pedidos...");
-                        }
-                        else
-                        {
-                            ifoodAPI.StatusLoja(false, "Vendas interrompida temporariamente");
-                            AddLog("LOJA IFOOD FECHADA!");
-                        }
-                    }
-
-                    if (status == StatusLoja.aberta)
-                        Sleep(30);
                     else
                     {
                         Sleep(60);
                         continue;
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                AddLog("Erro na integração iFood: " + ex.Message);
+                //if (!ex.Message.Contains("token expired") && !ex.Message.Contains("Invalid access"))
+                //    throw new ExceptionPDV(CodigoErro.EE11, ex);
+            }
+        }
 
-                    if (DateTime.Now.Subtract(UltimaVerificacao).TotalMinutes > 5)
-                        EnviarPrecosDisponibilidade();
+        private Boolean Autenticar()
+        {
+            API.OAuth apiOAuth = new API.OAuth();
 
-                    EnviaConfirmacoes();
+            try
+            {
+                if (String.IsNullOrEmpty(ConfigIFood.RefreshToken))
+                {
+                    Model.OAuth.Token token = apiOAuth.Token("authorization_code", ConfigIFood.ClientId, ConfigIFood.ClientSecret, ConfigIFood.AuthorizationCode, ConfigIFood.AuthorizationCodeVerifier, "");
 
-                    var novos = ifoodAPI.EventoPendentes();
-                    if (novos == null)
-                        continue;
-
-                    foreach (var evento in novos)
+                    if (token.accessToken != "")
                     {
-                        try
-                        {
-                            AddLog($"{evento.correlationId} => {evento.code}");
+                        ConfigIFood.RefreshToken = token.refreshToken;
+                        AccessToken = token.accessToken;
 
-                            if (evento.code == "PLACED")
-                                InserePedido(evento);
-                            else if (evento.code == "CANCELLED")
-                                CancelaPedido(evento);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    Model.OAuth.Token token = apiOAuth.Token("refresh_token", ConfigIFood.ClientId, ConfigIFood.ClientSecret, ConfigIFood.AuthorizationCode, ConfigIFood.AuthorizationCodeVerifier, ConfigIFood.RefreshToken);
 
-                            ifoodAPI.EventoLido(evento.id);
-                        }
-                        catch (Exception ex)
-                        {
-                            AddLog(new ExceptionPDV(CodigoErro.EE17, ex, evento.code), true);
-                        }
+                    if (token.accessToken != "")
+                    {
+                        AccessToken = token.accessToken;
+                        ConfigIFood.RefreshToken = token.refreshToken;
+
+                        //AtualizarRefreshToken(ConfigIFood.RefreshToken);
+
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (!ex.Message.Contains("token expired") && !ex.Message.Contains("Invalid access"))
-                    throw new ExceptionPDV(CodigoErro.EE11, ex);
+                AddLog($"Erro na geração do Token: " + ex.Message);
+                return false;
+            }
+        }
+
+        private void AtualizarRefreshToken(string refreshToken)
+        {
+            ConfiguracaoBDInformation config = ConfiguracaoBD.BuscarConfiguracao("RefreshToken");
+            config.Valor = refreshToken;
+            CRUD.Alterar(config);
+        }
+
+        private Boolean LojaAberta()
+        {
+            try
+            {
+                eStatusLoja statusLojaSistema = IntegracaoEstabelecimento.LojaAbertaSistema() ? eStatusLoja.aberta : eStatusLoja.fechada;
+
+                if (statusLojaSistema == eStatusLoja.aberta)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                AddLog("Erro na verificação do status da loja:" + ex.Message);
+
+                return false;
             }
         }
     }

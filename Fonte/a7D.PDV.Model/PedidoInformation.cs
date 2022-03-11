@@ -130,6 +130,9 @@ namespace a7D.PDV.Model
         [CRUDParameterDAL(false, "IDUsuarioTaxaServico", "IDUsuario")]
         public UsuarioInformation UsuarioTaxaServico { get; set; }
 
+        [CRUDParameterDAL(false, "TAG")]
+        public String TAG { get; set; }
+
         public string NumeroComanda { get; set; }
         public string NumeroMesa { get; set; }
         public bool EnviarNfEmailCliente { get; set; }

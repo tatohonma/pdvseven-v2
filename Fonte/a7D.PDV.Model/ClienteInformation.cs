@@ -86,6 +86,9 @@ namespace a7D.PDV.Model
         [CRUDParameterDAL(false, "Email")]
         public string Email { get; set; }
 
+        [CRUDParameterDAL(false, "TAG")]
+        public string TAG { get; set; }
+
         public String Telefone1
         {
             get

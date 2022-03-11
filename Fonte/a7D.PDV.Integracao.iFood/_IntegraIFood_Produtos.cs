@@ -4,7 +4,7 @@ using System;
 
 namespace a7D.PDV.Integracao.iFood
 {
-    public partial class IntegraIFood
+    public partial class _IntegraIFood
     {
         private void EnviarPrecosDisponibilidade()
         {

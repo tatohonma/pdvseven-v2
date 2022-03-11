@@ -12,12 +12,12 @@ namespace a7D.PDV.Integracao.iFood
         public static string CriaPedido(PedidoIFood pedidoIFood, out int idPedido, PDVInformation vendaPDV, CaixaInformation ifoodCaixa, UsuarioInformation usuario, int pagamentoIFood, int pagamentoDinheiro, int pagamentoDebito, int pagamentoCredito, int pagamentoRefeicao, int pagamentoOutros, int taxaEntrega)
         {
             idPedido = 0;
-            var pedidoPDV = Pedido.CarregarPorIdentificacao("ifood#" + pedidoIFood.reference);
+            var pedidoPDV = IntegracaoPedido.CarregarPorIdentificacao("ifood#" + pedidoIFood.reference);
             if (pedidoPDV.IDPedido != null)
                 return ""; //  $"Pedido {pedidoPDV.IDPedido} {pedidoPDV.GUIDAgrupamentoPedido} já inserido";
 
             //var ifoodCaixa = Caixa.UsaOuAbre(caixaPDV.IDPDV.Value, usuario.IDUsuario.Value, new int[] { pagamentoIFood, pagamentoDinheiro, pagamentoDebito, pagamentoCredito, pagamentoRefeicao, pagamentoOutros });
-            pedidoPDV = Pedido.NovoPedidoDelivery(ifoodCaixa);
+            pedidoPDV = IntegracaoPedido.NovoPedidoDelivery(ifoodCaixa);
 
             RelacionarCliente(pedidoPDV, pedidoIFood);
 
@@ -35,7 +35,7 @@ namespace a7D.PDV.Integracao.iFood
             else if (pedidoIFood.customer?.ordersCountOnRestaurant > 0)
                 pedidoPDV.ObservacaoCupom = "FIDELIDADE " + pedidoIFood.customer?.ordersCountOnRestaurant.ToString();
 
-            Pedido.Salvar(pedidoPDV);
+            IntegracaoPedido.Salvar(pedidoPDV);
             idPedido = pedidoPDV.IDPedido.Value;
 
             string log = $"OK Pedido {pedidoPDV.IDPedido} - {pedidoPDV.Cliente.IDCliente}: {pedidoPDV.Cliente.NomeCompleto}\r\n{pedidoPDV.Observacoes}";
@@ -47,11 +47,11 @@ namespace a7D.PDV.Integracao.iFood
             {
                 try
                 {
-                    pedidoPDV = Pedido.CarregarCompleto(pedidoPDV.IDPedido.Value);
+                    pedidoPDV = IntegracaoPedido.CarregarCompleto(pedidoPDV.IDPedido.Value);
                     OrdemProducaoServices.GerarOrdemProducao(pedidoPDV.ListaProduto, false);
                     log += "\r\nConfirmado Automaticamente e Ordem de Produção Gerada";
                     pedidoPDV.StatusPedido.StatusPedido = EStatusPedido.Aberto;
-                    Pedido.Salvar(pedidoPDV);
+                    IntegracaoPedido.Salvar(pedidoPDV);
 
                     if (ConfiguracoesSistema.Valores.ImprimirViaExpedicao == "NOVO") // IFOOD - Aprovação automatica
                         OrdemProducaoServices.GerarViaExpedicao(pedidoPDV.IDPedido.Value, ConfiguracoesSistema.Valores.IDAreaViaExpedicao);
