@@ -127,11 +127,6 @@ namespace a7D.PDV.Caixa.UI
                 {
                     _estado = EstadoDelivery.NaoConfirmado;
                 }
-                else if (AppDelivery && Pedido1.StatusPedido.StatusPedido == EStatusPedido.Aberto &&
-                        (tagOrderType.Valor == "TAKEOUT" || tagOrderType.Valor == "INDOOR"))
-                {
-                    _estado = EstadoDelivery.Finalizar;
-                }
                 else
                 {
                     _estado = EstadoDelivery.Entregador;

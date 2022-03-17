@@ -27,7 +27,7 @@ namespace a7D.PDV.Integracao.iFood.Model.Order
     public class CashInformation
     {
         public string description;
-        public int changeFor;
+        public decimal changeFor;
     }
 
     public class CommonOrderDetails

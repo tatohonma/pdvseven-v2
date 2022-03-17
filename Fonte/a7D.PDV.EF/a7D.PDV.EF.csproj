@@ -389,6 +389,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807191759469_2_18_Loggi.resx">
       <DependentUpon>201807191759469_2_18_Loggi.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810181409372_2_19_Limpeza_Mensagens_Iaago.resx">
       <DependentUpon>201810181409372_2_19_Limpeza_Mensagens_Iaago.cs</DependentUpon>

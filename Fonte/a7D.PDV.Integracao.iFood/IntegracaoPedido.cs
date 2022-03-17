@@ -438,6 +438,9 @@ namespace a7D.PDV.Integracao.iFood
             pedidoPagamento.UsuarioPagamento = UsuarioIfood;
             pedidoPagamento.Excluido = false;
 
+            //if(paymentMethod.chash != null)
+            //    pedidoPagamento.Valor = paymentMethod.value + paymentMethod.chash.changeFor;
+
             //pedido.@IDMetodo = ''--payments.methods.method;
             //pedido.IDContaRecebivel;
             //pedido.@IDBandeira = ''--payments.methods.card.brand;
@@ -489,7 +492,10 @@ namespace a7D.PDV.Integracao.iFood
                 var pedidos = BLL.Pedido.ListarDelivery6Horas();
 
                 if (pedidos.Count == 0)
+                {
                     AddLog("Sem confirmações para serem enviadas!");
+                    return;
+                }
 
                 foreach (var pedido in pedidos)
                 {
@@ -501,6 +507,7 @@ namespace a7D.PDV.Integracao.iFood
                         TagInformation tagOrderId = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-orderId");
                         TagInformation tagDisplayId = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-displayId");
                         TagInformation tagStatus = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-status");
+                        TagInformation tagOrderType = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-orderType");
 
                         if (pedido.IDStatusPedido == (int)EStatusPedido.NaoConfirmado)
                         {
@@ -522,7 +529,7 @@ namespace a7D.PDV.Integracao.iFood
                                 AddLog("Erro confirmando envio " + tagDisplayId.Valor + " (DisplayID) (CFM)!");
                             }
                         }
-                        else if (pedido.IDStatusPedido == (int)EStatusPedido.Enviado && tagStatus.Valor != "DSP")
+                        else if (pedido.IDStatusPedido == (int)EStatusPedido.Enviado && tagStatus.Valor != "DSP" && tagOrderType.Valor == "DELIVERY")
                         {
                             ret = APIOrder.Dispatch(tagOrderId.Valor);
                             qtdConfirmacaoEnviada++;
@@ -538,12 +545,26 @@ namespace a7D.PDV.Integracao.iFood
                                 AddLog("Erro confirmando envio " + tagDisplayId.Valor + " (DisplayID) (DSP)!");
                             }
                         }
+                        else if (pedido.IDStatusPedido == (int)EStatusPedido.Enviado && tagStatus.Valor != "RTP" && 
+                            (tagOrderType.Valor == "TAKEOUT" || tagOrderType.Valor == "INDOOR"))
+                        {
+                            ret = APIOrder.ReadyToPickup(tagOrderId.Valor);
+                            qtdConfirmacaoEnviada++;
+
+                            if (ret == null)
+                            {
+                                tagStatus.Valor = "RTP";
+                                CRUD.Alterar(tagStatus);
+                                AddLog("Pedido " + tagDisplayId.Valor + " (DisplayID) pronto para retirada (RTP)");
+                            }
+                            else
+                            {
+                                AddLog("Erro confirmando pronto para retirada " + tagDisplayId.Valor + " (DisplayID) (RTP)!");
+                            }
+                        }
                         else if (pedido.IDStatusPedido == (int)EStatusPedido.Cancelado && tagStatus.Valor == "requestCancellation")
                         {
-                            TagInformation tagCancellationCode = new TagInformation();
-                            tagCancellationCode.GUIDIdentificacao = pedido.GUIDIdentificacao;
-                            tagCancellationCode.Chave = "ifood-cancellationCode";
-                            CRUD.Carregar(tagCancellationCode);
+                            TagInformation tagCancellationCode = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-cancellationCode");
 
                             ret = APIOrder.RequestCancellation(tagOrderId.Valor, tagCancellationCode.Valor);
                             qtdConfirmacaoEnviada++;

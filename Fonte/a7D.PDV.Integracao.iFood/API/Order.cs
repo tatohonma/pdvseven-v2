@@ -23,7 +23,8 @@ namespace a7D.PDV.Integracao.iFood.API
         public string RequestCancellation(string id, string cancellationCode) => Send<string>($"/order/v1.0/orders/{id}/requestCancellation", new { reason = "string", cancellationCode = cancellationCode });
 
         public string Dispatch(string id) => Send<string>($"/order/v1.0/orders/{id}/dispatch");
-        
+        public string ReadyToPickup(string id) => Send<string>($"/order/v1.0/orders/{id}/readyToPickup");
+
 
     }
 }
