@@ -216,7 +216,7 @@ namespace a7D.PDV.Integracao.iFood
                 {
                     foreach (var modificacoes in item.options)
                     {
-                        AdicionarPedidoProduto(pedido.IDPedido.Value, null, modificacoes.externalCode, modificacoes.name, modificacoes.unitPrice, modificacoes.quantity, "");
+                        AdicionarPedidoProduto(pedido.IDPedido.Value, idPedidoProduto, modificacoes.externalCode, modificacoes.name, modificacoes.unitPrice, modificacoes.quantity, "");
                         pedido.Observacoes += "   -- " + modificacoes.name + " (qtd " + modificacoes.quantity + ")\n";
                     }
                 }
@@ -231,8 +231,10 @@ namespace a7D.PDV.Integracao.iFood
             {
                 GerarOrdemProducao(pedido.IDPedido.Value);
 
-                AlterarStatusPedido(pedido.IDPedido.Value, EStatusPedido.Aberto);
+                pedido.StatusPedido.IDStatusPedido = (int)EStatusPedido.Aberto;
             }
+
+            CRUD.Salvar(pedido);
         }
 
         public void GerarOrdemProducao(Int32 idPedido)
