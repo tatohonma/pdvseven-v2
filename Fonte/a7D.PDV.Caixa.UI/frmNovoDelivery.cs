@@ -101,16 +101,17 @@ namespace a7D.PDV.Caixa.UI
 
         private frmNovoDelivery(bool novo) : this()
         {
-            Pedido1 = Pedido.NovoPedidoDelivery(frmPrincipal.Caixa1);
             _estado = EstadoDelivery.Novo;
+            Pedido1 = Pedido.NovoPedidoDelivery(frmPrincipal.Caixa1);
             AppDelivery = false;
         }
 
         private frmNovoDelivery(string guidIdentificacao, EstadoDelivery estado) : this()
         {
             Pedido1 = Pedido.CarregarUltimoPedido(guidIdentificacao);
+            TagInformation tagOrderType = BLL.Tag.Carregar(Pedido1.GUIDIdentificacao, "ifood-orderType");
 
-            if(Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
+            if (Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
             {
                 AppDelivery = true;
                 controlePedidoProduto.BloqueiaEdicao();
@@ -119,20 +120,37 @@ namespace a7D.PDV.Caixa.UI
             if (estado == EstadoDelivery.Identificar)
             {
                 if (Pedido1.StatusPedido.StatusPedido == EStatusPedido.Enviado)
+                {
                     _estado = EstadoDelivery.Finalizar;
+                }
                 else if (Pedido1.StatusPedido.StatusPedido == EStatusPedido.NaoConfirmado)
+                {
                     _estado = EstadoDelivery.NaoConfirmado;
+                }
+                else if (AppDelivery && Pedido1.StatusPedido.StatusPedido == EStatusPedido.Aberto &&
+                        (tagOrderType.Valor == "TAKEOUT" || tagOrderType.Valor == "INDOOR"))
+                {
+                    _estado = EstadoDelivery.Finalizar;
+                }
                 else
+                {
                     _estado = EstadoDelivery.Entregador;
+                }
             }
             else if (estado == EstadoDelivery.Edicao)
             {
                 if (Pedido1.StatusPedido.StatusPedido == EStatusPedido.Enviado)
+                {
                     _estado = EstadoDelivery.Finalizar;
+                }
                 else if (Pedido1.StatusPedido.StatusPedido == EStatusPedido.NaoConfirmado)
+                {
                     _estado = EstadoDelivery.NaoConfirmado;
+                }
                 else
+                {
                     _estado = estado;
+                }
             }
             else
                 _estado = estado;
