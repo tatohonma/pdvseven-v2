@@ -110,6 +110,7 @@
     <Compile Include="MeioPagamentoSATInformation.cs" />
     <Compile Include="MovimentacaoInformation.cs" />
     <Compile Include="MovimentacaoProdutosInformation.cs" />
+    <Compile Include="OrigemPedidoInformation.cs" />
     <Compile Include="PainelModificacaoRelacionadoInformation.cs" />
     <Compile Include="PainelModificacaoOperacaoInformation.cs" />
     <Compile Include="PainelModificacaoCategoriaInformation.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="ProdutoTraducaoInformation.cs" />
     <Compile Include="StatusModel.cs" />
     <Compile Include="StatusProcessamentoSATInformation.cs" />
+    <Compile Include="TagInformation.cs" />
     <Compile Include="TaxaEntregaInformation.cs" />
     <Compile Include="TipoAreaImpressaoInformation.cs" />
     <Compile Include="TipoDescontoInformation.cs" />

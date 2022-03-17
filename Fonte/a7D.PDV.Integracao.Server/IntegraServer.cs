@@ -96,30 +96,30 @@ namespace a7D.PDV.Integracao.Server
                         Ativador.API.SyncMensage(AC.Chave, EOrigemDestinoMensagem.Integrador, AC.Versao, "OK")
                             .ContinueWith(task => VerificaMensagens(task));
 
-                    if (CheckBigData)
-                        BigData?.Sync();
-                    else
-                    {
-                        CheckBigData = true;
-                        if (BLL.PDV.PossuiBigData())
-                        {
-                            CheckBigData = true;
-                            // Código 'secreto' para desabilitar o Sync
-                            if (ConfiguracoesSistema.Valores.IntervaloBigData == -2606)
-                            {
-                                AddLog($"{BigDataServices.titulo} sincronismo desabilitado!!!");
-                            }
-                            else
-                            {
-                                BigData = new BigDataServices();
-                                BigData.AddLog += AddLog;
-                                BigData.IntervaloIntegracao = ConfiguracoesSistema.Valores.IntervaloBigData;
-                                AddLog($"{BigDataServices.titulo} sincronimo a cada {BigData.IntervaloIntegracao} min");
-                            }
-                        }
-                        else
-                            BigData = null;
-                    }
+                    //if (CheckBigData)
+                    //    BigData?.Sync();
+                    //else
+                    //{
+                    //    CheckBigData = true;
+                    //    if (BLL.PDV.PossuiBigData())
+                    //    {
+                    //        CheckBigData = true;
+                    //        // Código 'secreto' para desabilitar o Sync
+                    //        if (ConfiguracoesSistema.Valores.IntervaloBigData == -2606)
+                    //        {
+                    //            AddLog($"{BigDataServices.titulo} sincronismo desabilitado!!!");
+                    //        }
+                    //        else
+                    //        {
+                    //            BigData = new BigDataServices();
+                    //            BigData.AddLog += AddLog;
+                    //            BigData.IntervaloIntegracao = ConfiguracoesSistema.Valores.IntervaloBigData;
+                    //            AddLog($"{BigDataServices.titulo} sincronimo a cada {BigData.IntervaloIntegracao} min");
+                    //        }
+                    //    }
+                    //    else
+                    //        BigData = null;
+                    //}
                     
                     Sleep(60); // 1 Minuto
                 }

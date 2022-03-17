@@ -1,4 +1,5 @@
-﻿using a7D.PDV.BLL;
+﻿using a7D.Fmk.CRUD.DAL;
+using a7D.PDV.BLL;
 using a7D.PDV.BLL.Services;
 using a7D.PDV.Componentes;
 using a7D.PDV.EF.Enum;
@@ -50,7 +51,7 @@ namespace a7D.PDV.Caixa.UI
 
         private void frmPedidos_Load(object sender, EventArgs e)
         {
-            
+
             GA.Post(this);
             try
             {
@@ -86,7 +87,7 @@ namespace a7D.PDV.Caixa.UI
                 integracaoMenu.Visible = false;
 
             CarregarMenuTipoPedido();
-            
+
             listaPedidoMesa1.PedidoSelecionado += new Controles.ListaPedidoMesa.PedidoSelecionadoEventHandler(ListaPedidoMesa_PedidoSelecionado);
 
             listaPedidoComanda1.PedidoSelecionado += new Controles.ListaPedidoComanda.PedidoSelecionadoEventHandler(ListaPedidoComanda_PedidoSelecionado);
@@ -145,7 +146,7 @@ namespace a7D.PDV.Caixa.UI
                     AlterarListaTipoPedido(ETipoPedido.Comanda);
                 else if (rdbEntrega.Visible)
                     AlterarListaTipoPedido(ETipoPedido.Delivery);
-                else if(rdbRetirada.Visible)
+                else if (rdbRetirada.Visible)
                     AlterarListaTipoPedido(ETipoPedido.Retirada);
                 else
                 {
@@ -209,7 +210,7 @@ namespace a7D.PDV.Caixa.UI
                     break;
                 case ETipoPedido.Retirada:
                     rdbRetirada.Checked = true;
-                    
+
                     break;
             }
             AtualizarListaPedidos(true);
@@ -417,11 +418,16 @@ namespace a7D.PDV.Caixa.UI
 
                 if (tipoPedido_selecionado == ETipoPedido.Delivery)
                 {
-                    string ifood = pedido?.PedidoIFood;
-                    if (!string.IsNullOrEmpty(ifood))
-                        lblIdentificacao.Text = "IFOOD " + ifood;
+                    if (pedido.OrigemPedido != null && pedido.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
+                    {
+                        TagInformation tagDisplayId = BLL.Tag.Carregar(pedido.GUIDIdentificacao, "ifood-displayId");
+
+                        lblIdentificacao.Text = "IFOOD " + tagDisplayId.Valor;
+                    }
                     else
+                    {
                         lblIdentificacao.Text = "DELIVERY " + pedido.IDPedido;
+                    }
                 }
 
                 if (pedido.ValorConsumacaoMinima > 0)
@@ -478,7 +484,7 @@ namespace a7D.PDV.Caixa.UI
                         //,(item.Quantidade.Value * item.ValorUnitario.Value).ToString("#,##0.00")
                     };
 
-                    dgvItens.Rows.Add(row);                      
+                    dgvItens.Rows.Add(row);
                 }
             }
             else
@@ -726,42 +732,55 @@ namespace a7D.PDV.Caixa.UI
             var pedido = Pedido.CarregarCompleto(novoPedido.IDPedido);
             var hash1 = Pedido.GetHash(pedido, out List<object> i1);
 
-            var frm = new frmConfirmarDelivery
+            if (novoPedido.IDStatusPedido == (int)EStatusPedido.NaoConfirmado)
             {
-                Owner = this,
-                Pedido = pedido
-            };
-
-            var result = frm.ShowDialog();
-            if (result != DialogResult.Cancel)
-            {
-                var pedidoVerifica = Pedido.CarregarCompleto(novoPedido.IDPedido);
-                var exDiff = Pedido.Compare(hash1, i1, pedidoVerifica);
-                if (exDiff != null)
-                    Logs.ErroBox(CodigoErro.A900, exDiff, MessageBoxIcon.Exclamation);
-                else if (result == DialogResult.OK)
+                var frm = new frmConfirmarDelivery
                 {
-                    OrdemProducaoServices.GerarOrdemProducao(pedido.ListaProduto, false);
-                    pedido.StatusPedido.StatusPedido = EStatusPedido.Aberto;
-                    Pedido.Salvar(pedido);
+                    Owner = this,
+                    Pedido = pedido
+                };
+                var result = frm.ShowDialog();
 
-                    if (ConfiguracoesSistema.Valores.ImprimirViaExpedicao == "NOVO") // iFood - Aprovação manual
-                        OrdemProducaoServices.GerarViaExpedicao(pedido.IDPedido.Value, ConfiguracoesSistema.Valores.IDAreaViaExpedicao);
-                }
-                else if (result == DialogResult.No)
+                if (result != DialogResult.Cancel)
                 {
-                    // Cancelamento ou Rejeição
-                    if (pedido.StatusPedido.StatusPedido == EStatusPedido.EmCancelamento)
+                    var pedidoVerifica = Pedido.CarregarCompleto(novoPedido.IDPedido);
+
+                    TagInformation tagStatus = BLL.Tag.Carregar(pedido.GUIDIdentificacao, "ifood-status");
+
+                    if (pedidoVerifica.StatusPedido.StatusPedido == EStatusPedido.Cancelado)
                     {
-                        // O usuário atual pode cancelar nesse caso
-                        var form = new frmCancelarPedido(AC.Usuario.IDUsuario.Value, pedido.GUIDIdentificacao);
-                        form.ShowDialog(); // Tudo já ocorre aqui dentro
+                        MessageBox.Show("ATENÇÃO! O pedido foi cancelado automaticamente");
                     }
                     else
                     {
-                        Pedido.Cancelar(pedido, AC.Usuario.IDUsuario.Value);
+                        var exDiff = Pedido.Compare(hash1, i1, pedidoVerifica);
+                        if (exDiff != null)
+                        {
+                            Logs.ErroBox(CodigoErro.A900, exDiff, MessageBoxIcon.Exclamation);
+
+                        }
+                        else if (result == DialogResult.OK)
+                        {
+                            OrdemProducaoServices.GerarOrdemProducao(pedido.ListaProduto, false);
+                            pedido.StatusPedido.StatusPedido = EStatusPedido.Aberto;
+                            Pedido.Salvar(pedido);
+
+                            if (ConfiguracoesSistema.Valores.ImprimirViaExpedicao == "NOVO") // iFood - Aprovação manual
+                                OrdemProducaoServices.GerarViaExpedicao(pedido.IDPedido.Value, ConfiguracoesSistema.Valores.IDAreaViaExpedicao);
+                        }
+                        else if (result == DialogResult.No)
+                        {
+                            // Cancelamento ou Rejeição
+                            var form = new frmCancelarPedido(AC.Usuario.IDUsuario.Value, pedido.GUIDIdentificacao);
+                            form.ShowDialog();
+                        }
                     }
                 }
+            }
+            else if (novoPedido.IDStatusPedido == (int)EStatusPedido.EmCancelamento)
+            {
+                var form = new frmCancelarPedido(AC.Usuario.IDUsuario.Value, pedido.GUIDIdentificacao);
+                form.ShowDialog();
             }
 
             tmrDelivery.Start();

@@ -1,7 +1,9 @@
-﻿using a7D.PDV.BLL;
+﻿using a7D.Fmk.CRUD.DAL;
+using a7D.PDV.BLL;
 using a7D.PDV.Componentes;
 using a7D.PDV.Model;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace a7D.PDV.Caixa.UI
@@ -23,7 +25,10 @@ namespace a7D.PDV.Caixa.UI
             if (ConfiguracoesCaixa.Valores.NotificarDelivery == "AUDIO")
                 ((frmPedidos)Owner).Player.Play();
 
-            Text = $"Pedido {Pedido.IDPedido} iFood {Pedido.GUIDAgrupamentoPedido.Split('#')[1]}";
+            TagInformation tagDisplayId = BLL.Tag.Carregar(Pedido.GUIDIdentificacao, "ifood-displayId");
+
+            Text = $"Pedido {Pedido.IDPedido} iFood {tagDisplayId.Valor}";
+
             txtPedido.Text = Pedido.Observacoes;
             lblResumo.Text =
                 Pedido.Cliente.NomeCompleto +

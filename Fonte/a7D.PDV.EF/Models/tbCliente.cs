@@ -37,6 +37,7 @@ namespace a7D.PDV.EF.Models
         public DateTime? DtAlteracao { get; set; }
         public string Email { get; set; }
         public string TAG { get; set; }
+        public string GUIDIdentificacao { get; set; }
 
         public virtual tbEstado tbEstado { get; set; }
         public virtual ICollection<tbPedido> tbPedidos { get; set; }

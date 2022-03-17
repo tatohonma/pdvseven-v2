@@ -60,7 +60,6 @@ namespace a7D.PDV.Caixa.UI
         public bool AdicionarProdutos { get; set; }
         private EstadoDelivery _estado { get; set; }
         private bool AppDelivery;
-        private bool Retirada { get; set; }
 
         private IFormatProvider _provider = new CultureInfo("pt-BR");
 
@@ -79,9 +78,9 @@ namespace a7D.PDV.Caixa.UI
             Alignment = DataGridViewContentAlignment.MiddleRight
         };
 
-        public static frmNovoDelivery NovoPedidoDelivery(bool retirada)
+        public static frmNovoDelivery NovoPedidoDelivery()
         {
-            return new frmNovoDelivery(retirada, true);
+            return new frmNovoDelivery(true);
         }
 
         public static frmNovoDelivery EditarPedidoDelivery(string guidIdentificacao)
@@ -100,38 +99,22 @@ namespace a7D.PDV.Caixa.UI
             controlePedidoProduto.TipoPedidoSelecionado = ETipoPedido.Delivery;
         }
 
-        private frmNovoDelivery(bool retirada, bool novo) : this()
+        private frmNovoDelivery(bool novo) : this()
         {
             Pedido1 = Pedido.NovoPedidoDelivery(frmPrincipal.Caixa1);
             _estado = EstadoDelivery.Novo;
             AppDelivery = false;
-            Retirada = retirada;
-
-            if (Retirada)
-                AjusteEtapasRetirada();
-        }
-
-        private void AjusteEtapasRetirada()
-        {
-            rb3.Visible = false;
-            rb5.Visible = false;
-
-            rb6.Location = rb4.Location;
-            rb4.Location = rb3.Location;
-
-            rb8.Image = rb6.Image;
-            rb7.Image = rb5.Image;
-            rb6.Image = rb4.Image;
-            rb4.Image = rb3.Image;
         }
 
         private frmNovoDelivery(string guidIdentificacao, EstadoDelivery estado) : this()
         {
             Pedido1 = Pedido.CarregarUltimoPedido(guidIdentificacao);
-            // Pedido1.ListaPagamento = BLL.PedidoPagamento.ListarNaoCanceladoPorPedido(Pedido1.IDPedido.Value);
-            AppDelivery = Pedido1.GUIDIdentificacao?.StartsWith("ifood#") == true;
-            if (AppDelivery)
+
+            if(Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
+            {
+                AppDelivery = true;
                 controlePedidoProduto.BloqueiaEdicao();
+            }
 
             if (estado == EstadoDelivery.Identificar)
             {
@@ -1203,7 +1186,7 @@ namespace a7D.PDV.Caixa.UI
             if (AppDelivery && Pedido1.ValorEntrega > 0)
             {
                 var stringValor = Pedido1.ValorEntrega.Value.ToString("R$ #,##0.00", _provider);
-                rb3.Text = $"Taxa Entrega\n{stringValor}";
+                rb3.Text = $"Taxa de Entrega\n{stringValor}";
                 lblTaxaEntrega.Text = $"iFood: {stringValor}";
                 lblResumoTaxaEntrega.Text = lblFinalizarTaxaEntrega.Text = stringValor;
                 lblTaxaEntrega.Visible = true;
@@ -1213,7 +1196,7 @@ namespace a7D.PDV.Caixa.UI
             else if (Pedido1.TaxaEntrega != null)
             {
                 var stringValor = Pedido1.TaxaEntrega.Valor.Value.ToString("R$ #,##0.00", _provider);
-                rb3.Text = $"Taxa Entrega\n{stringValor}";
+                rb3.Text = $"Taxa de Entrega\n{stringValor}";
                 lblTaxaEntrega.Text = $"{Pedido1.TaxaEntrega.Nome}: {stringValor}";
                 lblResumoTaxaEntrega.Text = lblFinalizarTaxaEntrega.Text = stringValor;
                 lblTaxaEntrega.Visible = true;
@@ -1222,7 +1205,7 @@ namespace a7D.PDV.Caixa.UI
             else
             {
                 //teste sem taxa de entrega
-                rb3.Text = "Taxa Entrega";
+                rb3.Text = "Taxa de Entrega";
                 lblTaxaEntrega.Text = string.Empty;
                 lblTaxaEntrega.Visible = false;
                 dgvTaxaEntrega.Visible = true;

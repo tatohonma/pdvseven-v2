@@ -1,4 +1,5 @@
-﻿using a7D.PDV.BLL;
+﻿using a7D.Fmk.CRUD.DAL;
+using a7D.PDV.BLL;
 using a7D.PDV.Componentes;
 using a7D.PDV.EF.Enum;
 using a7D.PDV.Fiscal.Services;
@@ -18,6 +19,7 @@ namespace a7D.PDV.Caixa.UI
         private PedidoInformation Pedido1 { get; set; }
         private string GuidIdentificacao { get; set; }
         private int IDUsuario { get; set; }
+        private EOrigemPedido OrigemPedido;
         private static readonly string _formatoData = "yyyyMMddHHmmss";
         private static readonly IFormatProvider _cultureInfo = new CultureInfo("pt-BR");
 
@@ -25,6 +27,13 @@ namespace a7D.PDV.Caixa.UI
         {
             GuidIdentificacao = guidIdentificacao;
             IDUsuario = idUsuario;
+        }
+
+        public frmCancelarPedido(int idUsuario, string guidIdentificacao, EOrigemPedido origemPedido) : this()
+        {
+            GuidIdentificacao = guidIdentificacao;
+            IDUsuario = idUsuario;
+            OrigemPedido = origemPedido;
         }
 
         private frmCancelarPedido()
@@ -140,6 +149,11 @@ namespace a7D.PDV.Caixa.UI
 
         private void CancelarPedido(MotivoCancelamentoInformation motivo, bool satCancelado)
         {
+            if (Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
+            {
+                SalvarCodigoCancelamentoIfood(motivo);
+            }
+
             var statusPedido = (EStatusPedido)Pedido1.StatusPedido.IDStatusPedido.Value;
             var listCancelados = new List<PedidoProdutoInformation>();
 
@@ -160,14 +174,31 @@ namespace a7D.PDV.Caixa.UI
                 frmPedidoProdutoCancelamento.ImprimirComprovanteCancelamento(idPedidoProduto);
             }
 
-            PedidoPagamento.CancelarPorPedido(Pedido1.IDPedido.Value, AC.Usuario.IDUsuario.Value);
-
             if (statusPedido == EStatusPedido.Aberto)
             {
                 OrdemProducaoServices.GerarOrdemProducao(listCancelados, pedidoCancelado: true);
             }
 
+            if (Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
+            {
+                if (Pedido1.StatusPedido.StatusPedido == EStatusPedido.EmCancelamento)
+                {
+                    OrdemProducaoServices.GerarOrdemProducao(listCancelados, pedidoCancelado: true);
+                }
+                else
+                {
+                    TagInformation tagStatus = new TagInformation();
+                    tagStatus.GUIDIdentificacao = Pedido1.GUIDIdentificacao;
+                    tagStatus.Chave = "ifood-status";
+                    CRUD.Carregar(tagStatus);
+
+                    tagStatus.Valor = "requestCancellation";
+                    CRUD.Alterar(tagStatus);
+                }
+            }
+
             Pedido.AlterarStatus(Pedido1.IDPedido.Value, EStatusPedido.Cancelado);
+
             //frmPedidoPagamento.AlterarStatus((ETipoPedido)Pedido1.TipoPedido.IDTipoPedido.Value, GuidIdentificacao);
             FecharVenda.LiberaMesaComanda(Pedido1.TipoPedido.TipoPedido, GuidIdentificacao);
             PedidoPagamento.CancelarPorPedido(Pedido1.IDPedido.Value, IDUsuario);
@@ -181,8 +212,38 @@ namespace a7D.PDV.Caixa.UI
                 MessageBox.Show("Não foi possível cancelar o SAT porque o cupom foi emitido há mais de 1 hora.\nPedido cancelado no sistema", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            if (Pedido1.GUIDIdentificacao?.StartsWith("ifood#") == true)
-                MessageBox.Show("O IFOOD não cancela pedidos confirmados\nEntre em contato com o cliente informando o cancelamento", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //if (Pedido1.GUIDIdentificacao?.StartsWith("ifood#") == true)
+            //    MessageBox.Show("O IFOOD não cancela pedidos confirmados\nEntre em contato com o cliente informando o cancelamento", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void SalvarCodigoCancelamentoIfood(MotivoCancelamentoInformation motivo)
+        {
+            Dictionary<string, string> motivos = new Dictionary<string, string>();
+            motivos.Add("", "");
+            motivos.Add("501", "PROBLEMAS DE SISTEMA");
+            motivos.Add("502", "PEDIDO EM DUPLICIDADE");
+            motivos.Add("503", "ITEM INDISPONÍVEL");
+            motivos.Add("504", "RESTAURANTE SEM MOTOBOY");
+            motivos.Add("505", "CARDÁPIO DESATUALIZADO");
+            motivos.Add("506", "PEDIDO FORA DA ÁREA DE ENTREGA");
+            motivos.Add("507", "CLIENTE GOLPISTA / TROTE");
+            motivos.Add("508", "FORA DO HORÁRIO DO DELIVERY");
+            motivos.Add("509", "DIFICULDADES INTERNAS DO RESTAURANTE");
+            motivos.Add("511", "ÁREA DE RISCO");
+            motivos.Add("512", "RESTAURANTE ABRIRÁ MAIS TARDE");
+            motivos.Add("513", "RESTAURANTE FECHOU MAIS CEDO");
+
+            string cancellationCode = motivos.Where(v => v.Value == motivo.Nome).FirstOrDefault().Key;
+
+            if (cancellationCode == null)
+                cancellationCode = "509";
+
+            TagInformation tag = new TagInformation();
+            tag.GUIDIdentificacao = Pedido1.GUIDIdentificacao;
+            tag.Chave = "ifood-cancellationCode";
+            tag.Valor = cancellationCode;
+            tag.DtInclusao = DateTime.Now;
+            CRUD.Adicionar(tag);
         }
     }
 }

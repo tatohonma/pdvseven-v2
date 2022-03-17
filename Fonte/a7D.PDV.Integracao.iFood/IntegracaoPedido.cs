@@ -1,79 +1,142 @@
 ﻿using a7D.Fmk.CRUD.DAL;
 using a7D.PDV.BLL;
 using a7D.PDV.DAL;
+using a7D.PDV.EF.Enum;
+using a7D.PDV.Fiscal.Services;
 using a7D.PDV.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace a7D.PDV.Integracao.iFood
 {
-    public class IntegracaoPedido
+    public partial class IntegraIFood
     {
-        API.Order APIOrder;
-        ConfiguracoesIFood ConfigIFood;
-        CaixaInformation CaixaIFood;
-        PDVInformation PDVIFood;
-        UsuarioInformation UsuarioIfood;
-        TipoPagamentoInformation PagamentoIFood;
-        TipoPagamentoInformation PagamentoDinheiro;
-        TipoPagamentoInformation PagamentoCredito;
-        TipoPagamentoInformation PagamentoDebito;
-        TipoPagamentoInformation PagamentoRefeicao;
-        TipoPagamentoInformation PagamentoOutros;
-        TaxaEntregaInformation TaxaEntregaIFood;
-
-        public IntegracaoPedido(string accessToken,
-            ConfiguracoesIFood configIFood,
-            CaixaInformation caixaIFood,
-            PDVInformation pdvIFood,
-            UsuarioInformation usuarioIfood,
-            TipoPagamentoInformation pagamentoIFood,
-            TipoPagamentoInformation pagamentoDinheiro,
-            TipoPagamentoInformation pagamentoCredito,
-            TipoPagamentoInformation pagamentoDebito,
-            TipoPagamentoInformation pagamentoRefeicao,
-            TipoPagamentoInformation pagamentoOutros,
-            TaxaEntregaInformation taxaEntregaIFood)
-        {
-            APIOrder = new API.Order(accessToken);
-
-            ConfigIFood = configIFood;
-            CaixaIFood = caixaIFood;
-            PDVIFood = pdvIFood;
-            UsuarioIfood = usuarioIfood;
-            PagamentoIFood = pagamentoIFood;
-            PagamentoDinheiro = pagamentoDinheiro;
-            PagamentoCredito = pagamentoCredito;
-            PagamentoDebito = pagamentoDebito;
-            PagamentoRefeicao = pagamentoRefeicao;
-            PagamentoOutros = pagamentoOutros;
-            TaxaEntregaIFood = taxaEntregaIFood;
-        }
-
-        public void ImportarPedidos()
+        public void LerEventos()
         {
             var eventos = APIOrder.EventsPolling();
             if (eventos == null)
+            {
+                AddLog("Sem eventos!");
                 return;
+            }
+
+            AddLog(eventos.Length.ToString() + " encontrados...");
 
             foreach (var evento in eventos)
             {
+                AddLog("Id " + evento.id + " > OrderId " + evento.orderId + " > Code " + evento.code);
+                AddLog(JsonConvert.SerializeObject(evento));
+
                 try
                 {
-                    if (evento.code == "PLC")
-                        AdicionarPedido(evento);
+                    switch (evento.code)
+                    {
+                        case "PLC":
+                            AddLog("Adicionar pedido > " + evento.orderId);
+                            AdicionarPedido(evento);
+                            break;
+
+                        case "CON":
+                            AddLog("Finalizar pedido > " + evento.orderId);
+                            FinalizarPedido(evento);
+                            break;
+
+                        case "CAN":
+                            AddLog("Confirmar cancelamento pedido > " + evento.orderId);
+                            ConfirmarCancelamentoPedido(evento);
+                            break;
+
+                        case "CAR":
+                        case "CCR":
+                            AddLog("Cancelar pedido > " + evento.orderId);
+                            CancelarPedido(evento);
+                            break;
+
+                        default:
+                            AddLog("ATENÇÃO: Evento não tratado (" + evento.code + ")");
+                            break;
+                    }
 
                     APIOrder.Acknowledgment(new Model.Order.Event[] { evento });
                 }
                 catch (Exception ex)
                 {
+                    AddLog("Erro processando evento: " + ex.Message);
+                }
+            }
+        }
+
+        private void ConfirmarCancelamentoPedido(Model.Order.Event evento)
+        {
+            PedidoInformation pedido = CarregarPedidoPorOrderId(evento.orderId);
+            if (pedido != null && pedido.IDPedido != null)
+            {
+                AlterarStatusPedido(pedido.IDPedido.Value, EStatusPedido.Cancelado);
+            }
+            else
+            {
+                AddLog("Pedido " + evento.orderId + " não encontrado!");
+            }
+        }
+
+        private void CancelarPedido(Model.Order.Event evento)
+        {
+            PedidoInformation pedido = CarregarPedidoPorOrderId(evento.orderId);
+
+            if (pedido != null && pedido.IDPedido != null)
+            {
+                if (pedido.StatusPedido.StatusPedido == EStatusPedido.Aberto)
+                {
+                    AlterarStatusPedido(pedido.IDPedido.Value, EStatusPedido.EmCancelamento);
+                }
+                else
+                {
+                    AlterarStatusPedido(pedido.IDPedido.Value, EStatusPedido.Cancelado);
                 }
 
+                TagInformation tagStatus = new TagInformation();
+                tagStatus.GUIDIdentificacao = pedido.GUIDIdentificacao;
+                tagStatus.Chave = "ifood-status";
+                CRUD.Carregar(tagStatus);
+
+                tagStatus.Valor = evento.code;
+                CRUD.Alterar(tagStatus);
+            }
+            else
+            {
+                AddLog("Pedido " + evento.orderId + " não encontrado!");
+            }
+        }
+
+        private void FinalizarPedido(Model.Order.Event evento)
+        {
+            PedidoInformation pedido = CarregarPedidoPorOrderId(evento.orderId);
+
+            if (pedido != null && pedido.IDPedido != null)
+            {
+                if (ConfigIFood.FinalizacaoAutomatica)
+                {
+                    AlterarStatusPedido(pedido.IDPedido.Value, EStatusPedido.Finalizado);
+                }
+
+                TagInformation tagStatus = new TagInformation();
+                tagStatus.GUIDIdentificacao = pedido.GUIDIdentificacao;
+                tagStatus.Chave = "ifood-status";
+                CRUD.Carregar(tagStatus);
+
+                tagStatus.Valor = "CON";
+                CRUD.Alterar(tagStatus);
+            }
+            else
+            {
+                AddLog("Pedido " + evento.orderId + " não encontrado!");
             }
         }
 
@@ -82,44 +145,79 @@ namespace a7D.PDV.Integracao.iFood
             PedidoInformation pedido = new PedidoInformation();
 
             var orderDetails = APIOrder.OrderDetails(evento.orderId);
+            AddLog(JsonConvert.SerializeObject(orderDetails));
 
             pedido.Cliente = AdicionarCliente(orderDetails);
+            pedido.Observacoes += "Cliente: " + pedido.Cliente.NomeCompleto + "\n\n";
+            pedido.Observacoes += "Endereço: " + pedido.Cliente.EnderecoCompleto + "\n\n";
+
             pedido.DocumentoCliente = orderDetails.customer.documentNumber;
 
             pedido.TipoPedido = new TipoPedidoInformation();
             pedido.TipoPedido.IDTipoPedido = 30;
 
             pedido.StatusPedido = new StatusPedidoInformation();
-            pedido.StatusPedido.IDStatusPedido = 10;
+            pedido.StatusPedido.IDStatusPedido = (int)EStatusPedido.NaoConfirmado;
+
+            pedido.OrigemPedido = new OrigemPedidoInformation();
+            pedido.OrigemPedido.IDOrigemPedido = (int)EOrigemPedido.ifood;
 
             pedido.Caixa = CaixaIFood;
-
-            pedido.TaxaEntrega = new TaxaEntregaInformation();
-            pedido.TaxaEntrega = TaxaEntregaIFood;
 
             pedido.GUIDIdentificacao = Guid.NewGuid().ToString();
             pedido.DocumentoCliente = orderDetails.customer.documentNumber;
             pedido.DtPedido = DateTime.Now;
-            pedido.GUIDMovimentacao = Guid.NewGuid().ToString();
+            pedido.PermitirAlterar = false;
+
+            pedido.TaxaEntrega = new TaxaEntregaInformation();
+            pedido.TaxaEntrega = TaxaEntregaIFood;
             pedido.ValorEntrega = Convert.ToDecimal(orderDetails.total.deliveryFee);
-            pedido.TAG = "{ \"iFood_orderId\":\"" + orderDetails.id + "\"}";
+
+            if (orderDetails.total.benefits > 0)
+                pedido.TipoDesconto = TipoDescontoIFood;
+
+            pedido.ValorDesconto = orderDetails.total.benefits;
+
+            pedido.ValorServico = orderDetails.total.additionalFees;
+            pedido.ValorTotal = orderDetails.total.orderAmount;
+
+            if (orderDetails.orderTiming == "SCHEDULED")
+            {
+                pedido.Observacoes += "AGENDADO PARA " + orderDetails.schedule.deliveryDateTimeEnd + "\n\n";
+                pedido.ObservacaoCupom += "AGENDADO PARA " + orderDetails.schedule.deliveryDateTimeEnd + "\n\n";
+                AddLog("AGENDADO PARA " + orderDetails.schedule.deliveryDateTimeEnd);
+            }
 
             if (orderDetails.customer.ordersCountOnMerchant == 0)
-                pedido.ObservacaoCupom = "NOVO CLIENTE IFOOD";
+            {
+                pedido.Observacoes += "NOVO CLIENTE " + "\n\n";
+                pedido.ObservacaoCupom += "NOVO CLIENTE " + "\n\n";
+            }
             else
-                pedido.ObservacaoCupom = "FIDELIDADE " + orderDetails.customer.ordersCountOnMerchant.ToString();
+            {
+                pedido.Observacoes += "FIDELIDADE " + orderDetails.customer.ordersCountOnMerchant.ToString() + "\n\n";
+                pedido.ObservacaoCupom += "FIDELIDADE " + orderDetails.customer.ordersCountOnMerchant.ToString() + "\n\n";
+            }
 
             CRUD.Adicionar(pedido);
 
+            Tag.Adicionar(pedido.GUIDIdentificacao, "ifood-orderId", orderDetails.id);
+            Tag.Adicionar(pedido.GUIDIdentificacao, "ifood-displayId", orderDetails.displayId);
+            Tag.Adicionar(pedido.GUIDIdentificacao, "ifood-orderTiming", orderDetails.orderTiming);
+            Tag.Adicionar(pedido.GUIDIdentificacao, "ifood-orderType", orderDetails.orderType);
+            Tag.Adicionar(pedido.GUIDIdentificacao, "ifood-status", "PLC");
+
             foreach (var item in orderDetails.items)
             {
-                AdicionarPedidoProduto(pedido.IDPedido.Value, item.externalCode, item.name, item.unitPrice, item.quantity);
+                Int32 idPedidoProduto = AdicionarPedidoProduto(pedido.IDPedido.Value, null, item.externalCode, item.name, item.unitPrice, item.quantity, item.observations);
+                pedido.Observacoes += " - " + item.name + " (qtd " + item.quantity + ")\n";
 
                 if (item.options != null)
                 {
                     foreach (var modificacoes in item.options)
                     {
-                        AdicionarPedidoProduto(pedido.IDPedido.Value, modificacoes.externalCode, modificacoes.name, modificacoes.unitPrice, modificacoes.quantity);
+                        AdicionarPedidoProduto(pedido.IDPedido.Value, null, modificacoes.externalCode, modificacoes.name, modificacoes.unitPrice, modificacoes.quantity, "");
+                        pedido.Observacoes += "   -- " + modificacoes.name + " (qtd " + modificacoes.quantity + ")\n";
                     }
                 }
             }
@@ -128,31 +226,89 @@ namespace a7D.PDV.Integracao.iFood
             {
                 AdicionarPedidoPagamento(pedido.IDPedido.Value, pagamento);
             }
+
+            if (ConfigIFood.AprovarIFood == true)
+            {
+                GerarOrdemProducao(pedido.IDPedido.Value);
+
+                AlterarStatusPedido(pedido.IDPedido.Value, EStatusPedido.Aberto);
+            }
+        }
+
+        public void GerarOrdemProducao(Int32 idPedido)
+        {
+            try
+            {
+                PedidoInformation pedido = Pedido.CarregarCompleto(idPedido);
+                OrdemProducaoServices.GerarOrdemProducao(pedido.ListaProduto, false);
+                AddLog("Confirmação automatica e Ordem de Produção gerada!");
+
+                if (ConfiguracoesSistema.Valores.ImprimirViaExpedicao == "NOVO") // IFOOD - Aprovação automatica
+                {
+                    OrdemProducaoServices.GerarViaExpedicao(pedido.IDPedido.Value, ConfiguracoesSistema.Valores.IDAreaViaExpedicao);
+                    AddLog("Via de expedição gerada!");
+                }
+            }
+            catch (Exception ex)
+            {
+                AddLog("Erro: " + ex.Message);
+            }
         }
 
         private ClienteInformation AdicionarCliente(Model.Order.OrderDetails orderDetails)
         {
+            bool novoCliente = false;
             ClienteInformation cliente = CarregarCliente(orderDetails.customer.id);
+
+            if (cliente.IDCliente == null)
+            {
+                novoCliente = true;
+                cliente.GUIDIdentificacao = Guid.NewGuid().ToString();
+                cliente.DtInclusao = DateTime.Now;
+            }
 
             cliente.NomeCompleto = orderDetails.customer.name;
             cliente.Telefone1Numero = Convert.ToInt32(orderDetails.customer.phone.localizer);
             cliente.Documento1 = orderDetails.customer.documentNumber;
-            cliente.Endereco = orderDetails.delivery.deliveryAddress.streetName;
-            cliente.EnderecoNumero = orderDetails.delivery.deliveryAddress.streetNumber;
-            cliente.Complemento = orderDetails.delivery.deliveryAddress.complement;
-            cliente.Bairro = orderDetails.delivery.deliveryAddress.neighborhood;
-            cliente.Cidade = orderDetails.delivery.deliveryAddress.city;
-            cliente.CEP = Convert.ToInt32(orderDetails.delivery.deliveryAddress.postalCode);
-            cliente.EnderecoReferencia = orderDetails.delivery.deliveryAddress.reference;
+
+            if (orderDetails.orderType == "DELIVERY")
+            {
+                cliente.Endereco = orderDetails.delivery.deliveryAddress.streetName;
+                cliente.EnderecoNumero = orderDetails.delivery.deliveryAddress.streetNumber;
+                cliente.Complemento = orderDetails.delivery.deliveryAddress.complement;
+                cliente.Bairro = orderDetails.delivery.deliveryAddress.neighborhood;
+                cliente.Cidade = orderDetails.delivery.deliveryAddress.city;
+                cliente.CEP = Convert.ToInt32(orderDetails.delivery.deliveryAddress.postalCode);
+                cliente.EnderecoReferencia = orderDetails.delivery.deliveryAddress.reference;
+            }
+            else if (orderDetails.orderType == "TAKEOUT")
+            {
+                cliente.Endereco = "RETIRADA";
+                cliente.EnderecoNumero = "";
+                cliente.Complemento = "";
+                cliente.Bairro = "";
+                cliente.Cidade = "";
+                cliente.CEP = 0;
+                cliente.EnderecoReferencia = "";
+            }
+            else if (orderDetails.orderType == "INDOOR")
+            {
+                cliente.Endereco = "PEDIDO NA MESA " + orderDetails.indoor.table;
+                cliente.EnderecoNumero = "";
+                cliente.Complemento = "";
+                cliente.Bairro = "";
+                cliente.Cidade = "";
+                cliente.CEP = 0;
+                cliente.EnderecoReferencia = "";
+            }
             cliente.Bloqueado = false;
 
-            if (cliente.IDCliente == null)
-            {
-                cliente.TAG = "{ \"ifood_customer-id\":\"" + orderDetails.customer.id + "\" }";
-                cliente.DtInclusao = DateTime.Now;
-            }
-
             CRUD.Salvar(cliente);
+
+            if (novoCliente)
+            {
+                Tag.Adicionar(cliente.GUIDIdentificacao, "ifood-customerId", orderDetails.customer.id);
+            }
 
             return cliente;
         }
@@ -165,7 +321,16 @@ namespace a7D.PDV.Integracao.iFood
             DataSet ds = new DataSet();
             DataTable dt = new DataTable();
 
-            String querySql = "SELECT IDCliente FROM tbCliente WHERE TAG LIKE '%\"ifood_customer-id\":\"' + @customerId + '\"%'";
+            String querySql = @"
+                SELECT 
+                    IDCliente
+                FROM
+                    tbCliente c
+                    INNER JOIN tbTag t ON t.GUIDIdentificacao = c.GUIDIdentificacao
+                WHERE
+                    Chave = 'ifood-customerId' AND
+                    Valor = @customerId
+            ";
 
             da = new SqlDataAdapter(querySql, DB.ConnectionString);
             da.SelectCommand.Parameters.AddWithValue("@customerId", customerId);
@@ -182,19 +347,25 @@ namespace a7D.PDV.Integracao.iFood
             return cliente;
         }
 
-        private void AdicionarPedidoProduto(Int32 idPedido, string externalCode, string nome, decimal valorUnitario, decimal quantidade)
+        private Int32 AdicionarPedidoProduto(Int32 idPedido, Int32? idPedidoProduto_pai, string externalCode, string nome, decimal valorUnitario, decimal quantidade, string notas)
         {
             PedidoProdutoInformation pedidoProduto = new PedidoProdutoInformation();
             Int32 idProduto = 0;
-            String notas = "";
+            String observacaoProduto = "";
 
-            CarregarProduto(externalCode, nome, out idProduto, out notas);
+            CarregarProduto(externalCode, nome, out idProduto, out observacaoProduto);
 
             pedidoProduto.Produto = new ProdutoInformation();
             pedidoProduto.Produto.IDProduto = idProduto;
 
             pedidoProduto.Pedido = new PedidoInformation();
             pedidoProduto.Pedido.IDPedido = idPedido;
+
+            if (idPedidoProduto_pai != null)
+            {
+                pedidoProduto.PedidoProdutoPai = new PedidoProdutoInformation();
+                pedidoProduto.PedidoProdutoPai.IDPedidoProduto = idPedidoProduto_pai;
+            }
 
             pedidoProduto.PDV = PDVIFood;
             pedidoProduto.Usuario = UsuarioIfood;
@@ -204,20 +375,22 @@ namespace a7D.PDV.Integracao.iFood
             pedidoProduto.DtInclusao = DateTime.Now;
             pedidoProduto.CodigoAliquota = "";
 
-            pedidoProduto.Notas = notas;
+            pedidoProduto.Notas = observacaoProduto + "\n\n" + notas;
 
             pedidoProduto.Cancelado = false;
             pedidoProduto.RetornarAoEstoque = false;
 
             CRUD.Adicionar(pedidoProduto);
+
+            return pedidoProduto.IDPedidoProduto.Value;
         }
 
-        private void CarregarProduto(string externalCode, string nome, out Int32 idProduto, out String notas)
+        private void CarregarProduto(string externalCode, string nome, out Int32 idProduto, out String observacaoProduto)
         {
             if (externalCode == "")
             {
                 idProduto = 1;
-                notas = $"(sem código: {nome})";
+                observacaoProduto = $"(sem código: {nome})";
                 //    log += $"\r\n{idPdod}: {notaProduto}";
             }
 
@@ -226,25 +399,25 @@ namespace a7D.PDV.Integracao.iFood
             if (produto == null || produto.Nome == null)
             {
                 idProduto = 1;
-                notas = $"(não existe: {nome})";
+                observacaoProduto = $"(não existe: {nome})";
                 //log += $"\r\n{idPdod}: {notaProduto}";
             }
             else if (produto.Excluido == true)
             {
                 idProduto = 1;
-                notas = $"(excluido: {nome})";
+                observacaoProduto = $"(excluido: {nome})";
                 //log += $"\r\n{idPdod}: {notaProduto}";
             }
             else if (produto.Ativo == false)
             {
                 idProduto = 1;
-                notas = $"(inativo: {nome})";
+                observacaoProduto = $"(inativo: {nome})";
                 //log += $"\r\n{idPdod}: {notaProduto}";
             }
             else
             {
                 idProduto = produto.IDProduto.Value;
-                notas = "";
+                observacaoProduto = "";
             }
         }
 
@@ -261,6 +434,7 @@ namespace a7D.PDV.Integracao.iFood
             pedidoPagamento.Valor = paymentMethod.value;
             pedidoPagamento.DataPagamento = DateTime.Now;
             pedidoPagamento.UsuarioPagamento = UsuarioIfood;
+            pedidoPagamento.Excluido = false;
 
             //pedido.@IDMetodo = ''--payments.methods.method;
             //pedido.IDContaRecebivel;
@@ -276,10 +450,19 @@ namespace a7D.PDV.Integracao.iFood
 
             if (type == "OFFLINE")
             {
-                switch(method)
+                switch (method)
                 {
                     case "DEBIT":
                         idTipoPagamento = PagamentoDebito.IDTipoPagamento.Value;
+                        break;
+                    case "CREDIT":
+                        idTipoPagamento = PagamentoCredito.IDTipoPagamento.Value;
+                        break;
+                    case "CASH":
+                        idTipoPagamento = PagamentoDinheiro.IDTipoPagamento.Value;
+                        break;
+                    case "MEAL_VOUCHER":
+                        idTipoPagamento = PagamentoRefeicao.IDTipoPagamento.Value;
                         break;
                     default:
                         idTipoPagamento = PagamentoOutros.IDTipoPagamento.Value;
@@ -294,53 +477,153 @@ namespace a7D.PDV.Integracao.iFood
             return idTipoPagamento;
         }
 
-        private void AlterarStatus(Model.Order.Event evento)
+        public void EnviaConfirmacao()
         {
-            //var query = @"update tbproduto set Disponibilidade = @disponivel
-            //    from tbProdutoCategoriaProduto pcp
-            //    inner join tbProduto on tbProduto.IDProduto = pcp.IDProduto
-            //    where pcp.IDCategoriaProduto = @idCategoria
-            //    and tbProduto.Ativo = 1 and tbProduto.Excluido = 0";
+            string ret;
+            int qtdConfirmacaoEnviada = 0;
 
-            //using (var conn = new SqlConnection(DB.ConnectionString))
-            //{
-            //    conn.Open();
-            //    using (var cmd = conn.CreateCommand())
-            //    {
-            //        cmd.CommandText = query;
-            //        //cmd.Parameters.AddWithValue("@idCategoria", idCategoria);
-            //        //cmd.Parameters.AddWithValue("@disponivel", disponivel);
-
-            //        cmd.ExecuteNonQuery();
-            //    }
-            //}
-        }
-        public DataTable ListarPedidosAlterados()
-        {
-            //SqlDataAdapter da;
-            //DataSet ds = new DataSet();
-            //DataTable dt = new DataTable();
-
-            //String querySql = @"";
-
-            //da = new SqlDataAdapter(querySql, DB.ConnectionString);
-
-            //da.Fill(ds);
-            //dt = ds.Tables[0];
-
-            //return dt;
-
-            return null;
-        }
-        public void ExportarAlteracaoStatus()
-        {
-            Int32 idPedido;
-
-            DataTable listaPedidos = ListarPedidosAlterados();
-
-            for (int i = 0; i < listaPedidos.Rows.Count; i++)
+            try
             {
-                idPedido = Convert.ToInt32(listaPedidos.Rows[i]["IDPedido"]);
+                var pedidos = BLL.Pedido.ListarDelivery6Horas();
+
+                if (pedidos.Count == 0)
+                    AddLog("Sem confirmações para serem enviadas!");
+
+                foreach (var pedido in pedidos)
+                {
+                    try
+                    {
+                        if (pedido.IDOrigemPedido != 2)
+                            continue;
+
+                        TagInformation tagOrderId = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-orderId");
+                        TagInformation tagDisplayId = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-displayId");
+                        TagInformation tagStatus = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-status");
+
+                        if (pedido.IDStatusPedido == (int)EStatusPedido.NaoConfirmado)
+                        {
+                            continue;
+                        }
+                        else if (pedido.IDStatusPedido == (int)EStatusPedido.Aberto && tagStatus.Valor != "CFM")
+                        {
+                            ret = APIOrder.Confirm(tagOrderId.Valor);
+                            qtdConfirmacaoEnviada++;
+
+                            if (ret == null)
+                            {
+                                tagStatus = Tag.Alterar(tagStatus.GUIDIdentificacao, tagStatus.Chave, "CFM");
+
+                                AddLog("Pedido " + tagDisplayId.Valor + " (DisplayID) confirmado (CFM)");
+                            }
+                            else
+                            {
+                                AddLog("Erro confirmando envio " + tagDisplayId.Valor + " (DisplayID) (CFM)!");
+                            }
+                        }
+                        else if (pedido.IDStatusPedido == (int)EStatusPedido.Enviado && tagStatus.Valor != "DSP")
+                        {
+                            ret = APIOrder.Dispatch(tagOrderId.Valor);
+                            qtdConfirmacaoEnviada++;
+
+                            if (ret == null)
+                            {
+                                tagStatus.Valor = "DSP";
+                                CRUD.Alterar(tagStatus);
+                                AddLog("Pedido " + tagDisplayId.Valor + " (DisplayID) despachado (DSP)");
+                            }
+                            else
+                            {
+                                AddLog("Erro confirmando envio " + tagDisplayId.Valor + " (DisplayID) (DSP)!");
+                            }
+                        }
+                        else if (pedido.IDStatusPedido == (int)EStatusPedido.Cancelado && tagStatus.Valor == "requestCancellation")
+                        {
+                            TagInformation tagCancellationCode = new TagInformation();
+                            tagCancellationCode.GUIDIdentificacao = pedido.GUIDIdentificacao;
+                            tagCancellationCode.Chave = "ifood-cancellationCode";
+                            CRUD.Carregar(tagCancellationCode);
+
+                            ret = APIOrder.RequestCancellation(tagOrderId.Valor, tagCancellationCode.Valor);
+                            qtdConfirmacaoEnviada++;
+
+                            if (ret == null)
+                            {
+                                tagStatus.Valor = "CAN";
+                                CRUD.Alterar(tagStatus);
+                                AddLog("Pedido " + tagDisplayId.Valor + " (DisplayID) cancelado (CAN)");
+                            }
+                            else
+                            {
+                                AddLog("Erro confirmando cancelamento " + tagDisplayId.Valor + " (DisplayID) (CAN)!");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        AddLog("Erro confirmando pedido " + pedido.IDPedido + " (IDPedido): " + ex.Message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                AddLog("Erro verificando pedidos para confirmação " + ex.Message);
+            }
+
+            if (qtdConfirmacaoEnviada == 0)
+                AddLog("Sem confirmações para serem enviadas!");
+        }
+
+        private void AlterarStatusPedido(int idPedido, EStatusPedido statusPedido)
+        {
+            var query = @"UPDATE tbPedido set IDStatusPedido=@idStatusPedido WHERE idPedido=@idPedido";
+
+            using (var conn = new SqlConnection(DB.ConnectionString))
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = query;
+                    cmd.Parameters.AddWithValue("@idPedido", idPedido);
+                    cmd.Parameters.AddWithValue("@idStatusPedido", (int)statusPedido);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private PedidoInformation CarregarPedidoPorOrderId(string orderId)
+        {
+            PedidoInformation pedido = new PedidoInformation();
+
+            SqlDataAdapter da;
+            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
+
+            String querySql = @"
+                SELECT 
+                    IDPedido
+                FROM
+                    tbPedido p
+                    INNER JOIN tbTag t ON t.GUIDIdentificacao = p.GUIDIdentificacao
+                WHERE
+                    Chave = 'ifood-orderId' AND
+                    Valor = @orderId
+            ";
+
+            da = new SqlDataAdapter(querySql, DB.ConnectionString);
+            da.SelectCommand.Parameters.AddWithValue("@orderId", orderId);
+
+            da.Fill(ds);
+            dt = ds.Tables[0];
+
+            if (dt.Rows.Count > 0)
+            {
+                pedido = Pedido.Carregar(Convert.ToInt32(dt.Rows[0]["IDPedido"]));
+                return pedido;
+            }
+            else
+            {
+                return null;
             }
         }
     }

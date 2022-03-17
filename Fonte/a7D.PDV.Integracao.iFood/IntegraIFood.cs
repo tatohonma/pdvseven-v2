@@ -4,6 +4,7 @@ using a7D.PDV.EF.Enum;
 using a7D.PDV.EF.Models;
 using a7D.PDV.Integracao.Servico.Core;
 using a7D.PDV.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace a7D.PDV.Integracao.iFood
         none, aberta, fechada
     }
 
-    public class IntegraIFood : IntegracaoTask
+    public partial class IntegraIFood : IntegracaoTask
     {
         public override string Nome => "Delivery iFood";
 
@@ -30,8 +31,12 @@ namespace a7D.PDV.Integracao.iFood
         TipoPagamentoInformation PagamentoRefeicao;
         TipoPagamentoInformation PagamentoOutros;
         TaxaEntregaInformation TaxaEntregaIFood;
+        TipoDescontoInformation TipoDescontoIFood;
 
+        API.Order APIOrder;
+        API.Merchant APIMerchant;
         String AccessToken;
+        DateTime ExpiraEm;
 
         public override void Executar()
         {
@@ -134,9 +139,17 @@ namespace a7D.PDV.Integracao.iFood
             TaxaEntregaIFood = TaxaEntrega.CarregarPorNome("iFood");
             if (TaxaEntregaIFood == null)
             {
-                AddLog("Não há uma taxa de entrega com o nome 'iFood' cadastrada no Backoffice");
+                AddLog("Não há uma 'Taxa de Entrega' com o nome 'iFood' cadastrada no Backoffice");
                 configurado = false;
             }
+
+            TipoDescontoIFood = (TipoDescontoInformation)CRUD.Carregar(new TipoDescontoInformation { Nome = "iFood" });
+            if (TipoDescontoIFood.IDTipoDesconto == null)
+            {
+                AddLog("Não há um 'Tipo de Desconto' com o nome 'iFood' cadastrada no Backoffice");
+                configurado = false;
+            }
+            
 
             try
             {
@@ -159,37 +172,33 @@ namespace a7D.PDV.Integracao.iFood
 
         private void Loop()
         {
-            IntegracaoPedido objIntegracaoPedido;
-
             try
             {
                 AddLog("Integração iFood: Ativada");
 
                 while (Executando)
                 {
-                    Autenticar();
-
-                    objIntegracaoPedido = new IntegracaoPedido(
-                        AccessToken, 
-                        ConfigIFood,
-                        CaixaIFood,
-                        PDVIFood,
-                        UsuarioIfood,
-                        PagamentoIFood,
-                        PagamentoDinheiro,
-                        PagamentoCredito,
-                        PagamentoDebito,
-                        PagamentoRefeicao,
-                        PagamentoOutros,
-                        TaxaEntregaIFood);
-
-                    if (LojaAberta())
+                    if (AccessToken == null || AccessToken == "" || ExpiraEm < DateTime.Now)
                     {
-                        objIntegracaoPedido.ImportarPedidos();
-                        AddLog("EventsPolling() ");
+                        AddLog("Autenticando...");
+                        if (!Autenticar())
+                            continue;
+                    }
 
-                        //objIntegracaoPedido.ExportarAlteracaoStatus();
-                        //AddLog("IntegracaoPedido.ExportarAlteracaoStatus() ");
+                    APIOrder = new API.Order(AccessToken);
+                    APIMerchant = new API.Merchant(AccessToken);
+
+                    AddLog("Verificando status da loja");
+                    if (LojaAbertaSistema())
+                    {
+                        if (!LojaAbertaIfood())
+                            continue;
+
+                        AddLog("Lendo eventos...");
+                        LerEventos();
+
+                        AddLog("Enviando confirmações...");
+                        EnviaConfirmacao();
 
                         Sleep(25);
                     }
@@ -222,11 +231,15 @@ namespace a7D.PDV.Integracao.iFood
                     {
                         ConfigIFood.RefreshToken = token.refreshToken;
                         AccessToken = token.accessToken;
+                        ExpiraEm = DateTime.Now.AddSeconds(token.expiresIn * 0.8);
 
+                        AddLog("Autorizado e novo Token gerado (authorization_code)!");
+                        AddLog(AccessToken);
                         return true;
                     }
                     else
                     {
+                        AddLog("Falha na autentição!");
                         return false;
                     }
                 }
@@ -238,13 +251,16 @@ namespace a7D.PDV.Integracao.iFood
                     {
                         AccessToken = token.accessToken;
                         ConfigIFood.RefreshToken = token.refreshToken;
+                        ExpiraEm = DateTime.Now.AddSeconds(token.expiresIn * 0.8);
 
-                        //AtualizarRefreshToken(ConfigIFood.RefreshToken);
-
+                        AddLog("Autenticado e novo Token gerado (refresh_token)!");
+                        AddLog(AccessToken);
                         return true;
                     }
                     else
                     {
+                        AddLog("Falha na autentição!");
+                        AccessToken = "";
                         return false;
                     }
                 }
@@ -252,6 +268,7 @@ namespace a7D.PDV.Integracao.iFood
             catch (Exception ex)
             {
                 AddLog($"Erro na geração do Token: " + ex.Message);
+                AccessToken = "";
                 return false;
             }
         }
@@ -261,29 +278,6 @@ namespace a7D.PDV.Integracao.iFood
             ConfiguracaoBDInformation config = ConfiguracaoBD.BuscarConfiguracao("RefreshToken");
             config.Valor = refreshToken;
             CRUD.Alterar(config);
-        }
-
-        private Boolean LojaAberta()
-        {
-            try
-            {
-                eStatusLoja statusLojaSistema = IntegracaoEstabelecimento.LojaAbertaSistema() ? eStatusLoja.aberta : eStatusLoja.fechada;
-
-                if (statusLojaSistema == eStatusLoja.aberta)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                AddLog("Erro na verificação do status da loja:" + ex.Message);
-
-                return false;
-            }
         }
     }
 }

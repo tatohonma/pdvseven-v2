@@ -14,7 +14,7 @@ namespace a7D.PDV.Model
         [CRUDParameterDAL(true, "IDCliente")]
         public Int32? IDCliente { get; set; }
 
-        [CRUDParameterDAL(true, "CodigoERP")]
+        [CRUDParameterDAL(false, "CodigoERP")]
         public string CodigoERP { get; set; }
 
         [CRUDParameterDAL(false, "NomeCompleto")]
@@ -86,8 +86,8 @@ namespace a7D.PDV.Model
         [CRUDParameterDAL(false, "Email")]
         public string Email { get; set; }
 
-        [CRUDParameterDAL(false, "TAG")]
-        public string TAG { get; set; }
+        [CRUDParameterDAL(false, "GUIDIdentificacao")]
+        public string GUIDIdentificacao { get; set; }
 
         public String Telefone1
         {

@@ -80,6 +80,10 @@
       <Project>{75EF9713-861A-4C6B-8F7F-1343FDCBBFFB}</Project>
       <Name>a7D.PDV.EF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Fiscal\a7D.PDV.Fiscal.csproj">
+      <Project>{C506BD2C-FCB7-49E2-9759-661573B1C60A}</Project>
+      <Name>a7D.PDV.Fiscal</Name>
+    </ProjectReference>
     <ProjectReference Include="..\a7D.PDV.Integracao.Servico.Core\a7D.PDV.Integracao.Core.csproj">
       <Project>{79dcf4fa-291f-4a15-a41b-f915938b8536}</Project>
       <Name>a7D.PDV.Integracao.Core</Name>

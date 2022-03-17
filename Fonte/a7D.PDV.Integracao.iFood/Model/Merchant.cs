@@ -4,96 +4,96 @@ namespace a7D.PDV.Integracao.iFood.Model.Merchant
 {
     public class Error
     {
-        string code;
-        string message;
+        public string code;
+        public string message;
     }
 
     public class MerchantSummary
     {
-        string id;
-        string name;
-        string corporateName;
+        public string id;
+        public string name;
+        public string corporateName;
     }
 
     public class Address
     {
-        string country;
-        string state;
-        string city;
-        string postalCode;
-        string district;
-        string street;
-        string number;
-        string latitude;
-        string longitude;
+        public string country;
+        public string state;
+        public string city;
+        public string postalCode;
+        public string district;
+        public string street;
+        public string number;
+        public string latitude;
+        public string longitude;
     }
 
     public class Merchant
     {
-        string id;
-        string name;
-        string corporateName;
-        string description;
-        int averageTicket;
-        bool exclusive;
-        string type;
-        string status;
-        string createdAt;
-        Address address;
-        Operation operation;
+        public string id;
+        public string name;
+        public string corporateName;
+        public string description;
+        public int averageTicket;
+        public bool exclusive;
+        public string type;
+        public string status;
+        public string createdAt;
+        public Address address;
+        public Operation operation;
 
     }
 
     public class Interruption
     {
-        string id;
-        string description;
-        string start;
-        string end;
+        public string id;
+        public string description;
+        public string start;
+        public string end;
     }
 
     public class Status
     {
-        string operation;
-        string salesChannel;
-        bool available;
-        string state;
-        Reopenable reopenable;
-        StatusValidation validations;
-        StatusMessage message;
+        public string operation;
+        public string salesChannel;
+        public bool available;
+        public string state;
+        public Reopenable reopenable;
+        public StatusValidation[] validations;
+        public StatusMessage message;
     }
 
     public class Reopenable
     {
-        string identifier;
-        string type;
-        bool reopenable;
+        public string identifier;
+        public string type;
+        public bool reopenable;
     }
 
     public class StatusValidation
     {
-        string id;
-        string code;
-        string state;
-        StatusMessage message;
+        public string id;
+        public string code;
+        public string state;
+        public StatusMessage message;
     }
 
     public class StatusMessage
     {
-        string title;
-        string subtitle;
-        string description;
+        public string title;
+        public string subtitle;
+        public string description;
     }
 
     public class Operation
     {
-        string name;
-        SalesChannel salesChannel;
+        public string name;
+        public SalesChannel salesChannel;
     }
 
     public class SalesChannel
     {
-        string name;
-        string enabled;
+        public string name;
+        public string enabled;
     }
 }

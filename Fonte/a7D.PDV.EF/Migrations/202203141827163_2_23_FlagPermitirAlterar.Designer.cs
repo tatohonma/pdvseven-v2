@@ -7,13 +7,13 @@ namespace a7D.PDV.EF.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class _2_22_01_Cliente : IMigrationMetadata
+    public sealed partial class _2_23_FlagPermitirAlterar : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(_2_22_01_Cliente));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(_2_23_FlagPermitirAlterar));
         
         string IMigrationMetadata.Id
         {
-            get { return "202203111711574__2_22_01_Cliente"; }
+            get { return "202203141827163_2_23_FlagPermitirAlterar"; }
         }
         
         string IMigrationMetadata.Source

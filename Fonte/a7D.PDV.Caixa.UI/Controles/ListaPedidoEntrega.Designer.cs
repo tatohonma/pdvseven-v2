@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtPesquisarEntrega = new System.Windows.Forms.TextBox();
             this.dgvEntregas = new System.Windows.Forms.DataGridView();
             this.StatusPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,6 +43,7 @@
             this.Telefone1Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GUIDIdentificacao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IDStatusPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IDOrigemPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Icone = new System.Windows.Forms.DataGridViewImageColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolstripMenuCancelarPedido = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,8 +73,8 @@
             this.dgvEntregas.AllowUserToAddRows = false;
             this.dgvEntregas.AllowUserToDeleteRows = false;
             this.dgvEntregas.AllowUserToResizeRows = false;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
-            this.dgvEntregas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
+            this.dgvEntregas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvEntregas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -83,15 +84,15 @@
             this.dgvEntregas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgvEntregas.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvEntregas.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(193)))), ((int)(((byte)(207)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEntregas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(193)))), ((int)(((byte)(207)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEntregas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvEntregas.ColumnHeadersHeight = 40;
             this.dgvEntregas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.StatusPedido,
@@ -101,17 +102,18 @@
             this.Telefone1Numero,
             this.GUIDIdentificacao,
             this.IDStatusPedido,
+            this.IDOrigemPedido,
             this.Icone});
             this.dgvEntregas.ContextMenuStrip = this.contextMenuStrip1;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEntregas.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEntregas.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvEntregas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvEntregas.EnableHeadersVisualStyles = false;
             this.dgvEntregas.Location = new System.Drawing.Point(0, 93);
@@ -119,17 +121,17 @@
             this.dgvEntregas.Name = "dgvEntregas";
             this.dgvEntregas.ReadOnly = true;
             this.dgvEntregas.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEntregas.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEntregas.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvEntregas.RowHeadersVisible = false;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(231)))), ((int)(((byte)(234)))));
-            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(5);
-            this.dgvEntregas.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(231)))), ((int)(((byte)(234)))));
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(5);
+            this.dgvEntregas.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvEntregas.RowTemplate.DividerHeight = 1;
             this.dgvEntregas.RowTemplate.Height = 36;
             this.dgvEntregas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -137,7 +139,6 @@
             this.dgvEntregas.Size = new System.Drawing.Size(525, 340);
             this.dgvEntregas.TabIndex = 73;
             this.dgvEntregas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEntregas_CellClick);
-            this.dgvEntregas.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEntregas_CellContentDoubleClick);
             this.dgvEntregas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEntregas_CellDoubleClick);
             this.dgvEntregas.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvEntregas_CellFormatting);
             // 
@@ -203,6 +204,14 @@
             this.IDStatusPedido.Name = "IDStatusPedido";
             this.IDStatusPedido.ReadOnly = true;
             this.IDStatusPedido.Visible = false;
+            // 
+            // IDOrigemPedido
+            // 
+            this.IDOrigemPedido.DataPropertyName = "IDOrigemPedido";
+            this.IDOrigemPedido.HeaderText = "IDOrigemPedido";
+            this.IDOrigemPedido.Name = "IDOrigemPedido";
+            this.IDOrigemPedido.ReadOnly = true;
+            this.IDOrigemPedido.Visible = false;
             // 
             // Icone
             // 
@@ -303,6 +312,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Telefone1Numero;
         private System.Windows.Forms.DataGridViewTextBoxColumn GUIDIdentificacao;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDStatusPedido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDOrigemPedido;
         private System.Windows.Forms.DataGridViewImageColumn Icone;
     }
 }

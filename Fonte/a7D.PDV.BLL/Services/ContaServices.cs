@@ -1,4 +1,5 @@
-﻿using a7D.PDV.BLL.Extension;
+﻿using a7D.Fmk.CRUD.DAL;
+using a7D.PDV.BLL.Extension;
 using a7D.PDV.BLL.Utils;
 using a7D.PDV.BLL.ValueObject;
 using a7D.PDV.EF.Enum;
@@ -192,11 +193,12 @@ namespace a7D.PDV.BLL.Services
                     h.plain.AppendLine(h.Identificacao);
                     break;
                 case ETipoPedido.Delivery:
-                    string ifood = pedido.PedidoIFood;
-                    if (!string.IsNullOrEmpty(ifood))
+                    if(pedido.OrigemPedido != null && pedido.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
                     {
-                        h.Identificacao = "IFOOD " + ifood;
-                        h.plain.AppendLine("DELIVERY " + h.IdPedido + " IFOOD " + ifood);
+                        TagInformation tagDisplayId = BLL.Tag.Carregar(pedido.GUIDIdentificacao, "ifood-displayId");
+
+                        h.Identificacao = "IFOOD " + tagDisplayId.Valor;
+                        h.plain.AppendLine("DELIVERY " + h.IdPedido + " IFOOD " + tagDisplayId.Valor);
                     }
                     else
                     {

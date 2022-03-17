@@ -25,6 +25,9 @@ namespace a7D.PDV.BLL
         [Config("Aprovar vendas do iFood automaticamente", ETipoPDV.IFOOD, Valor = "1", ValoresAceitos = "0|1", Obrigatorio = true)]
         public bool AprovarIFood { get; set; }
 
+        [Config("Finalizar pedido no sistema automaticamente na finalização do iFood", ETipoPDV.IFOOD, Valor = "1", ValoresAceitos = "0|1", Obrigatorio = true)]
+        public bool FinalizacaoAutomatica { get; set; }
+
         [Config("ClientId (PDVSeven)", ETipoPDV.IFOOD)]
         public string ClientId { get; set; }
 

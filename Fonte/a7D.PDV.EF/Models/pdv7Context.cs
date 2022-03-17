@@ -261,6 +261,8 @@ namespace a7D.PDV.EF.Models
         public DbSet<tbTicket> Tickets { get; set; }
         public DbSet<tbIntegracao> Integracoes { get; set; }
         public DbSet<tbTipoIntegracao> TipoIntegracoes { get; set; }
+        public DbSet<tbTag> Tags { get; set; }
+        public DbSet<tbOrigemPedido> OrigemPedidos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -338,6 +340,8 @@ namespace a7D.PDV.EF.Models
             modelBuilder.Configurations.Add(new PesquisaMAP());
             modelBuilder.Configurations.Add(new tbTamanhoPacoteMAP());
             modelBuilder.Configurations.Add(new tbHorarioDeliveryMap());
+            modelBuilder.Configurations.Add(new tbTagMap());
+            modelBuilder.Configurations.Add(new tbOrigemPedidoMap());
         }
     }
 }

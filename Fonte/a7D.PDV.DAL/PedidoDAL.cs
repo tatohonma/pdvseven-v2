@@ -80,7 +80,8 @@ FROM tbPedido p (nolock)
 					cl.Bairro,
 					cl.Cidade,
 					cl.EnderecoReferencia,
-                    cl.Observacao
+                    cl.Observacao,
+                    p.IDOrigemPedido
                 FROM 
 	                tbPedido p
 					INNER JOIN tbStatusPedido sp (NOLOCK) ON sp.IDStatusPedido=p.IDStatusPedido					
@@ -154,10 +155,12 @@ SELECT
     ,cx.IDCaixa
     ,tp.Nome as 'TipoPedido_Nome'
 	,comanda.Numero as 'NumeroComanda'
-	,mesa.Numero as 'NumeroMesa'
-    
+	,mesa.Numero as 'NumeroMesa'    
     ,p.IDTipoDesconto
     ,td.Nome as 'TipoDescontoNome'
+    ,p.IDOrigemPedido
+    ,op.Nome as OrigemPedido_Nome
+    ,PermitirAlterar
 FROM 
 	tbPedido p (NOLOCK)
 	INNER JOIN tbStatusPedido sp (NOLOCK) ON sp.IDStatusPedido=p.IDStatusPedido
@@ -167,10 +170,8 @@ FROM
 	LEFT JOIN tbCliente c (NOLOCK) ON c.idCliente=p.idCliente
 	LEFT JOIN tbTipoEntrada te (NOLOCK) ON te.IDTipoEntrada=p.IDTipoEntrada
     LEFT JOIN tbCaixa cx (NOLOCK) on cx.IDCaixa = p.IDCaixa
-
     LEFT JOIN tbTipoDesconto td (NOLOCK) on td.IDTipoDesconto = p.IDTipoDesconto
-
-
+    LEFT JOIN tbOrigemPedido op (NOLOCK) on op.IDOrigemPedido= p.IDOrigemPedido
 WHERE
 	p.IDPedido=@idPedido
             ";
@@ -210,6 +211,10 @@ WHERE
                 pedido.TipoPedido = new TipoPedidoInformation();
                 pedido.TipoPedido.IDTipoPedido = Convert.ToInt32(dr["IDTipoPedido"]);
                 pedido.TipoPedido.Nome = Convert.ToString(dr["TipoPedido_Nome"]);
+
+                pedido.OrigemPedido = new OrigemPedidoInformation();
+                pedido.OrigemPedido.IDOrigemPedido = Convert.ToInt32(dr["IDOrigemPedido"]);
+                pedido.OrigemPedido.Nome = Convert.ToString(dr["OrigemPedido_Nome"]);
 
                 pedido.StatusPedido = new StatusPedidoInformation();
                 pedido.StatusPedido.IDStatusPedido = Convert.ToInt32(dr["IDStatusPedido"]);
@@ -303,6 +308,14 @@ WHERE
                         IDTipoDesconto = Convert.ToInt32(dr["IDTipoDesconto"]),
                         Nome = dr["TipoDescontoNome"].ToString()
                     };
+                }
+                if (dr["PermitirAlterar"] != DBNull.Value)
+                {
+                    pedido.PermitirAlterar = Convert.ToBoolean(dr["PermitirAlterar"]);
+                }
+                else
+                {
+                    pedido.PermitirAlterar = true;
                 }
             }
 

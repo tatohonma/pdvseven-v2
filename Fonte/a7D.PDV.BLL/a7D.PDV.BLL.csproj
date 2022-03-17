@@ -144,6 +144,7 @@
     <Compile Include="Dashboard.cs" />
     <Compile Include="Extension\ImpressaoExtensions.cs" />
     <Compile Include="GA.cs" />
+    <Compile Include="Tag.cs" />
     <Compile Include="ValueObject\SaldoClientes.cs" />
     <Compile Include="ValueObject\ImpressaoOrdemProducao.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

@@ -1,4 +1,5 @@
-﻿using a7D.PDV.BLL;
+﻿using a7D.Fmk.CRUD.DAL;
+using a7D.PDV.BLL;
 using a7D.PDV.BLL.Extension;
 using a7D.PDV.BLL.Services;
 using a7D.PDV.BLL.Utils;
@@ -613,11 +614,21 @@ namespace a7D.PDV.Fiscal.Services
                             h.Identificacao = $"COMANDA {Comanda.CarregarPorGUID(pedido.GUIDIdentificacao)?.Numero}";
                             break;
                         case ETipoPedido.Delivery:
-                            string ifood = pedido.PedidoIFood;
-                            if (!string.IsNullOrEmpty(ifood))
-                                h.Identificacao = "IFOOD " + ifood;
+
+                            if (pedido.OrigemPedido != null && pedido.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
+                            {
+                                TagInformation tagOrderId = new TagInformation();
+                                tagOrderId.GUIDIdentificacao = pedido.GUIDIdentificacao;
+                                tagOrderId.Chave = "ifood-orderId";
+                                CRUD.Carregar(tagOrderId);
+
+                                h.Identificacao = "IFOOD " + tagOrderId.Valor;
+                            }
                             else
+                            {
                                 h.Identificacao = "DELIVERY";
+                            }
+
                             break;
                     }
 

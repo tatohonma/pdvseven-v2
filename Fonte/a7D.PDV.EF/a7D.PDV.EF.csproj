@@ -69,6 +69,7 @@
     <Compile Include="DTO\PagamentoTEF.cs" />
     <Compile Include="Enum\ECodigosPagamentoSAT.cs" />
     <Compile Include="Enum\EConfig.cs" />
+    <Compile Include="Enum\EOrigemPedido.cs" />
     <Compile Include="Enum\EStatusMesa.cs" />
     <Compile Include="Enum\EStatusPedido.cs" />
     <Compile Include="Enum\ETamanhoPacote.cs" />
@@ -154,10 +155,26 @@
     <Compile Include="Migrations\202203112222532_2_22_Cliente.designer.cs">
       <DependentUpon>202203112222532_2_22_Cliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202203141806068_2_23_Tags+OrigemPedidos.cs" />
+    <Compile Include="Migrations\202203141806068_2_23_Tags+OrigemPedidos.designer.cs">
+      <DependentUpon>202203141806068_2_23_Tags+OrigemPedidos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203141827163_2_23_FlagPermitirAlterar.cs" />
+    <Compile Include="Migrations\202203141827163_2_23_FlagPermitirAlterar.designer.cs">
+      <DependentUpon>202203141827163_2_23_FlagPermitirAlterar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203141834520_2_23_GuidIdentificacao-Cliente.cs" />
+    <Compile Include="Migrations\202203141834520_2_23_GuidIdentificacao-Cliente.designer.cs">
+      <DependentUpon>202203141834520_2_23_GuidIdentificacao-Cliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\tbOrigemPedidoMap.cs" />
+    <Compile Include="Models\Mapping\tbTagMap.cs" />
     <Compile Include="Models\tbBandeira.cs" />
     <Compile Include="Models\Mapping\tbBandeiraMap.cs" />
     <Compile Include="Models\Mapping\tbTamanhoPacoteMAP.cs" />
     <Compile Include="Models\Mapping\tbHorarioDeliveryMap.cs" />
+    <Compile Include="Models\tbOrigemPedido.cs" />
+    <Compile Include="Models\tbTag.cs" />
     <Compile Include="Models\tbTicket.cs" />
     <Compile Include="Models\tbMensagem.cs" />
     <Compile Include="Models\tbIntegracao.cs" />
@@ -384,6 +401,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202203112222532_2_22_Cliente.resx">
       <DependentUpon>202203112222532_2_22_Cliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203141806068_2_23_Tags+OrigemPedidos.resx">
+      <DependentUpon>202203141806068_2_23_Tags+OrigemPedidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203141827163_2_23_FlagPermitirAlterar.resx">
+      <DependentUpon>202203141827163_2_23_FlagPermitirAlterar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203141834520_2_23_GuidIdentificacao-Cliente.resx">
+      <DependentUpon>202203141834520_2_23_GuidIdentificacao-Cliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

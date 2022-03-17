@@ -7,13 +7,13 @@ namespace a7D.PDV.EF.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class _2_22_01_RetiradaAgendado : IMigrationMetadata
+    public sealed partial class _2_23_TagsOrigemPedidos : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(_2_22_01_RetiradaAgendado));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(_2_23_TagsOrigemPedidos));
         
         string IMigrationMetadata.Id
         {
-            get { return "202202271908525_2_22_01_Retirada+Agendado"; }
+            get { return "202203141806068_2_23_Tags+OrigemPedidos"; }
         }
         
         string IMigrationMetadata.Source
