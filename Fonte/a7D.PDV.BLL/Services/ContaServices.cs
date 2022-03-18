@@ -437,7 +437,9 @@ namespace a7D.PDV.BLL.Services
             var valorTotalAPagar = Convert.ToDecimal(dados.ValorTotalAPagar);
 
             if (dados.ValorTotalAPagar != dados.ValorTotal)
+            {
                 Y += espaco + g.DrawItemValor(new ItemValor("Sub-Total:", dados.ValorTotal), fNormal, Y, totalWidth);
+            }
 
             if (!string.IsNullOrWhiteSpace(dados.ValorEntrega))
                 Y += espaco + g.DrawItemValor(new ItemValor("Taxa de Entrega:", dados.ValorEntrega), fNormal, Y, totalWidth);

@@ -153,7 +153,7 @@ namespace a7D.PDV.BLL.Services
                 {
                     TagInformation tagDisplayId = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-displayId");
 
-                    h.Identificacao = "IFOOD " + tagDisplayId.Valor.Substring(0, 5);
+                    h.Identificacao = "IFOOD " + tagDisplayId.Valor;
                     h.plain.AppendLine("DELIVERY " + h.IdPedido + " IFOOD " + tagDisplayId.Valor);
                 }
                 else

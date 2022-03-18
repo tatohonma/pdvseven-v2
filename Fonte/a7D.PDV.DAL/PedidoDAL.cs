@@ -211,10 +211,13 @@ WHERE
                 pedido.TipoPedido = new TipoPedidoInformation();
                 pedido.TipoPedido.IDTipoPedido = Convert.ToInt32(dr["IDTipoPedido"]);
                 pedido.TipoPedido.Nome = Convert.ToString(dr["TipoPedido_Nome"]);
-
-                pedido.OrigemPedido = new OrigemPedidoInformation();
-                pedido.OrigemPedido.IDOrigemPedido = Convert.ToInt32(dr["IDOrigemPedido"]);
-                pedido.OrigemPedido.Nome = Convert.ToString(dr["OrigemPedido_Nome"]);
+                
+                if (dr["IDOrigemPedido"] != DBNull.Value)
+                {
+                    pedido.OrigemPedido = new OrigemPedidoInformation();
+                    pedido.OrigemPedido.IDOrigemPedido = Convert.ToInt32(dr["IDOrigemPedido"]);
+                    pedido.OrigemPedido.Nome = Convert.ToString(dr["OrigemPedido_Nome"]);
+                }
 
                 pedido.StatusPedido = new StatusPedidoInformation();
                 pedido.StatusPedido.IDStatusPedido = Convert.ToInt32(dr["IDStatusPedido"]);

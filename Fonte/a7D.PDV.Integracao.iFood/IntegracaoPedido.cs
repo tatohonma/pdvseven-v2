@@ -34,6 +34,16 @@ namespace a7D.PDV.Integracao.iFood
                 AddLog("Id " + evento.id + " > OrderId " + evento.orderId + " > Code " + evento.code);
                 AddLog(JsonConvert.SerializeObject(evento));
 
+                if (EventosRecebidos.Contains(evento.id))
+                {
+                    AddLog("Evento duplicado...");
+                    APIOrder.Acknowledgment(new Model.Order.Event[] { evento });
+                }
+                else
+                {
+                    EventosRecebidos.Add(evento.id);
+                }
+
                 try
                 {
                     switch (evento.code)
@@ -438,8 +448,8 @@ namespace a7D.PDV.Integracao.iFood
             pedidoPagamento.UsuarioPagamento = UsuarioIfood;
             pedidoPagamento.Excluido = false;
 
-            //if(paymentMethod.chash != null)
-            //    pedidoPagamento.Valor = paymentMethod.value + paymentMethod.chash.changeFor;
+            if (paymentMethod.method == "CASH")
+                pedidoPagamento.Valor = paymentMethod.value + paymentMethod.cash.changeFor;
 
             //pedido.@IDMetodo = ''--payments.methods.method;
             //pedido.IDContaRecebivel;

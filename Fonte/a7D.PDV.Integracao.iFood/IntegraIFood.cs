@@ -37,6 +37,7 @@ namespace a7D.PDV.Integracao.iFood
         API.Merchant APIMerchant;
         String AccessToken;
         DateTime ExpiraEm;
+        List<String> EventosRecebidos;
 
         public override void Executar()
         {
@@ -174,6 +175,7 @@ namespace a7D.PDV.Integracao.iFood
         {
             try
             {
+                EventosRecebidos = new List<string>();
                 AddLog("Integração iFood: Ativada");
 
                 while (Executando)

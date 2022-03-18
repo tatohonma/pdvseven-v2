@@ -219,7 +219,7 @@ namespace a7D.PDV.Integracao.iFood.Model.Order
         public string currency;
         public string type;
         public decimal value;
-        public CashInformation chash;
+        public CashInformation cash;
         public CreditCardInformation card;
     }
 
