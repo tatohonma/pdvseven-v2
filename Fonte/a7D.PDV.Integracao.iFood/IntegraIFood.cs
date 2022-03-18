@@ -194,7 +194,10 @@ namespace a7D.PDV.Integracao.iFood
                     if (LojaAbertaSistema())
                     {
                         if (!LojaAbertaIfood())
+                        {
+                            Sleep(60);
                             continue;
+                        }
 
                         AddLog("Lendo eventos...");
                         LerEventos();

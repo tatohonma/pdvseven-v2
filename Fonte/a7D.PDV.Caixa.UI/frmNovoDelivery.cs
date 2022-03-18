@@ -111,7 +111,7 @@ namespace a7D.PDV.Caixa.UI
             Pedido1 = Pedido.CarregarUltimoPedido(guidIdentificacao);
             TagInformation tagOrderType = BLL.Tag.Carregar(Pedido1.GUIDIdentificacao, "ifood-orderType");
 
-            if (Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
+            if (Pedido1.OrigemPedido != null && Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
             {
                 AppDelivery = true;
                 controlePedidoProduto.BloqueiaEdicao();

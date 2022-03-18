@@ -150,11 +150,11 @@ namespace a7D.PDV.Caixa.UI
             txtNome.Text = string.Empty;
             txtEmail.Text = string.Empty;
 
-            if (txtNumero.Text.Length >= 4)
+            if (txtNumero.Text.Length >= 5)
             {
                 ListaCliente = Cliente.ListarResumido(telefone1Numero: Convert.ToInt32(txtNumero.Text));
             }
-            else if (txtNumero.Text.Length < 4)
+            else if (txtNumero.Text.Length < 5)
             {
                 ListaCliente = new List<ClienteInformation>();
             }

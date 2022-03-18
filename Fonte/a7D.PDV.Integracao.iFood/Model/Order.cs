@@ -14,7 +14,7 @@ namespace a7D.PDV.Integracao.iFood.Model.Order
     {
         public string descrition;
         public Sponsorship[] sponmsorshipValues;
-        public int value;
+        public decimal value;
         public string target;
     }
 
@@ -191,6 +191,7 @@ namespace a7D.PDV.Integracao.iFood.Model.Order
     public class OrderDetails
     {
         public string orderType;
+        public Benefit[] benefits;
         public Payments payments;
         public Merchant merchant;
         public string salesChannel;
@@ -252,7 +253,7 @@ namespace a7D.PDV.Integracao.iFood.Model.Order
     public class Sponsorship
     {
         public string name;
-        public Decimal value;
+        public decimal value;
     }
 
     public class TakeoutInformation

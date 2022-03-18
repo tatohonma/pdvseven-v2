@@ -153,6 +153,7 @@ namespace a7D.PDV.Integracao.iFood
         private void AdicionarPedido(Model.Order.Event evento)
         {
             PedidoInformation pedido = new PedidoInformation();
+            string voucherDesconto;
 
             var orderDetails = APIOrder.OrderDetails(evento.orderId);
             AddLog(JsonConvert.SerializeObject(orderDetails));
@@ -184,7 +185,25 @@ namespace a7D.PDV.Integracao.iFood
             pedido.ValorEntrega = Convert.ToDecimal(orderDetails.total.deliveryFee);
 
             if (orderDetails.total.benefits > 0)
+            {
                 pedido.TipoDesconto = TipoDescontoIFood;
+
+                voucherDesconto = "VOUCHER DE DESCONTO\n\n";
+                foreach (var benefit in orderDetails.benefits)
+                {
+                    voucherDesconto += benefit.descrition + "\n";
+
+                    foreach (var sponsorship in benefit.sponmsorshipValues)
+                    {
+                        voucherDesconto += " - " + sponsorship.name + ": R$ " + sponsorship.value + "\n";
+                    }
+
+                    voucherDesconto += "\n";
+                }
+
+                pedido.Observacoes += voucherDesconto + "\n\n";
+                pedido.ObservacaoCupom += voucherDesconto + "\n\n";
+            }
 
             pedido.ValorDesconto = orderDetails.total.benefits;
 
