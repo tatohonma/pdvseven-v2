@@ -122,18 +122,31 @@ namespace a7D.PDV.Integracao.iFood
             if (orderDetails.total.benefits > 0)
             {
                 pedido.TipoDesconto = TipoDescontoIFood;
-
                 voucherDesconto = "VOUCHER DE DESCONTO\n\n";
-                foreach (var benefit in orderDetails.benefits)
-                {
-                    voucherDesconto += benefit.descrition + "\n";
 
-                    foreach (var sponsorship in benefit.sponmsorshipValues)
+                if (orderDetails.benefits != null)
+                {                    
+                    foreach (var benefit in orderDetails.benefits)
                     {
-                        voucherDesconto += " - " + sponsorship.name + ": R$ " + sponsorship.value + "\n";
+                        if (benefit.sponmsorshipValue.own.value > 0)
+                        {
+                            //desconto iFood
+                            voucherDesconto += "Desconto iFood: R$ " + benefit.sponmsorshipValue.own.value + "\n\n";
+                        }
+                        else if (benefit.sponmsorshipValue.partner.value > 0)
+                        {
+                            //desconto restaurante
+                            voucherDesconto += "Desconto Restaurante: R$ " + benefit.sponmsorshipValue.partner.value + "\n\n";
+                        }
+                        else
+                        {
+                            voucherDesconto += "Desconto: R$ " + benefit.value.value + "\n\n";
+                        }
                     }
-
-                    voucherDesconto += "\n";
+                }
+                else
+                {
+                    voucherDesconto += "Desconto: R$ " + orderDetails.total.benefits + "\n\n"; 
                 }
 
                 pedido.Observacoes += voucherDesconto + "\n\n";
@@ -620,7 +633,7 @@ namespace a7D.PDV.Integracao.iFood
             {
                 GerarOrdemProducao(pedido.IDPedido.Value);
                 pedido.StatusPedido.IDStatusPedido = (int)EStatusPedido.Aberto;
-            }                
+            }
         }
     }
 }
