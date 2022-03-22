@@ -9,23 +9,15 @@ namespace a7D.PDV.Integracao.iFood.Model.Order
         public string type;
         public decimal value;
     }
-    public class Value
-    {
-        public string currency;
-        public decimal value;
-    }
+
     public class Benefit
     {
-        public string type;
-        public Value value;
-        public SponsorshipValue sponmsorshipValue;
+        public string descrition;
+        public Sponsorship[] sponmsorshipValues;
+        public decimal value;
         public string target;
     }
-    public class SponsorshipValue
-    {
-        public Value own;
-        public Value partner;
-    }
+
     public class CancellationRequest
     {
         public string description;
@@ -257,16 +249,13 @@ namespace a7D.PDV.Integracao.iFood.Model.Order
         public string deliveryDateTimeStart;
         public string deliveryDateTimeEnd;
     }
-    //public class Sponsorship
-    //{
-    //    public SponsorshipValue own;
-    //    public SponsorshipValue partner;
-    //}
-    //public class SponsorshipValue
-    //{
-    //    public string currency;
-    //    public decimal value;
-    //}
+
+    public class Sponsorship
+    {
+        public string name;
+        public decimal value;
+    }
+
     public class TakeoutInformation
     {
         public string mode;
