@@ -12,9 +12,8 @@ namespace a7D.PDV.Integracao.iFood.Model.Order
 
     public class Benefit
     {
-        public string descrition;
-        public Sponsorship[] sponmsorshipValues;
         public decimal value;
+        public Sponsorship[] sponsorshipValues;
         public string target;
     }
 

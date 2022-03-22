@@ -94,8 +94,8 @@ namespace a7D.PDV.Integracao.iFood
             AddLog(JsonConvert.SerializeObject(orderDetails));
 
             pedido.Cliente = AdicionarCliente(orderDetails);
-            pedido.Observacoes += "Cliente: " + pedido.Cliente.NomeCompleto + "\n\n";
-            pedido.Observacoes += "Endereço: " + pedido.Cliente.EnderecoCompleto + "\n\n";
+            pedido.Observacoes += "Cliente: " + pedido.Cliente.NomeCompleto + "\n";
+            pedido.Observacoes += "Endereço: " + pedido.Cliente.EnderecoCompleto + "\n";
 
             pedido.DocumentoCliente = orderDetails.customer.documentNumber;
 
@@ -123,21 +123,19 @@ namespace a7D.PDV.Integracao.iFood
             {
                 pedido.TipoDesconto = TipoDescontoIFood;
 
-                voucherDesconto = "VOUCHER DE DESCONTO\n\n";
+                voucherDesconto = "\nVOUCHER DE DESCONTO\n";
                 foreach (var benefit in orderDetails.benefits)
                 {
-                    voucherDesconto += benefit.descrition + "\n";
-
-                    foreach (var sponsorship in benefit.sponmsorshipValues)
+                    foreach (var sponsorship in benefit.sponsorshipValues)
                     {
-                        voucherDesconto += " - " + sponsorship.name + ": R$ " + sponsorship.value + "\n";
+                        if (sponsorship.value > 0)
+                            voucherDesconto += " > " + sponsorship.name + ": R$ " + sponsorship.value.ToString("#,##0.00") + "\n";
                     }
 
-                    voucherDesconto += "\n";
                 }
 
-                pedido.Observacoes += voucherDesconto + "\n\n";
-                pedido.ObservacaoCupom += voucherDesconto + "\n\n";
+                pedido.Observacoes += voucherDesconto + "\n";
+                pedido.ObservacaoCupom += voucherDesconto + "\n";
             }
 
             pedido.ValorDesconto = orderDetails.total.benefits;
@@ -154,13 +152,13 @@ namespace a7D.PDV.Integracao.iFood
 
             if (orderDetails.customer.ordersCountOnMerchant == 0)
             {
-                pedido.Observacoes += "NOVO CLIENTE " + "\n\n";
-                pedido.ObservacaoCupom += "NOVO CLIENTE " + "\n\n";
+                pedido.Observacoes += "NOVO CLIENTE " + "\n";
+                pedido.ObservacaoCupom += "NOVO CLIENTE " + "\n";
             }
             else
             {
-                pedido.Observacoes += "FIDELIDADE " + orderDetails.customer.ordersCountOnMerchant.ToString() + "\n\n";
-                pedido.ObservacaoCupom += "FIDELIDADE " + orderDetails.customer.ordersCountOnMerchant.ToString() + "\n\n";
+                pedido.Observacoes += "FIDELIDADE " + orderDetails.customer.ordersCountOnMerchant.ToString() + "\n";
+                pedido.ObservacaoCupom += "FIDELIDADE " + orderDetails.customer.ordersCountOnMerchant.ToString() + "\n";
             }
 
             CRUD.Adicionar(pedido);
@@ -620,7 +618,7 @@ namespace a7D.PDV.Integracao.iFood
             {
                 GerarOrdemProducao(pedido.IDPedido.Value);
                 pedido.StatusPedido.IDStatusPedido = (int)EStatusPedido.Aberto;
-            }                
+            }
         }
     }
 }
