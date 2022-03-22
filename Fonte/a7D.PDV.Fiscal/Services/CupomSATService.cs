@@ -617,12 +617,9 @@ namespace a7D.PDV.Fiscal.Services
 
                             if (pedido.OrigemPedido != null && pedido.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
                             {
-                                TagInformation tagOrderId = new TagInformation();
-                                tagOrderId.GUIDIdentificacao = pedido.GUIDIdentificacao;
-                                tagOrderId.Chave = "ifood-orderId";
-                                CRUD.Carregar(tagOrderId);
-
-                                h.Identificacao = "IFOOD " + tagOrderId.Valor;
+                                TagInformation tagDisplayId = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-DisplayID");
+ 
+                                h.Identificacao = "IFOOD " + tagDisplayId.Valor;
                             }
                             else
                             {

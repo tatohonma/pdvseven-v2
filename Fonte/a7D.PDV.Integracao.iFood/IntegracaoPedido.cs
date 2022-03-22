@@ -387,8 +387,7 @@ namespace a7D.PDV.Integracao.iFood
         {
             PedidoPagamentoInformation pedidoPagamento = new PedidoPagamentoInformation();
 
-            pedidoPagamento.TipoPagamento = new TipoPagamentoInformation();
-            pedidoPagamento.TipoPagamento.IDTipoPagamento = CarregarTipoPagamento(paymentMethod.type, paymentMethod.method);
+            pedidoPagamento.TipoPagamento = CarregarTipoPagamento(paymentMethod.type, paymentMethod.method);
 
             pedidoPagamento.Pedido = new PedidoInformation();
             pedidoPagamento.Pedido.IDPedido = idPedido;
@@ -398,48 +397,47 @@ namespace a7D.PDV.Integracao.iFood
             pedidoPagamento.UsuarioPagamento = UsuarioIfood;
             pedidoPagamento.Excluido = false;
 
+            pedidoPagamento.MeioPagamentoSAT = pedidoPagamento.TipoPagamento.MeioPagamentoSAT;
+            pedidoPagamento.IDGateway = (int?)pedidoPagamento.TipoPagamento.Gateway;
+
             if (paymentMethod.method == "CASH")
                 pedidoPagamento.Valor = paymentMethod.value + paymentMethod.cash.changeFor;
-
-            //pedido.@IDMetodo = ''--payments.methods.method;
-            //pedido.IDContaRecebivel;
-            //pedido.@IDBandeira = ''--payments.methods.card.brand;
-            //pedido.IDGateway
 
             CRUD.Adicionar(pedidoPagamento);
         }
 
-        private Int32 CarregarTipoPagamento(string type, string method)
+        private TipoPagamentoInformation CarregarTipoPagamento(string type, string method)
         {
-            Int32 idTipoPagamento;
+            TipoPagamentoInformation tipoPagamento = new TipoPagamentoInformation();
 
             if (type == "OFFLINE")
             {
                 switch (method)
                 {
                     case "DEBIT":
-                        idTipoPagamento = PagamentoDebito.IDTipoPagamento.Value;
+                        tipoPagamento = PagamentoDebito;
                         break;
                     case "CREDIT":
-                        idTipoPagamento = PagamentoCredito.IDTipoPagamento.Value;
+                        tipoPagamento = PagamentoCredito;
                         break;
                     case "CASH":
-                        idTipoPagamento = PagamentoDinheiro.IDTipoPagamento.Value;
+                        tipoPagamento = PagamentoDinheiro;
                         break;
                     case "MEAL_VOUCHER":
-                        idTipoPagamento = PagamentoRefeicao.IDTipoPagamento.Value;
+                        tipoPagamento = PagamentoRefeicao;
                         break;
                     default:
-                        idTipoPagamento = PagamentoOutros.IDTipoPagamento.Value;
+                        tipoPagamento = PagamentoOutros;
                         break;
                 }
             }
             else
             {
-                return PagamentoIFood.IDTipoPagamento.Value;
+                tipoPagamento = PagamentoIFood;
+                tipoPagamento.MeioPagamentoSAT = new MeioPagamentoSATInformation { IDMeioPagamentoSAT = 10 };
             }
 
-            return idTipoPagamento;
+            return tipoPagamento;
         }
 
         public void EnviaConfirmacao()
