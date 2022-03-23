@@ -154,7 +154,7 @@ namespace a7D.PDV.BLL.Services
                 //    itemPrint.WordWrap = true;
 
                 listaProdutoValor.Add(itemPrint);
-                if (exibirItensZerados && !string.IsNullOrEmpty(pedidoProduto.Notas))
+                if (exibirItensZerados && !string.IsNullOrEmpty(pedidoProduto.Notas.Trim()))
                 {
                     itemPrint = new ItemValor("*" + pedidoProduto.Notas, nivel: 4, multLines: true);
                     listaProdutoValor.Add(itemPrint);

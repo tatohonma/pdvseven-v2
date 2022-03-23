@@ -118,6 +118,7 @@ namespace a7D.PDV.Integracao.iFood
             pedido.TaxaEntrega = new TaxaEntregaInformation();
             pedido.TaxaEntrega = TaxaEntregaIFood;
             pedido.ValorEntrega = Convert.ToDecimal(orderDetails.total.deliveryFee);
+            pedido.TaxaServicoPadrao = Convert.ToDecimal(ConfiguracoesSistema.Valores.TaxaServicoEntrega);
 
             if (orderDetails.total.benefits > 0)
             {
@@ -169,6 +170,20 @@ namespace a7D.PDV.Integracao.iFood
             Tag.Adicionar(pedido.GUIDIdentificacao, "ifood-orderType", orderDetails.orderType);
             Tag.Adicionar(pedido.GUIDIdentificacao, "ifood-status", "PLC");
 
+            if (orderDetails.total.additionalFees > 0)
+            {
+                pedido.Observacoes += "Taxas Adicionais\r\n";
+
+                foreach (var fee in orderDetails.additionalFees)
+                {
+                    AdicionarPedidoProduto(pedido.IDPedido.Value, null, "4", fee.type, fee.value, 1, fee.type);
+                    pedido.Observacoes += " - " + fee.type + ": " + fee.value + "\r\n";
+                }
+
+                pedido.Observacoes += "\r\n";
+            }
+
+
             foreach (var item in orderDetails.items)
             {
                 Int32 idPedidoProduto = AdicionarPedidoProduto(pedido.IDPedido.Value, null, item.externalCode, item.name, item.unitPrice, item.quantity, item.observations);
@@ -189,12 +204,12 @@ namespace a7D.PDV.Integracao.iFood
                 AdicionarPedidoPagamento(pedido.IDPedido.Value, pagamento);
             }
 
+            CRUD.Salvar(pedido);
+
             if (ConfigIFood.AprovarIFood == true)
             {
                 ConfirmarPedido(evento);
-            }
-
-            CRUD.Salvar(pedido);
+            }            
         }
 
         public void GerarOrdemProducao(Int32 idPedido)
@@ -401,7 +416,7 @@ namespace a7D.PDV.Integracao.iFood
             pedidoPagamento.IDGateway = (int?)pedidoPagamento.TipoPagamento.Gateway;
 
             if (paymentMethod.method == "CASH")
-                pedidoPagamento.Valor = paymentMethod.value + paymentMethod.cash.changeFor;
+                pedidoPagamento.Valor = paymentMethod.cash.changeFor;
 
             CRUD.Adicionar(pedidoPagamento);
         }
@@ -615,7 +630,7 @@ namespace a7D.PDV.Integracao.iFood
             if (pedido != null && pedido.IDPedido != null)
             {
                 GerarOrdemProducao(pedido.IDPedido.Value);
-                pedido.StatusPedido.IDStatusPedido = (int)EStatusPedido.Aberto;
+                AlterarStatusPedido(pedido.IDPedido.Value, EStatusPedido.Aberto);
             }
         }
     }

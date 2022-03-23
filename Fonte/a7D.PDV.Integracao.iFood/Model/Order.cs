@@ -5,7 +5,6 @@ namespace a7D.PDV.Integracao.iFood.Model.Order
 {
     public class AdditionalFee
     {
-        public string description;
         public string type;
         public decimal value;
     }

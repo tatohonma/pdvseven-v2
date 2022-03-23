@@ -68,6 +68,7 @@ namespace a7D.PDV.Integracao.iFood
             Boolean configurado = true;
 
             ConfigIFood = new ConfiguracoesIFood();
+
             if (!ConfigIFood.IntegracaoIFood)
             {
                 AddLog("Integração iFood desligada");
@@ -183,7 +184,10 @@ namespace a7D.PDV.Integracao.iFood
                     {
                         AddLog("Autenticando...");
                         if (!Autenticar())
+                        {
+                            Sleep(60);
                             continue;
+                        }
                     }
 
                     APIOrder = new API.Order(AccessToken);

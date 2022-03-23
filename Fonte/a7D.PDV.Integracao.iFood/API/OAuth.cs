@@ -27,9 +27,19 @@ namespace a7D.PDV.Integracao.iFood.API
 
             var response = client.PostAsync(uri, formContent).Result;
             var resposta = response.Content.ReadAsStringAsync().Result;
-            var token = JsonConvert.DeserializeObject<Model.OAuth.Token>(resposta);
 
-            return token;
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {                
+                return JsonConvert.DeserializeObject<Model.OAuth.Token>(resposta);
+            }
+            else
+            {
+                string erroRetorno = "";
+                erroRetorno += response.StatusCode + " - " + response.ReasonPhrase + "\r\n";
+                erroRetorno += JsonConvert.SerializeObject(response) + "\r\n";
+
+                throw new Exception(erroRetorno);
+            }
         }
     }
 }
