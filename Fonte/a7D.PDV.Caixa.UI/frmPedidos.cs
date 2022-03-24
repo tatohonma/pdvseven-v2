@@ -712,6 +712,8 @@ namespace a7D.PDV.Caixa.UI
                 iFoodAprovacao.Checked = !iFoodAprovacao.Checked;
                 ConfiguracaoBD.DefinirValorPadraoTipo(EConfig.AprovarIFood, ETipoPDV.IFOOD, iFoodAprovacao.Checked ? "1" : "0");
             }
+
+            MessageBox.Show("É necessário reiniciar o integrador para concluir essa alteração!");
         }
 
         private void tmrDelivery_Tick(object sender, EventArgs e)

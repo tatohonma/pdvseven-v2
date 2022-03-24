@@ -32,6 +32,7 @@ namespace a7D.PDV.Integracao.iFood
         TipoPagamentoInformation PagamentoOutros;
         TaxaEntregaInformation TaxaEntregaIFood;
         TipoDescontoInformation TipoDescontoIFood;
+        ProdutoInformation TaxaAdicional;
 
         API.Order APIOrder;
         API.Merchant APIMerchant;
@@ -150,7 +151,14 @@ namespace a7D.PDV.Integracao.iFood
             {
                 AddLog("Não há um 'Tipo de Desconto' com o nome 'iFood' cadastrada no Backoffice");
                 configurado = false;
-            }            
+            }
+
+            TaxaAdicional = (ProdutoInformation)CRUD.Carregar(new ProdutoInformation { Nome = "Taxa Adicional iFood" });
+            if (TaxaAdicional.IDProduto == null)
+            {
+                AddLog("Não há um produto com o nome 'Taxa Adicional iFood' cadastrado no Backoffice");
+                configurado = false;
+            }
 
             try
             {
