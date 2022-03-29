@@ -82,22 +82,27 @@ namespace a7D.PDV.Caixa.UI
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
+            Boolean satCancelado = false;
+
             var motivo = (MotivoCancelamentoInformation)cbbMotivoCancelamento.SelectedItem;
             if (!motivo.IDMotivoCancelamento.HasValue)
             {
                 MessageBox.Show("Selecione um motivo de cancelamento", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             try
             {
                 Enabled = false;
                 Cursor = Cursors.WaitCursor;
                 Refresh();
+
                 if (ConfiguracoesCaixa.Valores.GerenciadorImpressao == ETipoGerenciadorImpressao.SAT
                  && Pedido1.RetornoSAT_venda?.IDRetornoSAT != null)
                 {
                     Pedido1.RetornoSAT_venda = RetornoSAT.Carregar(Pedido1.RetornoSAT_venda.IDRetornoSAT.Value);
-                    var horaConsultaUTC3 = DateTime.UtcNow.AddMinutes(-10);
+                    var horaConsultaUTC3 = DateTime.UtcNow.AddMinutes(-25);
+                    
                     if (DateTime.ParseExact(Pedido1.RetornoSAT_venda.timeStamp, _formatoData, _cultureInfo).ToUniversalTime() > horaConsultaUTC3)
                     {
                         if (Pedido1.RetornoSAT_cancelamento?.IDRetornoSAT == null)
@@ -111,25 +116,24 @@ namespace a7D.PDV.Caixa.UI
                             {
                                 Pedido1.RetornoSAT_venda.RetornoSATCancelamento = retornoCancSat;
                                 RetornoSAT.Salvar(Pedido1.RetornoSAT_venda);
-                                CancelarPedido(motivo, true);
-                                DialogResult = DialogResult.OK;
-                                Close();
-                                return;
+                                satCancelado = true;
                             }
-                            else
-                            {
-                                MessageBox.Show($"Não foi possível cancelar o SAT!\n{retornoCancSat.mensagem}", retornoCancSat.EEEEE, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
+
+                            CancelarPedido(motivo, satCancelado);
+                            DialogResult = DialogResult.OK;
+                            Close();
+                            return;
                         }
                     }
                     else
                     {
-                        CancelarPedido(motivo, false);
+                        CancelarPedido(motivo, satCancelado);
                         DialogResult = DialogResult.OK;
                         Close();
                         return;
                     }
                 }
+
                 CancelarPedido(motivo, true);
                 DialogResult = DialogResult.OK;
                 Close();
@@ -187,13 +191,7 @@ namespace a7D.PDV.Caixa.UI
                 }
                 else
                 {
-                    TagInformation tagStatus = new TagInformation();
-                    tagStatus.GUIDIdentificacao = Pedido1.GUIDIdentificacao;
-                    tagStatus.Chave = "ifood-status";
-                    CRUD.Carregar(tagStatus);
-
-                    tagStatus.Valor = "requestCancellation";
-                    CRUD.Alterar(tagStatus);
+                    BLL.Tag.Alterar(Pedido1.GUIDIdentificacao, "ifood-status", "requestCancellation");
                 }
             }
 
@@ -209,7 +207,7 @@ namespace a7D.PDV.Caixa.UI
             }
             else
             {
-                MessageBox.Show("Não foi possível cancelar o SAT porque o cupom foi emitido há mais de 1 hora.\nPedido cancelado no sistema", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Não foi possível cancelar o SAT provavelmente porque o cupom foi emitido há algum tempo.\nPedido cancelado no sistema", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             //if (Pedido1.GUIDIdentificacao?.StartsWith("ifood#") == true)

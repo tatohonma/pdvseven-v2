@@ -13,5 +13,9 @@ namespace a7D.PDV.Integracao.iFood.API
         }
 
         public Model.Merchant.Status[] Status(string id) => Get<Model.Merchant.Status[]>($"merchant/v1.0/merchants/{id}/status");
+
+        public Model.Merchant.Merchant Details(string id) => Get<Model.Merchant.Merchant>($"merchant/v1.0/merchants/{id}");
+
+        public Model.Merchant.MerchantSummary[] List() => Get<Model.Merchant.MerchantSummary[]>($"merchant/v1.0/merchants");
     }
 }

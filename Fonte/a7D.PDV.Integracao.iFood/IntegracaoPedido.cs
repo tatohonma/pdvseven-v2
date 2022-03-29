@@ -212,7 +212,7 @@ namespace a7D.PDV.Integracao.iFood
             if (ConfigIFood.AprovarIFood == true)
             {
                 ConfirmarPedido(evento);
-            }            
+            }
         }
 
         private string CarregarTipoTaxaAdicional(string feeType)
@@ -371,7 +371,7 @@ namespace a7D.PDV.Integracao.iFood
             pedidoProduto.DtInclusao = DateTime.Now;
             pedidoProduto.CodigoAliquota = "";
 
-            if(!String.IsNullOrWhiteSpace(observacaoProduto))
+            if (!String.IsNullOrWhiteSpace(observacaoProduto))
             {
                 pedidoProduto.Notas = observacaoProduto + "\r\n" + notas;
             }
@@ -441,7 +441,7 @@ namespace a7D.PDV.Integracao.iFood
             pedidoPagamento.MeioPagamentoSAT = pedidoPagamento.TipoPagamento.MeioPagamentoSAT;
             pedidoPagamento.IDGateway = (int?)pedidoPagamento.TipoPagamento.Gateway;
 
-            if (paymentMethod.method == "CASH")
+            if (paymentMethod.method == "CASH" && paymentMethod.cash.changeFor > 0)
                 pedidoPagamento.Valor = paymentMethod.cash.changeFor;
 
             CRUD.Adicionar(pedidoPagamento);

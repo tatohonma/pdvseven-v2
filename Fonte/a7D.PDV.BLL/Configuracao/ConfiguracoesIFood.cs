@@ -42,14 +42,5 @@ namespace a7D.PDV.BLL
 
         [Config("RefreshToken (api)", ETipoPDV.IFOOD)]
         public string RefreshToken { get; set; }
-
-        [Config("merchantId (Portal Parceiro)", ETipoPDV.IFOOD)]
-        public string merchantId { get; set; }
-
-         //[Config("Atualizar Preços", ETipoPDV.IFOOD, Valor = "NAO", ValoresAceitos = "NAO:Não atualizar|V1:Valor 1|V2:Valor 2|V3:Valor 3", Obrigatorio = true)]
-        //public string AtualizaValor { get; set; }
-
-        //[Config("Atualizar Disponibilidade", ETipoPDV.IFOOD, Valor = "0", ValoresAceitos = "0|1", Obrigatorio = true)]
-        //public bool AtuaizarDisponibilidade { get; set; }
     }
 }

@@ -228,6 +228,7 @@ namespace a7D.PDV.Integracao.iFood
             catch (Exception ex)
             {
                 AddLog("Erro na integração iFood: " + ex.Message);
+                AddLog("Reinicie o Integrador para restabelecer essa integração...\r\nCaso não resolva, entre em contato com o suporte!!!");
                 //if (!ex.Message.Contains("token expired") && !ex.Message.Contains("Invalid access"))
                 //    throw new ExceptionPDV(CodigoErro.EE11, ex);
             }
@@ -298,71 +299,78 @@ namespace a7D.PDV.Integracao.iFood
 
         public void LerEventos()
         {
-            var eventos = APIOrder.EventsPolling();
-            if (eventos == null)
+            try
             {
-                AddLog("Sem eventos!");
-                return;
-            }
-
-            AddLog(eventos.Length.ToString() + " encontrados...");
-
-            foreach (var evento in eventos)
-            {
-                AddLog("Id " + evento.id + " > OrderId " + evento.orderId + " > Code " + evento.code);
-                AddLog(JsonConvert.SerializeObject(evento));
-
-                if (EventosRecebidos.Contains(evento.id))
+                var eventos = APIOrder.EventsPolling();
+                if (eventos == null)
                 {
-                    AddLog("Evento duplicado...");
-                    APIOrder.Acknowledgment(new Model.Order.Event[] { evento });
-                }
-                else
-                {
-                    EventosRecebidos.Add(evento.id);
+                    AddLog("Sem eventos!");
+                    return;
                 }
 
-                try
+                AddLog(eventos.Length.ToString() + " encontrados...");
+
+                foreach (var evento in eventos)
                 {
-                    switch (evento.code)
+                    AddLog("Id " + evento.id + " > OrderId " + evento.orderId + " > Code " + evento.code);
+                    AddLog(JsonConvert.SerializeObject(evento));
+
+                    if (EventosRecebidos.Contains(evento.id))
                     {
-                        case "PLC":
-                            AddLog("Adicionar pedido > " + evento.orderId);
-                            AdicionarPedido(evento);
-                            break;
-
-                        case "CON":
-                            AddLog("Finalizar pedido > " + evento.orderId);
-                            FinalizarPedido(evento);
-                            break;
-
-                        case "CAN":
-                            AddLog("Confirmar cancelamento pedido > " + evento.orderId);
-                            ConfirmarCancelamentoPedido(evento);
-                            break;
-
-                        case "CAR":
-                        case "CCR":
-                            AddLog("Cancelar pedido > " + evento.orderId);
-                            CancelarPedido(evento);
-                            break;
-
-                        case "CFM":
-                            AddLog("Confirmar pedido > " + evento.orderId);
-                            ConfirmarPedido(evento);
-                            break;
-
-                        default:
-                            AddLog("ATENÇÃO: Evento não tratado (" + evento.code + ")");
-                            break;
+                        AddLog("Evento duplicado...");
+                        APIOrder.Acknowledgment(new Model.Order.Event[] { evento });
+                    }
+                    else
+                    {
+                        EventosRecebidos.Add(evento.id);
                     }
 
-                    APIOrder.Acknowledgment(new Model.Order.Event[] { evento });
+                    try
+                    {
+                        switch (evento.code)
+                        {
+                            case "PLC":
+                                AddLog("Adicionar pedido > " + evento.orderId);
+                                AdicionarPedido(evento);
+                                break;
+
+                            case "CON":
+                                AddLog("Finalizar pedido > " + evento.orderId);
+                                FinalizarPedido(evento);
+                                break;
+
+                            case "CAN":
+                                AddLog("Confirmar cancelamento pedido > " + evento.orderId);
+                                ConfirmarCancelamentoPedido(evento);
+                                break;
+
+                            case "CAR":
+                            case "CCR":
+                                AddLog("Cancelar pedido > " + evento.orderId);
+                                CancelarPedido(evento);
+                                break;
+
+                            case "CFM":
+                                AddLog("Confirmar pedido > " + evento.orderId);
+                                ConfirmarPedido(evento);
+                                break;
+
+                            default:
+                                AddLog("ATENÇÃO: Evento não tratado (" + evento.code + ")");
+                                break;
+                        }
+
+                        APIOrder.Acknowledgment(new Model.Order.Event[] { evento });
+                    }
+                    catch (Exception ex)
+                    {
+                        AddLog("Erro processando evento: " + ex.Message);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    AddLog("Erro processando evento: " + ex.Message);
-                }
+            }
+            catch (Exception ex)
+            {
+                AddLog("Erro lendo eventos: " + ex.Message);
             }
         }
     }

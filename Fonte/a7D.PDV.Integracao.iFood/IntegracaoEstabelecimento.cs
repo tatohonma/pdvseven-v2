@@ -62,33 +62,60 @@ namespace a7D.PDV.Integracao.iFood
 
         public Boolean LojaAbertaIfood()
         {
-            Model.Merchant.Status status = APIMerchant.Status(ConfigIFood.merchantId)[0];
+            Boolean ret = false;
+            Boolean lojaAberta = false;
 
-            if (status.state == "ERROR")
+            Model.Merchant.MerchantSummary[] listMerchant = APIMerchant.List();
+
+            foreach (var merchant in listMerchant)
             {
-                APIOrder.EventsPolling();
-                Sleep(10);
+                AddLog("Verificando loja " + merchant.name);
 
-                status = APIMerchant.Status(ConfigIFood.merchantId)[0];
+                lojaAberta = LojaAbertaIfood(merchant.id);
+                if (lojaAberta)
+                    ret = true;
             }
 
-            AddLog("Estado: " + status.state);
-            if (status.state == "OK" || status.state == "WARNING")
-            {
-                return true;
-            }
-            else if (status.state == "CLOSED")
-            {
-                AddLog("Loja fechada no iFood!");
-                AddLog(JsonConvert.SerializeObject(status));
+            return ret;
+        }
 
-                return false;
-            }
-            else
+        public Boolean LojaAbertaIfood(string merchantId)
+        {
+            try
             {
-                AddLog("Loja fechada no iFood e com algum erro!");
-                AddLog(JsonConvert.SerializeObject(status));
+                Model.Merchant.Status status = APIMerchant.Status(merchantId)[0];
 
+                if (status.state == "ERROR")
+                {
+                    APIOrder.EventsPolling();
+                    Sleep(10);
+
+                    status = APIMerchant.Status(merchantId)[0];
+                }
+
+                AddLog("Estado: " + status.state);
+                if (status.state == "OK" || status.state == "WARNING")
+                {
+                    return true;
+                }
+                else if (status.state == "CLOSED")
+                {
+                    AddLog("Loja fechada no iFood!");
+                    AddLog(JsonConvert.SerializeObject(status));
+
+                    return false;
+                }
+                else
+                {
+                    AddLog("Loja fechada no iFood e com algum erro!");
+                    AddLog(JsonConvert.SerializeObject(status));
+
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                AddLog("Erro na verificação da loja aberta no iFood: " + ex.Message);
                 return false;
             }
         }
