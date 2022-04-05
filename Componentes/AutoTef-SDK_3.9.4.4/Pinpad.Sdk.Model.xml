@@ -1,0 +1,1948 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Pinpad.Sdk.Model</name>
+    </assembly>
+    <members>
+        <member name="T:Pinpad.Sdk.Model.Constants.Timeout">
+            <summary>
+            Timeout for type of messages.
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.Exceptions.CardDecisionException">
+            <summary>
+            FNC Commad decides that card was denied
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Exceptions.CardDecisionException.NoCard">
+            <summary>
+            put as true when card improperly removed
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Exceptions.CardDecisionException.#ctor(System.Boolean,System.String,System.Exception)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="message">Invalid table detected message.</param>
+            <param name="noCard">Card improperly removed</param>
+            <param name="innerException">Inner exception, if any.</param>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Exceptions.CardDecisionException.#ctor(System.String,System.Exception)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="message">Invalid table detected message.</param>
+            <param name="innerException">Inner exception, if any.</param>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.Exceptions.CardHasChipException">
+            <summary>
+            Exception for reading a card as magnetic stripe while it has a EMV chip.
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Exceptions.CardHasChipException.#ctor">
+            <summary>
+            Creates the exception with a predefined message.
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.Exceptions.ExpiredCardException">
+            <summary>
+            Exception thrown when card has expired.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Exceptions.ExpiredCardException.ExpiredDate">
+            <summary>
+            Card expirated date.
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Exceptions.ExpiredCardException.#ctor(System.DateTime)">
+            <summary>
+            Default constructor, creates an exception with the default message "An expired card was read. Impossible to continue.".
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.Exceptions.PinDecisionException">
+            <summary>
+            Throws when Pin Read return GOC_DECISION denied offline
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Exceptions.PinDecisionException.#ctor(System.String,System.Exception)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="message">Invalid table detected message.</param>
+            <param name="innerException">Inner exception, if any.</param>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.Exceptions.PinpadException">
+            <summary>
+            Exception for PinPad communication
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Exceptions.PinpadException.RequestString">
+            <summary>
+            Request string sent to the PinPad
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Exceptions.PinpadException.ResponseString">
+            <summary>
+            Response string received from the PinPad
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Exceptions.PinpadException.#ctor(System.String,System.String,System.String,System.Exception)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="inner">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+            <param name="requestString">Request string sent to the PinPad</param>
+            <param name="responseString">Response string received from the PinPad</param>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.Exceptions.PinpadNotFoundException">
+            <summary>
+            Indicates that none pinpads were found on the machine.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Exceptions.PinpadNotFoundException.PinpadPortName">
+            <summary>
+            Port that the pinpad should be connected (if any).
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Exceptions.PinpadNotFoundException.#ctor(System.Exception)">
+            <summary>
+            Set's <see cref="T:Pinpad.Sdk.Model.Exceptions.PinpadNotFoundException"/> message to "None pinpad found.".
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Exceptions.PinpadNotFoundException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Set's <see cref="T:Pinpad.Sdk.Model.Exceptions.PinpadNotFoundException"/> to <paramref name="message"/>.
+            </summary>
+            <param name="message">Exception message.</param>
+            <param name="pinpadPortName">Port that the pinpad should be connected (if any).</param>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.Exceptions.CommandNameMismatchException">
+            <summary>
+            Exception for when attempting to parse a command string into the wrong object
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Exceptions.CommandNameMismatchException.#ctor(System.String,System.Exception)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="inner">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.Exceptions.InvalidChecksumException">
+            <summary>
+            Exception for when the Checksum has failed consecutively for over 3 times
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Exceptions.InvalidChecksumException.#ctor(System.String,System.String,System.String,System.Exception)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="inner">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+            <param name="requestString">Request string sent to the PinPad</param>
+            <param name="responseString">Response string received from the PinPad</param>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.Exceptions.InvalidValueException">
+            <summary>
+            Exception for when a value is not supported
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Exceptions.InvalidValueException.#ctor(System.String,System.Exception)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Exception Message</param>
+            <param name="inner">Inner Exception</param>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.Exceptions.LenghtMismatchException">
+            <summary>
+            Exception for when a property value length does not match what was expected
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Exceptions.LenghtMismatchException.#ctor(System.String,System.Exception)">
+            <summary>
+            Constrcutor
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="inner">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.Exceptions.PropertyParseException">
+            <summary>
+            Exception for failure parsing a PinPadProperty
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Exceptions.PropertyParseException.CommandString">
+            <summary>
+            The command string sent to the Command
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Exceptions.PropertyParseException.PropertyName">
+            <summary>
+            The property name that failed to parse
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Exceptions.PropertyParseException.PropertyString">
+            <summary>
+            The command substring sent to the StringParser
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Exceptions.PropertyParseException.#ctor(System.String,System.String,System.String,System.String,System.Exception)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="inner">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+            <param name="commandString">The command string sent to the Command</param>
+            <param name="propertyName">The property name that failed to parse</param>
+            <param name="propertyString">The command substring sent to the StringParser</param>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.Exceptions.StoneVersionMismatchException">
+            <summary>
+            Exception for when the PinPad's Stone Version is below the command's minimum or when attempting to send a Stone command to a PinPad wihtout Stone App
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Exceptions.StoneVersionMismatchException.Reason">
+            <summary>
+            Error reason.
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Exceptions.StoneVersionMismatchException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Creates the exception.
+            </summary>
+            <param name="reason">Exception reason.</param>
+            <param name="message">Exception Message</param>
+            <param name="inner">Inner Exception</param>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.Exceptions.UnsetPropertyException">
+            <summary>
+            Exception for when a property is not optional and has the data default value
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Exceptions.UnsetPropertyException.#ctor(System.String,System.Exception)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="inner">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.IPinpadCommunication">
+            <summary>
+            Contract for a class to establish logic connection to a pinpad,
+            send and receive commands to and from the pinpad.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.IPinpadCommunication.Connection">
+            <summary>
+            Pinpad connection at the link level.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.IPinpadCommunication.ConnectionName">
+            <summary>
+            Port name in which the pinpad is connected.
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadCommunication.SetTimeout(System.Int32,System.Int32)">
+            <summary>
+            Sets time interval for sending and receiving messages.
+            </summary>
+            <param name="writeTimeout">Time interval to wait for a message to be sent.Time in milliseconds and must be greater than 2 seconds to be changed</param>
+            <param name="readTimeout">Time interval to wait for a message to be received.Time in milliseconds  and must be greater than 2 seconds to be changed</param>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadCommunication.OpenPinpadConnection">
+            <summary>
+            Open logic connection to the pinpad.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadCommunication.ClosePinpadConnection(System.String)">
+            <summary>
+            Close logic connection, if it is connected.
+            </summary>
+            <param name="message">Message to display after closing connection.</param>
+            <returns>Whether the connection was closed or not.</returns>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadCommunication.Ping">
+            <summary>
+            Checks if the connection with the Pinpad is alive. If the pinpad is disconnected,
+            tries to connect again.
+            </summary>
+            <returns>True if the connection is alive.</returns>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadCommunication.CancelRequest">
+            <summary>
+            Was the request accepted by the Pinpad?
+            Cancels the current request at the Pinpad.
+            Should be called only once after the request was sent.
+            </summary>
+            <returns>True if accepted, false to resend.</returns>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadCommunication.SendRequestAndReceiveResponse``1(System.Object)">
+            <summary>
+            Sends a request and receives the specified generic type T.
+            </summary>
+            <typeparam name="T">The corresponding response to
+            the request sent.</typeparam>
+            <param name="request">Request to send.</param>
+            <returns>The response or null in case of failure.</returns>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadCommunication.SendRequestAndVerifyResponseCode(System.Object)">
+            <summary>
+            Sends a request, receives the response then verifies if the command name
+            is not ERR and response code corresponds to success.
+            </summary>
+            <param name="request">Request to send.</param>
+            <returns>True if the request was sent, response was received, command is 
+            not ERR and response code corresponds to success.</returns>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadCommunication.VerifyInsertCard">
+            <summary>
+            Check if a card has been inserted into the pinpad
+            </summary>
+            <returns>Returns true when it detects an inserted card</returns>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.IPinpadKeyboard">
+            <summary>
+            Pinpad keyboard interface tool.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.IPinpadKeyboard.DataPicker">
+            <summary>
+            It contains methods to select data through the pinpad.
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadKeyboard.GetKey">
+            <summary>
+            Gets the next Key pressed at the Pinpad with the default, safe, method.
+            Does not retrieve numeric keys.
+            </summary>
+            <returns>PinpadKey or Undefined on failure.</returns>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadKeyboard.GetNumericInput(Pinpad.Sdk.Model.FirstLineLabelCode,Pinpad.Sdk.Model.SecondLineLabelCode,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets a numeric input from pinpad keyboard.
+            </summary>
+            <param name="firstLine">First line label.</param>
+            <param name="secondLine">Second line label.</param>
+            <param name="minimumLength">Minimum input size.</param>
+            <param name="maximumLength">Maximum input size.</param>
+            <param name="timeOut">Time out.</param>
+            <returns>Input from the keyboard. Null if nothing was received, whether of timeout or cancellation.</returns>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadKeyboard.GetAmount(Pinpad.Sdk.Model.AmountCurrencyCode)">
+            <summary>
+            Gets a decimal amount.
+            The amount shall be typed in the followed format: 
+               - "1,99"
+               - "0,00"
+            Containing always at least 4 chars.
+            </summary>
+            <param name="currency">Amount currency, i. e. R$, US$.</param>
+            <returns>The amount if a valid amount was typed. Null if: timeout, user cancelled, amount was typed on an invalid format (example: 1.7,2).</returns>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.IPinpadPrinter">
+            <summary>
+            Responsible for representate pinpad thermal printer.
+            Only available for Ingenico iWL250 pinpad.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.IPinpadPrinter.IsSupported">
+            <summary>
+            Indicates wether the thermal printer is supported or not.
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadPrinter.AddLogo">
+            <summary>
+            Add Stone logotype to the printer buffer.
+            </summary>
+            <returns>Itself.</returns>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadPrinter.AddQrCode(Pinpad.Sdk.Model.PrinterAlignmentCode,System.String)">
+            <summary>
+            Add QR code to the printer buffer.
+            </summary>
+            <param name="alignment">QR code alignment.</param>
+            <param name="qrCodeMessage">QR code message.</param>
+            <returns>Itself.</returns>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadPrinter.AppendLine(Pinpad.Sdk.Model.PrinterAlignmentCode,Pinpad.Sdk.Model.PrinterFontSize,System.String,System.Object[])">
+            <summary>
+            Add line of text to the printer buffer.
+            </summary>
+            <param name="alignment">Text alignment.</param>
+            <param name="fontSize">Font size.</param>
+            <param name="text">Text to print.</param>
+            <param name="args">Arguments to the text to print.</param>
+            <returns>Itself.</returns>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadPrinter.AppendLine">
+            <summary>
+            Append an empty line.
+            </summary>
+            <returns>Itself.</returns>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadPrinter.AddSeparator">
+            <summary>
+            Add line separator.
+            </summary>
+            <returns>Itself.</returns>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadPrinter.Print">
+            <summary>
+            Print all content in printer buffer.
+            </summary>
+            <returns>Whether the printing was successful or not.</returns>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.Pinpad.IPinpadUpdateService">
+            <summary>
+            Responsible for providing methods and informations to update the pinpad embedded application.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Pinpad.IPinpadUpdateService.SectionSize">
+            <summary>
+            Size of the package to be sent to the pinpad.
+            Each package is a piece of the zipped application.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Pinpad.IPinpadUpdateService.CurrentApplicationVersion">
+            <summary>
+            Current application version running in the pinpad.
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Pinpad.IPinpadUpdateService.Load(System.String)">
+            <summary>
+            Loads the zipped file in the memory.
+            </summary>
+            <param name="filePath">Absolute file path of the new application.</param>
+            <returns>Whether the loading were successful or not.</returns>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Pinpad.IPinpadUpdateService.Update">
+            <summary>
+            Updates the pinpad with the application previously loaded. 
+            Must be called after the <see cref="M:Pinpad.Sdk.Model.Pinpad.IPinpadUpdateService.Load(System.String)"/>.
+            </summary>
+            <returns>Whether the update was successful.</returns>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.CardEntry">
+            <summary>
+            Represents a physical card used to perform a transaction.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.CardEntry.Type">
+            <summary>
+            Card type, defining the reading method (by EMV chip or magnetic stripe) to be used by the application.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.CardEntry.ReadingMode">
+            <summary>
+            Card Reading Mode
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.CardEntry.BrandId">
+            <summary>
+            Card brand (for example Visa, MasterCard, Amex, etc).
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.CardEntry.BrandName">
+            <summary>
+            Brand name corresponding to BrandId.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.CardEntry.PrimaryAccountNumber">
+            <summary>
+            Unmasked pan, all characters shown.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.CardEntry.PrimaryAccountNumberSequenceNumber">
+            <summary>
+            Application PAN Sequencial number for joint bank account.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.CardEntry.ExpirationDate">
+            <summary>
+            Card expiration date, printed in the original physical card.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.CardEntry.CardholderName">
+            <summary>
+            Cardholder/card owner name, printed in the original physical card.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.CardEntry.Track1">
+            <summary>
+            First track of card, if exists.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.CardEntry.Track2">
+            <summary>
+            Second track of card, if exists.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.CardEntry.Track3">
+            <summary>
+            Third track of card, if exists.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.CardEntry.NeedsPassword">
+            <summary>
+            Defines whether the card needs password or not.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.CardEntry.ApplicationId">
+            <summary>
+            AID.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.CardEntry.ApplicationCryptogram">
+            <summary>
+            ARQC.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.CardEntry.IsFallback">
+            <summary>
+            Is Fallback Flow
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.CardEntry.IsVoucher">
+            <summary>
+            Is Voucher
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.Pin">
+            <summary>
+            Security information about the card.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Pin.PinBlock">
+            <summary>
+            Pin block, encrypted cardholder password.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Pin.KeySerialNumber">
+            <summary>
+            Serial number of DUKPT key used on PIN encryption.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Pin.EmvData">
+            <summary>
+            EMV data, if exists. It's a group of information returned by EMV Kernel, representing several information about the transaction and the terminal itself.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Pin.IsOnline">
+            <summary>
+            Defines if password authentication is online or offline (using pinpad security internal methods).
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Pin.ApplicationCryptogram">
+            <summary>
+            ARQC.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Pin.CardholderNameExtended">
+            <summary>
+            Indicates the whole cardholder name when greater than 26 characters using the same 
+            coding convention as in ISO 7813.
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.IPinpadInfos">
+            <summary>
+            Pinpad informations.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.IPinpadInfos.ManufacturerName">
+            <summary>
+            Manufacturer Name
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.IPinpadInfos.Model">
+            <summary>
+            Model and Hardware version
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.IPinpadInfos.Specifications">
+            <summary>
+            Specification version at format "V.VV" or "VVVA" where A is the alphanumeric identifier, example: "108a"
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.IPinpadInfos.SerialNumber">
+            <summary>
+            Unique pinpad identifier.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.IPinpadInfos.IsContactless">
+            <summary>
+            Is Contactless supported?
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.IPinpadInfos.OperatingSystemVersion">
+            <summary>
+            Basic software or Operational System versions, without a defined format
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.IPinpadInfos.ManufacturerVersion">
+            <summary>
+            Manufactured Version at format "VVV.VV YYMMDD"
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.IPinpadInfos.IsStoneSupported">
+            <summary>
+            If stone is supported on this pinpad. If this value is false, none financial operation can be performed.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.IPinpadInfos.IsStoneProprietaryDevice">
+            <summary>
+            Defines if the application running in the pinpad is made by Stone.
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadInfos.GetDukptSerialNumber(System.Int32,Pinpad.Sdk.Model.TypeCode.CryptographyMode)">
+            <summary>
+            Obtains the current KSN (Key Serial Number) of an index in the table.
+            </summary>
+            <param name="indexToSearch">KSN index.</param>
+            <param name="cryptographyMode">Cryptography method.</param>
+            <returns>The obtained KSN, or null if the KSN was not found.</returns>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.IPinpadDisplay">
+            <summary>
+            Responsible for presenting messages in a pinpad device.
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadDisplay.ShowMessage(System.String,System.String,Pinpad.Sdk.Model.DisplayPaddingType)">
+            <summary>
+            Show message on pinpad screen.
+            </summary>
+            <param name="firstLine">The first line of the message, shown at the first screen line. Must have 16 characters or less.</param>
+            <param name="secondLine">The second line of the message, shown at the second screen line. Must have 16 characters or less.</param>
+            <param name="paddingType">At what alignment the message is present. It default value is left alignment.</param>
+            <returns>Whether the message could be shown with success or not.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">This exception is thrown only if one (or both) of the messages exceed the limit of 16 characters.</exception>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadDisplay.ShowMessageWithTimer(System.String,Pinpad.Sdk.Model.DisplayPaddingType)">
+            <summary>
+            Show message on pinpad screen and wait 3 seconds.
+            </summary>
+            <param name="message">message to display</param>
+            <param name="paddingType">Location in display</param>
+            <param name="timeInSeconds">Time in seconds</param>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadDisplay.ShowSelectionMenu(System.String,System.String[])">
+            <summary>
+            Show selection menu on pinpad screen.
+            </summary>
+            <param name="header">text header</param>
+            <param name="items">text list items</param>
+            <returns></returns>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.IPinpadTransaction">
+            <summary>
+            Pinpad transaction tools.
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadTransaction.RemoveCard(System.String,Pinpad.Sdk.Model.DisplayPaddingType)">
+            <summary>
+            On Pinpad screen, alternates between "RETIRE O CARTÃO" and parameter 'message' received, until card removal.
+            </summary>
+            <param name="message">Message to be shown on pinpad screen. Must not exceed 16 characters. This message remains on Pinpad screen after card removal.</param>
+            <param name="padding">Message alignment.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadTransaction.ReadCard(Pinpad.Sdk.Model.TransactionType,System.Decimal,Pinpad.Sdk.Model.TransactionType@,System.Collections.Generic.IList{Pinpad.Sdk.Model.PinpadCardBrand},System.Boolean,System.Boolean)">
+            <summary>
+            Read basic card information, that is, brand id, card type, card primary account number (PAN), cardholder name and expiration date.
+            If the card is removed in the middle of the process, returns CANCEL status.
+            </summary>
+            <param name="transactionType">Transaction type, that is, debit/credit.</param>
+            <param name="amount">Transaction amount.</param>
+            <param name="newTransactionType">If this method is called without knowing transaction type, pinpad will prompt for this information and return the value choosed by the cardholder.</param>
+            <param name="brandTable">List containing supported brands.</param>
+            <param name="isRawRead">True if the method should map all properties from the card; false if the 
+            method should map only the card's tracks.</param>        
+            <returns>Card basic info.</returns>
+            <exception cref="T:Pinpad.Sdk.Model.Exceptions.ExpiredCardException">When an expired card is read.</exception>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.IPinpadTransaction.ReadPassword(System.Decimal,System.String,Pinpad.Sdk.Model.CardType,System.String)">
+            <summary>
+            If cardholder card needs password, than prompts it. Otherwise, nothing is done. 
+            </summary>
+            <param name="amount">Transaction amount in cents.</param>
+            <param name="pan">Primary Account Number (PAN).</param>
+            <param name="readingMode">Card type, defining how the card must be read.</param>
+            <param name="brandName">Cardbrand name.</param>
+            <returns>An object Pin, containing pin block (cardholder password), Key Serial Number (KSN, determining pin block DUKPT encryption key) and if pin verification is online. </returns>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.PinpadBinRange">
+            <summary>
+            Primary Account Number BIN range.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.PinpadBinRange.InitialRange">
+            <summary>
+            Initial BIN of the range.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.PinpadBinRange.FinalRange">
+            <summary>
+            Final BIN of the range.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.PinpadBinRange.TefBrandId">
+            <summary>
+            Card brand identifier.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.PinpadBinRange.DataSetVersion">
+            <summary>
+            DataSet version.
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.PinpadBinRange.IsWithin(System.Decimal)">
+            <summary>
+            Verify if a given number is within this range.
+            </summary>
+            <param name="givenNumber">Given number to be verified.</param>
+            <returns>Whether the given number is within the range or not.</returns>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.PinpadCardBrand">
+            <summary>
+            Represents a card brand.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.PinpadCardBrand.Id">
+            <summary>
+            Card brand identifier in Card Brand Table from TMS.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.PinpadCardBrand.Description">
+            <summary>
+            Card brand brief description.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.PinpadCardBrand.BrandType">
+            <summary>
+            Card brand type:
+            - "1": debit;
+            - "2": credit.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.PinpadCardBrand.Ranges">
+            <summary>
+            BIN ranges for this brand.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.PinpadCardBrand.IsVoucher">
+            <summary>
+            Identifier card brand with voucher.
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.CardType">
+            <summary>
+            Enumerator specifying each card type supported by the application.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.CardType.Undefined">
+            <summary>
+            Undefined (that is, invalid) card type.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.CardType.Emv">
+            <summary>
+            Cartão com chip
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.CardType.MagneticStripe">
+            <summary>
+            Cartão com tarja magnética
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.CardType.Contactless">
+            <summary>
+            Cartão contactless
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.PinpadContactlessMode">
+            <summary>
+            Card contactless mode.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadContactlessMode.Undefined">
+            <summary>
+            Null
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadContactlessMode.Unsupported">
+            <summary>
+            CTLS mode not supported
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadContactlessMode.VisaMagneticStripe">
+            <summary>
+            Visa Magnetic Stripe
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadContactlessMode.VisaChip">
+            <summary>
+            Visa chip
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadContactlessMode.MasterMagneticStripe">
+            <summary>
+            MasterCard PayPass for Magnetic Stripe
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadContactlessMode.MasterChip">
+            <summary>
+            MasterCard PayPass for m/Chip
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadContactlessMode.AmexMagneticStripe">
+            <summary>
+            Amex Expresspay for Magnetic Stripe
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadContactlessMode.AmexChip">
+            <summary>
+            Amex Expresspay for EMV
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.TypeCode.CryptographyMode">
+            <summary>
+            Enumerator for cryptography methods
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.TypeCode.CryptographyMode.Undefined">
+            <summary>
+            Null
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.TypeCode.CryptographyMode.DataEncryptionStandard">
+            <summary>
+            DES
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.TypeCode.CryptographyMode.TripleDataEncryptionStandard">
+            <summary>
+            TDES
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.DisplayPaddingType">
+            <summary>
+            Defines text position in an pinpad screen output.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.DisplayPaddingType.Undefined">
+            <summary>
+            Undefined type of text alignment on the pinpad screen.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.DisplayPaddingType.Left">
+            <summary>
+            The text will be aligned at left side of the pinpad screen.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.DisplayPaddingType.Center">
+            <summary>
+            The text will be centralized on the pinpad screen.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.DisplayPaddingType.Right">
+            <summary>
+            The text will be aligned at right side of the pinpad screen.
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.EmvTableType">
+            <summary>
+            Enumerator Emv Tables 
+            Since undefined is 0 every value will be the actual code plus 1
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTableType.Undefined">
+            <summary>
+            Null
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTableType.Aid">
+            <summary>
+            Application Identifier Table
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTableType.Capk">
+            <summary>
+            Certification Authority Public Keys Table
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTableType.RevokedCertificate">
+            <summary>
+            CAPK's revoked certificates table
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.EmvTagCode">
+            <summary>
+            EMV data required by the application.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTagCode.TransactionCurrencyCode">
+            <summary>
+            Transaction Currency Code.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTagCode.ApplicationInterchangeProfile">
+            <summary>
+            Application Interchange Profile:
+            Indicates the capabilities of the card to support specific functions in the application.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTagCode.TerminalVerificationResults">
+            <summary>
+            Terminal Verification Results:
+            Status of the different functions as seen from the terminal.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTagCode.TransactionDate">
+            <summary>
+            Transaction Date:
+            Local date that the transaction was authorised formatted as YYMMDD.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTagCode.TransactionType">
+            <summary>
+            Transaction Type:
+            Indicates the type of financial transaction, represented by the first two digits of ISO 8583:1987 Processing Code.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTagCode.AmountAuthorized">
+            <summary>
+            Authorised (Numeric), Authorised amount of the transaction (excluding adjustments).
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTagCode.IssuerApplicationData">
+            <summary>
+            Issuer Application Data:
+            Contains proprietary application data for transmission to the issuer in an online transaction. 
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTagCode.TerminalCountryCode">
+            <summary>
+            Terminal Country Code.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTagCode.ApplicationCryptogram">
+            <summary>
+            Application Cryptogram.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTagCode.TerminalCapabilities">
+            <summary>
+            Terminal Capabilities.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTagCode.ApplicationTransactionCounter">
+            <summary>
+            Application Transaction Counter (ATC).
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTagCode.UnpredictableNumber">
+            <summary>
+            Unpredictable Number:
+            Value to provide variability and uniqueness to the generation of a cryptogram.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTagCode.CryptogramInformationData">
+            <summary>
+            Cryptogram Information Data:
+            Indicates the type of cryptogram and the actions to be performed by the terminal.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTagCode.CardholderVerificationMethodResults">
+            <summary>
+            Cardholder Verification Method (CVM) Results:
+            Indicates the results of the last CVM performed.
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.EmvTag">
+            <summary>
+            Responsible for know all EMV tags this application supports.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTag.MasterCard">
+            <summary>
+            MasterCard brand name.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.EmvTag.Maestro">
+            <summary>
+            Maestro brand name.
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.EmvTag.GetEmvTagsRequired">
+            <summary>
+            Get's all EMV tags supported and needed to perform EMV operations.9F71
+            </summary>
+            <returns>EMV tags concatenated.</returns>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.EmvTag.GetEmvTagsRequired(System.String)">
+            <summary>
+            Get's all EMV tags supported and needed to perform EMV operations based on cardbrand.
+            </summary>
+            <param name="brandName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.FirstLineLabelCode">
+            <summary>
+            Indicates the message to be presented on pinpad's first line.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.Undefined">
+            <summary>
+            Undefined message. Sending this value to the SPE will throw an exception.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.BlankSpace">
+            <summary>
+            None text is presented.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.Type">
+            <summary>
+            Presents "Digite".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.Retype">
+            <summary>
+            Presents "Redigite".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.Enter">
+            <summary>
+            Presents "Entre".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.ReEnter">
+            <summary>
+            Presents "Re-entre".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.Insert">
+            <summary>
+            Presents "Insira".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.Reinsert">
+            <summary>
+            Presents "Reinsira".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.Number">
+            <summary>
+            Presents "Numero".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.TypeNumber">
+            <summary>
+            Presents "Digite o numero".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.RetypeNumber">
+            <summary>
+            Presents "Redigite numero".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.EnterNumber">
+            <summary>
+            Presents "Entre o numero".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.ReEnterNumber">
+            <summary>
+            Presents "Re-entre numero".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.InsertNumber">
+            <summary>
+            Presents "Insira o numero".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.ReinsertNumber">
+            <summary>
+            Presents "Reinsira numero".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.Code">
+            <summary>
+            Presents "Codigo".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.TypeCode">
+            <summary>
+            Presents "Digite o codigo".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.RetypeCode">
+            <summary>
+            Presents "Redigite codigo".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.EnterCode">
+            <summary>
+            Presents "Entre o codigo".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.ReEnterCode">
+            <summary>
+            Presents "Re-entre codigo".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.InsertCode">
+            <summary>
+            Presents "Insira o codigo".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.FirstLineLabelCode.ReinsertCode">
+            <summary>
+            Presents "Reinsira codigo".
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.KeyboardMessageCode">
+            <summary>
+            Represents the message code to be printed when waiting for a numeric input.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardMessageCode.Undefined">
+            <summary>
+            Undefined label to be presented.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardMessageCode.AskForDdd">
+            <summary>
+            Ask for DDD.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardMessageCode.AskForDddConfirmation">
+            <summary>
+            Ask for DDD confirmation.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardMessageCode.AskForPhoneNumber">
+            <summary>
+            Ask for phone number.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardMessageCode.AskForPhoneNumberConfirmation">
+            <summary>
+            Ask for phone number confirmation.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardMessageCode.AskForDddAndPhone">
+            <summary>
+            Ask for DDD and phone number.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardMessageCode.AskForDddAndPhoneConfirmation">
+            <summary>
+            Ask for DDD and phone number confirmation.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardMessageCode.AskForCpf">
+            <summary>
+            Ask for CPF.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardMessageCode.AskForCpfConfirmation">
+            <summary>
+            Ask for CPF confirmation.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardMessageCode.AskForRg">
+            <summary>
+            Ask for RG.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardMessageCode.AskForRgConfirmation">
+            <summary>
+            Ask for RG confirmation.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardMessageCode.AskForLast4Digits">
+            <summary>
+            Ask for the last 4 digits from card.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardMessageCode.AskForSecurityCode">
+            <summary>
+            Ask for card security code.
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.KeyboardNumberFormat">
+            <summary>
+            Formatting in case of a numeric input.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardNumberFormat.Undefined">
+            <summary>
+            Undefined. Default value.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardNumberFormat.None">
+            <summary>
+            The command will not ask for numbers to be typed.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardNumberFormat.Decimal">
+            <summary>
+            The command will ask for decimals to be typed.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardNumberFormat.Binary">
+            <summary>
+            The command will ask for binaries to be typed.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardNumberFormat.Hexadecimal">
+            <summary>
+            The command will ask for hexadecimals to be typed.
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.KeyboardTextFormat">
+            <summary>
+            Formatting in care of a text input.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardTextFormat.Undefined">
+            <summary>
+            Undefined. Default value.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardTextFormat.None">
+            <summary>
+            The command will not ask for numbers to be typed.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardTextFormat.AlphaCapitals">
+            <summary>
+            The command will ask for text in capital letters to be typed.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardTextFormat.AlphaNonCapitals">
+            <summary>
+            The command will ask for lowercase text to be typed.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.KeyboardTextFormat.Symbols">
+            <summary>
+            The command will ask for symbols to be typed.
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.PinpadKeyCode">
+            <summary>
+            Since undefined is 0 every value will be the actual code plus 1 
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.Undefined">
+            <summary>
+            Null
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.Return">
+            <summary>
+            Ok/Return key
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.MobiPinUp">
+            <summary>
+            Mobi Pin 10 Up key.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.MobiPinDown">
+            <summary>
+            Mobi Pin 10 Down key.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.Function1">
+            <summary>
+            Function 1 key
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.Function2">
+            <summary>
+            Function 2 key
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.Function3">
+            <summary>
+            Function 3 key
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.Function4">
+            <summary>
+            Function 4 key
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.Backspace">
+            <summary>
+            Backspace key
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.Cancel">
+            <summary>
+            Cancel key
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.Decimal0">
+            <summary>
+            Decimal 0 key
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.Decimal1">
+            <summary>
+            Decimal 1 key
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.Decimal2">
+            <summary>
+            Decimal 2 key
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.Decimal3">
+            <summary>
+            Decimal 3 key
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.Decimal4">
+            <summary>
+            Decimal 4 key
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.Decimal5">
+            <summary>
+            Decimal 5 key
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.Decimal6">
+            <summary>
+            Decimal 6 key
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.Decimal7">
+            <summary>
+            Decimal 7 key
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.Decimal8">
+            <summary>
+            Decimal 8 key
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadKeyCode.Decimal9">
+            <summary>
+            Decimal 9 key
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.PinpadPrinterStatus">
+            <summary>
+            Enumerator for Printer status
+            Since undefined is 0 every value will be the actual code plus 1
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadPrinterStatus.Undefined">
+            <summary>
+            Null
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadPrinterStatus.Ready">
+            <summary>
+            Printer is ready to receive data to print
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadPrinterStatus.Busy">
+            <summary>
+            Printer is busy
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadPrinterStatus.OutOfPaper">
+            <summary>
+            Printer out of paper
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadPrinterStatus.InvalidFormat">
+            <summary>
+            Error with data to print
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadPrinterStatus.PrinterError">
+            <summary>
+            Generic printer error
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadPrinterStatus.Overheating">
+            <summary>
+            Printer overheating
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadPrinterStatus.UnfinishedPrinting">
+            <summary>
+            Still printing
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadPrinterStatus.LackOfFont">
+            <summary>
+            PinPad lacks the font files
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PinpadPrinterStatus.PackageTooLong">
+            <summary>
+            Information to print too long
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.PrinterAlignmentCode">
+            <summary>
+            Enumerator for PRT string alignment
+            Since undefined is 0 every value will be the actual code plus 1
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PrinterAlignmentCode.Undefined">
+            <summary>
+            Null
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PrinterAlignmentCode.Left">
+            <summary>
+            Left alignment
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PrinterAlignmentCode.Center">
+            <summary>
+            Center alignment
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PrinterAlignmentCode.Right">
+            <summary>
+            Right alignment
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.PrinterFontSize">
+            <summary>
+            Enumerator for PRT string font sizes
+            Since undefined is 0 every value will be the actual code plus 1
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PrinterFontSize.Undefined">
+            <summary>
+            Null
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PrinterFontSize.Small">
+            <summary>
+            Small string
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PrinterFontSize.Medium">
+            <summary>
+            Medium string
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.PrinterFontSize.Big">
+            <summary>
+            Big string
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.ResponseStatus">
+            <summary>
+            Pinpad command response status return codes enum
+            Since undefined is 0 every value will be the actual code plus 1, example: ST_OK is "000", 0 + 1 = 1
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.Undefined">
+            <summary>
+            Null value
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.Ok">
+            <summary>
+            Command successfully executed
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.NotSecureCommunication">
+            <summary>
+            Attempt to use safe communication while it was not established
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.F1KeyPressed">
+            <summary>
+            First Function key was pressed
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.F2KeyPressed">
+            <summary>
+            Second Function key was pressed
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.F3KeyPressed">
+            <summary>
+            Third Function key was pressed
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.F4KeyPressed">
+            <summary>
+            Forth Function key was pressed
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.BackspacePressed">
+            <summary>
+            Backspace key was pressed
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.CancelKeyPressed">
+            <summary>
+            Erro decrypting secure communication packet
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.InvalidCommand">
+            <summary>
+            Invalid call to function, previous operations are required, or unknown command
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.InvalidParameter">
+            <summary>
+            Invalid parameter passed to function
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.TimeOut">
+            <summary>
+            Operation timed out
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.OperationCancelled">
+            <summary>
+            Operation was cancelled by the operator
+            Cancel key was pressed
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.PinpadIsClosed">
+            <summary>
+            PinPad was not open, OPN was not previously called
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.MandatoryParameterNotReceived">
+            <summary>
+            A mandatory parameter was not sent
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.InvalidEmvTable">
+            <summary>
+            EMV tables versions different than expected
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.CouldNotWriteTable">
+            <summary>
+            Error writing tables, lack of space for example
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.InternalError">
+            <summary>
+            Internal error, unexpected situation without a specific return code
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.MagneticStripeError">
+            <summary>
+            Magnetic Card read error
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.PinIndexNotFound">
+            <summary>
+            Online pin key index is not present
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.NoneCardDetected">
+            <summary>
+            No card inserted or CTLS detected
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.PinBusy">
+            <summary>
+            Could not capture PIN temporarily for security reasons, for example: reached capture limit within a time inverval.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.ResponseDataOverflow">
+            <summary>
+            Response data length overflow
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.SamError">
+            <summary>
+            Secure Access Module (SAM) missing, mute or with communication error.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.DumbCard">
+            <summary>
+            Card missing or mute.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.CardCommunicationError">
+            <summary>
+            Card communication error
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.InvalidCard">
+            <summary>
+            Card was invalidated
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.CardProblems">
+            <summary>
+            Card not behaving as expected
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.InconsistentCard">
+            <summary>
+            Card contains invalid or inconsistent data
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.InvalidEmvApplication">
+            <summary>
+            Card without EMV application available for the required conditions
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.UnableToProcessEmvApplication">
+            <summary>
+            Selected EMV application may not be used in this situation
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.Fallback">
+            <summary>
+            High level EMC error passive of fallback to magnetic stripe
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.InvalidAmount">
+            <summary>
+            Invalid amount for transaction
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.MultipleContactlessDetected">
+            <summary>
+            Multiple CTLS detected simultaneously
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.CtlsCommunicationError">
+            <summary>
+            Communication error with CTLS
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.InvalidCtlsCard">
+            <summary>
+            CTLS was invalidated
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.CtlsCardProblems">
+            <summary>
+            CTLS not behaving as expected
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.InvalidCtlsApplication">
+            <summary>
+            CTLS without application available for the required conditions
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.UnableToProcessCtlsApplication">
+            <summary>
+            CTLS selected application may not be used in this situation
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.PinpadConnectionError">
+            <summary>
+            Could not connect with pinpad.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.FileNotFound">
+            <summary>
+            Multimedia file not found
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.FileFormatError">
+            <summary>
+            Error at multimedia file format
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.ResponseStatus.FileLoadingError">
+            <summary>
+            Error loading multimedia file
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.SecondLineLabelCode">
+            <summary>
+            Indicates the message to be presented on pinpad's second line.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.Undefined">
+            <summary>
+            Undefined message. Sending this value to the SPE will throw an exception.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.BlankSpace">
+            <summary>
+            None text is presented.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.TelephoneNumber">
+            <summary>
+            Presents "Numero telefone".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.TelephoneAreaCode">
+            <summary>
+            Presents "Codigo de area".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.TelephoneNumberAndArea">
+            <summary>
+            Presents "Cod. area + tel.".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.SocialSecurityDocument">
+            <summary>
+            Presents "CPF".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.CnpjDocument">
+            <summary>
+            Presents "CNPJ".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.RgDocument">
+            <summary>
+            Presents "RG".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.PisDocument">
+            <summary>
+            Presents "PIS".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.HealthDocument">
+            <summary>
+            Presents "SUS".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.DriversLicense">
+            <summary>
+            Presents "CNH".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.Passport">
+            <summary>
+            Presents "Passaporte".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.Last4Digits">
+            <summary>
+            Presents "Ult. 4 digitos".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.CardSecurityCode">
+            <summary>
+            Presents "Cod. segurança".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.AmountInReais">
+            <summary>
+            Presents "Valor (R$)".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.AmountInDollars">
+            <summary>
+            Presents "Valor (US$)"
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.AmountInEuros">
+            <summary>
+            Presents "Valor (€)"
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.AmountInPounds">
+            <summary>
+            Presents "Valor (£)"
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.AmountInYen">
+            <summary>
+            Presents "Valor (¥)"
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.Ticket">
+            <summary>
+            Presents "Ingresso".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.Entrance">
+            <summary>
+            Presents "Entrada".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.GasPump">
+            <summary>
+            Presents "Bomba gasolina".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.Scale">
+            <summary>
+            Presents "Balança".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.PointOfSale">
+            <summary>
+            Presents "Ponto de Venda".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.Station">
+            <summary>
+            Presents "Estação".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.Cashier">
+            <summary>
+            Presents "Caixa".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.Terminal">
+            <summary>
+            Presents "Terminal".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.Board">
+            <summary>
+            Presents "Mesa".
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.SecondLineLabelCode.Section">
+            <summary>
+            Presents "Seção".
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.TransactionType">
+            <summary>
+            Specifies each transaction type supported.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.TransactionType.Undefined">
+            <summary>
+            Undefined transaction type.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.TransactionType.Credit">
+            <summary>
+            Credit.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.TransactionType.Debit">
+            <summary>
+            Debit, at cash.
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.Utilities.DataPickerKeys">
+            <summary>
+            Class containing up and down keys of pinpad.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Utilities.DataPickerKeys.UpKey">
+            <summary>
+            Up key property.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Utilities.DataPickerKeys.DownKey">
+            <summary>
+            Down key property.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Utilities.DataPickerKeys.UpKeyPpc930">
+            <summary>
+            Up key property.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Utilities.DataPickerKeys.DownKeyPpc930">
+            <summary>
+            Down key property.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.Utilities.DataPickerKeys._up">
+            <summary>
+            Up key member.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.Utilities.DataPickerKeys._down">
+            <summary>
+            Down key member.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.Utilities.DataPickerKeys._upPpc930">
+            <summary>
+            Up key member PPC930.
+            </summary>
+        </member>
+        <member name="F:Pinpad.Sdk.Model.Utilities.DataPickerKeys._downPpc930">
+            <summary>
+            Down key member PPC930.
+            </summary>
+        </member>
+        <member name="T:Pinpad.Sdk.Model.Utilities.IDataPicker">
+            <summary>
+            It contains methods to select data through the pinpad.
+            </summary>
+        </member>
+        <member name="P:Pinpad.Sdk.Model.Utilities.IDataPicker.DataPickerKeys">
+            <summary>
+            Keys of Down and Up in pinpad.
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Utilities.IDataPicker.GetNumericValue(System.String,System.Boolean,System.Int16,System.Int16)">
+            <summary>
+            Get numeric value in range informed.
+            </summary>
+            <param name="label">Text to display on the first line of pinpad display.</param>
+            <param name="circularBehavior">Behavior of the list.</param>
+            <param name="minimunLimit">Minimum numeric value for pick. Limit: -32.768.</param>
+            <param name="maximumLimit">Maximum numeric value for pick. Limit: 32.767.</param>
+            <returns>Number picked or null if no one was picked.</returns>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Utilities.IDataPicker.GetValueInOptions(System.String,System.Boolean,System.Int16[])">
+            <summary>
+            Get numeric value in array options.
+            </summary>
+            <param name="label">Text to display on the first line of pinpad display.</param>
+            <param name="circularBehavior">Behavior of the list.</param>
+            <param name="options">Array with options.</param>
+            <returns>Option picked or null if no one was picked.</returns>
+        </member>
+        <member name="M:Pinpad.Sdk.Model.Utilities.IDataPicker.GetValueInOptions(System.String,System.Boolean,System.String[])">
+            <summary>
+            Get text value in array options.
+            </summary>
+            <param name="label">Text to display on the first line of pinpad display.</param>
+            <param name="circularBehavior">Behavior of the list.</param>
+            <param name="options">Array with options.</param>
+            <returns>Option picked or null/empty if no one was picked.</returns>
+        </member>
+        <member name="T:Pinpad.Sdk.Exceptions.InvalidTableException">
+            <summary>
+            Thrown when an invalid pinpad table is detected. Verify which of the pinpad tables you are trying to inject into the pinpad.
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Exceptions.InvalidTableException.#ctor(System.String,System.Exception)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="message">Invalid table detected message.</param>
+            <param name="innerException">Inner exception, if any.</param>
+        </member>
+        <member name="T:Pinpad.Sdk.Exceptions.PinpadDisconnectedException">
+            <summary>
+            Thrown when detect that the pinpad is no longer connected.
+            </summary>
+        </member>
+        <member name="M:Pinpad.Sdk.Exceptions.PinpadDisconnectedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="message">Pinpad disconnected message.</param>
+            <param name="inner">Inner exception, if any.</param>
+        </member>
+    </members>
+</doc>

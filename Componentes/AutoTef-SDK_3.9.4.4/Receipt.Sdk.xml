@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Receipt.Sdk</name>
+    </assembly>
+    <members>
+        <member name="T:Receipt.Sdk.Services.EmailService">
+            <summary>
+            Building and sending emails service.
+            Follows the design pattern Builder for passing parameters and call forwarding method.
+            </summary>
+        </member>
+        <member name="F:Receipt.Sdk.Services.EmailService.email">
+            <summary>
+            Email representation with header and body.
+            </summary>
+        </member>
+        <member name="F:Receipt.Sdk.Services.EmailService.allDone">
+            <summary>
+            Notifies one or more waiting threads that an event has occurred.
+            </summary>
+        </member>
+        <member name="M:Receipt.Sdk.Services.EmailService.#ctor(Receipt.Sdk.Model.ReceiptType,System.String)">
+            <summary>
+            Create an email service, for which it is possible to set the parameters of composition.
+            </summary>
+            <param name="type">Tipo de email type to be sent: Custom, Approved Transaction and Transaction Cancelled.</param>
+            <param name="email">Email recipient.</param>
+            <example>
+            Choose the type of email through the parameter.
+            <code>
+            EmailService service = new EmailService(EmailType.Custom); // For activation email.
+            </code>
+            </example>
+        </member>
+        <member name="M:Receipt.Sdk.Services.EmailService.AddBodyParameters(Receipt.Sdk.Model.BodyParameters)">
+            <summary>
+            Sets the bory parameters.
+            </summary>
+            <param name="parameters">Transaction information in FinancialOperationParameters type.</param>
+            <returns>Service instance. (this)</returns>
+            <example>
+            Define body parameters.
+            <code>
+            EmailService service = new EmailService(EmailType.Transaction)
+                .WithMailHeader("Email Subject", "user@email.com.br")
+                .WithActivationParameters(parameters);
+            </code>
+            </example>
+        </member>
+        <member name="M:Receipt.Sdk.Services.EmailService.Send">
+            <summary>
+            Send email.
+            </summary>
+            <example>
+            Example of sending activation email.
+            <code>
+            EmailService service = new EmailService(EmailType.Custom)
+                .WithMailHeader("Transaction Email Subject", "user@email.com.br")
+                .WithActivationParameters("STONE CODE", "Company Name", "Company Address", "Company Legal Identification")
+                .Send();
+            </code>
+            </example>
+        </member>
+        <member name="M:Receipt.Sdk.Services.EmailService.AddHeader(Receipt.Sdk.Model.ReceiptType,System.String)">
+            <summary>
+            Add e-mail header: subject and email.
+            </summary>
+            <param name="type">Type from e-mail to subject.</param>
+            <param name="to">E-mail from receiver.</param>
+        </member>
+        <member name="M:Receipt.Sdk.Services.EmailService.GetEmailAsJsonBytes">
+            <summary>
+            Get email as byte array.
+            </summary>
+            <returns>Email represents byte array.</returns>
+        </member>
+        <member name="M:Receipt.Sdk.Services.EmailService.GetRequestStreamCallback(System.IAsyncResult)">
+            <summary>
+            Begins an asynchronous request for a Stream object to use to write data.
+            <see href="https://msdn.microsoft.com/pt-br/library/system.net.httpwebrequest.begingetrequeststream(v=vs.110).aspx">Documentation in MSDN.</see>
+            </summary>
+            <param name="asynchronousResult">Status/Result for of an syncronous operation.</param>
+        </member>
+        <member name="M:Receipt.Sdk.Services.EmailService.GetResponseCallback(System.IAsyncResult)">
+            <summary>
+            The GetResponse function returns the attributes that are sent in the response if the final outcome of request processing matches the specified response type.
+            <see href="https://msdn.microsoft.com/pt-br/library/system.net.httpwebrequest.begingetrequeststream(v=vs.110).aspx">Documentation in MSDN.</see>
+            </summary>
+            <param name="asynchronousResult">Status/Result for of an syncronous operation.</param>
+        </member>
+        <member name="T:Receipt.Sdk.Services.IReceiptService">
+            <summary>
+            Define mandatory methods to concret and virtual receipt service.
+            </summary>
+        </member>
+        <member name="M:Receipt.Sdk.Services.IReceiptService.AddBodyParameters(Receipt.Sdk.Model.BodyParameters)">
+            <summary>
+            Body parameters to receipt.
+            </summary>
+            <param name="parameters">Activation parameters or financial operator parameters.</param>
+            <returns>Implement by concret or virtual receipt service.</returns>
+        </member>
+        <member name="M:Receipt.Sdk.Services.IReceiptService.Send">
+            <summary>
+            Send receipt to e-mail or printer.
+            </summary>
+        </member>
+        <member name="T:Receipt.Sdk.Services.ReceiptFactory">
+            <summary>
+            Factory to Receipt, build a concret or virtual receipt service.
+            </summary>
+        </member>
+        <member name="M:Receipt.Sdk.Services.ReceiptFactory.Build(Receipt.Sdk.Model.ReceiptType,System.String)">
+            <summary>
+            Build a IReceiptService implementation. 
+            </summary>
+            <param name="type">Activation, Transaction or Cancellation.</param>
+            <param name="email">If e-mail is not null, buil a concrete receipt service.  And send to this e-mail.</param>
+            <returns>Concrete implementation for IReceiptService.</returns>
+        </member>
+    </members>
+</doc>

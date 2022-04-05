@@ -1,0 +1,741 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microtef.Platform.Desktop</name>
+    </assembly>
+    <members>
+        <member name="T:Microtef.Platform.Desktop.DesktopInitializer">
+            <summary>
+            Responsible for setup all desktop functionalities.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopInitializer.Initialized">
+            <summary>
+            Informs whether desktop platform was initialized or not.
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopInitializer.InitializePlatform">
+            <summary>
+            Sets up all desktop functionalities.
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopInitializer.Initialize">
+            <summary>
+            Static method to initialize desktop functionalities.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Microtef.Platform.Desktop.DesktopConfigurations">
+            <summary>
+            Desktop configuration and platform information.
+            </summary>
+        </member>
+        <member name="F:Microtef.Platform.Desktop.DesktopConfigurations.OperatingSystemNameLimitLength">
+            <summary>
+            Operating System name limit length for <see cref="P:Microtef.Platform.Desktop.DesktopConfigurations.SystemName"/>.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopConfigurations.SystemName">
+            <summary>
+            Operating system name, operating system version and platform version.
+            </summary>
+            <example>Win32NT 10.0</example>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopConfigurations.MicroPosPackVersion">
+            <summary>
+            AutoTef Version PAck
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopConfigurations.SoftwareHousePartner">
+            <summary>
+            Short name software house partner
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopConfigurations.StoneModuleAcquirerVersion">
+            <summary>
+            Stone acquirer doc version
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopConfigurations.OsName">
+            <summary>
+            Operation system name
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopConfigurations.GetAppSettings(System.String)">
+            <summary>
+            Get a key from app.config.
+            </summary>
+            <param name="Name">App.config key name.</param>
+            <returns>App.config key value.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopConfigurations.#ctor">
+            <summary>
+            Set <see cref="P:Microtef.Platform.Desktop.DesktopConfigurations.SystemName"/> from current machine or device.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">If <see cref="T:Microtef.CrossPlatform.VersionAttribute.MicrotefPackVersionAttribute"/> does not exist on AssemblyInfo.cs.</exception>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopConfigurations.GetMicroPosPackVersion">
+            <summary>
+            Returns MicroPosPackVersion, from AssemblyInfo.
+            </summary>
+            <returns>The MicroPOS Pack version.</returns>
+            <exception cref="T:System.InvalidOperationException">When <see cref="T:Microtef.CrossPlatform.VersionAttribute.MicrotefPackVersionAttribute"/>
+            does not exist on AssemblyInfo.cs.</exception>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopConfigurations.GetStoneModuleAcquirerVersion">
+            <summary>
+            Returns MicroPosPackVersion, from AssemblyInfo.
+            </summary>
+            <returns>The MicroPOS Pack version.</returns>
+            <exception cref="T:System.InvalidOperationException">When <see cref="T:Microtef.CrossPlatform.VersionAttribute.MicrotefPackVersionAttribute"/>
+            does not exist on AssemblyInfo.cs.</exception>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopConfigurations.GetOsName">
+            <summary>
+            Return operating system name and short version.
+            </summary>
+            <returns>Operating System at the following format: OSName X.Y
+            Being X the major OS version number and Y the minor OS version number.</returns>
+        </member>
+        <member name="T:Microtef.Platform.Desktop.DesktopPinpadConnection">
+            <summary>
+            Responsible for establishing connection with pinpad by serial port.
+            </summary>
+        </member>
+        <member name="F:Microtef.Platform.Desktop.DesktopPinpadConnection._pinPadConnection">
+            <summary>
+            Instances of Serial port.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPinpadConnection.WriteTimeout">
+            <summary>
+            Message sending timeout 
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPinpadConnection.ReadTimeout">
+            <summary>
+             Message receiving timeout 
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPinpadConnection.ConnectionName">
+            <summary>
+            Serial port.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPinpadConnection.IsOpen">
+            <summary>
+            Checks if the connection is opened.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPinpadConnection.BytesToRead">
+            <summary>
+            Size of the message received.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPinpadConnection.CommunicationType">
+            <summary>
+            Communication type: Serial port. 
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadConnection.Open">
+            <summary>
+            Opens connection using serial port.
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadConnection.Close">
+            <summary>
+            Closes connection using serial port.
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadConnection.Dispose">
+            <summary>
+            Disposes connection using serial port.
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadConnection.DiscardInBuffer">
+            <summary>
+            Discards the buffer of sending message
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadConnection.DiscardOutBuffer">
+            <summary>
+            Discards the buffer of receiving message
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadConnection.Write(System.Byte[])">
+            <summary>
+            Sends the entire message using the serial port.
+            </summary>
+            <param name="buffer"> byte array of the message.</param>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadConnection.WriteByte(System.Byte)">
+            <summary>
+            Sends the message byte to byte using the socket.
+            </summary>
+            <param name="data"> One byte of the message</param>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadConnection.ReadByte">
+            <summary>
+            The socket receives a byte array and returns it byte by byte. Case a socket excepetion occurs, a NAk is sent. 
+            </summary>
+            <returns>One byte of the message.</returns>
+        </member>
+        <member name="T:Microtef.Platform.Desktop.DesktopPinpadConnectionController">
+            <summary>
+            Responsible for create connection according to the connection name. (serial port or IP address).
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadConnectionController.CreatePinpadConnection(System.String)">
+            <summary>
+            Creates a pinpad connection trying to first convert the connection name to <see cref="T:System.Net.IPAddress"/>, if it does. 
+            A pinpad connection by wifi is created, otherwise it is created through the serial port.
+            </summary>
+            <param name="connectionName">serial port or IP address</param>
+            <returns>A pinpad connection by serial port or wifi</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadConnectionController.IsIPAddress(System.String)">
+            <summary>
+            Checks whether this string can be converted to IPAddress.
+            </summary>
+            <param name="connectionName">serial port or ip adress</param>
+            <returns>true, if it is an ip address.</returns>
+        </member>
+        <member name="T:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi">
+            <summary>
+            Responsible for establishing connection with the pinpad wifi using socket.
+            </summary>
+        </member>
+        <member name="F:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi._ipAddress">
+            <summary>
+            IP address of pinpad wifi.
+            </summary>
+        </member>
+        <member name="F:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi._socket">
+            <summary>
+            One endpoint of a two-way communication link between pinpad wifi and the SDK on the network.
+            </summary>
+        </member>
+        <member name="F:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi._port">
+            <summary>
+            Port choosen to open connection.
+            </summary>
+        </member>
+        <member name="F:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi.remoteEndPoint">
+            <summary>
+            Remote Endpoint (IP address + port), that is, the IP address and port of the pinpad wifi.
+            </summary>
+        </member>
+        <member name="F:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi.buffer">
+            <summary>
+            Message buffer.
+            </summary>
+        </member>
+        <member name="F:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi.bufferCount">
+            <summary>
+            Number of bytes read from message received.
+            </summary>
+        </member>
+        <member name="F:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi.BufferSize">
+            <summary>
+            Byte size of the buffer
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi.#ctor(System.Net.IPAddress)">
+            <summary>
+            Creates a socket with Tcp protocol and a remote endpoint(pinpad wifi)
+            </summary>
+            <param name="ipAddress"> Ip Address</param>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi.BytesToRead">
+            <summary>
+            Size of the message received.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi.ConnectionName">
+            <summary>
+            Ip address.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi.IsOpen">
+            <summary>
+            Checks if the connection is opened.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi.ReadTimeout">
+            <summary>
+             Message receiving timeout 
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi.WriteTimeout">
+            <summary>
+            Message sending timeout 
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi.CommunicationType">
+            <summary>
+            Communication type: WIFI. 
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi.Close">
+            <summary>
+            Closes the socket.
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi.DiscardInBuffer">
+            <summary>
+            Discards the buffer of sending message
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi.DiscardOutBuffer">
+            <summary>
+            Discards the buffer of receiving message
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi.Dispose">
+            <summary>
+            Disposes the socket.
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi.Open">
+            <summary>
+            Opens connection with the  remote endpoint using socket.
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi.ReadByte">
+            <summary>
+            The socket receives a byte array and returns it byte by byte. In case a socket excepetion occurs, a NAK is sent. 
+            </summary>
+            <returns>One byte of the message.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi.Write(System.Byte[])">
+            <summary>
+            Sends the entire message using the socket.
+            </summary>
+            <param name="buffer">byte array of the message.</param>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadConnectionWifi.WriteByte(System.Byte)">
+            <summary>
+            Sends the message byte to byte using the socket.
+            </summary>
+            <param name="data">One byte of the message.</param>
+        </member>
+        <member name="T:Microtef.Platform.Desktop.DesktopPinpadFinder">
+            <summary>
+            Responsible for connecting to a pinpad or a set of pinpads on a desktop
+            environment, apart of running under Mono or .NET Framework.
+            </summary>
+        </member>
+        <member name="F:Microtef.Platform.Desktop.DesktopPinpadFinder.MinimumIpNumber">
+            <summary>
+            Minimum value in the range of IP addresses that will be searched
+            </summary>
+        </member>
+        <member name="F:Microtef.Platform.Desktop.DesktopPinpadFinder.MaximumIpNumber">
+            <summary>
+            Maximum value in the range of IP addresses that will be searched
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPinpadFinder.PinpadFound">
+            <summary>
+            Event fired when a pinpad was found.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPinpadFinder.IsRunningUnderDotNet">
+            <summary>
+            Whether the platform is running under .NET.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPinpadFinder.IgnoredPorts">
+            <summary>
+            Collection of ports that are being ignored when trying to connect to any pinpad.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPinpadFinder.IpAddressesFound">
+            <summary>
+            All IP addresses found in the LAN.
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadFinder.Find(System.String,System.String)">
+            <summary>
+            Finds a pinpad connection with the serial port name or IP address 
+            informed.
+            </summary>
+            <param name="connectionName">Serial port name or IP address.</param>
+            <returns>The pinpad connection with the port informed if the
+            connection was successful.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadFinder.Find(System.Boolean,System.String)">
+            <summary>
+            Searches for pinpads in serial ports (and Wi-Fi IP addresses, if the <paramref name="enableWifi"/>
+            is true) and returns the first found.
+            </summary>
+            <returns>Returns the first pinpad found.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadFinder.FindAllDevices(System.Boolean,System.String)">
+            <summary>
+            Gets all pinpads connected.
+            </summary>
+            <param name="enableWifi">Whether the method should search for Wi-Fi pinpads.</param>
+            <param name="stoneCode">Merchant's StoneCode.</param>
+            <returns>A collection of pinpads or null, if none was found.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadFinder.AddIgnoredPort(System.String)">
+            <summary>
+            Adds a port to the <see cref="P:Microtef.Platform.Desktop.DesktopPinpadFinder.IgnoredPorts"/> collection.
+            </summary>
+            <param name="portName">The port name to be ignored when trying to connect to a pinpad.</param>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadFinder.RemoveIgnoredPort(System.String)">
+            <summary>
+            Remove an ignored port from the <see cref="P:Microtef.Platform.Desktop.DesktopPinpadFinder.IgnoredPorts"/> collection.
+            </summary>
+            <param name="portName">The port name to stop being ignored.</param>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadFinder.GetPortNames">
+            <summary>
+            Returns all serial ports available in the machine, except the <see cref="P:Microtef.Platform.Desktop.DesktopPinpadFinder.IgnoredPorts"/>.
+            </summary>
+            <returns>Ports found in the machine, except the <see cref="P:Microtef.Platform.Desktop.DesktopPinpadFinder.IgnoredPorts"/>.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadFinder.GetGatewayAddress">
+            <summary>
+            Gets 3 sections of the gateway address (without the last one).
+            </summary>
+            <returns>Part of the gateway address (ex: 192.168.1) or null if nothing found.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadFinder.PingAllAddressesFromGateway(System.String)">
+            <summary>
+            Pings to all IP addresses of this network interface.
+            </summary>
+            <param name="gatewayAddress">Gateway IP address.</param>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadFinder.PingCompleted(System.Object,System.Net.NetworkInformation.PingCompletedEventArgs)">
+            <summary>
+            When the ping is completed this event is triggered and, if the connection
+            was successful, adds the IP addresses to buffer.
+            </summary>
+            <param name="sender">This instance of the class.</param>
+            <param name="e">Event information.</param>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadFinder.GetAPinpadByConnectionName(System.String,System.String)">
+            <summary>
+            Finds any pinpad connected by serial port, bluetooth or wifi.
+            </summary>
+            <param name="connectionName">Serial port name or IP address.</param>
+            <returns>A pinpad connection by serial port or IP address.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadFinder.GetAWifiPinpad(System.String)">
+            <summary>
+            Searches for a pinpad connected in a Wi-Fi network interface.
+            </summary>
+            <returns>A Wi-Fi pinpad connection.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadFinder.GetASerialPortPinpad">
+            <summary>
+            Gets the first pinpad found in the machine. The algorithm used to connect will vary
+            accordingly to the environment the SDK is running under.
+            </summary>
+            <returns>The first pinpad found.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadFinder.GetASerialPortPinpadOnDotNet(System.String[])">
+            <summary>
+            Opens a <see cref="T:System.Threading.Tasks.Task"/> for each serial port available, and verifies if
+            a pinpad is connected to that serial port.
+            </summary>
+            <param name="ports">All serial ports available in the machine.</param>
+            <returns>The first pinpad found or null if none was found.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadFinder.GetASerialPortPinpadOnMono(System.String[])">
+            <summary>
+            Verifies in every serial port in the machine if there is a pinpad connected.
+            Verifies all ports before evaluating the method.
+            </summary>
+            <param name="ports">All serial ports available in the machine.</param>
+            <returns>The first pinpad found or null if none was found.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadFinder.GetAllPinpadsOnDotNet(System.Boolean,System.String)">
+            <summary>
+            Get all pinpads on the machine, apart of being serial or wifi communication.
+            Uses a dedicated algorithm for .NET, using <see cref="T:System.Threading.Tasks.Task"/> to reduce the overhead
+            of trying to connect to several serial ports and IPs.
+            </summary>
+            <param name="enableWifi">Whether the method should search for Wi-Fi pinpads.</param>
+            <param name="stoneCode">Merchant's StoneCode.</param>
+            <returns>A collection of pinpads, representing all pinpads found on the machine
+            or null if none was found.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadFinder.GetAllWifiPinpadsOnDotNet(System.String)">
+            <summary>
+            Get all wifi pinpads on the machine.
+            Uses a dedicated algorithm for Mono, searching for each pinpad and trying to connect to it.
+            The overhead is superior to the <see cref="!:GetAllPinpadsOnDotNet(string)"/> method.
+            </summary>
+            <param name="stoneCode">Merchant's StoneCode.</param>
+            <returns>A collection of pinpads, representing all pinpads found on the machine
+            or null if none was found.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadFinder.SetupWifiSearch(System.Collections.Generic.ICollection{Microtef.CrossPlatform.IPinpadConnection},System.Collections.Generic.List{System.Threading.Tasks.Task},System.String,System.Action)">
+            <summary>
+            Abstracted method for searching for pinpads in the LAN.
+            </summary>
+            <param name="pinpadCollection">Where the pinpads will be added.</param>
+            <param name="tasks">Task collection. Each task will search for a pinpad.</param>
+            <param name="stoneCode">Merchant's StoneCode.</param>
+            <param name="afterTaskConfigAction">The action to be performed after tasks were fired. 
+            Used to define a strategy to stop tasks.</param>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopPinpadFinder.GetAllSerialPortPinpadsOnMono">
+            <summary>
+            Get serial post names on Mono.
+            </summary>
+            <returns>Pinpads found or null if none pinpad found.</returns>
+        </member>
+        <member name="T:Microtef.Platform.Desktop.DesktopPlatformInfo">
+            <summary>
+            Specific information about the desktop platform.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPlatformInfo.IsUserInteractive">
+            <summary>
+            Whether the user is interacting with the operating system or not.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPlatformInfo.OperationSystemName">
+            <summary>
+            Name of the operating system.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPlatformInfo.OperationSystemVersion">
+            <summary>
+            Version of the operation system.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPlatformInfo.ProcessorCount">
+            <summary>
+            Number of cores in the machine.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPlatformInfo.Architecture">
+            <summary>
+            Set of rules and methods that describe the functionality, organization, and implementation of 
+            computer systems.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPlatformInfo.MemoryInUsePercentage">
+            <summary>
+            Percentage of the memory currently in use.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopPlatformInfo.DriveStorageInUsePercentage">
+            <summary>
+            Percentage of the storage currently in use in the driver.
+            </summary>
+        </member>
+        <member name="T:Microtef.Platform.Desktop.DesktopThread">
+            <summary>
+            Abstraction of the <see cref="T:System.Threading.Thread"/>.
+            </summary>
+        </member>
+        <member name="F:Microtef.Platform.Desktop.DesktopThread.CurrentThread">
+            <summary>
+            Current thread in execution or aborted.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopThread.IsAlive">
+            <summary>
+            Whether the <see cref="F:Microtef.Platform.Desktop.DesktopThread.CurrentThread"/> is alive, that is, in execution.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.DesktopThread.Priority">
+            <summary>
+            Execution priority.
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopThread.#ctor(Microtef.CrossPlatform.CrossPlatformThreadStart)">
+            <summary>
+            Creates an instance of the class with the specified thread to run.
+            </summary>
+            <param name="threadStart">Optional value of the thread to be executed.</param>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopThread.NewThread(Microtef.CrossPlatform.CrossPlatformThreadStart)">
+            <summary>
+            Creates a new thread.
+            </summary>
+            <param name="threadStart">The action to be performed.</param>
+            <returns>The <see cref="T:System.Threading.Thread"/> abstraction in execution.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopThread.Sleep(System.Int32)">
+            <summary>
+            Waits for a number of milliseconds.
+            </summary>
+            <param name="millisecondsTimeout">Number of milliseconds to wait.</param>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopThread.Start">
+            <summary>
+            The action begins in <see cref="F:Microtef.Platform.Desktop.DesktopThread.CurrentThread"/>.
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.DesktopThread.Kill">
+            <summary>
+            Aborts the execution of <see cref="F:Microtef.Platform.Desktop.DesktopThread.CurrentThread"/>.
+            </summary>
+        </member>
+        <member name="T:Microtef.Platform.Desktop.PinpadWifi.DesktopPinpadWifiUpdate">
+            <summary>
+            Responsible for check and update the pinpad wifi
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.PinpadWifi.DesktopPinpadWifiUpdate.PinpadUpdateService">
+            <summary>
+            Contains functions to perform the update of pinpad wifi.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.PinpadWifi.DesktopPinpadWifiUpdate.FilePath">
+            <summary>
+            File path of the new version.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.PinpadWifi.DesktopPinpadWifiUpdate.PdmClient">
+            <summary>
+            Endpoint of poi download manager.
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.PinpadWifi.DesktopPinpadWifiUpdate.#ctor(Pinpad.Sdk.Model.Pinpad.IPinpadUpdateService)">
+            <summary>
+            Constructor. Creates a temp path to the file.
+            </summary>
+            <param name="pinpadUpdateService">It contains the operations to update the Pinpad Wi-Fi</param>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.PinpadWifi.DesktopPinpadWifiUpdate.UpdateIfExistNewVersion(System.String)">
+            <summary>
+            Try to download a new version pack.
+            </summary>
+            <returns>Name of the new version file or null if there's no new version to download.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.PinpadWifi.DesktopPinpadWifiUpdate.InstallUpdate">
+            <summary>
+            Checks if the file was loaded in memory and install the new version in the pinpad wifi.
+            </summary>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.PinpadWifi.DesktopPinpadWifiUpdate.SetupNewReleaseRequest(System.String)">
+            <summary>
+            Sets a request to the operation GetNewRelease of PDM.
+            </summary>
+            <returns>Setup request.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.PinpadWifi.DesktopPinpadWifiUpdate.VerifyIfVersionAlreadyExist(PoiDownloadManager.Sdk.Model.Report.IGetNewReleaseReport)">
+            <summary>
+            Verify whether the version reported by the PDM has already  been 
+            downloaded.
+            </summary>
+            <param name="report">Information returned by the PDM.</param>
+            <returns>True if folder with new version already exist, False otherwise.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.PinpadWifi.DesktopPinpadWifiUpdate.IsFileCorrupted(System.String,System.Int32)">
+            <summary>
+            Verify whether the file downloaded is incorrupt or not.
+            </summary>
+            <param name="report">Download file report.</param>
+            <returns>True if the file exists and is incorrupted, false otherwise.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.PinpadWifi.DesktopPinpadWifiUpdate.DownloadNewVersion(System.String)">
+            <summary>
+            Download a file from a specified download URL and saves it on
+            application root folder, under a specified file name.
+            </summary>
+            <param name="downloadUrl">Download URL.</param>
+            <returns>True if the download was successful, False otherwise.</returns>
+        </member>
+        <member name="M:Microtef.Platform.Desktop.PinpadWifi.DesktopPinpadWifiUpdate.Validate(PoiDownloadManager.Sdk.Model.Report.IGetNewReleaseReport)">
+            <summary>
+            Validate <see cref="T:PoiDownloadManager.Sdk.Model.Report.IGetNewReleaseReport"/> information to download
+            a new version. Verifies if the report is successfull and there is a
+            new version to download.
+            </summary>
+            <param name="report">PDM new release report.</param>
+            <returns>True if report was successful and there is a new version to
+            download. False if the download was false or there is no new version
+            to download.</returns>
+            <exception cref="T:System.ArgumentNullException">If report is null.</exception>
+            <exception cref="T:System.InvalidOperationException">If the report was succefssful, but
+            there is no new version to download.</exception>
+        </member>
+        <member name="T:Microtef.Platform.Desktop.PinpadWifi.ReleaseEntryData">
+            <summary>
+            Entry data for <see cref="!:IPoiDownloadManagerClient.GetNewRelease(INewReleaseEntry)"/>.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.PinpadWifi.ReleaseEntryData.CurrentBackupVersion">
+            <summary>
+            Current application backup version.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.PinpadWifi.ReleaseEntryData.CurrentVersion">
+            <summary>
+            Current version being executed.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.PinpadWifi.ReleaseEntryData.IsPartial">
+            <summary>
+            If the download is full (all app files are downloaded) or 
+            partial (only param configuration files are downloaded).
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.PinpadWifi.ReleaseEntryData.SerialNumber">
+            <summary>
+            Pinpad/POS serial number.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.PinpadWifi.ReleaseEntryData.StoneCode">
+            <summary>
+            Stone client affiliation code.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.PinpadWifi.ReleaseEntryData.TerminalModel">
+            <summary>
+            Terminal model. In this case, "Microtef".
+            </summary>
+        </member>
+        <member name="T:Microtef.Platform.Desktop.Resources.PinpadTerminalResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.Resources.PinpadTerminalResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.Resources.PinpadTerminalResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.Resources.PinpadTerminalResources.DownloadPackExtension">
+            <summary>
+              Looks up a localized string similar to .zip.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.Resources.PinpadTerminalResources.DownloadPackPrefix">
+            <summary>
+              Looks up a localized string similar to PinpadWifi.{0}.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.Resources.PinpadTerminalResources.TerminalModel">
+            <summary>
+              Looks up a localized string similar to D210N - Pinpad Wi-Fi.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.Resources.PinpadTerminalResources.TerminalProvider">
+            <summary>
+              Looks up a localized string similar to Stone Payments.
+            </summary>
+        </member>
+        <member name="P:Microtef.Platform.Desktop.Resources.PinpadTerminalResources.TerminalTitle">
+            <summary>
+              Looks up a localized string similar to Stone Payments - Microtef.
+            </summary>
+        </member>
+    </members>
+</doc>

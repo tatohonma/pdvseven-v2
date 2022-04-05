@@ -1,0 +1,251 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PoiDownloadManager.Sdk.Model</name>
+    </assembly>
+    <members>
+        <member name="T:PoiDownloadManager.Sdk.Model.Entry.INewReleaseEntry">
+            <summary>
+            Entry data for <see cref="M:PoiDownloadManager.Sdk.Model.IPoiDownloadManagerClient.GetNewRelease(PoiDownloadManager.Sdk.Model.Entry.INewReleaseEntry)"/>.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Entry.INewReleaseEntry.StoneCode">
+            <summary>
+            Stone client affiliation code.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Entry.INewReleaseEntry.CurrentBackupVersion">
+            <summary>
+            Backup version.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Entry.INewReleaseEntry.CurrentVersion">
+            <summary>
+            Version.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Entry.INewReleaseEntry.IsPartial">
+            <summary>
+            If the download is full or partial.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Entry.INewReleaseEntry.SerialNumber">
+            <summary>
+            Pinpad/POS serial number.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Entry.INewReleaseEntry.TerminalModel">
+            <summary>
+            Terminal model.
+            </summary>
+        </member>
+        <member name="T:PoiDownloadManager.Sdk.Model.IPoiDownloadManagerClient">
+            <summary>
+            Contract for Poi Download Manager.
+            </summary>
+        </member>
+        <member name="M:PoiDownloadManager.Sdk.Model.IPoiDownloadManagerClient.GetNewRelease(PoiDownloadManager.Sdk.Model.Entry.INewReleaseEntry)">
+            <summary>
+            Get new release for a specific POI.
+            </summary>
+            <param name="entry">Entry information.</param>
+            <returns>Returns information about the last release.</returns>
+        </member>
+        <member name="T:PoiDownloadManager.Sdk.Model.Report.IGetNewReleaseReport">
+            <summary>
+            Response from <see cref="M:PoiDownloadManager.Sdk.Model.IPoiDownloadManagerClient.GetNewRelease(PoiDownloadManager.Sdk.Model.Entry.INewReleaseEntry)"/>.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Report.IGetNewReleaseReport.Success">
+            <summary>
+            Whether the operation was successful or not.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Report.IGetNewReleaseReport.ErrorCode">
+            <summary>
+            Error code, if any.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Report.IGetNewReleaseReport.ErrorDescription">
+            <summary>
+            Error description, if any.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Report.IGetNewReleaseReport.BackupVersion">
+            <summary>
+            Backup version.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Report.IGetNewReleaseReport.NewVersion">
+            <summary>
+            New version to download.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Report.IGetNewReleaseReport.RollbackToBackupVersion">
+            <summary>
+            Whether a rollback is needed. In this case, <see cref="P:PoiDownloadManager.Sdk.Model.Report.IGetNewReleaseReport.BackupVersion"/> nor 
+            <see cref="P:PoiDownloadManager.Sdk.Model.Report.IGetNewReleaseReport.NewVersion"/> should be downloaded, but a local backup and stable version 
+            should replace the current one.
+            </summary>
+        </member>
+        <member name="T:PoiDownloadManager.Sdk.Model.Request.GetNewReleaseRequest">
+            <summary>
+            Request for a <see cref="M:PoiDownloadManager.Sdk.Model.IPoiDownloadManagerClient.GetNewRelease(PoiDownloadManager.Sdk.Model.Entry.INewReleaseEntry)"/> operation.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Request.GetNewReleaseRequest.AffiliationCode">
+            <summary>
+            Also known as StoneCode, the Stone client affiliation code.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Request.GetNewReleaseRequest.CurrentBackupVersion">
+            <summary>
+            Current backup version.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Request.GetNewReleaseRequest.CurrentVersion">
+            <summary>
+            Version in use.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Request.GetNewReleaseRequest.GetFullSource">
+            <summary>
+            Whether the full package should be downloaded or not.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Request.GetNewReleaseRequest.SerialNumber">
+            <summary>
+            Pinpad/POS serial number.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Request.GetNewReleaseRequest.TerminalModel">
+            <summary>
+            Terminal model.
+            </summary>
+        </member>
+        <member name="T:PoiDownloadManager.Sdk.Model.Request.PoiDownloadManagerBaseRequest">
+            <summary>
+            Base request for all <see cref="T:PoiDownloadManager.Sdk.Model.IPoiDownloadManagerClient"/> operations.
+            </summary>
+        </member>
+        <member name="T:PoiDownloadManager.Sdk.Model.Response.GetNewReleaseResponse">
+            <summary>
+            Response from a <see cref="T:PoiDownloadManager.Sdk.Model.IPoiDownloadManagerClient"/> operation.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Response.GetNewReleaseResponse.Data">
+            <summary>
+            New information about a release, if any.
+            </summary>
+        </member>
+        <member name="T:PoiDownloadManager.Sdk.Model.Response.GetNewReleaseResponse.GetNewReleaseResponseData">
+            <summary>
+            New information about a release, if any.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Response.GetNewReleaseResponse.GetNewReleaseResponseData.BackupVersion">
+            <summary>
+            Backup version.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Response.GetNewReleaseResponse.GetNewReleaseResponseData.NewVersion">
+            <summary>
+            New version to download.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Response.GetNewReleaseResponse.GetNewReleaseResponseData.RollbackToBackupVersion">
+            <summary>
+            Whether a rollback is needed. In this case, <see cref="P:PoiDownloadManager.Sdk.Model.Response.GetNewReleaseResponse.GetNewReleaseResponseData.BackupVersion"/> nor 
+            <see cref="P:PoiDownloadManager.Sdk.Model.Response.GetNewReleaseResponse.GetNewReleaseResponseData.NewVersion"/> should be downloaded, but a local backup and stable version 
+            should replace the current one.
+            </summary>
+        </member>
+        <member name="T:PoiDownloadManager.Sdk.Model.Response.PoiDownloadManagerBaseResponse">
+            <summary>
+            Base response returned from all <see cref="T:PoiDownloadManager.Sdk.Model.IPoiDownloadManagerClient"/> operations.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Response.PoiDownloadManagerBaseResponse.Service">
+            <summary>
+            Service name. In this case, always "PoiDownloadManager".
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Response.PoiDownloadManagerBaseResponse.Action">
+            <summary>
+            Action to be performed.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Response.PoiDownloadManagerBaseResponse.Success">
+            <summary>
+            Whether the operation was successful or not.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Response.PoiDownloadManagerBaseResponse.ErrorCode">
+            <summary>
+            Error code, if any.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Response.PoiDownloadManagerBaseResponse.ErrorDescription">
+            <summary>
+            Error description, if any.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Response.PoiDownloadManagerBaseResponse.AdditionalInformation">
+            <summary>
+            Additional information about the request/response, if any.
+            </summary>
+        </member>
+        <member name="T:PoiDownloadManager.Sdk.Model.Response.ReleaseData">
+            <summary>
+            Information about the release. Could be obtained from the 
+            <see cref="M:PoiDownloadManager.Sdk.Model.IPoiDownloadManagerClient.GetNewRelease(PoiDownloadManager.Sdk.Model.Entry.INewReleaseEntry)"/>.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Response.ReleaseData.ForceUpdate">
+            <summary>
+            If the release download and installation should be mandatory.
+            Applicable in bug fixes.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Response.ReleaseData.PackageSize">
+            <summary>
+            Release package size.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Response.ReleaseData.SourceUrl">
+            <summary>
+            Package download URL.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Response.ReleaseData.UrlType">
+            <summary>
+            URL type.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Model.Response.ReleaseData.Version">
+            <summary>
+            Release version.
+            </summary>
+        </member>
+        <member name="T:PoiDownloadManager.Sdk.Model.TypeCode.ActionCode">
+            <summary>
+            Poi Download Manager actions.
+            </summary>
+        </member>
+        <member name="F:PoiDownloadManager.Sdk.Model.TypeCode.ActionCode.Undefined">
+            <summary>
+            None and invalid action.
+            </summary>
+        </member>
+        <member name="F:PoiDownloadManager.Sdk.Model.TypeCode.ActionCode.GetNewReleases">
+            <summary>
+            GetNewReleases action, which returns the last release information.
+            </summary>
+        </member>
+        <member name="F:PoiDownloadManager.Sdk.Model.TypeCode.ActionCode.GetServiceStatus">
+            <summary>
+            GetServiceStatus action.
+            </summary>
+        </member>
+    </members>
+</doc>

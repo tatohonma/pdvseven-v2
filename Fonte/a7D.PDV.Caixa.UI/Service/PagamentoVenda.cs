@@ -129,7 +129,9 @@ namespace a7D.PDV.Caixa.UI
             if (celular != null)
                 celular += pagamento?.Pedido?.Cliente?.Telefone1Numero?.ToString();
 
-            var tefPagamento = PinpadTEF.Pagar(tipo, pagamento.Valor.Value, pedido.IDPedido.Value, "Loja", AC.PDV.Nome, AC.PDV.IDPDV.Value, celular, 1);
+            bool contemAlcoolicos = Pedido.ContemAlcoolico(pedido.IDPedido.Value);
+
+            var tefPagamento = PinpadTEF.Pagar(tipo, pagamento.Valor.Value, pedido.IDPedido.Value, "Loja", AC.PDV.Nome, AC.PDV.IDPDV.Value, celular, 1, contemAlcoolicos);
             mensagemOperador = tefPagamento.MensagemOperador;
 
             if (tefPagamento.Confirmado)

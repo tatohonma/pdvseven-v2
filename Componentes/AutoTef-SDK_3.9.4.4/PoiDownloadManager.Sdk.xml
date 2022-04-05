@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PoiDownloadManager.Sdk</name>
+    </assembly>
+    <members>
+        <member name="T:PoiDownloadManager.Sdk.Client.PoiDownloadManagerClient">
+            <summary>
+            Implementation of Poi Download Manager client features.
+            </summary>
+        </member>
+        <member name="F:PoiDownloadManager.Sdk.Client.PoiDownloadManagerClient.VersionLength">
+            <summary>
+            Poi Download Manager version length.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Client.PoiDownloadManagerClient.httpClient">
+            <summary>
+            Client responsible for http serialization and communication.
+            </summary>
+        </member>
+        <member name="M:PoiDownloadManager.Sdk.Client.PoiDownloadManagerClient.#ctor(System.String)">
+            <summary>
+            Creates an instance of Poi Download Manager client,
+            based on PDM server URL.
+            </summary>
+            <param name="url">URL to the PDM server.</param>
+            <exception cref="!:UriFormatException">When URI is invalid.</exception>
+            <exception cref="T:System.ArgumentNullException">When URI is a null string.</exception>
+        </member>
+        <member name="M:PoiDownloadManager.Sdk.Client.PoiDownloadManagerClient.#ctor(Communication.Sdk.HttpCommunication.IHttpClient)">
+            <summary>
+            Creates an instance of Poi Download Manager client,
+            based on a HTTP client.
+            </summary>
+            <param name="httpClient">HTTP client.</param>
+            <exception cref="T:System.ArgumentNullException">When httpClient is null.</exception>
+            <exception cref="T:System.ArgumentNullException">When ServiceBaseAddress is null.</exception>
+        </member>
+        <member name="M:PoiDownloadManager.Sdk.Client.PoiDownloadManagerClient.GetNewRelease(PoiDownloadManager.Sdk.Model.Entry.INewReleaseEntry)">
+            <summary>
+            Get new release for a specific POI.
+            </summary>
+            <param name="version">Entry information.</param>
+            <returns>Returns information about the last release.</returns>
+        </member>
+        <member name="M:PoiDownloadManager.Sdk.Client.PoiDownloadManagerClient.Validate(Communication.Sdk.HttpCommunication.IHttpClient)">
+            <summary>
+            Validates information about the <see cref="P:PoiDownloadManager.Sdk.Client.PoiDownloadManagerClient.httpClient"/>.
+            </summary>
+            <param name="httpClient">HTTP client to validate.</param>
+        </member>
+        <member name="T:PoiDownloadManager.Sdk.Mapper.NewReleaseResponseMapper">
+            <summary>
+            Responsible to map information of <see cref="M:PoiDownloadManager.Sdk.Model.IPoiDownloadManagerClient.GetNewRelease(PoiDownloadManager.Sdk.Model.Entry.INewReleaseEntry)"/>.
+            </summary>
+        </member>
+        <member name="M:PoiDownloadManager.Sdk.Mapper.NewReleaseResponseMapper.ToReport(PoiDownloadManager.Sdk.Model.Response.GetNewReleaseResponse)">
+            <summary>
+            Parse <see cref="T:PoiDownloadManager.Sdk.Model.Response.GetNewReleaseResponse"/> into a <see cref="T:PoiDownloadManager.Sdk.Model.Report.IGetNewReleaseReport"/>.
+            </summary>
+            <param name="original"><see cref="T:PoiDownloadManager.Sdk.Model.Response.GetNewReleaseResponse"/></param>
+            <returns><see cref="T:PoiDownloadManager.Sdk.Model.Report.IGetNewReleaseReport"/></returns>
+        </member>
+        <member name="T:PoiDownloadManager.Sdk.Extension.VersionExtension">
+            <summary>
+            Extension to validate a Poi Download Manager version.
+            </summary>
+        </member>
+        <member name="M:PoiDownloadManager.Sdk.Extension.VersionExtension.IsValid(System.Version)">
+            <summary>
+            
+            </summary>
+            <param name="self"></param>
+            <returns></returns>
+        </member>
+        <member name="T:PoiDownloadManager.Sdk.Provider.PoiDownloadManagerProvider">
+            <summary>
+            Provider of <see cref="T:PoiDownloadManager.Sdk.Model.IPoiDownloadManagerClient"/>.
+            </summary>
+        </member>
+        <member name="M:PoiDownloadManager.Sdk.Provider.PoiDownloadManagerProvider.Get(System.String)">
+            <summary>
+            Provide an instance of <see cref="T:PoiDownloadManager.Sdk.Model.IPoiDownloadManagerClient"/> by server URI.
+            </summary>
+            <param name="url">PDM server URL.</param>
+            <returns>An instance of <see cref="T:PoiDownloadManager.Sdk.Model.IPoiDownloadManagerClient"/>.</returns>
+            <exception cref="!:UriFormatException">When URI is invalid.</exception>
+            <exception cref="T:System.ArgumentNullException">When URI is a null string.</exception>
+        </member>
+        <member name="M:PoiDownloadManager.Sdk.Provider.PoiDownloadManagerProvider.Get(Communication.Sdk.HttpCommunication.IHttpClient)">
+            <summary>
+            Provide an instance of <see cref="T:PoiDownloadManager.Sdk.Model.IPoiDownloadManagerClient"/> by HTTP client.
+            </summary>
+            <param name="httpClient">HTTP client.</param>
+            <returns>An instance of <see cref="T:PoiDownloadManager.Sdk.Model.IPoiDownloadManagerClient"/>.</returns>
+            <exception cref="T:System.ArgumentNullException">When httpClient is null.</exception>
+            <exception cref="T:System.ArgumentNullException">When ServiceBaseAddress is null.</exception>
+        </member>
+        <member name="T:PoiDownloadManager.Sdk.Report.GetNewReleaseReport">
+            <summary>
+            Response from <see cref="M:PoiDownloadManager.Sdk.Model.IPoiDownloadManagerClient.GetNewRelease(PoiDownloadManager.Sdk.Model.Entry.INewReleaseEntry)"/>.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Report.GetNewReleaseReport.Success">
+            <summary>
+            Whether the operation was successful or not.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Report.GetNewReleaseReport.ErrorCode">
+            <summary>
+            Error code, if any.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Report.GetNewReleaseReport.ErrorDescription">
+            <summary>
+            Error description, if any.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Report.GetNewReleaseReport.BackupVersion">
+            <summary>
+            Backup version.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Report.GetNewReleaseReport.NewVersion">
+            <summary>
+            New version to download.
+            </summary>
+        </member>
+        <member name="P:PoiDownloadManager.Sdk.Report.GetNewReleaseReport.RollbackToBackupVersion">
+            <summary>
+            Whether a rollback is needed. In this case, <see cref="P:PoiDownloadManager.Sdk.Report.GetNewReleaseReport.BackupVersion"/> nor 
+            <see cref="P:PoiDownloadManager.Sdk.Report.GetNewReleaseReport.NewVersion"/> should be downloaded, but a local backup and stable version 
+            should replace the current one.
+            </summary>
+        </member>
+    </members>
+</doc>

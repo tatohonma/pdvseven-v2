@@ -17,7 +17,7 @@ namespace a7D.PDV.Integracao.NTK.UI
         {
             decimal valor = decimal.Parse(txtValor.Text);
             int parcelas = int.Parse(txtParcelas.Text);
-            var pagamento = PinpadTEF.Pagar((TipoTEF)cmbTipo.SelectedIndex, valor, 34567, "teste", "pdv", 3, "11966072730", parcelas);
+            var pagamento = PinpadTEF.Pagar((TipoTEF)cmbTipo.SelectedIndex, valor, 34567, "teste", "pdv", 3, "11966072730", parcelas, false);
 
             if (pagamento == null)
                 txtResp.Text = "FIM";

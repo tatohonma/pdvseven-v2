@@ -1,0 +1,1463 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microtef.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Microtef.Core.Authorizer">
+            <summary>
+            Responsible for authorizing transactions. Should be initialized fo each pinpad connected.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Authorizer.PinpadFacade">
+            <summary>
+            Responsible for pinpad communication. All data sent to pinpad is made through this member.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Authorizer.AuthorizationProvider">
+            <summary>
+            Authorization provider URI.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Authorizer.ReceiptPrinter">
+            <summary>
+            Responsible for printing transaction and cancellation receipts.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Authorizer.Merchant">
+            <summary>
+            Merchant information.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Authorizer.PinpadMessages">
+            <summary>
+            16 character label to be shown on pinpad screen at the end of a transaction.
+            Only the first 16 characters are shown.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Authorizer.OnStateChanged">
+            <summary>
+            Contains what should be done if the event is triggered.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Authorizer.AuthorizationMessage">
+            <summary>
+            Message with response reasno from Stone authorization host.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Authorizer.AuthorizationStatus">
+            <summary>
+            If SDK user tried to use a different authorization flow from the given one, then this member will indicate an error.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Authorizer.TransactionManager">
+            <summary>
+            Responsible for charging pinpads tables.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.Authorizer.authorizationStatus">
+            <summary>
+            If SDK user tried to use a different authorization flow from the given one, then this member will indicate an error.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.Authorizer.#ctor">
+            <summary>
+            Default constructor used internally for testing.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.Authorizer.#ctor(Pinpad.Sdk.IPinpadFacade,Tms.Sdk.interfaces.IActivationReport,Microtef.Core.DisplayableMessages)">
+            <summary>
+            Creates the object attached to a single pinpad.
+            </summary>
+            <param name="pinpadFacade"></param>
+            <param name="merchantInfo">Merchant information obtained from an activation.</param>
+            <param name="pinpadMessages"></param>
+        </member>
+        <member name="M:Microtef.Core.Authorizer.Authorize(Microtef.Core.ITransactionEntry,Pinpad.Sdk.Model.ResponseStatus@)">
+            <summary>
+            Perform an authorization.
+            </summary>
+            <param name="transaction">Transaction information.</param>
+            <param name="operationStatus">Authorization status, should be checked in case of error.</param>
+            <returns>A mapped and easy-to-read transation report.</returns>
+        </member>
+        <member name="M:Microtef.Core.Authorizer.GetSecurePan(System.String@)">
+            <summary>
+            Used to get card's Primary Account Number from EMV or Magnetic Stripe.
+            </summary>
+            <param name="pan">Primary Account Number read from the card.</param>
+            <returns>Operation status.</returns>
+        </member>
+        <member name="M:Microtef.Core.Authorizer.Cancel(System.String,System.Decimal,System.Boolean)">
+            <summary>
+            Cancel an unique transaction by it's Acquirer Transaction Key (ATK) or Initiator Transaction Key (ITK).
+            </summary>
+            <param name="transactionKey">Transaction identifier set by Stone.</param>
+            <param name="amount">Amount to cancel.</param>
+            <param name="isInitiator">Use initiator Transaction identifier to cancel.</param>
+            <returns>Information about the cancellation.</returns>
+        </member>
+        <member name="M:Microtef.Core.Authorizer.Reprint(Poi.Sdk.Authorization.Report.IPaperReceipt)">
+            <summary>
+            Print a new receipt of a transaction that already was printed.
+            In this case, the receipt comes with a "REPRINT" tag in it.
+            </summary>
+            <param name="receiptData">Information to print about a transaction.</param>
+            <returns>Whether the printing was OK or not.</returns>
+        </member>
+        <member name="M:Microtef.Core.Authorizer.UpdateTables(System.Int32,System.Boolean)">
+            <summary>
+            Tries to update tables a predefined number of times.
+            </summary>
+            <param name="forceUpdate">If it is a forced update or not.</param>
+            <param name="attempts">Attempt number.</param>
+            <returns>If it was updated or not.</returns>
+        </member>
+        <member name="M:Microtef.Core.Authorizer.ReadCard(Poi.Sdk.Authorization.Report.ICard@,Microtef.Core.ITransactionEntry)">
+            <summary>
+            Prompts for card insertion.
+            Reads card information and saves it in class' properties.
+            </summary>
+            <param name="cardInfo">Card read information.</param>
+            <param name="transaction">Transaction information.</param>
+            <returns>Operation status.</returns>
+            <exception cref="T:Pinpad.Sdk.Model.Exceptions.ExpiredCardException">When an expired card is read.</exception>
+        </member>
+        <member name="M:Microtef.Core.Authorizer.ReadPassword(Pinpad.Sdk.Model.Pin@,Poi.Sdk.Authorization.Report.ICard,System.Decimal)">
+            <summary>
+            If needed, read cardholder password and saves it in class' properties.
+            </summary>
+            <param name="pinInfo">Card security information read.</param>
+            <param name="cardInfo">Card information from which security are extracted.</param>
+            <param name="amount">Transaction amount.</param>
+            <returns>Password reading status.</returns>
+        </member>
+        <member name="M:Microtef.Core.Authorizer.SendAuthorizationAndGetReport(Poi.Sdk.Authorization.Report.ICard,Microtef.Core.ITransactionEntry,Pinpad.Sdk.Model.Pin)">
+            <summary>
+            Performs an authorization and gets the authorization report for this transaction.
+            At the end, asks for card removal and prints transaction receipt, if thermal printer
+            is available.
+            </summary>
+            <param name="cardInfo">Information about the card.</param>
+            <param name="transaction">Transaction information.</param>
+            <param name="pinInfo">Security PIN information, obtained through ReadPassword() method.</param>
+            <returns>Authorization report with easy-to-read information.</returns>
+        </member>
+        <member name="M:Microtef.Core.Authorizer.PromptForCardRemoval(System.String)">
+            <summary>
+            Prompts for cardholder to remove the card.
+            </summary>
+            <param name="message">This message is shown alternately with "RETIRE O CARTÃO". This message is also kept on the screen after the transaction process is closed.</param>
+        </member>
+        <member name="M:Microtef.Core.Authorizer.ReadMagneticCardTrailer">
+            <summary>
+            Reads the magnetic trailer of a magnetic stripe card.
+            </summary>
+            <returns>All information from magnetic tracks.</returns>
+        </member>
+        <member name="M:Microtef.Core.Authorizer.FinishAuthorization(Poi.Sdk.Authorization.Report.IAuthorizationReport)">
+            <summary>
+            Finishes an authorization process. This method shall be called always at the end of a transaction.
+            Triggers OnStateChange event.
+            </summary>
+            <param name="authReport">Response received from Stone authorizer.</param>
+            <returns>If the authorization was finished successfully or not.</returns>
+        </member>
+        <member name="M:Microtef.Core.Authorizer.PickTransactionType">
+            <summary>
+            Asks the user to choose the transaction type.
+            </summary>
+            <returns>TransactionType picked.</returns>
+        </member>
+        <member name="M:Microtef.Core.Authorizer.CreateAuthorizationEntry(Pinpad.Sdk.Model.CardEntry,Microtef.Core.ITransactionEntry,Pinpad.Sdk.Model.Pin)">
+            <summary>
+            Receives authorization information and creates an authorization request.
+            </summary>
+            <param name="cardInfo">Card information.</param>
+            <param name="transaction">Transaction information.</param>
+            <param name="pin">PIN block information.</param>
+            <returns>An authorization request ready to be sent.</returns>
+        </member>
+        <member name="M:Microtef.Core.Authorizer.Validate(Poi.Sdk.Authorization.Report.ICard,Microtef.Core.ITransactionEntry,Pinpad.Sdk.Model.Pin)">
+            <summary>
+            Validate information before sending to Stone authorizer.
+            </summary>
+            <param name="cardInfo">Card read information.</param>
+            <param name="transaction">Transaction information.</param>
+            <param name="pinInfo">PIN read information.</param>
+            <exception cref="T:System.ArgumentException">If invalid object.</exception>
+            <exception cref="T:System.ArgumentNullException">Is object is null.</exception>
+        </member>
+        <member name="M:Microtef.Core.Authorizer.Validate(Pinpad.Sdk.IPinpadFacade,Tms.Sdk.interfaces.IActivationReport,Microtef.Core.DisplayableMessages)">
+            <summary>
+            Validate information when creating a new authorizer.
+            </summary>
+            <param name="pinpadFacade">Pinpad attached to the authorizer.</param>
+            <param name="merchantInfo">Merchant information obtained from an activation.</param>
+            <param name="pinpadMessages">Messages to show on pinpad display.</param>
+            <exception cref="T:System.ArgumentException">If invalid object.</exception>
+            <exception cref="T:System.ArgumentNullException">Is object is null.</exception>
+        </member>
+        <member name="T:Microtef.Core.Authorization.ReadMagneticCardTrackResponse">
+            <summary>
+            Response from a <see cref="M:Microtef.Core.ICardPaymentAuthorizer.ReadMagneticCardTrailer"/>
+            containing three magnetic tracks.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Authorization.ReadMagneticCardTrackResponse.Track1">
+            <summary>
+            First magnetic track.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Authorization.ReadMagneticCardTrackResponse.Track2">
+            <summary>
+            Second magnetic track.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Authorization.ReadMagneticCardTrackResponse.Track3">
+            <summary>
+            Third magneic track.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.Authorization.Mapper.AidMapper.Get(Pinpad.Sdk.AidTable)">
+            <summary>
+            Converts a pinpad understandable AID into a TMS understandable CAPK.
+            </summary>
+            <param name="aid">Pinpad understandable AID.</param>
+            <returns>TMS understandable AID.</returns>
+        </member>
+        <member name="M:Microtef.Core.Authorization.Mapper.AidMapper.Get(Tms.Sdk.Download.Tags.Aid)">
+            <summary>
+            Converts a TMS understandable AID into a pinpad understandable AID.
+            </summary>
+            <param name="aid">TMS understandable AID.</param>
+            <returns>Pinpad understandable AID.</returns>
+        </member>
+        <member name="M:Microtef.Core.Authorization.Mapper.AidMapper.Get(Tms.Sdk.Download.TypeCodes.TmsContactlessMode)">
+            <summary>
+            Converts a TMS understandable TmsContactlessMode into a pinpad understandable ContactlessMode.
+            </summary>
+            <param name="mode">TMS understandable TmsContactlessMode.</param>
+            <returns>Pinpad understandable ContactlessMode.</returns>
+        </member>
+        <member name="M:Microtef.Core.Authorization.Mapper.AidMapper.Get(Pinpad.Sdk.Commands.ContactlessMode)">
+            <summary>
+            Converts a pinpad understandable ContactlessMode into a TMS understandable TmsContactlessMode.
+            </summary>
+            <param name="mode">Pinpad understandable ContactlessMode.</param>
+            <returns>TMS understandable TmsContactlessMode.</returns>
+        </member>
+        <member name="M:Microtef.Core.Authorization.Mapper.AidMapper.Validate(Tms.Sdk.Download.Tags.Aid)">
+            <summary>
+            Validates mandatory AID information.
+            </summary>
+            <param name="aid">AID information.</param>
+        </member>
+        <member name="M:Microtef.Core.Authorization.Mapper.AidMapper.Validate(Pinpad.Sdk.AidTable)">
+            <summary>
+            Verifies if the AID is null.
+            </summary>
+            <param name="aid">AID to be validated.</param>
+            <exception cref="T:System.ArgumentNullException">If the AID is null.</exception>
+        </member>
+        <member name="T:Microtef.Core.Authorization.Mapper.CapkMapper">
+            <summary>
+            Responsible for mapping TMS and pinpad CAPKs.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.Authorization.Mapper.CapkMapper.Get(Pinpad.Sdk.CapkTable)">
+            <summary>
+            Converts a pinpad understandable CAPK into a TMS understandable CAPK.
+            </summary>
+            <param name="capk">Pinpad understandable CAPK.</param>
+            <returns>TMS understandable CAPK.</returns>
+        </member>
+        <member name="M:Microtef.Core.Authorization.Mapper.CapkMapper.Get(Tms.Sdk.Download.Tags.Capk)">
+            <summary>
+            Converts a TMS understandable CAPK into a pinpad understandable CAPK.
+            </summary>
+            <param name="capk">TMS understandable CAPK.</param>
+            <returns>Pinpad understandable CAPK.</returns>
+        </member>
+        <member name="M:Microtef.Core.Authorization.Mapper.CapkMapper.Validate(Pinpad.Sdk.CapkTable)">
+            <summary>
+            Verifies if the PINPAD CAPK is null.
+            </summary>
+            <param name="capk">PINPAD CAPK to be validated.</param>
+            <exception cref="T:System.ArgumentNullException">If the PINPAD CAPK is null.</exception>
+        </member>
+        <member name="M:Microtef.Core.Authorization.Mapper.CapkMapper.Validate(Tms.Sdk.Download.Tags.Capk)">
+            <summary>
+            Verifies if the TMS CAPK is null.
+            </summary>
+            <param name="capk">TMS CAPK to be validated.</param>
+            <exception cref="T:System.ArgumentNullException">If the TMS CAPK is null.</exception>
+        </member>
+        <member name="T:Microtef.Core.Authorization.Mapper.CardMapper">
+            <summary>
+            Maps card information between Pinpad.Sdk and Poi.Sdk.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.Authorization.Mapper.CardMapper.MapCardEntry(Pinpad.Sdk.Model.CardEntry,Pinpad.Sdk.Model.Pin)">
+            <summary>
+            Maps intances of CardEntry and Pin, and returns the corresponding instance of Card.
+            </summary>
+            <param name="pinpadCard">Card information to be mapped.</param>
+            <param name="pin">Pin information to be mapped.</param>
+            <returns>Mapped instance of card.</returns>
+            <exception cref="T:System.ArgumentNullException">If some mandatory argument is null.</exception>
+        </member>
+        <member name="M:Microtef.Core.Authorization.Mapper.CardMapper.MapCard(Poi.Sdk.Authorization.Tag.CardSecurityInformation,System.String)">
+            <summary>
+            Maps intances of Card into the corresponding instance of CardEntry.
+            </summary>
+            <param name="card">Card information to be mapped.</param>
+            <param name="sak">Terminal Sale Affiliation Key (SAK).</param>
+            <returns>Mapped instance of card.</returns>
+            <exception cref="T:System.ArgumentNullException">If some mandatory argument is null.</exception>
+        </member>
+        <member name="M:Microtef.Core.Authorization.Mapper.CardMapper.Validate(Pinpad.Sdk.Model.CardEntry,Pinpad.Sdk.Model.Pin)">
+            <summary>
+            Mapping parameter validation.
+            </summary>
+            <param name="pinpadCard">Card information to be mapped.</param>
+            <param name="pin">Pin information to be mapped.</param>
+            <exception cref="T:System.ArgumentNullException">If some mandatory argument is null.</exception>
+        </member>
+        <member name="M:Microtef.Core.Authorization.Mapper.CardMapper.Validate(Poi.Sdk.Authorization.Tag.CardSecurityInformation,System.String)">
+            <summary>
+            Mapping parameter validation.
+            </summary>
+            <param name="card">>Card information to be mapped.</param>
+            <exception cref="T:System.ArgumentNullException">If some mandatory argument is null.</exception>
+        </member>
+        <member name="T:Microtef.Core.Authorization.TransactionEntry">
+            <summary>
+            Content (about a transaction) to initialize an authorization process.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.Authorization.TransactionEntry.ITK_LIMIT_LENGTH">
+            <summary>
+            Initiator Transaction Key length.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Authorization.TransactionEntry.Type">
+            <summary>
+            Type os the transaction (credit, debit).
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Authorization.TransactionEntry.Installment">
+            <summary>
+            Information about installments, if a credit transaction.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Authorization.TransactionEntry.Amount">
+            <summary>
+            Transaction amount.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Authorization.TransactionEntry.CaptureTransaction">
+            <summary>
+            If the transaction should be completed after authorized.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Authorization.TransactionEntry.InitiatorTransactionKey">
+            <summary>
+            Identifier setted by the user.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Authorization.TransactionEntry.HasAlcoholicDrink">
+            <summary>
+            Inform if there is an alcoholic product
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.Authorization.TransactionEntry.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.Authorization.TransactionEntry.#ctor(Poi.Sdk.Authorization.TypeCode.AccountType,System.Decimal,Poi.Sdk.Authorization.Tag.Installment,System.String,System.Boolean)">
+            <summary>
+            Setter constructor. Validates information, if needed.
+            </summary>
+            <param name="type">Type os the transaction (credit, debit).</param>
+            <param name="amount">Transaction amount.</param>
+            <param name="installment">Information about installments, if a credit transaction.</param>
+            <param name="itk">Identifier setted by the user.</param>
+            <param name="captureTransaction">If the transaction should be completed after authorized.</param>
+            <exception cref="T:System.ArgumentException">If an argument has invalid value or does not follow a specific business rule.</exception>
+        </member>
+        <member name="M:Microtef.Core.Authorization.TransactionEntry.Validate(Poi.Sdk.Authorization.TypeCode.AccountType,System.Decimal,Poi.Sdk.Authorization.Tag.Installment,System.String,System.Boolean)">
+            <summary>
+            Validates construction parameters that need to be validated.
+            </summary>
+            <param name="type">Type os the transaction (credit, debit).</param>
+            <param name="amount">Transaction amount.</param>
+            <param name="installment">Information about installments, if a credit transaction.</param>
+            <param name="itk">Identifier setted by the user.</param>
+            <param name="captureTransaction">If the transaction should be completed after authorized.</param>
+            <exception cref="T:System.ArgumentException">If an argument has invalid value or does not follow a specific business rule.</exception>
+        </member>
+        <member name="T:Microtef.Core.Extension.CommunicationTypeExtension">
+            <summary>
+            Extension for <see cref="T:Microtef.CrossPlatform.TypeCode.CommunicationType"/>.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.Extension.CommunicationTypeExtension.Map(Microtef.CrossPlatform.TypeCode.CommunicationType)">
+            <summary>
+            Converts a <see cref="T:Microtef.CrossPlatform.TypeCode.CommunicationType"/> into a <see cref="T:Tms.Sdk.Ping.Tags.TypeCode.CommunicationType"/>.
+            </summary>
+            <param name="code">The code to be mapped.</param>
+            <returns>Mapped value of <paramref name="code"/>.</returns>
+        </member>
+        <member name="T:Microtef.Core.Extension.ICardPaymentAuthorizerExtension">
+            <summary>
+            Converts a <see cref="T:Microtef.Core.ICardPaymentAuthorizer"/> into a <see cref="T:System.Collections.Generic.List`1"/> and
+            vice versa.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.Extension.ICardPaymentAuthorizerExtension.ToPingData(Microtef.Core.ICardPaymentAuthorizer)">
+            <summary>
+            Converts a single <see cref="T:Microtef.Core.ICardPaymentAuthorizer"/> into a collection of pinpads.
+            </summary>
+            <param name="self">The authorizer.</param>
+            <returns>The collection of pinpads ready to send it to the TMS.</returns>
+        </member>
+        <member name="M:Microtef.Core.Extension.ICardPaymentAuthorizerExtension.ToPingData(System.Collections.Generic.ICollection{Microtef.Core.ICardPaymentAuthorizer})">
+            <summary>
+            Converts multiple <see cref="T:Microtef.Core.ICardPaymentAuthorizer"/> into a collection of pinpads.
+            </summary>
+            <param name="self">Multiple authorizers.</param>
+            <returns>The collection of pinpads ready to send it to the TMS.</returns>
+        </member>
+        <member name="T:Microtef.Core.Extension.TransactionTypeExtension">
+            <summary>
+            Extension method to convert Account type in Transaction type.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.Extension.TransactionTypeExtension.ConvertToTAccountType(Pinpad.Sdk.Model.TransactionType)">
+            <summary>
+            Convert to Account type according to the value received.
+            </summary>
+            <param name="self">Enum that will be converted to account type.</param>
+            <returns>Enum converted (Credit or Debit)</returns>
+        </member>
+        <member name="M:Microtef.Core.Extension.TransactionTypeExtension.ConvertToTransactionType(Poi.Sdk.Authorization.TypeCode.AccountType)">
+            <summary>
+            Convert to Transaction type according to the value received.
+            </summary>
+            <param name="self">Enum that will be converted to transaction type.</param>
+            <returns>Enum converted (Credit or Debit)</returns>
+        </member>
+        <member name="T:Microtef.Core.BasicIoC">
+            <summary>
+            Basic Inversion of Control container. Does not store two objects
+            of the same type. Each registration must be attached to an instance
+            of the object to be registered - the instance cannot be null.
+            Warning: This is not an advanced implementation of it.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.BasicIoC.Instances">
+            <summary>
+            IOC instances.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.BasicIoC.Register``1(System.Object)">
+            <summary>
+            Register a new type attached to an instance that cannot be null.
+            </summary>
+            <typeparam name="T">Instance type to be registered.</typeparam>
+            <param name="instance">Instance to be registered under a unique type.</param>
+            <exception cref="T:System.ArgumentNullException">If the instance is null.</exception>
+        </member>
+        <member name="M:Microtef.Core.BasicIoC.Resolve``1">
+            <summary>
+            Returns the instance registered for the specified type.
+            </summary>
+            <typeparam name="T">Type of the instance to be returned.</typeparam>
+            <returns>Instance of the type or it's default value if the type specifies is not registered.</returns>
+        </member>
+        <member name="T:Microtef.Core.Ping.PingService">
+            <summary>
+            Responsible for sending status reports to the TMS every <see cref="F:Microtef.Core.Ping.PingService.TimeToPing"/> minutes.
+            Also, must handle the maintenance of the thread responsible for the operation.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.Ping.PingService.TimeToPing">
+            <summary>
+            Time to ping in milliseconds. In this case, ping once a day.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Ping.PingService.CurrentThread">
+            <summary>
+            Thread to ping.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Ping.PingService.PinpadsConnected">
+            <summary>
+            Pinpads connected to the Microtef.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Ping.PingService.Merchant">
+            <summary>
+            Merchant information to ping.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Ping.PingService.ThirdPartyInformation">
+            <summary>
+            Information about the third party. This is optional and set by the integrator.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.Ping.PingService.Start(System.Collections.Generic.List{Tms.Sdk.Ping.Tags.PinpadData},Tms.Sdk.interfaces.IActivationReport,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Fire the thread with the information needed.
+            </summary>
+            <param name="pinpads">Pinpads connected to the machine.</param>
+            <param name="merchant">Merchant information.</param>
+            <param name="thirdPartyInformation">Optional integrator information.</param>
+        </member>
+        <member name="M:Microtef.Core.Ping.PingService.StartPinging">
+            <summary>
+            Initiates a non-stoping looping, that pings the Microtef status report every <see cref="F:Microtef.Core.Ping.PingService.TimeToPing"/>
+            minutes.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.Ping.PingService.SetupPingRequest">
+            <summary>
+            Setup a <see cref="T:Tms.Sdk.Ping.PingRequest"/>.
+            </summary>
+            <returns>The <see cref="T:Tms.Sdk.Ping.PingRequest"/> assembled with the information provided.</returns>
+        </member>
+        <member name="M:Microtef.Core.Ping.PingService.SetupMemoryData">
+            <summary>
+            Creates the <see cref="T:Tms.Sdk.Ping.Tags.ComputerMemory"/>, accordingly to the platform.
+            </summary>
+            <returns>The <see cref="T:Tms.Sdk.Ping.Tags.ComputerMemory"/> assembled with the information provided by the platform.</returns>
+        </member>
+        <member name="M:Microtef.Core.Ping.PingService.SetupPlatformData">
+            <summary>
+            Creates the <see cref="T:Tms.Sdk.Ping.Tags.PlatformData"/>, accordingly to the platform.
+            </summary>
+            <returns>The <see cref="T:Tms.Sdk.Ping.Tags.PlatformData"/> assembled with the information provided by the platform
+            and by the third party.</returns>
+        </member>
+        <member name="M:Microtef.Core.Ping.PingService.SetupOperatingSystemData">
+            <summary>
+            Creates the <see cref="T:Tms.Sdk.Ping.Tags.OperatingSystem"/>, accordingly to the platform.
+            </summary>
+            <returns>The <see cref="T:Tms.Sdk.Ping.Tags.OperatingSystem"/> assembled with the information provided by the platform.</returns>
+        </member>
+        <member name="M:Microtef.Core.Ping.PingService.SetupTerminalInfoData">
+            <summary>
+            Creates the <see cref="T:Tms.Sdk.Ping.Tags.TerminalInfo"/>, based on information provided by the activation 
+            process.
+            </summary>
+            <returns>The <see cref="T:Tms.Sdk.Ping.Tags.TerminalInfo"/> assembled with the activation information.</returns>
+        </member>
+        <member name="T:Microtef.Core.Provider.UriProviderResource">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Provider.UriProviderResource.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Provider.UriProviderResource.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Provider.UriProviderResource.AuthorizationUri">
+            <summary>
+              Looks up a localized string similar to https://tef.stone.com.br.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Provider.UriProviderResource.PhcUri">
+            <summary>
+              Looks up a localized string similar to https://poihostcommunication.stone.com.br.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Provider.UriProviderResource.PrtUri">
+            <summary>
+              Looks up a localized string similar to https://poireport.stone.com.br.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Provider.UriProviderResource.TmsUri">
+            <summary>
+              Looks up a localized string similar to https://tms.stone.com.br.
+            </summary>
+        </member>
+        <member name="T:Microtef.Core.Staging.FallbackSettings">
+            <summary>
+            Backdoor to change the original URIs.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.Staging.FallbackSettings.EnableFallback">
+            <summary>
+            Whether the fallback is available or not. Used for testing, to 
+            define the endpoint to the test endpoint.
+            Always false as default.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Staging.FallbackSettings.FallbackAuthorizerUri">
+            <summary>
+            The fallback URI for the authorization provider.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Staging.FallbackSettings.FallbackTmsUri">
+            <summary>
+            The fallback URI for the TMS.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Staging.FallbackSettings.FallbackPhcUri">
+            <summary>
+            The fallback URI for the PHC.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Staging.FallbackSettings.FallbackPrtUri">
+            <summary>
+            The fallback URI for the PRT.
+            </summary>
+        </member>
+        <member name="T:Microtef.Core.Card">
+            <summary>
+            Public information about the card.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.Card.rawCard">
+            <summary>
+            "Unmapped" card from Pinpad.Sdk.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Card.BrandId">
+            <summary>
+            Brand ID.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Card.BrandName">
+            <summary>
+            Card brand name.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Card.CardholderName">
+            <summary>
+            Cardholder name printed on the card.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Card.ExpirationDate">
+            <summary>
+            Card expiration date.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Card.MaskedPrimaryAccountNumber">
+            <summary>
+            Masked primary account number (number printed on the card).
+            The mask consists in hide middle characters. 
+            Example:
+            Original PAN: 1234432156788765
+            Masked PAN: 123443******8765
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Card.Type">
+            <summary>
+            Card type.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Card.ReadingMode">
+            <summary>
+            Card type.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Card.ApplicationId">
+            <summary>
+            Card application ID, also known as AID.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Card.ApplicationCryptogram">
+            <summary>
+            Card application cryptogram, also known as ARQC.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Card.NeedsPassword">
+            <summary>
+            Defines whether the card needs password or not.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Card.PrimaryAccountNumberSequenceNumber">
+            <summary>
+            Application PAN Sequencial number for joint bank account.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Card.IsFallback">
+            <summary>
+            Is Fallback flow.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Card.IsVoucher">
+            <summary>
+            Is Voucher Card
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.Card.#ctor(Pinpad.Sdk.Model.CardEntry,System.String)">
+            <summary>
+            Private constructor, to set de "unmapped" card.
+            </summary>
+            <param name="rawCard">Card read.</param>
+            <param name="sak">Terminal Sale Affiliation Key (SAK).</param>
+        </member>
+        <member name="T:Microtef.Core.Transaction.Mapper.BrandMapper">
+            <summary>
+            Mapper between <see cref="P:Tms.Sdk.Download.Report.ICardBrandDownloadReport.BrandCollection"/> and 
+            <see cref="T:System.Collections.Generic.IList`1"/>.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.Transaction.Mapper.BrandMapper.ToPinpadCardBrand(Tms.Sdk.Download.Report.ICardBrandDownloadReport)">
+            <summary>
+            Maps a <see cref="P:Tms.Sdk.Download.Report.ICardBrandDownloadReport.BrandCollection"/> into a 
+            <see cref="T:System.Collections.Generic.IList`1"/>.
+            </summary>
+            <param name="self">Collection of brands supported obtained from TMS.</param>
+            <returns>Mapped brands supported by the pinpad.</returns>
+        </member>
+        <member name="T:Microtef.Core.Transaction.Operations.PaperReceiptPrinter">
+            <summary>
+            Responsible to print a receipt for an approved transaction.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.Transaction.Operations.PaperReceiptPrinter.Authorizer">
+            <summary>
+            Responsible for provide access to the pinpad.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.Transaction.Operations.PaperReceiptPrinter.#ctor(Microtef.Core.ICardPaymentAuthorizer)">
+            <summary>
+            Creates an instance with a correponding authorizer attached to it.
+            </summary>
+            <param name="authorizer">Responsible for provide access to the pinpad.</param>
+        </member>
+        <member name="M:Microtef.Core.Transaction.Operations.PaperReceiptPrinter.Print(Poi.Sdk.Authorization.Report.IAuthorizationReport,Tms.Sdk.interfaces.IActivationReport)">
+            <summary>
+            Print the first receipt from an approved transaction.
+            </summary>
+            <param name="approvedTransaction">Transaction to be printed about.</param>
+            <param name="merchant">Merchant information obtained from an activation.</param>
+            <returns>Whether the printing was successful or not.</returns>
+        </member>
+        <member name="M:Microtef.Core.Transaction.Operations.PaperReceiptPrinter.Print(Poi.Sdk.Authorization.Report.IPaperReceipt)">
+            <summary>
+            Print a receipt of an approved transaction.
+            Contains a tag "REIMPRESSAO" in it's header.
+            </summary>
+            <param name="receiptData">Receipt information.</param>
+            <returns>Whether the printing was successful or not.</returns>
+        </member>
+        <member name="M:Microtef.Core.Transaction.Operations.PaperReceiptPrinter.Print(Poi.Sdk.Authorization.Report.IPaperReceipt,System.Boolean,System.Boolean)">
+            <summary>
+            Print the receipt and asks if the client via should be printed.
+            </summary>
+            <param name="receiptData">Receipt information.</param>
+            <param name="isClientReceipt">Whether it is the client via or not.</param>
+            <param name="isReprint">Whether it is a reprint or not.</param>
+            <returns>Whether the printing was successful or not.</returns>
+        </member>
+        <member name="M:Microtef.Core.Transaction.Operations.PaperReceiptPrinter.PrintReceipt(Poi.Sdk.Authorization.Report.IPaperReceipt,System.Boolean,System.Boolean)">
+            <summary>
+            Print a unique receipt.
+            </summary>
+            <param name="receiptData">Receipt information.</param>
+            <param name="isClientReceipt">Whether it is the client via or not.</param>
+            <param name="isReprint">Whether it is a reprint or not.</param>
+            <returns>Whether the printing was successful or not.</returns>
+        </member>
+        <member name="M:Microtef.Core.Transaction.Operations.PaperReceiptPrinter.AskForClientReceipt">
+            <summary>
+            Asks through pinpad screen and keyboard, if the client receipt via should be printed
+            or not.
+            </summary>
+            <returns>If the client via should be printed.</returns>
+        </member>
+        <member name="M:Microtef.Core.Transaction.Operations.PaperReceiptPrinter.PrintReceiptHeader(Poi.Sdk.Authorization.Report.IPaperReceipt,System.Boolean,System.Boolean)">
+            <summary>
+            Adds receipt header to the printer buffer.
+            </summary>
+            <param name="receiptData">Receipt information.</param>
+            <param name="isClientReceipt">Whether it is the client via or not.</param>
+            <param name="isReprint">Whether it is a reprint or not.</param>
+        </member>
+        <member name="M:Microtef.Core.Transaction.Operations.PaperReceiptPrinter.PrintReceiptBody(Poi.Sdk.Authorization.Report.IPaperReceipt,System.Boolean)">
+            <summary>
+            Adds receipt body to the printer buffer.
+            </summary>
+            <param name="receiptData">Receipt information.</param>
+            <param name="printClientData">If client information should be printed in the receipt.</param>
+        </member>
+        <member name="M:Microtef.Core.Transaction.Operations.PaperReceiptPrinter.Validate(Poi.Sdk.Authorization.Report.IPaperReceipt)">
+            <summary>
+            Validate reprint data.
+            </summary>
+            <param name="receiptData">Whether all mandatory information about the reprint is present.</param>
+        </member>
+        <member name="T:Microtef.Core.CardReader">
+            <summary>
+            Responsible for read any card, regardless of card type (chip and pin or magnetic
+            stripe).
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.CardReader.PinpadTransactionProvider">
+            <summary>
+            Injects tables downloaded into the pinpad.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.CardReader.#ctor(Pinpad.Sdk.PinpadTransaction)">
+            <summary>
+            Creates an instance of the reader, with a specified <see cref="T:Pinpad.Sdk.PinpadTransaction"/>.
+            </summary>
+            <param name="pinpadTransaction"></param>
+        </member>
+        <member name="M:Microtef.Core.CardReader.Read(Poi.Sdk.Authorization.Report.ICard@,Microtef.Core.ITransactionEntry,System.String)">
+            <summary>
+            Reads a card.
+            </summary>
+            <param name="cardInfo">Information about the card.</param>
+            <param name="transaction">Transaction information.</param>
+            <param name="sak">Terminal Sale Affiliation Key (SAK).</param>
+            <returns>Reading status from pinpad.</returns>
+        </member>
+        <member name="M:Microtef.Core.CardReader.Dispose">
+            <summary>
+            Sinalize the Garbage Collector that this object is elegible to be collected.
+            </summary>
+        </member>
+        <member name="T:Microtef.Core.ICardPaymentAuthorizer">
+            <summary>
+            Responsible for authorizing transactions. Should be initialized fo each pinpad connected.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.ICardPaymentAuthorizer.PinpadFacade">
+            <summary>
+            Responsible for pinpad communication. All data sent to pinpad is made through this member.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.ICardPaymentAuthorizer.AuthorizationProvider">
+            <summary>
+            Authorization provider URI.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.ICardPaymentAuthorizer.Merchant">
+            <summary>
+            Merchant information.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.ICardPaymentAuthorizer.AuthorizationStatus">
+            <summary>
+            If SDK user tried to use a different authorization flow from the given one, then this member will indicate an error.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.ICardPaymentAuthorizer.PinpadMessages">
+            <summary>
+            16 character label to be shown on pinpad screen at the end of a transaction.
+            Only the first 16 characters are shown.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.ICardPaymentAuthorizer.OnStateChanged">
+            <summary>
+            Contains what should be done if the event is triggered.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.ICardPaymentAuthorizer.Authorize(Microtef.Core.ITransactionEntry,Pinpad.Sdk.Model.ResponseStatus@)">
+            <summary>
+            Perform an authorization.
+            </summary>
+            <param name="transaction">Transaction information.</param>
+            <param name="operationStatus">Authorization status, should be checked in case of error.</param>
+            <returns>A mapped and easy-to-read transation report.</returns>
+            <exception cref="T:Pinpad.Sdk.Model.Exceptions.PinpadNotFoundException">When none pinpad found.</exception>
+            <exception cref="T:Pinpad.Sdk.Model.Exceptions.CardHasChipException">When a card was swiped, but it has chip.</exception>
+            <exception cref="T:Pinpad.Sdk.Model.Exceptions.ExpiredCardException">When an expired card was passed.</exception>
+        </member>
+        <member name="M:Microtef.Core.ICardPaymentAuthorizer.GetSecurePan(System.String@)">
+            <summary>
+            Used to get card's Primary Account Number from EMV or Magnetic Stripe.
+            </summary>
+            <param name="pan">Primary Account Number read from the card.</param>
+            <returns>Operation status.</returns>
+        </member>
+        <member name="M:Microtef.Core.ICardPaymentAuthorizer.Cancel(System.String,System.Decimal,System.Boolean)">
+            <summary>
+            Cancel an unique transaction by it's Acquirer Transaction Key (ATK) or Initiator Transaction Key (ITK).
+            </summary>
+            <param name="transactionKey">Transaction identifier set by Stone.</param>
+            <param name="amount">Amount to cancel.</param>
+            <param name="isInitiator">Use initiator Transaction identifier to cancel.</param>
+            <returns>Information about the cancellation.</returns>
+        </member>
+        <member name="M:Microtef.Core.ICardPaymentAuthorizer.Reprint(Poi.Sdk.Authorization.Report.IPaperReceipt)">
+            <summary>
+            Print a new receipt of a transaction that already was printed.
+            In this case, the receipt comes with a "REPRINT" tag in it.
+            </summary>
+            <param name="receiptData">Information to print about a transaction.</param>
+            <returns>Whether the printing was OK or not.</returns>
+        </member>
+        <member name="M:Microtef.Core.ICardPaymentAuthorizer.UpdateTables(System.Int32,System.Boolean)">
+            <summary>
+            Tries to update tables a predefined number of times.
+            </summary>
+            <param name="forceUpdate">If it is a forced update or not.</param>
+            <param name="attempts">Attempt number.</param>
+            <returns>If it was updated or not.</returns>
+        </member>
+        <member name="M:Microtef.Core.ICardPaymentAuthorizer.ReadCard(Poi.Sdk.Authorization.Report.ICard@,Microtef.Core.ITransactionEntry)">
+            <summary>
+            Prompts for card insertion.
+            Reads card information and saves it in class' properties.
+            </summary>
+            <param name="cardInfo">Card read information.</param>
+            <param name="transaction">Transaction information.</param>
+            <returns>Operation status.</returns>
+            <exception cref="T:Pinpad.Sdk.Model.Exceptions.PinpadNotFoundException">When none pinpad found.</exception>
+            <exception cref="T:Pinpad.Sdk.Model.Exceptions.CardHasChipException">When a card was swiped, but it has chip.</exception>
+            <exception cref="T:Pinpad.Sdk.Model.Exceptions.ExpiredCardException">When an expired card was passed.</exception>
+        </member>
+        <member name="M:Microtef.Core.ICardPaymentAuthorizer.ReadPassword(Pinpad.Sdk.Model.Pin@,Poi.Sdk.Authorization.Report.ICard,System.Decimal)">
+            <summary>
+            If needed, read cardholder password and saves it in class' properties.
+            </summary>
+            <param name="pinInfo">Card security information read.</param>
+            <param name="cardInfo">Card information from which security are extracted.</param>
+            <param name="amount">Transaction amount.</param>
+            <returns>Password reading status.</returns>
+            <exception cref="T:Pinpad.Sdk.Model.Exceptions.PinpadNotFoundException">When none pinpad found.</exception>
+        </member>
+        <member name="M:Microtef.Core.ICardPaymentAuthorizer.SendAuthorizationAndGetReport(Poi.Sdk.Authorization.Report.ICard,Microtef.Core.ITransactionEntry,Pinpad.Sdk.Model.Pin)">
+            <summary>
+            Performs an authorization and gets the authorization report for this transaction.
+            </summary>
+            <param name="cardInfo">Information about the card.</param>
+            <param name="transaction">Transaction information.</param>
+            <param name="pinInfo">Security PIN information, obtained through ReadPassword() method.</param>
+            <returns>Authorization report with easy-to-read information.</returns>
+        </member>
+        <member name="M:Microtef.Core.ICardPaymentAuthorizer.PromptForCardRemoval(System.String)">
+            <summary>
+            Prompts for cardholder to remove the card.
+            </summary>
+            <param name="message">This message is shown alternately with "RETIRE O CARTÃO". This message is also kept on the screen after the transaction process is closed.</param>
+        </member>
+        <member name="M:Microtef.Core.ICardPaymentAuthorizer.ReadMagneticCardTrailer">
+            <summary>
+            Reads the magnetic trailer of a magnetic stripe card.
+            </summary>
+            <returns>All information from magnetic tracks.</returns>
+        </member>
+        <member name="T:Microtef.Core.ITransactionEntry">
+            <summary>
+            Content (about a transaction) to initialize an authorization process.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.ITransactionEntry.Type">
+            <summary>
+            Type os the transaction (credit, debit).
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.ITransactionEntry.Installment">
+            <summary>
+            Information about installments, if a credit transaction.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.ITransactionEntry.Amount">
+            <summary>
+            Transaction amount.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.ITransactionEntry.CaptureTransaction">
+            <summary>
+            If the transaction should be completed after authorized.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.ITransactionEntry.InitiatorTransactionKey">
+            <summary>
+            Identifier setted by the user.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.ITransactionEntry.HasAlcoholicDrink">
+            <summary>
+            Inform if there is an alcoholic product
+            </summary>
+        </member>
+        <member name="T:Microtef.Core.AuthorizationStatusChangeEventArgs">
+            <summary>
+            Transaction status changing event.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatusChangeEventArgs.AuthorizationStatus">
+            <summary>
+            Triggers an event when the authorization status is changed.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatusChangeEventArgs.Message">
+            <summary>
+            Status message.
+            </summary>
+        </member>
+        <member name="T:Microtef.Core.DeviceProvider">
+            <summary>
+            Provides access to ICardPaymentAuthorizers, which are responsible for communicating with the pinpad and performing financial operations.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.DeviceProvider.PingService">
+            <summary>
+            Responsible for pinging the TMS with terminal information.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.DeviceProvider.GetOneOrFirst(System.String,System.String,System.String,Microtef.Core.DisplayableMessages,System.String)">
+            <summary>
+            [OBSOLETE] Use ActivateAndGetOneOrFirst(IActivationReport, DisplayableMessages, string) or GetOneOrFirst(string, DisplayableMessages, string) instead.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.DeviceProvider.GetAll(System.String,System.String,System.String,Microtef.Core.DisplayableMessages)">
+            <summary>
+            [OBSOLETE] Use ActivateAndGetAll(string, DisplayableMessages, string) or GetAll(IActivationReport, DisplayableMessages, string) instead.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.DeviceProvider.ActivateAndGetOneOrFirst(System.String,Microtef.Core.DisplayableMessages,System.String,System.Boolean,System.String,System.String)">
+            <summary>
+            Perform an activation and get the first pinpad found, based on
+            the arguments received.
+            </summary>
+            <param name="stoneCode">Establishment Stone Code.</param>
+            <param name="pinpadMessages">Messages to show on pinpad display.</param>
+            <param name="connectionName">USB port name where the pinpad is connected or ÌP Address.</param>
+            <param name="enableWifi">Whether the method should search for Wi-Fi pinpads.</param>
+            <param name="merchantEmail">Email to where the activation receipt will be sent.</param>
+            <param name="partnerName">Name software house partner</param>
+            <returns>The authorizer attached to that pinpad.</returns>
+            <exception cref="T:System.ArgumentException">If merchantEmail is empty or invalid.</exception>
+            <exception cref="T:System.InvalidOperationException">If an error occurred on activation.</exception>
+        </member>
+        <member name="M:Microtef.Core.DeviceProvider.GetOneOrFirst(Tms.Sdk.interfaces.IActivationReport,Microtef.Core.DisplayableMessages,System.String,System.Boolean)">
+            <summary>
+            Get the first pinpad found, based on the arguments received.
+            </summary>
+            <param name="merchantInfo">Merchant information, obtained from an activation.</param>
+            <param name="pinpadMessages">Messages to show on pinpad display.</param>
+            <param name="connectionName">USB port name where the pinpad is connected or ÌP Address.</param>
+            <param name="enableWifi">enable/disable search for pinpad Wi-Fi.</param>
+            <returns>The authorizer attached to that pinpad.</returns>
+            <returns>The authorizer attached to that pinpad.</returns>
+        </member>
+        <member name="M:Microtef.Core.DeviceProvider.ActivateAndGetAll(System.String,Microtef.Core.DisplayableMessages,System.Boolean,System.String)">
+            <summary>
+            Perform an activation and get all pinpads attached to the machine.
+            </summary>
+            <param name="stoneCode">Establishment Stone Code.</param>
+            <param name="pinpadMessages">Messages to show on pinpad display.</param>
+            <param name="enableWifi">Whether the method should search for Wi-Fi pinpads.</param>
+            <param name="partnerName">Set software houser partner name</param>
+            <returns>A colloction of authorizers, each one related to each pinpad connected to the machine.</returns>
+            <exception cref="T:System.InvalidOperationException">If an error occurred on activation.</exception>
+        </member>
+        <member name="M:Microtef.Core.DeviceProvider.GetAll(Tms.Sdk.interfaces.IActivationReport,Microtef.Core.DisplayableMessages,System.Boolean)">
+            <summary>
+            Get all pinpads attached to the machine.
+            </summary>
+            <param name="merchantInfo">Merchant information to validate.</param>
+            <param name="pinpadMessages">Messages to show on pinpad display.</param>
+            <param name="enableWifi">Whether the method should search for Wi-Fi pinpads.</param>
+            <returns>A colloction of authorizers, each one related to each pinpad connected to the machine.</returns>
+        </member>
+        <member name="M:Microtef.Core.DeviceProvider.ActivateAndRegister(System.String,System.String,System.String)">
+            <summary>
+            Validate the StoneCode and if it is valid, perform an activation.
+            If the activation was well succeeded, register the <see cref="T:Tms.Sdk.Client.ITmsClient"/> into
+            the <see cref="T:Microtef.Core.BasicIoC"/>.
+            </summary>
+            <param name="stoneCode">Establishment Stone Code.</param>
+            <param name="email">Email to where the activation rteceipt will be sent.</param>
+            <param name="partnerName">Set software houser partner name</param>
+            <returns>Merchant information.</returns>
+            <exception cref="T:System.ArgumentException">If email is empty or invalid.</exception>
+            <exception cref="T:System.InvalidOperationException">If an error occurred on activation.</exception>
+        </member>
+        <member name="M:Microtef.Core.DeviceProvider.Validate(System.String)">
+            <summary>
+            Validation for Stone Code only.
+            </summary>
+            <param name="stoneCode">Stone Code to validate.</param>
+        </member>
+        <member name="M:Microtef.Core.DeviceProvider.Validate(Tms.Sdk.interfaces.IActivationReport)">
+            <summary>
+            Validate if all mandatory field of a <see cref="T:Tms.Sdk.interfaces.IActivationReport"/>
+            are present.
+            </summary>
+            <param name="merchantInfo">Merchant information to validate.</param>
+        </member>
+        <member name="P:Microtef.Core.PasswordReader.PinpadTransactionProvider">
+            <summary>
+            Injects tables downloaded into the pinpad.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.PasswordReader.Read(Pinpad.Sdk.Model.Pin@,Poi.Sdk.Authorization.Report.ICard,System.Decimal)">
+            <summary>
+            If needed, read cardholder password and saves it in class' properties.
+            </summary>
+            <param name="pinInfo">Card security information read.</param>
+            <param name="cardInfo">Card information.</param>
+            <param name="amount">Transaction amount.</param>
+            <returns>Password reading status.</returns>
+        </member>
+        <member name="T:Microtef.Core.TableUpdateHandler">
+            <summary>
+            Responsible for update and inject into the pinpad AID and CAPK tables.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.TableUpdateHandler.Pinpad">
+            <summary>
+            Pinpad in which the tables will be injected.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.TableUpdateHandler.#ctor(Pinpad.Sdk.IPinpadFacade)">
+            <summary>
+            Create an instance with a specified and mandatory <see cref="T:Pinpad.Sdk.PinpadTransaction"/>.
+            </summary>
+            <param name="pinpad">Pinpad in which the tables will be injected.</param>
+        </member>
+        <member name="M:Microtef.Core.TableUpdateHandler.Charge(System.Boolean,System.String)">
+            <summary>
+            Load all tables updates by the server.
+            </summary>
+            <param name="saleAffiliationKey">Terminal Sale Affiliation Key (SAK).</param>
+            <param name="forceUpdate">If shoulb force download tables. If true, will download and inject new tables even when tables are already up-to-dated.</param>
+            <returns>Response status, defining if something went wrong.</returns>
+        </member>
+        <member name="M:Microtef.Core.TableUpdateHandler.InjectTables(Tms.Sdk.Download.Report.IEmvTableDownloadReport)">
+            <summary>
+            Injects AID and CAPK tables into the pinpad.
+            </summary>
+            <param name="tables">Collection of tables.</param>
+        </member>
+        <member name="M:Microtef.Core.TableUpdateHandler.InjectCapkTable(System.Collections.Generic.ICollection{Tms.Sdk.Download.Tags.Capk})">
+            <summary>
+            Injects CAPK table.
+            </summary>
+            <param name="capkTable">CAPK table to be injected.</param>
+        </member>
+        <member name="M:Microtef.Core.TableUpdateHandler.InjectAidTable(System.Collections.Generic.ICollection{Tms.Sdk.Download.Tags.Aid})">
+            <summary>
+            Injects AID table.
+            </summary>
+            <param name="aidTable">AID table to be injected.</param>
+        </member>
+        <member name="M:Microtef.Core.TableUpdateHandler.Dispose">
+            <summary>
+            Alert the .NET Framework Garbage Collector that this instance is eligible for memory collection.
+            </summary>
+        </member>
+        <member name="T:Microtef.Core.TransactionManager">
+            <summary>
+            Responsible for manage pinpad CAPK and AID tables.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.TransactionManager.Pinpad">
+            <summary>
+            Pinpad through which every transaction is made.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.TransactionManager.SaleAffiliationKey">
+            <summary>
+            SAK related to a capture method of a StoneCode.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.TransactionManager.#ctor(Pinpad.Sdk.IPinpadFacade,System.String)">
+            <summary>
+            Creates the table manager.
+            </summary>
+            <param name="pinpad">Pinpad through which every transaction is made.</param>
+            <param name="sak">Sale Affiliation Key.</param>
+        </member>
+        <member name="M:Microtef.Core.TransactionManager.Charge(System.Boolean)">
+            <summary>
+            Load all tables updates by the server.
+            </summary>
+            <param name="forceUpdate">If shoulb force download tables. If true, will download and inject new tables even when tables are already up-to-dated.</param>
+            <returns>Response status, defining if something went wrong.</returns>
+        </member>
+        <member name="M:Microtef.Core.TransactionManager.ReadCard(Poi.Sdk.Authorization.Report.ICard@,Microtef.Core.ITransactionEntry)">
+            <summary>
+            Reads a card.
+            </summary>
+            <param name="cardInfo">Information about the card.</param>
+            <param name="transaction">Transaction information.</param>
+            <returns>Reading status from pinpad.</returns>
+        </member>
+        <member name="M:Microtef.Core.TransactionManager.ReadPassword(Pinpad.Sdk.Model.Pin@,Poi.Sdk.Authorization.Report.ICard,System.Decimal)">
+            <summary>
+            Reads card password.
+            </summary>
+            <param name="pinInfo">Pin information obtained.</param>
+            <param name="cardInfo">Card information obtained from <see cref="M:Microtef.Core.TransactionManager.ReadCard(Poi.Sdk.Authorization.Report.ICard@,Microtef.Core.ITransactionEntry)">ReadCard method</see>.</param>
+            <param name="amount">Transaction amount.</param>
+            <returns>Reading status from pinpad.</returns>
+        </member>
+        <member name="M:Microtef.Core.TransactionManager.FinishTransaction(Poi.Sdk.Authorization.Report.IAuthorizationReport)">
+            <summary>
+            Finishes an authorization process. This method shall be called always at the end of a transaction.
+            Triggers OnStateChange event.
+            </summary>
+            <param name="authReport">The result of an authorization.</param>
+            <returns>If the authorization was finished successfully or not.</returns>
+        </member>
+        <member name="M:Microtef.Core.TransactionManager.GetSecurePan(System.String@,System.String)">
+            <summary>
+            Used to get card's Primary Account Number from EMV or Magnetic Stripe.
+            </summary>
+            <param name="pan">Primary Account Number read from the card.</param>
+            <param name="sak">Sale Affiliation Key.</param>
+            <returns>Operation status.</returns>
+        </member>
+        <member name="M:Microtef.Core.TransactionManager.PromptForCardRemoval(System.String)">
+            <summary>
+            Prompts for cardholder to remove the card.
+            </summary>
+            <param name="message">This message is shown alternately with "RETIRE O CARTÃO". This message is also kept on the screen after the transaction process is closed.</param>
+        </member>
+        <member name="T:Microtef.Core.DisplayableMessages">
+            <summary>
+            Represents messages to be displayed on pinpad screen.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.DisplayableMessages.DefaultInitializationMessage">
+            <summary>
+            Default message to be displayed on pinpad screen while initializing the pinpad.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.DisplayableMessages.DefaultApprovedMessage">
+            <summary>
+            Default message to be displayed on pinpad screen when a transaction is approved.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.DisplayableMessages.DefaultDeclinedMessage">
+            <summary>
+            Default message to be displayed on pinpad screen when a transaction is declined.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.DisplayableMessages.DefaultMainLabel">
+            <summary>
+            Default message to be displayed on pinpad screen while pinpad is not transacting.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.DisplayableMessages.DefaultProcessingMessage">
+            <summary>
+            Default message to be displayed on pinpad screen while processing the transaction.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.DisplayableMessages.DefaultCreditLabel">
+            <summary>
+            Default credit option to be displayed on pinpad screen while select transaction type.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.DisplayableMessages.DefaultDebitLabel">
+            <summary>
+            Default debit option to be displayed on pinpad screen while select transaction type.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.DisplayableMessages.DefaultTransactionTypeMenuLabel">
+            <summary>
+            Default select label to be displayed on pinpad screen while select transaction type.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.DisplayableMessages.InitializationMessage">
+            <summary>
+            Message to be displayed on pinpad screen while initializing the pinpad.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.DisplayableMessages.ApprovedMessage">
+            <summary>
+            Message to be displayed on pinpad screen when a transaction is approved.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.DisplayableMessages.DeclinedMessage">
+            <summary>
+            Message to be displayed on pinpad screen when a transaction is declined.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.DisplayableMessages.MainLabel">
+            <summary>
+            Message to be displayed on pinpad screen while pinpad is not transacting.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.DisplayableMessages.ProcessingMessage">
+            <summary>
+            Message to be displayed on pinpad screen while processing the transaction.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.DisplayableMessages.CreditLabel">
+            <summary>
+            Credit option to be displayed on pinpad screen while select transaction type.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.DisplayableMessages.DebitLabel">
+            <summary>
+            Debit option to be displayed on pinpad screen while select transaction type.
+            </summary>
+        </member>
+        <member name="P:Microtef.Core.DisplayableMessages.TransactionTypeMenuLabel">
+            <summary>
+            Select label to be displayed on pinpad screen while select transaction type.
+            </summary>
+        </member>
+        <member name="M:Microtef.Core.DisplayableMessages.#ctor">
+            <summary>
+            Parameterless constructor, that sets its properties with default values.
+            </summary>
+        </member>
+        <member name="T:Microtef.Core.AuthorizationStatus">
+            <summary>
+            Authorization status.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.Undefined">
+            <summary>
+            Estado Indefinido
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.InvalidSaleAffiliationKey">
+            <summary>
+            SaleAffiliationKey inválido
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.InvalidTransaction">
+            <summary>
+            Transação inválida
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.TransactionCreated">
+            <summary>
+            Transação criada mas não iniciada
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.Authorizing">
+            <summary>
+            Autorizando a transação online
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.Approved">
+            <summary>
+            Transação aprovada
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.NotApproved">
+            <summary>
+            Transação Negada
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.PartiallyApproved">
+            <summary>
+            Transação Parcialmente aprovada, consulte TransactionApprovedAmount
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.TechnicalError">
+            <summary>
+            Erro técnico, transação cancelada
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.UserCancelled">
+            <summary>
+            Transação cancelada pelo PinPad
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.SystemCancelled">
+            <summary>
+            Transação cancelada pelo Sistema
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.AwaitingCard">
+            <summary>
+            Aguardando o cartão ser inserido
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.AwaitingPinCode">
+            <summary>
+            Aguardando o PIN do cartão ser inserido
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.NetworkError">
+            <summary>
+            Falha na rede
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.CardReadingError">
+            <summary>
+            Falha na leitura dos dados do cartão, tente novamente
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.CardReadingFatalError">
+            <summary>
+            Fatal error occurred on card reading.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.PinpadGenericError">
+            <summary>
+            Generic error with PinPad
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.PinpadNotFoundError">
+            <summary>
+            PinPad não encontrado
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.AwaitingCardRemoval">
+            <summary>
+            Awaiting the user to remove the card.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.TableDownloading">
+            <summary>
+            Downloading CAPK and AID tables from TMS.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.TableDownloadingError">
+            <summary>
+            Error while downloading pinpad tables. Unable to perform a card reading.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.TransactionFinished">
+            <summary>
+            Transaction finished.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.DumbCard">
+            <summary>
+            Card could not be read. Try swipe the card (even if it have EMV chip).
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.InvalidCard">
+            <summary>
+            An invalid card was inserted or swiped.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.ConnectionError">
+            <summary>
+            Connection error.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.CardNotFound">
+            <summary>
+            Card not found on ICC reader or CTLS detected.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.FinishingTransaction">
+            <summary>
+            This status means that the EMV chip data is being updated, and therefore the card can not be removed.
+            </summary>
+        </member>
+        <member name="F:Microtef.Core.AuthorizationStatus.TimeOut">
+            <summary>
+            None response received from the server.
+            </summary>
+        </member>
+    </members>
+</doc>
