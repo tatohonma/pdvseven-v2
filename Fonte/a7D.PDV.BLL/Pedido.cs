@@ -1016,6 +1016,9 @@ ORDER BY p.DtPedidoFechamento";
         public static bool ContemAlcoolico(Int32 idPedido)
         {
             string categoriasAlcoolicas = ConfiguracoesSistema.Valores.CategoriasAlcoolicas;
+            
+            if (String.IsNullOrEmpty(categoriasAlcoolicas))
+                return false;
 
             SqlDataAdapter da;
             DataSet ds = new DataSet();
