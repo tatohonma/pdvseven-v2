@@ -19,7 +19,7 @@ namespace a7D.PDV.Integracao.Server
             var client = new HttpClient()
             {
                 //BaseAddress = new Uri("http://localhost:7700"),
-                BaseAddress = new Uri("https://apipdvseven.azurewebsites.net"),
+                BaseAddress = new Uri("http://apipdvseven.azurewebsites.net"),
             };
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Add("x-auth-token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6InNlcnZlciIsImlzcyI6InNlbGYiLCJuYmYiOjE0NjM0MzIxODJ9.8Uw2JjVgPRxGOuuy9HPDwnubnuKNytuWvO_-ToQIPpw");

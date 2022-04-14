@@ -667,7 +667,10 @@ namespace a7D.PDV.BLL
                 if (resumo && desconto["Motivo Desconto"].ToString() != "TOTAL")
                     continue;
                 var linha = desconto["Motivo Desconto"].ToString().PadRight(25, ' ').Substring(0, 25);
-                linha += "R$ " + Convert.ToDecimal(desconto["Valor total (R$)"]).ToString("#,##0.00");
+                if (desconto["Valor total (R$)"].ToString() != "")
+                    linha += "R$ " + Convert.ToDecimal(desconto["Valor total (R$)"]).ToString("#,##0.00");
+                else
+                    linha += "R$ 0,00";
 
                 relatorio.Add(linha);
             }

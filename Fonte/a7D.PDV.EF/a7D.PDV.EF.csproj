@@ -353,21 +353,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711081839391_2_17_A_Gateways.resx">
       <DependentUpon>201711081839391_2_17_A_Gateways.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711211201050_2_17_B_PedidoPagamentos.resx">
       <DependentUpon>201711211201050_2_17_B_PedidoPagamentos.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711222001305_2_17_C_RecebiveisBandeiras.resx">
       <DependentUpon>201711222001305_2_17_C_RecebiveisBandeiras.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711301228526_2_17_D_TipoPagamento.resx">
       <DependentUpon>201711301228526_2_17_D_TipoPagamento.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711301252521_2_17_E_TipoPagamento.resx">
       <DependentUpon>201711301252521_2_17_E_TipoPagamento.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801191259197_2_19_A_Saldos.resx">
       <DependentUpon>201801191259197_2_19_A_Saldos.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801221634174_2_19_B_Saldos.resx">
       <DependentUpon>201801221634174_2_19_B_Saldos.cs</DependentUpon>
