@@ -31,9 +31,10 @@ namespace a7D.PDV.AutoAtendimento.UI.Services
             {
                 TEF = new Integracao.Pagamento.GranitoTEF.GranitoPinpad(pedidoID, pedidoID, total, "");
             }
-                else if (PdvServices.MeioPagamento == "STONE")
+            else if (PdvServices.MeioPagamento == "STONE")
             {
-                TEF = new Integracao.Pagamento.StoneTEF.PinpadStoneTEF(pedidoID, total, null);
+                bool contemAlcoolico = BLL.Pedido.ContemAlcoolico(pedidoID);
+                TEF = new Integracao.Pagamento.StoneTEF.PinpadStoneTEF(pedidoID, total, null, contemAlcoolico);
             }
             else if (PdvServices.MeioPagamento == "NTKPayGo")
             {

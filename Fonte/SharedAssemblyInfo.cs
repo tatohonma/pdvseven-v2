@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2022")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.21.1.10")]
+[assembly: AssemblyVersion("2.23.0.7")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -63,6 +63,39 @@ Lista das últimas versões e FIX
     Os numeros de cada versão de cada aplicações Android seguirá sua numeração propria.
     O WS2 é responsável em bloquear versão antiga dos aplicativos, e fornecer o link do correto para download
     Especificar o tipo de cada alteração feita: Novo, Melhoria, Correção, TDD, Atualização
+
+2.23.0.7 ======================================================================
+    Correção: Chamada da API sem o HTTPS
+    Correção: Relatório do Fechamento do dia
+    Correção: Fechamento do dia sem movimentação
+
+2.23.0.6 ======================================================================
+    Melhoria: Inclusao da opção "Categorias Alcoolicas" no Configurador
+    Correção: Ajuste do TEF Stone para a versão 3.9.4.4
+        Bloqueio do uso de Vale Refeição para bebidas alcoolicas
+
+2.23.0.5 ======================================================================
+    Correção: Integração iFood
+        Pagamento com dinheiro no iFood estava vindo zerado
+        Cancelamento de pedido com o cupom sat acima do tempo
+        Tratamentos de erros para evitar Exception
+
+2.23.0.4 ======================================================================
+    Correção: Integracao iFood com a nova API
+        Abertura Loja
+        Importação Pedido
+
+2.22.0.0 ======================================================================
+    Novo: Adicionado o tipo de pedido Retirada
+        Incluir opção no configurador para Habilitar Pedido Retirada no Caixa
+        Configurador > Caixa > Tipo de pedido Padrão: adicionado opção Retirada
+        Configurador > Caixa: adicionado configuracao "Habilitar Tipo de Pedido Retirada"
+
+2.21.1.11 ======================================================================
+    Correção: o IDTipoPedido estava perdendo quando desconto dado no imprimir conta
+    Correção: o valor do pedido, na tela de adicionar produto, aparecia errado quando tinha modificação com valor
+    Melhoria: exibir o tipo de desconto no CheckBox "aplicar desconto" quando algum tipo selecionado
+
 
 2.21.1.10 ======================================================================
     Migração GitHub

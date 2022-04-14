@@ -1,6 +1,8 @@
-﻿using a7D.PDV.BLL;
+﻿using a7D.Fmk.CRUD.DAL;
+using a7D.PDV.BLL;
 using a7D.PDV.BLL.Extension;
 using a7D.PDV.BLL.Services;
+using a7D.PDV.EF.Enum;
 using a7D.PDV.Model;
 using ACBrFramework.ECF;
 using System;
@@ -654,9 +656,12 @@ namespace a7D.PDV.Impressora
                 case 30:
                     identificacao += "DELIVERY";
 
-                    string ifood = pedido.PedidoIFood;
-                    if (!string.IsNullOrEmpty(ifood))
-                        identificacao += " IFOOD " + ifood;
+                    if (pedido.OrigemPedido != null && pedido.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
+                    {
+                        TagInformation tagDisplayId = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-displayId");
+
+                        identificacao += " IFOOD " + tagDisplayId.Valor;
+                    }
 
                     if (pedido.Cliente != null)
                     {

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data;
+using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +16,7 @@ namespace a7D.PDV.Integracao.Pagamento.StoneTEF
         public string ViaEstabelecimento { get; private set; }
         public string ViaCliente { get; private set; }
         public decimal Valor { get; private set; }
+        public bool HasAlcoholicDrink { get; private set; }
         public Exception Erro { get; private set; }
         public bool PrecisaSelecionar => atkCancelamento == null;
         public string Log => log.ToString();
@@ -25,6 +28,7 @@ namespace a7D.PDV.Integracao.Pagamento.StoneTEF
         Task process;
 
         public static string StoneCode { get; set; }
+        
         const string LojaPDV = "PDVSeven";
 
         public bool PagamentoConfirmado
@@ -38,7 +42,7 @@ namespace a7D.PDV.Integracao.Pagamento.StoneTEF
             }
         }
 
-        public PinpadStoneTEF(int identificador, decimal valor, string autorizacaoCancelamento)
+        public PinpadStoneTEF(int identificador, decimal valor, string autorizacaoCancelamento, bool hasAlcoholicDrink)
         {
             process = null;
 
@@ -46,13 +50,14 @@ namespace a7D.PDV.Integracao.Pagamento.StoneTEF
                 log = new StringBuilder("Nova Venda: " + identificador);
             else
                 log = new StringBuilder("Cancelamento de transação: " + autorizacaoCancelamento);
-          
+
             if (string.IsNullOrEmpty(StoneCode))
                 throw new Exception("Configure o StoneCode");
 
             ID = identificador;
             Valor = valor;
             atkCancelamento = autorizacaoCancelamento;
+            HasAlcoholicDrink = hasAlcoholicDrink;
         }
 
         public void DefinirMetodoPagamento(MetodoPagamento metodo, int parcelas)
@@ -98,7 +103,7 @@ namespace a7D.PDV.Integracao.Pagamento.StoneTEF
                             {
                                 Mensagem = "Insira o cartão";
                                 AddLog("Autorizando");
-                                var result = AuthorizationCore.Authorize(ID, Valor, Debito, null, (s) =>
+                                var result = AuthorizationCore.Authorize(ID, Valor, Debito, null, HasAlcoholicDrink, (s) =>
                                 {
                                     if (abort)
                                         throw new Exception("Operação cancelada pelo operador");

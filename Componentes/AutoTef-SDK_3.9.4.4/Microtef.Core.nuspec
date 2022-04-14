@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>MicroPos.Core</id>
+    <version>$version$</version>
+    <title>MicroPos.Core</title>
+     <authors>MicroPos Team</authors>
+     <owners>Buy4</owners>    
+    <projectUrl>https://github.com/stone-pagamentos</projectUrl>
+    <iconUrl>http://www.stone.com.br/img/simbolo-stone.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Stone</description>    	
+    <copyright>Copyright 2016</copyright>    
+    <tags>Stone Pagamentos TEF MicroTef MicroPos POS Point Of Sale</tags>
+    <dependencies>
+      <dependency id="MicroPos.CrossPlatform" version="[1.4.0]" />
+      <dependency id="Pinpad.Sdk" version="[2.18.0]" />
+      <dependency id="Poi.Sdk" version="[1.5.1]" />
+      <dependency id="PoiDownloadManager.Sdk" version="[1.0.1]" />
+      <dependency id="Receipt.Sdk" version="[1.2.2]" />
+      <dependency id="Tms.Sdk" version="[2.0.4]" />
+    </dependencies>
+   </metadata>
+   <files>
+    <file src="bin\Release\MicroPos.Core.dll" target="lib\portable40-net45+sl5+win8+wp8+wpa81" /> 	
+   </files>
+</package>

@@ -19,6 +19,7 @@ namespace a7D.PDV.Caixa.UI.Controles
         public decimal ValorPendenteSemDesconto { get; private set; }
         public decimal ValorPendente { get; private set; }
         public bool AceitarParcial { get; private set; }
+
         public event EventHandler ParametrosAlterados;
 
         public PedidoPagamentoControl()
@@ -48,6 +49,13 @@ namespace a7D.PDV.Caixa.UI.Controles
             if (PedidoAtual.AplicarDesconto == true && PedidoAtual.ValorDesconto > 0)
             {
                 txtDescontoReais.Text = PedidoAtual.ValorDesconto.Value.ToString("0.00");
+                //cid
+                if (PedidoAtual.TipoDesconto.Nome != null)
+                {
+                    ckbAplicaDesconto.Text = PedidoAtual.TipoDesconto.Nome;
+                }
+                //cid
+
                 ckbAplicaDesconto.Checked = true;
                 txtDescontoPorcentagem.Enabled = txtDescontoReais.Enabled = true;
             }
@@ -93,7 +101,7 @@ namespace a7D.PDV.Caixa.UI.Controles
                 {
                     var frmTipoDesconto = new frmTipoDesconto();
                     tipoResult = frmTipoDesconto.ShowDialog();
-                    tipoDesconto = new TipoDescontoInformation { IDTipoDesconto = frmTipoDesconto.IDTipoDesconto };
+                    tipoDesconto = new TipoDescontoInformation { IDTipoDesconto = frmTipoDesconto.IDTipoDesconto, Descricao = frmTipoDesconto.Descricao };
                 }
                 else
                     tipoResult = DialogResult.OK;
@@ -114,6 +122,7 @@ namespace a7D.PDV.Caixa.UI.Controles
             }
             else
             {
+                ckbAplicaDesconto.Text = "Aplica desconto";
                 PedidoAtual.TipoDesconto = null;
                 PedidoAtual.UsuarioDesconto = usuarioDesconto;
 

@@ -78,6 +78,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="a7D.Fwk.CRUD.DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Componentes\a7D.Fwk.CRUD.DAL.dll</HintPath>
+    </Reference>
     <Reference Include="ACBrFramework.Net, Version=0.9.6.5, Culture=neutral, PublicKeyToken=4ca716d5e1bd4ba3, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Componentes\ACBrFramework.Net.dll</HintPath>

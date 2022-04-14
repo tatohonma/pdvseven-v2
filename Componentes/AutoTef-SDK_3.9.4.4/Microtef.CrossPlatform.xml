@@ -1,0 +1,345 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microtef.CrossPlatform</name>
+    </assembly>
+    <members>
+        <member name="T:Microtef.CrossPlatform.TypeCode.CommunicationType">
+            <summary>
+            Indicates which communication type (pinpad wifi or pinpad by serial port). 
+            </summary>
+        </member>
+        <member name="F:Microtef.CrossPlatform.CrossPlatformController.SystemNameLimitLength">
+            <summary>
+            Limit length for <see cref="P:Microtef.CrossPlatform.IConfigurationController.SystemName"/>.
+            </summary>
+        </member>
+        <member name="F:Microtef.CrossPlatform.CrossPlatformController.IsInitialized">
+            <summary>
+            Indicate if any platform was initialized.
+            </summary>
+        </member>
+        <member name="T:Microtef.CrossPlatform.IConfigurationController">
+            <summary>
+            Platform configuration and information.
+            </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.IConfigurationController.SystemName">
+            <summary>
+            Operating system name and version.
+            </summary>
+        </member>
+        <member name="M:Microtef.CrossPlatform.IConfigurationController.GetAppSettings(System.String)">
+            <summary>
+            Get a value from an app.config key.
+            </summary>
+            <param name="Name">App.config key.</param>
+            <returns>App.config key value.</returns>
+        </member>
+        <member name="T:Microtef.CrossPlatform.CrossPlatformThreadStart">
+            <summary>
+            The action to be executed.
+            </summary>
+        </member>
+        <member name="T:Microtef.CrossPlatform.ICrossPlatformThread">
+            <summary>
+            A unit of work (such as a Thread or a Task), specific from the platform.
+            </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.ICrossPlatformThread.IsAlive">
+            <summary>
+            Whether the thread is alive, that is, in execution.
+            </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.ICrossPlatformThread.Priority">
+            <summary>
+            Execution priority.
+            </summary>
+        </member>
+        <member name="M:Microtef.CrossPlatform.ICrossPlatformThread.NewThread(Microtef.CrossPlatform.CrossPlatformThreadStart)">
+            <summary>
+            Creates a new thread and starts it.
+            </summary>
+            <param name="ThreadStart">The action to be performed.</param>
+            <returns>The thread in execution.</returns>
+        </member>
+        <member name="M:Microtef.CrossPlatform.ICrossPlatformThread.Sleep(System.Int32)">
+            <summary>
+            Waits for a number of milliseconds.
+            </summary>
+            <param name="millisecondsTimeout">Number of milliseconds to wait.</param>
+        </member>
+        <member name="M:Microtef.CrossPlatform.ICrossPlatformThread.Start">
+            <summary>
+            The action begins.
+            </summary>
+        </member>
+        <member name="M:Microtef.CrossPlatform.ICrossPlatformThread.Kill">
+            <summary>
+            Kill the thread and abort execution.
+            </summary>
+        </member>
+        <member name="T:Microtef.CrossPlatform.IInitializer">
+            <summary>
+            Responsible for setup all functionalities from a specific platform.
+            </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.IInitializer.Initialized">
+            <summary>
+            Informs whether the platform was initialized or not.
+            </summary>
+        </member>
+        <member name="M:Microtef.CrossPlatform.IInitializer.InitializePlatform">
+            <summary>
+            Setup all functionalities from a specific platform.
+            </summary>
+        </member>
+        <member name="T:Microtef.CrossPlatform.IPinpadConnection">
+            <summary>
+            Responsibles for the Connection functions.
+            </summary>
+        </member>
+        <member name="M:Microtef.CrossPlatform.IPinpadConnection.Open">
+            <summary>
+            Opens connection.
+            </summary>
+        </member>
+        <member name="M:Microtef.CrossPlatform.IPinpadConnection.Close">
+            <summary>
+            Closes connection.
+            </summary>
+        </member>
+        <member name="M:Microtef.CrossPlatform.IPinpadConnection.Dispose">
+            <summary>
+            Disposes the communication interface.
+            </summary>
+        </member>
+        <member name="M:Microtef.CrossPlatform.IPinpadConnection.DiscardInBuffer">
+            <summary>
+            Discards the buffer of the writing methods.
+            </summary>
+        </member>
+        <member name="M:Microtef.CrossPlatform.IPinpadConnection.DiscardOutBuffer">
+            <summary>
+            Discards the buffer of the reading methods.
+            </summary>
+        </member>
+        <member name="M:Microtef.CrossPlatform.IPinpadConnection.Write(System.Byte[])">
+            <summary>
+            Sends the message of the buffer.
+            </summary>
+            <param name="buffer">buffer message that will be sent</param>
+        </member>
+        <member name="M:Microtef.CrossPlatform.IPinpadConnection.WriteByte(System.Byte)">
+            <summary>
+            sends the message(one byte).
+            </summary>
+            <param name="data">One byte that will be sent</param>
+        </member>
+        <member name="M:Microtef.CrossPlatform.IPinpadConnection.ReadByte">
+            <summary>
+            returns byte to byte from data received.
+            </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.IPinpadConnection.WriteTimeout">
+            <summary>
+            Sets and gets the timeout to send the message.
+            </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.IPinpadConnection.ReadTimeout">
+            <summary>
+            Sets and gets the timeout to receive the message.
+            </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.IPinpadConnection.ConnectionName">
+             <summary>
+            Contains the port name or ip address according to the communication type. ex: [Serial port : COM6]  [WIFI : 192.168.1.101]
+             </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.IPinpadConnection.IsOpen">
+            <summary>
+            Checks if the connections is opened.
+            </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.IPinpadConnection.BytesToRead">
+            <summary>
+            Message length received
+            </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.IPinpadConnection.CommunicationType">
+            <summary>
+            Communication type: Serial Port/Bluetooth or WIFI. 
+            </summary>
+        </member>
+        <member name="T:Microtef.CrossPlatform.IPinpadConnectionController">
+            <summary>
+            Responsible for connecting to availables devices.
+            </summary>
+        </member>
+        <member name="M:Microtef.CrossPlatform.IPinpadConnectionController.CreatePinpadConnection(System.String)">
+            <summary>
+            Creates a pinpad connection(by serial port or IP address) following the methods of <see cref="T:Microtef.CrossPlatform.IPinpadConnection"/>
+            </summary>
+            <param name="connectionName">Serial port or IP address</param>
+            <returns>A pinpad connection(serial port or IP address)</returns>
+        </member>
+        <member name="T:Microtef.CrossPlatform.IPinpadFinder">
+            <summary>
+            Responsible for connecting to a pinpad or a set of pinpads.
+            </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.IPinpadFinder.PinpadFound">
+            <summary>
+            Event fired when a pinpad was found.
+            </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.IPinpadFinder.IgnoredPorts">
+            <summary>
+            Collection of ports that are being ignored when trying to connect to any pinpad.
+            </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.IPinpadFinder.IsRunningUnderDotNet">
+            <summary>
+            Whether the platform is running under .NET.
+            </summary>
+        </member>
+        <member name="M:Microtef.CrossPlatform.IPinpadFinder.GetPortNames">
+            <summary>
+            Returns all serial ports available in the machine, except the <see cref="P:Microtef.CrossPlatform.IPinpadFinder.IgnoredPorts"/>.
+            </summary>
+            <returns>Ports found in the machine, except the <see cref="P:Microtef.CrossPlatform.IPinpadFinder.IgnoredPorts"/>.</returns>
+        </member>
+        <member name="M:Microtef.CrossPlatform.IPinpadFinder.AddIgnoredPort(System.String)">
+            <summary>
+            Adds a port to the <see cref="P:Microtef.CrossPlatform.IPinpadFinder.IgnoredPorts"/> collection.
+            </summary>
+            <param name="portName">The port name to be ignored when trying to connect to a pinpad.</param>
+        </member>
+        <member name="M:Microtef.CrossPlatform.IPinpadFinder.RemoveIgnoredPort(System.String)">
+            <summary>
+            Remove an ignored port from the <see cref="P:Microtef.CrossPlatform.IPinpadFinder.IgnoredPorts"/> collection.
+            </summary>
+            <param name="portName">The port name to stop being ignored.</param>
+        </member>
+        <member name="M:Microtef.CrossPlatform.IPinpadFinder.Find(System.Boolean,System.String)">
+            <summary>
+            Procura um Pinpad pronto para uso.
+            Utiliza um thread para cada porta Serial para agilizar a busca.
+            </summary>
+            <returns>Uma porta serial aberta de um Pinpad</returns>
+        </member>
+        <member name="M:Microtef.CrossPlatform.IPinpadFinder.Find(System.String,System.String)">
+            <summary>
+            Procura um Pinpad pronto para uso em uma porta serial específica.
+            Utiliza um thread para cada porta Serial para agilizar a busca.
+            </summary>
+            <returns>Uma porta serial aberta de um Pinpad</returns>
+        </member>
+        <member name="M:Microtef.CrossPlatform.IPinpadFinder.FindAllDevices(System.Boolean,System.String)">
+            <summary>
+            Gets all pinpads connected.
+            </summary>
+            <param name="enableWifi">Whether the method should search for Wi-Fi pinpads.</param>
+            <param name="stoneCode">Merchant's StoneCode.</param>
+            <returns>A collection of pinpads or null, if none was found.</returns>
+        </member>
+        <member name="T:Microtef.CrossPlatform.IPlatformInfo">
+            <summary>
+            Specific information about the platform implemented.
+            </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.IPlatformInfo.OperationSystemName">
+            <summary>
+            Name of the operating system.
+            </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.IPlatformInfo.IsUserInteractive">
+            <summary>
+            Whether the user is interacting with the operating system or not.
+            </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.IPlatformInfo.OperationSystemVersion">
+            <summary>
+            Version of the operation system.
+            </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.IPlatformInfo.ProcessorCount">
+            <summary>
+            Number of cores in the machine.
+            </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.IPlatformInfo.Architecture">
+            <summary>
+            Set of rules and methods that describe the functionality, organization, and implementation of 
+            computer systems.
+            </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.IPlatformInfo.MemoryInUsePercentage">
+            <summary>
+            Percentage of the memory currently in use.
+            </summary>
+        </member>
+        <member name="P:Microtef.CrossPlatform.IPlatformInfo.DriveStorageInUsePercentage">
+            <summary>
+            Percentage of the storage currently in use in the driver.
+            </summary>
+        </member>
+        <member name="T:Microtef.CrossPlatform.PinpadConnectionManager">
+            <summary>
+            Armazena as Portas Seriais impedindo que elas sejam destruídas pelo garbage collector
+            </summary>
+        </member>
+        <member name="M:Microtef.CrossPlatform.PinpadConnectionManager.GetPinpadConnection(System.String)">
+            <summary>
+            Gets a pinpad connection according with the serial port or ip address informed. 
+            </summary>
+            <param name="connectionName">Serial port or wifi</param>
+            <returns> A pinpad connection (serial port or wifi)</returns>
+        </member>
+        <member name="T:Microtef.CrossPlatform.VersionAttribute.MicrotefPackVersionAttribute">
+            <summary>
+            Attribute for a platform pack.
+            </summary>
+        </member>
+        <member name="F:Microtef.CrossPlatform.VersionAttribute.MicrotefPackVersionAttribute.VersionFormatRegex">
+            <summary>
+            Version format RegEx. RegEx: /([a-zA-Z]){1,32}\s(\d+\.\d+\.\d+)/g
+            Does not allow:
+            	- Unicode characters/special characters
+            	- Space within pack name
+            	- More than one space between name and version
+            And follow these rules:
+            	- Version shall be format accordingly to the <see cref="!:http://semver.org/"/>: MAJOR.MINOR.PATCH
+            	- The three of the version number shall always exist
+            </summary>
+            <example>
+            	Match: MicroTef 1.2.3
+            	Does not match: MicroTef 1.2.3.4
+            	Does not match: MicroTef 1.2
+            	Does not match: MicroTef  1.2.3
+            	Does not match: MicroTef .2.3
+            	Does not allow: MicTef 1.2.3
+            </example>
+        </member>
+        <member name="P:Microtef.CrossPlatform.VersionAttribute.MicrotefPackVersionAttribute.Version">
+            <summary>
+            Pack version.
+            </summary>
+        </member>
+        <member name="M:Microtef.CrossPlatform.VersionAttribute.MicrotefPackVersionAttribute.#ctor(System.String)">
+            <summary>
+            Creates instance and validates MicroPos Pack Version, accoding to 
+            <see cref="F:Microtef.CrossPlatform.VersionAttribute.MicrotefPackVersionAttribute.VersionFormatRegex"/>.
+            </summary>
+            <param name="version">Pack version.</param>
+            <exception cref="T:System.InvalidOperationException">When pack version is invalBid.</exception>
+        </member>
+        <member name="M:Microtef.CrossPlatform.VersionAttribute.MicrotefPackVersionAttribute.ValidateVersion(System.String)">
+            <summary>
+            Validates <see cref="P:Microtef.CrossPlatform.VersionAttribute.MicrotefPackVersionAttribute.Version"/>.
+            </summary>
+            <param name="version">Possible pack version.</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Microtef.CrossPlatform.VersionAttribute.StoneModuleAcquirerVersionAttribute.#ctor(System.String)" -->
+    </members>
+</doc>

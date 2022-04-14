@@ -59,7 +59,8 @@ namespace a7D.PDV.Caixa.UI.Controles
                            EnderecoNumero = l.Field<string>("EnderecoNumero"),
                            Observacao = l.Field<string>("Observacao"),
                            Bairro = l.Field<string>("Bairro"),
-                           Cidade = l.Field<string>("Cidade")
+                           Cidade = l.Field<string>("Cidade"),
+                           IDOrigemPedido = l.Field<int?>("IDOrigemPedido")
                        };
             var saveRow = -1;
             if (dgvEntregas.Rows.Count > 0)
@@ -75,7 +76,8 @@ namespace a7D.PDV.Caixa.UI.Controles
                     ObterEndereco(item.Endereco, item.EnderecoNumero, item.Bairro, item.Cidade, item.Observacao),
                     item.Telefone1Numero,
                     item.GUIDIdentificacao,
-                    item.IDStatusPedido
+                    item.IDStatusPedido,
+                    item.IDOrigemPedido
                 };
 
                 dgvEntregas.Rows.Add(row);
@@ -133,11 +135,12 @@ namespace a7D.PDV.Caixa.UI.Controles
 
                 item.Cells[0].Style.Font = new Font(this.Font, FontStyle.Bold);
 
-                DataGridViewImageCell icone = (DataGridViewImageCell)item.Cells[7];
-                if (((string)item.Cells["GUIDIdentificacao"].Value).StartsWith("ifood#"))
+                DataGridViewImageCell icone = (DataGridViewImageCell)item.Cells["Icone"];
+                icone.Value = Resources.semImagem;
+                if (Convert.ToInt32(item.Cells["IDOrigemPedido"].Value) == (int)EOrigemPedido.ifood)
+                {
                     icone.Value = Resources.ifood;
-                else
-                    icone.Value = Resources.semImagem;
+                }
 
                 if (Convert.ToInt32(item.Cells["IDStatusPedido"].Value) == (int)EStatusPedido.NaoConfirmado)
                 {
@@ -170,51 +173,61 @@ namespace a7D.PDV.Caixa.UI.Controles
             AtualizarLista();
         }
 
-        private void dgvEntregas_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void SelecionarPedido(int linhaSelecionada)
         {
-            Cursor = Cursors.WaitCursor;
-            Refresh();
-            if (dgvEntregas.SelectedRows.Count >= 0)
+            if (linhaSelecionada >= 0)
             {
-                try
-                {
-                    GUIDIdentificacao_selecionado = dgvEntregas.SelectedRows[0].Cells["GUIDIdentificacao"].Value.ToString();
-                    AtualizarStatus();
-                    PedidoSelecionado(sender, e);
-                }
-                catch { }
+                GUIDIdentificacao_selecionado = dgvEntregas.Rows[linhaSelecionada].Cells["GUIDIdentificacao"].Value.ToString();
+            }
+            else
+            {
+                GUIDIdentificacao_selecionado = null;
             }
 
-            Cursor = Cursors.Default;
-            Refresh();
+            ExibirLista();
+            AtualizarStatus();
+        }
+
+        private void AbrirPedido(Int32 linhaSelecionada)
+        {
+            if (linhaSelecionada >= 0)
+            {
+                GUIDIdentificacao_selecionado = dgvEntregas.Rows[linhaSelecionada].Cells["GUIDIdentificacao"].Value.ToString();
+
+                PedidoInformation pedido = new PedidoInformation();
+                pedido = Pedido.CarregarPorIdentificacao(GUIDIdentificacao_selecionado);
+
+                if (pedido.PermitirAlterar != false)
+                {
+                    using (var frm = frmNovoDelivery.EditarPedidoDelivery(GUIDIdentificacao_selecionado))
+                    {
+                        frm.ShowDialog();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Esse pedido de Delivery não pode ser alterado");
+                }
+            }
+            else
+            {
+                GUIDIdentificacao_selecionado = null;
+            }
+
+            ExibirLista();
+            AtualizarStatus();
         }
 
         private void dgvEntregas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //clickWaiter.Stop();
-            //if (e.RowIndex >= 0)
-            //{
-            //    Cursor = Cursors.WaitCursor;
-            //    Refresh();
-            //    GUIDIdentificacao_selecionado = dgvEntregas.Rows[e.RowIndex].Cells["GUIDIdentificacao"].Value.ToString();
+            AbrirPedido(e.RowIndex);
+            PedidoSelecionado(sender, e);
+        }
 
-            //    using (var frm = frmNovoDelivery.EditarPedidoDelivery(frmPrincipal.Caixa1, frmPrincipal.PDV1, GUIDIdentificacao_selecionado))
-            //    {
-            //        frm.ShowDialog();
-            //    }
-            //}
-            //else
-            //{
-            //    GUIDIdentificacao_selecionado = null;
-            //}
-
-            //ExibirLista();
-            //AtualizarStatus();
-
-            //PedidoSelecionado(sender, e);
-
-            //Cursor = Cursors.Default;
-            //Refresh();
+        private void dgvEntregas_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SelecionarPedido(e.RowIndex);
+            PedidoSelecionado(sender, e);
         }
 
         private void txtPesquisarEntrega_TextChanged(object sender, EventArgs e)
@@ -251,28 +264,7 @@ namespace a7D.PDV.Caixa.UI.Controles
             }
         }
 
-        private void dgvEntregas_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //clickWaiter.Stop();
-            if (e.RowIndex >= 0)
-            {
-                GUIDIdentificacao_selecionado = dgvEntregas.Rows[e.RowIndex].Cells["GUIDIdentificacao"].Value.ToString();
 
-                using (var frm = frmNovoDelivery.EditarPedidoDelivery(GUIDIdentificacao_selecionado))
-                {
-                    frm.ShowDialog();
-                }
-            }
-            else
-            {
-                GUIDIdentificacao_selecionado = null;
-            }
-
-            ExibirLista();
-            AtualizarStatus();
-
-            PedidoSelecionado(sender, e);
-        }
 
         private void clickTimer_tick(object sender, EventArgs e)
         {
@@ -313,21 +305,31 @@ namespace a7D.PDV.Caixa.UI.Controles
 
         private void dgvEntregas_SelectionChanged(object sender, EventArgs e)
         {
-            Cursor = Cursors.WaitCursor;
-            Refresh();
-            if (dgvEntregas.SelectedRows.Count >= 0)
+            //Cursor = Cursors.WaitCursor;
+            //Refresh();
+            //if (dgvEntregas.SelectedRows.Count >= 0)
+            //{
+            //    try
+            //    {
+            //        GUIDIdentificacao_selecionado = dgvEntregas.SelectedRows[0].Cells["GUIDIdentificacao"].Value.ToString();
+            //        AtualizarStatus();
+            //        PedidoSelecionado(sender, e);
+            //    }
+            //    catch { }
+            //}
+
+            //Cursor = Cursors.Default;
+            //Refresh();
+        }
+
+        private void btnNovoPedidoRetirada_Click(object sender, EventArgs e)
+        {
+            using (var frm = frmNovoDelivery.NovoPedidoDelivery())
             {
-                try
-                {
-                    GUIDIdentificacao_selecionado = dgvEntregas.SelectedRows[0].Cells["GUIDIdentificacao"].Value.ToString();
-                    AtualizarStatus();
-                    PedidoSelecionado(sender, e);
-                }
-                catch { }
+                frm.ShowDialog();
             }
 
-            Cursor = Cursors.Default;
-            Refresh();
+            AtualizarLista();
         }
     }
 }

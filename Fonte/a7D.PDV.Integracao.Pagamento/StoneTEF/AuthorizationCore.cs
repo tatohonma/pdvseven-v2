@@ -112,7 +112,7 @@ namespace a7D.PDV.Integracao.Pagamento.StoneTEF
         /// </summary>
         /// <returns>The report returned from Stone Authorizer, or null if something 
         /// went wrong.</returns>
-        public static PagamentoResultado Authorize(int id, decimal valor, bool debito, string email, Action<string> status)
+        public static PagamentoResultado Authorize(int id, decimal valor, bool debito, string email, bool hasAlcoholicDrink, Action<string> status)
         {
             // Verify if the authorizer is eligible to do something:
             if (IsUsable == false) { return null; }
@@ -124,6 +124,7 @@ namespace a7D.PDV.Integracao.Pagamento.StoneTEF
                 CaptureTransaction = true,
                 InitiatorTransactionKey = id.ToString(),
                 Type = debito ? AccountType.Debit : AccountType.Credit,
+                HasAlcoholicDrink = hasAlcoholicDrink,
             };
 
             try

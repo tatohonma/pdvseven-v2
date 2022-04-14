@@ -161,6 +161,9 @@ namespace a7D.PDV.BLL
         [Config("Cliente deve ter 'Data de Nascimento'", Valor = "0", ValoresAceitos = "0|1", Obrigatorio = true)]
         public bool ClienteDataNascimentoObrigatorio { get; protected set; }
 
+        [Config("Categorias de Bebidas Alcoolicas (informar os IDs separados por ,)", Valor = "")]
+        public string CategoriasAlcoolicas { get; protected set; }
+
         [Config("Stone Code (TEF)", Valor = "")]
         public string StoneCode { get; protected set; }
 

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -11,6 +12,8 @@
     <AssemblyName>a7D.PDV.EF</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,10 +39,10 @@
       <HintPath>..\..\Componentes\a7D.Fwk.CRUD.DAL.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -66,6 +69,7 @@
     <Compile Include="DTO\PagamentoTEF.cs" />
     <Compile Include="Enum\ECodigosPagamentoSAT.cs" />
     <Compile Include="Enum\EConfig.cs" />
+    <Compile Include="Enum\EOrigemPedido.cs" />
     <Compile Include="Enum\EStatusMesa.cs" />
     <Compile Include="Enum\EStatusPedido.cs" />
     <Compile Include="Enum\ETamanhoPacote.cs" />
@@ -147,10 +151,30 @@
     <Compile Include="Migrations\201906100032210_2_21_Ticket_Integracoes.Designer.cs">
       <DependentUpon>201906100032210_2_21_Ticket_Integracoes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202203112222532_2_22_Cliente.cs" />
+    <Compile Include="Migrations\202203112222532_2_22_Cliente.designer.cs">
+      <DependentUpon>202203112222532_2_22_Cliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203141806068_2_23_Tags+OrigemPedidos.cs" />
+    <Compile Include="Migrations\202203141806068_2_23_Tags+OrigemPedidos.designer.cs">
+      <DependentUpon>202203141806068_2_23_Tags+OrigemPedidos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203141827163_2_23_FlagPermitirAlterar.cs" />
+    <Compile Include="Migrations\202203141827163_2_23_FlagPermitirAlterar.designer.cs">
+      <DependentUpon>202203141827163_2_23_FlagPermitirAlterar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203141834520_2_23_GuidIdentificacao-Cliente.cs" />
+    <Compile Include="Migrations\202203141834520_2_23_GuidIdentificacao-Cliente.designer.cs">
+      <DependentUpon>202203141834520_2_23_GuidIdentificacao-Cliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\tbOrigemPedidoMap.cs" />
+    <Compile Include="Models\Mapping\tbTagMap.cs" />
     <Compile Include="Models\tbBandeira.cs" />
     <Compile Include="Models\Mapping\tbBandeiraMap.cs" />
     <Compile Include="Models\Mapping\tbTamanhoPacoteMAP.cs" />
     <Compile Include="Models\Mapping\tbHorarioDeliveryMap.cs" />
+    <Compile Include="Models\tbOrigemPedido.cs" />
+    <Compile Include="Models\tbTag.cs" />
     <Compile Include="Models\tbTicket.cs" />
     <Compile Include="Models\tbMensagem.cs" />
     <Compile Include="Models\tbIntegracao.cs" />
@@ -324,29 +348,32 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\201711071610129_initial.resx">
       <DependentUpon>201711071610129_initial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711081839391_2_17_A_Gateways.resx">
       <DependentUpon>201711081839391_2_17_A_Gateways.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711211201050_2_17_B_PedidoPagamentos.resx">
       <DependentUpon>201711211201050_2_17_B_PedidoPagamentos.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711222001305_2_17_C_RecebiveisBandeiras.resx">
       <DependentUpon>201711222001305_2_17_C_RecebiveisBandeiras.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711301228526_2_17_D_TipoPagamento.resx">
       <DependentUpon>201711301228526_2_17_D_TipoPagamento.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711301252521_2_17_E_TipoPagamento.resx">
       <DependentUpon>201711301252521_2_17_E_TipoPagamento.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801191259197_2_19_A_Saldos.resx">
       <DependentUpon>201801191259197_2_19_A_Saldos.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801221634174_2_19_B_Saldos.resx">
       <DependentUpon>201801221634174_2_19_B_Saldos.cs</DependentUpon>
@@ -368,6 +395,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807191759469_2_18_Loggi.resx">
       <DependentUpon>201807191759469_2_18_Loggi.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810181409372_2_19_Limpeza_Mensagens_Iaago.resx">
       <DependentUpon>201810181409372_2_19_Limpeza_Mensagens_Iaago.cs</DependentUpon>
@@ -378,12 +406,26 @@
     <EmbeddedResource Include="Migrations\201906100032210_2_21_Ticket_Integracoes.resx">
       <DependentUpon>201906100032210_2_21_Ticket_Integracoes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203112222532_2_22_Cliente.resx">
+      <DependentUpon>202203112222532_2_22_Cliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203141806068_2_23_Tags+OrigemPedidos.resx">
+      <DependentUpon>202203141806068_2_23_Tags+OrigemPedidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203141827163_2_23_FlagPermitirAlterar.resx">
+      <DependentUpon>202203141827163_2_23_FlagPermitirAlterar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203141834520_2_23_GuidIdentificacao-Cliente.resx">
+      <DependentUpon>202203141834520_2_23_GuidIdentificacao-Cliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="Resources\Outros.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -474,4 +516,12 @@
     <None Include="Resources\Relatorio_Lista_Produtos_Impostos.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este projeto faz referência a pacotes do NuGet que não estão presentes neste computador. Use a Restauração de Pacotes do NuGet para baixá-los.  Para obter mais informações, consulte http://go.microsoft.com/fwlink/?LinkID=322105. O arquivo ausente é {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
 </Project>

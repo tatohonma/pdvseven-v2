@@ -130,6 +130,17 @@ namespace a7D.PDV.Model
         [CRUDParameterDAL(false, "IDUsuarioTaxaServico", "IDUsuario")]
         public UsuarioInformation UsuarioTaxaServico { get; set; }
 
+        [CRUDParameterDAL(false, "TAG")]
+        public String TAG { get; set; }
+
+        [CRUDParameterDAL(false, "IDOrigemPedido", "IDOrigemPedido")]
+        public OrigemPedidoInformation OrigemPedido { get; set; }
+
+        [CRUDParameterDAL(false, "PermitirAlterar")]
+        public bool? PermitirAlterar { get; set; }
+
+
+
         public string NumeroComanda { get; set; }
         public string NumeroMesa { get; set; }
         public bool EnviarNfEmailCliente { get; set; }
@@ -149,22 +160,6 @@ namespace a7D.PDV.Model
                         return true;
                     else
                         return false;
-            }
-        }
-
-        /// <summary>
-        /// Obtem o número do IFOOD resumido, baseado no GUIDAgrupamentoPedido!
-        /// ATENÇÃO: No campo de Identificação é o ID único (número grande)
-        /// </summary>
-        public string PedidoIFood
-        {
-            get
-            {
-                if (GUIDAgrupamentoPedido?.StartsWith("ifood#") == true)
-
-                    return GUIDAgrupamentoPedido.Split('#')[1];
-                else
-                    return "";
             }
         }
 

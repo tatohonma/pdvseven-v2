@@ -1,4 +1,5 @@
-﻿using a7D.PDV.BLL.Extension;
+﻿using a7D.Fmk.CRUD.DAL;
+using a7D.PDV.BLL.Extension;
 using a7D.PDV.BLL.ValueObject;
 using a7D.PDV.EF.Enum;
 using a7D.PDV.EF.Models;
@@ -97,12 +98,16 @@ namespace a7D.PDV.BLL
 
                     case ETipoPedido.Delivery:
 
-                        // O numero do pedido sai no rodapé
-                        string ifood = pedido.PedidoIFood;
-                        if (!string.IsNullOrEmpty(ifood))
-                            conteudo.AppendLine($"DELIVERY IFOOD {ifood}");
+                        if (pedido.OrigemPedido != null && pedido.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
+                        {
+                            TagInformation tagDisplayId = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-displayId");
+
+                            conteudo.AppendLine($"DELIVERY IFOOD {tagDisplayId.Valor}");
+                        }
                         else
+                        {
                             conteudo.AppendLine("DELIVERY");
+                        }
 
                         if (!string.IsNullOrEmpty(pedido.ObservacaoCupom))
                             conteudo

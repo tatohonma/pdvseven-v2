@@ -81,7 +81,9 @@
             this.lblLoggiEstimativa = new System.Windows.Forms.Label();
             this.llAlterarCliente = new System.Windows.Forms.LinkLabel();
             this.gbEditarCliente = new System.Windows.Forms.GroupBox();
+            this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
+            this.txtReferencia = new System.Windows.Forms.TextBox();
             this.txtCEP = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.txtRG = new System.Windows.Forms.TextBox();
@@ -229,8 +231,6 @@
             this.lblFinalizarTelefone = new System.Windows.Forms.Label();
             this.lblFinalizarNome = new System.Windows.Forms.Label();
             this.lnkVoltar = new System.Windows.Forms.LinkLabel();
-            this.label26 = new System.Windows.Forms.Label();
-            this.txtReferencia = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.gb2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -712,6 +712,16 @@
             this.gbEditarCliente.TabStop = false;
             this.gbEditarCliente.Visible = false;
             // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(7, 284);
+            this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(79, 17);
+            this.label26.TabIndex = 78;
+            this.label26.Text = "Referência";
+            // 
             // label25
             // 
             this.label25.AutoSize = true;
@@ -721,6 +731,19 @@
             this.label25.Size = new System.Drawing.Size(39, 17);
             this.label25.TabIndex = 76;
             this.label25.Text = "CEP";
+            // 
+            // txtReferencia
+            // 
+            this.txtReferencia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.txtReferencia.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtReferencia.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtReferencia.Location = new System.Drawing.Point(7, 302);
+            this.txtReferencia.Margin = new System.Windows.Forms.Padding(4);
+            this.txtReferencia.MaxLength = 500;
+            this.txtReferencia.Multiline = true;
+            this.txtReferencia.Name = "txtReferencia";
+            this.txtReferencia.Size = new System.Drawing.Size(240, 58);
+            this.txtReferencia.TabIndex = 77;
             // 
             // txtCEP
             // 
@@ -2477,9 +2500,9 @@
             this.gb8.Controls.Add(this.groupBox17);
             this.gb8.Controls.Add(this.btnFinalizarPedido);
             this.gb8.Controls.Add(this.groupBox8);
-            this.gb8.Controls.Add(this.groupBox10);
             this.gb8.Controls.Add(this.groupBox11);
             this.gb8.Controls.Add(this.groupBox12);
+            this.gb8.Controls.Add(this.groupBox10);
             this.gb8.Location = new System.Drawing.Point(12, 194);
             this.gb8.Name = "gb8";
             this.gb8.Size = new System.Drawing.Size(981, 517);
@@ -2818,29 +2841,6 @@
             this.lnkVoltar.VisitedLinkColor = System.Drawing.Color.Blue;
             this.lnkVoltar.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkVoltar_LinkClicked);
             // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(7, 284);
-            this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(79, 17);
-            this.label26.TabIndex = 78;
-            this.label26.Text = "Referência";
-            // 
-            // txtReferencia
-            // 
-            this.txtReferencia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.txtReferencia.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtReferencia.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtReferencia.Location = new System.Drawing.Point(7, 302);
-            this.txtReferencia.Margin = new System.Windows.Forms.Padding(4);
-            this.txtReferencia.MaxLength = 500;
-            this.txtReferencia.Multiline = true;
-            this.txtReferencia.Name = "txtReferencia";
-            this.txtReferencia.Size = new System.Drawing.Size(240, 58);
-            this.txtReferencia.TabIndex = 77;
-            // 
             // frmNovoDelivery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -2849,18 +2849,18 @@
             this.BackgroundImage = global::a7D.PDV.Caixa.UI.Properties.Resources.bg_Titulo2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1005, 721);
-            this.Controls.Add(this.gb1);
-            this.Controls.Add(this.gb6);
-            this.Controls.Add(this.gb5);
             this.Controls.Add(this.lnkVoltar);
             this.Controls.Add(this.lblTotalPedido);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gb6);
+            this.Controls.Add(this.gb5);
             this.Controls.Add(this.gb2);
             this.Controls.Add(this.gb3);
             this.Controls.Add(this.gb8);
             this.Controls.Add(this.gb4);
             this.Controls.Add(this.gb7);
+            this.Controls.Add(this.gb1);
             this.Font = new System.Drawing.Font("Arial", 11.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);

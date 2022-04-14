@@ -43,6 +43,7 @@
             this.Telefone1Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GUIDIdentificacao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IDStatusPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IDOrigemPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Icone = new System.Windows.Forms.DataGridViewImageColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolstripMenuCancelarPedido = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,6 +102,7 @@
             this.Telefone1Numero,
             this.GUIDIdentificacao,
             this.IDStatusPedido,
+            this.IDOrigemPedido,
             this.Icone});
             this.dgvEntregas.ContextMenuStrip = this.contextMenuStrip1;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -137,7 +139,6 @@
             this.dgvEntregas.Size = new System.Drawing.Size(525, 340);
             this.dgvEntregas.TabIndex = 73;
             this.dgvEntregas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEntregas_CellClick);
-            this.dgvEntregas.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEntregas_CellContentDoubleClick);
             this.dgvEntregas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEntregas_CellDoubleClick);
             this.dgvEntregas.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvEntregas_CellFormatting);
             // 
@@ -204,6 +205,14 @@
             this.IDStatusPedido.ReadOnly = true;
             this.IDStatusPedido.Visible = false;
             // 
+            // IDOrigemPedido
+            // 
+            this.IDOrigemPedido.DataPropertyName = "IDOrigemPedido";
+            this.IDOrigemPedido.HeaderText = "IDOrigemPedido";
+            this.IDOrigemPedido.Name = "IDOrigemPedido";
+            this.IDOrigemPedido.ReadOnly = true;
+            this.IDOrigemPedido.Visible = false;
+            // 
             // Icone
             // 
             this.Icone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -242,7 +251,7 @@
             this.btnNovoPedidoEntrega.Name = "btnNovoPedidoEntrega";
             this.btnNovoPedidoEntrega.Size = new System.Drawing.Size(525, 43);
             this.btnNovoPedidoEntrega.TabIndex = 75;
-            this.btnNovoPedidoEntrega.Text = "&NOVO PEDIDO DELIVERY";
+            this.btnNovoPedidoEntrega.Text = "&NOVO PEDIDO ENTREGA";
             this.btnNovoPedidoEntrega.UseVisualStyleBackColor = false;
             this.btnNovoPedidoEntrega.Click += new System.EventHandler(this.btnNovoPedidoEntrega_Click);
             // 
@@ -303,6 +312,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Telefone1Numero;
         private System.Windows.Forms.DataGridViewTextBoxColumn GUIDIdentificacao;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDStatusPedido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDOrigemPedido;
         private System.Windows.Forms.DataGridViewImageColumn Icone;
     }
 }

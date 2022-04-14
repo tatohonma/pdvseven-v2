@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>AutoTef.Platform.Desktop</id>
+    <version>$version$</version>
+    <title>AutoTef for desktops</title>
+    <authors>AutoTef Team</authors>
+    <owners>Stone</owners>
+    <projectUrl>https://github.com/stone-pagamentos</projectUrl>
+    <iconUrl>http://www.stone.com.br/img/simbolo-stone.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Stone</description>
+    <copyright>Copyright 2016</copyright>
+    <tags>Stone Pagamentos TEF AutoTef POS Point Of Sale</tags>
+  </metadata>
+</package>

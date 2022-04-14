@@ -5,6 +5,7 @@
         Mesa = 10,
         Comanda = 20,
         Delivery = 30,
-        Balcao = 40
+        Balcao = 40,
+        Retirada = 50
     }
 }

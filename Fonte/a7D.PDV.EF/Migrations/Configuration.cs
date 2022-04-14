@@ -78,6 +78,7 @@ namespace a7D.PDV.EF.Migrations
             context.TamanhoPacotes.AddOrUpdate(g => g.IDTamanhoPacote, ValueName.Convert<tbTamanhoPacote>(typeof(ETamanhoPacote)));
             context.tbTipoAreaImpressoes.AddOrUpdate(g => g.IDTipoAreaImpressao, ValueName.Convert<tbTipoAreaImpressao>(typeof(ETipoAreaImpressao)));
             context.TipoIntegracoes.AddOrUpdate(g => g.IDTipoIntegracao, ValueName.Convert<tbTipoIntegracao>(typeof(ETipoIntegracao)));
+            context.OrigemPedidos.AddOrUpdate(g => g.IDOrigemPedido, ValueName.Convert<tbOrigemPedido>(typeof(EOrigemPedido)));
 
             LogarAlteracoes(context);
 

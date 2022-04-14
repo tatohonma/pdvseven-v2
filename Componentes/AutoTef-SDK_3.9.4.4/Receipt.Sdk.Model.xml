@@ -1,0 +1,277 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Receipt.Sdk.Model</name>
+    </assembly>
+    <members>
+        <member name="T:Receipt.Sdk.Model.Email">
+            <summary>
+            This type represents e-mail entity.
+            </summary>
+        </member>
+        <member name="M:Receipt.Sdk.Model.Email.#ctor(Receipt.Sdk.Model.ReceiptType)">
+            <summary>
+            E-mail object with type passed by parameter: Activation, Cancellation or Transaction.
+            </summary>
+            <param name="type">Receipt's type.</param>
+        </member>
+        <member name="P:Receipt.Sdk.Model.Email.MailHeader">
+            <summary>
+            Mail header parameter. Receiver and subject.
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.Email.BodyParameters">
+            <summary>
+            Body parameters from email. Types: Activation or Financial Operation.
+            </summary>
+        </member>
+        <member name="T:Receipt.Sdk.Model.ActivationBodyParameters">
+            <summary>
+            Entity with activation parameters.
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.ActivationBodyParameters._logoImage">
+            <summary>
+            Field logo_image in JSON request.
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.ActivationBodyParameters._fontSize">
+            <summary>
+            Field font_size in JSON request.
+            </summary>
+        </member>
+        <member name="F:Receipt.Sdk.Model.ActivationBodyParameters._aligment">
+            <summary>
+            Field text_alignment in JSON request.
+            </summary>
+        </member>
+        <member name="F:Receipt.Sdk.Model.ActivationBodyParameters._font">
+            <summary>
+            Field font_family in JSON request.
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.ActivationBodyParameters.FooterMessage">
+            <summary>
+            Field footer_message in JSON request.
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.ActivationBodyParameters.CompanyStoneCode">
+            <summary>
+            Stone Code for activation e-mail.
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.ActivationBodyParameters.CompanyName">
+            <summary>
+            Company Name for activation e-mail.
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.ActivationBodyParameters.CompanyAddress">
+            <summary>
+            Company Address for activation e-mail.
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.ActivationBodyParameters.CompanyLegalIdentification">
+            <summary>
+            Legal Identification, like CPF or CNPJ, for activation e-mail.
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.ActivationBodyParameters.ActivationDateTime">
+            <summary>
+            Activation DateTime for activation e-mail.
+            </summary>
+        </member>
+        <member name="F:Receipt.Sdk.Model.ActivationBodyParameters._bodyMessage">
+            <summary>
+            Body messagem member.
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.ActivationBodyParameters.BodyMessage">
+            <summary>
+            Field body_message in JSON request.
+            </summary>
+        </member>
+        <member name="M:Receipt.Sdk.Model.ActivationBodyParameters.FormatBodyMessage">
+            <summary>
+            Format fields to html message.
+            </summary>
+            <returns>Formated message.</returns>
+        </member>
+        <member name="T:Receipt.Sdk.Model.BodyParameters">
+            <summary>
+            BodyParameters generic type.
+            </summary>
+        </member>
+        <member name="T:Receipt.Sdk.Model.ReceiptType">
+            <summary>
+            Email types to define email template.
+            </summary>
+        </member>
+        <member name="F:Receipt.Sdk.Model.ReceiptType.Undefined">
+            <summary>
+            Undefined email type.
+            </summary>
+        </member>
+        <member name="F:Receipt.Sdk.Model.ReceiptType.Activation">
+            <summary>
+            Custom email type for Activation email.
+            </summary>
+        </member>
+        <member name="F:Receipt.Sdk.Model.ReceiptType.Transaction">
+            <summary>
+            Transaction email type for Transaction email.
+            </summary>
+        </member>
+        <member name="F:Receipt.Sdk.Model.ReceiptType.Cancellation">
+            <summary>
+            Void Transaction email type for Cancellation email.
+            </summary>
+        </member>
+        <member name="T:Receipt.Sdk.Model.FinancialOperationParameters">
+            <summary>
+            Entity with financial operation parameters.
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.FinancialOperationParameters.CardBrand">
+            <summary>
+            Field card_brand in JSON required.
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.FinancialOperationParameters.ClientName">
+            <summary>
+            Field client_name in JSON required. 
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.FinancialOperationParameters.ClientMaskedCardNumber">
+            <summary>
+            Field client_masked_card_number in JSON required. 
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.FinancialOperationParameters.DisplayCompanyInformation">
+            <summary>
+            Field display_company_information in JSON required. 
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.FinancialOperationParameters.CompanyName">
+            <summary>
+            Field company_name in JSON required.
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.FinancialOperationParameters.CompanyAddress">
+            <summary>
+            Field company_address in JSON required. 
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.FinancialOperationParameters.CompanyTaxDocumentNumber">
+            <summary>
+            Field company_tax_document_number in JSON required. 
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.FinancialOperationParameters.TransactionAid">
+            <summary>
+            Field transaction_aid in JSON required. 
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.FinancialOperationParameters.TransactionArqc">
+            <summary>
+            Field transaction_arqc in JSON required. 
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.FinancialOperationParameters.TransactionStoneId">
+            <summary>
+            Field transaction_stone_id in JSON required. 
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.FinancialOperationParameters.TransactionDateTime">
+            <summary>
+            Transaction DateTime.
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.FinancialOperationParameters.TransactionDate">
+            <summary>
+            Field transaction_date in JSON required. 
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.FinancialOperationParameters.TransactionTime">
+            <summary>
+            Field transaction_time in JSON required. 
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.FinancialOperationParameters.TransactionAmount">
+            <summary>
+            Field transaction_amount in JSON required. 
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.FinancialOperationParameters.DisplayAidArqc">
+            <summary>
+            Field display_aid_arqc in JSON required. 
+            </summary>
+        </member>
+        <member name="T:Receipt.Sdk.Model.FontFamily">
+            <summary>
+            Font types to define email template.
+            </summary>
+        </member>
+        <member name="F:Receipt.Sdk.Model.FontFamily.Undefined">
+            <summary>
+            Undefined font type.
+            </summary>
+        </member>
+        <member name="F:Receipt.Sdk.Model.FontFamily.Times">
+            <summary>
+            Times font type.
+            </summary>
+        </member>
+        <member name="T:Receipt.Sdk.Model.MailHeader">
+            <summary>
+            Entity to email header.
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.MailHeader.Subject">
+            <summary>
+            Field subject in JSON email.
+            </summary>
+        </member>
+        <member name="P:Receipt.Sdk.Model.MailHeader.To">
+            <summary>
+            Field to in JSON email.
+            </summary>
+        </member>
+        <member name="T:Receipt.Sdk.Model.ReceiptTypeMapper">
+            <summary>
+            Mapper of enums for string values.
+            </summary>
+        </member>
+        <member name="M:Receipt.Sdk.Model.ReceiptTypeMapper.EnumToString(Receipt.Sdk.Model.ReceiptType)">
+            <summary>
+            Convert ReceiptType in string for json.
+            </summary>
+            <param name="type">Email's type.</param>
+            <returns>String representation for the type in json.</returns>
+        </member>
+        <member name="T:Receipt.Sdk.Model.TextAligment">
+            <summary>
+            Text aligment type to e-mail template.
+            </summary>
+        </member>
+        <member name="F:Receipt.Sdk.Model.TextAligment.Undefined">
+            <summary>
+            Undefined aligment.
+            </summary>
+        </member>
+        <member name="F:Receipt.Sdk.Model.TextAligment.Right">
+            <summary>
+            Right aligment.
+            </summary>
+        </member>
+        <member name="F:Receipt.Sdk.Model.TextAligment.Center">
+            <summary>
+            Center aligment.
+            </summary>
+        </member>
+        <member name="F:Receipt.Sdk.Model.TextAligment.Left">
+            <summary>
+            Left aligment.
+            </summary>
+        </member>
+    </members>
+</doc>

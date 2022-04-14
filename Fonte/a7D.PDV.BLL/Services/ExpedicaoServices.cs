@@ -1,4 +1,5 @@
-﻿using a7D.PDV.BLL.Extension;
+﻿using a7D.Fmk.CRUD.DAL;
+using a7D.PDV.BLL.Extension;
 using a7D.PDV.BLL.Utils;
 using a7D.PDV.BLL.ValueObject;
 using a7D.PDV.EF.Enum;
@@ -20,11 +21,16 @@ namespace a7D.PDV.BLL.Services
             relatorio.Add(string.Empty.PadLeft(Constantes.Colunas, '-'));
             relatorio.Add($"DATA {pedido.DtPedido.Value.ToString("dd/MM/yyyy HH:mm:ss")}");
 
-            string ifood = pedido.PedidoIFood;
-            if (!string.IsNullOrEmpty(ifood))
-                relatorio.Add($"PEDIDO N {pedido.IDPedido.Value} IFOOD {ifood}");
+            if (pedido.OrigemPedido != null && pedido.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
+            {
+                TagInformation tagDisplay = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-displayId");
+
+                relatorio.Add($"PEDIDO N {pedido.IDPedido.Value} IFOOD {tagDisplay.Valor}");
+            }
             else
+            {
                 relatorio.Add($"PEDIDO N {pedido.IDPedido.Value}");
+            }
 
             relatorio.Add($"ENTREGADOR {pedido.Entregador?.Nome}");
             relatorio.Add($"TAXA DE ENTREGA {pedido.TaxaEntrega?.Nome}");
@@ -123,7 +129,6 @@ namespace a7D.PDV.BLL.Services
                 }
             }
 
-            string ifood = pedido.PedidoIFood;
             if (pedido.TipoPedido.TipoPedido == ETipoPedido.Mesa)
             {
                 h.plain.AppendLine("EXPEDIÇÃO");
@@ -142,15 +147,20 @@ namespace a7D.PDV.BLL.Services
                 h.Identificacao = "EXPEDIÇÃO BALCÃO";
                 h.plain.AppendLine(h.Identificacao);
             }
-            else if (!string.IsNullOrEmpty(ifood))
+            else if (pedido.TipoPedido.TipoPedido == ETipoPedido.Delivery)
             {
-                h.Identificacao = "IFOOD " + ifood;
-                h.plain.AppendLine("DELIVERY " + h.IdPedido + " IFOOD " + ifood);
-            }
-            else
-            {
-                h.Identificacao = "DELIVERY";
-                h.plain.AppendLine("DELIVERY " + h.IdPedido);
+                if (pedido.OrigemPedido != null && pedido.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
+                {
+                    TagInformation tagDisplayId = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-displayId");
+
+                    h.Identificacao = "IFOOD " + tagDisplayId.Valor;
+                    h.plain.AppendLine("DELIVERY " + h.IdPedido + " IFOOD " + tagDisplayId.Valor);
+                }
+                else
+                {
+                    h.Identificacao = "DELIVERY";
+                    h.plain.AppendLine("DELIVERY " + h.IdPedido);
+                }
             }
 
             Cliente.Fill(pedido, h);

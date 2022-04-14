@@ -41,7 +41,7 @@ namespace a7D.PDV.Integracao.Pagamento
             return "";
         }
 
-        public static PagamentoResultado Pagar(TipoTEF tipo, decimal valor, int pedido, string loja, string pdvNome, int idPDV, string celular, int parcelas)
+        public static PagamentoResultado Pagar(TipoTEF tipo, decimal valor, int pedido, string loja, string pdvNome, int idPDV, string celular, int parcelas, bool contemAlcoolicos)
         {
             FactoryWPF factory = null;
 
@@ -66,7 +66,7 @@ namespace a7D.PDV.Integracao.Pagamento
 
                 case TipoTEF.STONE:
                     factory = new FactoryWPF(false);
-                    tef = new StoneTEF.PinpadStoneTEF(pedido, valor, null);
+                    tef = new StoneTEF.PinpadStoneTEF(pedido, valor, null, contemAlcoolicos);
 
                     break;
 
@@ -96,7 +96,7 @@ namespace a7D.PDV.Integracao.Pagamento
             {
                 case TipoTEF.STONE:
                     factory = new FactoryWPF(false);
-                    tef = new StoneTEF.PinpadStoneTEF(0, 0, autorizacaoCancelamento);
+                    tef = new StoneTEF.PinpadStoneTEF(0, 0, autorizacaoCancelamento, false);
 
                     break;
 

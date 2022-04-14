@@ -52,6 +52,9 @@ namespace a7D.PDV.EF.Models
         public int? IDUsuarioTaxaServico { get; set; }
         public string TAG { get; set; }
         public string Clima { get; set; }
+        public int? IDOrigemPedido { get; set; }
+        public bool? PermitirAlterar { get; set; }
+
         public virtual tbCaixa tbCaixa { get; set; }
         public virtual tbCliente tbCliente { get; set; }
         public virtual tbEntregador tbEntregador { get; set; }

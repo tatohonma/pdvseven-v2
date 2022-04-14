@@ -14,12 +14,14 @@ namespace a7D.PDV.Caixa.UI
         }
 
         public int IDTipoDesconto { get; private set; }
+        public string Descricao { get; private set; }
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             if (cbbTipoDesconto.SelectedIndex > 0)
             {
                 IDTipoDesconto = ((TipoDescontoInformation)cbbTipoDesconto.SelectedItem).IDTipoDesconto.Value;
+                Descricao = ((TipoDescontoInformation)cbbTipoDesconto.SelectedItem).Nome;
                 DialogResult = DialogResult.OK;
                 Close();
             }

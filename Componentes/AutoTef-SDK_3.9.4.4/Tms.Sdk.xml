@@ -1,0 +1,3073 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Tms.Sdk</name>
+    </assembly>
+    <members>
+        <member name="T:Tms.Sdk.Activation.ActivationRequest">
+            <summary>
+            Representing an activation request interfaced. Mapped the classes to xml format.
+            Accept two entry as parameters : An ActivationEntry or only a StoneCode.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Activation.ActivationRequest.MicrotefModelName">
+            <summary>
+            Tag name of MicroPos
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Activation.ActivationRequest.StoneCodeTagName">
+            <summary>
+            Tag name of StoneCode
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Activation.ActivationRequest.#ctor">
+            <summary>
+            The seralization to xml needs of a default constructor
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Activation.ActivationRequest.#ctor(Tms.Sdk.Activation.Entry.ActivationEntry)">
+            <summary>
+            Creates an activation request in xml with all information specified.
+            <param name="entry">ActivationEntry</param>
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Activation.ActivationRequest.#ctor(System.String)">
+            <summary>
+            Creates an activation request in xml with all information specified.
+            <param name="stoneCode">string</param>
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Activation.ActivationRequest.CreateDataSet(Tms.Sdk.Activation.Entry.ActivationEntry)">
+            <summary>
+            Assigns to the dataset the informations that will be mapped in the Xml
+            </summary>
+            <param name="entry">ActivationEntry</param>
+            <returns>Returns a dataset that will be added in the list of DataSet</returns>
+        </member>
+        <member name="M:Tms.Sdk.Activation.ActivationRequest.CreateDataSet(System.String)">
+            <summary>
+            Assigns to the dataset the informations that will be mapped in the Xml
+            </summary>
+            <param name="stoneCode">Merchant's stone code</param>
+            <returns>Returns a dataset that will be added in the list of DataSet</returns>
+        </member>
+        <member name="T:Tms.Sdk.Activation.ActivationResponse">
+            <summary>
+            Represents the AcceptorConfigurationUpdate XML message. 
+            Relates the received XML with mapped activation classes.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Activation.ActivationResponse.#ctor">
+            <summary>
+            The deseralization to XML needs a default constructor.
+            </summary>   
+        </member>
+        <member name="T:Tms.Sdk.Activation.Entry.ActivationEntry">
+            <summary>
+            Class responsible for activation data entry
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Activation.Entry.ActivationEntry.StoneCode">
+            <summary>
+            Merchant's StoneCode
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Activation.Entry.ActivationEntry.ProviderId">
+            <summary>
+            Pinpad provider name
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Activation.Entry.ActivationEntry.TerminalModel">
+            <summary>
+            Pinpad model
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Activation.Entry.ActivationEntry.TerminalSerialNumber">
+            <summary>
+            Unique number of the Pinpad
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Activation.Entry.ActivationEntry.Email">
+            <summary>
+            Email to where the activation receipt will be sent.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Activation.Report.ActivationReport">
+            <summary>
+            Report for an <see cref="!:ITmsClient.Activate(string)">activation operation</see>.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Activation.Report.ActivationReport.Request">
+            <summary>
+            Represents a activation request
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Activation.Report.ActivationReport.Response">
+            <summary>
+            Mapped the deserialized xml received 
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Activation.Report.ActivationReport.StoneCode">
+            <summary>
+            Merchant's stone code
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Activation.Report.ActivationReport.Address">
+            <summary>
+            Merchant address.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Activation.Report.ActivationReport.CompanyName">
+            <summary>
+            Company name.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Activation.Report.ActivationReport.IdentityCode">
+            <summary>
+            Merchant CNPJ or CPF.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Activation.Report.ActivationReport.ResponseCode">
+            <summary>
+            Activation response code (if any).
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Activation.Report.ActivationReport.ResponseReason">
+            <summary>
+            Activation response reason (if any).
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Activation.Report.ActivationReport.SaleAffiliationKey">
+            <summary>
+            Sale affiliation key is a unique key for a merchant (StoneCode) 
+            AND a capture method (MicroPos, Mobile, TEF, POS).
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Activation.Report.ActivationReport.WasSuccessful">
+            <summary>
+            Defines if the activation has succeed.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Activation.Report.ActivationReport.XmlRequest">
+            <summary>
+            XML sent to Stone TMS.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Activation.Report.ActivationReport.XmlResponse">
+            <summary>
+            XML received from Stone TMS.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Activation.Report.ActivationReport.#ctor(Tms.Sdk.Activation.ActivationRequest,Tms.Sdk.Common.Base.AbstractResponse)">
+            <summary>
+            Instances the request and response that will be used to compose the report
+            </summary>
+            <param name="request">Request of an Activation</param>
+            <param name="response">Response of an Activation</param>
+        </member>
+        <member name="M:Tms.Sdk.Activation.Report.ActivationReport.SendActivationReceipt(System.String)">
+            <summary>
+            Create and send the receipt according to
+            the <see cref="T:Receipt.Sdk.Model.ReceiptType"/>
+            </summary>
+            <param name="email">Email to where the receipt will be sent.</param>
+            <exception cref="!:ArgumentException">If email is not valid.</exception>
+        </member>
+        <member name="T:Tms.Sdk.Client.ResourceClients.IPoiHostCommunicationClient">
+            <summary>
+            PoiHostCommunication Client.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.IPoiHostCommunicationClient.GetDateTime(Tms.Sdk.ServerDateTime.DateTimeRequest)">
+            <summary>
+            Gets the server date and time.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tms.Sdk.Client.ResourceClients.IPoiReportClient">
+            <summary>
+            PoiReport Client.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.IPoiReportClient.SendReport(Tms.Sdk.Ping.PingRequest)">
+            <summary>
+            Sends terminal report.
+            </summary>
+            <param name="pingInformation"></param>
+        </member>
+        <member name="P:Tms.Sdk.Client.ResourceClients.ITmsLegacyClient.SerializedResponse">
+            <summary>
+            Activation resource Uri.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.ITmsLegacyClient.Activate(Tms.Sdk.Activation.Entry.ActivationEntry,System.Nullable{System.DateTime})">
+            <summary>
+            Sends a request that will be mapped in XML to perfom an activation and returns a deserialized response.
+            </summary>
+            <param name="entry">Activation entry data</param>
+            <returns>Returns a report according to the response</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.ITmsLegacyClient.Activate(System.String,System.Nullable{System.DateTime})">
+            <summary>
+            Sends a request that will be mapped in XML to perfom an activation and returns a deserialized response.
+            </summary>
+            <param name="stoneCode">Merchant's stone code</param>
+            <returns>Returns a report according to the response.</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.ITmsLegacyClient.DownloadCardBrands(System.String)">
+            <summary>
+            Sends a request that will be mapped in XML to download card brands and returns a deserialized response.
+            </summary>
+            <param name="sak">Sale Affiliation Key</param>
+            <returns>Returns a report according to the response.</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.ITmsLegacyClient.DownloadTables(System.String)">
+            <summary>
+            Sends a request that will be mapped in xml to perfom the management plan and returns a deserialized response .
+            </summary>
+            <param name="sak">Sale Affiliation Key</param>
+            <returns>Returns a report according to the response</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.ITmsLegacyClient.ManagementPlan(System.String)">
+            <summary>
+            Sends a request that will be mapped in xml to perfom the management plan and returns a deserialized response .
+            </summary>
+            <param name="sak">Sale Affiliation Key</param>
+            <returns>Returns a report according to the response</returns>
+        </member>
+        <member name="T:Tms.Sdk.Client.ResourceClients.PoiReportClient">
+            <summary>
+            PoiReport Client.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.PoiReportClient.#ctor">
+            <summary>
+            This default constructor is used in the tests.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.PoiReportClient.#ctor(System.String)">
+            <summary>
+            Constructor that creates a HTTP client to communicate with PoiReport.
+            </summary>
+            <param name="poiReportUri">Stone PoiReport URI.</param>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.PoiReportClient.#ctor(Communication.Sdk.HttpCommunication.IHttpClient)">
+            <summary>
+            Constructor that creates a HTTP client to communicate with PHC.
+            </summary>
+            <param name="httpClient">IHttpClient.</param>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.PoiReportClient.SendReport(Tms.Sdk.Ping.PingRequest)">
+            <summary>
+            Sends Microtef report.
+            </summary>
+            <param name="pingInformation"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tms.Sdk.Client.ResourceClients.PoiHostCommunicationClient">
+            <summary>
+            PoiHostCommunication Client.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.PoiHostCommunicationClient.#ctor">
+            <summary>
+            This default constructor is used in the tests.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.PoiHostCommunicationClient.#ctor(System.String)">
+            <summary>
+            Constructor that creates a HTTP client to communicate with PHC.
+            </summary>
+            <param name="phcUri">Stone TMS URI.</param>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.PoiHostCommunicationClient.#ctor(Communication.Sdk.HttpCommunication.IHttpClient)">
+            <summary>
+            Constructor that creates a HTTP client to communicate with PHC.
+            </summary>
+            <param name="httpClient">IHttpClient.</param>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.PoiHostCommunicationClient.GetDateTime(Tms.Sdk.ServerDateTime.DateTimeRequest)">
+            <summary>
+            Gets the server date and time.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tms.Sdk.Client.ResourceClients.TmsLegacyClient">
+            <summary>
+            "Terminal Management Service" Client. Perform operations as:
+            	- Activation
+            	- Table download
+            	- Management plan reports
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Client.ResourceClients.TmsLegacyClient.ActivationResourceUri">
+            <summary>
+            Activation resource Uri.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Client.ResourceClients.TmsLegacyClient.HttpClient">
+            <summary>
+            The HTTP client use to communicate.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.TmsLegacyClient.#ctor">
+            <summary>
+            This default constructor is used in the tests.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.TmsLegacyClient.#ctor(System.String)">
+            <summary>
+            Constructor that creates a HTTP client to communicate with Stone TMS.
+            </summary>
+            <param name="tmsUri">TMS URI.</param>
+            <param name="phcUri">PHC URI.</param>
+            <param name="prtUri">PRT URI.</param>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.TmsLegacyClient.#ctor(Communication.Sdk.HttpCommunication.IHttpClient)">
+            <summary>
+            Constructor that creates a HTTP client to communicate with Stone TMS.
+            </summary>
+            <param name="httpClient">IHttpClient.</param>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.TmsLegacyClient.Activate(Tms.Sdk.Activation.Entry.ActivationEntry,System.Nullable{System.DateTime})">
+            <summary>
+            Sends a request that will be mapped in XML to perfom an activation and returns a deserialized response.
+            </summary>
+            <param name="entry">Activation entry data</param>
+            <param name="serverDateTime">Server date and time</param>
+            <returns>Returns a report according to the response</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.TmsLegacyClient.Activate(System.String,System.Nullable{System.DateTime})">
+            <summary>
+            Sends a request that will be mapped in XML to perfom an activation and returns a deserialized response.
+            </summary>
+            <param name="stoneCode">Merchant's stone code</param>
+            <param name="serverDateTime">Server date and time</param>
+            <returns>Returns a report according to the response.</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.TmsLegacyClient.DownloadTables(System.String)">
+            <summary>
+            Sends a request that will be mapped in XML to download EMV tables and returns a deserialized response.
+            </summary>
+            <param name="sak">Sale Affliation Key</param>
+            <returns>Returns a report according to the response.</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.TmsLegacyClient.DownloadCardBrands(System.String)">
+            <summary>
+            Sends a request that will be mapped in XML to download card brands and returns a deserialized response.
+            </summary>
+            <param name="sak">Sale Affiliation Key</param>
+            <returns>Returns a report according to the response.</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.TmsLegacyClient.ManagementPlan(System.String)">
+            <summary>
+            Sends a request that will be mapped in xml to perfom the management plan and returns a deserialized response .
+            </summary>
+            <param name="sak">Sale Affiliation Key</param>
+            <returns>Returns a report according to the response</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.TmsLegacyClient.ExecuteRequest``1(Tms.Sdk.Common.Base.AbstractRequest,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Performs the Post and Get methods according to the request sent.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="request">Send a type of request(Activate or Download or ManagementPlan)</param>
+            <param name="headers">Request headers</param>
+            <returns>Returns a response that will be sent to the constructor of a report</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.TmsLegacyClient.TryDeserializeResponse``1(System.String)">
+            <summary>
+            Try deserialize the incoming string as the expected response or acceptor rejection.
+            </summary>
+            <typeparam name="T">expected response type</typeparam>
+            <param name="serializedResponse">server response as string</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.TmsLegacyClient.GetActivationUri">
+            <summary>
+            Gets the activation resource uri.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.TmsLegacyClient.Post(Tms.Sdk.Common.Base.AbstractRequest,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Executes the post method through the httpclient.
+            </summary>
+            <param name="request">Send a type of request(Activate or Download or ManagementPlan)</param>
+            <returns>returns a string in XML format</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.ResourceClients.TmsLegacyClient.Get``1(System.String)">
+            <summary>
+            Executes the get method through the httpclient.
+            </summary>       
+            <param name="serializedResponse"> Result of the post method. string in XML format</param>
+            <returns>Returns a response that will be used in the constructor of a report</returns>
+        </member>
+        <member name="T:Tms.Sdk.Client.ITmsClient">
+            <summary>
+            "Terminal Management Service" Client. Perform operations as:
+            	- Activation
+            	- AID and CAPK table download
+            	- Card brand and BIN range table download
+            	- Management plan reports
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Client.ITmsClient.Activate(Tms.Sdk.Activation.Entry.ActivationEntry)">
+            <summary>
+            Activate a terminal as MicroPos based on a StoneCode.
+            </summary>
+            <param name="entry">Activation entry data(StoneCode, ProviderId, TemrinalModel and TerminalSerialNumber).</param>
+            <returns>An activation report containing all information about the activation.</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.ITmsClient.Activate(System.String)">
+            <summary>
+            Activate a terminal as MicroPos based on a StoneCode.
+            </summary>
+            <param name="stoneCode">Merchant's stone code.</param>
+            <returns>An activation report containing all information about the activation.</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.ITmsClient.DownloadEmvTables(System.String)">
+            <summary>
+            Download tables AID and CAPK to be injected into the pinpad.
+            </summary>
+            <param name="sak">Sale Affiliation Key.</param>
+            <returns>Download tables report containing all information about the download.</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.ITmsClient.DownloadCardBrands(System.String)">
+            <summary>
+            Download Card Brand and BIN tables. Join these two tables to create a 
+            <see cref="T:Tms.Sdk.Download.Report.ICardBrandDownloadReport"/>, that contains all information needed
+            to relate any PAN to a specific card brand.
+            </summary>
+            <param name="sak">Sale Affiliation Key.</param>
+            <returns>Report containing informations about the card brands supported.</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.ITmsClient.ManageTables(System.String)">
+            <summary>        
+            Get consolidated information about all versions of data to
+            be downloaded by ITmsClient operations.
+            </summary>
+            <param name="sak">Sale Affiliation Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.ITmsClient.Ping(Tms.Sdk.Ping.PingRequest)">
+            <summary>
+            Sends a status report to the TMS, allowing the collection of metrics about the Microtef.
+            </summary>
+            <param name="pingInformation">Request to be sent to the TMS.</param>
+        </member>
+        <member name="T:Tms.Sdk.Client.TmsClient">
+            <summary>
+            "Terminal Management Service" Client. Perform operations as:
+            	- Activation
+            	- Table download
+            	- Management plan reports
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Client.TmsClient.#ctor">
+            <summary>
+            This default constructor is used in the tests.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Client.TmsClient.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor that creates a HTTP client to communicate with Stone TMS.
+            </summary>
+            <param name="tmsUri">TMS URI.</param>
+            <param name="phcUri">PHC URI.</param>
+            <param name="prtUri">PRT URI.</param>
+        </member>
+        <member name="M:Tms.Sdk.Client.TmsClient.#ctor(Tms.Sdk.Client.ResourceClients.ITmsLegacyClient,Tms.Sdk.Client.ResourceClients.IPoiHostCommunicationClient,Tms.Sdk.Client.ResourceClients.IPoiReportClient)">
+            <summary>
+            Constructor that creates a HTTP client to communicate with Stone TMS.
+            </summary>
+            <param name="tmsLegacyClient">ITmsLegacyClient.</param>
+            <param name="poiHostCommunicationClient">IPoiHostCommunicationClient.</param>
+            <param name="poiReportClient">IPoiReportClient.</param>
+        </member>
+        <member name="M:Tms.Sdk.Client.TmsClient.Activate(Tms.Sdk.Activation.Entry.ActivationEntry)">
+            <summary>
+            Activate a terminal as MicroPos based on a StoneCode.
+            </summary>
+            <param name="entry">Activation entry data.</param>
+            <returns>An activation report containing all information about the activation.</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.TmsClient.Activate(System.String)">
+            <summary>
+            Activate a terminal as MicroPos based on a StoneCode.
+            </summary>
+            <param name="stoneCode">Merchant's stone code.</param>
+            <returns>An activation report containing all information about the activation.</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.TmsClient.DownloadEmvTables(System.String)">
+            <summary>
+            Download tables AID and CAPK to be injected into the pinpad.
+            </summary>
+            <param name="sak">Sale Affiliation Key.</param>
+            <returns>Download tables report containing all information about the download.</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.TmsClient.DownloadCardBrands(System.String)">
+            <summary>
+            Download Card Brand and BIN tables. Join these two tables to create a 
+            <see cref="T:Tms.Sdk.Download.Report.ICardBrandDownloadReport"/>, that contains all information needed
+            to relate any PAN to a specific card brand.
+            </summary>
+            <param name="sak">Sale Affiliation Key.</param>
+            <returns>Report containing informations about the card brands supported.</returns>                          
+        </member>
+        <member name="M:Tms.Sdk.Client.TmsClient.ManageTables(System.String)">
+            <summary>
+            Check if the sale affilition key is valid and returns a managementPlan report .
+            </summary>
+            <param name="sak">Sale Affiliation Key</param>
+            <returns>Returns a report according to the response</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.TmsClient.Ping(Tms.Sdk.Ping.PingRequest)">
+            <summary>
+            Sends a status report to the TMS, allowing the collection of metrics about the Microtef.
+            </summary>
+            <param name="pingInformation">Request to be sent to the TMS.</param>
+        </member>
+        <member name="M:Tms.Sdk.Client.TmsClient.ActivateImpl(Tms.Sdk.Activation.Entry.ActivationEntry)">
+            <summary>
+            Sends a request that will be mapped in XML to perfom an activation and returns a deserialized response.
+            </summary>
+            <param name="entry">Activation entry data</param>
+            <returns>Returns a report according to the response</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.TmsClient.ActivateImpl(System.String)">
+            <summary>
+            Sends a request that will be mapped in XML to perfom an activation and returns a deserialized response.
+            </summary>
+            <param name="stoneCode">Merchant's stone code</param>
+            <returns>Returns a report according to the response.</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.TmsClient.DownloadTablesImpl(System.String)">
+            <summary>
+            Sends a request that will be mapped in XML to download EMV tables and returns a deserialized response.
+            </summary>
+            <param name="sak">Sale Affliation Key</param>
+            <returns>Returns a report according to the response.</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.TmsClient.DownloadCardBrandsImpl(System.String)">
+            <summary>
+            Sends a request that will be mapped in XML to download card brands and returns a deserialized response.
+            </summary>
+            <param name="sak">Sale Affiliation Key</param>
+            <returns>Returns a report according to the response.</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.TmsClient.ManagementPlanImpl(System.String)">
+            <summary>
+            Sends a request that will be mapped in xml to perfom the management plan and returns a deserialized response .
+            </summary>
+            <param name="sak">Sale Affiliation Key</param>
+            <returns>Returns a report according to the response</returns>
+        </member>
+        <member name="M:Tms.Sdk.Client.TmsClient.PingImpl(Tms.Sdk.Ping.PingRequest)">
+            <summary>
+            Sends a status report to the TMS, allowing the collection of metrics about the Microtef.
+            </summary>
+            <param name="pingInformation">Request to be sent to the TMS.</param>
+        </member>
+        <member name="M:Tms.Sdk.Client.TmsClient.GetServerDateTime(System.String)">
+            <summary>
+            Returns the server date and time.
+            </summary>
+            <param name="stoneCode"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tms.Sdk.Client.TmsProvider">
+            <summary>
+            TMS client provider.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Client.TmsProvider.Get(System.String,System.String,System.String)">
+            <summary>
+            Creates a TMS client.
+            </summary>
+            <param name="tmsUri">Stone TMS URI.</param>
+            <param name="phcUri">Stone PHC URI.</param>
+            <returns>TMS client.</returns>
+        </member>
+        <member name="T:Tms.Sdk.Common.Const.XmlHeader">
+            <summary>
+            Contains constants related to headers from xml.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Const.XmlHeader.TagDocument">
+            <summary>
+            Tag name of Document( header of all the xmls)
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Const.XmlHeader.TagStatusReport">
+            <summary>
+            Tag name of statusReport( header of xmls requests)
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Const.XmlHeader.TagAcceptorConfig">
+            <summary>
+            Tag name of acceptorConfiguration( header of xmls responses(Activation and Download))
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Const.XmlHeader.TagTerminalManagementReject">
+            <summary>
+            Tag name of terminalManagementReject( header of xmls rejections)
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Const.XmlHeader.TagManagementPlanReplacement">
+            <summary>
+            Tag name of managementPlanReplacement( header of xml response ( Management Plan))
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.OperationResult.OperationInfo">
+            <summary>
+            Representation of a information associated to a operation.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Common.OperationResult.OperationInfo.#ctor">
+            <summary>
+            Basic class constructor.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Common.OperationResult.OperationInfo.#ctor(System.String,System.String)">
+            <summary>
+            Alternative class constructor.
+            </summary>
+            <param name="code">Code of a operation info</param>
+            <param name="message">A message of a operation info</param>
+        </member>
+        <member name="P:Tms.Sdk.Common.OperationResult.OperationInfo.Code">
+            <summary>
+            Code of a operation info.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.OperationResult.OperationInfo.Message">
+            <summary>
+            A message of a operation info.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.OperationResult.OperationResult">
+            <summary>
+            Representation of a return of a called operation (non-generic version).
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Common.OperationResult.OperationResult.#ctor">
+            <summary>
+            Basic class constructor
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Common.OperationResult.OperationResult.#ctor(System.Boolean)">
+            <summary>
+            Alternative class constructor.
+            </summary>
+            <param name="success"></param>
+        </member>
+        <member name="P:Tms.Sdk.Common.OperationResult.OperationResult.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.OperationResult.OperationResult.MessageList">
+            <summary>
+            List of messages returned from the operation.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Common.OperationResult.OperationResult.AddMessage(System.String,System.String)">
+            <summary>
+            Add a message to message list.
+            </summary>
+            <param name="code">The code of message.</param>
+            <param name="message">The text message.</param>
+        </member>
+        <member name="M:Tms.Sdk.Common.OperationResult.OperationResult.AddMessage(System.Int64,System.String)">
+            <summary>
+            Add a message to message list.
+            </summary>
+            <param name="code"></param>
+            <param name="message"></param>
+        </member>
+        <member name="T:Tms.Sdk.Common.OperationResult.OperationResult`1">
+            <summary>
+            Representation of a return of a called operation.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Common.OperationResult.OperationResult`1.#ctor">
+            <summary>
+            Basic class constructor.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Common.OperationResult.OperationResult`1.#ctor(System.Boolean)">
+            <summary>
+            Alternative class constructor.
+            </summary>
+            <param name="success"></param>
+        </member>
+        <member name="P:Tms.Sdk.Common.OperationResult.OperationResult`1.Data">
+            <summary>
+            Data transported in this instance as a returned data.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Security.ClientKey">
+            <summary>
+            Represents a client key.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Common.Security.ClientKey.#ctor(System.String,System.String)">
+            <summary>
+            Constructor with parameters.
+            </summary>
+            <param name="key"></param>
+            <param name="salt"></param>
+        </member>
+        <member name="P:Tms.Sdk.Common.Security.ClientKey.Key">
+            <summary>
+            Public key.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Security.ClientKey.Salt">
+            <summary>
+            Private key.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Security.Resource">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Security.Resource.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Security.Resource.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Security.Resource.Key">
+            <summary>
+              Looks up a localized string similar to Stone-MicroPos-2019-04-10.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Security.Resource.Salt">
+            <summary>
+              Looks up a localized string similar to 8993fc91c70646a2bd83f5793c046755.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Security.Resource.String">
+            <summary>
+              Looks up a localized string similar to .
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Security.TerminalData">
+            <summary>
+            Represents the terminal data to generate nonce
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Common.Security.TerminalData.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor with parameters.
+            </summary>
+            <param name="stoneCode"></param>
+            <param name="serialNumber"></param>
+            <param name="terminalModel"></param>
+        </member>
+        <member name="P:Tms.Sdk.Common.Security.TerminalData.StoneCode">
+            <summary>
+            Stone code.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Security.TerminalData.SerialNumber">
+            <summary>
+            Serial number.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Security.TerminalData.TerminalModel">
+            <summary>
+            Terminal model.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Security.HMACAuthentication">
+            <summary>
+            HMAC Authentication service.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Security.HMACAuthentication.Timestamp">
+            <summary>
+            Timestamp.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Security.HMACAuthentication.Method">
+            <summary>
+            Http verb used in the request.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Security.HMACAuthentication.Uri">
+            <summary>
+            Uri used in the request.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Security.HMACAuthentication.Content">
+            <summary>
+            Body content.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Common.Security.HMACAuthentication.#ctor(Tms.Sdk.Common.Security.ClientKey,Tms.Sdk.Common.Security.TerminalData)">
+            <summary>
+            Constructor with parameters.
+            </summary>
+            <param name="clientKey"></param>
+            <param name="terminalData"></param>
+        </member>
+        <member name="M:Tms.Sdk.Common.Security.HMACAuthentication.GenerateHash">
+            <summary>
+            Generate hash.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.StandardCompliance">
+            <summary>
+            Identification of the capture medium
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.StandardCompliance.Identification">
+            <summary>
+            Identification of the entity
+            Max35Text
+            </summary>       
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.StatusData">
+            <summary>        
+            Information about the PINPAD bersions, TEF version and module acquirer version.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.StatusData.VersionNumber">
+            <summary>
+            PINPAD Version description
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.TypeCodes.TmsRejectReasonCode">
+            <summary>
+            The reason why the server returned a rejection message instead of the corresponding request response.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.TmsRejectReasonCode.Undefined">
+            <summary>
+            Invalid value
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.TmsRejectReasonCode.UnableToProcess">
+            <summary>
+            Not possible to process the message, for instance the security module is unavailable, the hardware is unavailable, or there is a problem of resource.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.TmsRejectReasonCode.InvalidMessage">
+            <summary>
+            Invalid envelope of the message.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.TmsRejectReasonCode.ParsingError">
+            <summary>
+            Invalid message: At least one of the data element or data structure is not present, the format, 
+            or the content of one data element or one data structure is not correct.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.TmsRejectReasonCode.Security">
+            <summary>
+            Security error (for example an invalid key or an incorrect MAC value).
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.TmsRejectReasonCode.InitiatingParty">
+            <summary>
+            Invalid identification data for the sender.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.TmsRejectReasonCode.RecipientParty">
+            <summary>
+            Invalid identification data for the the receiver.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.TmsRejectReasonCode.DuplicateMessage">
+            <summary>
+            Duplicate message, the identification of the exchange is the same than a previous message.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.TmsRejectReasonCode.ProtocolVersion">
+            <summary>
+            Version of the protocol couldn't be supported by the recipient.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.TmsRejectReasonCode.MessageType">
+            <summary>
+            Type of message the recipient receives is unknow or unsupported.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.TypeCodes.DataSetCategoryCode">
+            <summary>
+            Category of data set to transfer to the point of interaction.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.DataSetCategoryCode.Undefined">
+            <summary>
+            Invalid value.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.DataSetCategoryCode.AcquirerParameters">
+            <summary>
+            Acquirer specific configuration parameters for the point of interaction (POI) system.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.DataSetCategoryCode.ApplicationParameters">
+            <summary>
+            Payment application specific configuration parameters for the point of interaction (POI) system.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.DataSetCategoryCode.BatchCapture">
+            <summary>
+            Batch upload of transaction data (data capture of a group of transactions).
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.DataSetCategoryCode.CaptureResponse">
+            <summary>
+            Batch upload response for the batch capture of transactions.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.DataSetCategoryCode.DelegationData">
+            <summary>
+            RejectionData needed to create a terminal management sub-domain.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.DataSetCategoryCode.ManagementPlan">
+            <summary>
+            Configuration of management plan in the point of interaction.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.DataSetCategoryCode.MerchantParameters">
+            <summary>
+            Merchant configuration parameters for the point of interaction (POI).
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.DataSetCategoryCode.SecurityParameters">
+            <summary>
+            Point of interaction parameters related to the security of software application and application protocol.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.DataSetCategoryCode.SoftwareModule">
+            <summary>
+            Software module.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.DataSetCategoryCode.StatusReport">
+            <summary>
+            Report of software configuration and parameter status.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.DataSetCategoryCode.TerminalParameters">
+            <summary>
+            Point of interaction parameters attached to the terminal as serial number or physical capabilities.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.DataSetCategoryCode.VendorParameters">
+            <summary>
+            Point of interaction parameters defined by the manufacturer for instance the PIN verification capabilities.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.TypeCodes.PartyTypeCode">
+            <summary>
+            Code for an agent within an authorization context.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PartyTypeCode.Undefined">
+            <summary>
+            Invalid value.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PartyTypeCode.OriginatingPoi">
+            <summary>
+            Point Of Interaction initiating the card payment transaction.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PartyTypeCode.Acceptor">
+            <summary>
+            Card acceptor, party accepting the card and presenting transaction data to the acquirer.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PartyTypeCode.Merchant">
+            <summary>
+            Merchant providing goods and service in the card payment transaction.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PartyTypeCode.Acquirer">
+            <summary>
+            Bank of the Merchant providing goods and services.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PartyTypeCode.IntermediaryAgent">
+            <summary>
+            Party acting on behalf of other parties to process or forward data to other parties.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PartyTypeCode.MasterTerminalManager">
+            <summary>
+            Responsible for the maintenance of a card payment acceptance terminal.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PartyTypeCode.TerminalManager">
+            <summary>
+            Responsible for one or several maintenance functions of a card payment acceptance terminal.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.TypeCodes.PoiComponentTypeCode">
+            <summary>
+            Component type.
+            Identifies a POS component, which can be a hardware like printers, the terminal itself, SIM cards, or a specific software version.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PoiComponentTypeCode.Undefined">
+            <summary>
+            Invalid value.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PoiComponentTypeCode.AcquirerProtocolParameters">
+            <summary>
+            Parameters for acquirer interface of the point of interaction, including acquirer host configuration parameters.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PoiComponentTypeCode.ApplicationParameters">
+            <summary>
+            Parameters of a payment application running on the point of interaction.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PoiComponentTypeCode.TerminalParameters">
+            <summary>
+            Manufacturer configuration parameters of the point of interaction.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PoiComponentTypeCode.SecurityParameters">
+            <summary>
+            Security parameters of the point of interaction.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PoiComponentTypeCode.Server">
+            <summary>
+            Payment server of a point of interaction system.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PoiComponentTypeCode.Terminal">
+            <summary>
+            Payment terminal point of interaction.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PoiComponentTypeCode.Device">
+            <summary>
+            Device sub-component of a component of the point of interaction.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PoiComponentTypeCode.SecureModule">
+            <summary>
+            Security module.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PoiComponentTypeCode.PaymentApplication">
+            <summary>
+            Payment application software.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PoiComponentTypeCode.EmvKernel">
+            <summary>
+            EMV application kernel (EMV is the chip card specifications initially defined by Eurocard, Mastercard and Visa).
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PoiComponentTypeCode.EmvLevel1">
+            <summary>
+            EMV physical interface (EMV is the chip card specifications initially defined by Eurocard, Mastercard and Visa).
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PoiComponentTypeCode.Middleware">
+            <summary>
+            Software module of the point of interaction.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PoiComponentTypeCode.Driver">
+            <summary>
+            Driver module of the point of interaction.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PoiComponentTypeCode.OperatingSystem">
+            <summary>
+            Software that manages hardware to provide common services to the applications.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.TypeCodes.PoiComponentTypeCode.MerchantParameters">
+            <summary>
+            Merchant configuration parameters for the point of interaction (POI).
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.Content">
+            <summary>
+            The properties of this class are ignored if they do not satisfy the condition.
+            </summary>
+            <summary>
+            Actual data to authenticate.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.Content.TerminalParametersSpecified">
+            <summary>
+            Defines that the property <see cref="P:Tms.Sdk.Common.Tags.Content.TerminalParameters"/> is not mandatory
+            and could be ignored if not present.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Tms.Sdk.Common.Tags.Content.PoiComponentListSpecified" -->
+        <member name="P:Tms.Sdk.Common.Tags.Content.MerchantParameterSpecified">
+            <summary>
+            Defines that the property <see cref="P:Tms.Sdk.Common.Tags.Content.MerchantParameter"/> is not mandatory
+            and could be ignored if not present.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.Content.ActionSpecified">
+            <summary>
+            Defines that the property <see cref="P:Tms.Sdk.Common.Tags.Content.Action"/> is not mandatory
+            and could be ignored if not present.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.Content.PoiComponentList">
+            <summary>
+            List of data related to a component of the POI performing the status report.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.Content.DataSetRequired">
+            <summary>
+            Request the terminal management system to answer with the identified data set.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.Content.Errors">
+            <summary>
+            Error log of the point of interaction since the last status report.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.Content.MerchantParameter">
+            <summary>
+            Merchant configuration parameters for the point of interaction (POI).
+            </summary>   
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.Content.TerminalParameters">
+            <summary>
+            Contains the table of identifiers
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.Content.Action">
+            <summary>
+            Terminal management action to be performed by the point of interaction (POI).
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.DataSet">
+            <summary>
+            The properties of this class are ignored if they do not satisfy the condition
+            </summary>
+            <summary>
+            RejectionData related to a status report of a point of interaction (POI).
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.DataSet.SequenceCounterSpecified">
+            <summary>
+            Defines that the property <see cref="P:Tms.Sdk.Common.Tags.DataSet.SequenceCounter"/> is not mandatory
+            and could be ignored if not present.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.DataSet.Identification">
+            <summary>
+            Identification of the data set containing the status report.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.DataSet.SequenceCounter">
+            <summary>
+            Counter to identify a single data set within the whole transfer.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.DataSet.Content">
+            <summary>
+            Content of the status report.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.DataSetIdentification">
+            <summary>
+            The properties of this class are ignored if they do not satisfy the condition
+            </summary>
+            <summary>
+            Identification of the required data set.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.DataSetIdentification.IdentificationSpecified">
+            <summary>
+            Defines that the property <see cref="P:Tms.Sdk.Common.Tags.DataSetIdentification.Identification"/> is not mandatory
+            and could be ignored if not present.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.DataSetIdentification.VersionSpecified">
+            <summary>
+            Defines that the property <see cref="P:Tms.Sdk.Common.Tags.DataSetIdentification.Version"/> is not mandatory
+            and could be ignored if not present.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.DataSetIdentification.NameSpecified">
+            <summary>
+            Defines that the property <see cref="P:Tms.Sdk.Common.Tags.DataSetIdentification.Name"/> is not mandatory
+            and could be ignored if not present.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.DataSetIdentification.CreationDateTimeSpecified">
+            <summary>
+            Defines that the property <see cref="P:Tms.Sdk.Common.Tags.DataSetIdentification.CreationDateTime"/> is not mandatory
+            and could be ignored if not present.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.DataSetIdentification.Identification">
+            <summary>
+            Identification of the required data set.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.DataSetIdentification.Type">
+            <summary>
+            Category of data set.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.DataSetIdentification.Version">
+            <summary>
+            Version of the data set.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.DataSetIdentification.CreationDateTime">
+            <summary>
+            Date and time of creation of the data set.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.DataSetIdentification.Name">
+            <summary>
+            Name of the data set.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.Header">
+            <summary>
+            The properties of this class are ignored if they do not satisfy the condition
+            </summary>
+            <summary>
+            Set of characteristics related to the transfer of the message.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.Header.ExchangeIdentificationSpecified">
+            <summary>
+            Defines that the property <see cref="P:Tms.Sdk.Common.Tags.Header.ExchangeIdentification"/> is not mandatory
+            and could be ignored if not present.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Common.Tags.Header.DateTimePattern">
+            <summary>
+            Constant to the Data time used int the headers.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.Header.FormatVersion">
+            <summary>
+            Version of file format.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.Header.ExchangeIdentification">
+            <summary>
+            Unique identification of an exchange occurrence.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.Header.CreationDateTime">
+            <summary>
+            Date and time at which the file or message was created.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.PoiComponentIdentification">
+            <summary>
+            The properties of this class are ignored if they do not satisfy the condition
+            </summary>
+            <summary>
+            Identification of the POI component.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.PoiComponentIdentification.SerialNumberSpecified">
+            <summary>
+            Defines that the property <see cref="P:Tms.Sdk.Common.Tags.PoiComponentIdentification.SerialNumber"/> is not mandatory
+            and could be ignored if not present.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.PoiComponentIdentification.ItemNumber">
+            <summary>
+            Component list index.
+            
+            Hierarchical identification of a hardware component inside all the 
+            hardware component of the POI. It is composed of all item numbers of 
+            the upper level components, separated by the '.' character, ended by 
+            the item number of the current component.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.PoiComponentIdentification.ProviderIdentification">
+             <summary>
+            Identifies the provider of the software, hardware or parameters of the POI component.
+             </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.PoiComponentIdentification.Model">
+            <summary>
+            Identification of the POI component assigned by its provider.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.PoiComponentIdentification.SerialNumber">
+            <summary>
+            Serial number identifying an occurrence of an hardware component. 
+            Unique hardware id set by Provider.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.RejectData">
+            <summary>
+            Information related to the reject.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.RejectData.RejectReason">
+            <summary>
+            Reject reason of the request or the advice.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.RejectData.AdditionalInformation">
+            <summary>
+            Additional information related to the reject of the exchange.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.RejectData.MessageInError">
+            <summary>
+            Original request that caused the recipient party to reject it.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.TerminalManagementRejection">
+            <summary>
+            The TerminalManagementRejection message is sent by the terminal manager to 
+            reject a message request sent by an acceptor, to indicate that the received 
+            message could not be processed.
+            </summary>   
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.TerminalManagementRejection.Data">
+            <summary>
+            Message root.
+            Embraces all content related to rejection.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.TerminalManagementRejectionData">
+            <summary>
+            Message root.
+            Embraces all content related to rejection.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.TerminalManagementRejectionData.Header">
+            <summary>
+            Rejection message management information.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.TerminalManagementRejectionData.Reject">
+            <summary>
+            Information related to the reject.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.Address">
+            <summary>
+            Represents "Adr" node in AcceptorConfigurationUpdate XML message.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.Address.City">
+            <summary>
+            Represents establishment city
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.Address.District">
+            <summary>
+            Represents establishment district
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.Address.Street">
+            <summary>
+            Represents establishment street
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.Address.DoorNumber">
+            <summary>
+            Represents establishment street number
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.Address.Complement">
+            <summary>
+            Represents establishment address complement
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.Address.Neighborhood">
+            <summary>
+            Represents establishment neighborhood
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.Address.ZipCode">
+            <summary>
+            Represents establishment zip code
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Common.Tags.Address.ToString">
+            <summary>
+            Format the address under the format:
+            "Street, DoorNumber - Neighborhood Complement City/District ZIPCode"
+            </summary>
+            <returns>The complete address.</returns>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.MerchantParameters">
+            <summary>
+            Merchant configuration parameters for the point of interaction (POI).
+            </summary>    
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.MerchantParameters.SaleAffiliationKey">
+            <summary>
+            Unique merchant identification in acquirer.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.MerchantParameters.Address">
+            <summary>
+            Merchant address.
+            </summary>        
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.MerchantParameters.CompanyName">
+            <summary>
+            Company/establishment name.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.MerchantParameters.LegalIdentification">
+            <summary>
+            CNPJ/CPF
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.PoiIdentification">
+            <summary>
+            The properties of this class are ignored if they do not satisfy the condition
+            </summary>
+            <summary>
+            "POIId" node. Identifies an unique point of interaction.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.PoiIdentification.IssuerSpecified">
+            <summary>
+            Defines that the property <see cref="P:Tms.Sdk.Common.Tags.PoiIdentification.Issuer"/> is not mandatory
+            and could be ignored if not present.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.PoiIdentification.TypeSpecified">
+            <summary>
+            Defines that the property <see cref="P:Tms.Sdk.Common.Tags.PoiIdentification.Type"/> is not mandatory
+            and could be ignored if not present.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.PoiIdentification.ShortNameSpecified">
+            <summary>
+            Defines that the property <see cref="P:Tms.Sdk.Common.Tags.PoiIdentification.ShortName"/> is not mandatory
+            and could be ignored if not present.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.PoiIdentification.Identification">
+            <summary>
+            Identification of the entity (SAK).
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.PoiIdentification.Type">
+            <sumary>
+            Type of identified entity.
+            </sumary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.PoiIdentification.Issuer">
+            <sumary>
+            Entity assigning the identification (for example merchant, acceptor, 
+            acquirer, or tax authority).
+            </sumary>   
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.PoiIdentification.ShortName">
+            <sumary>
+            Name of the entity.
+            </sumary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.AcceptorConfiguration">
+            <summary>
+            Represents "AccptrCfgtn" node in AcceptorConfigurationUpdate XML message.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.AcceptorConfiguration.PoiIdentification">
+            <summary>
+            Identification of the point of interaction for terminal management.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.AcceptorConfiguration.DataSet">
+            <summary>
+            RejectionData set containing the acceptor parameters of a point of interaction (POI).
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.AcceptorConfigurationUpdateData">
+            <summary>
+            May represent:
+            - activation download request
+            - comparison: initial message between POS and TMS service, when the POS does not have datasets installed.
+            - action dataset download: (post-comparison) message to obtain action dataset action, after comparison.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.AcceptorConfigurationUpdateData.Header">
+            <summary>
+            Set of characteristics related to the transfer of the acceptor parameters.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.AcceptorConfigurationUpdateData.AcceptorConfiguration">
+            <summary>
+            Acceptor configuration to be downloaded from the terminal management system.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.DataSetRequired">
+            <summary>
+            Request the terminal management system to answer with the identified data set.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.DataSetRequired.Identification">
+            <summary>
+            Identification of the required data set.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.PoiComponent">
+            <summary>
+            RejectionData related to a component of the POI performing the status report.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.PoiComponent.Type">
+            <summary>
+            Type of component belonging to a POI Terminal.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.PoiComponent.Identification">
+            <summary>
+            Identification of the POI component.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.PoiComponent.Status">
+            <summary>
+            PINPAD Version
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.PoiComponent.StandardCompliance">
+            <summary>
+            Identification of the capture medium
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Tags.StatusReportBody">
+            <summary>
+            Status of the point of interaction (POI), its components and their installed versions.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.StatusReportBody.PoiIdentification">
+            <summary>
+            Identification of the point of interaction for terminal management.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.StatusReportBody.DataSet">
+            <summary>
+            Group of data related to a status report of a point of interaction (POI).
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.StatusReportData.Header">
+            <summary>
+            Set of characteristics related to the transfer of the acceptor parameters.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Tags.StatusReportData.StatusReport">
+            <summary>
+            Status of the point of interaction (POI), its components and their installed versions.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Rejection">
+            <summary>
+            Represents the TerminalManagementRejection XML message.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Common.Rejection.#ctor">
+            <summary>
+            When occurs some error in a request the rejection is called showing some informations about.
+            The Rejection calls the TerminalManagementRejectionData class.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Base.AbstractSerielizableIso20022">
+            <summary>
+            Class responsible for Serializing
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Common.Base.AbstractSerielizableIso20022.GetAsIso20022RawXml">
+            <summary>
+            Retrieves the original XML trading message.
+            </summary>
+            <returns>Returns the raw xml sent (the OriginalRequest property represents its info as a class).</returns>
+        </member>
+        <member name="T:Tms.Sdk.Common.Base.AbstractRequest">
+            <summary>
+            Abstract class responsible for request
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Base.AbstractRequest.Data">
+            <summary>
+            Interaction point status (POI), its components and their installed versions.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Tms.Sdk.Common.Base.AbstractRequest.#ctor" -->
+        <member name="T:Tms.Sdk.Common.Base.AbstractResponse">
+            <summary>
+            Abstract class responsible for response
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Base.AbstractResponse.ConfigurationData">
+            <summary>
+            Update of the acceptor configuration to be donwloaded by the terminal management system.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Base.AbstractResponse.Data">
+            <summary>
+            Terminal maintenance actions to be performed by a point of interaction (POI).
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Common.Base.AbstractResponse.RejectionData">
+            <summary>
+            Message root.
+            Embraces all content related to rejection.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Download.Tags.Capk">
+            <summary>
+            Certification Authority Public Key. 
+            Embraces all Certificated Authority public keys, used by EMV cards
+            at an authentication process and PIN encryption during an offline transaction.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.Tags.Capk.TagName">
+            <summary>
+            Tag name of Certification Authority Public Key(Capk)
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Capk.CapkIndex">
+            <summary>
+            Certification Authority Public Key Index.
+            (TAG 9f22)
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Capk.CheckSum">
+            <summary>
+            Result of an algorithm that verifies the integrity of CAPK data. If this CheckSum doesn't match with it's correspondent, it means data are corrupted.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Capk.CheckSumStatusCode">
+            <summary>
+            Whether checksum exists or not.
+            - "0": unused;
+            - "1": used.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Capk.DataSetVersion">
+            <summary>
+            DataSet version.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Capk.Exponent">
+            <summary>
+            Certification Authority Public Key Exponent.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Capk.Modulus">
+            <summary>
+            Certification Authority Public Key Modulus.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Capk.RecordedIdentification">
+            <summary>
+            Recorded Application Provider Identifier.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Capk.CapkIndexInTable">
+            <summary>
+            Table recorder index (from "01" to "ZZ").
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Capk.ExponentLength">
+            <summary>
+            <see cref="P:Tms.Sdk.Download.Tags.Capk.Exponent">Exponent</see> field length.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Capk.ModulusLength">
+            <summary>
+            <see cref="P:Tms.Sdk.Download.Tags.Capk.Modulus">Modulus</see> field length.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Capk.AcquirerNumber">
+            <summary>
+            Acquirer identifier. Responsible for the AID table (in ABECS, Stone is represented by "8").
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Download.Tags.AidTable">
+            <summary>
+            Table containing all AIDs supported
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.AidTable.Aids">
+            <summary>
+            List of supported AIDS
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Download.Tags.BinRange">
+            <summary>
+            Represents a specific bin feature.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.Tags.BinRange.TagName">
+            <summary>
+            Tag name of BinRange
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.BinRange.MinRange">
+            <summary>
+            Initial BIN of the range.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.BinRange.MaxRange">
+            <summary>
+            Final BIN of the range.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.BinRange.TefBrandId">
+            <summary>
+            <see cref="T:Tms.Sdk.Download.Tags.CardBrandTable">Brand Table</see> identifier.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.BinRange.DataSetVersion">
+            <summary>
+            DataSet version.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Download.Tags.BinRange.IsWithin(System.Decimal)">
+            <summary>
+            Verify if a given number is within this range.
+            </summary>
+            <param name="givenNumber">Given number to be verified.</param>
+            <returns>Whether the given number is within the range or not.</returns>
+        </member>
+        <member name="T:Tms.Sdk.Download.Tags.BinRangeTable">
+            <summary>
+            Bin Table, containing all BIN ranges, each one associated with it's own brand,
+            meaning that this table is related to <see cref="T:Tms.Sdk.Download.Tags.CardBrandTable">Brand Table</see>.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.BinRangeTable.BinRanges">
+            <summary>
+            Bin Range table.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Download.Tags.CapkTable">
+            <summary>
+            CAPK table.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.CapkTable.Capks">
+            <summary>
+            CAPK list.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Download.Tags.CardBrand">
+            <summary>
+            Represents a card brand.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.Tags.CardBrand.TagName">
+            <summary>
+            Tag name of card brand
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.CardBrand.Id">
+            <summary>
+            Card brand identifier in <see cref="T:Tms.Sdk.Download.Tags.CardBrandTable">Card Brand Table</see>.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.CardBrand.Description">
+            <summary>
+            Card brand brief description.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.CardBrand.BrandType">
+            <summary>
+            Card brand type:
+            - "1": debit;
+            - "2": credit.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.CardBrand.Ranges">
+            <summary>
+            BIN ranges for this brand.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Download.Tags.CardBrandTable">
+            <summary>
+            Card Brand Table, containing all card brands accepted by the merchant when using Stone host.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.CardBrandTable.CardBrands">
+            <summary>
+            Card brand list. 
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Download.Tags.Aid">
+            <summary>
+            Application Identifier (AID)
+            Identifies the application as described in ISO/IEC 7816-5
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.Tags.Aid.TagName">
+            <summary>
+            Tag name of Application Identifier (AID).
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.ApplicationId">
+            <summary>
+            Application Identifier (AID).
+            AID – Application.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.TefBrandId">
+            <summary>
+            Brand identification in BrandTable.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.ApplicationName">
+            <summary>
+            Preferred mnemonic associated with the AID
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.ApplicationIdLength">
+            <summary>
+            AID field length.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.SelFlag">
+            <summary>
+            Reset default value.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.Priority">
+            <summary>
+            Indicates the priority of a given application or group of applications in a directory
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.TargerPer">
+            <summary>
+            Target Percentage to be Used for Random Selection
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.MaxTargerPer">
+            <summary>
+            Maximum Target Percentage to be used for Biased Random Selection:
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.FloorLimitCheck">
+            <summary>
+            Default value "01".
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.RandTransSel">
+            <summary>
+            Default value "01".
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.VelocityCheck">
+            <summary>
+            Default value "01".
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.FloorLimit">
+            <summary>
+            Indicates the floor limit in the terminal in conjunction with the AID.
+            In case of Brazil, represented at centavo.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.TerminalActionCodeDenial">
+            <summary>
+            Terminal Action Code – Denial.
+            - This specifies the terminal's conditions to reject a transaction.
+            - Specifies the acquirer’s conditions that cause the denial of a transaction without attempt to go online
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.TerminalActionCodeDefault">
+            <summary>
+            Terminal Action Code – Default.
+            Specifies the acquirer’s conditions that cause a transaction to be rejected if it might have been approved online, but the terminal is unable to process the transaction online
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.TerminalActionCodeOnline">
+            <summary>
+            Terminal Action Code – Online.
+            - Specifies the acquirer’s conditions that cause a transaction to be transmitted online
+            - This specifies the terminals's conditions to approve a transaction online.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.DefaultDynamicDataObjectList">
+            <summary>
+            Default Dynamic RejectionData Authentication RejectionData Object List
+            
+            The DDOL is a list of data that the card requires if the DDA (Dynamic RejectionData Authentication of card and terminal data to verify that the card application and data are genuine.)
+            method is used during RejectionData Authentication, and the terminal may also store a default DDOL that can be used if the DDOL is not present in the data from the card.
+            The terminal uses the DOL processing rules to format the requested data and then sends it to the card in the Internal Authenticate command.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.DefaultTransactionDataObjectList">
+            <summary>
+            Default Transaction Certificate RejectionData Object List:
+            The TDOL is a list of data that the terminal must use as the input when it needs to calculate a transaction cryptogram hash, 
+            and the terminal may also store a default TDOL that can be used if the TDOL is not present in the data from the card. 
+            The terminal uses the DOL (RejectionData Object List) processing rules to format the requested data, but this is only required 
+            if the transaction cryptogram hash is required by either of the CDOL.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.Version">
+            <summary>
+            Application version number. (TAG 9F09)
+            Version number assigned by the payment system for the application.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.RiskMainData">
+            <summary>
+            Reset default value .
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.ApplicationIdIndex">
+            <summary>
+            Recorder index in this table (from "01" to "ZZ").
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.ApplicationType">
+            <summary>
+            Application type (from "01" to "98").
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.TerminalCountryCode">
+            <summary>
+            Terminal country code. (TAG 9F1A)
+            Indicates the country of the terminal, represented according to ISO 3166
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.TerminalCurrencyCode">
+            <summary>
+            Transaction Currency Code. (TAG 5F36)
+            Indicates the currency in which the account is managed according to ISO 4217
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.TerminalCurrencyExponent">
+            <summary>
+            Transaction Currency Exponent. (TAG 5F36)
+            Indicates the implied position of the decimal point from the right of the amount represented according to ISO 4217.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.AdditionalTerminalCapabilities">
+            <summary>
+            Additional Terminal Capabilities. (TAG 9F40)
+            Indicates the data input and output capabilities of the terminal
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.TerminalType">
+            <summary>
+            Terminal Type. (TAG 9F35)
+            Indicates the environment of the terminal, its communications capability, and its operational control
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.ContactlessZeroAmountCode">
+            <summary>
+            Indicated an action to Contactless Module if reset ("0") transaction amount.
+            - "0": unsupported;
+            - "1": support, but only online.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.TransactionCategoryCode">
+            <summary>
+            Transaction Category Code. (TAG 9F53)
+            Currently set with default value "R".
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.ContactlessMode">
+            <summary>
+            Contactless mode.
+            Terminal capability to the referred AID, in case it's located in a CTLS:
+            - "0": unsupported;
+            - "1": support VISA MSD; ----- OBSOLET
+            - "1" or "2": support VISA qVSDC;
+            - "3": support MasterCard PayPass Magnetic Stripe; ----- OBSOLET
+            - "3" or "4": support MasterCard PayPass M/Chip;
+            - "5": support Amex Expresspay Magnetic Stripe Mode; ----- OBSOLET
+            - "5" or "6": support Amex Expresspay EMV mode.
+            - "7": support Pure Contactless.
+            - "8" or "9": support Discover D-PASS EMV Mode.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.ContactlessTransactionLimit">
+            <summary>
+            Terminal/Reader Contactless Transaction Limit.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.ContactlessFloorLimit">
+            <summary>
+            Terminal/Reader Contactless Floor Limit.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.ContactlessCvmLimit">
+            <summary>
+            Terminal/Reader CVM (Cardholder Verification Method) Required Limit 
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.ContactlessApplicationVersion">
+            <summary>
+            Contactless Application Version. (TAG 9F6D)
+            PayPass Mag Stripe Application Version Number (Terminal).
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.AcquirerNumber">
+            <summary>
+            Acquirer identifier. Responsible for the AID table (in ABECS, Stone is represented by "8").
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.MerchantId">
+            <summary>
+            Merchant Identifier. (TAG 9F16)
+            When concatenated with the Acquirer Identifier, uniquely identifies a given merchant
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.TerminalId">
+            <summary>
+            Terminal Identification. (TAG 9F1C)
+            When concatenated with the Acquirer Identifier, uniquely identifies a given merchant
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.MerchantCategoryCode">
+            <summary>
+            Merchant Category Code. (TAG 9F15)
+            Classifies the type of business being done by the merchant, represented according to ISO 8583:1993 for Card Acceptor Business Code.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.TerminalCapabilities">
+            <summary>
+            Terminal Capabilities. (TAG 9F33)
+            Indicates:
+                - the card data input,
+                - CVM: Carholder Verification Method
+                - security capabilities of the terminal.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.TACDenialContactless">
+            <summary>
+            Contactless Terminal Action Denial (TAG DF8121h)
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.TACDefaultContactless">
+            <summary>
+            Contactless Terminal Action Defafault (TAG DF8120h)
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.TACOnlineContactless">
+            <summary>
+            Contactless Terminal Action Online (TAG DF8122h)
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.MobileFunctionalitySupported">
+            <summary>
+            CVM Mobile 
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.AdditionalTerminalCapabilitiesContactless">
+            <summary>
+            Contactless Additional Terminal Capababilities (TAG 9F40h)
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.TerminalCapabilitiesContactless">
+            <summary>
+            Contactless Terminal Capababilities (TAG 9F33h)
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.CTLSTRNLIMMobContactless">
+            <summary>
+            Contactless Terminal Capababilities Mobile Transaction
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.Aid.ContactlessZeroAmount">
+            <summary>
+            Indicated an action to Contactless Module if reset (false) transaction amount.
+            * This property is not serializad.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Download.Tags.TerminalParameters">
+            <summary>
+            Contains the identifiers tables.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.TerminalParameters.AidTable">
+            <summary>
+            Aid table
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.TerminalParameters.BinRangeTable">
+            <summary>
+            Bin Range table
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.TerminalParameters.CardBrandTable">
+            <summary>
+            CardBrand table
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Tags.TerminalParameters.CapkTable">
+            <summary>
+            Capk table
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Download.Report.CardBrandDownloadReport">
+            <summary>
+            Report implementation for <see cref="!:ITmsClient.DownloadCardBrands(string, string, string)"/>
+            operation.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.CardBrandDownloadReport.Request">
+            <summary>
+            Represents a download request
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.CardBrandDownloadReport.Response">
+            <summary>
+            Mapped the deserialized xml received 
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.CardBrandDownloadReport.BrandCollection">
+            <summary>
+            Card brand colletion from TMS.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.CardBrandDownloadReport.ResponseCode">
+            <summary>
+            Response code in case of error.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.CardBrandDownloadReport.ResponseReason">
+            <summary>
+            Response reason in case of error.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.CardBrandDownloadReport.WasSuccessful">
+            <summary>
+            Whether the operation succeed or not.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.CardBrandDownloadReport.XmlRequest">
+            <summary>
+            XML request sent to TMS.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.CardBrandDownloadReport.XmlResponse">
+            <summary>
+            XML response returned from TMS.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Download.Report.CardBrandDownloadReport.#ctor(Tms.Sdk.Download.DownloadRequest,Tms.Sdk.Common.Base.AbstractResponse)">
+            <summary>
+            Instances the request and response that will be used to compose the report
+            </summary>
+            <param name="request">Request of the download card brand</param>
+            <param name="response">Response of the download card brand</param>
+        </member>
+        <member name="T:Tms.Sdk.Download.Report.ICardBrandDownloadReport">
+            <summary>
+            Report from the <see cref="!:ITmsClient.DownloadCardBrands(string, string, string)"/> 
+            operation.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.ICardBrandDownloadReport.BrandCollection">
+            <summary>
+            Collection of supported brands.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Download.Report.IEmvTableDownloadReport">
+            <summary>
+            Report for a <see cref="!:ITmsClient.DownloadTables(string)">download tables operation</see>.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.IEmvTableDownloadReport.Capks">
+            <summary>
+            CAPKs downloaded.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.IEmvTableDownloadReport.Aids">
+            <summary>
+            AIDs downloaded.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Download.Report.EmvTableDownloadReport">
+            <summary>
+            Report for a <see cref="!:ITmsClient.DownloadTables(string)">download tables operation</see>.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.EmvTableDownloadReport.Request">
+            <summary>
+            Represents a download request
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.EmvTableDownloadReport.Response">
+            <summary>
+            Mapped the deserialized xml received 
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.EmvTableDownloadReport.Aids">
+            <summary>
+            List of Application Identifier (AID).
+            AID – Application.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.EmvTableDownloadReport.Capks">
+            <summary>
+            List of Certification Authority Public Key. 
+            Embraces all Certificated Authority public keys, used by EMV cards at an authentication process and PIN encryption during an offline transaction.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.EmvTableDownloadReport.ResponseCode">
+            <summary>
+            Table download response code (if any).
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.EmvTableDownloadReport.ResponseReason">
+            <summary>
+            Table download response reason (if any).
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.EmvTableDownloadReport.WasSuccessful">
+            <summary>
+            Defines if the activation has succeed.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.EmvTableDownloadReport.XmlRequest">
+            <summary>
+            XML sent to Stone TMS.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Download.Report.EmvTableDownloadReport.XmlResponse">
+            <summary>
+            XML received from Stone TMS.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Download.Report.EmvTableDownloadReport.#ctor(Tms.Sdk.Download.DownloadRequest,Tms.Sdk.Common.Base.AbstractResponse)">
+            <summary>
+            Instances the request and response that will be used to compose the report
+            </summary>
+            <param name="request">Request of the download table</param>
+            <param name="response">Response of the download table</param>
+        </member>
+        <member name="T:Tms.Sdk.Download.TypeCodes.CardBrandType">
+            <summary>
+            Card brand application type.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.TypeCodes.CardBrandType.Undefined">
+            <summary>
+            Invalid value.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.TypeCodes.CardBrandType.Debit">
+            <summary>
+            Debit card.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.TypeCodes.CardBrandType.Credit">
+            <summary>
+            Credit card.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.TypeCodes.CardBrandType.Voucher">
+            <summary>
+            Voucher receipt
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Download.TypeCodes.TmsContactlessMode">
+            <summary>
+            Contactledd card mode.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.TypeCodes.TmsContactlessMode.Undefined">
+            <summary>
+            Invalid value.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.TypeCodes.TmsContactlessMode.Unsupported">
+            <summary>
+            CTLS mode not supported.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.TypeCodes.TmsContactlessMode.VisaMagneticStripe">
+            <summary>
+            Visa Magnetic Stripe.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.TypeCodes.TmsContactlessMode.VisaChipOption1">
+            <summary>
+            Visa chip
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.TypeCodes.TmsContactlessMode.MasterMagneticStripe">
+            <summary>
+            MasterCard PayPass for Magnetic Stripe.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.TypeCodes.TmsContactlessMode.MasterChipOption1">
+            <summary>
+            MasterCard PayPass for m/Chip.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.TypeCodes.TmsContactlessMode.AmexMagneticStripe">
+            <summary>
+            Amex Expresspay for Magnetic Stripe.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.TypeCodes.TmsContactlessMode.AmexChipOption1">
+            <summary>
+            Amex Expresspay for EMV.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.TypeCodes.TmsContactlessMode.PureContactless">
+            <summary>
+            Pure Contactless.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.TypeCodes.TmsContactlessMode.DiscoverDPASSOption1">
+            <summary>
+            Discover D-PASS EMV Mode.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Download.TypeCodes.DownloadType">
+            <summary>
+            Types to download table and card brand.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.TypeCodes.DownloadType.Undefined">
+            <summary>
+            Invalid value.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.TypeCodes.DownloadType.EmvTables">
+            <summary>
+            Type to download table.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Download.TypeCodes.DownloadType.CardBrandTables">
+            <summary>
+            Type to card brand.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Download.DownloadRequest">
+            POS requests a list of DataSets to the server.
+            Server validates whether the requested DataSets are allowed to the specific POS model.
+            Server adds a list of valid DataSets into the response message.
+            This kind of request is answered through a AcceptorConfigurationUpdate message.
+            XmlHeader -> Constants to the header.
+        </member>
+        <member name="M:Tms.Sdk.Download.DownloadRequest.#ctor">
+            <summary>
+            The seralization to XML needs of a default constructor.
+            </summary>  
+        </member>
+        <member name="M:Tms.Sdk.Download.DownloadRequest.#ctor(System.String,Tms.Sdk.Download.TypeCodes.DownloadType,Tms.Sdk.ManagementPlan.Report.IManagementPlanReport)">
+            <summary>
+            Constructor that define it's entries, that is, what the information
+            shoul the request download.
+            </summary>
+            <param name="sak">Terminal Sale Affiliation Key (SAK).</param>
+            <param name="type">Download type.</param>
+            <param name="report">Information about version of the tables to be downloaded.</param>           
+        </member>
+        <member name="M:Tms.Sdk.Download.DownloadRequest.CreateDataSetList(Tms.Sdk.Download.TypeCodes.DownloadType,Tms.Sdk.ManagementPlan.Report.IManagementPlanReport)">
+            <summary>
+            Assigns to the dataset list  the informations that will be mapped in the XML.
+            </summary>
+            <param name="Type">Types between EmvTables or CardBrandTables</param>
+            <param name="report">Information about version of the tables to be downloaded.</param>
+            <returns>Returns a dataset list used in the xml mapped.</returns> 
+        </member>
+        <member name="M:Tms.Sdk.Download.DownloadRequest.AddDataSet(System.String,System.String)">
+            <summary>
+            Create a dataSet that will be added in dataset list.
+            </summary>
+            <param name="name">Identifier name.</param>
+            <param name="version">Identifier version.</param>
+            <returns>Returns a dataset according to the versions received from ManagementPlan.</returns>
+        </member>
+        <member name="T:Tms.Sdk.Download.DownloadResponse">
+            <summary>
+            Represents the AcceptorConfigurationUpdate XML message.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Download.DownloadResponse.#ctor">
+            <summary>
+            The deseralization to XML needs of a default constructor.
+            </summary>   
+        </member>
+        <member name="T:Tms.Sdk.Ping.Tags.ComputerMemory">
+            <summary>
+            Contains information about the memory available in the computer.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.Tags.ComputerMemory.MemoryInUsePercentage">
+            <summary>
+            Available RAM (Random Access Memory) in the computer.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.Tags.ComputerMemory.DriveStorageInUsePercentage">
+            <summary>
+            Total RAM (Random Access Memory) in the computer.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Ping.Tags.TerminalInfo">
+            <summary>
+            Information about the merchant who activated the terminal.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.Tags.TerminalInfo.AffiliationCode">
+            <summary>
+            Merchant unique identifier defined by Stone.
+            Can relate to several <see cref="P:Tms.Sdk.Ping.Tags.TerminalInfo.SAK"/>, depending
+            on the capture method defined.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.Tags.TerminalInfo.SAK">
+            <summary>
+            The SAK related to the <see cref="P:Tms.Sdk.Ping.Tags.TerminalInfo.AffiliationCode"/> and related to the
+            capture method defined.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.Tags.TerminalInfo.Model">
+            <summary>
+            Terminal model.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.Tags.TerminalInfo.SerialNumber">
+            <summary>
+            Serial number.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Ping.Tags.OperatingSystem">
+            <summary>
+            Information about the operating system and the processor.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.Tags.OperatingSystem.Name">
+            <summary>
+            Operating system name.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.Tags.OperatingSystem.IsUserInteractive">
+            <summary>
+            Whether the user is active, that is, interacting with the 
+            operating system, or not.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.Tags.OperatingSystem.Version">
+            <summary>
+            Operating system realese version.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.Tags.OperatingSystem.ProcessorCount">
+            <summary>
+            Number of processor cores in the computer.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.Tags.OperatingSystem.Architecture">
+            <summary>
+            Architecture type.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Ping.Tags.PinpadData">
+            <summary>
+            Information extracted from the pinpad connected.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.Tags.PinpadData.SerialNumber">
+            <summary>
+            Pinpad unique identifier defined by the <see cref="P:Tms.Sdk.Ping.Tags.PinpadData.Manufacturer"/>.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.Tags.PinpadData.AbecsVersion">
+            <summary>
+            ABECS version for which the terminal was built.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.Tags.PinpadData.Manufacturer">
+            <summary>
+            Manufacturer name.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.Tags.PinpadData.Model">
+            <summary>
+            Terminal model.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.Tags.PinpadData.CommunicationType">
+            <summary>
+            Method through whitch the pinpad communicate with the remote.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Ping.Tags.PlatformData">
+            <summary>
+            Platform and third-party information.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.Tags.PlatformData.SystemName">
+            <summary>
+            Platform system name or identifier.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.Tags.PlatformData.ThirdPartyInformation">
+            <summary>
+            Information that the third-party application wants to log.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Ping.Tags.TypeCode.CommunicationType">
+            <summary>
+            Pinpad communication type.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Ping.Tags.TypeCode.CommunicationType.Undefined">
+            <summary>
+            Communication type not set. Invalid value.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Ping.Tags.TypeCode.CommunicationType.Usb">
+            <summary>
+            USB devices, connected through a serial port.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Ping.Tags.TypeCode.CommunicationType.Bluetooth">
+            <summary>
+            Bluetooth devices, connected through a virtual serial port.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.Ping.Tags.TypeCode.CommunicationType.WiFi">
+            <summary>
+            Wi-Fi devices, connected through a socket or TCP client.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Ping.PingRequest">
+            <summary>
+            Request to ping platform information into the TMS.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.PingRequest.PlatformData">
+            <summary>
+            Platform and third-party information.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.PingRequest.TerminalInfoData">
+            <summary>
+            Information about the merchant who activated the terminal.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.PingRequest.OperatingSystemData">
+            <summary>
+            Information about the operating system and the processor.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.PingRequest.MemoryData">
+            <summary>
+            Contains information about the memory available in the computer.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.Ping.PingRequest.Pinpads">
+            <summary>
+            List of pinpads.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.ManagementPlan.Report.IManagementPlanReport">
+            <summary>
+            Contain consolidated information about all versions of data to
+            be downloaded by <see cref="!:Model.ITmsClient"/> operations.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Report.IManagementPlanReport.AidVersion">
+            <summary>
+            In case of success, AID table version.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Report.IManagementPlanReport.CapkVersion">
+            <summary>
+            In case of success, CAPK table version.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Report.IManagementPlanReport.CardBrandVersion">
+            <summary>
+            In case of success, Card Brand table version.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Report.IManagementPlanReport.BinRangeVersion">
+            <summary>
+            In case of success, BIN range table version.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.ManagementPlan.Report.ManagementPlanReport">
+            <summary>
+            Contain consolidated information about all versions of data to
+            be downloaded by <see cref="!:Model.ITmsClient"/> operations.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Report.ManagementPlanReport.Request">
+            <summary>
+            Represents a managementPlan request
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Report.ManagementPlanReport.Response">
+            <summary>
+            Mapped the deserialized xml received 
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Report.ManagementPlanReport.AidVersion">
+            <summary>
+            In case of success, AID table version.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Report.ManagementPlanReport.BinRangeVersion">
+            <summary>
+            In case of success, BIN range table version.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Report.ManagementPlanReport.CapkVersion">
+            <summary>
+            In case of success, CAPK table version.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Report.ManagementPlanReport.CardBrandVersion">
+            <summary>
+            In case of success, Card Brand table version.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Report.ManagementPlanReport.ResponseCode">
+            <summary>
+            response code (if any).
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Report.ManagementPlanReport.ResponseReason">
+            <summary>
+            Activation response reason (if any).
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Report.ManagementPlanReport.WasSuccessful">
+            <summary>
+            Whether downloading informations has succeed or not.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Report.ManagementPlanReport.XmlRequest">
+            <summary>
+            XML sent to Stone TMS.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Report.ManagementPlanReport.XmlResponse">
+            <summary>
+            XML received from Stone TMS.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.ManagementPlan.Report.ManagementPlanReport.#ctor(Tms.Sdk.ManagementPlan.ManagementPlanRequest,Tms.Sdk.Common.Base.AbstractResponse)">
+            <summary>
+            Instances the request and response that will be used to compose the report
+            </summary>
+            <param name="request">Request of the managementPlan</param>
+            <param name="response">Response of the managementPlan</param>
+        </member>
+        <member name="T:Tms.Sdk.ManagementPlan.Tags.Action">
+            <summary>
+            One specific action to be performed by the POS.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Tags.Action.Type">
+            <summary>
+            Types of action to be performed by a point of interaction (POI).
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Tags.Action.DataSetIdentification">
+            <summary>
+            Data set on which the action has to be performed.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Tags.Action.Trigger">
+            <summary>
+            Event on which the action has to be activated by the point of interaction (POI).
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.ManagementPlan.Tags.ManagementPlanReplacement">
+            <summary>
+            Sequence of terminal maintenance actions to be performed by a point of interaction (POI).
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Tags.ManagementPlanReplacement.PoiIdentification">
+            <summary>
+            Identification of the point of interaction for terminal management.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Tags.ManagementPlanReplacement.DataSet">
+            <summary>
+            Data related to a status report of a point of interaction (POI).
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.ManagementPlan.Tags.ManagementPlanReplacementData">
+            <summary>
+            The message body, embraced by the main node "MgmtPlanRplcmnt".
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Tags.ManagementPlanReplacementData.Header">
+            <summary>
+            Set of characteristics related to the transfer of the acceptor parameters.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ManagementPlan.Tags.ManagementPlanReplacementData.ManagementPlanReplacement">
+            <summary>
+            Sequence of terminal maintenance actions to be performed by a point of interaction (POI).
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.ManagementPlan.TypeCodes.ManagementPlanActionName">
+            <summary>
+            Used to access these names as constants instead of using them as strings.
+            That class is used in the class <see cref="!:ManagementPlanReport"/>
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.ManagementPlan.TypeCodes.ManagementPlanActionName.AidTag">
+            <summary>
+            Application Identifier (AID).
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.ManagementPlan.TypeCodes.ManagementPlanActionName.BinTag">
+            <summary>
+             BinRange
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.ManagementPlan.TypeCodes.ManagementPlanActionName.CapkTag">
+            <summary>
+             Certification Authority Public Key(Capk)
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.ManagementPlan.TypeCodes.ManagementPlanActionName.CardBrandsTag">
+            <summary>
+            Card Brands
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.ManagementPlan.TypeCodes.TerminalManagementActionCode">
+            <summary>
+            Specifies a code to an action to be performed by the POI.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.ManagementPlan.TypeCodes.TerminalManagementActionCode.Undefined">
+            <summary>
+            Invalid value.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.ManagementPlan.TypeCodes.TerminalManagementActionCode.Activate">
+            <summary>
+            Data set must be activated.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.ManagementPlan.TypeCodes.TerminalManagementActionCode.Deactivate">
+            <summary>
+            Data set must be deactivated.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.ManagementPlan.TypeCodes.TerminalManagementActionCode.Delete">
+            <summary>
+            Data set must be deleted.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.ManagementPlan.TypeCodes.TerminalManagementActionCode.Download">
+            <summary>
+            Data set must be downloaded.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.ManagementPlan.TypeCodes.TerminalManagementActionCode.Install">
+            <summary>
+            Data set must be installed.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.ManagementPlan.TypeCodes.TerminalManagementActionCode.Restart">
+            <summary>
+            Point of interaction must be restarted.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.ManagementPlan.TypeCodes.TerminalManagementActionCode.Upload">
+            <summary>
+            Data set must be uploaded.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.ManagementPlan.TypeCodes.TerminalManagementActionTriggerCode">
+            <summary>
+            Event to start a terminal management action by the point of interaction (POI).
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.ManagementPlan.TypeCodes.TerminalManagementActionTriggerCode.Undefined">
+            <summary>
+            Invalid Value.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.ManagementPlan.TypeCodes.TerminalManagementActionTriggerCode.DateTime">
+            <summary>
+            Date and time trigger the terminal management action.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.ManagementPlan.TypeCodes.TerminalManagementActionTriggerCode.HostEvent">
+            <summary>
+            Acquirer triggers the terminal management action.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.ManagementPlan.TypeCodes.TerminalManagementActionTriggerCode.Manual">
+            <summary>
+            Acceptor triggers the terminal management action.
+            </summary>
+        </member>
+        <member name="F:Tms.Sdk.ManagementPlan.TypeCodes.TerminalManagementActionTriggerCode.SaleEvent">
+            <summary>
+            Sale system triggers the terminal management action.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.ManagementPlan.ManagementPlanRequest">
+            <summary>
+            Represents the request of a Management Plan Replacement operation, 
+            that is, terminal maintenance actions to be performed by a Point Of Interaction (POI).
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.ManagementPlan.ManagementPlanRequest.#ctor">
+            <summary>
+            The seralization to xml needs of a default constructor.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.ManagementPlan.ManagementPlanRequest.#ctor(System.String)">
+            <summary>
+            Creates a management plan request in XML with all information specified.
+            <param name="sak">Sale Affiliation Key.</param>
+            </summary>       
+        </member>
+        <member name="M:Tms.Sdk.ManagementPlan.ManagementPlanRequest.CreateDataSet">
+            <summary>
+            Assigns to the dataset the informations that will be mapped in the XML.
+            </summary>        
+            <returns>Returns a dataset that will be added in the list of DataSet.</returns>
+        </member>
+        <member name="T:Tms.Sdk.ManagementPlan.ManagementPlanResponse">
+            <summary>
+            Represents the AcceptorConfigurationUpdate XML message.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.ManagementPlan.ManagementPlanResponse.#ctor">
+            <summary>
+            The deseralization to xml needs of a default constructor.
+            </summary>                  
+        </member>
+        <member name="F:Tms.Sdk.ServerDateTime.DateTimeRequest.MicroPosModelName">
+            <summary>
+            Tag model name of MicroPos
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.ServerDateTime.DateTimeRequest.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.ServerDateTime.DateTimeRequest.#ctor(System.String)">
+            <summary>
+            Constructor with parameter.
+            </summary>
+            <param name="affiliationCode"></param>
+        </member>
+        <member name="P:Tms.Sdk.ServerDateTime.DateTimeRequest.Model">
+            <summary>
+            Model name.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ServerDateTime.DateTimeRequest.SerialNumber">
+            <summary>
+            Serial number.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ServerDateTime.DateTimeRequest.AffiliationCode">
+            <summary>
+            Affilication code.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ServerDateTime.DateTimeRequest.Timezone">
+            <summary>
+            Timezone.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.ServerDateTime.DateTimeResponse">
+            <summary>
+            Datetime response.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.ServerDateTime.DateTimeResponse.DateTime">
+            <summary>
+            Date and time.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Specification.ActivationSpecificationOnlyStoneCode">
+            <summary>
+            Class responsible for validates the activation entry data
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Tms.Sdk.Specification.ActivationSpecificationOnlyStoneCode.ToExpression" -->
+        <member name="M:Tms.Sdk.Specification.ActivationSpecificationOnlyStoneCode.Validate(System.String)">
+            <summary>
+            Validates the activation entry data.
+            </summary>
+            <param name="stoneCode">Stone Code.</param>
+        </member>
+        <member name="T:Tms.Sdk.Specification.DateTimeSpecification">
+            <summary>
+            Responsible for validating mandatory information to be sent in the <see cref="!:ITmsClient.DateTime(DateTimeRequest)"/>.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Tms.Sdk.Specification.DateTimeSpecification.ToExpression" -->
+        <member name="M:Tms.Sdk.Specification.DateTimeSpecification.Validate(Tms.Sdk.ServerDateTime.DateTimeRequest)">
+            <summary>
+            Validates the datetime request.
+            </summary>
+            <param name="sak">DateTime request to validate.</param>
+        </member>
+        <member name="T:Tms.Sdk.Specification.PingSpecification">
+            <summary>
+            Responsible for validating mandatory information to be sent in the <see cref="!:ITmsClient.Ping(PingRequest)"/>.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Tms.Sdk.Specification.PingSpecification.ToExpression" -->
+        <member name="M:Tms.Sdk.Specification.PingSpecification.Validate(Tms.Sdk.Ping.PingRequest)">
+            <summary>
+            Validates the ping request.
+            </summary>
+            <param name="entry">Ping request to validate.</param>
+        </member>
+        <member name="T:Tms.Sdk.Specification.DownloadSpecification">
+            <summary>
+            Class responsible for validate the download entry data   
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Tms.Sdk.Specification.DownloadSpecification.ToExpression" -->
+        <member name="M:Tms.Sdk.Specification.DownloadSpecification.Validate(System.String)">
+            <summary>
+            Validates the download entry data.
+            </summary>
+            <param name="sak">Sale Affiliation Key.</param>
+        </member>
+        <member name="T:Tms.Sdk.Specification.ActivationSpecification">
+            <summary>
+            Class responsible for validate the activation entry data
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Tms.Sdk.Specification.ActivationSpecification.ToExpression" -->
+        <member name="M:Tms.Sdk.Specification.ActivationSpecification.Validate(Tms.Sdk.Activation.Entry.ActivationEntry)">
+            <summary>
+            Validates the activation entry data.
+            </summary>
+            <param name="entry">Activationentry.</param>
+        </member>
+        <member name="T:Tms.Sdk.Specification.ManagementPlanSpecification">
+            <summary>
+            Class responsible for validates the management plan entry data
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Tms.Sdk.Specification.ManagementPlanSpecification.ToExpression" -->
+        <member name="M:Tms.Sdk.Specification.ManagementPlanSpecification.Validate(System.String)">
+            <summary>
+            Validates the management plan entry data.
+            </summary>
+            <param name="sak">Sale Affilition Key.</param>
+        </member>
+        <member name="T:Tms.Sdk.Specification.Specification`1">
+            <summary>
+            This abstract class validates entry data
+            </summary>    
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Tms.Sdk.Specification.Specification`1.ToExpression" -->
+        <member name="M:Tms.Sdk.Specification.Specification`1.Validate(`0)">
+            <summary>
+            Validates entry data of a request.
+            </summary>
+            <param name="entry"></param>
+        </member>
+        <member name="M:Tms.Sdk.Specification.Specification`1.IsSatisfiedBy(`0)">
+            <summary>
+            Check if the entry data is valid calling the ToExpression to perform validation
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="T:Tms.Sdk.interfaces.IActivationReport">
+            <summary>
+            Report for an <see cref="!:ITmsClient.Activate(string)">activation operation</see>.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.interfaces.IActivationReport.StoneCode">
+            <summary>
+            Merchant's stone code
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.interfaces.IActivationReport.Address">
+            <summary>
+            Merchant address.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.interfaces.IActivationReport.IdentityCode">
+            <summary>
+            Merchant CNPJ or CPF.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.interfaces.IActivationReport.CompanyName">
+            <summary>
+            Company name.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.interfaces.IActivationReport.SaleAffiliationKey">
+            <summary>
+            Sale affiliation key is a unique key for a merchant (StoneCode) 
+            AND a capture method (MicroPos, Mobile, TEF, POS).
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.interfaces.IActivationReport.SendActivationReceipt(System.String)">
+            <summary>
+            Create and send the receipt according to
+            the <see cref="!:ReceiptType"/>
+            </summary>
+            <param name="email">Email to where the receipt will be sent.</param>
+            <exception cref="!:ArgumentException">If email or receipt type are not valid.</exception>
+        </member>
+        <member name="T:Tms.Sdk.interfaces.IReport">
+            <summary>
+            A report is always sent in the response, even if the request has been validated or not. 
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.interfaces.IReport.WasSuccessful">
+            <summary>
+            Defines if the activation has succeed.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.interfaces.IReport.ResponseReason">
+            <summary>
+            Activation response reason (if any).
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.interfaces.IReport.ResponseCode">
+            <summary>
+            Activation response code (if any).
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.interfaces.IReport.XmlRequest">
+            <summary>
+            XML sent to Stone TMS.
+            </summary>
+        </member>
+        <member name="P:Tms.Sdk.interfaces.IReport.XmlResponse">
+            <summary>
+            XML received from Stone TMS.
+            </summary>
+        </member>
+    </members>
+</doc>

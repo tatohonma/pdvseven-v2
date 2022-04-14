@@ -18,9 +18,6 @@ namespace a7D.PDV.EF.Models
         public int? Telefone2DDD { get; set; }
         public int? Telefone2Numero { get; set; }
         public string Documento1 { get; set; } // CPF
-        public int? IDDocumento2Tipo { get; set; } // Tipo Documento 2 (Passaporte)
-        public string Documento2 { get; set; } // Passaporte
-        public string IDiFood { get; set; }
         public string RG { get; set; }
         public decimal? Limite { get; set; }
         public decimal? Credito { get; set; }
@@ -39,6 +36,8 @@ namespace a7D.PDV.EF.Models
         public DateTime DtInclusao { get; set; }
         public DateTime? DtAlteracao { get; set; }
         public string Email { get; set; }
+        public string TAG { get; set; }
+        public string GUIDIdentificacao { get; set; }
 
         public virtual tbEstado tbEstado { get; set; }
         public virtual ICollection<tbPedido> tbPedidos { get; set; }

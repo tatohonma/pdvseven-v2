@@ -195,8 +195,8 @@ FROM
     LEFT JOIN tbTipoPedido tp ON tp.IDTipoPedido=p.IDTipoPedido
 WHERE
 	p.idTipoPedido<>20
-	AND
-	(ca.idFechamento IS NULL OR p.idCaixa IS NULL)
+	AND (ca.idFechamento IS NULL OR p.idCaixa IS NULL)
+    AND p.IDStatusPedido <> 50
 GROUP BY
 	 sp.Nome
 	,tp.Nome
@@ -216,8 +216,8 @@ FROM
 	LEFT JOIN tbCaixa ca ON ca.IDCaixa=p.IDCaixa
 WHERE
 	p.idTipoPedido=20
-	AND
-	(ca.idFechamento IS NULL OR p.idCaixa IS NULL)
+	AND (ca.idFechamento IS NULL OR p.idCaixa IS NULL)
+    AND p.IDStatusPedido <> 50
 GROUP BY
 	 cl.Sexo
 	,sp.Nome
@@ -235,6 +235,7 @@ FROM
 	LEFT JOIN tbCaixa ca ON ca.IDCaixa=p.IDCaixa
 WHERE
 	(ca.IDFechamento IS NULL OR p.IDCaixa IS NULL)
+    AND p.IDStatusPedido <> 50
 GROUP BY
 	sp.Nome
 
@@ -251,7 +252,7 @@ FROM
 	LEFT JOIN tbCaixa ca ON ca.IDCaixa=p.IDCaixa
 WHERE
 	(ca.IDFechamento IS NULL OR p.IDCaixa IS NULL)
-
+    AND p.IDStatusPedido <> 50
 ORDER BY 'status', tipo
             ";
 
@@ -280,11 +281,10 @@ FROM
        LEFT JOIN tbCaixa ca ON ca.IDCaixa=p.IDCaixa
     LEFT JOIN tbTipoPedido tp ON tp.IDTipoPedido=p.IDTipoPedido
 WHERE
-       p.idTipoPedido<>20
-       AND
-       p.DtPedido>(SELECT ISNull(MAX(DtFechamento), datefromparts(2000, 1, 1)) FROM tbFechamento)
-	   AND
-	    ca.IDFechamento is NULL
+    p.idTipoPedido<>20
+    AND p.DtPedido>(SELECT ISNull(MAX(DtFechamento), datefromparts(2000, 1, 1)) FROM tbFechamento)
+    AND ca.IDFechamento is NULL
+    AND p.IDStatusPedido <> 50
 GROUP BY
        sp.Nome
        ,tp.Nome
@@ -303,11 +303,10 @@ FROM
        LEFT JOIN tbStatusPedido sp ON sp.idStatusPedido=p.idStatusPedido
        LEFT JOIN tbCaixa ca ON ca.IDCaixa=p.IDCaixa
 WHERE
-       p.idTipoPedido=20
-       AND
-       p.DtPedido>(SELECT ISNull(MAX(DtFechamento), datefromparts(2000, 1, 1)) FROM tbFechamento)
-	   AND
-	   ca.IDFechamento is NULL
+    p.idTipoPedido=20
+    AND p.DtPedido>(SELECT ISNull(MAX(DtFechamento), datefromparts(2000, 1, 1)) FROM tbFechamento)
+	AND ca.IDFechamento is NULL
+    AND p.IDStatusPedido <> 50
 GROUP BY
        cl.Sexo
        ,sp.Nome
@@ -324,10 +323,9 @@ FROM
        LEFT JOIN tbStatusPedido sp ON sp.idStatusPedido=p.idStatusPedido
        LEFT JOIN tbCaixa ca ON ca.IDCaixa=p.IDCaixa
 WHERE
-	     
-       p.DtPedido>(SELECT ISNull(MAX(DtFechamento), datefromparts(2000, 1, 1)) FROM tbFechamento)
-	   AND
-	   ca.IDFechamento is NULL
+    p.DtPedido>(SELECT ISNull(MAX(DtFechamento), datefromparts(2000, 1, 1)) FROM tbFechamento)
+    AND ca.IDFechamento is NULL
+    AND p.IDStatusPedido <> 50
 	     
 GROUP BY
        sp.Nome
@@ -344,9 +342,9 @@ FROM
        LEFT JOIN tbStatusPedido sp ON sp.idStatusPedido=p.idStatusPedido
        LEFT JOIN tbCaixa ca ON ca.IDCaixa=p.IDCaixa
 WHERE
-       p.DtPedido>(SELECT ISNull(MAX(DtFechamento), datefromparts(2000, 1, 1)) FROM tbFechamento)
-	   AND
-	   ca.IDFechamento is NULL
+    p.DtPedido>(SELECT ISNull(MAX(DtFechamento), datefromparts(2000, 1, 1)) FROM tbFechamento)
+    AND ca.IDFechamento is NULL
+    AND p.IDStatusPedido <> 50
 ORDER BY 'status', tipo";
 
             da = new SqlDataAdapter(querySql, DB.ConnectionString);
@@ -371,11 +369,10 @@ FROM
        tbPedido p (NOLOCK)
        LEFT JOIN tbCaixa c (NOLOCK) ON c.IDCaixa=p.IDCaixa
 WHERE
-       p.idTipoPedido=10
-       AND
-       p.DtPedido>(SELECT ISNull(MAX(DtFechamento), datefromparts(2000, 1, 1)) FROM tbFechamento)
-	   AND
-	   c.IDFechamento is NULL
+    p.idTipoPedido=10
+    AND p.DtPedido>(SELECT ISNull(MAX(DtFechamento), datefromparts(2000, 1, 1)) FROM tbFechamento)
+    AND c.IDFechamento is NULL
+    AND p.IDStatusPedido <> 50
 
 UNION ALL
 
@@ -386,11 +383,10 @@ FROM
        tbPedido p (NOLOCK)
        LEFT JOIN tbCaixa c (NOLOCK) ON c.IDCaixa=p.IDCaixa
 WHERE
-       p.idTipoPedido=30
-       AND
-       p.DtPedido>(SELECT ISNull(MAX(DtFechamento), datefromparts(2000, 1, 1)) FROM tbFechamento)
-	   AND
-	   c.IDFechamento is NULL
+    p.idTipoPedido=30
+    AND p.DtPedido>(SELECT ISNull(MAX(DtFechamento), datefromparts(2000, 1, 1)) FROM tbFechamento)
+	AND c.IDFechamento is NULL
+    AND p.IDStatusPedido <> 50
 
 UNION ALL
 
@@ -419,9 +415,9 @@ FROM
        tbPedido p (NOLOCK)
        LEFT JOIN tbCaixa c (NOLOCK) ON c.IDCaixa=p.IDCaixa
 WHERE
-       p.DtPedido>(SELECT ISNull(MAX(DtFechamento), datefromparts(2000, 1, 1)) FROM tbFechamento)
-	   AND
-	   c.IDFechamento is NULL
+    p.DtPedido>(SELECT ISNull(MAX(DtFechamento), datefromparts(2000, 1, 1)) FROM tbFechamento)
+    AND c.IDFechamento is NULL
+    AND p.IDStatusPedido <> 50
             ";
 
             da = new SqlDataAdapter(querySql, DB.ConnectionString);
@@ -455,10 +451,11 @@ WHERE
                 querySql += @"(p.idStatusPedido=40 AND c.idFechamento IS NULL OR p.idCaixa IS NULL)";
 
             querySql += $@"
-AND
+    AND
 	pp.idTipoPagamento IS NOT NULL
     AND pp.Excluido=0
     AND IsNull(pp.IDGateway, 0)<>{(int)EGateway.ContaCliente}
+    AND p.IDStatusPedido <> 50
 GROUP BY
 	tp.Nome
 
@@ -483,7 +480,8 @@ WHERE
 AND
 	pp.idTipoPagamento IS NOT NULL
     AND pp.Excluido=0
-    AND IsNull(pp.IDGateway, 0)<>{(int)EGateway.ContaCliente}";
+    AND IsNull(pp.IDGateway, 0)<>{(int)EGateway.ContaCliente}
+    AND p.IDStatusPedido <> 50";
 
             da = new SqlDataAdapter(querySql, DB.ConnectionString);
             if (idFechamento.HasValue)
@@ -518,10 +516,11 @@ WHERE
                 querySql += @"(p.idStatusPedido=40 AND c.idFechamento IS NULL OR p.idCaixa IS NULL)";
 
             querySql += $@"
-AND
-	pp.idTipoPagamento IS NOT NULL
+
+    AND pp.idTipoPagamento IS NOT NULL
     AND pp.Excluido=0
     AND IsNull(pp.IDGateway, 0)={(int)EGateway.ContaCliente}
+    AND p.IDStatusPedido <> 50
 
 UNION ALL
 
@@ -541,7 +540,9 @@ if (idFechamento.HasValue)
                 querySql += @"(p.idStatusPedido=40 AND c.idFechamento IS NULL OR p.idCaixa IS NULL)";
 
             querySql += $@"
-AND pd.IDTipoProduto=50 and pp.Cancelado=0";
+    AND pd.IDTipoProduto=50 
+    AND pp.Cancelado=0
+    AND p.IDStatusPedido <> 50";
 
             da = new SqlDataAdapter(querySql, DB.ConnectionString);
             if (idFechamento.HasValue)
@@ -591,7 +592,9 @@ FROM
 	LEFT JOIN tbPedido (nolock) p ON p.idCaixa=c.idCaixa
 	LEFT JOIN tbTipoDesconto (nolock) td on td.IDTipoDesconto = p.IDTipoDesconto
 WHERE
-	(c.idFechamento = @idFechamento) AND td.IDTipoDesconto is not null
+	(c.idFechamento = @idFechamento) 
+    AND td.IDTipoDesconto is not null
+    AND p.IDStatusPedido <> 50
 GROUP BY
 	td.Nome
 
@@ -605,7 +608,8 @@ FROM
 	LEFT JOIN tbPedido (nolock) p ON p.idCaixa=c.idCaixa
 	LEFT JOIN tbTipoDesconto (nolock) td on td.IDTipoDesconto = p.IDTipoDesconto
 WHERE
-	(c.idFechamento = @idFechamento)";
+	(c.idFechamento = @idFechamento)
+    AND p.IDStatusPedido <> 50";
 
             da = new SqlDataAdapter(querySQL, DB.ConnectionString);
             da.SelectCommand.Parameters.AddWithValue("@idFechamento", idFechamento);

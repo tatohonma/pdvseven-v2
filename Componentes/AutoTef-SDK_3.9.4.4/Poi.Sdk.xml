@@ -1,0 +1,4079 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Poi.Sdk</name>
+    </assembly>
+    <members>
+        <member name="T:Poi.Sdk.Authorization.AuthorisationRequest">
+            <summary>
+            Authorization request to be sent to acquirer through the <see cref="T:Poi.Sdk.Client.AcquirerServiceClient"/>
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.AuthorisationRequest.Data">
+            <summary>
+            Information related to the authorisation request.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.AuthorisationRequest.Entry">
+            <summary>
+            Authorization entry data used in the request builder.
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Authorization.AuthorisationRequest.#ctor">
+            <summary>
+            The seralization to xml needs of a default constructor
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Authorization.AuthorisationRequest.#ctor(Poi.Sdk.Authorization.Entry.AuthorizationEntry)">
+            <summary>
+            Call the BuildRequest to perform the constrction of the request
+            </summary>
+            <param name="entry">Authorization entry data</param>
+        </member>
+        <member name="M:Poi.Sdk.Authorization.AuthorisationRequest.BuildRequest">
+            <summary>
+            Mount all the request 
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Authorization.AuthorisationRequest.CreateHeader">
+            <summary>
+            Creates the Header of the request
+            </summary>
+            <returns>The object of this class</returns>
+        </member>
+        <member name="M:Poi.Sdk.Authorization.AuthorisationRequest.CreateEnviroment">
+            <summary>
+            Creates the Enviroment of the request
+            </summary>
+            <returns>The object of this class</returns>
+        </member>
+        <member name="M:Poi.Sdk.Authorization.AuthorisationRequest.CreateCard">
+            <summary>
+            Creates the Card of the request
+            </summary>
+            <returns>The object of this class</returns>
+        </member>
+        <member name="M:Poi.Sdk.Authorization.AuthorisationRequest.CreateCardHolder">
+            <summary>
+            Creates the CardHolder of the request
+            </summary>
+            <returns>The object of this class</returns>
+        </member>
+        <member name="M:Poi.Sdk.Authorization.AuthorisationRequest.CreateContext">
+            <summary>
+            Creates the Context of the request
+            </summary>
+            <returns>The object of this class</returns>
+        </member>
+        <member name="M:Poi.Sdk.Authorization.AuthorisationRequest.CreateTransaction">
+            <summary>
+            Creates the Transaction of the request
+            </summary>
+            <returns>The object of this class</returns>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.AuthorisationResponse">
+            <summary>
+            Authorization response that contains the original response message,
+            that can be a proccess response <see cref="T:Poi.Sdk.Authorization.Tag.AcceptorAuthorisationResponseData"/> or a rejection <see cref="T:Poi.Sdk.Rejection.AcceptorRejectionData"/>
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Entry.AuthorizationEntry">
+            <summary>
+            Authorization data entry
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Entry.AuthorizationEntry.SaleAffiliationKey">
+            <summary>
+            Merchant affiliation key in Acquirer.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Entry.AuthorizationEntry.InitiatorTransactionKey">
+            <summary>
+            Identification of transaction created by the client.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Entry.AuthorizationEntry.SystemName">
+            <summary>
+            System name and version
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Entry.AuthorizationEntry.TransactionType">
+            <summary>
+            Type of cardholder account used for the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Entry.AuthorizationEntry.Amount">
+            <summary>
+            Transaction amount.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Entry.AuthorizationEntry.CaptureTransaction">
+            <summary>
+            If the transaction must be captured or not.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Entry.AuthorizationEntry.Ksn">
+            <summary>
+            Key Serial Number of pin cryptogram.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Entry.AuthorizationEntry.Installment">
+            <summary>
+            Transaction installment details.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Entry.AuthorizationEntry.Card">
+            <summary>
+            Information about the card used in the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Entry.AuthorizationEntry.CardEncryption">
+            <summary>
+            Security information about the card used in the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Entry.AuthorizationEntry.TerminalManufacturer">
+            <summary>
+            Terminal Manufacturer Name.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Entry.AuthorizationEntry.TerminalModel">
+            <summary>
+            Terminal Model.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Entry.AuthorizationEntry.CompanyName">
+            <summary>
+            Company Name
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Entry.AuthorizationEntry.ShortNamePartner">
+            <summary>
+            Software House Partner
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Entry.AuthorizationEntry.VersionNumber">
+            <summary>
+            PINPAD Version Number information
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Entry.AuthorizationEntry.SerialNumber">
+            <summary>
+            PinPad Serial Number
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Entry.AuthorizationEntry.ModuleAcquirerVersion">
+            <summary>
+            Doc TEF Stone Version
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Report.AuthorizationReport">
+            <summary>
+            Contains the response(already interfaced) received from an Authorization Report.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.Request">
+            <summary>
+            Represents an authorisation request
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.Response">
+            <summary>
+            Mapped the deserialized xml received 
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.TransactionEntry">
+            <summary>
+            Entry for this transaction's report.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.WasSuccessful">
+            <summary>
+            Defines if the authorisation was a success.
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Authorization.Report.AuthorizationReport.GetResponseToAuthorization">
+            <summary>
+            Results for Response Authorization Data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.AcquirerTransactionKey">
+            <summary>
+            Transaction ID set by Stone. Returned even in case of a declined transaction.
+            Null if a rejection occurred.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.InitiatorTransactionKey">
+            <summary>
+            Transaction ID set by the application, used to cancel in case of connection failure.	
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.Amount">
+            <summary>
+            Total transaction amount.		
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.DateTime">
+            <summary>
+            Transaction date and time.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.Installment">
+            <summary>
+            Installment information.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.Card">
+            <summary>
+            Information about the card used in the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.TransactionType">
+            <summary>
+            Type of the transaction e.g. credit or debit.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.Receipt">
+            <summary>
+            Information to be printed by specific supported pinpads.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.TryAutoCancelPerformed">
+            <summary>
+            If a time out was returned by the host and an automatic cancellation had to be performed.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.AvailableBalance">
+            <summary>
+            Availabe balance in the card. This is optional, not all issuers have this feature.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.ResponseCode">
+            <summary>
+            Response code in case of a declined cancellation or a rejection.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.ResponseReason">
+            <summary>
+            Response reason in case of a declined cancellation or a rejection.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.XmlRequest">
+            <summary>
+            Xml sent to Stone Poi
+            </summary>      
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.XmlResponse">
+            <summary>
+            XML received from Stone Poi.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.EmvDataToInject">
+            <summary>
+            EMV data returned by the acquirer. This data must be injected in the EMV module of the card
+            used in the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.AuthorizationReponseCode">
+            <summary>
+            Raw response code.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.AuthorizationReport.AuthorizationStatus">
+            <summary>
+            Raw authorization status.
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Authorization.Report.AuthorizationReport.#ctor(Poi.Sdk.Authorization.AuthorisationRequest,Poi.Sdk.Common.Base.AbstractResponse,Poi.Sdk.Authorization.Report.ICard)">
+            <summary>
+            Instances the request and response that will be used to compose the report
+            </summary>
+            <param name="request">Request of an Authorisation</param>
+            <param name="response">Response of an Authorisation</param>
+            <param name="card">Card used in the transaction.</param>
+        </member>
+        <member name="M:Poi.Sdk.Authorization.Report.AuthorizationReport.#ctor(Poi.Sdk.Authorization.Entry.AuthorizationEntry)">
+            <summary>
+            Constructor to be used when the transaction was interrupted before sent to the acquirer.
+            </summary>
+            <param name="transaction">Entry data to perform an authorization proccess.</param>
+        </member>
+        <member name="M:Poi.Sdk.Authorization.Report.AuthorizationReport.SendAuthorizationReceipt(Tms.Sdk.interfaces.IActivationReport,System.String)">
+            <summary>
+            Send the authorization receipt. 
+            </summary>
+            <param name="merchant">Informations about the merchant.</param>
+            <param name="email">Email to where the receipt will be sent.</param>
+            <exception cref="T:System.ArgumentException">If email is invalid.</exception>
+            <exception cref="T:System.ArgumentNullException">If merchant data is null.</exception>
+        </member>
+        <member name="M:Poi.Sdk.Authorization.Report.AuthorizationReport.GetReceipt">
+            <summary>
+            Creates a <see cref="T:Poi.Sdk.Authorization.Report.PaperReceipt"/> contining all mandatory
+            information to print a receipt.
+            </summary>
+            <returns>Mandatory information to print a receipt.</returns>
+        </member>
+        <member name="M:Poi.Sdk.Authorization.Report.AuthorizationReport.GetDateTime">
+            <summary>
+            Get's the transaction date time depending on the data available.
+            </summary>
+            <returns>The transaction date time if the remote returned something, null otherwise.</returns>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Report.IAuthorizationReport">
+            <summary>
+            Reports the informations about the authorization.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IAuthorizationReport.Card">
+            <summary>
+            Information about the card used in the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IAuthorizationReport.AvailableBalance">
+            <summary>
+            Balance available in the card. This is option, due to not all issuers available this information.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IAuthorizationReport.TransactionType">
+            <summary>
+            Transaction type.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IAuthorizationReport.Receipt">
+            <summary>
+            Information to be printed by specific supported pinpads.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IAuthorizationReport.TryAutoCancelPerformed">
+            <summary>
+            Whether the remote returned a time out and an automatic cancellation had to be performed.
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Authorization.Report.IAuthorizationReport.SendAuthorizationReceipt(Tms.Sdk.interfaces.IActivationReport,System.String)">
+            <summary>
+            Send the authorization receipt. 
+            </summary>
+            <param name="merchant">Informations about the merchant.</param>
+            <param name="email">Email to where the receipt will be sent.</param>
+            <exception cref="T:System.ArgumentException">If email is not valid.</exception>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Report.IAuthorizationStatusReport">
+            <summary>
+            Report for a <see cref="M:Poi.Sdk.Client.IAcquirerServiceClient.CheckTransactionStatus(Poi.Sdk.TransactionStatus.Entry.TransactionStatusReportEntry)"/>.
+            It contains basic information about one transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IAuthorizationStatusReport.AcquirerTransactionKey">
+            <summary>
+            Transaction ID set by Stone.
+            Must be persisted.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IAuthorizationStatusReport.InitiatorTransactionKey">
+            <summary>
+            Transaction ID set by the application, used to cancel in case of connection failure.
+            Must be persisted.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IAuthorizationStatusReport.Amount">
+            <summary>
+            Total transaction amount.
+            Must be persisted.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IAuthorizationStatusReport.DateTime">
+            <summary>
+            Transaction date and time.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IAuthorizationStatusReport.Installment">
+            <summary>
+            Installment information.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Report.ICard">
+            <summary>
+            Public information about the card.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.ICard.BrandId">
+            <summary>
+            Brand ID.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.ICard.BrandName">
+            <summary>
+            Card brand name.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.ICard.CardholderName">
+            <summary>
+            Cardholder name printed on the card.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.ICard.ExpirationDate">
+            <summary>
+            Card expiration date.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.ICard.MaskedPrimaryAccountNumber">
+            <summary>
+            Masked primary account number (number printed on the card).
+            The mask consists in hide middle characters. 
+            Example:
+            Original PAN: 1234432156788765
+            Masked PAN: 123443******8765
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.ICard.Type">
+            <summary>
+            Card type.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.ICard.ReadingMode">
+            <summary>
+            Card reading mode.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.ICard.ApplicationId">
+            <summary>
+            Card application ID, also known as AID.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.ICard.ApplicationCryptogram">
+            <summary>
+            Card application cryptogram, also known as ARQC.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.ICard.NeedsPassword">
+            <summary>
+            Defines whether the card needs password or not.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.ICard.PrimaryAccountNumberSequenceNumber">
+            <summary>
+            Application PAN Sequencial number for joint banck account.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.ICard.IsFallback">
+            <summary>
+            Is Fallback Flow
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.ICard.IsVoucher">
+            <summary>
+            Is Voucher Card
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Report.IAuthorizationEmvReport">
+            <summary>
+            Represents information returned by the acquirer in the authorization process.
+            This data shall be injected in the EMV module of the card used in the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IAuthorizationEmvReport.EmvDataToInject">
+            <summary>
+            EMV data to inject in tha EMV module of the card used in the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IAuthorizationEmvReport.AuthorizationReponseCode">
+            <summary>
+            Raw authorization code, this information is also injected.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IAuthorizationEmvReport.AuthorizationStatus">
+            <summary>
+            Raw authorization status, this information is also injected.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Report.IPaperReceipt">
+            <summary>
+            Information contained in a paper receipt.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IPaperReceipt.CardholderName">
+            <summary>
+            Cardholder name printed on the card.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IPaperReceipt.Amount">
+            <summary>
+            Transaction amount.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IPaperReceipt.TransactionType">
+            <summary>
+            Type of the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IPaperReceipt.InstallmentType">
+            <summary>
+            Transaction installment type.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IPaperReceipt.MaskedPrimaryAccountNumber">
+            <summary>
+            Primary Account Number printer on the card, with middle digits masked.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IPaperReceipt.BrandName">
+            <summary>
+            Card brand name.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IPaperReceipt.Aid">
+            <summary>
+            Card Application ID.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IPaperReceipt.Arqc">
+            <summary>
+            Transaction and card Application Cryptogram.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IPaperReceipt.AcquirerTransactionKey">
+            <summary>
+            Unique identifier set by Stone for this transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IPaperReceipt.InitiatorTransactionKey">
+            <summary>
+            Transaction identifier set by the initiating party.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IPaperReceipt.SystemSpecifications">
+            <summary>
+            System information.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IPaperReceipt.StoneCode">
+            <summary>
+            Merchant ID on Stone.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IPaperReceipt.AvailableBalance">
+            <summary>
+            Available balance in that account.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IPaperReceipt.TransactionDateTime">
+            <summary>
+            Transaction date and time.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IPaperReceipt.ClientVia">
+            <summary>
+            Client via
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.IPaperReceipt.MerchantVia">
+            <summary>
+            Establishment via
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Report.PaperReceipt">
+            <summary>
+            Information contained in a paper receipt.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.PaperReceipt.AcquirerTransactionKey">
+            <summary>
+            Unique identifier set by Stone for this transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.PaperReceipt.Aid">
+            <summary>
+            Card Application ID.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.PaperReceipt.Amount">
+            <summary>
+            Transaction amount.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.PaperReceipt.Arqc">
+            <summary>
+            Transaction and card Application Cryptogram.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.PaperReceipt.AvailableBalance">
+            <summary>
+            Available balance in that account.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.PaperReceipt.BrandName">
+            <summary>
+            Card brand name.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.PaperReceipt.CardholderName">
+            <summary>
+            Cardholder name printed on the card.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.PaperReceipt.InitiatorTransactionKey">
+            <summary>
+            Transaction identifier set by the initiating party.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.PaperReceipt.InstallmentType">
+            <summary>
+            Transaction installment type.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.PaperReceipt.MaskedPrimaryAccountNumber">
+            <summary>
+            Primary Account Number printer on the card, with middle digits masked.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.PaperReceipt.StoneCode">
+            <summary>
+            Merchant ID on Stone.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.PaperReceipt.SystemSpecifications">
+            <summary>
+            System information.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.PaperReceipt.TransactionDateTime">
+            <summary>
+            Transaction date and time.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.PaperReceipt.TransactionType">
+            <summary>
+            Type of the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.PaperReceipt.ClientVia">
+            <summary>
+            Client via
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Report.PaperReceipt.MerchantVia">
+            <summary>
+            Establishment via
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.AcceptorAuthorisationRequestData">
+            <summary>
+            Information related to the authorisation request.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.AcceptorAuthorisationRequestData.Header">
+            <summary>
+            Authorisation request message management information.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.AcceptorAuthorisationRequestData.AuthorisationRequest">
+            <summary>
+            Information related to the authorisation request.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.AcceptorAuthorisationResponseData">
+            <summary>
+            Information related to the response of the authorisation.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.AcceptorAuthorisationResponseData.Header">
+            <summary>
+            Authorisation response message management information
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.AcceptorAuthorisationResponseData.AuthorisationResponse">
+            <summary>
+            Information related to the response of the authorisation.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.Action">
+            <summary>
+            Set of actions to be performed by the POI (Point Of Interaction) system.
+            </summary>      
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.Action.ActionType">
+            <summary>
+            Type of action to be performed by the POI (Point Of Interaction) system
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.Action.MessageToPresent">
+            <summary>
+            Message to be displayed to the cardholder or the cashier.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.AuthorisationRequestData">
+            <summary>
+            Information related to the authorisation request.
+            </summary>        
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.AuthorisationRequestData.EnvironmentData">
+            <summary>
+            Environment of the transaction
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.AuthorisationRequestData.Context">
+            <summary>
+            Context in which the transaction is performed (payment and sale).
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.AuthorisationRequestData.Transaction">
+            <summary>
+            Authorized transaction between an acceptor and an acquirer
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.AuthorisationResponseData">
+            <summary>
+            Information related to the response of the authorisation.
+            </summary>        
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.AuthorisationResponseData.Environment">
+            <summary>
+            Environment of the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.AuthorisationResponseData.Transaction">
+            <summary>
+            Authorisation of a card payment transaction between an acceptor and an acquirer.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.AuthorisationResponseData.TransactionResponse">
+            <summary>
+            Authorisation response from the acquirer.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.AuthorisationResultData">
+            <summary>
+            Results of the authorisation, and actions to perform.
+            </summary>       
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.AuthorisationResultData.ResponseToAuthorisation">
+            <summary>
+            Response to an authorisation request
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.AuthorisationResultData.AuthorisationCode">
+            <summary>
+            Value assigned by the authorising party.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.AuthorisationResultData.CompletionRequired">
+            <summary>
+            Indicates whether the acquirer requires a further exchange completion after the completion of the transaction
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.CardSecurityInformation">
+            <summary>
+            Represents a physical card used to perform a transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.CardSecurityInformation.PrimaryAccountNumber">
+            <summary>
+            PAN (Primary Account Number) printed in the original physical card.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.CardSecurityInformation.PrimaryAccountNumberSequenceNumber">
+            <summary>
+            Application PAN Sequencial number for joint banck account.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.CardSecurityInformation.ExpirationDate">
+            <summary>
+            Card expiration date, printed in the original physical card.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.CardSecurityInformation.Track1">
+            <summary>
+            First card trail, if exists.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.CardSecurityInformation.Track2">
+            <summary>
+            Second card trail, if exists.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.CardSecurityInformation.Track3">
+            <summary>
+            Third card trail, if exists.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.CardSecurityInformation.EmvData">
+            <summary>
+            EMV data, if exists. It's a group of information returned by EMV Kernel, representing several information about the transaction and the terminal itself.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.CardSecurityInformation.SecurityCode">
+            <summary>
+            CVC or CVV2 of card, optional.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.CardSecurityInformation.EncryptedPin">
+            <summary>
+            Encrypted pin of card, if exists.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.CardSecurityInformation.BrandId">
+            <summary>
+            Card brand identification used on an authorization.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.ContextData">
+            <summary>
+            Context in which the transaction is performed (payment and sale).
+            </summary>           
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.ContextData.PaymentContext">
+            <summary>
+            Context of the card payment transaction.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.MessageToPresentData">
+            <summary>
+            Message to be displayed to the cardholder or the cashier.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.MessageToPresentData.MessageDestination">
+            <summary>
+            Destination of the message to be displayed or printed.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.MessageToPresentData.MessageContent">
+            <summary>
+            Text or graphic data to be display or printed to the cardholder or the cashier.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.Balance">
+            <summary>
+            Available balance to a specific bank account. Not all banks return this information.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.Balance.Amount">
+            <summary>
+            Balance available.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.ResponseToAuthorisationData">
+            <summary>
+            Response to an authorisation request
+            </summary>       
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.ResponseToAuthorisationData.Response">
+            <summary>
+            Result of the transaction
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.ResponseToAuthorisationData.ResponseReason">
+            <summary>
+            Detailed result of the transaction.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.TransactionResponseData">
+            <summary>
+            Authorisation of a card payment transaction between an acceptor and an acquirer.
+            </summary>       
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.TransactionResponseData.AuthorisationResult">
+            <summary>
+            Results of the authorisation, and actions to perform.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.TransactionResponseData.Action">
+            <summary>
+            Set of actions to be performed by the POI (Point Of Interaction) system.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.TransactionResponseData.AvailableBalance">
+            <summary>
+            Available balance to a specific bank account. Not all banks return this information.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.CardReadingMode">
+            <summary>
+            Responsible for to manager the reading card.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.Tag.CardReadingMode.Undefined">
+            <summary>
+            Invalid value
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.Tag.CardReadingMode.Tag">
+            <summary>
+            Tag reading capabilities (RFID, etc.)
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.Tag.CardReadingMode.Manual">
+            <summary>
+            Keyboard entry or OCR reading of embossing or printed data, either at time of 
+            transaction or after the event.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.Tag.CardReadingMode.BarCode">
+            <summary>
+            Bar code
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.Tag.CardReadingMode.MagneticStripe">
+            <summary>
+            Magnetic stripe
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.Tag.CardReadingMode.Chip">
+            <summary>
+            ICC (Integrated Circuit Card) with contact containing software applications conform to ISO 7816
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.Tag.CardReadingMode.AccountData">
+            <summary>
+            Account data on file.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.Tag.CardReadingMode.Contactless">
+            <summary>
+            Contactless proximity reader
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.Tag.CardReadingMode.EMVProximityReader">
+            <summary>
+            Contactless proximity reader, with application conform to the standard EMV 
+            (standard initiated by Europay, Mastercard and Visa).
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.AuthenticationData">
+            <summary>
+            Data related to the authentication of the cardholder
+            </summary> 
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.AuthenticationData.AuthenticationMethod">
+            <summary>
+            Method used to authenticate a cardholder.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.AuthenticationData.CardholderOnlinePin">
+            <summary>
+            Encrypted personal identification number (PIN) and related information.
+            </summary>        
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.CardData">
+            <summary>
+            Payment card performing the transaction
+            </summary>   
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.CardData.PlainCardData">
+            <summary>
+            Sensitive data associated with the card performing the transaction.
+            </summary>                        
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.Cardholder">
+            <summary>
+            Identification of the cardholder involved in a transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.Cardholder.Authentication">
+            <summary>
+            Data related to the authentication of the cardholder
+            </summary> 
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.Cardholder.Name">
+            <summary>
+            Cardholder's Name
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.CardholderOnlinePinData">
+            <summary>
+            Encrypted personal identification number (PIN) and related information.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.CardholderOnlinePinData.EncryptedPinBlock">
+            <summary>
+            Encrypted PIN (Personal Identification Number).
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.EncryptedContentData">
+            <summary>
+            Encrypted data with an encryption key.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.EncryptedContentData.EncryptedData">
+            <summary>
+            Encrypted data with an encryption key
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.EncryptedPINBlockData">
+            <summary>
+            Encrypted PIN (Personal Identification Number).
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.EncryptedPINBlockData.ContentType">
+            <summary>
+            Type of data protection
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.EncryptedPINBlockData.EnvelopedData">
+            <summary>
+            Data protection by encryption, with a session key.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.EnvelopedDataData">
+            <summary>
+            Data protection by encryption, with a session key.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.EnvelopedDataData.Recipient">
+            <summary>
+            Transport key or key encryption key (KEK) identification for the recipient.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.EnvelopedDataData.EncryptedContent">
+            <summary>
+            Encrypted data with an encryption key.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.Environment">
+            <summary>
+            Environment of the transaction
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.Environment.Merchant">
+            <summary>
+            Merchant performing the card payment transaction
+            </summary>                    
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.Environment.Poi">
+             <summary>        
+            Information about the device that is performing the operation
+             </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.Environment.Card">
+            <summary>
+            Payment card performing the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.Environment.Cardholder">
+            <summary>
+            Cardholder involved in the card payment.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.GenericIdentification">
+            <summary>
+            Identification of an entity
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.GenericIdentification.Identification">
+            <summary>
+            Identification of the entity
+            Max35Text
+            </summary>       
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.GenericIdentification.ShortName">
+            <sumary>
+            Name of the entity.
+            </sumary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.Installment">
+            <summary>
+            Data related to a financial loan (instalment) or to a recurring transaction.
+            </summary>                  
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.Installment.Type">
+            <summary>
+            Type of the installment used in an AuthorizationRequest/>.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.Installment.TotalNumberOfPayments">
+            <summary>
+            Total number of instalment payments
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.InstallmentType">
+            <summary>
+            Type of Installments of a transaction(payment)
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.Tag.InstallmentType.Undefined">
+            <summary>
+            Invalid value
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.Tag.InstallmentType.None">
+            <summary>
+            There is no installment payment
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.Tag.InstallmentType.Merchant">
+            <summary>
+            Merchant makes payment in installment 
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.Tag.InstallmentType.Issuer">
+            <summary>
+            Bank makes payment in installments
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.KekData">
+            <summary>
+            Key encryption key
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.KekData.KekIdentification">
+            <summary>
+            Identification of the key encryption key (KEK).
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.KekData.EncryptedKey">
+            <summary>
+            Encryption key using previously distributed symmetric key.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.KEKIdentificationData">
+            <summary>
+            Identification of the key encryption key (KEK).
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.KEKIdentificationData.DerivationIdentification">
+            <summary>
+            Identification used for derivation of a unique key from a master key provided for the data protection.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.MerchantData">
+            <summary>
+            Merchant performing the card payment transaction
+            </summary>              
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.MerchantData.Identification">
+            <summary>
+            Identification of the merchant
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.PaymentContextData">
+            <summary>
+            Context of the card payment transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.PaymentContextData.CardDataEntryMode">
+            <summary>
+            Entry mode of the card data.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.PaymentContextData.FallbackIndicator">
+            <summary>
+            Indicator of a card entry mode fallback.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.PlainCardDataData">
+            <summary>
+            Sensitive data associated with the card performing the transaction.
+            </summary>                
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.PlainCardDataData.CardSequenceNumber">
+            <summary>
+            Identify a card inside a set of cards with the same card number (PAN)
+            </summary>
+            [MinMaxNumericText(2, 3)]
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.PlainCardDataData.PAN">
+            <summary>
+            Primary Account Number (PAN) of the card, or card number.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.PlainCardDataData.ExpiryDate">
+            <summary>
+            Expiry date of the card.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.PlainCardDataData.TrackData">
+            <summary>
+            Magnetic track or equivalent payment card data
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.RecipientData">
+            <summary>
+            Transport key or key encryption key (KEK) identification for the recipient.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.RecipientData.KEK">
+            <summary>
+            Key Encrypted Key
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.TrackDataData">
+            <summary>
+            Magnetic track or equivalent payment card data
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.TrackDataData.TrackNumber">
+            <summary>
+            Track number of the card.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.TrackDataData.TrackValue">
+            <summary>
+            Card track content or equivalent.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.Tag.TransactionIdentificationData">
+            <summary>
+            Identification of the transaction assigned by the POI (Point Of Interaction).
+            </summary>          
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.TransactionIdentificationData.TransactionDateTime">
+            <summary>
+            Local date and time of the transaction assigned by the POI (Point Of Interaction).
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Authorization.Tag.TransactionIdentificationData.TransactionReference">
+            <summary>
+            Identification of the transaction that has to be unique for a time period.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.TypeCode.ActionTypeCode">
+            <summary>
+            Type of action to be performed by the point of interaction (POI).
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ActionTypeCode.Busy">
+            <summary>
+            Server busy, try later.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ActionTypeCode.CaptureCard">
+            <summary>
+            Capture the card.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ActionTypeCode.DisplayMessage">
+            <summary>
+            Display a message.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ActionTypeCode.ForbidOverride">
+            <summary>
+            Payment application cannot propose to the merchant an override of the payment transaction.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ActionTypeCode.IdentificationRequired">
+            <summary>
+            Additional identification required (passport, ID card, etc.).
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ActionTypeCode.PINLastTry">
+            <summary>
+            Last PIN (Personal Identification Number) try.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ActionTypeCode.PINRetry">
+            <summary>
+            PIN (Personal Identification Number) is wrong, retry a PIN verification.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ActionTypeCode.PrintMessage">
+            <summary>
+            Print a message.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ActionTypeCode.Referral">
+            <summary>
+            Referral has to be performed.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ActionTypeCode.RequestData">
+            <summary>
+            Request additional data through a displayed text and request confirmation by an attendant.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.TypeCode.AuthenticationMethodCode">
+            <summary>
+            Method used to authenticate a cardholder.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AuthenticationMethodCode.Bypass">
+            <summary>
+            Authentication bypassed by the merchant.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AuthenticationMethodCode.ManualVerification">
+            <summary>
+            Manual verification, for example passport or drivers license.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AuthenticationMethodCode.MerchantAuthentication">
+            <summary>
+            Merchant-related authentication.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AuthenticationMethodCode.OfflinePin">
+            <summary>
+            Off-line PIN authentication (Personal Identification Number).
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AuthenticationMethodCode.OnlinePin">
+            <summary>
+            On-line PIN authentication (Personal Identification Number).
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AuthenticationMethodCode.PaperSignature">
+            <summary>
+            Handwritten paper signature.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AuthenticationMethodCode.Password">
+            <summary>
+            Authentication by a password.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AuthenticationMethodCode.SecureCertificate">
+            <summary>
+            Secure electronic transaction with cardholder X.509 certificate.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AuthenticationMethodCode.SecuredChannel">
+            <summary>
+            Channel-encrypted transaction.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AuthenticationMethodCode.SecureNoCertificate">
+            <summary>
+            Secure electronic transaction without cardholder certificate.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AuthenticationMethodCode.SignatureCapture">
+            <summary>
+            Electronic signature capture (handwritten signature).
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AuthenticationMethodCode.UnknownMethod">
+            <summary>
+            Authentication method is performed unknown.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.TypeCode.ContentType">
+            <summary>
+            Identification of the type of amount.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ContentType.PlainData">
+            <summary>
+            Generic, non cryptographic, or unqualified data content - (ASN.1 Object Identifier: id-data).
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ContentType.SignedData">
+            <summary>
+            Digital signature - (ASN.1 Object Identifier: id-signedData).
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ContentType.EnvelopedData">
+            <summary>
+            Encrypted data, with encryption key -(ASN.1 Object Identifier: id-envelopedData).
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ContentType.DigestedData">
+            <summary>
+            Message digest - (ASN.1 Object Identifier: id-digestedData).
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ContentType.EncryptedData">
+            <summary>
+            Encrypted data - (ASN.1 Object Identifier: id-encryptedData).
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ContentType.AuthenticatedData">
+            <summary>
+            MAC (Message Authentication Code),with encryption key - (ASN.1 ObjectIdentifier: id-ct-authData).
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.TypeCode.ResponseCode">
+            <summary>
+            Results of the transaction.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ResponseCode.Undefined">
+            <summary>
+            Invalid Value
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ResponseCode.Declined">
+            <summary>
+            Service is declined.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ResponseCode.Approved">
+            <summary>
+            Service has been successfuly provided.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ResponseCode.PartialApproved">
+            <summary>
+            Service has been partialy provided.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.ResponseCode.TechnicalError">
+            <summary>
+            Service cannot be provided for technical
+            reason (eg timeout contacting the Issuer,
+            security problem).
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.TypeCode.UserInterfaceCode">
+            <summary>
+            Management of the interfaces messages for users.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.UserInterfaceCode.CardholderDisplay">
+            <summary>
+            Cardholder display or interface.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.UserInterfaceCode.CardholderReceipt">
+            <summary>
+            Cardholder receipt.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.UserInterfaceCode.MerchantDisplay">
+            <summary>
+            Merchant display or interface.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.UserInterfaceCode.MerchantReceipt">
+            <summary>
+            Merchant receipt.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.TypeCode.AccountType">
+            <summary>
+            Type of cardholder account used for the transaction.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AccountType.Undefined">
+            <summary>
+            Invalid value
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AccountType.Default">
+            <summary>
+            Default account.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AccountType.Debit">
+            <summary>
+            Checking account (debit)
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AccountType.Credit">
+            <summary>
+            Credit card account.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AccountType.Savings">
+            <summary>
+            Savings account.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AccountType.Universal">
+            <summary>
+            Universal account.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AccountType.Investment">
+            <summary>
+            Investment account.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.AccountType.EpurseCard">
+            <summary>
+            Electronic purse card account.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Authorization.TypeCode.TransactionChannel">
+            <summary>
+            The channel of transaction used in the <see cref="T:Poi.Sdk.Authorization.AuthorisationRequest"/>
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.TransactionChannel.Undefined">
+            <summary>
+            Invalid value
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Authorization.TypeCode.TransactionChannel.Ecommerce">
+            <summary>
+            Eletronic commerce channel.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Cancellation.Entry.CancellationEntry">
+            <summary>
+            Cancellation data entry
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Entry.CancellationEntry.SaleAffiliationKey">
+            <summary>
+            Affiliation key of Merchant in Acquirer.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Entry.CancellationEntry.AcquirerTransactionKey">
+            <summary>
+            Identification of transaction created by the acquirer.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Entry.CancellationEntry.InitiatorTransactionKey">
+            <summary>
+            Identification of transaction created by the client.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Entry.CancellationEntry.Amount">
+            <summary>
+            Total amount to cancellate.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Entry.CancellationEntry.CaptureTransaction">
+            <summary>
+            If transaction should be captured or wait for a completion request.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Cancellation.Report.AbstractCancellationReport">
+            <summary>
+            Mandatory operations and properties for any regular cancellation report.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Report.AbstractCancellationReport.AmountCanceled">
+            <summary>
+            Amount canceled.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Report.AbstractCancellationReport.WasSuccessful">
+            <summary>
+            Defines if the request was a success.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Report.AbstractCancellationReport.ResponseReason">
+            <summary>
+            Response reason, in case occurs a rejection.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Report.AbstractCancellationReport.ResponseCode">
+            <summary>
+            Response code, in case occurs a rejection.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Report.AbstractCancellationReport.XmlRequest">
+            <summary>
+            XML sent to Stone Poi.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Report.AbstractCancellationReport.XmlResponse">
+            <summary>
+            XML received from Stone Poi.
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Cancellation.Report.AbstractCancellationReport.SendCancellationReceipt(System.String,Tms.Sdk.interfaces.IActivationReport,System.String,Poi.Sdk.Authorization.Report.ICard)">
+            <summary>
+            Send the receipt according to
+            the <see cref="T:Receipt.Sdk.Model.ReceiptType"/>
+            </summary>
+            <param name="atk">Transaction identifier, also known as Stone ID.</param>
+            <param name="merchant">Informations about the merchant.</param>
+            <param name="email">Email to where the receipt will be sent.</param>
+            <param name="card">Informations about the card.</param>
+            <exception cref="T:System.ArgumentException">If email is invalid.</exception>
+            <exception cref="T:System.ArgumentNullException">If merchant data is null.</exception>
+        </member>
+        <member name="T:Poi.Sdk.Cancellation.Report.CancellationReport">
+            <summary>
+            Contains the response(already interfaced) received from a Cancellation Report.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Report.CancellationReport.Request">
+            <summary>
+            Represents a cancellation request
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Report.CancellationReport.Response">
+            <summary>
+            Mapped the deserialized xml received 
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Report.CancellationReport.ResponseCode">
+            <summary>
+            Response code in case of a declined authorization or a rejection.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Report.CancellationReport.ResponseReason">
+            <summary>
+            Response reason in case of a declined authorization or a rejection.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Report.CancellationReport.WasSuccessful">
+            <summary>
+            Defines if the Cancellation was a success.
+            If true, it means it's not a rejection or a declined cancellation.
+            If false, it means it's a rejection or a declined cancellation.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Report.CancellationReport.XmlRequest">
+            <summary>
+            XML sent to Stone Poi.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Report.CancellationReport.XmlResponse">
+            <summary>
+            XML received from Stone Poi.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Report.CancellationReport.AmountCanceled">
+            <summary>
+            Amount canceled.
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Cancellation.Report.CancellationReport.#ctor(Poi.Sdk.Common.Base.AbstractCancellationRequest,Poi.Sdk.Common.Base.AbstractResponse)">
+            <summary>
+            Instances the request and response that will be used to compose the report
+            </summary>
+            <param name="request">Request of a Cancellation</param>
+            <param name="response">Response of a Cancellation</param>
+        </member>
+        <member name="T:Poi.Sdk.Cancellation.Report.ICancellationReport">
+            <summary>
+            Reports the informations about the cancellation
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Report.ICancellationReport.AmountCanceled">
+            <summary>
+            Amount canceled.
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Cancellation.Report.ICancellationReport.SendCancellationReceipt(System.String,Tms.Sdk.interfaces.IActivationReport,System.String,Poi.Sdk.Authorization.Report.ICard)">
+            <summary>
+            Send the receipt according to
+            the <see cref="!:ReceiptType"/>
+            </summary>
+            <param name="atk">Transaction identifier, also known as Stone ID.</param>
+            <param name="merchant">Informations about the merchant.</param>
+            <param name="email">Email to where the receipt will be sent.</param>
+            <param name="card">Informations about the card.</param>
+            <exception cref="T:System.ArgumentException">If email is invalid.</exception>
+            <exception cref="T:System.ArgumentNullException">If merchant data is null.</exception>
+        </member>
+        <member name="T:Poi.Sdk.Cancellation.CancellationAtkRequest">
+            <summary>
+            Cancellation request to be sent to acquirer through the <see cref="T:Poi.Sdk.Client.AcquirerServiceClient"/>
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Cancellation.CancellationAtkRequest.#ctor">
+            <summary>
+            The seralization to xml needs of a default constructor
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Cancellation.CancellationAtkRequest.#ctor(Poi.Sdk.Cancellation.Entry.CancellationEntry)">
+            <summary>
+            Adds the only value that differs of the CancellationITKRequest
+            </summary>
+            <param name="entry">Authorization entry data</param>
+        </member>
+        <member name="T:Poi.Sdk.Cancellation.CancellationItkRequest">
+            <summary>
+            Cancellation request to be sent to acquirer through the <see cref="T:Poi.Sdk.Client.AcquirerServiceClient"/>
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Cancellation.CancellationItkRequest.#ctor">
+            <summary>
+            The seralization to xml needs of a default constructor
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Cancellation.CancellationItkRequest.#ctor(Poi.Sdk.Cancellation.Entry.CancellationEntry)">
+            <summary>
+            Adds the only value that differs of the CancellationATKRequest
+            </summary>
+            <param name="entry">Authorization entry data</param>
+        </member>
+        <member name="T:Poi.Sdk.Cancellation.Tag.AcceptorCancellationRequestData">
+            <summary>
+            Information related to the cancellation request.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Tag.AcceptorCancellationRequestData.Header">
+            <summary>
+            Cancellation request message management information
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Tag.AcceptorCancellationRequestData.CancellationRequest">
+            <summary>
+            Information related to the cancellation request.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Cancellation.Tag.AcceptorCancellationResponseData">
+            <summary>
+            Information related to the cancellation response
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Tag.AcceptorCancellationResponseData.Header">
+            <summary>
+            Cancellation response message management information
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Tag.AcceptorCancellationResponseData.CancellationResponse">
+            <summary>
+            Information related to the cancellation response.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Cancellation.Tag.CancellationRequestData">
+            <summary>
+            Information related to the cancellation request.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Tag.CancellationRequestData.Environment">
+            <summary>
+            Environment of the transaction
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Tag.CancellationRequestData.Transaction">
+            <summary>
+            Cancellation transaction between an acceptor and an acquirer.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Cancellation.Tag.CancellationTransactionResponse">
+            <summary>
+            Responsible by cancellation of the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Tag.CancellationTransactionResponse.Environment">
+            <summary>
+            Environment of the transaction
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Tag.CancellationTransactionResponse.TransactionResponse">
+            <summary>
+            Response from the acquirer to the cancellation transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Tag.CancellationTransactionResponse.Transaction">
+            <summary>
+            Cancellation transaction between an acceptor and an acquirer.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Cancellation.Tag.OriginalTransaction">
+            <summary>
+            Identification of the original transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Tag.OriginalTransaction.RecipientTransactionIdentification">
+            <summary>
+            Identification of the transaction assigned by the recipient party for the initiating party.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Cancellation.Tag.OriginalTransaction.InitiatorTransactionIdentification">
+            <summary>
+            Identification of the transaction assigned by the initiating party for the recipient party.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Client.AbstractAcquirerServiceClient">
+            <summary>
+            Acquirer service client. Performs operations as:
+            	- Authorize
+            	- Cancel
+            	- Capture
+            	-Transaction status
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Client.AbstractAcquirerServiceClient.TimesToTryToAutoCancel">
+            <summary>
+            Times to try to automatic cancel a transaction by it's ITK.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Client.AbstractAcquirerServiceClient.HttpClient">
+            <summary>
+            The HTTP client use to communicate.
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Client.AbstractAcquirerServiceClient.#ctor">
+            <summary>
+            This default constructor is used in the tests.
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Client.AbstractAcquirerServiceClient.#ctor(Communication.Sdk.HttpCommunication.IHttpClient)">
+            <summary>
+            Instances the httpClient that wiil be used in the actions of the AcquirerServiceClient.
+            </summary>
+            <param name="httpClient">The HTTP client use to communicate.</param>
+        </member>
+        <member name="M:Poi.Sdk.Client.AbstractAcquirerServiceClient.AuthorizeImpl(Poi.Sdk.Authorization.Entry.AuthorizationEntry)">
+            <summary>
+            Authorize a transaction acoording to the request data entry
+            </summary>
+            <param name="entry">Authorization entry data</param>
+            <returns>Returns informations about the authorization</returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.AbstractAcquirerServiceClient.CancelImpl(Poi.Sdk.Cancellation.Entry.CancellationEntry)">
+            <summary>
+            Cancel a transaction according to the request data entry.
+            </summary>
+            <param name="entry">Cancellation entry data</param>
+            <returns>Returns informations about the cancellation</returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.AbstractAcquirerServiceClient.CaptureTransactionImpl(Poi.Sdk.Completion.Entry.CaptureEntry)">
+            <summary>
+            Capture a transaction according to the request data entry. Find transaction to confirm by the identification provided in authorization request.
+            </summary>
+            <param name="entry">Completion entry data</param>
+            <returns>Returns informations about the completion</returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.AbstractAcquirerServiceClient.CheckTransactionStatusImpl(Poi.Sdk.TransactionStatus.Entry.TransactionStatusReportEntry)">
+            <summary>
+            Checks a transaction according to the ATK or ITK and gets the status of this transaction. That status shows if was authorized and if there was a capture or cancellation or both.
+            </summary>
+            <param name="entry">TransactionStatusReport entry data</param>
+            <returns>A transactionReport with reports about authorization, capture and cancellation </returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.AbstractAcquirerServiceClient.CheckManyTransactionsStatusImpl(Poi.Sdk.TransactionStatus.Entry.TransactionStatusReportEntry)">
+            <summary>
+            Checks a transaction according to the ATKs(more than one) or ITKs(more than one) and gets the status of this transaction. That status shows if was authorized and if there was a capture or cancellation or both.
+            </summary>
+            <param name="entry">TransactionStatusReport entry data</param>
+            <returns>A transactionReport with reports about authorization, capture and cancellation </returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.AbstractAcquirerServiceClient.Authorize(Poi.Sdk.Authorization.Entry.AuthorizationEntry)">
+            <summary>
+            Authorize a transaction acoording to the request data entry
+            </summary>
+            <param name="entry">Authorization entry data</param>
+            <returns>Returns informations about the authorization</returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.AbstractAcquirerServiceClient.Cancel(Poi.Sdk.Cancellation.Entry.CancellationEntry)">
+            <summary>
+            Cancel a transaction according to the request data entry.
+            </summary>
+            <param name="entry">Cancellation entry data</param>
+            <returns>Returns informations about the cancellation</returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.AbstractAcquirerServiceClient.CaptureTransaction(Poi.Sdk.Completion.Entry.CaptureEntry)">
+            <summary>
+            Capture a transaction according to the request data entry. Find transaction to confirm by the identification provided in authorization request.
+            </summary>
+            <param name="entry">Completion entry data</param>
+            <returns>Returns informations about the completion</returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.AbstractAcquirerServiceClient.CheckTransactionStatus(Poi.Sdk.TransactionStatus.Entry.TransactionStatusReportEntry)">
+            <summary>
+            Checks a transaction according to the ATK or ITK and gets the status of this transaction. That status shows if was authorized and if there was a capture or cancellation or both.
+            </summary>
+            <param name="entry">TransactionStatusReport entry data</param>
+            <returns>A transactionReport with reports about authorization, capture and cancellation </returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.AbstractAcquirerServiceClient.CheckManyTransactionsStatus(Poi.Sdk.TransactionStatus.Entry.TransactionStatusReportEntry)">
+            <summary>
+            Checks a transaction according to the ATKs(more than one) or ITKs(more than one) and gets the status of this transaction. That status shows if was authorized and if there was a capture or cancellation or both.
+            </summary>
+            <param name="entry">TransactionStatusReport entry data</param>
+            <returns>A transactionReport with reports about authorization, capture and cancellation </returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.AbstractAcquirerServiceClient.ExecuteRequest``2(``0)">
+            <summary>
+            Performs the POST and GET methods according to the request received.
+            </summary>
+            <typeparam name="TRequest">Request type.</typeparam>
+            <typeparam name="TResponse">Response type.</typeparam>
+            <param name="request">The request itself to be sent to the remote.</param>
+            <returns>Returns a response that will be sent to the constructor of a report.</returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.AbstractAcquirerServiceClient.TryDeserializeResponse``1(System.String)">
+            <summary>
+            Try deserialize the incoming string as the expected response or acceptor rejection.
+            </summary>
+            <typeparam name="T">expected response type</typeparam>
+            <param name="serializedResponse">server response as string</param>
+            <returns></returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.AbstractAcquirerServiceClient.Post``1(``0)">
+            <summary>
+            Executes the post method through the httpclient.
+            </summary>
+            <param name="request">Send a type of request(Authorization or Cancellation or Capture or Transaction Status)</param>
+            <returns>returns a string in XML format</returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.AbstractAcquirerServiceClient.Get``1(System.String)">
+            <summary>
+            Executes the get method through the httpclient.
+            </summary>       
+            <param name="serializedResponse"> Result of the post method. string in XML format</param>
+            <returns>Returns a response that will be used in the constructor of a report</returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.AbstractAcquirerServiceClient.GetUri``1(``0)">
+            <summary>
+            Get the correct Uri in relation to the request sent.
+            </summary>
+            <typeparam name="T">type generic of request</typeparam>
+            <param name="request">type of the request</param>
+            <returns>A string matching to the type of the request</returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.AbstractAcquirerServiceClient.StartAutoCancel(Poi.Sdk.Authorization.Entry.AuthorizationEntry)">
+            <summary>
+            Tries to cancel the previous transaction for a specified number of times, defined by 
+            <see cref="F:Poi.Sdk.Client.AbstractAcquirerServiceClient.TimesToTryToAutoCancel"/>. This is used when a time out occurred in the client, and the
+            application cannot determine whether the transaction has reached the remote and the transaction was
+            approved.
+            </summary>
+            <param name="authEntry">Entry data to authorize a transaction.</param>
+        </member>
+        <member name="M:Poi.Sdk.Client.AbstractAcquirerServiceClient.TryAutoCancel(Poi.Sdk.Authorization.Entry.AuthorizationEntry)">
+            <summary>
+            Tries to cancel a transaction by it's ITK.
+            If some exception is thrown, returns false.
+            </summary>
+            <param name="authEntry">Entry data to authorize a transaction.</param>
+            <returns>True if the cancellation was performed and false if the cancellation was declined
+            or some exception was thrown.</returns>
+        </member>
+        <member name="T:Poi.Sdk.Client.AcquirerServiceClient">
+            <summary>
+            Acquirer service client. Performs operations as:
+            	- Authorize
+            	- Cancel
+            	- Capture
+            	-Transaction status
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Client.AcquirerServiceClient.#ctor">
+            <summary>
+            This default constructor is used in the tests.
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Client.AcquirerServiceClient.#ctor(System.String)">
+            <summary>
+            Constructor that creates a HTTP client to communicate with Stone Poi.
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Client.AcquirerServiceClient.#ctor(Communication.Sdk.HttpCommunication.IHttpClient)">
+            <summary>
+            This constructor is used in the tests(to the mock).
+            </summary>
+            <param name="httpClient">IHttpClient</param>
+        </member>
+        <member name="M:Poi.Sdk.Client.AcquirerServiceClient.AuthorizeImpl(Poi.Sdk.Authorization.Entry.AuthorizationEntry)">
+            <summary>
+            Authorize a transaction acoording to the request data entry
+            </summary>
+            <param name="entry">Authorization entry data</param>
+            <returns>Returns informations about the authorization</returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.AcquirerServiceClient.CancelImpl(Poi.Sdk.Cancellation.Entry.CancellationEntry)">
+            <summary>
+            Cancel a transaction according to the request data entry.
+            </summary>
+            <param name="entry">Cancellation entry data</param>
+            <returns>Returns informations about the cancellation</returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.AcquirerServiceClient.CaptureTransactionImpl(Poi.Sdk.Completion.Entry.CaptureEntry)">
+            <summary>
+            Capture a transaction according to the request data entry. Find transaction to confirm by the identification provided in authorization request.
+            </summary>
+            <param name="entry">Completion entry data</param>
+            <returns>Returns informations about the completion</returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.AcquirerServiceClient.CheckTransactionStatusImpl(Poi.Sdk.TransactionStatus.Entry.TransactionStatusReportEntry)">
+            <summary>
+            Checks a transaction according to the ATK or ITK and gets the status of this transaction. That status shows if was authorized and if there was a capture or cancellation or both.
+            </summary>
+            <param name="entry">TransactionStatusReport entry data</param>
+            <returns>A transactionReport with reports about authorization, capture and cancellation </returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.AcquirerServiceClient.CheckManyTransactionsStatusImpl(Poi.Sdk.TransactionStatus.Entry.TransactionStatusReportEntry)">
+            <summary>
+            Checks a transaction according to the ATKs(more than one) or ITKs(more than one) and gets the status of this transaction. That status shows if was authorized and if there was a capture or cancellation or both.
+            </summary>
+            <param name="entry">TransactionStatusReport entry data</param>
+            <returns>A transactionReport with reports about authorization, capture and cancellation </returns>
+        </member>
+        <member name="T:Poi.Sdk.Client.IAcquirerServiceClient">
+            <summary>
+            Acquirer service client. Performs operations as:
+            	- Authorize
+            	- Cancel
+            	- Capture
+            	-Transaction status
+            </summary>	
+        </member>
+        <member name="M:Poi.Sdk.Client.IAcquirerServiceClient.Authorize(Poi.Sdk.Authorization.Entry.AuthorizationEntry)">
+            <summary>
+            Authorize a transaction acoording to the request data entry
+            </summary>
+            <param name="entry">Authorization entry data</param>
+            <returns>Returns informations about the authorization</returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.IAcquirerServiceClient.Cancel(Poi.Sdk.Cancellation.Entry.CancellationEntry)">
+            <summary>
+            Cancel a transaction according to the request data entry.
+            </summary>
+            <param name="entry">Cancellation entry data</param>
+            <returns>Returns informations about the cancellation</returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.IAcquirerServiceClient.CaptureTransaction(Poi.Sdk.Completion.Entry.CaptureEntry)">
+            <summary>
+            Capture a transaction according to the request data entry. Find transaction to confirm by the identification provided in authorization request.
+            </summary>
+            <param name="entry">Completion entry data</param>
+            <returns>Returns informations about the completion</returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.IAcquirerServiceClient.CheckTransactionStatus(Poi.Sdk.TransactionStatus.Entry.TransactionStatusReportEntry)">
+            <summary>
+            Checks a transaction according to the ATK or ITK and gets the status of this transaction. That status shows if was authorized and if there was a capture or cancellation or both.
+            </summary>
+            <param name="entry">TransactionStatusReport entry data</param>
+            <returns>A transactionReport with reports about authorization, capture and cancellation </returns>
+        </member>
+        <member name="M:Poi.Sdk.Client.IAcquirerServiceClient.CheckManyTransactionsStatus(Poi.Sdk.TransactionStatus.Entry.TransactionStatusReportEntry)">
+            <summary>
+            Checks a transaction according to the ATKs(more than one) or ITKs(more than one) and gets the status of this transaction. That status shows if was authorized and if there was a capture or cancellation or both.
+            </summary>
+            <param name="entry">TransactionStatusReport entry data</param>
+            <returns>A transactionReport with reports about authorization, capture and cancellation </returns>
+        </member>
+        <member name="T:Poi.Sdk.Common.Base.AbstractResponse">
+            <summary>
+            Abstract class that contains all responses(Authorization Response, Cancellation Response, Completion Response and the Rejection).
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Base.AbstractResponse.AuthorisationData">
+            <summary>
+            Information related to the response of the authorisation. All data(of authorization) received from xml are mapped beginning in this class(Root element).
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Base.AbstractResponse.CancellationData">
+            <summary>
+            Information related to the cancellation response. All data(of cancellation) received from xml are mapped beginning in this class(Root element).
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Base.AbstractResponse.CompletionData">
+            <summary>
+            Information related to the completion advice response. All data(of completion) received from xml are mapped beginning in this class(Root element).
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Base.AbstractResponse.TransactionData">
+            <summary>
+            Information related to the transactionStatus response. All data(of transaction status) received from xml are mapped beginning in this class(Root element).
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Base.AbstractResponse.RejectionData">
+             <summary>
+            Case some data is not correct or some expected data was not received, this class will to map the data received from xml. 
+             </summary>        
+        </member>
+        <member name="T:Poi.Sdk.Common.Base.IRequest">
+            <summary>
+            Request of all the operations(Authorization, Cancellation and Completion).
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Common.Base.IRequest.BuildRequest">
+            <summary>
+            Responsible for construct the request 
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Common.Base.AbstractCancellationRequest">
+            <summary>
+            The AcceptorCancellationRequest message is sent by an acceptor (or its agent) to the acquirer (or its
+            agent) , to request the cancellation of a successfully completed transaction. Cancellation should only
+            occur before the transaction has been cleared.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Base.AbstractCancellationRequest.Data">
+            <summary>
+            Information related to the cancellation request.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Base.AbstractCancellationRequest.Entry">
+            <summary>
+            Cancellation entry data used in the request builder.
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Common.Base.AbstractCancellationRequest.#ctor">
+            <summary>
+            It necessary for subclasses to use default constructor
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Common.Base.AbstractCancellationRequest.#ctor(Poi.Sdk.Cancellation.Entry.CancellationEntry)">
+            <summary>
+            Call the BuildRequest to perform the constrction of the request
+            </summary>
+            <param name="entry">Cancellation entry data</param>
+        </member>
+        <member name="M:Poi.Sdk.Common.Base.AbstractCancellationRequest.BuildRequest">
+            <summary>
+            Mount all the request
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Common.Base.AbstractCancellationRequest.CreateHeader">
+            <summary>
+            Creates the Header of the request
+            </summary>
+            <returns>The object of this class</returns>
+        </member>
+        <member name="M:Poi.Sdk.Common.Base.AbstractCancellationRequest.CreateEnviroment">
+            <summary>
+            Creates the Enviroment of the request
+            </summary>
+            <returns>The object of this class</returns>
+        </member>
+        <member name="M:Poi.Sdk.Common.Base.AbstractCancellationRequest.CreateTransaction">
+            <summary>
+            Creates the Transaction of the request
+            </summary>
+            <returns>The object of this class</returns>
+        </member>
+        <member name="T:Poi.Sdk.Common.Base.CancellationResponse">
+            <summary>
+            Cancellation response. It's always related to a corresponding <see cref="T:Poi.Sdk.Common.Base.AbstractCancellationRequest" />.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Common.Const.CardBrandName">
+            <summary>
+            Card brand name availables.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Const.CardBrandName.MasterCard">
+            <summary>
+            MasterCard brand name.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Const.CardBrandName.Maestro">
+            <summary>
+            Maestro brand name.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Common.Const.Currency">
+            <summary>
+            Represents the value of the currency in the requests.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Const.Currency.CurrencyBrazil">
+            <summary>
+            Value of the currency from Brazil.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Common.Const.XmlHeader">
+            <summary>
+            Contains constants related to headers from xml.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Const.XmlHeader.TagDocument">
+            <summary>
+            Tag name of Document( header of all the xmls)
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Const.XmlHeader.TagAuthorization">
+            <summary>
+            Tag name of Authorization
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Const.XmlHeader.TagAuthorizationResponse">
+            <summary>
+            Tag name of AuthorizationResopnse
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Const.XmlHeader.TagCancellation">
+            <summary>
+            Tag name of Cancellation
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Const.XmlHeader.TagCancellationResponse">
+            <summary>
+            Tag name of CancellationResponse
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Const.XmlHeader.TagCompletionAdvice">
+            <summary>
+            Tag name ofCompletionAdvice
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Const.XmlHeader.TagCompletionAdviceResponse">
+            <summary>
+            Tag name of CompletionAdvice
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Const.XmlHeader.TagTransactionStatusReport">
+            <summary>
+            Tag name of TransctionStatusReport
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Const.XmlHeader.TagTransactionStatusReportResponse">
+            <summary>
+            Tag name of TransactionStatusReportResponse
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Const.XmlHeader.TagRejection">
+            <summary>
+            Tag name of Rejection
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Common.Report.IReport">
+            <summary>
+            A report is always sent in the response, even if the request has been validated or not. 
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Report.IReport.WasSuccessful">
+            <summary>
+            Defines if the request was a success.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Report.IReport.ResponseReason">
+            <summary>
+            Response reason, in case occurs a rejection.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Report.IReport.ResponseCode">
+            <summary>
+            Response code, in case occurs a rejection.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Report.IReport.XmlRequest">
+            <summary>
+            XML sent to Stone Poi.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Report.IReport.XmlResponse">
+            <summary>
+            XML received from Stone Poi.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Common.Tag.CapabilitiesData">
+            <summary>
+            Capabilities
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.CapabilitiesData.PrintLineWidth">
+            <summary>
+            Number of columns to be printed in receipt
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Common.Tag.EnvironmentResponse">
+            <summary>
+            Environment of the transaction in the response.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.EnvironmentResponse.MerchantIdentification">
+            <summary>
+            Identification of the merchant.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.EnvironmentResponse.PoiIdentification">
+            <summary>
+            Identification of the POI performing the transaction
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Common.Tag.Transaction">
+            <summary>
+            Transaction between an acceptor and an acquirer
+            </summary>
+            <summary>
+            Authorized transaction between an acceptor and an acquirer
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.Transaction.InitiatorTransactionIdentificationSpecified">
+            <summary>
+            Identification of the transaction assigned by the initiating party for the recipient party.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.Transaction.TransactionCaptureSpecified">
+            <summary>
+            Flag indicating whether the transaction data must be captured or not in addition to the message process.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.Transaction.TransactionIdentificationSpecified">
+            <summary>
+            Identification of the transaction assigned by the POI (Point Of Interaction).
+            </summary>   
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.Transaction.RecipientTransactionIdentificationSpecified">
+            <summary>
+            Identification of the transaction assigned by the recipient party for the initiating party.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.Transaction.OriginalTransactionSpecified">
+            <summary>
+            Identification of the original transaction
+            </summary>               
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.Transaction.TransactionDetailsSpecified">
+            <summary>
+            Details of the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.Transaction.ResponseSpecified">
+            <summary>
+            Result of the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.Transaction.InitiatorTransactionIdentification">
+            <summary>
+            Identification of the transaction assigned by the initiating party for the recipient party.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.Transaction.TransactionCapture">
+            <summary>
+            Flag indicating whether the transaction data must be captured or not in addition to the message process.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.Transaction.TransactionIdentification">
+            <summary>
+            Identification of the transaction assigned by the POI (Point Of Interaction).
+            </summary>   
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.Transaction.RecipientTransactionIdentification">
+            <summary>
+            Identification of the transaction assigned by the recipient party for the initiating party.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.Transaction.OriginalTransaction">
+            <summary>
+            Identification of the original transaction
+            </summary>               
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.Transaction.TransactionDetails">
+            <summary>
+            Details of the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.Transaction.Response">
+            <summary>
+            Result of the transaction.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Common.Tag.TransactionDetails">
+            <summary>
+            Details of the transaction
+            </summary>
+            <summary>
+            Details of the transaction
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.TransactionDetails.CurrencySpecified">
+            <summary>
+            Currency associated with the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.TransactionDetails.TotalAmountSpecified">
+            <summary>
+            Total amount of the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.TransactionDetails.AccountTypeSpecified">
+            <summary>
+            Type of cardholder account used for the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.TransactionDetails.InstallmentSpecified">
+            <summary>
+            Data related to a financial loan (instalment) or to a recurring transaction.
+            </summary>                        
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.TransactionDetails.ICCRelatedDataSpecified">
+            <summary>
+            Data related to an integrated circuit card application
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.TransactionDetails.Currency">
+            <summary>
+            Currency associated with the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.TransactionDetails.TotalAmount">
+            <summary>
+            Total amount of the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.TransactionDetails.Installment">
+            <summary>
+            Data related to a financial loan (instalment) or to a recurring transaction.
+            </summary>                        
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.TransactionDetails.ICCRelatedData">
+            <summary>
+            Data related to an integrated circuit card application
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.TransactionDetails.AccountType">
+            <summary>
+            Type of cardholder account used for the transaction.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Common.Tag.Header">
+            <summary>
+            Set of characteristics related to the transfer of the message.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.Header.DateTimePattern">
+            <summary>
+            Constant to the date time used int the headers.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.Header.CardExpirationDateTimePattern">
+            <summary>
+            Represents the date time pattern used by the expiration date time of the card.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.Header.ProtocolVrsn">
+            <summary>
+            Constant to the Data time used int the headers.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.Header.MessageFunction">
+            <summary>
+            Identifies the type of process related to the message.
+            </summary>   
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.Header.ProtocolVersion">
+            <summary>
+            Version of the acquirer protocol specifications.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.Header.CreationDateTime">
+            <summary>
+            Date and time at which the message was created.
+            </summary>        
+        </member>
+        <member name="T:Poi.Sdk.Common.Tag.PointOfInteraction">
+             <summary>        
+            Information about the device that is performing the operation
+             </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.PointOfInteraction.SystemName">
+            <summary>
+            In this case, is sent the microtef and windows version
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.PointOfInteraction.Capabilities">
+            <summary>
+            Capabilities
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.PointOfInteraction.PoiComponent">
+            <summary>
+            List of data related to a component of the POI performing the status report.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Common.Tag.PointOfInteraction.ShortName">
+            <summary>
+            Soft Descriptor
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Common.Tag.MessageFunctionCode">
+            <summary>
+            Identifies the type of process related to the message.
+            </summary> 
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.AuthorisationRequest">
+            <summary>
+            Request for authorisation without financial capture.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.AuthorisationResponse">
+            <summary>
+            Response for authorisation without financial capture.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.FinancialAuthorisationRequest">
+            <summary>
+            Request for authorisation with financial capture.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.FinancialAuthorisationResponse">
+            <summary>
+            Response for authorisation with financial capture.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.CompletionAdvice">
+            <summary>
+            Advice for completion without financial capture
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.CompletionAdviceResponse">
+            <summary>
+            Advice response for completion without financial capture
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.FinancialCompletionAdvice">
+            <summary>
+            Advice for completion with financial capture.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.FinancialCompletionAdviceResponse">
+            <summary>
+            Advice response for completion with financial capture.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.ReversalAdvice">
+            <summary>
+            Advice for reversal without financial capture.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.ReversalAdviceResponse">
+            <summary>
+            Advice response for reversal without financial capture.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.FinancialReversalAdvice">
+            <summary>
+            Advice for reversal with financial capture.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.FinancialReversalAdviceResponse">
+            <summary>
+            Advice response for reversal with financial capture.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.CancellationRequest">
+            <summary>
+            Request for cancellation.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.CancellationResponse">
+            <summary>
+            Response for cancellation.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.CancellationAdvice">
+            <summary>
+            Advice for cancellation.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.CancellationAdviceResponse">
+            <summary>
+            Advice response for cancellation.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.DiagnosticRequest">
+            <summary>
+            Request for diagnostic.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.DiagnosticResponse">
+            <summary>
+            Response for diagnostic.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.ReconciliationRequest">
+            <summary>
+            Request for reconciliation.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.ReconciliationResponse">
+            <summary>
+            Response for reconciliation.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.AcceptorRejection">
+            <summary>
+            Reject a request or an advice.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.TransactionStatusReportRequest">
+            <summary>
+            Request for Transaction Report
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Common.Tag.MessageFunctionCode.TransactionStatusReportResponse">
+            <summary>
+            Response for Transaction Report
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Completion.CapturenRequest">
+            <summary>
+            Completion request to be sent to acquirer through the <see cref="!:AcquirerServiceClient"/>
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.CapturenRequest.Data">
+            <summary>
+             Information related to the completion advice.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.CapturenRequest.Entry">
+            <summary>
+            Completion entry data used in the request builder.
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Completion.CapturenRequest.#ctor">
+            <summary>
+            The seralization to xml needs of a default constructor
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Completion.CapturenRequest.#ctor(Poi.Sdk.Completion.Entry.CaptureEntry)">
+            <summary>
+            Call the BuildRequest to perform the constrction of the request
+            </summary>
+            <param name="entry">Completion entry data</param>
+        </member>
+        <member name="M:Poi.Sdk.Completion.CapturenRequest.BuildRequest">
+            <summary>
+            Mount all the request 
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Completion.CapturenRequest.CreateHeader">
+            <summary>
+            Creates the Header of the request
+            </summary>
+            <returns>The object of this class</returns>
+        </member>
+        <member name="M:Poi.Sdk.Completion.CapturenRequest.CreateEnviroment">
+            <summary>
+            Creates the Enviroment of the request
+            </summary>
+            <returns>The object of this class</returns>
+        </member>
+        <member name="M:Poi.Sdk.Completion.CapturenRequest.CreateTransaction">
+            <summary>
+            Creates the Transaction of the request
+            </summary>
+            <returns>The object of this class</returns>
+        </member>
+        <member name="T:Poi.Sdk.Completion.CaptureResponse">
+            <summary>
+            The AcceptorCompletionAdviceResponse message is sent by the acquirer (or its agent) 
+            to acknowledge the acceptor (or its agent) of the outcome of the payment transaction, 
+            and the transfer the financial data of the transaction contained in the completion advice.
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Completion.CaptureResponse.#ctor">
+            <summary>
+            The deseralization to XML needs a default constructor.
+            </summary>  
+        </member>
+        <member name="T:Poi.Sdk.Completion.Entry.CaptureEntry">
+            <summary>
+            Completion data entry
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Entry.CaptureEntry.SaleAffiliationKey">
+            <summary>
+            Affiliation key of Merchant in Acquirer
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Entry.CaptureEntry.AcquirerTransactionKey">
+            <summary>
+            Identification of transaction created by the acquirer
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Entry.CaptureEntry.Amount">
+            <summary>
+            Transaction amount
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Entry.CaptureEntry.InitiatorTransactionKey">
+            <summary>
+            Identification of transaction created by the client
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Completion.Report.CaptureReport">
+            <summary>
+            Contains the response(already interfaced) received from a CaptureReport Report.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Report.CaptureReport.Request">
+            <summary>
+            Represents a completion request. Also, this is the deserialized XML request sent to POI server.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Report.CaptureReport.Response">
+            <summary>
+            Mapped the deserialized XML received from POI server.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Report.CaptureReport.ResponseCode">
+            <summary>
+            Response code in case of a declined completion or a rejection.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Report.CaptureReport.ResponseReason">
+            <summary>
+            Response reason in case of a declined completion or a rejection.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Report.CaptureReport.WasSuccessful">
+            <summary>
+            Defines if the Completion was a success.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Report.CaptureReport.XmlRequest">
+            <summary>
+            XML sent to Stone Poi.
+            </summary>  
+        </member>
+        <member name="P:Poi.Sdk.Completion.Report.CaptureReport.XmlResponse">
+            <summary>
+            XML received from Stone Poi.
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Completion.Report.CaptureReport.#ctor(Poi.Sdk.Completion.CapturenRequest,Poi.Sdk.Common.Base.AbstractResponse)">
+            <summary>
+            Instances the request and response that will be used to compose the report
+            </summary>
+            <param name="request">Request of a Completion</param>
+            <param name="response">Response of a Completion</param>
+        </member>
+        <member name="T:Poi.Sdk.Completion.Report.ICaptureReport">
+            <summary>
+            Reports the informations about the cancellation
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Completion.Tag.AcceptorCompletionAdviceData">
+            <summary>
+            Information related to the completion advice.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Tag.AcceptorCompletionAdviceData.Header">
+            <summary>
+             Completion advice message management information
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Tag.AcceptorCompletionAdviceData.CompletionAdvice">
+            <summary>
+            Information related to the completion advice.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Completion.Tag.AcceptorCompletionAdviceResponseData">
+            <summary>
+            The AcceptorCompletionAdviceResponse message is sent by the acquirer (or its agent) 
+            to acknowledge the acceptor (or its agent) of the outcome of the payment transaction, 
+            and the transfer the financial data of the transaction contained in the completion advice.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Tag.AcceptorCompletionAdviceResponseData.Header">
+            <summary>
+            Completion advice response message management information.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Tag.AcceptorCompletionAdviceResponseData.CompletionAdviceResponse">
+            <summary>
+            Information related to the completion advice response
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Completion.Tag.CompletionAdvice">
+            <summary>
+             Information related to the completion advice
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Tag.CompletionAdvice.Environment">
+            <summary>
+            Environment of the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Tag.CompletionAdvice.Transaction">
+            <summary>
+            Card payment transaction between an acceptor and an acquirer
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Completion.Tag.CompletionAdviceResponse">
+            <summary>
+            Completion advice response message management information.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Tag.CompletionAdviceResponse.Environment">
+            <summary>
+             Environment of the transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Tag.CompletionAdviceResponse.Transaction">
+            <summary>
+            Card payment transaction between an acceptor and an acquirer.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Completion.Tag.SaleContext">
+            <summary>
+            Context of the sale involving the card payment transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Tag.SaleContext.SaleIdentification">
+            <summary>
+            Identification of the sale terminal (electronic cash register) or the sale system
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Completion.Tag.SaleContext.SaleReferenceNumber">
+            <summary>
+            Identify a sale transaction assigned by the sale system.
+            </summary>            
+        </member>
+        <member name="T:Poi.Sdk.Exceptions.InvalidConnectionException">
+            <summary>
+            Thrown if the application could not connect to the internet.
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Exceptions.InvalidConnectionException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates the exception with optional parameters.
+            </summary>
+            <param name="message">Exception message, with error details.</param>
+            <param name="innerException">The exception that occurred previously, if any.</param>
+        </member>
+        <member name="T:Poi.Sdk.GlobalResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.GlobalResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.GlobalResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.GlobalResources.AUTHORIZE_URI">
+            <summary>
+              Looks up a localized string similar to /Authorize.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.GlobalResources.BRAZIL_CURRENCY_CODE">
+            <summary>
+              Looks up a localized string similar to 986.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.GlobalResources.CANCELLATION_URI">
+            <summary>
+              Looks up a localized string similar to /Cancellation.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.GlobalResources.COMPLETION_URI">
+            <summary>
+              Looks up a localized string similar to /CompletionAdvice.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.GlobalResources.ISO_20022_PROTOCOL_VERSION">
+            <summary>
+              Looks up a localized string similar to 2.0.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.GlobalResources.TRANSACTION_STATUS_REPORT_URI">
+            <summary>
+              Looks up a localized string similar to /TransactionStatusReport.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.AcquirerServiceClientProvider">
+            <summary>
+            Acquirer service client provider.
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.AcquirerServiceClientProvider.Get(System.String)">
+            <summary>
+            Creates a Poi client.
+            </summary>
+            <param name="poiUri">Stone Poi URI.</param>
+            <returns>Acquirer service client.</returns>
+        </member>
+        <member name="T:Poi.Sdk.Rejection.AcceptorRejectionData">
+            <summary>
+            AcceptorRejection message is sent by the acquirer (or its agent) to reject a message request or
+            advice sent by an acceptor (or its agent), to indicate that the received message could not be processed.
+            </summary> 
+        </member>
+        <member name="P:Poi.Sdk.Rejection.AcceptorRejectionData.Header">
+            <summary>
+            Rejection message management information.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Rejection.AcceptorRejectionData.Reject">
+            <summary>
+            Information related to the reject.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Rejection.EnumDescriptionAttribute">
+            <summary>
+            Stores a description for the object.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Rejection.EnumDescriptionAttribute._text">
+            <summary>
+            Enum description.
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Rejection.EnumDescriptionAttribute.#ctor(System.String)">
+            <summary>
+            Set an enum description.
+            </summary>
+            <param name="stringValue"></param>
+        </member>
+        <member name="M:Poi.Sdk.Rejection.EnumDescriptionAttribute.GetDescription(System.Enum)">
+            <summary>
+            Get's an enum description, if any.
+            </summary>
+            <param name="enumValue">Enumerator to extract the description.</param>
+            <returns>Enum description.</returns>
+        </member>
+        <member name="T:Poi.Sdk.Rejection.Reject">
+            <summary>
+            Information related to the reject.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Rejection.Reject.RejectReason">
+            <summary>
+            Information related to the reject.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Rejection.Reject.AdditionalInformation">
+            <summary>
+            Additional information related to the reject of the exchange.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.Rejection.Reject.MessageInError">
+            <summary>
+            Original request that caused the recipient party to reject it.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Rejection.Rejection">
+            <summary>
+            AcceptorRejection message is sent by the acquirer (or its agent) to reject a message request or
+            advice sent by an acceptor (or its agent), to indicate that the received message could not be processed.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Rejection.RejectionReason">
+            <summary>
+            Reason of transmission of a rejection message in response to a request or an advice.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Rejection.RejectionReason.Undefined">
+            <summary>
+            Undefined/default value of a rejection reason.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Rejection.RejectionReason.UnableToProcess">
+            <summary>
+            Not possible to process the message received.
+            Examples: unavailable instance of security module, unavailable hardware, resource problem.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Rejection.RejectionReason.ParsingError">
+            <summary>
+            At least one of the data elements or data structure is not present;
+            incorrect format.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Rejection.RejectionReason.SecurityError">
+            <summary>
+            Security error.
+            Examples: invalid encryption key, incorrent MAC value.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Rejection.RejectionReason.DuplicatedMassageError">
+            <summary>
+            Message identification is the same than a previous one.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Rejection.RejectionReason.InvalidMessage">
+            <summary>
+            Invalid envelope of the message.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Rejection.RejectionReason.InvalidInitiatingPartyIdentification">
+            <summary>
+            Invalid identification data for the sender.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Rejection.RejectionReason.InvalidRecipientPartyIdentification">
+            <summary>
+            Invalid identification data for the the receiver.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Rejection.RejectionReason.InvalidProtocolVersion">
+            <summary>
+            Version of the protocol couldn't be supported by the recipient.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.Rejection.RejectionReason.InvalidMessageType">
+            <summary>
+            Type of message the recipient receives is unknow or unsupported.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.Specification.AuthorizationSpecification">
+            <summary>
+            Class responsible for validate the authorisation entry data
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Specification.AuthorizationSpecification.ToExpression">
+            <summary>
+            Create the predicate called in the method <see cref="M:Poi.Sdk.Specification.Specification`1.IsSatisfiedBy(`0)"></see>.
+            </summary>
+            <returns>The predicate</returns>
+        </member>
+        <member name="M:Poi.Sdk.Specification.AuthorizationSpecification.Validate(Poi.Sdk.Authorization.Entry.AuthorizationEntry)">
+            <summary>
+            Validates the authorisation entry data.
+            </summary>
+            <param name="entry">AuthorizationEntry.</param>
+        </member>
+        <member name="T:Poi.Sdk.Specification.CancellationSpecification">
+            <summary>
+            Class responsible for validate the cancellation entry data
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Specification.CancellationSpecification.ToExpression">
+            <summary>
+            Create the predicate called in the method <see cref="M:Poi.Sdk.Specification.Specification`1.IsSatisfiedBy(`0)"></see>.
+            </summary>
+            <returns>The predicate</returns>
+        </member>
+        <member name="M:Poi.Sdk.Specification.CancellationSpecification.Validate(Poi.Sdk.Cancellation.Entry.CancellationEntry)">
+            <summary>
+            Validates the cancellation entry data.
+            </summary>
+            <param name="entry">CancellationEntry.</param>
+        </member>
+        <member name="T:Poi.Sdk.Specification.CaptureSpecification">
+            <summary>
+            Class responsible for validate the completion entry data
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Specification.CaptureSpecification.ToExpression">
+            <summary>
+            Create the predicate called in the method <see cref="M:Poi.Sdk.Specification.Specification`1.IsSatisfiedBy(`0)"></see>.
+            </summary>
+            <returns>The predicate</returns>
+        </member>
+        <member name="M:Poi.Sdk.Specification.CaptureSpecification.Validate(Poi.Sdk.Completion.Entry.CaptureEntry)">
+            <summary>
+            Validates the completion entry data.
+            </summary>
+            <param name="entry">CaptureEntry.</param>
+        </member>
+        <member name="T:Poi.Sdk.Specification.Specification`1">
+            <summary>
+            This abstract class validates entry data
+            </summary>   
+        </member>
+        <member name="M:Poi.Sdk.Specification.Specification`1.ToExpression">
+            <summary>
+            Create the predicate called in the method <see cref="M:Poi.Sdk.Specification.Specification`1.IsSatisfiedBy(`0)"></see>.
+            </summary>
+            <returns>The predicate</returns>
+        </member>
+        <member name="M:Poi.Sdk.Specification.Specification`1.Validate(`0)">
+            <summary>
+            Validates entry data of a request.
+            </summary>
+            <param name="entry">(T) Generic entry</param>
+        </member>
+        <member name="M:Poi.Sdk.Specification.Specification`1.IsSatisfiedBy(`0)">
+            <summary>
+            Check if the entry data is valid calling the ToExpression to perform validation
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="T:Poi.Sdk.Specification.TransactionStatusReportSpecification">
+            <summary>
+            Class responsible for validate the transactionstatusReport entry data
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.Specification.TransactionStatusReportSpecification.ToExpression">
+            <summary>
+            Create the predicate called in the method <see cref="M:Poi.Sdk.Specification.Specification`1.IsSatisfiedBy(`0)"></see>.
+            </summary>
+            <returns>The predicate</returns>
+        </member>
+        <member name="M:Poi.Sdk.Specification.TransactionStatusReportSpecification.Validate(Poi.Sdk.TransactionStatus.Entry.TransactionStatusReportEntry)">
+            <summary>
+            Validates the TransactionStatusReport entry data.
+            </summary>
+            <param name="entry">TransactionStatusReportEntry.</param>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Entry.TransactionStatusReportEntry">
+            <summary>
+            TransactionStatusReport data entry
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Entry.TransactionStatusReportEntry.SaleAffiliationKey">
+            <summary>
+            Affiliation key of Merchant in Acquirer.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Entry.TransactionStatusReportEntry.AcquirerTransactionKey">
+            <summary>
+            Identification of transaction created by the acquirer.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Entry.TransactionStatusReportEntry.InitiatorTransactionKey">
+            <summary>
+            Identification of transaction created by the client.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Report.AuthorizationStatusReport">
+            <summary>
+            Data of authorization from transactionStatusReport mapped in an authorizationReport
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.AuthorizationStatusReport.Authorization">
+            <summary>
+            Receive the data of the authorization from transactionStatusReport in the constructor of the class
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.AuthorizationStatusReport.Summary">
+            <summary>
+            Contains others informations about transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.AuthorizationStatusReport.AcquirerTransactionKey">
+            <summary>
+            Transaction ID set by Stone.
+            Must be persisted.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.AuthorizationStatusReport.Amount">
+            <summary>
+            Transaction amount.
+            Must be persisted.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.AuthorizationStatusReport.DateTime">
+            <summary>
+            Transaction date and time.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.AuthorizationStatusReport.InitiatorTransactionKey">
+            <summary>
+            Not used
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.AuthorizationStatusReport.Installment">
+            <summary>
+            Not used
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.AuthorizationStatusReport.ResponseCode">
+            <summary>
+            response code (if any).
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.AuthorizationStatusReport.ResponseReason">
+            <summary>
+            response reason (if any).
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.AuthorizationStatusReport.WasSuccessful">
+            <summary>
+            Defines if the authorization was a success.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.AuthorizationStatusReport.XmlRequest">
+            <summary>
+            Not used
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.AuthorizationStatusReport.XmlResponse">
+            <summary>
+            Not used
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.TransactionStatus.Report.AuthorizationStatusReport.#ctor(Poi.Sdk.TransactionStatus.Tag.Authorization,Poi.Sdk.TransactionStatus.Tag.Summary)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="authorization"> Authorization data from a transaction status </param>
+            <param name="summary"> More details about the transaction  </param>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Report.CancellationStatusReport">
+            <summary>
+            Data of cancellation from transactionStatusReport mapped in an cancellationnReport
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.CancellationStatusReport.Cancellation">
+            <summary>
+            Receive the data of the cancellation from transactionStatusReport in the constructor of the class
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.CancellationStatusReport.Summary">
+            <summary>
+            Contains others informations about transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.CancellationStatusReport.AmountCanceled">
+            <summary>
+            Amount Canceled
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.CancellationStatusReport.ResponseCode">
+            <summary>
+            response code (if any).
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.CancellationStatusReport.ResponseReason">
+            <summary>
+            response reason (if any).
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.CancellationStatusReport.WasSuccessful">
+            <summary>
+            Defines if the cancellation was a success.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.CancellationStatusReport.XmlRequest">
+            <summary>
+            Not used
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.CancellationStatusReport.XmlResponse">
+            <summary>
+            Not used
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.TransactionStatus.Report.CancellationStatusReport.#ctor(Poi.Sdk.TransactionStatus.Tag.Cancellation,Poi.Sdk.TransactionStatus.Tag.Summary)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="cancellation"> cancellation data from a transaction status</param>
+            <param name="summary"> More details about the transaction  </param>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Report.CaptureStatusReport">
+            <summary>
+            Data of completion from transactionStatusReport mapped in an completionreport
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.CaptureStatusReport.Capture">
+            <summary>
+            Receive the data of the completion(capture) from transactionStatusReport in the constructor of the class
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.CaptureStatusReport.Summary">
+            <summary>
+            Contains others informations about transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.CaptureStatusReport.ResponseCode">
+            <summary>
+            response code (if any). Case occurs a rejection
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.CaptureStatusReport.ResponseReason">
+            <summary>
+            response reason (if any). Case occurs a rejection
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.CaptureStatusReport.WasSuccessful">
+            <summary>
+            Defines if the capture was a success.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.CaptureStatusReport.XmlRequest">
+            <summary>
+            Not used
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.CaptureStatusReport.XmlResponse">
+            <summary>
+            Not used
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.TransactionStatus.Report.CaptureStatusReport.#ctor(Poi.Sdk.TransactionStatus.Tag.Capture,Poi.Sdk.TransactionStatus.Tag.Summary)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="capture"> capture data from a transaction status </param>
+             /// <param name="summary"> More details about the transaction  </param>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Report.ITransactionReport">
+            <summary>
+            Reports data related to the transaction according to the ATk or ITK provided.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.ITransactionReport.AcquirerTransactionKey">
+            <summary>
+            A transaction ID set by Acquirer.
+            </summary>    
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.ITransactionReport.InitiatorTransactionKey">
+            <summary>
+            Transaction Gateway Id
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.ITransactionReport.AcquirerDateTime">
+            <summary>
+            Date time set by Acquirer
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.ITransactionReport.LocalDateTime">
+            <summary>
+            Local date time
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.ITransactionReport.FirstCaptureDateTime">
+            <summary>
+            First completion date, formatted as "yyyy-MM-ddTHH:mm:ss"
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.ITransactionReport.FirstCancellationDateTime">
+            <summary>
+            First cancellation date, fomatted as "yyyy-MM-ddTHH:mm:ss"
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.ITransactionReport.TotalOriginalAmount">
+            <summary>
+            Original total amount
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.ITransactionReport.TotalAuthorisationAmount">
+            <summary>
+            Total authorized amount
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.ITransactionReport.TotalCaptureAmount">
+            <summary>
+            Total captured amount
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.ITransactionReport.TotalCancellationAmount">
+            <summary>
+            Total cancelled amount
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.ITransactionReport.AuthorisationStatus">
+            <summary>
+            Transaction status (FULL, PART, NONE)
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.ITransactionReport.CaptureStatus">
+            <summary>
+            Completion status (FULL, PART, NONE)
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.ITransactionReport.CancellationStatus">
+            <summary>
+            Cancellation status (FULL, PART, NONE)
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.ITransactionReport.Currency">
+            <summary>
+            Currency
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.ITransactionReport.AccountType">
+            <summary>
+            Original account type (credit or debit)
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.ITransactionReport.MerchantShortName">
+            <summary>
+            Merchant short number.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.ITransactionReport.MerchantCategoryCode">
+            <summary>
+            Returns the MCC used in requested transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.ITransactionReport.InstallmentCount">
+            <summary>
+            Installment information
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.ITransactionReport.History">
+            <summary>
+            History of the transactions about authorization, capture and cancellation.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Report.TransactionReport">
+            <summary>
+            Contains the response(already interfaced). Show the status about a Atk or Itk provided
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.Request">
+            <summary>
+            Represents a TransactionStatusReport request
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.Response">
+            <summary>
+            Mapped the deserialized xml received 
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.TransactionIndex">
+            <summary>
+            Represents the number of the transaction that will be shown its status
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.Summary">
+            <summary>
+            Contains others informations about transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.History">
+            <summary>
+            Contains the historic about the reports(authorization,cancellation, capture) of a transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.ResponseCode">
+            <summary>
+            response code (if any).
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.ResponseReason">
+            <summary>
+            response reason (if any).
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.WasSuccessful">
+            <summary>
+            Defines if the transactionStatusReport was a success.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.XmlRequest">
+            <summary>
+            XML sent to Stone Poi.
+            </summary>  
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.XmlResponse">
+            <summary>
+            XML received from Stone Poi.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.AcquirerTransactionKey">
+            <summary>
+            A transaction ID set by Acquirer.
+            </summary>  
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.InitiatorTransactionKey">
+            <summary>
+            Transaction Gateway Id
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.AcquirerDateTime">
+            <summary>
+            Date time set by Acquirer
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.LocalDateTime">
+            <summary>
+            Local date time. When the transaction was performed
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.FirstCaptureDateTime">
+            <summary>
+            First completion date, formatted as "yyyy-MM-ddTHH:mm:ss"
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.FirstCancellationDateTime">
+            <summary>
+            First cancellation date, fomatted as "yyyy-MM-ddTHH:mm:ss"
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.TotalOriginalAmount">
+            <summary>
+            Original total amount
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.TotalAuthorisationAmount">
+            <summary>
+            Total authorized amount
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.TotalCaptureAmount">
+            <summary>
+            Total captured amount
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.TotalCancellationAmount">
+            <summary>
+            Total cancelled amount
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.AuthorisationStatus">
+            <summary>
+            Transaction status (FULL, PART, NONE)
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.CaptureStatus">
+            <summary>
+            Completion status (FULL, PART, NONE)
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.CancellationStatus">
+            <summary>
+            Cancellation status (FULL, PART, NONE)
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.Currency">
+            <summary>
+            Currency of the country
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.MerchantShortName">
+            <summary>
+            Merchant short number.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.MerchantCategoryCode">
+            <summary>
+            Returns the MCC used in requested transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.InstallmentCount">
+            <summary>
+            Installment information
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Report.TransactionReport.AccountType">
+            <summary>
+            Original account type (credit or debit)
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.TransactionStatus.Report.TransactionReport.#ctor(Poi.Sdk.TransactionStatus.TransactionStatusReportRequest,Poi.Sdk.Common.Base.AbstractResponse,System.Int32)">
+            <summary>
+            Constructor. Build the history if there is no a rejection.
+            </summary>
+            <param name="request">data from request</param>
+            <param name="response">data from response</param>
+            <param name="transactionIndex">Transaction index on <see cref="T:Poi.Sdk.TransactionStatus.Tag.TransactionStsRptResponse"/> 
+            list.</param>
+        </member>
+        <member name="M:Poi.Sdk.TransactionStatus.Report.TransactionReport.BuildHistory">
+            <summary>
+            Build the history adding, if there is, authorization, cancellations and completions
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.TransactionStatus.Report.TransactionReport.FindAuthorization(Poi.Sdk.TransactionStatus.Tag.Authorization)">
+            <summary>
+            Adds an authorization report in the historic.
+            </summary>
+            <param name="authorization">authorization data for a transaction</param>
+            <returns>The object of this class</returns>
+        </member>
+        <member name="M:Poi.Sdk.TransactionStatus.Report.TransactionReport.FindCancellations(System.Collections.ObjectModel.Collection{Poi.Sdk.TransactionStatus.Tag.Cancellation})">
+            <summary>
+            Adds a cancellation report in the historic.
+            </summary>
+            <param name="cancellations">cancellation data for a transaction</param>
+            <returns>The object of this class</returns>
+        </member>
+        <member name="M:Poi.Sdk.TransactionStatus.Report.TransactionReport.FindCompletions(System.Collections.ObjectModel.Collection{Poi.Sdk.TransactionStatus.Tag.Capture})">
+            <summary>
+            Adds a completion report in the historic.
+            </summary>
+            <param name="captures">completion data for a transaction</param>
+            <returns>The object of this class</returns>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Tag.AcceptorTransactionStatusReportResponseData">
+            <summary>
+            Information related to the transaction satus response
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.AcceptorTransactionStatusReportResponseData.Header">
+            <summary>
+            Set of characteristics related to the transfer of the message.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.AcceptorTransactionStatusReportResponseData.TransactionStsRptResponse">
+            <summary>
+            Transaction status property
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Tag.AccptrTxStsRptRq">
+            <summary>
+            Represents an interfaced transaction status report request.   
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.AccptrTxStsRptRq.HeaderTransaction">
+            <summary>
+            Set of characteristics related to the transfer of the message.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.AccptrTxStsRptRq.TxStsRpt">
+            <summary>
+            Represents ResponseStatus property.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Tag.Authorization">
+            <summary>
+            Informations about authorization shown in transaction status
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Authorization.RcptOprId">
+            <summary>
+            Acquirer operation id
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Authorization.AcqrrDtTm">
+            <summary>
+            Date time set by Acquirer
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Authorization.LclDtTm">
+            <summary>
+            Local date time
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Authorization.OrgnlAmt">
+            <summary>
+            Transaction original amount
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Authorization.AuthrsdAmt">
+            <summary>
+            Authorized amount
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Authorization.Rspn">
+            <summary>
+            Transaction response (DECL, APPR, TECH)
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Authorization.RspnRsn">
+            <summary>
+            Transaction response code.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Authorization.AuthstnCd">
+            <summary>
+            Issuer authorizing code 
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Tag.Cancellation">
+            <summary>
+            Informations about cancellation shown in transaction status
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Cancellation.RcptOprId">
+            <summary>
+            Acquirer operation id
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Cancellation.AcqrrDtTm">
+            <summary>
+            Date time set by Acquirer
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Cancellation.LclDtTm">
+            <summary>
+            Local date time of the transaction
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Cancellation.Amt">
+            <summary>
+            Amount canceled
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Cancellation.Rspn">
+            <summary>
+            Transaction response (DECL, APPR, TECH)
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Cancellation.RspnRsn">
+            <summary>
+            Transaction response code.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Tag.Capture">
+            <summary>
+            Informations about completion(capture) shown in transaction status
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Capture.RcptOprId">
+            <summary>
+            Acquirer operation id
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Capture.AcqrrDtTm">
+            <summary>
+            Date time set by Acquirer
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Capture.LclDtTm">
+            <summary>
+            Local date time
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Capture.Amt">
+            <summary>
+            Amount captured
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Capture.Rspn">
+            <summary>
+            Transaction response (DECL, APPR, TECH)
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Capture.RspnRsn">
+            <summary>
+            Transaction response code.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Tag.HeaderTransaction">
+            <summary>
+            Set of characteristics related to the transfer of the message.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.HeaderTransaction.InitiatingParty">
+            <summary>
+            Unique identification of the partner that has initiated the exchange.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Tag.InstallmentTransaction">
+            <summary>
+            Data related to a financial loan (instalment) or to a recurring transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.InstallmentTransaction.TtlNbOfPmts">
+            <summary>
+            Number of installments
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Tag.Operations">
+            <summary>
+            Transaction operations
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Operations.Authorization">
+            <summary>
+            Authorization info
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Operations.AuthorizationCaptureCollection">
+            <summary>
+            Capture info
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Operations.Cancellations">
+            <summary>
+            Cancellation info
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Tag.AdditionalService">
+            <summary>
+            It is optional and describes the type of service provided in this operation
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.TransactionStatus.Tag.AdditionalService.AGGR">
+            <summary>
+            Aggregation   Aggregation of low payments.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.TransactionStatus.Tag.AdditionalService.DCCV">
+            <summary>
+            Dynamic currency conversion (DCC).
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.TransactionStatus.Tag.AdditionalService.GRTT">
+            <summary>
+            Card payment with gratuity.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.TransactionStatus.Tag.AdditionalService.LOYT">
+            <summary>
+            Loyalty services.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.TransactionStatus.Tag.AdditionalService.NRES">
+            <summary>
+            No show after reservation.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.TransactionStatus.Tag.AdditionalService.PUCO">
+            <summary>
+            Purchase and corporate data.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.TransactionStatus.Tag.AdditionalService.RECP">
+            <summary>
+            Recurring payment.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.TransactionStatus.Tag.AdditionalService.SOAF">
+            <summary>
+            Solicited available funds.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.TransactionStatus.Tag.AdditionalService.VCAU">
+            <summary>
+            Voice authorisation.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.TransactionStatus.Tag.AdditionalService.INSI">
+            <summary>
+            Instalment payment transaction performed    by the card issuer.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.TransactionStatus.Tag.AdditionalService.INSA">
+            <summary>
+            Instalment payment transaction performed     by the acceptor or the acquirer.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.TransactionStatus.Tag.AdditionalService.CSHB">
+            <summary>
+            Card payment with cash-back.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.TransactionStatus.Tag.AdditionalService.MasterCardAgroCard">
+            <summary>
+            MasterCard Agro Card.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Tag.OrgnlTx">
+            <summary>
+            Contains informations about Acquirer Transaction Key and Initiator Transaction Key
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.OrgnlTx.RcptTxId">
+            <summary>
+            Refers to Acquirer Transaction Key
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.OrgnlTx.InitrTxId">
+            <summary>
+            Refers to Initiator Transaction Key
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Tag.Summary">
+            <summary>
+            Corresponds to the node "Summry" in AcceptorTransactionStatusReporResponseV02.1 XML.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Summary.RcptTxId">
+            <summary>
+            A transaction ID set by Acquirer.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Summary.InitrTxId">
+            <summary>
+            Transaction Gateway Id
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Summary.AcqrrDtTm">
+            <summary>
+            Date time set by Acquirer
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Summary.LclDtTm">
+            <summary>
+            Local date time
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Summary.FrstCaptrDtTm">
+            <summary>
+            First completion date, formatted as "yyyy-MM-ddTHH:mm:ss"
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Summary.FrstCxlDtTm">
+            <summary>
+            First cancellation date, fomatted as "yyyy-MM-ddTHH:mm:ss"
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Summary.TtlOrgnlAmt">
+            <summary>
+            Original total amount
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Summary.TtlAuthrsdAmt">
+            <summary>
+            Total authorized amount
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Summary.TtlCaptrdAmt">
+            <summary>
+            Total captured amount
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Summary.TtlCancAmt">
+            <summary>
+            Total cancelled amount
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Summary.AuthrsdSts">
+            <summary>
+            Transaction status (FULL, PART, NONE)
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Summary.CaptrdSts">
+            <summary>
+            Completion status (FULL, PART, NONE)
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Summary.CancSts">
+            <summary>
+            Cancellation status (FULL, PART, NONE)
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Summary.Ccy">
+            <summary>
+            Currency
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Summary.AcctTp">
+            <summary>
+            Original account type (credit or debit)
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Summary.MrchntShrtNm">
+            <summary>
+            Merchant short number.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Summary.MrchntCtgyCd">
+            <summary>
+            Returns the MCC used in requested transaction.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Summary.AddtlSvc">
+             <summary>
+            It is optional and describes the type of service provided in this operation.
+             </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.Summary.Instlmt">
+            <summary>
+            Installment information
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Tag.TransactionResponse">
+            <summary>
+            Authorisation response from the acquirer.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.TransactionResponse.Summary">
+            <summary>
+            Corresponds to the node "Summry" in AcceptorTransactionStatusReporResponseV02.1 XML.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.TransactionResponse.Operations">
+            <summary>
+            Corresponds to the node "Oprs" in AcceptorTransactionStatusReporResponseV02.1 XML.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Tag.TransactionSts">
+            <summary>
+            Information containing transaction status.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.TransactionSts.TxRpt">
+            <summary>
+            Represents Transaction property Type.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.TransactionSts.OrgnlTx">
+            <summary>
+            Contains informations about Acquirer Transaction Key and Initiator Transaction Key
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Tag.TransactionStsRptResponse">
+            <summary>
+            Represents an interfaced transaction status report response.
+            Converts all ISO20022 data into organized information that can be used by SDK user.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.TransactionStsRptResponse.Transactions">
+            <summary>
+            Represents ResponseStatus property.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.Tag.TxStsRpt">
+            <summary>
+            Represents ResponseStatus property.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.Tag.TxStsRpt.TransactionCollection">
+            <summary>
+            Information containing transaction status.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.TransactionStatusReportRequest">
+            <summary>
+            TransactionStatusReport request to be sent to acquirer through the <see cref="T:Poi.Sdk.Client.AcquirerServiceClient"/>
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.TransactionStatusReportRequest.Data">
+            <summary>
+            Information related to the transactionStatusReport request.
+            </summary>
+        </member>
+        <member name="P:Poi.Sdk.TransactionStatus.TransactionStatusReportRequest.Entry">
+            <summary>
+            TransactionStatusReport entry data used in the request builder.
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.TransactionStatus.TransactionStatusReportRequest.#ctor">
+            <summary>
+            The seralization to xml needs of a default constructor
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.TransactionStatus.TransactionStatusReportRequest.#ctor(Poi.Sdk.TransactionStatus.Entry.TransactionStatusReportEntry)">
+            <summary>
+            Call the BuildRequest to perform the constrction of the request
+            </summary>
+            <param name="entry">TransactionStatusReport entry data</param>
+        </member>
+        <member name="M:Poi.Sdk.TransactionStatus.TransactionStatusReportRequest.BuildRequest">
+            <summary>
+            Mount all the request 
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.TransactionStatus.TransactionStatusReportRequest.CreateHeader">
+            <summary>
+            Creates the Header of the request
+            </summary>
+            <returns>The object of this class</returns>
+        </member>
+        <member name="M:Poi.Sdk.TransactionStatus.TransactionStatusReportRequest.CreateTransactionATK">
+            <summary>
+            Creates the Transaction of the request with ATK
+            </summary>
+            <returns>The object of this class</returns>
+        </member>
+        <member name="M:Poi.Sdk.TransactionStatus.TransactionStatusReportRequest.CreateTransactionITK">
+            <summary>
+            Creates the Transaction of the request with ITK
+            </summary>
+            <returns>The object of this class</returns>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.TransactionStatusReportResponse">
+            <summary>
+            TransactionStatusReport response that contains the original response message,
+            </summary>
+        </member>
+        <member name="M:Poi.Sdk.TransactionStatus.TransactionStatusReportResponse.#ctor">
+            <summary>
+            The deseralization to XML needs a default constructor.
+            </summary> 
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.TypeCode.OperationStatusEnum">
+            <summary>
+            Indicated the operation status of a response message.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.TransactionStatus.TypeCode.OperationStatusEnum.Undefined">
+            <summary>
+            Invalid Value
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.TransactionStatus.TypeCode.OperationStatusEnum.FULL">
+            <summary>
+            Indicates that the total operation amount was captured.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.TransactionStatus.TypeCode.OperationStatusEnum.PART">
+            <summary>
+            Indicates that only a partial operation amount was captured.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.TransactionStatus.TypeCode.OperationStatusEnum.NONE">
+            <summary>
+            Indicated that the operation didn't captured any amount.
+            </summary>
+        </member>
+        <member name="T:Poi.Sdk.TransactionStatus.TypeCode.TransactionReportType">
+            <summary>
+            Defines response's detailing level
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.TransactionStatus.TypeCode.TransactionReportType.SUMM">
+            <summary>
+            Returns detailed summary of requested transaction.
+            </summary>
+        </member>
+        <member name="F:Poi.Sdk.TransactionStatus.TypeCode.TransactionReportType.OPRS">
+            <summary>
+            Returns all operation data of requested transaction.
+            </summary>
+        </member>
+        <member name="T:Tms.Sdk.Common.Base.AbstractSerializableIso20022">
+            <summary>
+            Class responsible for Serializing
+            </summary>
+        </member>
+        <member name="M:Tms.Sdk.Common.Base.AbstractSerializableIso20022.GetAsIso20022RawXml">
+            <summary>
+            Retrieves the original XML trading message.
+            </summary>
+            <returns>Returns the raw xml sent (the OriginalRequest property represents its info as a class).</returns>
+        </member>
+    </members>
+</doc>

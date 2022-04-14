@@ -284,5 +284,15 @@ WHERE
 
             return Y;
         }
+
+        public static void AdicionarTag(Int32 idCliente, string chave, string valor)
+        {
+
+        }
+
+        public static void ExcluirTag(Int32 idCliente, string chave)
+        {
+
+        }
     }
 }
