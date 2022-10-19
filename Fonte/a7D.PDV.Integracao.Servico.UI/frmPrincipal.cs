@@ -4,8 +4,7 @@ using a7D.PDV.BLL.Services;
 using a7D.PDV.Componentes;
 using a7D.PDV.EF.Models;
 using a7D.PDV.Fiscal.Services;
-using a7D.PDV.Integracao.EasyChopp;
-using a7D.PDV.Integracao.ERPCake;
+using a7D.PDV.Integracao.DeliveryOnline;
 using a7D.PDV.Integracao.iFood;
 using a7D.PDV.Integracao.NTKServer;
 using a7D.PDV.Integracao.Server;
@@ -35,8 +34,9 @@ namespace a7D.PDV.Integracao.Servico.UI
                 IntegracaoItem.From<IntegraOrdemProducao>(txtStatusImpressao, pbImpressao, AddLogException),
                 IntegracaoItem.From<IntegraNTK>(txtStatusPOS, pbPagamentoIntegrado, AddLogException),
                 IntegracaoItem.From<IntegraIFood>(txtIFood, pbIFood, AddLogException),
-                IntegracaoItem.From<IntegraERPCake>(txtStatusERP, pbERP, AddLogException),
-                IntegracaoItem.From<IntegraEasyChopp>(txtStatusEasyChopp, pbEasyChopp, AddLogException)
+                IntegracaoItem.From<IntegraDeliveryOnline>(txtStatusDeliveryOnline, pbDeliveryOnline, AddLogException),
+                //IntegracaoItem.From<IntegraERPCake>(txtStatusERP, pbERP, AddLogException),
+                //IntegracaoItem.From<IntegraEasyChopp>(txtStatusEasyChopp, pbEasyChopp, AddLogException)
             };
         }
 

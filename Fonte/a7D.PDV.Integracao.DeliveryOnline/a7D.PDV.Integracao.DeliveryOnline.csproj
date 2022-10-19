@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BFDCB202-B7A6-4F3D-813F-970ECB7539AF}</ProjectGuid>
+    <ProjectGuid>{B4334C06-09BD-463F-9908-27C19D475940}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>a7D.PDV.Integracao.iFood</RootNamespace>
-    <AssemblyName>a7D.PDV.Integracao.iFood</AssemblyName>
+    <RootNamespace>a7D.PDV.Integracao.DeliveryOnline</RootNamespace>
+    <AssemblyName>a7D.PDV.Integracao.DeliveryOnline</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,11 +29,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="a7D.Fwk.CRUD.DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="a7D.Fwk.CRUD.DAL">
       <HintPath>..\..\Componentes\a7D.Fwk.CRUD.DAL.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -49,22 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="API\Merchant.cs" />
-    <Compile Include="API\OAuth.cs" />
-    <Compile Include="API\Order.cs" />
-    <Compile Include="DAL\Caixa.cs" />
-    <Compile Include="DAL\Cliente.cs" />
-    <Compile Include="DAL\Pedido.cs" />
-    <Compile Include="DAL\Produto.cs" />
-    <Compile Include="IntegraIFood.cs" />
-    <Compile Include="IntegracaoEstabelecimento.cs" />
-    <Compile Include="IntegracaoPedido.cs" />
-    <Compile Include="Model\Order.cs" />
-    <Compile Include="Model\Merchant.cs" />
-    <Compile Include="Model\Token.cs" />
+    <Compile Include="IntegraDeliveryOnline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,25 +59,18 @@
       <Project>{a4b2ab32-5d8e-4ae9-8350-cb75759a9b11}</Project>
       <Name>a7D.PDV.DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\a7D.PDV.EF\a7D.PDV.EF.csproj">
-      <Project>{75EF9713-861A-4C6B-8F7F-1343FDCBBFFB}</Project>
-      <Name>a7D.PDV.EF</Name>
-    </ProjectReference>
     <ProjectReference Include="..\a7D.PDV.Fiscal\a7D.PDV.Fiscal.csproj">
-      <Project>{C506BD2C-FCB7-49E2-9759-661573B1C60A}</Project>
+      <Project>{c506bd2c-fcb7-49e2-9759-661573b1c60a}</Project>
       <Name>a7D.PDV.Fiscal</Name>
     </ProjectReference>
     <ProjectReference Include="..\a7D.PDV.Integracao.Servico.Core\a7D.PDV.Integracao.Core.csproj">
-      <Project>{79dcf4fa-291f-4a15-a41b-f915938b8536}</Project>
+      <Project>{79DCF4FA-291F-4A15-A41B-F915938B8536}</Project>
       <Name>a7D.PDV.Integracao.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\a7D.PDV.Model\a7D.PDV.Model.csproj">
       <Project>{22ba05b8-59d7-4e09-8471-7c8012f1b100}</Project>
       <Name>a7D.PDV.Model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DTO\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

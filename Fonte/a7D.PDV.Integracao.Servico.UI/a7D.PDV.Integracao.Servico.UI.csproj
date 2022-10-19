@@ -154,13 +154,9 @@
       <Project>{F24C813D-011C-4665-A36C-75F4080F0F7B}</Project>
       <Name>a7D.PDV.Integracao.API2.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\a7D.PDV.Integracao.EasyChopp\a7D.PDV.Integracao.EasyChopp.csproj">
-      <Project>{3E8661C3-3BE1-45E0-8B4F-4CC9769EFAA5}</Project>
-      <Name>a7D.PDV.Integracao.EasyChopp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\a7D.PDV.Integracao.ERPCake\a7D.PDV.Integracao.ERPCake.csproj">
-      <Project>{3b619658-d613-43fa-b8f4-f9392a55260b}</Project>
-      <Name>a7D.PDV.Integracao.ERPCake</Name>
+    <ProjectReference Include="..\a7D.PDV.Integracao.DeliveryOnline\a7D.PDV.Integracao.DeliveryOnline.csproj">
+      <Project>{b4334c06-09bd-463f-9908-27c19d475940}</Project>
+      <Name>a7D.PDV.Integracao.DeliveryOnline</Name>
     </ProjectReference>
     <ProjectReference Include="..\a7D.PDV.Integracao.iFood\a7D.PDV.Integracao.iFood.csproj">
       <Project>{bfdcb202-b7a6-4f3d-813f-970ecb7539af}</Project>
