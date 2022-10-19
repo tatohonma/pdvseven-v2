@@ -83,6 +83,9 @@ namespace a7D.PDV.Model
         [CRUDParameterDAL(false, "UtilizarBalanca")]
         public bool? UtilizarBalanca { get; set; }
 
+        [CRUDParameterDAL(false, "GUIDIdentificacao")]
+        public string GUIDIdentificacao { get; set; }
+
         public override int GetHashCode()
         {
             var hash = 13;
