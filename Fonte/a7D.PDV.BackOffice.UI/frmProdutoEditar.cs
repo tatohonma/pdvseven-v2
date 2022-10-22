@@ -170,6 +170,8 @@ namespace a7D.PDV.BackOffice.UI
             AreasImpressao.AddRange(areas);
             AreasMapeadas = MapAreaImpressaoProduto.ListarPorProduto(Produto1.IDProduto);
             AtualizarComboAreaImpressao();
+
+            AtualizarComboTags();
         }
 
         private void AtualizarComboAreaImpressao()
@@ -197,6 +199,19 @@ namespace a7D.PDV.BackOffice.UI
             listaPaineisModificacao = listaPaineisModificacao.OrderBy(pm => pm.Nome).ToList();
             listaPaineisModificacao.Insert(0, new PainelModificacaoInformation());
             cbbPainelModificacao.DataSource = listaPaineisModificacao;
+        }
+
+        private void AtualizarComboTags()
+        {
+            var listaTag = BLL.Tag.ListarChaves();
+
+            TagInformation novaTag = new TagInformation();
+            novaTag.Chave = "criar nova tag";
+
+            listaTag.Insert(0, "");
+            listaTag.Add("criar nova tag");
+
+            cbbTagChave.DataSource = listaTag;            
         }
 
         private void frmProdutoEditar_Load(object sender, EventArgs e)
@@ -258,15 +273,7 @@ namespace a7D.PDV.BackOffice.UI
                 if (Produto1.Unidade != null && Produto1.Unidade.IDUnidade.HasValue)
                     cbbUnidade.SelectedValue = Produto1.Unidade.IDUnidade.Value;
 
-                if (Produto1.IDProduto.HasValue)
-                    CarregarReceita();
-                else
-                {
-                    txtProdutoReceita.Visible = false;
-                    btnProcurarProdutoReceita.Visible = false;
-                    dgvReceita.Visible = false;
-                    lblMsgSalvar.Visible = true;
-                }
+                CarregarReceita();
             }
             else
             {
@@ -276,7 +283,6 @@ namespace a7D.PDV.BackOffice.UI
 
                 cbbUnidade.Enabled = false;
             }
-
 
             if (Produto1.IDProduto != null)
             {
@@ -310,17 +316,42 @@ namespace a7D.PDV.BackOffice.UI
                 AtualizarListaPainelModificacao();
                 AtualizarListaCategoria();
                 AtualizarListaAreaImpressao();
+                AtualizarListaTags();
 
                 //Imagem
                 CarregarImagem();
 
-                //Carregar impostos
-                //CarregarImpostos();
+                if (!ReceitaCarregada)
+                {
+                    pnlReceita.Visible = true;
+                    lblMsgSalvarReceita.Visible = false;
+                    CarregarReceita();
+                }
+
+                if (String.IsNullOrEmpty(Produto1.GUIDIdentificacao))
+                {
+                    pnlTags.Visible = false;
+                    lblMsgSalvarTags.Visible = true;
+                }
 
                 Task.Run(() => ObterEstoque());
             }
 
             txtNome.Focus();
+        }
+
+        private void AtualizarListaTags()
+        {
+            if (String.IsNullOrEmpty(Produto1.GUIDIdentificacao))
+                return;
+
+            List<TagInformation> listaTag = BLL.Tag.Listar(Produto1.GUIDIdentificacao);
+
+            dgvTags.AutoGenerateColumns = false;
+            dgvTags.SuspendLayout();
+            dgvTags.DataSource = listaTag.ToArray();
+            dgvTags.ResumeLayout();
+            dgvTags.ClearSelection();
         }
 
         void ObterEstoque()
@@ -533,12 +564,18 @@ namespace a7D.PDV.BackOffice.UI
                     {
                         if (!ReceitaCarregada)
                         {
-                            txtProdutoReceita.Visible = true;
-                            btnProcurarProdutoReceita.Visible = true;
-                            dgvReceita.Visible = true;
-                            lblMsgSalvar.Visible = false;
+                            pnlReceita.Visible = true;
+                            lblMsgSalvarReceita.Visible = false;
                             CarregarReceita();
                         }
+
+                        if(!String.IsNullOrEmpty(Produto1.GUIDIdentificacao))
+                        {
+                            pnlTags.Visible = true;
+                            lblMsgSalvarTags.Visible = false;
+                            AtualizarListaTags();
+                        }
+
                         Text = Titulo;
                         Refresh();
                     }
@@ -1277,6 +1314,67 @@ namespace a7D.PDV.BackOffice.UI
 
                 AtualizarListaAreaImpressao();
             }
+        }
+
+        private void btnTagAdicionar_Click(object sender, EventArgs e)
+        {
+            string chave;
+
+            if(cbbTagChave.Visible == true)
+            {
+                chave = cbbTagChave.SelectedValue.ToString();
+            }
+            else
+            {
+                chave = txtTagChave.Text;
+            }
+
+            BLL.Tag.Adicionar(Produto1.GUIDIdentificacao, chave, txtTagValor.Text);
+
+            cbbTagChave.SelectedIndex = 0;
+            cbbTagChave.Visible = true;
+            txtTagChave.Visible = false;
+
+            txtTagChave.Text = "";
+            txtTagValor.Text = "";
+
+            AtualizarListaTags();
+            AtualizarComboTags();
+        }
+
+        private void dgvTags_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                if (dgvTags.Columns[e.ColumnIndex].Name == "excluir")
+                {
+                    Int32 idTag = Convert.ToInt32(dgvTags["IDTag", e.RowIndex].Value);
+                    BLL.Tag.Excluir(idTag);
+
+                    AtualizarListaTags();
+                    AtualizarComboTags();
+                }
+            }
+        }
+
+        private void cbbTagChave_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cbbTagChave.SelectedValue.ToString() == "criar nova tag")
+            {
+                cbbTagChave.Visible = false;
+                txtTagChave.Visible = true;
+                txtTagChave.Focus();
+            }
+        }
+
+        private void btnTagCancelar_Click(object sender, EventArgs e)
+        {
+            cbbTagChave.SelectedIndex = 0;
+            cbbTagChave.Visible = true;
+            txtTagChave.Visible = false;
+
+            txtTagChave.Text = "";
+            txtTagValor.Text = "";
         }
     }
 }

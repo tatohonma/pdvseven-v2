@@ -44,5 +44,28 @@ namespace a7D.PDV.BLL
 
             return tag;
         }
+
+        public static void Excluir(Int32 idTag)
+        {
+            TagInformation tag = new TagInformation();
+            tag.IDTag = idTag;
+            CRUD.Excluir(tag);
+        }
+
+        public static List<TagInformation> Listar(string guidIdentificacao)
+        {
+            TagInformation tag = new TagInformation();
+            tag.GUIDIdentificacao = guidIdentificacao;
+
+            List<Object> listaObj = CRUD.Listar(tag);
+            List<TagInformation> lista = listaObj.ConvertAll(new Converter<Object, TagInformation>(TagInformation.ConverterObjeto));
+
+            return lista;
+        }
+
+        public static List<String> ListarChaves()
+        {
+            return DAL.TagDAL.ListaChaves();
+        }
     }
 }

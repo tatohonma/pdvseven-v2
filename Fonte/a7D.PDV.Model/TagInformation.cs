@@ -22,5 +22,10 @@ namespace a7D.PDV.Model
 
         [CRUDParameterDAL(false, "DtInclusao")]
         public DateTime? DtInclusao { get; set; }
+
+        public static TagInformation ConverterObjeto(Object obj)
+        {
+            return (TagInformation)obj;
+        }
     }
 }
