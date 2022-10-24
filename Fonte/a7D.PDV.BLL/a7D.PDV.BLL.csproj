@@ -117,6 +117,7 @@
     <Compile Include="CategoriaImposto.cs" />
     <Compile Include="Configuracao\ConfiguracaoBD.cs" />
     <Compile Include="Configuracao\ConfiguracoesComumPedidos.cs" />
+    <Compile Include="Configuracao\ConfiguracoesDeliveryOnline.cs" />
     <Compile Include="Configuracao\ConfiguracoesEasyChopp.cs" />
     <Compile Include="Configuracao\ConfiguracoesNFCe.cs" />
     <Compile Include="Configuracao\ConfiguracoesTorneira.cs" />

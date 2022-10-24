@@ -22,10 +22,12 @@ namespace a7D.PDV.BLL
                 typeof(ConfiguracoesGerenciadorImpressao),  // 80
                 typeof(ConfiguracoesAutoatendimento),       // 140
                 typeof(ConfiguracoesIFood),                 // 150
-                typeof(ConfiguracoesERP),                   // 160 
-                typeof(ConfiguracoesLoggi),                 // 180
-                typeof(ConfiguracoesEasyChopp),             // 190
-                typeof(ConfiguracoesTorneira)               // 220
+                typeof(ConfiguracoesDeliveryOnline),        // 250
+
+                //typeof(ConfiguracoesERP),                   // 160 
+                //typeof(ConfiguracoesLoggi),                 // 180
+                //typeof(ConfiguracoesEasyChopp),             // 190
+                //typeof(ConfiguracoesTorneira)               // 220
             };
         }
 

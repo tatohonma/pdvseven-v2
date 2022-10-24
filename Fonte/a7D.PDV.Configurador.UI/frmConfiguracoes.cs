@@ -75,14 +75,8 @@ namespace a7D.PDV.Configurador.UI
                 FillConfig(ETipoPDV.GERENCIADOR_IMPRESSAO, null, tableGerenciadorImpressao);
             else if (selectedTab == tabIFood)
                 FillConfig(ETipoPDV.IFOOD, null, tableIFood);
-            else if (selectedTab == tabERP)
-                FillConfig(ETipoPDV.ERP, null, tableERP);
-            else if (selectedTab == tabLoggi)
-                FillConfig(ETipoPDV.LOGGI, null, tableLoggi);
-            else if (selectedTab == tabTorneira )
-                FillConfig(ETipoPDV.TORNEIRA, cbbPDVTorneira, tableTorneira);
-            else if (selectedTab == tabEasyChopp)
-                FillConfig(ETipoPDV.EASYCHOPP, null, tableEasyChopp);
+            else if (selectedTab == tabDeliveryOnline)
+                FillConfig(ETipoPDV.DELIVERY_ONLINE, null, tableDeliveryOnline);
         }
 
         delegate void CallBackFillConfig(ETipoPDV tipo, ComboBox ddl, TableLayoutPanel table, object sender = null);
@@ -179,12 +173,6 @@ namespace a7D.PDV.Configurador.UI
         {
             FillConfig(ETipoPDV.SAIDA, null, tableSaida, cbbPDVSaida.SelectedItem);
         }
-
-        private void cbbPDVTorneira_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FillConfig(ETipoPDV.TORNEIRA, null, tableTorneira, cbbPDVTorneira.SelectedItem);
-        }
-
         #endregion
 
     }

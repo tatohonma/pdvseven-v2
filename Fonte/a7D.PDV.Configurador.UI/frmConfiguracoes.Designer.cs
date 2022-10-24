@@ -63,16 +63,8 @@
             this.tableGerenciadorImpressao = new System.Windows.Forms.TableLayoutPanel();
             this.tabIFood = new System.Windows.Forms.TabPage();
             this.tableIFood = new System.Windows.Forms.TableLayoutPanel();
-            this.tabERP = new System.Windows.Forms.TabPage();
-            this.tableERP = new System.Windows.Forms.TableLayoutPanel();
-            this.tabLoggi = new System.Windows.Forms.TabPage();
-            this.tableLoggi = new System.Windows.Forms.TableLayoutPanel();
-            this.tabTorneira = new System.Windows.Forms.TabPage();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.tableTorneira = new System.Windows.Forms.TableLayoutPanel();
-            this.cbbPDVTorneira = new System.Windows.Forms.ComboBox();
-            this.tabEasyChopp = new System.Windows.Forms.TabPage();
-            this.tableEasyChopp = new System.Windows.Forms.TableLayoutPanel();
+            this.tabDeliveryOnline = new System.Windows.Forms.TabPage();
+            this.tableDeliveryOnline = new System.Windows.Forms.TableLayoutPanel();
             this.tabCardapio.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tabComanda.SuspendLayout();
@@ -91,11 +83,7 @@
             this.panel7.SuspendLayout();
             this.tabGerenciadorImpressao.SuspendLayout();
             this.tabIFood.SuspendLayout();
-            this.tabERP.SuspendLayout();
-            this.tabLoggi.SuspendLayout();
-            this.tabTorneira.SuspendLayout();
-            this.panel8.SuspendLayout();
-            this.tabEasyChopp.SuspendLayout();
+            this.tabDeliveryOnline.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabCardapio
@@ -345,10 +333,7 @@
             this.tabControl1.Controls.Add(this.tabAutoatendimento);
             this.tabControl1.Controls.Add(this.tabGerenciadorImpressao);
             this.tabControl1.Controls.Add(this.tabIFood);
-            this.tabControl1.Controls.Add(this.tabERP);
-            this.tabControl1.Controls.Add(this.tabLoggi);
-            this.tabControl1.Controls.Add(this.tabTorneira);
-            this.tabControl1.Controls.Add(this.tabEasyChopp);
+            this.tabControl1.Controls.Add(this.tabDeliveryOnline);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -565,134 +550,30 @@
             this.tableIFood.Size = new System.Drawing.Size(724, 400);
             this.tableIFood.TabIndex = 1;
             // 
-            // tabERP
+            // tabDeliveryOnline
             // 
-            this.tabERP.BackColor = System.Drawing.SystemColors.Control;
-            this.tabERP.Controls.Add(this.tableERP);
-            this.tabERP.Location = new System.Drawing.Point(4, 29);
-            this.tabERP.Name = "tabERP";
-            this.tabERP.Size = new System.Drawing.Size(738, 419);
-            this.tabERP.TabIndex = 12;
-            this.tabERP.Text = "ERP";
+            this.tabDeliveryOnline.BackColor = System.Drawing.SystemColors.Control;
+            this.tabDeliveryOnline.Controls.Add(this.tableDeliveryOnline);
+            this.tabDeliveryOnline.Location = new System.Drawing.Point(4, 29);
+            this.tabDeliveryOnline.Name = "tabDeliveryOnline";
+            this.tabDeliveryOnline.Size = new System.Drawing.Size(738, 419);
+            this.tabDeliveryOnline.TabIndex = 12;
+            this.tabDeliveryOnline.Text = "Delivery Online";
             // 
-            // tableERP
+            // tableDeliveryOnline
             // 
-            this.tableERP.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tableDeliveryOnline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableERP.AutoSize = true;
-            this.tableERP.BackColor = System.Drawing.Color.Transparent;
-            this.tableERP.ColumnCount = 1;
-            this.tableERP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableERP.Location = new System.Drawing.Point(6, 6);
-            this.tableERP.Name = "tableERP";
-            this.tableERP.RowCount = 1;
-            this.tableERP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableERP.Size = new System.Drawing.Size(724, 400);
-            this.tableERP.TabIndex = 2;
-            // 
-            // tabLoggi
-            // 
-            this.tabLoggi.BackColor = System.Drawing.SystemColors.Control;
-            this.tabLoggi.Controls.Add(this.tableLoggi);
-            this.tabLoggi.Location = new System.Drawing.Point(4, 29);
-            this.tabLoggi.Name = "tabLoggi";
-            this.tabLoggi.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLoggi.Size = new System.Drawing.Size(738, 419);
-            this.tabLoggi.TabIndex = 13;
-            this.tabLoggi.Text = "Loggi";
-            // 
-            // tableLoggi
-            // 
-            this.tableLoggi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLoggi.AutoSize = true;
-            this.tableLoggi.BackColor = System.Drawing.Color.Transparent;
-            this.tableLoggi.ColumnCount = 1;
-            this.tableLoggi.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLoggi.Location = new System.Drawing.Point(6, 6);
-            this.tableLoggi.Name = "tableLoggi";
-            this.tableLoggi.RowCount = 1;
-            this.tableLoggi.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLoggi.Size = new System.Drawing.Size(724, 400);
-            this.tableLoggi.TabIndex = 3;
-            // 
-            // tabTorneira
-            // 
-            this.tabTorneira.BackColor = System.Drawing.SystemColors.Control;
-            this.tabTorneira.Controls.Add(this.panel8);
-            this.tabTorneira.Controls.Add(this.cbbPDVTorneira);
-            this.tabTorneira.Location = new System.Drawing.Point(4, 29);
-            this.tabTorneira.Name = "tabTorneira";
-            this.tabTorneira.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTorneira.Size = new System.Drawing.Size(738, 419);
-            this.tabTorneira.TabIndex = 14;
-            this.tabTorneira.Text = "Torneira";
-            // 
-            // panel8
-            // 
-            this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel8.AutoScroll = true;
-            this.panel8.Controls.Add(this.tableTorneira);
-            this.panel8.Location = new System.Drawing.Point(9, 49);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(722, 355);
-            this.panel8.TabIndex = 12;
-            // 
-            // tableTorneira
-            // 
-            this.tableTorneira.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableTorneira.AutoSize = true;
-            this.tableTorneira.BackColor = System.Drawing.Color.Transparent;
-            this.tableTorneira.ColumnCount = 1;
-            this.tableTorneira.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableTorneira.Location = new System.Drawing.Point(3, 7);
-            this.tableTorneira.Name = "tableTorneira";
-            this.tableTorneira.Padding = new System.Windows.Forms.Padding(3);
-            this.tableTorneira.RowCount = 1;
-            this.tableTorneira.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableTorneira.Size = new System.Drawing.Size(716, 348);
-            this.tableTorneira.TabIndex = 4;
-            // 
-            // cbbPDVTorneira
-            // 
-            this.cbbPDVTorneira.DisplayMember = "Exibicao";
-            this.cbbPDVTorneira.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbbPDVTorneira.FormattingEnabled = true;
-            this.cbbPDVTorneira.Location = new System.Drawing.Point(8, 10);
-            this.cbbPDVTorneira.Name = "cbbPDVTorneira";
-            this.cbbPDVTorneira.Size = new System.Drawing.Size(355, 28);
-            this.cbbPDVTorneira.TabIndex = 11;
-            this.cbbPDVTorneira.ValueMember = "IDPDV";
-            this.cbbPDVTorneira.SelectedIndexChanged += new System.EventHandler(this.cbbPDVTorneira_SelectedIndexChanged);
-            // 
-            // tabEasyChopp
-            // 
-            this.tabEasyChopp.BackColor = System.Drawing.SystemColors.Control;
-            this.tabEasyChopp.Controls.Add(this.tableEasyChopp);
-            this.tabEasyChopp.Location = new System.Drawing.Point(4, 29);
-            this.tabEasyChopp.Name = "tabEasyChopp";
-            this.tabEasyChopp.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEasyChopp.Size = new System.Drawing.Size(738, 419);
-            this.tabEasyChopp.TabIndex = 15;
-            this.tabEasyChopp.Text = "EasyChopp";
-            // 
-            // tableEasyChopp
-            // 
-            this.tableEasyChopp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableEasyChopp.AutoSize = true;
-            this.tableEasyChopp.BackColor = System.Drawing.Color.Transparent;
-            this.tableEasyChopp.ColumnCount = 1;
-            this.tableEasyChopp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableEasyChopp.Location = new System.Drawing.Point(6, 6);
-            this.tableEasyChopp.Name = "tableEasyChopp";
-            this.tableEasyChopp.RowCount = 1;
-            this.tableEasyChopp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableEasyChopp.Size = new System.Drawing.Size(724, 400);
-            this.tableEasyChopp.TabIndex = 4;
+            this.tableDeliveryOnline.AutoSize = true;
+            this.tableDeliveryOnline.BackColor = System.Drawing.Color.Transparent;
+            this.tableDeliveryOnline.ColumnCount = 1;
+            this.tableDeliveryOnline.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableDeliveryOnline.Location = new System.Drawing.Point(7, 9);
+            this.tableDeliveryOnline.Name = "tableDeliveryOnline";
+            this.tableDeliveryOnline.RowCount = 1;
+            this.tableDeliveryOnline.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableDeliveryOnline.Size = new System.Drawing.Size(724, 400);
+            this.tableDeliveryOnline.TabIndex = 2;
             // 
             // frmConfiguracoes
             // 
@@ -734,15 +615,8 @@
             this.tabGerenciadorImpressao.PerformLayout();
             this.tabIFood.ResumeLayout(false);
             this.tabIFood.PerformLayout();
-            this.tabERP.ResumeLayout(false);
-            this.tabERP.PerformLayout();
-            this.tabLoggi.ResumeLayout(false);
-            this.tabLoggi.PerformLayout();
-            this.tabTorneira.ResumeLayout(false);
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
-            this.tabEasyChopp.ResumeLayout(false);
-            this.tabEasyChopp.PerformLayout();
+            this.tabDeliveryOnline.ResumeLayout(false);
+            this.tabDeliveryOnline.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -783,15 +657,7 @@
         private System.Windows.Forms.ComboBox cbbPDVSaida;
         private System.Windows.Forms.TabPage tabIFood;
         private System.Windows.Forms.TableLayoutPanel tableIFood;
-        private System.Windows.Forms.TabPage tabERP;
-        private System.Windows.Forms.TableLayoutPanel tableERP;
-        private System.Windows.Forms.TabPage tabLoggi;
-        private System.Windows.Forms.TableLayoutPanel tableLoggi;
-        private System.Windows.Forms.TabPage tabTorneira;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.TableLayoutPanel tableTorneira;
-        private System.Windows.Forms.ComboBox cbbPDVTorneira;
-        private System.Windows.Forms.TabPage tabEasyChopp;
-        private System.Windows.Forms.TableLayoutPanel tableEasyChopp;
+        private System.Windows.Forms.TabPage tabDeliveryOnline;
+        private System.Windows.Forms.TableLayoutPanel tableDeliveryOnline;
     }
 }
