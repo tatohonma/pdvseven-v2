@@ -17,5 +17,18 @@ namespace a7D.PDV.BLL
 
         [Config("Ligar Integração do Delivery Online no Integrador", ETipoPDV.DELIVERY_ONLINE, Valor = "0", ValoresAceitos = "0|1", Obrigatorio = true)]
         public bool IntegracaoDeliveryOnline{ get; set; }
+
+        [Config("username", ETipoPDV.DELIVERY_ONLINE)]
+        public String Username { get; set; }
+
+        [Config("password", ETipoPDV.DELIVERY_ONLINE)]
+        public String Password { get; set; }
+
+        [Config("device_name", ETipoPDV.DELIVERY_ONLINE)]
+        public String DeviceName { get; set; }
+
+        [Config("token", ETipoPDV.DELIVERY_ONLINE)]
+        public String Token { get; set; }
+        
     }
 }

@@ -1,4 +1,5 @@
-﻿using a7D.PDV.BLL;
+﻿using a7D.Fmk.CRUD.DAL;
+using a7D.PDV.BLL;
 using a7D.PDV.Integracao.Servico.Core;
 using a7D.PDV.Model;
 using Newtonsoft.Json;
@@ -21,7 +22,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
 
         public override void Executar()
         {
-            //if (!ValidarLicenca())
+            //if (!ValidarLicenca())'
             //    return;
 
             if (!ValidarConfiguracoes())
@@ -42,6 +43,14 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 return false;
             }
 
+            if (string.IsNullOrEmpty(ConfigDO.Username)
+             || string.IsNullOrEmpty(ConfigDO.Password)
+             || string.IsNullOrEmpty(ConfigDO.DeviceName))
+            {
+                AddLog("Falta configurar o Delivery Online no Configurador (username, password e device-name)");
+                return false;
+            }
+
             return configurado;
         }
 
@@ -50,19 +59,21 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             try
             {
                 //EventosRecebidos = new List<string>();
-                AddLog("Integração iFood: Ativada");
+                AddLog("Integração Delivery Online: Ativada");
 
                 while (Executando)
                 {
-                    //if (AccessToken == null || AccessToken == "" || ExpiraEm < DateTime.Now)
-                    //{
-                    //    AddLog("Autenticando...");
-                    //    if (!Autenticar())
-                    //    {
-                    //        Sleep(60);
-                    //        continue;
-                    //    }
-                    //}
+                    if (String.IsNullOrEmpty(ConfigDO.Token))
+                    {
+                        AddLog("Autenticando...");
+                        if (!Autenticar())
+                        {
+                            Sleep(60);
+                            continue;
+                        }
+                    }
+
+                    Sleep(60);
 
                     //APIOrder = new API.Order(AccessToken);
                     //APIMerchant = new API.Merchant(AccessToken);
@@ -93,11 +104,47 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             }
             catch (Exception ex)
             {
-                AddLog("Erro na integração DeliveryOnline: " + ex.Message);
+                AddLog("Erro na integração Delivery Online: " + ex.Message);
                 AddLog("Reinicie o Integrador para restabelecer essa integração...\r\nCaso não resolva, entre em contato com o suporte!!!");
                 //if (!ex.Message.Contains("token expired") && !ex.Message.Contains("Invalid access"))
                 //    throw new ExceptionPDV(CodigoErro.EE11, ex);
             }
+        }
+        private Boolean Autenticar()
+        {
+            API.Auth apiAuth = new API.Auth();
+
+            try
+            {
+                Model.Token.Token token = apiAuth.Token(ConfigDO.Username, ConfigDO.Password, ConfigDO.DeviceName);
+
+                if (!String.IsNullOrEmpty(token.token))
+                {
+                    ConfigDO.Token = token.token;
+                    AtualizarToken(token.token);
+
+                    AddLog("Autorizado e Token gerado!");
+                    AddLog(ConfigDO.Token);
+                    return true;
+                }
+                else
+                {
+                    AddLog("Falha na autentição!");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                AddLog($"Erro na geração do Token: " + ex.Message);
+                ConfigDO.Token = "";
+                return false;
+            }
+        }
+        private void AtualizarToken(string token)
+        {
+            ConfiguracaoBDInformation config = ConfiguracaoBD.BuscarConfiguracao("Token", 250);
+            config.Valor = token;
+            CRUD.Alterar(config);
         }
     }
 }

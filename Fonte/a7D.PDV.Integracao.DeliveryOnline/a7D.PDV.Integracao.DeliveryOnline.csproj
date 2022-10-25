@@ -47,7 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Auth.cs" />
     <Compile Include="IntegraDeliveryOnline.cs" />
+    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\Token.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

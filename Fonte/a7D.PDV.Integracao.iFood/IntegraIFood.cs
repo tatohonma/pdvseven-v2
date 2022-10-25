@@ -247,6 +247,8 @@ namespace a7D.PDV.Integracao.iFood
                     if (token.accessToken != "")
                     {
                         ConfigIFood.RefreshToken = token.refreshToken;
+                        AtualizarRefreshToken(token.refreshToken);
+
                         AccessToken = token.accessToken;
                         ExpiraEm = DateTime.Now.AddSeconds(token.expiresIn * 0.8);
 
@@ -265,10 +267,13 @@ namespace a7D.PDV.Integracao.iFood
                     Model.OAuth.Token token = apiOAuth.Token("refresh_token", ConfigIFood.ClientId, ConfigIFood.ClientSecret, ConfigIFood.AuthorizationCode, ConfigIFood.AuthorizationCodeVerifier, ConfigIFood.RefreshToken);
 
                     if (token.accessToken != "")
-                    {
-                        AccessToken = token.accessToken;
+                    {                        
                         ConfigIFood.RefreshToken = token.refreshToken;
+                        AtualizarRefreshToken(token.refreshToken);
+
+                        AccessToken = token.accessToken;
                         ExpiraEm = DateTime.Now.AddSeconds(token.expiresIn * 0.8);
+
 
                         AddLog("Autenticado e novo Token gerado (refresh_token)!");
                         AddLog(AccessToken);
@@ -292,7 +297,7 @@ namespace a7D.PDV.Integracao.iFood
 
         private void AtualizarRefreshToken(string refreshToken)
         {
-            ConfiguracaoBDInformation config = ConfiguracaoBD.BuscarConfiguracao("RefreshToken");
+            ConfiguracaoBDInformation config = ConfiguracaoBD.BuscarConfiguracao("RefreshToken", 150);
             config.Valor = refreshToken;
             CRUD.Alterar(config);
         }

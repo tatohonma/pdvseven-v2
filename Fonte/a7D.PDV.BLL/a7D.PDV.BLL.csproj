@@ -119,12 +119,12 @@
     <Compile Include="Configuracao\ConfiguracoesComumPedidos.cs" />
     <Compile Include="Configuracao\ConfiguracoesDeliveryOnline.cs" />
     <Compile Include="Configuracao\ConfiguracoesEasyChopp.cs" />
+    <Compile Include="Configuracao\ConfiguracoesLoggi.cs" />
     <Compile Include="Configuracao\ConfiguracoesNFCe.cs" />
     <Compile Include="Configuracao\ConfiguracoesTorneira.cs" />
     <Compile Include="Constantes.cs" />
     <Compile Include="Extension\ConfiguracaoExtensions.cs" />
     <Compile Include="Configuracao\ConfiguracoesERP.cs" />
-    <Compile Include="Configuracao\ConfiguracoesLoggi.cs" />
     <Compile Include="Configuracao\ConfiguracoesIFood.cs" />
     <Compile Include="Configuracao\ConfiguracoesSaida.cs" />
     <Compile Include="Configuracao\ConfiguracoesCaixa.cs" />
