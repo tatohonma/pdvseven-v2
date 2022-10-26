@@ -20,6 +20,8 @@ namespace a7D.PDV.Integracao.DeliveryOnline
 
         ConfiguracoesDeliveryOnline ConfigDO;
 
+        API.Orders APIOrders;
+
         public override void Executar()
         {
             //if (!ValidarLicenca())'
@@ -73,9 +75,13 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                         }
                     }
 
+                    APIOrders = new API.Orders(ConfigDO.Token);
+
+                    AddLog("Lendo pedidos...");
+                    LerPedidos();
+
                     Sleep(60);
 
-                    //APIOrder = new API.Order(AccessToken);
                     //APIMerchant = new API.Merchant(AccessToken);
 
                     //AddLog("Verificando status da loja");
@@ -110,6 +116,17 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 //    throw new ExceptionPDV(CodigoErro.EE11, ex);
             }
         }
+
+        private void LerPedidos()
+        {
+            var pedidos = APIOrders.GetOrders();
+            if (pedidos == null)
+            {
+                AddLog("Sem pedidos!");
+                return;
+            }
+        }
+
         private Boolean Autenticar()
         {
             API.Auth apiAuth = new API.Auth();

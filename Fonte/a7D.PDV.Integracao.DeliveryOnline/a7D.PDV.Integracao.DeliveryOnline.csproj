@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\Auth.cs" />
+    <Compile Include="API\Orders.cs" />
     <Compile Include="IntegraDeliveryOnline.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Token.cs" />
