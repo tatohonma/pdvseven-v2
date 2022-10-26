@@ -18,6 +18,15 @@ namespace a7D.PDV.BLL
         [Config("Ligar Integração do Delivery Online no Integrador", ETipoPDV.DELIVERY_ONLINE, Valor = "0", ValoresAceitos = "0|1", Obrigatorio = true)]
         public bool IntegracaoDeliveryOnline{ get; set; }
 
+        [Config("Confirmar o pedido automaticamente", ETipoPDV.DELIVERY_ONLINE, Valor = "1", ValoresAceitos = "0|1", Obrigatorio = true)]
+        public bool ConfirmacaoAutomatica { get; set; }
+
+        [Config("ID PDV para o Caixa do DeliveryOnline", ETipoPDV.DELIVERY_ONLINE, Valor = "", Obrigatorio = true)]
+        public int CaixaPDV { get; set; }
+
+        [Config("Chave do usuário a ser usado no DeliveryOnline", ETipoPDV.DELIVERY_ONLINE, EConfig.ChaveUsuario, Valor = "9933", Obrigatorio = true)]
+        public string ChaveUsuario { get; set; }
+
         [Config("username", ETipoPDV.DELIVERY_ONLINE)]
         public String Username { get; set; }
 

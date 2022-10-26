@@ -1,5 +1,6 @@
 ﻿using a7D.Fmk.CRUD.DAL;
 using a7D.PDV.BLL;
+using a7D.PDV.EF.Enum;
 using a7D.PDV.Integracao.Servico.Core;
 using a7D.PDV.Model;
 using Newtonsoft.Json;
@@ -19,8 +20,12 @@ namespace a7D.PDV.Integracao.DeliveryOnline
         public override string Nome => "Delivery Online";
 
         ConfiguracoesDeliveryOnline ConfigDO;
+        TaxaEntregaInformation TaxaEntregaDO;
+        UsuarioInformation UsuarioDO;
+        PDVInformation PDVDO;
 
         API.Orders APIOrders;
+        API.Locations APILocations;
 
         public override void Executar()
         {
@@ -49,8 +54,39 @@ namespace a7D.PDV.Integracao.DeliveryOnline
              || string.IsNullOrEmpty(ConfigDO.Password)
              || string.IsNullOrEmpty(ConfigDO.DeviceName))
             {
-                AddLog("Falta configurar o Delivery Online no Configurador (username, password e device-name)");
-                return false;
+                AddLog("Falta configurar o acesso a API do Delivery Online no Configurador (username, password e device-name)");
+                configurado = false;
+            }
+
+            TaxaEntregaDO = TaxaEntrega.CarregarPorNome("DeliveryOnline");
+            if (TaxaEntregaDO == null)
+            {
+                AddLog("Não há uma 'Taxa de Entrega' com o nome 'DeliveryOnline' cadastrada no Backoffice");
+                configurado = false;
+            }
+
+            var pdvs = BLL.PDV.Listar();
+            PDVDO = pdvs.FirstOrDefault(p => p.IDPDV == ConfigDO.CaixaPDV && p.TipoPDV.Tipo == ETipoPDV.CAIXA);
+            if (PDVDO == null)
+            {
+                AddLog($"Caixa ID PDV: {ConfigDO.CaixaPDV} inválido!");
+                configurado = false;
+            }
+
+            try
+            {
+                UsuarioDO = Usuario.Autenticar(ConfigDO.ChaveUsuario);
+            }
+            catch (ExceptionPDV ex)
+            {
+                configurado = false;
+                AddLog(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                configurado = false;
+                AddLog("Erro ao carregar o usuário pela chave informada ( " + ConfigDO.ChaveUsuario + ")");
+                AddLog(ex.Message);
             }
 
             return configurado;
@@ -75,31 +111,47 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                         }
                     }
 
-                    APIOrders = new API.Orders(ConfigDO.Token);
+                    if (APIOrders == null)
+                        APIOrders = new API.Orders(ConfigDO.Token);
+
+                    if(APILocations == null)
+                        APILocations = new API.Locations(ConfigDO.Token);
 
                     AddLog("Lendo pedidos...");
                     LerPedidos();
-
-                    Sleep(60);
 
                     //APIMerchant = new API.Merchant(AccessToken);
 
                     //AddLog("Verificando status da loja");
                     //if (LojaAbertaSistema())
                     //{
-                    //    if (!LojaAbertaIfood())
+                    //    if (!LojaAbertaDeliveryOnline())
                     //    {
                     //        Sleep(60);
                     //        continue;
                     //    }
 
-                    //    AddLog("Lendo eventos...");
-                    //    LerEventos();
 
-                    //    AddLog("Enviando confirmações...");
-                    //    EnviaConfirmacao();
+                    //    if (APIOrders == null)
+                    //        APIOrders = new API.Orders(ConfigDO.Token);
 
-                    //    Sleep(25);
+                    //    AddLog("Lendo pedidos...");
+                    //    LerPedidos();
+
+
+                    //    //    if (!LojaAbertaIfood())
+                    //    //    {
+                    //    //        Sleep(60);
+                    //    //        continue;
+                    //    //    }
+
+                    //    //    AddLog("Lendo eventos...");
+                    //    //    LerEventos();
+
+                    //    //    AddLog("Enviando confirmações...");
+                    //    //    EnviaConfirmacao();
+
+                    //    //    Sleep(25);
                     //}
                     //else
                     //{
@@ -120,10 +172,26 @@ namespace a7D.PDV.Integracao.DeliveryOnline
         private void LerPedidos()
         {
             var pedidos = APIOrders.GetOrders();
+
             if (pedidos == null)
             {
                 AddLog("Sem pedidos!");
                 return;
+            }
+
+            foreach (var pedido in pedidos.data)
+            {
+                switch(pedido.attributes.status.status_id)
+                {
+                    case 2: //Pendente confirmação
+                        //Verificar se já foi importado
+
+                        //Adicionar no sistema
+                        AdicionarPedido(pedido);
+
+                        //Alterar status na API
+                        break;
+                }
             }
         }
 
@@ -153,7 +221,10 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             catch (Exception ex)
             {
                 AddLog($"Erro na geração do Token: " + ex.Message);
+
                 ConfigDO.Token = "";
+                AtualizarToken("");
+
                 return false;
             }
         }
