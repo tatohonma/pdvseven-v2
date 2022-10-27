@@ -92,11 +92,15 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             //string voucherDesconto;
             //string tipoTaxaAdicional;
 
-            if (CarregarPedidoPorIdExterno(pedidoApi.id) != null)
-                return;
-
             AddLog(JsonConvert.SerializeObject(pedidoApi));
 
+            if (CarregarPedidoPorIdExterno(pedidoApi.id) != null)
+            {
+                AddLog($"Pedido {pedidoApi.id} já importado");
+
+                //AlterarStatusPedidoAPI(pedidoApi.id, 1);
+                return;
+            }
 
             pedido.Cliente = AdicionarCliente(pedidoApi);
             pedido.Observacoes += "Cliente: " + pedido.Cliente.NomeCompleto + "\r\n\r\n";
@@ -148,7 +152,8 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             //pedido.ValorDesconto = orderDetails.total.benefits;
 
             //pedido.ValorServico = orderDetails.total.additionalFees;
-            //pedido.ValorTotal = orderDetails.total.orderAmount;
+            string strValorTotal = pedidoApi.attributes.order_totals.FirstOrDefault(total => total.code == "total").value;
+            pedido.ValorTotal = Convert.ToDecimal(strValorTotal, new CultureInfo("en-us"));
 
             //if (orderDetails.orderTiming == "SCHEDULED")
             //{
@@ -171,12 +176,8 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             CRUD.Adicionar(pedido);
 
             Tag.Adicionar(pedido.GUIDIdentificacao, "DeliveryOnline-id", pedidoApi.id);
-            //Tag.Adicionar(pedido.GUIDIdentificacao, "ifood-displayId", orderDetails.displayId);
-            //Tag.Adicionar(pedido.GUIDIdentificacao, "ifood-orderTiming", orderDetails.orderTiming);
             Tag.Adicionar(pedido.GUIDIdentificacao, "DeliveryOnline-order_type", pedidoApi.attributes.order_type);
-            //Tag.Adicionar(pedido.GUIDIdentificacao, "DeliveryOnline-status", "PLC");
-
-
+            Tag.Adicionar(pedido.GUIDIdentificacao, "DeliveryOnline-status_id", pedidoApi.attributes.status.status_id.ToString());
 
             //if (orderDetails.total.additionalFees > 0)
             //{
@@ -208,10 +209,8 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 //    }
             }
 
-            string strValorTotal = pedidoApi.attributes.order_totals.FirstOrDefault(total => total.code == "total").value;
-            decimal valorTotal = Convert.ToDecimal(strValorTotal, new CultureInfo("en-us"));
             Int32 idTipoPagamento = Convert.ToInt32(pedidoApi.attributes.payment);
-            //AdicionarPedidoPagamento(pedido.IDPedido.Value, idTipoPagamento, valorTotal);
+            AdicionarPedidoPagamento(pedido.IDPedido.Value, idTipoPagamento, pedido.ValorTotal.Value);
 
             CRUD.Salvar(pedido);
 
@@ -430,7 +429,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
         {
             PedidoPagamentoInformation pedidoPagamento = new PedidoPagamentoInformation();
 
-            pedidoPagamento.TipoPagamento = TipoPagamento.CarregarPorCodigo(idTipoPagamento);
+            pedidoPagamento.TipoPagamento = TipoPagamento.Carregar(idTipoPagamento);
 
             pedidoPagamento.Pedido = new PedidoInformation();
             pedidoPagamento.Pedido.IDPedido = idPedido;
@@ -617,6 +616,41 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             }
         }
 
+        private DataRowCollection ListarPedidosNaoSincronizados()
+        {
+            SqlDataAdapter da;
+            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
+
+            String querySql = @"
+                SELECT 
+	                p.GUIDIdentificacao,
+	                p.IDPedido,
+	                p.IDStatusPedido,
+	                t1.Valor as status_id,
+	                t2.Valor as order_id
+                FROM 
+	                tbPedido p
+	                INNER JOIN tbTag t1 ON p.GUIDIdentificacao=t1.GUIDIdentificacao AND t1.Chave='DeliveryOnline-status_id'
+	                INNER JOIN tbTag t2 ON p.GUIDIdentificacao=t2.GUIDIdentificacao AND t2.Chave='DeliveryOnline-id'
+                WHERE
+	                (p.IDStatusPedido=10 AND t1.Valor<>3)
+	                OR
+	                (p.IDStatusPedido=20 AND t1.Valor<>4)
+	                OR
+	                (p.IDStatusPedido=40 AND t1.Valor<>5)
+	                OR
+	                (p.IDStatusPedido=50 AND t1.Valor<>6)
+            ";
+
+            da = new SqlDataAdapter(querySql, DB.ConnectionString);
+
+            da.Fill(ds);
+            dt = ds.Tables[0];
+
+            return dt.Rows;
+        }
+
         private ProdutoInformation CarregarProdutoPorIdExterno(int menu_id)
         {
             ProdutoInformation produto = new ProdutoInformation();
@@ -662,7 +696,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 if (pedido.StatusPedido.StatusPedido != EStatusPedido.Aberto)
                 {
                     AlterarStatusPedidoSistema(pedido.IDPedido.Value, EStatusPedido.Aberto);
-                    AlterarStatusPedidoAPI(pedidoApi.id, 1);
+                    AlterarStatusPedidoAPI(pedidoApi.id, 3);
                     GerarOrdemProducao(pedido.IDPedido.Value);
                 }
                 else

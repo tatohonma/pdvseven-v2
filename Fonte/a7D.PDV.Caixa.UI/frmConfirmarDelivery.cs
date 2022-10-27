@@ -25,9 +25,17 @@ namespace a7D.PDV.Caixa.UI
             if (ConfiguracoesCaixa.Valores.NotificarDelivery == "AUDIO")
                 ((frmPedidos)Owner).Player.Play();
 
-            TagInformation tagDisplayId = BLL.Tag.Carregar(Pedido.GUIDIdentificacao, "ifood-displayId");
-
-            Text = $"Pedido {Pedido.IDPedido} iFood {tagDisplayId.Valor}";
+            switch (Pedido.OrigemPedido.IDOrigemPedido)
+            {
+                case 2:
+                    TagInformation tagDisplayId = BLL.Tag.Carregar(Pedido.GUIDIdentificacao, "ifood-displayId");
+                    Text = $"Pedido {Pedido.IDPedido} iFood {tagDisplayId.Valor}";
+                    break;
+                case 3:
+                    TagInformation tagId = BLL.Tag.Carregar(Pedido.GUIDIdentificacao, "DeliveryOnline-id");
+                    Text = $"Pedido {Pedido.IDPedido} DeliveryOnline {tagId.Valor}";
+                    break;
+            }
 
             txtPedido.Text = Pedido.Observacoes;
             lblResumo.Text =

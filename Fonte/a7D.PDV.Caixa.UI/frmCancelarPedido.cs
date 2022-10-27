@@ -102,7 +102,7 @@ namespace a7D.PDV.Caixa.UI
                 {
                     Pedido1.RetornoSAT_venda = RetornoSAT.Carregar(Pedido1.RetornoSAT_venda.IDRetornoSAT.Value);
                     var horaConsultaUTC3 = DateTime.UtcNow.AddMinutes(-25);
-                    
+
                     if (DateTime.ParseExact(Pedido1.RetornoSAT_venda.timeStamp, _formatoData, _cultureInfo).ToUniversalTime() > horaConsultaUTC3)
                     {
                         if (Pedido1.RetornoSAT_cancelamento?.IDRetornoSAT == null)

@@ -6,6 +6,7 @@ using a7D.PDV.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace a7D.PDV.Integracao.DeliveryOnline
@@ -114,13 +115,16 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                     if (APIOrders == null)
                         APIOrders = new API.Orders(ConfigDO.Token);
 
-                    if(APILocations == null)
+                    if (APILocations == null)
                         APILocations = new API.Locations(ConfigDO.Token);
 
                     AddLog("Lendo pedidos...");
                     LerPedidos();
 
-                    //Sleep(10);
+                    AddLog("Atualizando status no APP...");
+                    AtualizarStatus();
+
+                    Sleep(30);
 
                     //APIMerchant = new API.Merchant(AccessToken);
 
@@ -171,9 +175,46 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             }
         }
 
+        private void AtualizarStatus()
+        {
+            var pedidos = ListarPedidosNaoSincronizados();
+
+            foreach (var pedido in pedidos)
+            {
+                Int32 idPedido = Convert.ToInt32(((DataRow)pedido)["IDPedido"]);
+                Int32 idStatusPedido = Convert.ToInt32(((DataRow)pedido)["IDStatusPedido"]);
+                string guidIdentificacao = ((DataRow)pedido)["guidIdentificacao"].ToString();
+                String order_id = ((DataRow)pedido)["order_id"].ToString();
+
+                switch (idStatusPedido)
+                {
+                    case 10:
+                        APIOrders.UpdateStatus(order_id, 3);
+                        Tag.Alterar(guidIdentificacao, "DeliveryOnline-status_id", "3");
+                        AddLog($"Status do Pedido {idPedido} (order-id {order_id}) alterado no app para 'Preparação'");
+                        break;
+                    case 20:
+                        APIOrders.UpdateStatus(order_id, 4);
+                        Tag.Alterar(guidIdentificacao, "DeliveryOnline-status_id", "4");
+                        AddLog($"Status do Pedido {idPedido} (order-id {order_id}) alterado no app para 'Enviado'");
+                        break;
+                    case 40:
+                        APIOrders.UpdateStatus(order_id, 5);
+                        Tag.Alterar(guidIdentificacao, "DeliveryOnline-status_id", "5");
+                        AddLog($"Status do Pedido {idPedido} (order-id {order_id}) alterado no app para 'Finalizado'");
+                        break;
+                    case 50:
+                        APIOrders.UpdateStatus(order_id, 6);
+                        Tag.Alterar(guidIdentificacao, "DeliveryOnline-status_id", "6");
+                        AddLog($"Status do Pedido {idPedido} (order-id {order_id}) alterado no app para 'Cancelado'");
+                        break;
+                }
+            }
+        }
+
         private void LerPedidos()
         {
-            var pedidos = APIOrders.GetOrders();
+            var pedidos = APIOrders.GetOrders(2);
 
             if (pedidos == null)
             {
@@ -183,17 +224,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
 
             foreach (var pedido in pedidos.data)
             {
-                switch(pedido.attributes.status.status_id)
-                {
-                    case 2: //Pendente confirmação
-                        //Verificar se já foi importado
-
-                        //Adicionar no sistema
-                        AdicionarPedido(pedido);
-
-                        //Alterar status na API
-                        break;
-                }
+                AdicionarPedido(pedido);
             }
         }
 

@@ -77,14 +77,23 @@ namespace a7D.PDV.Caixa.UI
             if (!string.IsNullOrEmpty(spWidth) && Int32.TryParse(spWidth, out int nspWidth))
                 spContainer.SplitterDistance = nspWidth;
 
+            ConfiguracoesDeliveryOnline ConfigDO = new ConfiguracoesDeliveryOnline();
+
             if (BLL.PDV.PossuiIFOOD() && ConfiguracoesCaixa.Valores.NotificarDelivery != "NAO")
             {
                 tmrDelivery.Enabled = ConfiguracoesCaixa.Valores.ConfirmarDelivery;
+
                 iFoodHabilitado.Checked = ConfiguracaoBD.ValorOuPadrao(EConfig.HabilitarIFood, ETipoPDV.IFOOD) == "1";
                 iFoodAprovacao.Checked = ConfiguracaoBD.ValorOuPadrao(EConfig.AprovarIFood, ETipoPDV.IFOOD) == "1";
             }
+            else if (ConfigDO.IntegracaoDeliveryOnline == true)
+            {
+                tmrDelivery.Enabled = ConfiguracoesCaixa.Valores.ConfirmarDelivery;
+            }
             else
+            {
                 integracaoMenu.Visible = false;
+            }                      
 
             CarregarMenuTipoPedido();
 
@@ -424,6 +433,12 @@ namespace a7D.PDV.Caixa.UI
 
                         lblIdentificacao.Text = "IFOOD " + tagDisplayId.Valor;
                     }
+                    else if (pedido.OrigemPedido != null && pedido.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.deliveryOnline)
+                    {
+                        TagInformation tagId = BLL.Tag.Carregar(pedido.GUIDIdentificacao, "DeliveryOnline-id");
+
+                        lblIdentificacao.Text = "Delivery Online " + tagId.Valor;
+                    }
                     else
                     {
                         lblIdentificacao.Text = "DELIVERY " + pedido.IDPedido;
@@ -747,8 +762,6 @@ namespace a7D.PDV.Caixa.UI
                 {
                     var pedidoVerifica = Pedido.CarregarCompleto(novoPedido.IDPedido);
 
-                    TagInformation tagStatus = BLL.Tag.Carregar(pedido.GUIDIdentificacao, "ifood-status");
-
                     if (pedidoVerifica.StatusPedido.StatusPedido == EStatusPedido.Cancelado)
                     {
                         MessageBox.Show("ATENÇÃO! O pedido foi cancelado automaticamente");
@@ -767,7 +780,7 @@ namespace a7D.PDV.Caixa.UI
                             pedido.StatusPedido.StatusPedido = EStatusPedido.Aberto;
                             Pedido.Salvar(pedido);
 
-                            if (ConfiguracoesSistema.Valores.ImprimirViaExpedicao == "NOVO") // iFood - Aprovação manual
+                            if (ConfiguracoesSistema.Valores.ImprimirViaExpedicao == "NOVO")
                                 OrdemProducaoServices.GerarViaExpedicao(pedido.IDPedido.Value, ConfiguracoesSistema.Valores.IDAreaViaExpedicao);
                         }
                         else if (result == DialogResult.No)
