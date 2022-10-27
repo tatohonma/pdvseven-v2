@@ -120,6 +120,8 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                     AddLog("Lendo pedidos...");
                     LerPedidos();
 
+                    //Sleep(10);
+
                     //APIMerchant = new API.Merchant(AccessToken);
 
                     //AddLog("Verificando status da loja");

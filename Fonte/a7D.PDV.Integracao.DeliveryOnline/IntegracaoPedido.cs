@@ -596,7 +596,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                     tbPedido p
                     INNER JOIN tbTag t ON t.GUIDIdentificacao = p.GUIDIdentificacao
                 WHERE
-                    Chave = 'DeliveryOnline-order_id' AND
+                    Chave = 'DeliveryOnline-id' AND
                     Valor = @order_id
             ";
 
