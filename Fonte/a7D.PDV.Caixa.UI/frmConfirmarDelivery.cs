@@ -32,7 +32,7 @@ namespace a7D.PDV.Caixa.UI
                     Text = $"Pedido {Pedido.IDPedido} iFood {tagDisplayId.Valor}";
                     break;
                 case 3:
-                    TagInformation tagId = BLL.Tag.Carregar(Pedido.GUIDIdentificacao, "DeliveryOnline-id");
+                    TagInformation tagId = BLL.Tag.Carregar(Pedido.GUIDIdentificacao, "DeliveryOnline-order_id");
                     Text = $"Pedido {Pedido.IDPedido} DeliveryOnline {tagId.Valor}";
                     break;
             }

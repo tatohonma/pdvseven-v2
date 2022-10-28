@@ -39,6 +39,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline.Model.Orders
     public class OrderTotalsInformation
     {
         public string code;
+        public string title;
         public string value;
     }
 
@@ -54,6 +55,11 @@ namespace a7D.PDV.Integracao.DeliveryOnline.Model.Orders
     }
 
     public class MenuOptions
-    { 
+    {
+        public Int32 menu_id;
+        public string order_option_name;
+        public string order_option_price;
+        public Decimal quantity;
+        public string order_option_category;
     }
 }

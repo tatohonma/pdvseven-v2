@@ -328,11 +328,14 @@ namespace a7D.PDV.BackOffice.UI
                     CarregarReceita();
                 }
 
-                if (String.IsNullOrEmpty(Produto1.GUIDIdentificacao))
+                if (!String.IsNullOrEmpty(Produto1.GUIDIdentificacao))
                 {
-                    pnlTags.Visible = false;
-                    lblMsgSalvarTags.Visible = true;
+                    pnlTags.Visible = true;
+                    lblMsgSalvarTags.Visible = false;
                 }
+
+                pnlReceita.Visible = true;
+                lblMsgSalvarReceita.Visible = false;
 
                 Task.Run(() => ObterEstoque());
             }
@@ -475,6 +478,8 @@ namespace a7D.PDV.BackOffice.UI
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             Salvar();
+
+            Produto1 = Produto.CarregarCompleto(Produto1.IDProduto.Value);
         }
 
         private void Salvar(bool fechar = false)
@@ -575,6 +580,9 @@ namespace a7D.PDV.BackOffice.UI
                             lblMsgSalvarTags.Visible = false;
                             AtualizarListaTags();
                         }
+
+                        pnlReceita.Visible = true;
+                        lblMsgSalvarReceita.Visible = false;
 
                         Text = Titulo;
                         Refresh();

@@ -24,6 +24,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
         TaxaEntregaInformation TaxaEntregaDO;
         UsuarioInformation UsuarioDO;
         PDVInformation PDVDO;
+        TipoDescontoInformation TipoDescontoDO;
 
         API.Orders APIOrders;
         API.Locations APILocations;
@@ -71,6 +72,13 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             if (PDVDO == null)
             {
                 AddLog($"Caixa ID PDV: {ConfigDO.CaixaPDV} inválido!");
+                configurado = false;
+            }
+
+            TipoDescontoDO = (TipoDescontoInformation)CRUD.Carregar(new TipoDescontoInformation { Nome = "Delivery Online" });
+            if (TipoDescontoDO.IDTipoDesconto == null)
+            {
+                AddLog("Não há um 'Tipo de Desconto' com o nome 'Delivery Online' cadastrada no Backoffice");
                 configurado = false;
             }
 
@@ -125,45 +133,6 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                     AtualizarStatus();
 
                     Sleep(30);
-
-                    //APIMerchant = new API.Merchant(AccessToken);
-
-                    //AddLog("Verificando status da loja");
-                    //if (LojaAbertaSistema())
-                    //{
-                    //    if (!LojaAbertaDeliveryOnline())
-                    //    {
-                    //        Sleep(60);
-                    //        continue;
-                    //    }
-
-
-                    //    if (APIOrders == null)
-                    //        APIOrders = new API.Orders(ConfigDO.Token);
-
-                    //    AddLog("Lendo pedidos...");
-                    //    LerPedidos();
-
-
-                    //    //    if (!LojaAbertaIfood())
-                    //    //    {
-                    //    //        Sleep(60);
-                    //    //        continue;
-                    //    //    }
-
-                    //    //    AddLog("Lendo eventos...");
-                    //    //    LerEventos();
-
-                    //    //    AddLog("Enviando confirmações...");
-                    //    //    EnviaConfirmacao();
-
-                    //    //    Sleep(25);
-                    //}
-                    //else
-                    //{
-                    //    Sleep(60);
-                    //    continue;
-                    //}
                 }
             }
             catch (Exception ex)
@@ -172,6 +141,8 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 AddLog("Reinicie o Integrador para restabelecer essa integração...\r\nCaso não resolva, entre em contato com o suporte!!!");
                 //if (!ex.Message.Contains("token expired") && !ex.Message.Contains("Invalid access"))
                 //    throw new ExceptionPDV(CodigoErro.EE11, ex);
+
+                AddLog(ex.ToString());
             }
         }
 
@@ -204,8 +175,8 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                         AddLog($"Status do Pedido {idPedido} (order-id {order_id}) alterado no app para 'Finalizado'");
                         break;
                     case 50:
-                        APIOrders.UpdateStatus(order_id, 6);
-                        Tag.Alterar(guidIdentificacao, "DeliveryOnline-status_id", "6");
+                        APIOrders.UpdateStatus(order_id, 9);
+                        Tag.Alterar(guidIdentificacao, "DeliveryOnline-status_id", "9");
                         AddLog($"Status do Pedido {idPedido} (order-id {order_id}) alterado no app para 'Cancelado'");
                         break;
                 }

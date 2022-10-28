@@ -66,7 +66,9 @@ Lista das últimas versões e FIX
 
 2.24.0.0 ======================================================================
     Novo: Integracao Delivery Online
-    Melhoria: Incluir GUIDIdentificacao em Produtos
+    Melhoria: Incluisão do GUIDIdentificacao em Produtos para uso das Tags
+    Correção: Cancelamento de pedidos no Delivery sem integracao com App
+    Correção: Não estava salvando o Refresh_Token no db
 
 2.23.0.7 ======================================================================
     Correção: Chamada da API sem o HTTPS

@@ -89,12 +89,12 @@ namespace a7D.PDV.Integracao.DeliveryOnline
         private void AdicionarPedido(Model.Orders.DataInformation pedidoApi)
         {
             PedidoInformation pedido = new PedidoInformation();
-            //string voucherDesconto;
+            string voucherDesconto;
             //string tipoTaxaAdicional;
 
             AddLog(JsonConvert.SerializeObject(pedidoApi));
 
-            if (CarregarPedidoPorIdExterno(pedidoApi.id) != null)
+            if (CarregarPedidoPorOrderId(pedidoApi.id) != null)
             {
                 AddLog($"Pedido {pedidoApi.id} já importado");
 
@@ -130,26 +130,23 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             pedido.ValorEntrega = Convert.ToDecimal(taxaEntrega, new CultureInfo("en-us"));
             //pedido.TaxaServicoPadrao = Convert.ToDecimal(ConfiguracoesSistema.Valores.TaxaServicoEntrega);
 
-            //if (orderDetails.total.benefits > 0)
-            //{
-            //    pedido.TipoDesconto = TipoDescontoIFood;
+            var cupom = pedidoApi.attributes.order_totals.FirstOrDefault(total => total.code == "coupon");
+            if (cupom != null)
+            {
+                pedido.TipoDesconto = TipoDescontoDO;
 
-            //    voucherDesconto = "VOUCHER DE DESCONTO\r\n";
-            //    foreach (var benefit in orderDetails.benefits)
-            //    {
-            //        foreach (var sponsorship in benefit.sponsorshipValues)
-            //        {
-            //            if (sponsorship.value > 0)
-            //                voucherDesconto += " > " + sponsorship.name + ": R$ " + sponsorship.value.ToString("#,##0.00") + "\r\n";
-            //        }
+                voucherDesconto = "CUPOM DE DESCONTO\r\n";
+                voucherDesconto += " > " + cupom.title + ": R$ " + Convert.ToDecimal(cupom.value, new CultureInfo("en-us")) + "\r\n";
 
-            //    }
+                pedido.Observacoes += voucherDesconto + "\r\n";
+                pedido.ObservacaoCupom += voucherDesconto + "\r\n";
 
-            //    pedido.Observacoes += voucherDesconto + "\r\n";
-            //    pedido.ObservacaoCupom += voucherDesconto + "\r\n";
-            //}
-
-            //pedido.ValorDesconto = orderDetails.total.benefits;
+                pedido.ValorDesconto = Convert.ToDecimal(cupom.value, new CultureInfo("en-us")) * -1;
+            }
+            else
+            {
+                pedido.ValorDesconto = 0;
+            }
 
             //pedido.ValorServico = orderDetails.total.additionalFees;
             string strValorTotal = pedidoApi.attributes.order_totals.FirstOrDefault(total => total.code == "total").value;
@@ -175,7 +172,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
 
             CRUD.Adicionar(pedido);
 
-            Tag.Adicionar(pedido.GUIDIdentificacao, "DeliveryOnline-id", pedidoApi.id);
+            Tag.Adicionar(pedido.GUIDIdentificacao, "DeliveryOnline-order_id", pedidoApi.id);
             Tag.Adicionar(pedido.GUIDIdentificacao, "DeliveryOnline-order_type", pedidoApi.attributes.order_type);
             Tag.Adicionar(pedido.GUIDIdentificacao, "DeliveryOnline-status_id", pedidoApi.attributes.status.status_id.ToString());
 
@@ -192,21 +189,45 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             //    pedido.Observacoes += "\r\n";
             //}
 
-            pedido.Observacoes += "ITENS\r\n";
-            foreach (var item in pedidoApi.attributes.order_menus)
-            {
-                Decimal valorUnitario = Convert.ToDecimal(item.price, new CultureInfo("en-us"));
-                Int32 idPedidoProduto = AdicionarPedidoProduto(pedido.IDPedido.Value, null, item.menu_id, item.name, valorUnitario, item.quantity, item.comment);
-                pedido.Observacoes += " - " + item.name + " (qtd " + item.quantity + ")\r\n";
+            ProdutoInformation produto;
+            Int32 idProduto;
+            String observacaoProduto = "";
 
-                //    if (item.options != null)
-                //    {
-                //        foreach (var modificacoes in item.options)
-                //        {
-                //            AdicionarPedidoProduto(pedido.IDPedido.Value, idPedidoProduto, modificacoes.externalCode, modificacoes.name, modificacoes.unitPrice, modificacoes.quantity, "");
-                //            pedido.Observacoes += "   -- " + modificacoes.name + " (qtd " + modificacoes.quantity + ")\r\n";
-                //        }
-                //    }
+            ProdutoInformation modificacao;
+            Int32 idProduto_modificacao;
+            String observacaoModificacao = "";
+
+            Int32 idPedidoProduto;
+            Decimal valorUnitario;
+
+
+            pedido.Observacoes += "ITENS\r\n";
+            foreach (var p in pedidoApi.attributes.order_menus)
+            {
+                produto = CarregarProdutoPorMenuId(p.menu_id);
+                CarregarProduto(produto, p.name, out idProduto, out observacaoProduto);
+
+                if (!String.IsNullOrWhiteSpace(observacaoProduto) && !String.IsNullOrWhiteSpace(p.comment))
+                    observacaoProduto = observacaoProduto + "\r\n" + p.comment;
+                else
+                    observacaoProduto = p.comment;
+
+                valorUnitario = Convert.ToDecimal(p.price, new CultureInfo("en-us"));
+                idPedidoProduto = AdicionarPedidoProduto(pedido.IDPedido.Value, null, idProduto, valorUnitario, p.quantity, observacaoProduto);
+                pedido.Observacoes += " - " + p.name + " (qtd " + p.quantity + ")\r\n";
+
+                if (p.menu_options != null)
+                {
+                    foreach (var m in p.menu_options)
+                    {
+                        modificacao = CarregarModificacaoPorNome(m.menu_id, m.order_option_name);
+                        CarregarProduto(modificacao, m.order_option_name, out idProduto_modificacao, out observacaoModificacao);
+
+                        valorUnitario = Convert.ToDecimal(m.order_option_price, new CultureInfo("en-us"));
+                        AdicionarPedidoProduto(pedido.IDPedido.Value, idPedidoProduto, idProduto_modificacao, valorUnitario, m.quantity, observacaoModificacao);
+                        pedido.Observacoes += " -- " + m.order_option_name + " (qtd " + m.quantity + ")\r\n";
+                    }
+                }
             }
 
             Int32 idTipoPagamento = Convert.ToInt32(pedidoApi.attributes.payment);
@@ -351,13 +372,9 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             return cliente;
         }
 
-        private Int32 AdicionarPedidoProduto(Int32 idPedido, Int32? idPedidoProduto_pai, Int32 menu_id, string nome, decimal valorUnitario, decimal quantidade, string notas)
+        private Int32 AdicionarPedidoProduto(Int32 idPedido, Int32? idPedidoProduto_pai, Int32 idProduto, decimal valorUnitario, decimal quantidade, string notas)
         {
             PedidoProdutoInformation pedidoProduto = new PedidoProdutoInformation();
-            Int32 idProduto = 0;
-            String observacaoProduto = "";
-
-            CarregarProduto(menu_id, nome, out idProduto, out observacaoProduto);
 
             pedidoProduto.Produto = new ProdutoInformation();
             pedidoProduto.Produto.IDProduto = idProduto;
@@ -379,14 +396,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             pedidoProduto.DtInclusao = DateTime.Now;
             pedidoProduto.CodigoAliquota = "";
 
-            if (!String.IsNullOrWhiteSpace(observacaoProduto))
-            {
-                pedidoProduto.Notas = observacaoProduto + "\r\n" + notas;
-            }
-            else
-            {
-                pedidoProduto.Notas = notas;
-            }
+            pedidoProduto.Notas = notas;
 
             pedidoProduto.Cancelado = false;
             pedidoProduto.RetornarAoEstoque = false;
@@ -396,10 +406,8 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             return pedidoProduto.IDPedidoProduto.Value;
         }
 
-        private void CarregarProduto(Int32 menu_id, string nome, out Int32 idProduto, out String observacaoProduto)
+        private void CarregarProduto(ProdutoInformation produto, String nome, out Int32 idProduto, out String observacaoProduto)
         {
-            ProdutoInformation produto = CarregarProdutoPorIdExterno(menu_id);
-
             if (produto == null || produto.Nome == null)
             {
                 idProduto = 1;
@@ -448,120 +456,6 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             CRUD.Adicionar(pedidoPagamento);
         }
 
-        //public void EnviaConfirmacao()
-        //{
-        //    string ret;
-        //    int qtdConfirmacaoEnviada = 0;
-
-        //    try
-        //    {
-        //        var pedidos = BLL.Pedido.ListarDelivery6Horas();
-
-        //        if (pedidos.Count == 0)
-        //        {
-        //            AddLog("Sem confirmações para serem enviadas!");
-        //            return;
-        //        }
-
-        //        foreach (var pedido in pedidos)
-        //        {
-        //            try
-        //            {
-        //                if (pedido.IDOrigemPedido != 2)
-        //                    continue;
-
-        //                TagInformation tagOrderId = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-orderId");
-        //                TagInformation tagDisplayId = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-displayId");
-        //                TagInformation tagStatus = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-status");
-        //                TagInformation tagOrderType = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-orderType");
-
-        //                if (pedido.IDStatusPedido == (int)EStatusPedido.NaoConfirmado)
-        //                {
-        //                    continue;
-        //                }
-        //                else if (pedido.IDStatusPedido == (int)EStatusPedido.Aberto && tagStatus.Valor != "CFM")
-        //                {
-        //                    ret = APIOrder.Confirm(tagOrderId.Valor);
-        //                    qtdConfirmacaoEnviada++;
-
-        //                    if (ret == null)
-        //                    {
-        //                        tagStatus = Tag.Alterar(tagStatus.GUIDIdentificacao, tagStatus.Chave, "CFM");
-
-        //                        AddLog("Pedido " + tagDisplayId.Valor + " (DisplayID) confirmado (CFM)");
-        //                    }
-        //                    else
-        //                    {
-        //                        AddLog("Erro confirmando envio " + tagDisplayId.Valor + " (DisplayID) (CFM)!");
-        //                    }
-        //                }
-        //                else if (pedido.IDStatusPedido == (int)EStatusPedido.Enviado && tagStatus.Valor != "DSP" && tagOrderType.Valor == "DELIVERY")
-        //                {
-        //                    ret = APIOrder.Dispatch(tagOrderId.Valor);
-        //                    qtdConfirmacaoEnviada++;
-
-        //                    if (ret == null)
-        //                    {
-        //                        tagStatus.Valor = "DSP";
-        //                        CRUD.Alterar(tagStatus);
-        //                        AddLog("Pedido " + tagDisplayId.Valor + " (DisplayID) despachado (DSP)");
-        //                    }
-        //                    else
-        //                    {
-        //                        AddLog("Erro confirmando envio " + tagDisplayId.Valor + " (DisplayID) (DSP)!");
-        //                    }
-        //                }
-        //                else if (pedido.IDStatusPedido == (int)EStatusPedido.Enviado && tagStatus.Valor != "RTP" &&
-        //                    (tagOrderType.Valor == "TAKEOUT" || tagOrderType.Valor == "INDOOR"))
-        //                {
-        //                    ret = APIOrder.ReadyToPickup(tagOrderId.Valor);
-        //                    qtdConfirmacaoEnviada++;
-
-        //                    if (ret == null)
-        //                    {
-        //                        tagStatus.Valor = "RTP";
-        //                        CRUD.Alterar(tagStatus);
-        //                        AddLog("Pedido " + tagDisplayId.Valor + " (DisplayID) pronto para retirada (RTP)");
-        //                    }
-        //                    else
-        //                    {
-        //                        AddLog("Erro confirmando pronto para retirada " + tagDisplayId.Valor + " (DisplayID) (RTP)!");
-        //                    }
-        //                }
-        //                else if (pedido.IDStatusPedido == (int)EStatusPedido.Cancelado && tagStatus.Valor == "requestCancellation")
-        //                {
-        //                    TagInformation tagCancellationCode = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-cancellationCode");
-
-        //                    ret = APIOrder.RequestCancellation(tagOrderId.Valor, tagCancellationCode.Valor);
-        //                    qtdConfirmacaoEnviada++;
-
-        //                    if (ret == null)
-        //                    {
-        //                        tagStatus.Valor = "CAN";
-        //                        CRUD.Alterar(tagStatus);
-        //                        AddLog("Pedido " + tagDisplayId.Valor + " (DisplayID) cancelado (CAN)");
-        //                    }
-        //                    else
-        //                    {
-        //                        AddLog("Erro confirmando cancelamento " + tagDisplayId.Valor + " (DisplayID) (CAN)!");
-        //                    }
-        //                }
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                AddLog("Erro confirmando pedido " + pedido.IDPedido + " (IDPedido): " + ex.Message);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        AddLog("Erro verificando pedidos para confirmação " + ex.Message);
-        //    }
-
-        //    if (qtdConfirmacaoEnviada == 0)
-        //        AddLog("Sem confirmações para serem enviadas!");
-        //}
-
         private void AlterarStatusPedidoSistema(int idPedido, EStatusPedido statusPedido)
         {
             var query = @"UPDATE tbPedido set IDStatusPedido=@idStatusPedido WHERE idPedido=@idPedido";
@@ -580,7 +474,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             }
         }
 
-        private PedidoInformation CarregarPedidoPorIdExterno(string order_id)
+        private PedidoInformation CarregarPedidoPorOrderId(string order_id)
         {
             PedidoInformation pedido = new PedidoInformation();
 
@@ -595,7 +489,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                     tbPedido p
                     INNER JOIN tbTag t ON t.GUIDIdentificacao = p.GUIDIdentificacao
                 WHERE
-                    Chave = 'DeliveryOnline-id' AND
+                    Chave = 'DeliveryOnline-order_id' AND
                     Valor = @order_id
             ";
 
@@ -632,7 +526,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 FROM 
 	                tbPedido p
 	                INNER JOIN tbTag t1 ON p.GUIDIdentificacao=t1.GUIDIdentificacao AND t1.Chave='DeliveryOnline-status_id'
-	                INNER JOIN tbTag t2 ON p.GUIDIdentificacao=t2.GUIDIdentificacao AND t2.Chave='DeliveryOnline-id'
+	                INNER JOIN tbTag t2 ON p.GUIDIdentificacao=t2.GUIDIdentificacao AND t2.Chave='DeliveryOnline-order_id'
                 WHERE
 	                (p.IDStatusPedido=10 AND t1.Valor<>3)
 	                OR
@@ -651,7 +545,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             return dt.Rows;
         }
 
-        private ProdutoInformation CarregarProdutoPorIdExterno(int menu_id)
+        private ProdutoInformation CarregarProdutoPorMenuId(int menu_id)
         {
             ProdutoInformation produto = new ProdutoInformation();
 
@@ -687,9 +581,50 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             }
         }
 
+        private ProdutoInformation CarregarModificacaoPorNome(int menu_id, string nome)
+        {
+            ProdutoInformation produto = new ProdutoInformation();
+
+            SqlDataAdapter da;
+            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
+
+            String querySql = @"
+                SELECT 
+	                m.IDProduto
+                FROM 
+	                tbProduto m
+	                INNER JOIN tbPainelModificacaoProduto pmp ON pmp.IDProduto=m.IDProduto
+	                INNER JOIN tbProdutoPainelModificacao ppm ON ppm.IDPainelModificacao=pmp.IDPainelModificacao
+	                INNER JOIN tbProduto p ON p.IDProduto=ppm.IDProduto
+	                INNER JOIN tbTag t ON t.GUIDIdentificacao=p.GUIDIdentificacao AND t.Chave='DeliveryOnline-menu_id'
+                WHERE
+	                m.Nome=@nome
+	                AND
+	                t.Valor=@menu_id
+            ";
+
+            da = new SqlDataAdapter(querySql, DB.ConnectionString);
+            da.SelectCommand.Parameters.AddWithValue("@menu_id", menu_id);
+            da.SelectCommand.Parameters.AddWithValue("@nome", nome);
+
+            da.Fill(ds);
+            dt = ds.Tables[0];
+
+            if (dt.Rows.Count > 0)
+            {
+                produto = Produto.Carregar(Convert.ToInt32(dt.Rows[0]["IDProduto"]));
+                return produto;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         private void ConfirmarPedido(Model.Orders.DataInformation pedidoApi)
         {
-            PedidoInformation pedido = CarregarPedidoPorIdExterno(pedidoApi.id);
+            PedidoInformation pedido = CarregarPedidoPorOrderId(pedidoApi.id);
 
             if (pedido != null && pedido.IDPedido != null)
             {

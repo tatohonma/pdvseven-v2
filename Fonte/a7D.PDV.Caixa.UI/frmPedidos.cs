@@ -435,7 +435,7 @@ namespace a7D.PDV.Caixa.UI
                     }
                     else if (pedido.OrigemPedido != null && pedido.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.deliveryOnline)
                     {
-                        TagInformation tagId = BLL.Tag.Carregar(pedido.GUIDIdentificacao, "DeliveryOnline-id");
+                        TagInformation tagId = BLL.Tag.Carregar(pedido.GUIDIdentificacao, "DeliveryOnline-order_id");
 
                         lblIdentificacao.Text = "Delivery Online " + tagId.Valor;
                     }

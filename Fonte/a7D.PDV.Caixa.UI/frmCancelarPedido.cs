@@ -153,7 +153,7 @@ namespace a7D.PDV.Caixa.UI
 
         private void CancelarPedido(MotivoCancelamentoInformation motivo, bool satCancelado)
         {
-            if (Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
+            if (Pedido1.OrigemPedido != null && Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
             {
                 SalvarCodigoCancelamentoIfood(motivo);
             }
@@ -183,7 +183,7 @@ namespace a7D.PDV.Caixa.UI
                 OrdemProducaoServices.GerarOrdemProducao(listCancelados, pedidoCancelado: true);
             }
 
-            if (Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
+            if (Pedido1.OrigemPedido != null && Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
             {
                 if (Pedido1.StatusPedido.StatusPedido == EStatusPedido.EmCancelamento)
                 {
