@@ -534,7 +534,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
 	                OR
 	                (p.IDStatusPedido=40 AND t1.Valor<>5)
 	                OR
-	                (p.IDStatusPedido=50 AND t1.Valor<>6)
+	                (p.IDStatusPedido=50 AND t1.Valor<>9)
             ";
 
             da = new SqlDataAdapter(querySql, DB.ConnectionString);
