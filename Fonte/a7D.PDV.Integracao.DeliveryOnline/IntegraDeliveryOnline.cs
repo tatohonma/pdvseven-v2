@@ -60,13 +60,6 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 configurado = false;
             }
 
-            TaxaEntregaDO = TaxaEntrega.CarregarPorNome("DeliveryOnline");
-            if (TaxaEntregaDO == null)
-            {
-                AddLog("Não há uma 'Taxa de Entrega' com o nome 'DeliveryOnline' cadastrada no Backoffice");
-                configurado = false;
-            }
-
             var pdvs = BLL.PDV.Listar();
             PDVDO = pdvs.FirstOrDefault(p => p.IDPDV == ConfigDO.CaixaPDV && p.TipoPDV.Tipo == ETipoPDV.CAIXA);
             if (PDVDO == null)
@@ -75,11 +68,31 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 configurado = false;
             }
 
+            TaxaEntregaDO = TaxaEntrega.CarregarPorNome("Delivery Online");
+            if (TaxaEntregaDO.IDTaxaEntrega == null)
+            {
+                TaxaEntregaDO = new TaxaEntregaInformation();
+                TaxaEntregaDO.Nome = "Delivery Online";
+                TaxaEntregaDO.Ativo = true;
+                TaxaEntregaDO.Excluido = false;
+                TaxaEntregaDO.Valor = 0;
+
+                CRUD.Adicionar(TaxaEntregaDO);
+
+                AddLog("Taxa Entrega 'Delivery Online' adicionada!");
+            }
+
             TipoDescontoDO = (TipoDescontoInformation)CRUD.Carregar(new TipoDescontoInformation { Nome = "Delivery Online" });
             if (TipoDescontoDO.IDTipoDesconto == null)
             {
-                AddLog("Não há um 'Tipo de Desconto' com o nome 'Delivery Online' cadastrada no Backoffice");
-                configurado = false;
+                TipoDescontoDO = new TipoDescontoInformation();
+                TipoDescontoDO.Nome = "Delivery Online";
+                TipoDescontoDO.Ativo = true;
+                TipoDescontoDO.Excluido = false;
+
+                CRUD.Adicionar(TipoDescontoDO);
+
+                AddLog("Tipo Desconto 'Delivery Online' adicionado!");
             }
 
             try
@@ -132,7 +145,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                     AddLog("Atualizando status no APP...");
                     AtualizarStatus();
 
-                    Sleep(30);
+                    Sleep(60);
                 }
             }
             catch (Exception ex)
