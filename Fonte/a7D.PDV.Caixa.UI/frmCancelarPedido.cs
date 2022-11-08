@@ -102,7 +102,7 @@ namespace a7D.PDV.Caixa.UI
                 {
                     Pedido1.RetornoSAT_venda = RetornoSAT.Carregar(Pedido1.RetornoSAT_venda.IDRetornoSAT.Value);
                     var horaConsultaUTC3 = DateTime.UtcNow.AddMinutes(-25);
-                    
+
                     if (DateTime.ParseExact(Pedido1.RetornoSAT_venda.timeStamp, _formatoData, _cultureInfo).ToUniversalTime() > horaConsultaUTC3)
                     {
                         if (Pedido1.RetornoSAT_cancelamento?.IDRetornoSAT == null)
@@ -153,7 +153,7 @@ namespace a7D.PDV.Caixa.UI
 
         private void CancelarPedido(MotivoCancelamentoInformation motivo, bool satCancelado)
         {
-            if (Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
+            if (Pedido1.OrigemPedido != null && Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
             {
                 SalvarCodigoCancelamentoIfood(motivo);
             }
@@ -183,7 +183,7 @@ namespace a7D.PDV.Caixa.UI
                 OrdemProducaoServices.GerarOrdemProducao(listCancelados, pedidoCancelado: true);
             }
 
-            if (Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
+            if (Pedido1.OrigemPedido != null && Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
             {
                 if (Pedido1.StatusPedido.StatusPedido == EStatusPedido.EmCancelamento)
                 {

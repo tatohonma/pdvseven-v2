@@ -100,8 +100,77 @@ namespace a7D.PDV.Integracao.iFood
             PagamentoIFood = listaPagamentos.FirstOrDefault(p => p.IDGateway == (int)EGateway.iFood);
             if (PagamentoIFood == null)
             {
-                AddLog("Não há um meio de pagamento com Gateway 'iFood' cadastrado no Backoffice");
-                configurado = false;
+                PagamentoIFood = new TipoPagamentoInformation();
+                PagamentoIFood.Nome = "iFood";
+                PagamentoIFood.CodigoImpressoraFiscal = "iFood";
+                PagamentoIFood.Ativo = true;
+                PagamentoIFood.RegistrarValores = false;
+                PagamentoIFood.IDGateway = (int)EGateway.iFood;
+
+                CRUD.Adicionar(PagamentoIFood);
+                AddLog("Pagamento com Gateway 'iFood' cadastrado!");
+            }
+
+            PagamentoRefeicao = listaPagamentos.FirstOrDefault(p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Refeicao));
+            if (PagamentoRefeicao == null)
+            {
+                PagamentoRefeicao = new TipoPagamentoInformation();
+                PagamentoRefeicao.Nome = "Vale Refeição";
+                PagamentoRefeicao.CodigoImpressoraFiscal = "0";
+                PagamentoRefeicao.RegistrarValores = true;
+                PagamentoRefeicao.Ativo = true;
+                PagamentoRefeicao.MeioPagamentoSAT = new MeioPagamentoSATInformation { IDMeioPagamentoSAT = 7 };
+
+                AddLog("Pagamento 'Vale Refeição' cadastrado!");
+            }
+
+            TaxaEntregaIFood = TaxaEntrega.CarregarPorNome("iFood");
+            if (TaxaEntregaIFood == null)
+            {
+                TaxaEntregaIFood = new TaxaEntregaInformation();
+                TaxaEntregaIFood.Nome = "iFood";
+                TaxaEntregaIFood.Ativo = true;
+                TaxaEntregaIFood.Excluido = false;
+                TaxaEntregaIFood.Valor = 0;
+
+                AddLog("Taxa de Entrega 'iFood' cadastrada!");
+            }
+
+            TipoDescontoIFood = (TipoDescontoInformation)CRUD.Carregar(new TipoDescontoInformation { Nome = "iFood" });
+            if (TipoDescontoIFood.IDTipoDesconto == null)
+            {
+                TipoDescontoIFood = new TipoDescontoInformation();
+                TipoDescontoIFood.Nome = "iFood";
+                TipoDescontoIFood.Ativo = true;
+                TipoDescontoIFood.Excluido = false;
+
+                CRUD.Adicionar(TipoDescontoIFood);
+
+                AddLog("Tipo Desconto 'iFood' adicionado!");
+            }
+
+            TaxaAdicional = (ProdutoInformation)CRUD.Carregar(new ProdutoInformation { Nome = "Taxa Adicional iFood" });
+            if (TaxaAdicional.IDProduto == null)
+            {
+                TaxaAdicional = new ProdutoInformation();
+                TaxaAdicional.Nome = "Taxa Adicional iFood";
+                TaxaAdicional.TipoProduto = new TipoProdutoInformation { IDTipoProduto = 10 };
+                TaxaAdicional.ValorUnitario = 0;
+                TaxaAdicional.Ativo = true;
+                TaxaAdicional.Disponibilidade = true;
+                TaxaAdicional.Excluido = false;
+                TaxaAdicional.DtAlteracaoDisponibilidade = DateTime.Now;
+                TaxaAdicional.DtUltimaAlteracao = DateTime.Now;
+                TaxaAdicional.ClassificacaoFiscal = new ClassificacaoFiscalInformation { IDClassificacaoFiscal = 2 };
+                TaxaAdicional.Unidade = new UnidadeInformation { IDUnidade = 1 };
+                TaxaAdicional.ControlarEstoque = false;
+                TaxaAdicional.UtilizarBalanca = false;
+                TaxaAdicional.AssistenteModificacoes = false;
+                TaxaAdicional.GUIDIdentificacao = Guid.NewGuid().ToString();
+
+                CRUD.Adicionar(TaxaAdicional);
+
+                AddLog("Produto com o nome 'Taxa Adicional iFood' cadastrado!");
             }
 
             PagamentoDinheiro = listaPagamentos.FirstOrDefault(p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Dinheiro));
@@ -125,38 +194,10 @@ namespace a7D.PDV.Integracao.iFood
                 configurado = false;
             }
 
-            PagamentoRefeicao = listaPagamentos.FirstOrDefault(p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Refeicao));
-            if (PagamentoRefeicao == null)
-            {
-                AddLog("Não há um meio de pagamento 'Vale Refeição' disponível cadastrado no Backoffice");
-                configurado = false;
-            }
-
             PagamentoOutros = listaPagamentos.FirstOrDefault(p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Outros));
             if (PagamentoOutros == null)
             {
                 AddLog("Não há um meio de pagamento 'Outros' disponível cadastrado no Backoffice");
-                configurado = false;
-            }
-
-            TaxaEntregaIFood = TaxaEntrega.CarregarPorNome("iFood");
-            if (TaxaEntregaIFood == null)
-            {
-                AddLog("Não há uma 'Taxa de Entrega' com o nome 'iFood' cadastrada no Backoffice");
-                configurado = false;
-            }
-
-            TipoDescontoIFood = (TipoDescontoInformation)CRUD.Carregar(new TipoDescontoInformation { Nome = "iFood" });
-            if (TipoDescontoIFood.IDTipoDesconto == null)
-            {
-                AddLog("Não há um 'Tipo de Desconto' com o nome 'iFood' cadastrada no Backoffice");
-                configurado = false;
-            }
-
-            TaxaAdicional = (ProdutoInformation)CRUD.Carregar(new ProdutoInformation { Nome = "Taxa Adicional iFood" });
-            if (TaxaAdicional.IDProduto == null)
-            {
-                AddLog("Não há um produto com o nome 'Taxa Adicional iFood' cadastrado no Backoffice");
                 configurado = false;
             }
 
@@ -247,6 +288,8 @@ namespace a7D.PDV.Integracao.iFood
                     if (token.accessToken != "")
                     {
                         ConfigIFood.RefreshToken = token.refreshToken;
+                        AtualizarRefreshToken(token.refreshToken);
+
                         AccessToken = token.accessToken;
                         ExpiraEm = DateTime.Now.AddSeconds(token.expiresIn * 0.8);
 
@@ -265,10 +308,13 @@ namespace a7D.PDV.Integracao.iFood
                     Model.OAuth.Token token = apiOAuth.Token("refresh_token", ConfigIFood.ClientId, ConfigIFood.ClientSecret, ConfigIFood.AuthorizationCode, ConfigIFood.AuthorizationCodeVerifier, ConfigIFood.RefreshToken);
 
                     if (token.accessToken != "")
-                    {
-                        AccessToken = token.accessToken;
+                    {                        
                         ConfigIFood.RefreshToken = token.refreshToken;
+                        AtualizarRefreshToken(token.refreshToken);
+
+                        AccessToken = token.accessToken;
                         ExpiraEm = DateTime.Now.AddSeconds(token.expiresIn * 0.8);
+
 
                         AddLog("Autenticado e novo Token gerado (refresh_token)!");
                         AddLog(AccessToken);
@@ -292,7 +338,7 @@ namespace a7D.PDV.Integracao.iFood
 
         private void AtualizarRefreshToken(string refreshToken)
         {
-            ConfiguracaoBDInformation config = ConfiguracaoBD.BuscarConfiguracao("RefreshToken");
+            ConfiguracaoBDInformation config = ConfiguracaoBD.BuscarConfiguracao("RefreshToken", 150);
             config.Valor = refreshToken;
             CRUD.Alterar(config);
         }
@@ -353,6 +399,10 @@ namespace a7D.PDV.Integracao.iFood
                             case "CFM":
                                 AddLog("Confirmar pedido > " + evento.orderId);
                                 ConfirmarPedido(evento);
+                                break;
+
+                            case "RDA":
+                                AddLog("Motoboy a caminho > " + evento.orderId);
                                 break;
 
                             default:

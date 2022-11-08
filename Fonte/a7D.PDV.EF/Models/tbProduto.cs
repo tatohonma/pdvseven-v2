@@ -22,6 +22,7 @@ namespace a7D.PDV.EF.Models
         }
 
         public int IDProduto { get; set; }
+        public string GUIDIdentificacao { get; set; }
         public int IDTipoProduto { get; set; }
         public string Codigo { get; set; }
         public string CodigoERP { get; set; }

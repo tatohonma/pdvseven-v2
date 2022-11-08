@@ -3,6 +3,7 @@
     public enum EOrigemPedido
     {
         sistema = 1,
-        ifood = 2
+        ifood = 2,
+        deliveryOnline = 3
     }
 }

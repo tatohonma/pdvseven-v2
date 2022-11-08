@@ -88,9 +88,11 @@ namespace a7D.PDV.BLL
 
         public static void SalvarCompleto(ProdutoInformation obj)
         {
-            //ProdutoImposto.Salvar(obj.ProdutoImposto);
             try
             {
+                if (string.IsNullOrEmpty(obj.GUIDIdentificacao))
+                    obj.GUIDIdentificacao = Guid.NewGuid().ToString();
+
                 obj.DtUltimaAlteracao = DateTime.Now;
                 obj.Excluido = false;
                 Salvar(obj);

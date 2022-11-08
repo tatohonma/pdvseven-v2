@@ -243,7 +243,7 @@ namespace a7D.PDV.Caixa.UI
             if (qtd > 0)
             {
                 if (MessageBox.Show($@"Há {qtd} pedido{(qtd > 1 ? "s" : "")} delivery não finalizado{(qtd > 1 ? "s" : "")}!
-Isso irá poderá gerar divergência no caixa atual ou no próximo.
+Isso poderá gerar divergência no caixa atual ou no próximo.
 
 Deseja realizar o fechamento do caixa mesmo assim?", "ATENÇÃO", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
                     return;
