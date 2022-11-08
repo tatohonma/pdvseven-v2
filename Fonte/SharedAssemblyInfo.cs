@@ -66,7 +66,11 @@ Lista das últimas versões e FIX
 
 
 2.24.0.0 ======================================================================
-    
+    Novo: Integração com Delivery Online
+    Melhorias: Ajustes na integração iFood para criar automaticamente Tipo Pagamento, Tipo Desconto, Taxa Entrega, Pagamento por VR
+    Melhorias: Inclusão das TAGs em produtos
+    Correção: Erro na autenticação do iFood que expirava
+    Correção: Cancelamento de pedidos no Delivery sem integracao com App
 
 2.23.0.7 ======================================================================
     Correção: Chamada da API de autenticação sem o HTTPS
