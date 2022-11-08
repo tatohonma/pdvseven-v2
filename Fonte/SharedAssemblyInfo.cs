@@ -64,8 +64,12 @@ Lista das últimas versões e FIX
     O WS2 é responsável em bloquear versão antiga dos aplicativos, e fornecer o link do correto para download
     Especificar o tipo de cada alteração feita: Novo, Melhoria, Correção, TDD, Atualização
 
+
+2.24.0.0 ======================================================================
+    
+
 2.23.0.7 ======================================================================
-    Correção: Chamada da API sem o HTTPS
+    Correção: Chamada da API de autenticação sem o HTTPS
     Correção: Relatório do Fechamento do dia
     Correção: Fechamento do dia sem movimentação
 
