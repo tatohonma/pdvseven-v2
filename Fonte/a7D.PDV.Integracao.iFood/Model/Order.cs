@@ -1,5 +1,4 @@
 ﻿using System;
-using a7D.PDV.Integracao.iFood.Model;
 
 namespace a7D.PDV.Integracao.iFood.Model.Order
 {

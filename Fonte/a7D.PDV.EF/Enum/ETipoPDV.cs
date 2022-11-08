@@ -29,5 +29,6 @@ namespace a7D.PDV.EF.Enum
         [Description("Torneira")] TORNEIRA = 220,
         [Description("Validador de Ticket")] TICKET = 230,
         [Description("POS Integrado Granito")] POS_INTEGRADO_GRANITO = 240,
+        [Description("Delivery Online")] DELIVERY_ONLINE = 250,
     }
 }

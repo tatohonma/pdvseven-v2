@@ -84,6 +84,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelatorioDAL.cs" />
     <Compile Include="SqlDataReaderExtensionMethods.cs" />
+    <Compile Include="TagDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\a7D.PDV.EF\a7D.PDV.EF.csproj">

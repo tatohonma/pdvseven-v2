@@ -2,8 +2,6 @@ using a7D.PDV.BLL;
 using a7D.PDV.BLL.Services;
 using a7D.PDV.EF.Enum;
 using a7D.PDV.EF.Models;
-using a7D.PDV.Integracao.Loggi;
-using a7D.PDV.Integracao.Loggi.Model;
 using a7D.PDV.Model;
 using a7D.PDV.Model.DTO;
 using System;
@@ -42,8 +40,8 @@ namespace a7D.PDV.Caixa.UI
         #region Variáveis
 
         private PedidoInformation Pedido1 { get; set; }
-        private OrcamentoResponse loggiOrcamento = null;
-        private Task loggiTask = null;
+        //private OrcamentoResponse loggiOrcamento = null;
+        //private Task loggiTask = null;
         private List<TaxaEntregaInformation> TaxasEntrega { get; set; }
         private List<EntregadorInformation> Entregadores { get; set; }
         private List<PedidoPagamentoInformation> Pagamentos { get; set; }
@@ -109,11 +107,13 @@ namespace a7D.PDV.Caixa.UI
         private frmNovoDelivery(string guidIdentificacao, EstadoDelivery estado) : this()
         {
             Pedido1 = Pedido.CarregarUltimoPedido(guidIdentificacao);
-            TagInformation tagOrderType = BLL.Tag.Carregar(Pedido1.GUIDIdentificacao, "ifood-orderType");
 
-            if (Pedido1.OrigemPedido != null && Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
+            if (Pedido1.OrigemPedido != null &&
+                (Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood ||
+                Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.deliveryOnline))
             {
                 AppDelivery = true;
+
                 controlePedidoProduto.BloqueiaEdicao();
             }
 
@@ -1164,10 +1164,7 @@ namespace a7D.PDV.Caixa.UI
             }
             else
             {
-                lblResumoNomeCliente.Text =
-                    lblResumoTelefoneCliente.Text =
-                    lblResumoEnderecoObs.Text =
-                    string.Empty;
+                lblResumoNomeCliente.Text = lblResumoTelefoneCliente.Text = lblResumoEnderecoObs.Text = string.Empty;
                 rb1.Text = string.Empty;
                 gbEditarCliente.Visible = false;
             }
@@ -1188,6 +1185,8 @@ namespace a7D.PDV.Caixa.UI
                 rb2.Text = "1 Produto";
             else
                 rb2.Text = $"{(quantidade ?? 0).ToString("0")} Produtos";
+
+
             var stringTotal = total.ToString("R$ #,##0.00", _provider);
 
             rb2.Text += $"\n{stringTotal}";
@@ -1196,17 +1195,27 @@ namespace a7D.PDV.Caixa.UI
             #endregion
 
             #region taxa entrega
-            if (AppDelivery && Pedido1.ValorEntrega > 0)
-            {
-                var stringValor = Pedido1.ValorEntrega.Value.ToString("R$ #,##0.00", _provider);
-                rb3.Text = $"Taxa de Entrega\n{stringValor}";
-                lblTaxaEntrega.Text = $"iFood: {stringValor}";
-                lblResumoTaxaEntrega.Text = lblFinalizarTaxaEntrega.Text = stringValor;
-                lblTaxaEntrega.Visible = true;
-                llConfirmacaoAlterarTaxaEntrega.Visible = false;
-                TaxaSelecionada = true;
-            }
-            else if (Pedido1.TaxaEntrega != null)
+            //if (AppDelivery && Pedido1.ValorEntrega > 0 && Pedido1.OrigemPedido.IDOrigemPedido == (Int32)EOrigemPedido.ifood)
+            //{
+            //    var stringValor = Pedido1.ValorEntrega.Value.ToString("R$ #,##0.00", _provider);
+            //    rb3.Text = $"Taxa de Entrega\n{stringValor}";
+            //    lblTaxaEntrega.Text = $"iFood: {stringValor}";
+            //    lblResumoTaxaEntrega.Text = lblFinalizarTaxaEntrega.Text = stringValor;
+            //    lblTaxaEntrega.Visible = true;
+            //    llConfirmacaoAlterarTaxaEntrega.Visible = false;
+            //    TaxaSelecionada = true;
+            //}
+            //else if (AppDelivery && Pedido1.ValorEntrega > 0 && Pedido1.OrigemPedido.IDOrigemPedido == (Int32)EOrigemPedido.deliveryOnline)
+            //{
+            //    var stringValor = Pedido1.ValorEntrega.Value.ToString("R$ #,##0.00", _provider);
+            //    rb3.Text = $"Taxa de Entrega\n{stringValor}";
+            //    lblTaxaEntrega.Text = $"iFood: {stringValor}";
+            //    lblResumoTaxaEntrega.Text = lblFinalizarTaxaEntrega.Text = stringValor;
+            //    lblTaxaEntrega.Visible = true;
+            //    llConfirmacaoAlterarTaxaEntrega.Visible = false;
+            //    TaxaSelecionada = true;
+            //}
+            if (Pedido1.TaxaEntrega != null)
             {
                 var stringValor = Pedido1.TaxaEntrega.Valor.Value.ToString("R$ #,##0.00", _provider);
                 rb3.Text = $"Taxa de Entrega\n{stringValor}";
@@ -1422,11 +1431,11 @@ namespace a7D.PDV.Caixa.UI
         private void LoggiOrcamento()
         {
             if (!BLL.PDV.PossuiLoggi()
-             || loggiTask != null // Se ja estiver em execução, ão faz nada
+             //|| loggiTask != null // Se ja estiver em execução, ão faz nada
              || dgvEntregador.SelectedRows.Count == 0
              || Pedido1.IDPedido == null
              || Pedido1.Cliente == null
-             || loggiOrcamento != null
+             //|| loggiOrcamento != null
              || !(Pedido1.TaxaEntrega?.IDTamanhoPacote > 0))
                 return;
 
@@ -1436,18 +1445,18 @@ namespace a7D.PDV.Caixa.UI
             Pedido1.Entregador = entregador;
             Pedido1.DtEnvio = DateTime.Now;
 
-            loggiTask = Task.Run(() =>
-            {
-                lIgnorado = false;
+            //loggiTask = Task.Run(() =>
+            //{
+            //    lIgnorado = false;
 
-                loggiOrcamento = LoggiDelivery.Orcamento(
-                    Pedido1.TaxaEntrega.IDTamanhoPacote.Value,
-                    (Pedido1.Cliente.CEP > 0 ? Pedido1.Cliente.CEP.Value.ToString("00000000") : Pedido1.Cliente.Endereco) + ", " + Pedido1.Cliente.EnderecoNumero + " " + Pedido1.Cliente.Complemento,
-                    "Retirar pedido #" + Pedido1.IDPedido,
-                    "Entregar para " + Pedido1.Cliente.NomeCompleto);
+            //    loggiOrcamento = LoggiDelivery.Orcamento(
+            //        Pedido1.TaxaEntrega.IDTamanhoPacote.Value,
+            //        (Pedido1.Cliente.CEP > 0 ? Pedido1.Cliente.CEP.Value.ToString("00000000") : Pedido1.Cliente.Endereco) + ", " + Pedido1.Cliente.EnderecoNumero + " " + Pedido1.Cliente.Complemento,
+            //        "Retirar pedido #" + Pedido1.IDPedido,
+            //        "Entregar para " + Pedido1.Cliente.NomeCompleto);
 
-                loggiTask = null;
-            });
+            //    loggiTask = null;
+            //});
         }
 
         private void PesquisarCliente()
@@ -1607,60 +1616,60 @@ namespace a7D.PDV.Caixa.UI
                 msg += "Selecione a taxa de entrega\n";
                 rb3.ImageIndex = 2;
             }
-            else if (_estado == EstadoDelivery.Entregador && Pedido1.Entregador?.IDGateway == (int)EGateway.Loggi)
-            {
-                if (loggiOrcamento == null)
-                {
-                    LoggiOrcamento();
-                    loggiTask?.Wait(5000);
-                }
+            //            else if (_estado == EstadoDelivery.Entregador && Pedido1.Entregador?.IDGateway == (int)EGateway.Loggi)
+            //            {
+            //                if (loggiOrcamento == null)
+            //                {
+            //                    LoggiOrcamento();
+            //                    loggiTask?.Wait(5000);
+            //                }
 
-                if (loggiOrcamento == null)
-                    msg += "Sem resposta da Loggi\r\n";
+            //                if (loggiOrcamento == null)
+            //                    msg += "Sem resposta da Loggi\r\n";
 
-                else if (string.IsNullOrEmpty(loggiOrcamento.id))
-                    msg += "Loggi ERRO: " + loggiOrcamento.ToString() + "\r\n";
+            //                else if (string.IsNullOrEmpty(loggiOrcamento.id))
+            //                    msg += "Loggi ERRO: " + loggiOrcamento.ToString() + "\r\n";
 
-                else if (loggiOrcamento.waypoints.Length == 2
-                    && loggiOrcamento.waypoints[0]?.address_data.formatted_address != null
-                    && loggiOrcamento.waypoints[1]?.address_data.formatted_address != null)
-                {
-                    string info = $@"Confirma entrega via Loggi?
+            //                else if (loggiOrcamento.waypoints.Length == 2
+            //                    && loggiOrcamento.waypoints[0]?.address_data.formatted_address != null
+            //                    && loggiOrcamento.waypoints[1]?.address_data.formatted_address != null)
+            //                {
+            //                    string info = $@"Confirma entrega via Loggi?
 
-Origem:
-{loggiOrcamento.waypoints[0].address_data.formatted_address}
+            //Origem:
+            //{loggiOrcamento.waypoints[0].address_data.formatted_address}
 
-Destino:
-{loggiOrcamento.waypoints[1].address_data.formatted_address}";
+            //Destino:
+            //{loggiOrcamento.waypoints[1].address_data.formatted_address}";
 
-                    rb1.Checked = true;
-                    AlterarVisibilidade();
-                    Application.DoEvents();
+            //                    rb1.Checked = true;
+            //                    AlterarVisibilidade();
+            //                    Application.DoEvents();
 
-                    if (MessageBox.Show(info, "Loggi", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) != DialogResult.Yes)
-                        msg += "Loggi: Não foi confirmado";
-                    else
-                    {
-                        var result = LoggiDelivery.Confirmar(loggiOrcamento.id);
+            //                    if (MessageBox.Show(info, "Loggi", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) != DialogResult.Yes)
+            //                        msg += "Loggi: Não foi confirmado";
+            //                    else
+            //                    {
+            //                        var result = LoggiDelivery.Confirmar(loggiOrcamento.id);
 
-                        if (result.errors != null)
-                            msg = result.errors.ToString();
+            //                        if (result.errors != null)
+            //                            msg = result.errors.ToString();
 
-                        if (result.error_message != null)
-                            msg += " " + result.error_message;
+            //                        if (result.error_message != null)
+            //                            msg += " " + result.error_message;
 
-                        if (result.id == 0)
-                        {
-                            Logs.Erro(CodigoErro.EE21, result.last_request + "\r\n" + result.last_result, loggiOrcamento.ToString());
-                            msg = "Não foi possível realizar o pedido na Loggi\r\n" + msg;
-                        }
-                        else
-                            MessageBox.Show("Pedido Loggi #" + result.id + " criado", "Loggi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-                else
-                    msg += "Loggi ERRO: Não foi possível obter os endereços de origem e destino da entrega";
-            }
+            //                        if (result.id == 0)
+            //                        {
+            //                            Logs.Erro(CodigoErro.EE21, result.last_request + "\r\n" + result.last_result, loggiOrcamento.ToString());
+            //                            msg = "Não foi possível realizar o pedido na Loggi\r\n" + msg;
+            //                        }
+            //                        else
+            //                            MessageBox.Show("Pedido Loggi #" + result.id + " criado", "Loggi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //                    }
+            //                }
+            //                else
+            //                    msg += "Loggi ERRO: Não foi possível obter os endereços de origem e destino da entrega";
+            //            }
             #endregion
 
             var existemProdutos = controlePedidoProduto.ListaPedidoProduto.Count != 0;
@@ -1960,20 +1969,20 @@ Destino:
                 return;
             }
 
-            if (BLL.PDV.PossuiLoggi()
-             && !string.IsNullOrEmpty(txtEndereco.Text)
-             && !string.IsNullOrEmpty(txtEnderecoNumero.Text))
-            {
-                lPesquisando = true;
-                loggiOrcamento = null;
-                lblLoggiEstimativa.Text = await LoggiDelivery.EstimarAsync((txtCEP.Text.Length == 8 ? txtCEP.Text : txtEndereco.Text) + ", " + txtEnderecoNumero.Text + " " + txtComplemento.Text);
-                lPesquisando = false;
-                if (lIgnorado)
-                {
-                    lIgnorado = false;
-                    txtEnderecoNumero_TextChanged(null, null);
-                }
-            }
+            //if (BLL.PDV.PossuiLoggi()
+            // && !string.IsNullOrEmpty(txtEndereco.Text)
+            // && !string.IsNullOrEmpty(txtEnderecoNumero.Text))
+            //{
+            //    lPesquisando = true;
+            //    loggiOrcamento = null;
+            //    lblLoggiEstimativa.Text = await LoggiDelivery.EstimarAsync((txtCEP.Text.Length == 8 ? txtCEP.Text : txtEndereco.Text) + ", " + txtEnderecoNumero.Text + " " + txtComplemento.Text);
+            //    lPesquisando = false;
+            //    if (lIgnorado)
+            //    {
+            //        lIgnorado = false;
+            //        txtEnderecoNumero_TextChanged(null, null);
+            //    }
+            //}
         }
     }
 }

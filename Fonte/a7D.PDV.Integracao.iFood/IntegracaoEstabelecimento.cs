@@ -21,24 +21,23 @@ namespace a7D.PDV.Integracao.iFood
                 DataTable dt = new DataTable();
 
                 String querySql = @"
-				SELECT	
-					cbd.Valor as 'ID PDV iFood',
-					CASE
-						WHEN c.DtAbertura is null THEN  0
-						WHEN c.DtAbertura is not null THEN  1
-					END as 'Status Caixa iFood'
-				FROM
-					tbConfiguracaoBD cbd
-					INNER JOIN tbCaixa c ON c.IDPDV = cbd.Valor
-				WHERE
-					cbd.Chave = 'CaixaPDV'
-					AND
-					c.DtAbertura is not null
-					AND
-					c.DtFechamento is null
-            ";
+				    SELECT
+					    CASE
+						    WHEN c.DtAbertura is null THEN  0
+						    WHEN c.DtAbertura is not null THEN  1
+					    END as 'Status Caixa'
+				    FROM
+					    tbCaixa c
+				    WHERE
+					    c.DtAbertura is not null
+					    AND
+					    c.DtFechamento is null
+                        AND
+                        c.IDPDV=@IDPDV
+                ";
 
                 da = new SqlDataAdapter(querySql, DB.ConnectionString);
+                da.SelectCommand.Parameters.AddWithValue("@IDPDV", ConfigIFood.CaixaPDV);
 
                 da.Fill(ds);
                 dt = ds.Tables[0];
@@ -49,7 +48,7 @@ namespace a7D.PDV.Integracao.iFood
                 }
                 else
                 {
-                    AddLog("Loja do iFood fechada no sistema!");
+                    AddLog("Loja do iFood fechada no sistema! (Verificar abertura de caixa)");
                     return false;
                 }
             }

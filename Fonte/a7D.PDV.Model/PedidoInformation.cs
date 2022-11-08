@@ -78,7 +78,6 @@ namespace a7D.PDV.Model
         [CRUDParameterDAL(false, "ValorTotal")]
         public Decimal? ValorTotal { get; set; }
 
-        // Campo auxiliar de controle, no IFOOD é o numero curto do pedido
         [CRUDParameterDAL(false, "GUIDAgrupamentoPedido")]
         public String GUIDAgrupamentoPedido { get; set; }
 
