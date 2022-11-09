@@ -731,6 +731,10 @@
       <Project>{86D34513-7E1D-4DD1-AB22-6A2AC809EA93}</Project>
       <Name>a7D.PDV.Impressora</Name>
     </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.iFood\a7D.PDV.Integracao.iFood.csproj">
+      <Project>{bfdcb202-b7a6-4f3d-813f-970ecb7539af}</Project>
+      <Name>a7D.PDV.Integracao.iFood</Name>
+    </ProjectReference>
     <ProjectReference Include="..\a7D.PDV.Integracao.Pagamento\a7D.PDV.Integracao.Pagamento.csproj">
       <Project>{26083fd7-642b-4f53-bab3-1c8f0ac8eabf}</Project>
       <Name>a7D.PDV.Integracao.Pagamento</Name>

@@ -666,5 +666,24 @@ namespace a7D.PDV.Integracao.iFood
                 }
             }
         }
+
+
+        public List<MotivoCancelamentoInformation> ListarMotivosCancelamento(string id)
+        {
+            List<MotivoCancelamentoInformation> list = new List<MotivoCancelamentoInformation>();
+            ConfigIFood = new ConfiguracoesIFood();
+
+            Autenticar();
+            APIOrder = new API.Order(AccessToken);
+
+            var listaMotivosCancelamento = APIOrder.CancellationReasons(id);
+
+            foreach (var motivoCancelamento in listaMotivosCancelamento)
+            {
+                list.Add(new MotivoCancelamentoInformation { IDMotivoCancelamento = Convert.ToInt32(motivoCancelamento.cancelCodeId), Nome = motivoCancelamento.description });
+            }
+
+            return list;
+        }
     }
 }

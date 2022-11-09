@@ -121,6 +121,7 @@ namespace a7D.PDV.Integracao.iFood
                 PagamentoRefeicao.Ativo = true;
                 PagamentoRefeicao.MeioPagamentoSAT = new MeioPagamentoSATInformation { IDMeioPagamentoSAT = 7 };
 
+                CRUD.Adicionar(PagamentoRefeicao);
                 AddLog("Pagamento 'Vale Refeição' cadastrado!");
             }
 
@@ -133,6 +134,7 @@ namespace a7D.PDV.Integracao.iFood
                 TaxaEntregaIFood.Excluido = false;
                 TaxaEntregaIFood.Valor = 0;
 
+                CRUD.Adicionar(TaxaEntregaIFood);
                 AddLog("Taxa de Entrega 'iFood' cadastrada!");
             }
 
@@ -145,7 +147,6 @@ namespace a7D.PDV.Integracao.iFood
                 TipoDescontoIFood.Excluido = false;
 
                 CRUD.Adicionar(TipoDescontoIFood);
-
                 AddLog("Tipo Desconto 'iFood' adicionado!");
             }
 
@@ -169,7 +170,6 @@ namespace a7D.PDV.Integracao.iFood
                 TaxaAdicional.GUIDIdentificacao = Guid.NewGuid().ToString();
 
                 CRUD.Adicionar(TaxaAdicional);
-
                 AddLog("Produto com o nome 'Taxa Adicional iFood' cadastrado!");
             }
 
@@ -391,6 +391,9 @@ namespace a7D.PDV.Integracao.iFood
                                 break;
 
                             case "CAR":
+                                AddLog("Cancelamento confirmado pelo iFood > " + evento.orderId);
+                                break;
+                                    
                             case "CCR":
                                 AddLog("Cancelar pedido > " + evento.orderId);
                                 CancelarPedido(evento);

@@ -277,4 +277,10 @@ namespace a7D.PDV.Integracao.iFood.Model.Order
         public float pickupEtaStart;
         public float trackDate;
     }
+
+    public class CancellationReasons
+    {
+        public string cancelCodeId;
+        public string description; 
+    }
 }
