@@ -67,8 +67,17 @@ namespace a7D.PDV.Caixa.UI
                 Integracao.iFood.IntegraIFood objIntegraIFood = new Integracao.iFood.IntegraIFood();
 
                 var listaMotivo = objIntegraIFood.ListarMotivosCancelamento(id);
-                listaMotivo.Insert(0, new MotivoCancelamentoInformation());
-                cbbMotivoCancelamento.DataSource = listaMotivo;
+
+                if (listaMotivo.Count > 0)
+                {
+                    listaMotivo.Insert(0, new MotivoCancelamentoInformation());
+                    cbbMotivoCancelamento.DataSource = listaMotivo;
+                }
+                else
+                {
+                    MessageBox.Show("Cancelamento negado pelo iFood! Entre em contato com eles...", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Close();
+                }
             }
             else
             {
