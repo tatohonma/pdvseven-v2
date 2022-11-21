@@ -12,7 +12,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline.API
         {
         }
 
-        public Model.Orders.OrdersInformation GetOrders(int statusId) => Get<Model.Orders.OrdersInformation>($"/api/orders?status={statusId}");
+        public Model.Orders.OrdersInformation GetOrders(int locationId, int statusId) => Get<Model.Orders.OrdersInformation>($"/api/orders?location={locationId}&status={statusId}");
 
         public void UpdateStatus(string id, int status_id)
         {

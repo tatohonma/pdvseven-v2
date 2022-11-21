@@ -52,11 +52,12 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 return false;
             }
 
-            if (string.IsNullOrEmpty(ConfigDO.Username)
+            if (string.IsNullOrEmpty(ConfigDO.Location_id)
+             || string.IsNullOrEmpty(ConfigDO.Username)
              || string.IsNullOrEmpty(ConfigDO.Password)
              || string.IsNullOrEmpty(ConfigDO.DeviceName))
             {
-                AddLog("Falta configurar o acesso a API do Delivery Online no Configurador (username, password e device-name)");
+                AddLog("Falta configurar o acesso a API do Delivery Online no Configurador (location_id, username, password e device-name)");
                 configurado = false;
             }
 
@@ -198,18 +199,25 @@ namespace a7D.PDV.Integracao.DeliveryOnline
 
         private void LerPedidos()
         {
-            var pedidos = APIOrders.GetOrders(2);
+            var listaLocationId = ConfigDO.Location_id.Split(';');
+            Int32 qtdPedidos = 0;
 
-            if (pedidos == null)
+            foreach (var locationId in listaLocationId)
             {
-                AddLog("Sem pedidos!");
-                return;
+                var pedidos = APIOrders.GetOrders(Convert.ToInt32(locationId.Trim()), 2);
+
+                if (pedidos != null && pedidos.data.Length > 0)
+                {
+                    foreach (var pedido in pedidos.data)
+                    {
+                        AdicionarPedido(pedido);
+                        qtdPedidos++;
+                    }
+                }
             }
 
-            foreach (var pedido in pedidos.data)
-            {
-                AdicionarPedido(pedido);
-            }
+            if (qtdPedidos == 0)
+                AddLog(" -- Sem pedidos!");
         }
 
         private Boolean Autenticar()
