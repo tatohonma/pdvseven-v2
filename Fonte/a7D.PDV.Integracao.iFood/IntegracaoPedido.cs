@@ -597,7 +597,7 @@ namespace a7D.PDV.Integracao.iFood
 
         private void AlterarStatusPedido(int idPedido, EStatusPedido statusPedido)
         {
-            var query = @"UPDATE tbPedido set IDStatusPedido=@idStatusPedido WHERE idPedido=@idPedido";
+            var query = @"UPDATE tbPedido set IDStatusPedido=@idStatusPedido, IDCaixa=@idCaixa WHERE idPedido=@idPedido";
 
             using (var conn = new SqlConnection(DB.ConnectionString))
             {
@@ -607,6 +607,7 @@ namespace a7D.PDV.Integracao.iFood
                     cmd.CommandText = query;
                     cmd.Parameters.AddWithValue("@idPedido", idPedido);
                     cmd.Parameters.AddWithValue("@idStatusPedido", (int)statusPedido);
+                    cmd.Parameters.AddWithValue("@idCaixa", CaixaIFood.IDCaixa.Value);
 
                     cmd.ExecuteNonQuery();
                 }

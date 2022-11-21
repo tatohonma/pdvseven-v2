@@ -22,6 +22,7 @@ namespace a7D.PDV.Integracao.iFood
 
                 String querySql = @"
 				    SELECT
+                        IDCaixa,
 					    CASE
 						    WHEN c.DtAbertura is null THEN  0
 						    WHEN c.DtAbertura is not null THEN  1
@@ -44,6 +45,11 @@ namespace a7D.PDV.Integracao.iFood
 
                 if (dt.Rows.Count > 0)
                 {
+                    CaixaIFood = new PDV.Model.CaixaInformation
+                    {
+                        IDCaixa = Convert.ToInt32(dt.Rows[0]["IDCaixa"])
+                    };
+
                     return true;
                 }
                 else
