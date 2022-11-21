@@ -40,7 +40,7 @@ namespace a7D.PDV.BLL
         [Config("AuthorizationCode (Portal Parceiro)", ETipoPDV.IFOOD)]
         public string AuthorizationCode { get; set; }
 
-        [Config("RefreshToken (api)", ETipoPDV.IFOOD)]
+        [Config("RefreshToken (sistema preenche automático)", ETipoPDV.IFOOD)]
         public string RefreshToken { get; set; }
     }
 }
