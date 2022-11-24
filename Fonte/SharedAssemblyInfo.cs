@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2022")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.24.1.0")]
+[assembly: AssemblyVersion("2.24.2.0")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
