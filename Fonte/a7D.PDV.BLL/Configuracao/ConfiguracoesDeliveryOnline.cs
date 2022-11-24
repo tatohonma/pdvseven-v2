@@ -27,6 +27,9 @@ namespace a7D.PDV.BLL
         [Config("Chave do usuário a ser usado no DeliveryOnline", ETipoPDV.DELIVERY_ONLINE, EConfig.ChaveUsuario, Valor = "9933", Obrigatorio = true)]
         public string ChaveUsuario { get; set; }
 
+        [Config("Location_id (separar por ; se tiver mais de 1)", ETipoPDV.DELIVERY_ONLINE)]
+        public String Location_id { get; set; }
+
         [Config("username", ETipoPDV.DELIVERY_ONLINE)]
         public String Username { get; set; }
 
@@ -36,7 +39,7 @@ namespace a7D.PDV.BLL
         [Config("device_name", ETipoPDV.DELIVERY_ONLINE)]
         public String DeviceName { get; set; }
 
-        [Config("token", ETipoPDV.DELIVERY_ONLINE)]
+        [Config("token (sistema preenche automático)", ETipoPDV.DELIVERY_ONLINE)]
         public String Token { get; set; }
         
     }

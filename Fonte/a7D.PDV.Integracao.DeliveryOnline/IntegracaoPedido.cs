@@ -128,7 +128,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             pedido.TaxaEntrega = TaxaEntregaDO;
             string taxaEntrega = pedidoApi.attributes.order_totals.FirstOrDefault(total => total.code == "delivery").value;
             pedido.ValorEntrega = Convert.ToDecimal(taxaEntrega, new CultureInfo("en-us"));
-            //pedido.TaxaServicoPadrao = Convert.ToDecimal(ConfiguracoesSistema.Valores.TaxaServicoEntrega);
+            pedido.TaxaServicoPadrao = 0;
 
             var cupom = pedidoApi.attributes.order_totals.FirstOrDefault(total => total.code == "coupon");
             if (cupom != null)
@@ -209,7 +209,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
 
                 if (!String.IsNullOrWhiteSpace(observacaoProduto) && !String.IsNullOrWhiteSpace(p.comment))
                     observacaoProduto = observacaoProduto + "\r\n" + p.comment;
-                else
+                else if(String.IsNullOrWhiteSpace(observacaoProduto) && !String.IsNullOrWhiteSpace(p.comment))
                     observacaoProduto = p.comment;
 
                 valorUnitario = Convert.ToDecimal(p.price, new CultureInfo("en-us"));

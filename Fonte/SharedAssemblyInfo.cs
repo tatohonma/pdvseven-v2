@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2022")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.24.0.0")]
+[assembly: AssemblyVersion("2.24.2.0")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -64,11 +64,18 @@ Lista das últimas versões e FIX
     O WS2 é responsável em bloquear versão antiga dos aplicativos, e fornecer o link do correto para download
     Especificar o tipo de cada alteração feita: Novo, Melhoria, Correção, TDD, Atualização
 
+2.24.2.0 ======================================================================
+    Correção: No fechamento, estava aparecendo produtos em aberto (IDCaixa não estava sendo gravado no fechamento pelo iFood)
+    Correção: Produto não cadastrado não estava salvando o nome na observação
+    Melhoria: Inclusao do campo Location_id para o Multi-lojas do Delivery Online
+
+2.24.1.0 ======================================================================
+    Melhoria: Listar Motivos Cancelamento do iFood
 
 2.24.0.0 ======================================================================
     Novo: Integração com Delivery Online
-    Melhorias: Ajustes na integração iFood para criar automaticamente Tipo Pagamento, Tipo Desconto, Taxa Entrega, Pagamento por VR
-    Melhorias: Inclusão das TAGs em produtos
+    Melhoria: Ajustes na integração iFood para criar automaticamente Tipo Pagamento, Tipo Desconto, Taxa Entrega, Pagamento por VR
+    Melhoria: Inclusão das TAGs em produtos
     Correção: Erro na autenticação do iFood que expirava
     Correção: Cancelamento de pedidos no Delivery sem integracao com App
 

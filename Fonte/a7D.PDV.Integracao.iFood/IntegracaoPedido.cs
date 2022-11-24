@@ -27,7 +27,7 @@ namespace a7D.PDV.Integracao.iFood
             }
             else
             {
-                AddLog("Pedido " + evento.orderId + " não encontrado!");
+                AddLog("  >> Pedido " + evento.orderId + " não encontrado!");
             }
         }
 
@@ -56,7 +56,7 @@ namespace a7D.PDV.Integracao.iFood
             }
             else
             {
-                AddLog("Pedido " + evento.orderId + " não encontrado!");
+                AddLog("  >> Pedido " + evento.orderId + " não encontrado!");
             }
         }
 
@@ -81,7 +81,7 @@ namespace a7D.PDV.Integracao.iFood
             }
             else
             {
-                AddLog("Pedido " + evento.orderId + " não encontrado!");
+                AddLog("  >> Pedido " + evento.orderId + " não encontrado!");
             }
         }
 
@@ -92,7 +92,7 @@ namespace a7D.PDV.Integracao.iFood
             string tipoTaxaAdicional;
 
             var orderDetails = APIOrder.OrderDetails(evento.orderId);
-            AddLog(JsonConvert.SerializeObject(orderDetails));
+            AddLog("  >> " + JsonConvert.SerializeObject(orderDetails));
 
             pedido.Cliente = AdicionarCliente(orderDetails);
             pedido.Observacoes += "Cliente: " + pedido.Cliente.NomeCompleto + "\r\n\r\n";
@@ -521,11 +521,11 @@ namespace a7D.PDV.Integracao.iFood
                             {
                                 tagStatus = Tag.Alterar(tagStatus.GUIDIdentificacao, tagStatus.Chave, "CFM");
 
-                                AddLog("Pedido " + tagDisplayId.Valor + " (DisplayID) confirmado (CFM)");
+                                AddLog("  > Pedido " + tagDisplayId.Valor + " (DisplayID) confirmado (CFM)");
                             }
                             else
                             {
-                                AddLog("Erro confirmando envio " + tagDisplayId.Valor + " (DisplayID) (CFM)!");
+                                AddLog("  > Erro confirmando envio " + tagDisplayId.Valor + " (DisplayID) (CFM)!");
                             }
                         }
                         else if (pedido.IDStatusPedido == (int)EStatusPedido.Enviado && tagStatus.Valor != "DSP" && tagOrderType.Valor == "DELIVERY")
@@ -537,11 +537,11 @@ namespace a7D.PDV.Integracao.iFood
                             {
                                 tagStatus.Valor = "DSP";
                                 CRUD.Alterar(tagStatus);
-                                AddLog("Pedido " + tagDisplayId.Valor + " (DisplayID) despachado (DSP)");
+                                AddLog("  > Pedido " + tagDisplayId.Valor + " (DisplayID) despachado (DSP)");
                             }
                             else
                             {
-                                AddLog("Erro confirmando envio " + tagDisplayId.Valor + " (DisplayID) (DSP)!");
+                                AddLog("  > Erro confirmando envio " + tagDisplayId.Valor + " (DisplayID) (DSP)!");
                             }
                         }
                         else if (pedido.IDStatusPedido == (int)EStatusPedido.Enviado && tagStatus.Valor != "RTP" &&
@@ -554,11 +554,11 @@ namespace a7D.PDV.Integracao.iFood
                             {
                                 tagStatus.Valor = "RTP";
                                 CRUD.Alterar(tagStatus);
-                                AddLog("Pedido " + tagDisplayId.Valor + " (DisplayID) pronto para retirada (RTP)");
+                                AddLog("  > Pedido " + tagDisplayId.Valor + " (DisplayID) pronto para retirada (RTP)");
                             }
                             else
                             {
-                                AddLog("Erro confirmando pronto para retirada " + tagDisplayId.Valor + " (DisplayID) (RTP)!");
+                                AddLog("  > Erro confirmando pronto para retirada " + tagDisplayId.Valor + " (DisplayID) (RTP)!");
                             }
                         }
                         else if (pedido.IDStatusPedido == (int)EStatusPedido.Cancelado && tagStatus.Valor == "requestCancellation")
@@ -572,23 +572,23 @@ namespace a7D.PDV.Integracao.iFood
                             {
                                 tagStatus.Valor = "CAN";
                                 CRUD.Alterar(tagStatus);
-                                AddLog("Pedido " + tagDisplayId.Valor + " (DisplayID) cancelado (CAN)");
+                                AddLog("  > Pedido " + tagDisplayId.Valor + " (DisplayID) cancelado (CAN)");
                             }
                             else
                             {
-                                AddLog("Erro confirmando cancelamento " + tagDisplayId.Valor + " (DisplayID) (CAN)!");
+                                AddLog("  > Erro confirmando cancelamento " + tagDisplayId.Valor + " (DisplayID) (CAN)!");
                             }
                         }
                     }
                     catch (Exception ex)
                     {
-                        AddLog("Erro confirmando pedido " + pedido.IDPedido + " (IDPedido): " + ex.Message);
+                        AddLog("  > Erro confirmando pedido " + pedido.IDPedido + " (IDPedido): " + ex.Message);
                     }
                 }
             }
             catch (Exception ex)
             {
-                AddLog("Erro verificando pedidos para confirmação " + ex.Message);
+                AddLog("  > Erro verificando pedidos para confirmação " + ex.Message);
             }
 
             if (qtdConfirmacaoEnviada == 0)
@@ -597,7 +597,7 @@ namespace a7D.PDV.Integracao.iFood
 
         private void AlterarStatusPedido(int idPedido, EStatusPedido statusPedido)
         {
-            var query = @"UPDATE tbPedido set IDStatusPedido=@idStatusPedido WHERE idPedido=@idPedido";
+            var query = @"UPDATE tbPedido set IDStatusPedido=@idStatusPedido, IDCaixa=@idCaixa WHERE idPedido=@idPedido";
 
             using (var conn = new SqlConnection(DB.ConnectionString))
             {
@@ -607,6 +607,7 @@ namespace a7D.PDV.Integracao.iFood
                     cmd.CommandText = query;
                     cmd.Parameters.AddWithValue("@idPedido", idPedido);
                     cmd.Parameters.AddWithValue("@idStatusPedido", (int)statusPedido);
+                    cmd.Parameters.AddWithValue("@idCaixa", CaixaIFood.IDCaixa.Value);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -665,6 +666,25 @@ namespace a7D.PDV.Integracao.iFood
                     AddLog("Pedido já estava confirmado");
                 }
             }
+        }
+
+
+        public List<MotivoCancelamentoInformation> ListarMotivosCancelamento(string id)
+        {
+            List<MotivoCancelamentoInformation> list = new List<MotivoCancelamentoInformation>();
+            ConfigIFood = new ConfiguracoesIFood();
+
+            Autenticar();
+            APIOrder = new API.Order(AccessToken);
+
+            var listaMotivosCancelamento = APIOrder.CancellationReasons(id);
+
+            foreach (var motivoCancelamento in listaMotivosCancelamento)
+            {
+                list.Add(new MotivoCancelamentoInformation { IDMotivoCancelamento = Convert.ToInt32(motivoCancelamento.cancelCodeId), Nome = motivoCancelamento.description });
+            }
+
+            return list;
         }
     }
 }

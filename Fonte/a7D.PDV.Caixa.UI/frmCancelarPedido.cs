@@ -61,9 +61,30 @@ namespace a7D.PDV.Caixa.UI
 
         private void PopularMotivosCancelamento()
         {
-            var listaMotivo = MotivoCancelamento.Listar();
-            listaMotivo.Insert(0, new MotivoCancelamentoInformation());
-            cbbMotivoCancelamento.DataSource = listaMotivo;
+            if (Pedido1.OrigemPedido != null && Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
+            {
+                string id = BLL.Tag.Carregar(Pedido1.GUIDIdentificacao, "ifood-orderId").Valor;
+                Integracao.iFood.IntegraIFood objIntegraIFood = new Integracao.iFood.IntegraIFood();
+
+                var listaMotivo = objIntegraIFood.ListarMotivosCancelamento(id);
+
+                if (listaMotivo.Count > 0)
+                {
+                    listaMotivo.Insert(0, new MotivoCancelamentoInformation());
+                    cbbMotivoCancelamento.DataSource = listaMotivo;
+                }
+                else
+                {
+                    MessageBox.Show("Cancelamento negado pelo iFood! Entre em contato com eles...", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Close();
+                }
+            }
+            else
+            {
+                var listaMotivo = MotivoCancelamento.Listar();
+                listaMotivo.Insert(0, new MotivoCancelamentoInformation());
+                cbbMotivoCancelamento.DataSource = listaMotivo;
+            }
         }
 
         private class CancelarPedidoVM
@@ -90,6 +111,8 @@ namespace a7D.PDV.Caixa.UI
                 MessageBox.Show("Selecione um motivo de cancelamento", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+
 
             try
             {
@@ -155,7 +178,7 @@ namespace a7D.PDV.Caixa.UI
         {
             if (Pedido1.OrigemPedido != null && Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood)
             {
-                SalvarCodigoCancelamentoIfood(motivo);
+                motivo = SalvarCodigoCancelamentoIfood(motivo);
             }
 
             var statusPedido = (EStatusPedido)Pedido1.StatusPedido.IDStatusPedido.Value;
@@ -214,34 +237,22 @@ namespace a7D.PDV.Caixa.UI
             //    MessageBox.Show("O IFOOD não cancela pedidos confirmados\nEntre em contato com o cliente informando o cancelamento", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void SalvarCodigoCancelamentoIfood(MotivoCancelamentoInformation motivo)
+        private MotivoCancelamentoInformation SalvarCodigoCancelamentoIfood(MotivoCancelamentoInformation motivo)
         {
-            Dictionary<string, string> motivos = new Dictionary<string, string>();
-            motivos.Add("", "");
-            motivos.Add("501", "PROBLEMAS DE SISTEMA");
-            motivos.Add("502", "PEDIDO EM DUPLICIDADE");
-            motivos.Add("503", "ITEM INDISPONÍVEL");
-            motivos.Add("504", "RESTAURANTE SEM MOTOBOY");
-            motivos.Add("505", "CARDÁPIO DESATUALIZADO");
-            motivos.Add("506", "PEDIDO FORA DA ÁREA DE ENTREGA");
-            motivos.Add("507", "CLIENTE GOLPISTA / TROTE");
-            motivos.Add("508", "FORA DO HORÁRIO DO DELIVERY");
-            motivos.Add("509", "DIFICULDADES INTERNAS DO RESTAURANTE");
-            motivos.Add("511", "ÁREA DE RISCO");
-            motivos.Add("512", "RESTAURANTE ABRIRÁ MAIS TARDE");
-            motivos.Add("513", "RESTAURANTE FECHOU MAIS CEDO");
-
-            string cancellationCode = motivos.Where(v => v.Value == motivo.Nome).FirstOrDefault().Key;
-
-            if (cancellationCode == null)
-                cancellationCode = "509";
+            var motivoCancelamento = (MotivoCancelamentoInformation)CRUD.Carregar(new MotivoCancelamentoInformation { Nome = motivo.Nome });
+            if (motivoCancelamento.IDMotivoCancelamento == null)
+            {
+                CRUD.Adicionar(motivoCancelamento);
+            }
 
             TagInformation tag = new TagInformation();
             tag.GUIDIdentificacao = Pedido1.GUIDIdentificacao;
             tag.Chave = "ifood-cancellationCode";
-            tag.Valor = cancellationCode;
+            tag.Valor = motivo.IDMotivoCancelamento.ToString();
             tag.DtInclusao = DateTime.Now;
             CRUD.Adicionar(tag);
+
+            return motivoCancelamento;
         }
     }
 }

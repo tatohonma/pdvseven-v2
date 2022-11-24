@@ -121,6 +121,7 @@ namespace a7D.PDV.Integracao.iFood
                 PagamentoRefeicao.Ativo = true;
                 PagamentoRefeicao.MeioPagamentoSAT = new MeioPagamentoSATInformation { IDMeioPagamentoSAT = 7 };
 
+                CRUD.Adicionar(PagamentoRefeicao);
                 AddLog("Pagamento 'Vale Refeição' cadastrado!");
             }
 
@@ -133,6 +134,7 @@ namespace a7D.PDV.Integracao.iFood
                 TaxaEntregaIFood.Excluido = false;
                 TaxaEntregaIFood.Valor = 0;
 
+                CRUD.Adicionar(TaxaEntregaIFood);
                 AddLog("Taxa de Entrega 'iFood' cadastrada!");
             }
 
@@ -145,7 +147,6 @@ namespace a7D.PDV.Integracao.iFood
                 TipoDescontoIFood.Excluido = false;
 
                 CRUD.Adicionar(TipoDescontoIFood);
-
                 AddLog("Tipo Desconto 'iFood' adicionado!");
             }
 
@@ -169,7 +170,6 @@ namespace a7D.PDV.Integracao.iFood
                 TaxaAdicional.GUIDIdentificacao = Guid.NewGuid().ToString();
 
                 CRUD.Adicionar(TaxaAdicional);
-
                 AddLog("Produto com o nome 'Taxa Adicional iFood' cadastrado!");
             }
 
@@ -231,7 +231,7 @@ namespace a7D.PDV.Integracao.iFood
                 {
                     if (AccessToken == null || AccessToken == "" || ExpiraEm < DateTime.Now)
                     {
-                        AddLog("Autenticando...");
+                        AddLog(" -- Autenticando ----------------------------------------------------------------------------------------------");
                         if (!Autenticar())
                         {
                             Sleep(60);
@@ -242,7 +242,7 @@ namespace a7D.PDV.Integracao.iFood
                     APIOrder = new API.Order(AccessToken);
                     APIMerchant = new API.Merchant(AccessToken);
 
-                    AddLog("Verificando status da loja");
+                    AddLog(" -- Verificando status da loja -------------------------------------------------------------------------------");
                     if (LojaAbertaSistema())
                     {
                         if (!LojaAbertaIfood())
@@ -251,10 +251,10 @@ namespace a7D.PDV.Integracao.iFood
                             continue;
                         }
 
-                        AddLog("Lendo eventos...");
+                        AddLog(" -- Lendo eventos --------------------------------------------------------------------------------------------");
                         LerEventos();
 
-                        AddLog("Enviando confirmações...");
+                        AddLog(" -- Enviando confirmações ------------------------------------------------------------------------------------");
                         EnviaConfirmacao();
 
                         Sleep(25);
@@ -308,7 +308,7 @@ namespace a7D.PDV.Integracao.iFood
                     Model.OAuth.Token token = apiOAuth.Token("refresh_token", ConfigIFood.ClientId, ConfigIFood.ClientSecret, ConfigIFood.AuthorizationCode, ConfigIFood.AuthorizationCodeVerifier, ConfigIFood.RefreshToken);
 
                     if (token.accessToken != "")
-                    {                        
+                    {
                         ConfigIFood.RefreshToken = token.refreshToken;
                         AtualizarRefreshToken(token.refreshToken);
 
@@ -358,8 +358,8 @@ namespace a7D.PDV.Integracao.iFood
 
                 foreach (var evento in eventos)
                 {
-                    AddLog("Id " + evento.id + " > OrderId " + evento.orderId + " > Code " + evento.code);
-                    AddLog(JsonConvert.SerializeObject(evento));
+                    AddLog("  > Id " + evento.id + " > OrderId " + evento.orderId + " > Code " + evento.code);
+                    AddLog("  >> " + JsonConvert.SerializeObject(evento));
 
                     if (EventosRecebidos.Contains(evento.id))
                     {
@@ -376,37 +376,44 @@ namespace a7D.PDV.Integracao.iFood
                         switch (evento.code)
                         {
                             case "PLC":
-                                AddLog("Adicionar pedido > " + evento.orderId);
+                                AddLog("  > Adicionar pedido > " + evento.orderId);
                                 AdicionarPedido(evento);
                                 break;
 
                             case "CON":
-                                AddLog("Finalizar pedido > " + evento.orderId);
+                                AddLog("  > Finalizar pedido > " + evento.orderId);
                                 FinalizarPedido(evento);
                                 break;
 
                             case "CAN":
-                                AddLog("Confirmar cancelamento pedido > " + evento.orderId);
+                                AddLog("  > Confirmar cancelamento pedido > " + evento.orderId);
                                 ConfirmarCancelamentoPedido(evento);
                                 break;
 
                             case "CAR":
+                                AddLog("  > Cancelamento confirmado pelo iFood > " + evento.orderId);
+                                break;
+
                             case "CCR":
-                                AddLog("Cancelar pedido > " + evento.orderId);
+                                AddLog("  > Cancelar pedido > " + evento.orderId);
                                 CancelarPedido(evento);
                                 break;
 
                             case "CFM":
-                                AddLog("Confirmar pedido > " + evento.orderId);
-                                ConfirmarPedido(evento);
+                                AddLog("  > Pedido confirmado pelo iFood > " + evento.orderId);
+                                //ConfirmarPedido(evento);
                                 break;
 
                             case "RDA":
-                                AddLog("Motoboy a caminho > " + evento.orderId);
+                                AddLog("  > Motoboy disponível para essa entrega > " + evento.orderId);
+                                break;
+
+                            case "DSP":
+                                AddLog("  > Despacho confirmado pelo iFood > " + evento.orderId);
                                 break;
 
                             default:
-                                AddLog("ATENÇÃO: Evento não tratado (" + evento.code + ")");
+                                AddLog("  > ATENÇÃO: Evento não tratado (" + evento.code + ") > " + evento.orderId);
                                 break;
                         }
 
@@ -414,13 +421,13 @@ namespace a7D.PDV.Integracao.iFood
                     }
                     catch (Exception ex)
                     {
-                        AddLog("Erro processando evento: " + ex.Message);
+                        AddLog("  > Erro processando evento: " + ex.Message);
                     }
                 }
             }
             catch (Exception ex)
             {
-                AddLog("Erro lendo eventos: " + ex.Message);
+                AddLog("  > Erro lendo eventos: " + ex.Message);
             }
         }
     }
