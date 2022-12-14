@@ -51,7 +51,8 @@
             // btnCancelar
             // 
             this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCancelar.Location = new System.Drawing.Point(110, 395);
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Location = new System.Drawing.Point(110, 404);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(92, 47);
             this.btnCancelar.TabIndex = 1;
@@ -62,7 +63,7 @@
             // btnSalvar
             // 
             this.btnSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSalvar.Location = new System.Drawing.Point(12, 395);
+            this.btnSalvar.Location = new System.Drawing.Point(12, 404);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(92, 47);
             this.btnSalvar.TabIndex = 0;
@@ -131,7 +132,6 @@
             this.cbbMeioPagamento.Name = "cbbMeioPagamento";
             this.cbbMeioPagamento.Size = new System.Drawing.Size(306, 25);
             this.cbbMeioPagamento.TabIndex = 3;
-            this.cbbMeioPagamento.Visible = false;
             // 
             // lblMeioPagamento
             // 
@@ -141,7 +141,6 @@
             this.lblMeioPagamento.Size = new System.Drawing.Size(137, 17);
             this.lblMeioPagamento.TabIndex = 18;
             this.lblMeioPagamento.Text = "Meio de Pagamento";
-            this.lblMeioPagamento.Visible = false;
             // 
             // label4
             // 
@@ -163,7 +162,6 @@
             this.cbbGateway.Name = "cbbGateway";
             this.cbbGateway.Size = new System.Drawing.Size(306, 25);
             this.cbbGateway.TabIndex = 1;
-            this.cbbGateway.SelectedIndexChanged += new System.EventHandler(this.cbbGateway_SelectedIndexChanged);
             // 
             // ckbRegistrarValores
             // 
@@ -228,7 +226,6 @@
             this.lblRecebivel.Size = new System.Drawing.Size(135, 17);
             this.lblRecebivel.TabIndex = 27;
             this.lblRecebivel.Text = "Conta de Recebivel";
-            this.lblRecebivel.Visible = false;
             // 
             // cbbBandeira
             // 
@@ -241,7 +238,6 @@
             this.cbbBandeira.Name = "cbbBandeira";
             this.cbbBandeira.Size = new System.Drawing.Size(306, 25);
             this.cbbBandeira.TabIndex = 26;
-            this.cbbBandeira.Visible = false;
             // 
             // cbbRecebivel
             // 
@@ -254,7 +250,6 @@
             this.cbbRecebivel.Name = "cbbRecebivel";
             this.cbbRecebivel.Size = new System.Drawing.Size(306, 25);
             this.cbbRecebivel.TabIndex = 25;
-            this.cbbRecebivel.Visible = false;
             // 
             // lblBandeira
             // 
@@ -264,14 +259,13 @@
             this.lblBandeira.Size = new System.Drawing.Size(66, 17);
             this.lblBandeira.TabIndex = 21;
             this.lblBandeira.Text = "Bandeira";
-            this.lblBandeira.Visible = false;
             // 
             // frmTipoPagamentoEditar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(334, 454);
+            this.ClientSize = new System.Drawing.Size(334, 463);
             this.Controls.Add(this.tlpCampos);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnSalvar);
