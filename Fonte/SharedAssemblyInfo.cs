@@ -64,6 +64,10 @@ Lista das últimas versões e FIX
     O WS2 é responsável em bloquear versão antiga dos aplicativos, e fornecer o link do correto para download
     Especificar o tipo de cada alteração feita: Novo, Melhoria, Correção, TDD, Atualização
 
+2.24.3.0 ======================================================================
+    Correção: Selecionar ingredientes na receita não estava funcionando
+    Correção: Forma de pagamento do iFood não estava relacionando com o IDMeioPagamentoSAT
+
 2.24.2.0 ======================================================================
     Correção: No fechamento, estava aparecendo produtos em aberto (IDCaixa não estava sendo gravado no fechamento pelo iFood)
     Correção: Produto não cadastrado não estava salvando o nome na observação
