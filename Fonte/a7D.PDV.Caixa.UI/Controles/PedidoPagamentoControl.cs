@@ -321,9 +321,14 @@ namespace a7D.PDV.Caixa.UI.Controles
             if (NormalOuTouch.Autenticacao(false, true, false, false, out UsuarioInformation usuarioTaxaServico) == DialogResult.OK)
             {
                 PedidoAtual.UsuarioTaxaServico = usuarioTaxaServico;
+
+                CalcularExibir();
+                ParametrosAlterados?.Invoke(null, null);
             }
-            CalcularExibir();
-            ParametrosAlterados?.Invoke(null, null);
+            else
+            {
+                ckbAplicarServico.Checked = !ckbAplicarServico.Checked;
+            }
         }
     }
 }
