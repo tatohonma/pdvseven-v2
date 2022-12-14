@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbEntrada = new System.Windows.Forms.RadioButton();
             this.rbSaida = new System.Windows.Forms.RadioButton();
+            this.rbEntrada = new System.Windows.Forms.RadioButton();
             this.btnSalvar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,27 +53,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tipo";
             // 
-            // rbEntrada
-            // 
-            this.rbEntrada.AutoSize = true;
-            this.rbEntrada.Location = new System.Drawing.Point(6, 47);
-            this.rbEntrada.Name = "rbEntrada";
-            this.rbEntrada.Size = new System.Drawing.Size(96, 26);
-            this.rbEntrada.TabIndex = 0;
-            this.rbEntrada.TabStop = true;
-            this.rbEntrada.Text = "Entrada";
-            this.rbEntrada.UseVisualStyleBackColor = true;
-            // 
             // rbSaida
             // 
             this.rbSaida.AutoSize = true;
             this.rbSaida.Location = new System.Drawing.Point(150, 47);
             this.rbSaida.Name = "rbSaida";
-            this.rbSaida.Size = new System.Drawing.Size(81, 26);
+            this.rbSaida.Size = new System.Drawing.Size(63, 21);
             this.rbSaida.TabIndex = 1;
             this.rbSaida.TabStop = true;
             this.rbSaida.Text = "Saída";
             this.rbSaida.UseVisualStyleBackColor = true;
+            // 
+            // rbEntrada
+            // 
+            this.rbEntrada.AutoSize = true;
+            this.rbEntrada.Location = new System.Drawing.Point(6, 47);
+            this.rbEntrada.Name = "rbEntrada";
+            this.rbEntrada.Size = new System.Drawing.Size(77, 21);
+            this.rbEntrada.TabIndex = 0;
+            this.rbEntrada.TabStop = true;
+            this.rbEntrada.Text = "Entrada";
+            this.rbEntrada.UseVisualStyleBackColor = true;
             // 
             // btnSalvar
             // 
@@ -102,7 +102,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 115);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 22);
+            this.label1.Size = new System.Drawing.Size(47, 17);
             this.label1.TabIndex = 3;
             this.label1.Text = "Nome";
             // 
@@ -112,7 +112,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNome.Location = new System.Drawing.Point(12, 140);
             this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(539, 29);
+            this.txtNome.Size = new System.Drawing.Size(539, 25);
             this.txtNome.TabIndex = 4;
             // 
             // txtDescricao
@@ -131,13 +131,13 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 172);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 22);
+            this.label2.Size = new System.Drawing.Size(75, 17);
             this.label2.TabIndex = 5;
             this.label2.Text = "Descrição";
             // 
             // frmTipoMovimentacaoEditar
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(563, 469);
             this.Controls.Add(this.txtDescricao);
@@ -148,9 +148,12 @@
             this.Controls.Add(this.btnSalvar);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmTipoMovimentacaoEditar";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Tipo de Movimentação";
             this.TopMost = true;

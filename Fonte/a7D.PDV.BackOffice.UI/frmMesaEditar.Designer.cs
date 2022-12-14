@@ -45,10 +45,10 @@
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label3.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.label3.Location = new System.Drawing.Point(2, 56);
+            this.label3.Location = new System.Drawing.Point(2, 45);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(148, 21);
+            this.label3.Size = new System.Drawing.Size(110, 17);
             this.label3.TabIndex = 9;
             this.label3.Text = "Capacidade";
             // 
@@ -56,20 +56,20 @@
             // 
             this.txtCapacidade.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtCapacidade.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.txtCapacidade.Location = new System.Drawing.Point(2, 79);
-            this.txtCapacidade.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCapacidade.Location = new System.Drawing.Point(2, 64);
+            this.txtCapacidade.Margin = new System.Windows.Forms.Padding(2);
             this.txtCapacidade.Name = "txtCapacidade";
-            this.txtCapacidade.Size = new System.Drawing.Size(148, 29);
+            this.txtCapacidade.Size = new System.Drawing.Size(110, 25);
             this.txtCapacidade.TabIndex = 2;
             // 
             // txtNumero1
             // 
             this.txtNumero1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtNumero1.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.txtNumero1.Location = new System.Drawing.Point(2, 23);
-            this.txtNumero1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNumero1.Location = new System.Drawing.Point(2, 19);
+            this.txtNumero1.Margin = new System.Windows.Forms.Padding(2);
             this.txtNumero1.Name = "txtNumero1";
-            this.txtNumero1.Size = new System.Drawing.Size(148, 29);
+            this.txtNumero1.Size = new System.Drawing.Size(110, 25);
             this.txtNumero1.TabIndex = 0;
             // 
             // label2
@@ -80,7 +80,7 @@
             this.label2.Location = new System.Drawing.Point(2, 0);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(148, 21);
+            this.label2.Size = new System.Drawing.Size(110, 17);
             this.label2.TabIndex = 6;
             this.label2.Text = "Mesa";
             // 
@@ -89,10 +89,10 @@
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCancelar.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.btnCancelar.Location = new System.Drawing.Point(154, 138);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancelar.Location = new System.Drawing.Point(116, 113);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(149, 31);
+            this.btnCancelar.Size = new System.Drawing.Size(111, 24);
             this.btnCancelar.TabIndex = 4;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -102,10 +102,10 @@
             // 
             this.btnSalvar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSalvar.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.btnSalvar.Location = new System.Drawing.Point(2, 138);
-            this.btnSalvar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSalvar.Location = new System.Drawing.Point(2, 113);
+            this.btnSalvar.Margin = new System.Windows.Forms.Padding(2);
             this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.Size = new System.Drawing.Size(148, 31);
+            this.btnSalvar.Size = new System.Drawing.Size(110, 24);
             this.btnSalvar.TabIndex = 3;
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.UseVisualStyleBackColor = true;
@@ -115,10 +115,10 @@
             // 
             this.txtNumero2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtNumero2.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.txtNumero2.Location = new System.Drawing.Point(154, 23);
-            this.txtNumero2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNumero2.Location = new System.Drawing.Point(116, 19);
+            this.txtNumero2.Margin = new System.Windows.Forms.Padding(2);
             this.txtNumero2.Name = "txtNumero2";
-            this.txtNumero2.Size = new System.Drawing.Size(149, 29);
+            this.txtNumero2.Size = new System.Drawing.Size(111, 25);
             this.txtNumero2.TabIndex = 1;
             this.txtNumero2.Visible = false;
             // 
@@ -127,10 +127,10 @@
             this.lblAte.AutoSize = true;
             this.lblAte.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblAte.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.lblAte.Location = new System.Drawing.Point(154, 0);
+            this.lblAte.Location = new System.Drawing.Point(116, 0);
             this.lblAte.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblAte.Name = "lblAte";
-            this.lblAte.Size = new System.Drawing.Size(149, 21);
+            this.lblAte.Size = new System.Drawing.Size(111, 17);
             this.lblAte.TabIndex = 17;
             this.lblAte.Text = "Até";
             this.lblAte.Visible = false;
@@ -151,31 +151,35 @@
             this.tableLayoutPanel1.Controls.Add(this.txtCapacidade, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.txtNumero1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 9);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(7, 7);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(305, 171);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(229, 139);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // frmMesaEditar
             // 
             this.AcceptButton = this.btnSalvar;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(322, 189);
+            this.ClientSize = new System.Drawing.Size(242, 154);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmMesaEditar";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "MESA";
+            this.Text = "Mesa";
             this.Load += new System.EventHandler(this.frmMesaEditar_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

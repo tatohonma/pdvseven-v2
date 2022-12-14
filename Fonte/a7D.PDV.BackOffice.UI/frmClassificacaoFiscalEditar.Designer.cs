@@ -30,6 +30,8 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtCEST = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.txtNCM = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtDescricao = new System.Windows.Forms.TextBox();
@@ -55,8 +57,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnSalvar = new System.Windows.Forms.Button();
-            this.txtCEST = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -67,7 +67,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(10, 10);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(405, 463);
@@ -87,17 +87,35 @@
             this.tabPage1.Controls.Add(this.txtNome);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage1.Size = new System.Drawing.Size(397, 433);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Informações";
             // 
+            // txtCEST
+            // 
+            this.txtCEST.Location = new System.Drawing.Point(205, 75);
+            this.txtCEST.Margin = new System.Windows.Forms.Padding(2);
+            this.txtCEST.Name = "txtCEST";
+            this.txtCEST.Size = new System.Drawing.Size(185, 25);
+            this.txtCEST.TabIndex = 35;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(205, 55);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(48, 17);
+            this.label12.TabIndex = 34;
+            this.label12.Text = "CEST";
+            // 
             // txtNCM
             // 
             this.txtNCM.Location = new System.Drawing.Point(5, 75);
-            this.txtNCM.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNCM.Margin = new System.Windows.Forms.Padding(2);
             this.txtNCM.Name = "txtNCM";
             this.txtNCM.Size = new System.Drawing.Size(185, 25);
             this.txtNCM.TabIndex = 33;
@@ -115,7 +133,7 @@
             // txtDescricao
             // 
             this.txtDescricao.Location = new System.Drawing.Point(5, 193);
-            this.txtDescricao.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDescricao.Margin = new System.Windows.Forms.Padding(2);
             this.txtDescricao.Multiline = true;
             this.txtDescricao.Name = "txtDescricao";
             this.txtDescricao.Size = new System.Drawing.Size(385, 205);
@@ -136,7 +154,7 @@
             this.cbbTipoTributacao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbTipoTributacao.FormattingEnabled = true;
             this.cbbTipoTributacao.Location = new System.Drawing.Point(5, 19);
-            this.cbbTipoTributacao.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbbTipoTributacao.Margin = new System.Windows.Forms.Padding(2);
             this.cbbTipoTributacao.Name = "cbbTipoTributacao";
             this.cbbTipoTributacao.Size = new System.Drawing.Size(385, 25);
             this.cbbTipoTributacao.TabIndex = 29;
@@ -154,7 +172,7 @@
             // txtNome
             // 
             this.txtNome.Location = new System.Drawing.Point(5, 135);
-            this.txtNome.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNome.Margin = new System.Windows.Forms.Padding(2);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(385, 25);
             this.txtNome.TabIndex = 27;
@@ -187,9 +205,9 @@
             this.tabPage2.Controls.Add(this.txtICMS);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage2.Size = new System.Drawing.Size(397, 433);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Impostos";
@@ -197,7 +215,7 @@
             // txtIOF
             // 
             this.txtIOF.Location = new System.Drawing.Point(5, 296);
-            this.txtIOF.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtIOF.Margin = new System.Windows.Forms.Padding(2);
             this.txtIOF.Name = "txtIOF";
             this.txtIOF.Size = new System.Drawing.Size(385, 25);
             this.txtIOF.TabIndex = 47;
@@ -216,7 +234,7 @@
             // txtISS
             // 
             this.txtISS.Location = new System.Drawing.Point(5, 250);
-            this.txtISS.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtISS.Margin = new System.Windows.Forms.Padding(2);
             this.txtISS.Name = "txtISS";
             this.txtISS.Size = new System.Drawing.Size(385, 25);
             this.txtISS.TabIndex = 45;
@@ -235,7 +253,7 @@
             // txtCIDE
             // 
             this.txtCIDE.Location = new System.Drawing.Point(5, 205);
-            this.txtCIDE.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCIDE.Margin = new System.Windows.Forms.Padding(2);
             this.txtCIDE.Name = "txtCIDE";
             this.txtCIDE.Size = new System.Drawing.Size(385, 25);
             this.txtCIDE.TabIndex = 43;
@@ -254,7 +272,7 @@
             // txtCofins
             // 
             this.txtCofins.Location = new System.Drawing.Point(5, 159);
-            this.txtCofins.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCofins.Margin = new System.Windows.Forms.Padding(2);
             this.txtCofins.Name = "txtCofins";
             this.txtCofins.Size = new System.Drawing.Size(385, 25);
             this.txtCofins.TabIndex = 41;
@@ -273,7 +291,7 @@
             // txtPISPASEP
             // 
             this.txtPISPASEP.Location = new System.Drawing.Point(5, 114);
-            this.txtPISPASEP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPISPASEP.Margin = new System.Windows.Forms.Padding(2);
             this.txtPISPASEP.Name = "txtPISPASEP";
             this.txtPISPASEP.Size = new System.Drawing.Size(385, 25);
             this.txtPISPASEP.TabIndex = 39;
@@ -292,7 +310,7 @@
             // txtIPI
             // 
             this.txtIPI.Location = new System.Drawing.Point(5, 68);
-            this.txtIPI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtIPI.Margin = new System.Windows.Forms.Padding(2);
             this.txtIPI.Name = "txtIPI";
             this.txtIPI.Size = new System.Drawing.Size(385, 25);
             this.txtIPI.TabIndex = 37;
@@ -311,7 +329,7 @@
             // txtICMS
             // 
             this.txtICMS.Location = new System.Drawing.Point(5, 22);
-            this.txtICMS.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtICMS.Margin = new System.Windows.Forms.Padding(2);
             this.txtICMS.Name = "txtICMS";
             this.txtICMS.Size = new System.Drawing.Size(385, 25);
             this.txtICMS.TabIndex = 35;
@@ -330,7 +348,7 @@
             // btnCancelar
             // 
             this.btnCancelar.Location = new System.Drawing.Point(246, 478);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(80, 38);
             this.btnCancelar.TabIndex = 37;
@@ -341,7 +359,7 @@
             // btnSalvar
             // 
             this.btnSalvar.Location = new System.Drawing.Point(331, 478);
-            this.btnSalvar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSalvar.Margin = new System.Windows.Forms.Padding(2);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(80, 38);
             this.btnSalvar.TabIndex = 36;
@@ -349,34 +367,18 @@
             this.btnSalvar.UseVisualStyleBackColor = true;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
-            // txtCEST
-            // 
-            this.txtCEST.Location = new System.Drawing.Point(205, 75);
-            this.txtCEST.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCEST.Name = "txtCEST";
-            this.txtCEST.Size = new System.Drawing.Size(185, 25);
-            this.txtCEST.TabIndex = 35;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(205, 55);
-            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(48, 17);
-            this.label12.TabIndex = 34;
-            this.label12.Text = "CEST";
-            // 
             // frmClassificacaoFiscalEditar
             // 
+            this.AcceptButton = this.btnSalvar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(424, 526);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnSalvar);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmClassificacaoFiscalEditar";

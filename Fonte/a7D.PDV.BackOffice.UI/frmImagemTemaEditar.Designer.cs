@@ -34,6 +34,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtDescricao = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.salvarImagemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnSalvar = new System.Windows.Forms.Button();
             this.btnEscolherImagem = new System.Windows.Forms.Button();
@@ -41,11 +43,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cbIdioma = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.salvarImagemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -55,7 +55,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 27);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 22);
+            this.label1.Size = new System.Drawing.Size(51, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "Nome:";
             // 
@@ -65,7 +65,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNome.Location = new System.Drawing.Point(16, 52);
             this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(507, 29);
+            this.txtNome.Size = new System.Drawing.Size(507, 25);
             this.txtNome.TabIndex = 0;
             this.txtNome.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNome_KeyDown);
             this.txtNome.Leave += new System.EventHandler(this.txtNome_Leave);
@@ -77,7 +77,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 84);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 22);
+            this.label2.Size = new System.Drawing.Size(79, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Descrição:";
             // 
@@ -99,6 +99,21 @@
             this.pictureBox1.Size = new System.Drawing.Size(501, 314);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.salvarImagemToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 26);
+            // 
+            // salvarImagemToolStripMenuItem
+            // 
+            this.salvarImagemToolStripMenuItem.Name = "salvarImagemToolStripMenuItem";
+            this.salvarImagemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.salvarImagemToolStripMenuItem.Text = "Salvar Imagem";
+            this.salvarImagemToolStripMenuItem.Click += new System.EventHandler(this.salvarImagemToolStripMenuItem_Click);
             // 
             // btnCancelar
             // 
@@ -153,7 +168,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 188);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 22);
+            this.label3.Size = new System.Drawing.Size(55, 17);
             this.label3.TabIndex = 36;
             this.label3.Text = "Idioma:";
             // 
@@ -165,7 +180,7 @@
             this.cbIdioma.FormattingEnabled = true;
             this.cbIdioma.Location = new System.Drawing.Point(16, 213);
             this.cbIdioma.Name = "cbIdioma";
-            this.cbIdioma.Size = new System.Drawing.Size(507, 30);
+            this.cbIdioma.Size = new System.Drawing.Size(507, 25);
             this.cbIdioma.TabIndex = 2;
             // 
             // panel1
@@ -176,24 +191,9 @@
             this.panel1.Size = new System.Drawing.Size(507, 320);
             this.panel1.TabIndex = 37;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.salvarImagemToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(184, 58);
-            // 
-            // salvarImagemToolStripMenuItem
-            // 
-            this.salvarImagemToolStripMenuItem.Name = "salvarImagemToolStripMenuItem";
-            this.salvarImagemToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
-            this.salvarImagemToolStripMenuItem.Text = "Salvar Imagem";
-            this.salvarImagemToolStripMenuItem.Click += new System.EventHandler(this.salvarImagemToolStripMenuItem_Click);
-            // 
             // frmImagemTemaEditar
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(535, 684);
             this.Controls.Add(this.panel1);
@@ -208,16 +208,19 @@
             this.Controls.Add(this.txtNome);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmImagemTemaEditar";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Imagem Tema";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmImagemTemaEditar_FormClosing);
             this.Load += new System.EventHandler(this.frmImagemTemaEditar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

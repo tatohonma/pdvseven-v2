@@ -43,7 +43,7 @@
             this.txtNumero2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtNumero2.Font = new System.Drawing.Font("Arial", 11.25F);
             this.txtNumero2.Location = new System.Drawing.Point(111, 19);
-            this.txtNumero2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNumero2.Margin = new System.Windows.Forms.Padding(2);
             this.txtNumero2.Name = "txtNumero2";
             this.txtNumero2.Size = new System.Drawing.Size(106, 25);
             this.txtNumero2.TabIndex = 1;
@@ -68,7 +68,7 @@
             this.btnCancelar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCancelar.Font = new System.Drawing.Font("Arial", 11.25F);
             this.btnCancelar.Location = new System.Drawing.Point(111, 70);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(106, 24);
             this.btnCancelar.TabIndex = 3;
@@ -81,7 +81,7 @@
             this.btnSalvar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSalvar.Font = new System.Drawing.Font("Arial", 11.25F);
             this.btnSalvar.Location = new System.Drawing.Point(2, 70);
-            this.btnSalvar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSalvar.Margin = new System.Windows.Forms.Padding(2);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(105, 24);
             this.btnSalvar.TabIndex = 2;
@@ -94,7 +94,7 @@
             this.txtNumero1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtNumero1.Font = new System.Drawing.Font("Arial", 11.25F);
             this.txtNumero1.Location = new System.Drawing.Point(2, 19);
-            this.txtNumero1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNumero1.Margin = new System.Windows.Forms.Padding(2);
             this.txtNumero1.Name = "txtNumero1";
             this.txtNumero1.Size = new System.Drawing.Size(105, 25);
             this.txtNumero1.TabIndex = 0;
@@ -126,7 +126,7 @@
             this.tableLayoutPanel1.Controls.Add(this.lblAte, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtNumero1, 0, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 10);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
@@ -144,10 +144,14 @@
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(237, 115);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmComandaDiversas";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Comandas";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

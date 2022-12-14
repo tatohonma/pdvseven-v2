@@ -47,7 +47,7 @@
             this.cbbUnidadeDe.FormattingEnabled = true;
             this.cbbUnidadeDe.Location = new System.Drawing.Point(96, 73);
             this.cbbUnidadeDe.Name = "cbbUnidadeDe";
-            this.cbbUnidadeDe.Size = new System.Drawing.Size(220, 34);
+            this.cbbUnidadeDe.Size = new System.Drawing.Size(220, 29);
             this.cbbUnidadeDe.TabIndex = 1;
             // 
             // cbbUnidadePara
@@ -58,7 +58,7 @@
             this.cbbUnidadePara.FormattingEnabled = true;
             this.cbbUnidadePara.Location = new System.Drawing.Point(543, 73);
             this.cbbUnidadePara.Name = "cbbUnidadePara";
-            this.cbbUnidadePara.Size = new System.Drawing.Size(220, 34);
+            this.cbbUnidadePara.Size = new System.Drawing.Size(220, 29);
             this.cbbUnidadePara.TabIndex = 3;
             // 
             // txtDivisao
@@ -67,7 +67,7 @@
             this.txtDivisao.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDivisao.Location = new System.Drawing.Point(446, 73);
             this.txtDivisao.Name = "txtDivisao";
-            this.txtDivisao.Size = new System.Drawing.Size(91, 34);
+            this.txtDivisao.Size = new System.Drawing.Size(91, 29);
             this.txtDivisao.TabIndex = 4;
             this.txtDivisao.Text = " ";
             this.txtDivisao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDivisao_KeyPress);
@@ -84,6 +84,7 @@
             // 
             // btnCancelar
             // 
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.Location = new System.Drawing.Point(130, 166);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(107, 55);
@@ -99,7 +100,7 @@
             this.label4.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(12, 76);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 27);
+            this.label4.Size = new System.Drawing.Size(61, 22);
             this.label4.TabIndex = 10;
             this.label4.Text = "Um(a)";
             // 
@@ -110,7 +111,7 @@
             this.label5.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(322, 76);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(118, 27);
+            this.label5.Size = new System.Drawing.Size(90, 22);
             this.label5.TabIndex = 11;
             this.label5.Text = " é igual à ";
             // 
@@ -121,7 +122,7 @@
             this.label6.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(769, 76);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(47, 27);
+            this.label6.Size = new System.Drawing.Size(37, 22);
             this.label6.TabIndex = 12;
             this.label6.Text = "(s).";
             // 
@@ -130,15 +131,17 @@
             this.txtMultiplicacao.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMultiplicacao.Location = new System.Drawing.Point(446, 166);
             this.txtMultiplicacao.Name = "txtMultiplicacao";
-            this.txtMultiplicacao.Size = new System.Drawing.Size(91, 34);
+            this.txtMultiplicacao.Size = new System.Drawing.Size(91, 29);
             this.txtMultiplicacao.TabIndex = 13;
             this.txtMultiplicacao.Text = " ";
             this.txtMultiplicacao.Visible = false;
             // 
             // frmConversaoUnidadeEditar
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
+            this.AcceptButton = this.btnSalvar;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(823, 233);
             this.Controls.Add(this.txtMultiplicacao);
             this.Controls.Add(this.label6);
@@ -150,9 +153,12 @@
             this.Controls.Add(this.cbbUnidadePara);
             this.Controls.Add(this.cbbUnidadeDe);
             this.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmConversaoUnidadeEditar";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Conversão de Unidade";
             this.Load += new System.EventHandler(this.frmConversaoUnidadeEditar_Load);
