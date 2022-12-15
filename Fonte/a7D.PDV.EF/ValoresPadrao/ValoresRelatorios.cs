@@ -36,7 +36,6 @@ namespace a7D.PDV.EF.ValoresPadrao
                 new tbRelatorio() { IDTipoRelatorio=2, Ordem = 150, Nome = "Saidas Avulsas", QuerySQL = Resources.Relatorio_Saidas_Avulsas },
                 new tbRelatorio() { IDTipoRelatorio=2, Ordem = 160, Nome = "Sangria", QuerySQL = Resources.Relatorio_Sangria },
                 new tbRelatorio() { IDTipoRelatorio=2, Ordem = 170, Nome = "Taxa Entrega Delivery", QuerySQL = Resources.Relatorio_Taxa_Entrega_Delivery },
-                new tbRelatorio() { IDTipoRelatorio=2, Ordem = 180, Nome = "Taxa de Servico Com e Sem Desconto", QuerySQL = Resources.Relatorio_Taxa_Servico_Com_e_Sem_Desconto },
                 new tbRelatorio() { IDTipoRelatorio=2, Ordem = 190, Nome = "Histórico de Créditos por Cliente", QuerySQL = Resources.Relatorio_Creditos},
                 new tbRelatorio() { IDTipoRelatorio=2, Ordem = 200, Nome = "Formas de pagamento detalhado", QuerySQL = Resources.Relatorio_Tipos_Metodo_Bandeira},
                 new tbRelatorio() { IDTipoRelatorio=2, Ordem = 210, Nome = "Impostos dos produtos", QuerySQL = Resources.Relatorio_Lista_Produtos_Impostos}
