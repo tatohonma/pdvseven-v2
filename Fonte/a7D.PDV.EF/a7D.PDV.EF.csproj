@@ -428,6 +428,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -449,9 +450,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Relatorio_Taxa_Entrega_Delivery.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Relatorio_Taxa_Servico_Com_e_Sem_Desconto.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Relatorio_Creditos.sql" />
