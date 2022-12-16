@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2022")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.24.2.0")]
+[assembly: AssemblyVersion("2.24.3.0")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -64,6 +64,19 @@ Lista das últimas versões e FIX
     O WS2 é responsável em bloquear versão antiga dos aplicativos, e fornecer o link do correto para download
     Especificar o tipo de cada alteração feita: Novo, Melhoria, Correção, TDD, Atualização
 
+===============================================================================
+===============================================================================
+
+2.24.3.0 ======================================================================
+    Correção: Selecionar ingredientes na receita não estava funcionando
+    Correção: Forma de pagamento do iFood não estava relacionando com o IDMeioPagamentoSAT
+    Melhoria: Reimpressão do fechamento da conta não fiscal
+    Melhoria: Retirada do relatório "Taxa_Servico_Com_e_Sem_Desconto"
+    Correção: Alterar taxa de serviço sem informar senha
+    Melhoria: Permitir preencher todos os campos independente do gatway pagamento
+    Melhoria: Ajuste das bordas no BackOffice
+    Melhoria: Importar taxa de serviço no Delivery Online 
+    
 2.24.2.0 ======================================================================
     Correção: No fechamento, estava aparecendo produtos em aberto (IDCaixa não estava sendo gravado no fechamento pelo iFood)
     Correção: Produto não cadastrado não estava salvando o nome na observação

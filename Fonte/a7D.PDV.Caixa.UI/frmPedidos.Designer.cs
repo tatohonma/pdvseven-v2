@@ -96,15 +96,15 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnAdicionarCreditos = new System.Windows.Forms.Button();
             this.spContainer = new System.Windows.Forms.SplitContainer();
-            this.listaPedidoEntrega1 = new a7D.PDV.Caixa.UI.Controles.ListaPedidoEntrega();
-            this.listaPedidoMesa1 = new a7D.PDV.Caixa.UI.Controles.ListaPedidoMesa();
-            this.listaPedidoComandaSemCheckin1 = new a7D.PDV.Caixa.UI.Controles.ListaPedidoComandaSemCheckin();
-            this.listaPedidoComanda1 = new a7D.PDV.Caixa.UI.Controles.ListaPedidoComanda();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tbMenuTop = new System.Windows.Forms.TableLayoutPanel();
             this.rdbRetirada = new System.Windows.Forms.RadioButton();
             this.btnBalcao = new System.Windows.Forms.Button();
             this.menuTEFcancelarTransacao = new System.Windows.Forms.ToolStripMenuItem();
+            this.listaPedidoEntrega1 = new a7D.PDV.Caixa.UI.Controles.ListaPedidoEntrega();
+            this.listaPedidoMesa1 = new a7D.PDV.Caixa.UI.Controles.ListaPedidoMesa();
+            this.listaPedidoComandaSemCheckin1 = new a7D.PDV.Caixa.UI.Controles.ListaPedidoComandaSemCheckin();
+            this.listaPedidoComanda1 = new a7D.PDV.Caixa.UI.Controles.ListaPedidoComanda();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -637,26 +637,25 @@
             this.toolStripSeparator1,
             this.cancelarPedidoToolStripMenuItem});
             this.fiscalMenuItem.Name = "fiscalMenuItem";
-            this.fiscalMenuItem.Size = new System.Drawing.Size(78, 20);
-            this.fiscalMenuItem.Text = "S&AT / NFCe";
-            this.fiscalMenuItem.Visible = false;
+            this.fiscalMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.fiscalMenuItem.Text = "Cupom";
             // 
             // reimprimirToolStripMenuItem
             // 
             this.reimprimirToolStripMenuItem.Name = "reimprimirToolStripMenuItem";
-            this.reimprimirToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.reimprimirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.reimprimirToolStripMenuItem.Text = "Reimprimir Cupom";
             this.reimprimirToolStripMenuItem.Click += new System.EventHandler(this.reimprimirToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(173, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // cancelarPedidoToolStripMenuItem
             // 
             this.cancelarPedidoToolStripMenuItem.Name = "cancelarPedidoToolStripMenuItem";
-            this.cancelarPedidoToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.cancelarPedidoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cancelarPedidoToolStripMenuItem.Text = "Cancelar Cupom";
             this.cancelarPedidoToolStripMenuItem.Click += new System.EventHandler(this.cancelarPedidoToolStripMenuItem_Click);
             // 
@@ -836,54 +835,6 @@
             this.spContainer.TabIndex = 40;
             this.spContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.spContainer_SplitterMoved);
             // 
-            // listaPedidoEntrega1
-            // 
-            this.listaPedidoEntrega1.BackColor = System.Drawing.Color.White;
-            this.listaPedidoEntrega1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listaPedidoEntrega1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listaPedidoEntrega1.Location = new System.Drawing.Point(0, 0);
-            this.listaPedidoEntrega1.Margin = new System.Windows.Forms.Padding(4);
-            this.listaPedidoEntrega1.Name = "listaPedidoEntrega1";
-            this.listaPedidoEntrega1.Size = new System.Drawing.Size(557, 221);
-            this.listaPedidoEntrega1.TabIndex = 88;
-            // 
-            // listaPedidoMesa1
-            // 
-            this.listaPedidoMesa1.BackColor = System.Drawing.Color.White;
-            this.listaPedidoMesa1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listaPedidoMesa1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listaPedidoMesa1.Location = new System.Drawing.Point(0, 0);
-            this.listaPedidoMesa1.Margin = new System.Windows.Forms.Padding(4);
-            this.listaPedidoMesa1.Name = "listaPedidoMesa1";
-            this.listaPedidoMesa1.Size = new System.Drawing.Size(557, 221);
-            this.listaPedidoMesa1.TabIndex = 1;
-            // 
-            // listaPedidoComandaSemCheckin1
-            // 
-            this.listaPedidoComandaSemCheckin1.BackColor = System.Drawing.Color.White;
-            this.listaPedidoComandaSemCheckin1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listaPedidoComandaSemCheckin1.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.listaPedidoComandaSemCheckin1.GUIDIdentificacao_selecionado = null;
-            this.listaPedidoComandaSemCheckin1.Location = new System.Drawing.Point(0, 0);
-            this.listaPedidoComandaSemCheckin1.Margin = new System.Windows.Forms.Padding(4);
-            this.listaPedidoComandaSemCheckin1.Name = "listaPedidoComandaSemCheckin1";
-            this.listaPedidoComandaSemCheckin1.NumeroComanda = 0;
-            this.listaPedidoComandaSemCheckin1.Size = new System.Drawing.Size(557, 221);
-            this.listaPedidoComandaSemCheckin1.TabIndex = 91;
-            this.listaPedidoComandaSemCheckin1.Visible = false;
-            // 
-            // listaPedidoComanda1
-            // 
-            this.listaPedidoComanda1.BackColor = System.Drawing.Color.White;
-            this.listaPedidoComanda1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listaPedidoComanda1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listaPedidoComanda1.Location = new System.Drawing.Point(0, 0);
-            this.listaPedidoComanda1.Margin = new System.Windows.Forms.Padding(5);
-            this.listaPedidoComanda1.Name = "listaPedidoComanda1";
-            this.listaPedidoComanda1.Size = new System.Drawing.Size(557, 221);
-            this.listaPedidoComanda1.TabIndex = 89;
-            this.listaPedidoComanda1.Visible = false;
-            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 1;
@@ -967,6 +918,54 @@
             // 
             this.menuTEFcancelarTransacao.Name = "menuTEFcancelarTransacao";
             this.menuTEFcancelarTransacao.Size = new System.Drawing.Size(32, 19);
+            // 
+            // listaPedidoEntrega1
+            // 
+            this.listaPedidoEntrega1.BackColor = System.Drawing.Color.White;
+            this.listaPedidoEntrega1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listaPedidoEntrega1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listaPedidoEntrega1.Location = new System.Drawing.Point(0, 0);
+            this.listaPedidoEntrega1.Margin = new System.Windows.Forms.Padding(4);
+            this.listaPedidoEntrega1.Name = "listaPedidoEntrega1";
+            this.listaPedidoEntrega1.Size = new System.Drawing.Size(557, 221);
+            this.listaPedidoEntrega1.TabIndex = 88;
+            // 
+            // listaPedidoMesa1
+            // 
+            this.listaPedidoMesa1.BackColor = System.Drawing.Color.White;
+            this.listaPedidoMesa1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listaPedidoMesa1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listaPedidoMesa1.Location = new System.Drawing.Point(0, 0);
+            this.listaPedidoMesa1.Margin = new System.Windows.Forms.Padding(4);
+            this.listaPedidoMesa1.Name = "listaPedidoMesa1";
+            this.listaPedidoMesa1.Size = new System.Drawing.Size(557, 221);
+            this.listaPedidoMesa1.TabIndex = 1;
+            // 
+            // listaPedidoComandaSemCheckin1
+            // 
+            this.listaPedidoComandaSemCheckin1.BackColor = System.Drawing.Color.White;
+            this.listaPedidoComandaSemCheckin1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listaPedidoComandaSemCheckin1.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.listaPedidoComandaSemCheckin1.GUIDIdentificacao_selecionado = null;
+            this.listaPedidoComandaSemCheckin1.Location = new System.Drawing.Point(0, 0);
+            this.listaPedidoComandaSemCheckin1.Margin = new System.Windows.Forms.Padding(4);
+            this.listaPedidoComandaSemCheckin1.Name = "listaPedidoComandaSemCheckin1";
+            this.listaPedidoComandaSemCheckin1.NumeroComanda = 0;
+            this.listaPedidoComandaSemCheckin1.Size = new System.Drawing.Size(557, 221);
+            this.listaPedidoComandaSemCheckin1.TabIndex = 91;
+            this.listaPedidoComandaSemCheckin1.Visible = false;
+            // 
+            // listaPedidoComanda1
+            // 
+            this.listaPedidoComanda1.BackColor = System.Drawing.Color.White;
+            this.listaPedidoComanda1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listaPedidoComanda1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listaPedidoComanda1.Location = new System.Drawing.Point(0, 0);
+            this.listaPedidoComanda1.Margin = new System.Windows.Forms.Padding(5);
+            this.listaPedidoComanda1.Name = "listaPedidoComanda1";
+            this.listaPedidoComanda1.Size = new System.Drawing.Size(557, 221);
+            this.listaPedidoComanda1.TabIndex = 89;
+            this.listaPedidoComanda1.Visible = false;
             // 
             // frmPedidos
             // 

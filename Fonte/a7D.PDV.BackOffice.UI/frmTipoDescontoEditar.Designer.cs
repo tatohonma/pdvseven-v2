@@ -44,10 +44,10 @@
             this.ckbAtivo.AutoSize = true;
             this.ckbAtivo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ckbAtivo.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.ckbAtivo.Location = new System.Drawing.Point(2, 179);
-            this.ckbAtivo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ckbAtivo.Location = new System.Drawing.Point(2, 148);
+            this.ckbAtivo.Margin = new System.Windows.Forms.Padding(2);
             this.ckbAtivo.Name = "ckbAtivo";
-            this.ckbAtivo.Size = new System.Drawing.Size(124, 31);
+            this.ckbAtivo.Size = new System.Drawing.Size(92, 24);
             this.ckbAtivo.TabIndex = 2;
             this.ckbAtivo.Text = "Ativo";
             this.ckbAtivo.UseVisualStyleBackColor = true;
@@ -57,10 +57,10 @@
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCancelar.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.btnCancelar.Location = new System.Drawing.Point(130, 214);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancelar.Location = new System.Drawing.Point(98, 176);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(124, 32);
+            this.btnCancelar.Size = new System.Drawing.Size(92, 24);
             this.btnCancelar.TabIndex = 4;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -70,10 +70,10 @@
             // 
             this.btnSalvar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSalvar.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.btnSalvar.Location = new System.Drawing.Point(2, 214);
-            this.btnSalvar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSalvar.Location = new System.Drawing.Point(2, 176);
+            this.btnSalvar.Margin = new System.Windows.Forms.Padding(2);
             this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.Size = new System.Drawing.Size(124, 32);
+            this.btnSalvar.Size = new System.Drawing.Size(92, 24);
             this.btnSalvar.TabIndex = 3;
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.UseVisualStyleBackColor = true;
@@ -84,12 +84,12 @@
             this.tableLayoutPanel1.SetColumnSpan(this.txtDescricao, 2);
             this.txtDescricao.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtDescricao.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.txtDescricao.Location = new System.Drawing.Point(2, 79);
-            this.txtDescricao.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDescricao.Location = new System.Drawing.Point(2, 64);
+            this.txtDescricao.Margin = new System.Windows.Forms.Padding(2);
             this.txtDescricao.Multiline = true;
             this.txtDescricao.Name = "txtDescricao";
             this.txtDescricao.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDescricao.Size = new System.Drawing.Size(252, 71);
+            this.txtDescricao.Size = new System.Drawing.Size(188, 59);
             this.txtDescricao.TabIndex = 1;
             // 
             // label2
@@ -97,10 +97,10 @@
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label2.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.label2.Location = new System.Drawing.Point(2, 56);
+            this.label2.Location = new System.Drawing.Point(2, 45);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(124, 21);
+            this.label2.Size = new System.Drawing.Size(92, 17);
             this.label2.TabIndex = 19;
             this.label2.Text = "Descrição";
             // 
@@ -109,10 +109,10 @@
             this.tableLayoutPanel1.SetColumnSpan(this.txtNome, 2);
             this.txtNome.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtNome.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.txtNome.Location = new System.Drawing.Point(2, 23);
-            this.txtNome.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNome.Location = new System.Drawing.Point(2, 19);
+            this.txtNome.Margin = new System.Windows.Forms.Padding(2);
             this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(252, 29);
+            this.txtNome.Size = new System.Drawing.Size(188, 25);
             this.txtNome.TabIndex = 0;
             // 
             // label1
@@ -123,7 +123,7 @@
             this.label1.Location = new System.Drawing.Point(2, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(124, 21);
+            this.label1.Size = new System.Drawing.Size(92, 17);
             this.label1.TabIndex = 18;
             this.label1.Text = "Nome";
             // 
@@ -142,29 +142,34 @@
             this.tableLayoutPanel1.Controls.Add(this.txtNome, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.txtDescricao, 0, 3);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 10);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(256, 248);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(192, 202);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // frmTipoDescontoEditar
             // 
             this.AcceptButton = this.btnSalvar;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(280, 272);
+            this.ClientSize = new System.Drawing.Size(210, 221);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmTipoDescontoEditar";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Tipo de Desconto";
             this.TopMost = true;

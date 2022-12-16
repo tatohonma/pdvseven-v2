@@ -90,7 +90,6 @@ namespace a7D.PDV.Integracao.DeliveryOnline
         {
             PedidoInformation pedido = new PedidoInformation();
             string voucherDesconto;
-            //string tipoTaxaAdicional;
 
             AddLog(JsonConvert.SerializeObject(pedidoApi));
 
@@ -98,15 +97,12 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             {
                 AddLog($"Pedido {pedidoApi.id} já importado");
 
-                //AlterarStatusPedidoAPI(pedidoApi.id, 1);
                 return;
             }
 
             pedido.Cliente = AdicionarCliente(pedidoApi);
             pedido.Observacoes += "Cliente: " + pedido.Cliente.NomeCompleto + "\r\n\r\n";
             pedido.Observacoes += "Endereço: " + pedido.Cliente.EnderecoCompleto + "\r\n\r\n";
-
-            //pedido.DocumentoCliente = orderDetails.customer.documentNumber;
 
             pedido.TipoPedido = new TipoPedidoInformation();
             pedido.TipoPedido.IDTipoPedido = 30;
@@ -117,10 +113,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             pedido.OrigemPedido = new OrigemPedidoInformation();
             pedido.OrigemPedido.IDOrigemPedido = (int)EOrigemPedido.deliveryOnline;
 
-            //pedido.Caixa = CaixaPDV;
-
             pedido.GUIDIdentificacao = Guid.NewGuid().ToString();
-            //pedido.DocumentoCliente = orderDetails.customer.documentNumber;
             pedido.DtPedido = DateTime.Now;
             pedido.PermitirAlterar = false;
 
@@ -148,27 +141,8 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 pedido.ValorDesconto = 0;
             }
 
-            //pedido.ValorServico = orderDetails.total.additionalFees;
             string strValorTotal = pedidoApi.attributes.order_totals.FirstOrDefault(total => total.code == "total").value;
             pedido.ValorTotal = Convert.ToDecimal(strValorTotal, new CultureInfo("en-us"));
-
-            //if (orderDetails.orderTiming == "SCHEDULED")
-            //{
-            //    pedido.Observacoes += "AGENDADO PARA " + orderDetails.schedule.deliveryDateTimeEnd + "\r\n\r\n";
-            //    pedido.ObservacaoCupom += "AGENDADO PARA " + orderDetails.schedule.deliveryDateTimeEnd + "\r\n\r\n";
-            //    AddLog("AGENDADO PARA " + orderDetails.schedule.deliveryDateTimeEnd);
-            //}
-
-            //if (orderDetails.customer.ordersCountOnMerchant == 0)
-            //{
-            //    pedido.Observacoes += "NOVO CLIENTE " + "\r\n\r\n";
-            //    pedido.ObservacaoCupom += "NOVO CLIENTE " + "\r\n\r\n";
-            //}
-            //else
-            //{
-            //    pedido.Observacoes += "FIDELIDADE " + orderDetails.customer.ordersCountOnMerchant.ToString() + "\r\n\r\n";
-            //    pedido.ObservacaoCupom += "FIDELIDADE " + orderDetails.customer.ordersCountOnMerchant.ToString() + "\r\n\r\n";
-            //}
 
             CRUD.Adicionar(pedido);
 
@@ -176,18 +150,17 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             Tag.Adicionar(pedido.GUIDIdentificacao, "DeliveryOnline-order_type", pedidoApi.attributes.order_type);
             Tag.Adicionar(pedido.GUIDIdentificacao, "DeliveryOnline-status_id", pedidoApi.attributes.status.status_id.ToString());
 
-            //if (orderDetails.total.additionalFees > 0)
-            //{
-            //    pedido.Observacoes += "TAXAS ADICIONAIS\r\n";
-            //    foreach (var fee in orderDetails.additionalFees)
-            //    {
-            //        tipoTaxaAdicional = CarregarTipoTaxaAdicional(fee.type);
-            //        AdicionarPedidoProduto(pedido.IDPedido.Value, null, TaxaAdicional.IDProduto.ToString(), tipoTaxaAdicional, fee.value, 1, tipoTaxaAdicional);
-            //        pedido.Observacoes += " - " + tipoTaxaAdicional + ": R$ " + fee.value.ToString("#,##0.00") + "\r\n";
-            //    }
+            var taxa = pedidoApi.attributes.order_totals.FirstOrDefault(total => total.code == "paymentFee");
+            if (taxa != null)
+            {
+                decimal valorTaxa = Convert.ToDecimal(taxa.value, new CultureInfo("en-us"));
 
-            //    pedido.Observacoes += "\r\n";
-            //}
+                pedido.Observacoes += "TAXA ADICIONAL\r\n";
+                pedido.Observacoes += " - " + taxa.title + ": R$ " + valorTaxa.ToString("#,##0.00") + "\r\n";
+                pedido.Observacoes += "\r\n";
+
+                AdicionarPedidoProduto(pedido.IDPedido.Value, null, TaxaAdicional.IDProduto.Value, valorTaxa, 1, "");
+            }
 
             ProdutoInformation produto;
             Int32 idProduto;
@@ -200,7 +173,6 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             Int32 idPedidoProduto;
             Decimal valorUnitario;
 
-
             pedido.Observacoes += "ITENS\r\n";
             foreach (var p in pedidoApi.attributes.order_menus)
             {
@@ -209,7 +181,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
 
                 if (!String.IsNullOrWhiteSpace(observacaoProduto) && !String.IsNullOrWhiteSpace(p.comment))
                     observacaoProduto = observacaoProduto + "\r\n" + p.comment;
-                else if(String.IsNullOrWhiteSpace(observacaoProduto) && !String.IsNullOrWhiteSpace(p.comment))
+                else if (String.IsNullOrWhiteSpace(observacaoProduto) && !String.IsNullOrWhiteSpace(p.comment))
                     observacaoProduto = p.comment;
 
                 valorUnitario = Convert.ToDecimal(p.price, new CultureInfo("en-us"));
@@ -240,22 +212,6 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 ConfirmarPedido(pedidoApi);
             }
         }
-
-        //private string CarregarTipoTaxaAdicional(string feeType)
-        //{
-        //    string descricao;
-        //    switch (feeType)
-        //    {
-        //        case "SMALL_ORDER_FEE":
-        //            descricao = "pedido abaixo do valor mínimo";
-        //            break;
-        //        default:
-        //            descricao = feeType;
-        //            break;
-        //    }
-
-        //    return descricao;
-        //}
 
         public void GerarOrdemProducao(Int32 idPedido)
         {

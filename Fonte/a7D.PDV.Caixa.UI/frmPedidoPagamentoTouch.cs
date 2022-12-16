@@ -209,9 +209,10 @@ namespace a7D.PDV.Caixa.UI
 
                 PedidoAtual.EmailCliente = ppCliente.EmailCliente;
 
-                var dialog = new FecharVenda(PedidoAtual, ppCliente.DocumentoNaNota, PedidoAtual.Observacoes)
-                    .NaImpressora(ConfiguracoesCaixa.Valores.ModeloImpressora)
-                    .Fechar(true, chkImprimir.Checked, chkExpedicao.Checked);
+                var objFecharVenda = new FecharVenda(PedidoAtual, ppCliente.DocumentoNaNota, PedidoAtual.Observacoes);
+
+                objFecharVenda.NaImpressora(ConfiguracoesCaixa.Valores.ModeloImpressora);   
+                var dialog = objFecharVenda.Fechar(true, chkImprimir.Checked, chkExpedicao.Checked);
 
                 if (dialog == DialogResult.OK)
                 {

@@ -57,7 +57,6 @@ namespace a7D.PDV.BackOffice.UI
                 cbbMeioPagamento.SelectedIndex = -1;
             }
 
-            ExibeCampos();
             var qtd = BLL.Caixa.ContarAbertos();
             string mensagem = "Não efetuar alterações enquanto o caixa estiver aberto!";
             if (qtd > 0)
@@ -78,11 +77,7 @@ namespace a7D.PDV.BackOffice.UI
             TipoPagamento1.CodigoImpressoraFiscal = txtCodigo.Text;
             TipoPagamento1.Ativo = ckbAtivo.Checked;
             TipoPagamento1.IDGateway = (int)cbbGateway.SelectedValue;
-
-            if (cbbMeioPagamento.Visible)
-                TipoPagamento1.MeioPagamentoSAT = new MeioPagamentoSATInformation() { IDMeioPagamentoSAT = Convert.ToInt32(cbbMeioPagamento.SelectedValue) };
-            else
-                TipoPagamento1.MeioPagamentoSAT = null;
+            TipoPagamento1.MeioPagamentoSAT = new MeioPagamentoSATInformation() { IDMeioPagamentoSAT = Convert.ToInt32(cbbMeioPagamento.SelectedValue) };
 
             if (TipoPagamento1.Gateway == EGateway.NTKPOS
              || TipoPagamento1.Gateway == EGateway.GranitoPOS
@@ -96,12 +91,6 @@ namespace a7D.PDV.BackOffice.UI
                 {
                     TipoPagamento1.ContaRecebivel = new tbContaRecebivel() { IDContaRecebivel = (int)EContaRecebivel.ContaCliente };
                     TipoPagamento1.MeioPagamentoSAT = new MeioPagamentoSATInformation() { IDMeioPagamentoSAT = (int)ECodigosPagamentoSAT.Loja };
-                }
-                else
-                {
-                    TipoPagamento1.MeioPagamentoSAT = null;
-                    TipoPagamento1.ContaRecebivel = null;
-                    TipoPagamento1.Bandeira = null;
                 }
             }
             else
@@ -149,24 +138,6 @@ namespace a7D.PDV.BackOffice.UI
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void cbbGateway_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ExibeCampos();
-        }
-
-        private void ExibeCampos()
-        {
-            lblBandeira.Visible = cbbBandeira.Visible = lblRecebivel.Visible = cbbRecebivel.Visible = ckbRegistrarValores.Visible = lblMeioPagamento.Visible = cbbMeioPagamento.Visible = cbbGateway.SelectedIndex == 0;
-            // Estas formas de pagamento devem ser a mesma em Tipos de PDV com fechamento automático: AutoFechamento()
-            ckbAtivo.Visible =
-                  ((int)cbbGateway.SelectedValue != (int)EGateway.NTKPOS
-                && (int)cbbGateway.SelectedValue != (int)EGateway.GranitoPOS
-                && (int)cbbGateway.SelectedValue != (int)EGateway.StonePOS
-                && (int)cbbGateway.SelectedValue != (int)EGateway.iFood);
-
-            this.Height = tlpCampos.PreferredSize.Height + 120;
         }
     }
 }

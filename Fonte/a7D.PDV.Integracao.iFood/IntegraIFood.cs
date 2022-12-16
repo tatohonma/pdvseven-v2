@@ -101,6 +101,8 @@ namespace a7D.PDV.Integracao.iFood
             if (PagamentoIFood == null)
             {
                 PagamentoIFood = new TipoPagamentoInformation();
+                PagamentoIFood.MeioPagamentoSAT = new MeioPagamentoSATInformation { IDMeioPagamentoSAT = 10 };
+
                 PagamentoIFood.Nome = "iFood";
                 PagamentoIFood.CodigoImpressoraFiscal = "iFood";
                 PagamentoIFood.Ativo = true;

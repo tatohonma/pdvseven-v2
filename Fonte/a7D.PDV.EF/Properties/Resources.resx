@@ -133,9 +133,6 @@
   <data name="Relatorio_Taxa_Entrega_Delivery" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Relatorio_Taxa_Entrega_Delivery.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="Relatorio_Taxa_Servico_Com_e_Sem_Desconto" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Relatorio_Taxa_Servico_Com_e_Sem_Desconto.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
   <data name="Tipos" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Tipos.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
