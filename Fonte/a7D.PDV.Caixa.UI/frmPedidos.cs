@@ -67,8 +67,6 @@ namespace a7D.PDV.Caixa.UI
 
             clientesMenuSaldos.Visible = clientesMenuCadastro.Visible = frmPrincipal.ContaCliente;
 
-            fiscalMenuItem.Visible = ConfiguracoesSistema.Valores.Fiscal != "none";
-            fiscalMenuItem.Text = ConfiguracoesSistema.Valores.Fiscal;
             informarPerdaToolStripMenuItem.Visible = BLL.PDV.PossuiEstoque();
 
             lblTituloForm.Text += " - " + AC.PDV.Nome;

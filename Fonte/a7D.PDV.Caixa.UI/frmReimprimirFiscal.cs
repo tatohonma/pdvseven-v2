@@ -1,6 +1,9 @@
 ﻿using a7D.PDV.BLL;
+using a7D.PDV.BLL.Services;
 using a7D.PDV.Componentes;
+using a7D.PDV.EF.Enum;
 using a7D.PDV.Fiscal.Services;
+using a7D.PDV.Model;
 using System;
 using System.Data;
 using System.Linq;
@@ -101,21 +104,36 @@ ORDER BY DataPedido";
 
         private void btnReimprimir_Click(object sender, EventArgs e)
         {
-            var imprimir = lista.Where(p => p.Selecione && p.IDRetornoSAT > 0);
-            if (imprimir.Count() == 0)
-            {
-                MessageBox.Show("Selecione pedidos emitidos para ser reimpresso.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            var imprimir = lista.Where(p => p.Selecione);
+
             dgvPrincipal.UseWaitCursor = true;
             btnEmitir.Enabled = btnReimprimir.Enabled = false;
             try
             {
                 foreach (var item in imprimir)
                 {
-                    var retornoSAT = RetornoSAT.Carregar(item.IDRetornoSAT.Value);
-                    if (!CupomSATService.ImprimirCupomVenda(retornoSAT.arquivoCFeSAT, item.IDPedido, ConfiguracoesCaixa.Valores.ModeloImpressora, out Exception mensagemErro))
-                        throw mensagemErro;
+                    if(item.IDRetornoSAT > 0)
+                    {
+                        var retornoSAT = RetornoSAT.Carregar(item.IDRetornoSAT.Value);
+                        if (!CupomSATService.ImprimirCupomVenda(retornoSAT.arquivoCFeSAT, item.IDPedido, ConfiguracoesCaixa.Valores.ModeloImpressora, out Exception mensagemErro))
+                            throw mensagemErro;
+                    }
+                    else
+                    {
+                        PedidoInformation pedido = Pedido.CarregarCompleto(item.IDPedido);
+
+                        switch (ConfiguracoesCaixa.Valores.GerenciadorImpressao)
+                        {
+                            case ETipoGerenciadorImpressao.ACBr:
+                            case ETipoGerenciadorImpressao.ECFBemafii:
+                                frmPrincipal.Impressora1.GerarCupom(pedido, false);
+                                break;
+                            case ETipoGerenciadorImpressao.ImpressoraWindows:
+                            case ETipoGerenciadorImpressao.SAT:
+                                ContaServices.ImprimirConta(ConfiguracoesCaixa.Valores.ModeloImpressora, pedido);
+                                break;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
