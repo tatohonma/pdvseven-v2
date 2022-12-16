@@ -95,7 +95,7 @@ namespace a7D.PDV.EF.Migrations
             AjustesVersao2_17_17_5(context, versao);
             AjustesVersao2_19_3_2(context, versao);
             AjustesVersao2_20_3_0(context, versao);
-            AjustesVersao2_25_0_0(context, versao);
+            AjustesVersao2_24_3_0(context, versao);
 
             // Limpeza iFood e ERP: Remover futuramente
             if (versao != null && versao.ToVersion() < new Version("2.17.16.6"))
@@ -217,12 +217,12 @@ delete from tbGateway where NOT(IDGateway in (select distinct IDGateway from tbT
             }
         }
 
-        private void AjustesVersao2_25_0_0(pdv7Context context, tbVersao versao)
+        private void AjustesVersao2_24_3_0(pdv7Context context, tbVersao versao)
         {
-            if (versao == null || versao.ToVersion() < new Version("2.25.0.0"))
+            if (versao == null || versao.ToVersion() < new Version("2.24.3.0"))
             {
                 context.Database.ExecuteSqlCommand(@"DELETE tbRelatorio WHERE Nome='Taxa de Servico Com e Sem Desconto' AND IDTipoRelatorio='2'");
-                log.AppendLine($"Ajuste Versao 2.25.0.0: Relatório 'Taxa de Servico Com e Sem Desconto' excluído!");
+                log.AppendLine($"Ajuste Versao 2.24.3.0: Relatório 'Taxa de Servico Com e Sem Desconto' excluído!");
             }
         }
    }
