@@ -67,6 +67,14 @@ Lista das últimas versões e FIX
 2.24.3.0 ======================================================================
     Correção: Selecionar ingredientes na receita não estava funcionando
     Correção: Forma de pagamento do iFood não estava relacionando com o IDMeioPagamentoSAT
+    Melhoria: Reimpressão do fechamento da conta não fiscal
+    Melhoria: Retirada do relatório "Taxa_Servico_Com_e_Sem_Desconto"
+    Correção: Alterar taxa de serviço sem informar senha
+    Melhoria: Permitir preencher todos os campos independente do gatway pagamento
+    Melhoria: Ajuste das bordas no BackOffice
+    
+    
+    
 
 2.24.2.0 ======================================================================
     Correção: No fechamento, estava aparecendo produtos em aberto (IDCaixa não estava sendo gravado no fechamento pelo iFood)
