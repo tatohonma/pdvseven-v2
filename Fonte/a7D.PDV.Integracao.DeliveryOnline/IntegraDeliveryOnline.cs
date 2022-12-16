@@ -25,6 +25,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
         UsuarioInformation UsuarioDO;
         PDVInformation PDVDO;
         TipoDescontoInformation TipoDescontoDO;
+        ProdutoInformation TaxaAdicional;
 
         API.Orders APIOrders;
         API.Locations APILocations;
@@ -94,6 +95,29 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 CRUD.Adicionar(TipoDescontoDO);
 
                 AddLog("Tipo Desconto 'Delivery Online' adicionado!");
+            }
+
+            TaxaAdicional = (ProdutoInformation)CRUD.Carregar(new ProdutoInformation { Nome = "Serviço Delivery Online" });
+            if (TaxaAdicional.IDProduto == null)
+            {
+                TaxaAdicional = new ProdutoInformation();
+                TaxaAdicional.Nome = "Serviço Delivery Online";
+                TaxaAdicional.TipoProduto = new TipoProdutoInformation { IDTipoProduto = 10 };
+                TaxaAdicional.ValorUnitario = 0;
+                TaxaAdicional.Ativo = true;
+                TaxaAdicional.Disponibilidade = true;
+                TaxaAdicional.Excluido = false;
+                TaxaAdicional.DtAlteracaoDisponibilidade = DateTime.Now;
+                TaxaAdicional.DtUltimaAlteracao = DateTime.Now;
+                TaxaAdicional.ClassificacaoFiscal = new ClassificacaoFiscalInformation { IDClassificacaoFiscal = 2 };
+                TaxaAdicional.Unidade = new UnidadeInformation { IDUnidade = 1 };
+                TaxaAdicional.ControlarEstoque = false;
+                TaxaAdicional.UtilizarBalanca = false;
+                TaxaAdicional.AssistenteModificacoes = false;
+                TaxaAdicional.GUIDIdentificacao = Guid.NewGuid().ToString();
+
+                CRUD.Adicionar(TaxaAdicional);
+                AddLog("Produto com o nome 'Serviço Delivery Online' cadastrado!");
             }
 
             try
