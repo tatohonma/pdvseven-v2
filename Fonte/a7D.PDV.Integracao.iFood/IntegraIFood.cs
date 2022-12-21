@@ -271,7 +271,7 @@ namespace a7D.PDV.Integracao.iFood
             catch (Exception ex)
             {
                 AddLog("Erro na integração iFood: " + ex.Message);
-                AddLog("Reinicie o Integrador para restabelecer essa integração...\r\nCaso não resolva, entre em contato com o suporte!!!");
+                //AddLog("Reinicie o Integrador para restabelecer essa integração...\r\nCaso não resolva, entre em contato com o suporte!!!");
                 //if (!ex.Message.Contains("token expired") && !ex.Message.Contains("Invalid access"))
                 //    throw new ExceptionPDV(CodigoErro.EE11, ex);
             }

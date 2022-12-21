@@ -79,10 +79,6 @@ namespace a7D.PDV.Integracao.Servico.UI
         {
             lvStatus.Clear();
 
-            //tabServicos.TabPages.Remove(tabEasyChopp);
-            //txtStatusServer.Text = "Inicializando...";
-
-            //Tem que estar pelo menos configurado!
             if (!frmConfigurarConexaoDB.Verifica(true, false))
             {
                 if (!string.IsNullOrEmpty(frmConfigurarConexaoDB.NovoIP))
@@ -143,7 +139,7 @@ namespace a7D.PDV.Integracao.Servico.UI
                     else
                         stStatus.Text = integracao.Nome + " em execução";
 
-                    // Verifica se qualquer instancia enviou umpedido de finalização 
+                    // Verifica se qualquer instancia enviou um pedido de finalização 
                     for (int s = 0; s < integracoes.Count; s++)
                         if (integracoes[s].RequestClose)
                             Finalizar();
