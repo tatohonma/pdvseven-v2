@@ -25,6 +25,8 @@ namespace a7D.PDV.Integracao.Servico.Core
         private string BasePath;
         private string Integracao;
 
+        private Int32 qtdTentativas = 0;
+
         public IntegracaoTask()
         {
             var fi = new FileInfo(Assembly.GetEntryAssembly().Location);
@@ -81,6 +83,15 @@ namespace a7D.PDV.Integracao.Servico.Core
             {
                 Executando = false;
                 AddLog("Finalizando " + Nome);
+
+                if(qtdTentativas < 5)
+                {
+                    qtdTentativas++;
+                    AddLog("Reiniciando " + Nome + "... Tentativa " + qtdTentativas + " de 5");
+
+                    Executando = true;
+                    this.Executar();
+                }
             }
         }
 

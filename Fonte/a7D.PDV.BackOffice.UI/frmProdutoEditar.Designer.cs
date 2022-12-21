@@ -212,8 +212,8 @@
             this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(223, 549);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancelar.Location = new System.Drawing.Point(222, 552);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(89, 36);
             this.btnCancelar.TabIndex = 3;
@@ -225,8 +225,8 @@
             // 
             this.btnSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSalvar.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalvar.Location = new System.Drawing.Point(10, 549);
-            this.btnSalvar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSalvar.Location = new System.Drawing.Point(9, 552);
+            this.btnSalvar.Margin = new System.Windows.Forms.Padding(2);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(80, 36);
             this.btnSalvar.TabIndex = 1;
@@ -242,7 +242,7 @@
             this.ckbAtivo.Dock = System.Windows.Forms.DockStyle.Left;
             this.ckbAtivo.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ckbAtivo.Location = new System.Drawing.Point(2, 404);
-            this.ckbAtivo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ckbAtivo.Margin = new System.Windows.Forms.Padding(2);
             this.ckbAtivo.Name = "ckbAtivo";
             this.ckbAtivo.Size = new System.Drawing.Size(58, 36);
             this.ckbAtivo.TabIndex = 9;
@@ -267,7 +267,7 @@
             this.txtNome.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtNome.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNome.Location = new System.Drawing.Point(2, 126);
-            this.txtNome.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNome.Margin = new System.Windows.Forms.Padding(2);
             this.txtNome.MaxLength = 100;
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(706, 25);
@@ -292,7 +292,7 @@
             this.txtCodigo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtCodigo.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCodigo.Location = new System.Drawing.Point(2, 24);
-            this.txtCodigo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCodigo.Margin = new System.Windows.Forms.Padding(2);
             this.txtCodigo.MaxLength = 10;
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(350, 25);
@@ -303,7 +303,7 @@
             this.txtValorUnitario.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtValorUnitario.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtValorUnitario.Location = new System.Drawing.Point(2, 326);
-            this.txtValorUnitario.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtValorUnitario.Margin = new System.Windows.Forms.Padding(2);
             this.txtValorUnitario.Name = "txtValorUnitario";
             this.txtValorUnitario.Size = new System.Drawing.Size(173, 25);
             this.txtValorUnitario.TabIndex = 4;
@@ -313,7 +313,7 @@
             this.txtCodigoAliquota.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtCodigoAliquota.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCodigoAliquota.Location = new System.Drawing.Point(356, 375);
-            this.txtCodigoAliquota.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCodigoAliquota.Margin = new System.Windows.Forms.Padding(2);
             this.txtCodigoAliquota.Name = "txtCodigoAliquota";
             this.txtCodigoAliquota.Size = new System.Drawing.Size(173, 25);
             this.txtCodigoAliquota.TabIndex = 7;
@@ -349,7 +349,7 @@
             this.txtDescricao.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtDescricao.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDescricao.Location = new System.Drawing.Point(2, 177);
-            this.txtDescricao.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDescricao.Margin = new System.Windows.Forms.Padding(2);
             this.txtDescricao.MaxLength = 500;
             this.txtDescricao.Multiline = true;
             this.txtDescricao.Name = "txtDescricao";
@@ -358,8 +358,7 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabDadosPrincipais);
             this.tabControl1.Controls.Add(this.tabCategorias);
@@ -371,7 +370,7 @@
             this.tabControl1.Controls.Add(this.tabTags);
             this.tabControl1.Font = new System.Drawing.Font("Arial", 11.25F);
             this.tabControl1.Location = new System.Drawing.Point(9, 11);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(722, 534);
@@ -383,9 +382,9 @@
             this.tabDadosPrincipais.BackColor = System.Drawing.Color.Transparent;
             this.tabDadosPrincipais.Controls.Add(this.tableLayoutPanel1);
             this.tabDadosPrincipais.Location = new System.Drawing.Point(4, 26);
-            this.tabDadosPrincipais.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabDadosPrincipais.Margin = new System.Windows.Forms.Padding(2);
             this.tabDadosPrincipais.Name = "tabDadosPrincipais";
-            this.tabDadosPrincipais.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabDadosPrincipais.Padding = new System.Windows.Forms.Padding(2);
             this.tabDadosPrincipais.Size = new System.Drawing.Size(714, 504);
             this.tabDadosPrincipais.TabIndex = 0;
             this.tabDadosPrincipais.Text = "Dados principais";
@@ -456,7 +455,7 @@
             this.ckbAssistenteModificacoes.Dock = System.Windows.Forms.DockStyle.Left;
             this.ckbAssistenteModificacoes.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ckbAssistenteModificacoes.Location = new System.Drawing.Point(533, 304);
-            this.ckbAssistenteModificacoes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ckbAssistenteModificacoes.Margin = new System.Windows.Forms.Padding(2);
             this.ckbAssistenteModificacoes.Name = "ckbAssistenteModificacoes";
             this.tableLayoutPanel1.SetRowSpan(this.ckbAssistenteModificacoes, 2);
             this.ckbAssistenteModificacoes.Size = new System.Drawing.Size(175, 47);
@@ -493,7 +492,7 @@
             this.txtValorUnitario2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtValorUnitario2.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtValorUnitario2.Location = new System.Drawing.Point(179, 326);
-            this.txtValorUnitario2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtValorUnitario2.Margin = new System.Windows.Forms.Padding(2);
             this.txtValorUnitario2.Name = "txtValorUnitario2";
             this.txtValorUnitario2.Size = new System.Drawing.Size(173, 25);
             this.txtValorUnitario2.TabIndex = 5;
@@ -503,7 +502,7 @@
             this.txtValorUnitario3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtValorUnitario3.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtValorUnitario3.Location = new System.Drawing.Point(356, 326);
-            this.txtValorUnitario3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtValorUnitario3.Margin = new System.Windows.Forms.Padding(2);
             this.txtValorUnitario3.Name = "txtValorUnitario3";
             this.txtValorUnitario3.Size = new System.Drawing.Size(173, 25);
             this.txtValorUnitario3.TabIndex = 6;
@@ -517,7 +516,7 @@
             this.cbbClassificacaoFiscal.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbClassificacaoFiscal.FormattingEnabled = true;
             this.cbbClassificacaoFiscal.Location = new System.Drawing.Point(2, 75);
-            this.cbbClassificacaoFiscal.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbbClassificacaoFiscal.Margin = new System.Windows.Forms.Padding(2);
             this.cbbClassificacaoFiscal.Name = "cbbClassificacaoFiscal";
             this.cbbClassificacaoFiscal.Size = new System.Drawing.Size(706, 25);
             this.cbbClassificacaoFiscal.TabIndex = 2;
@@ -542,7 +541,7 @@
             this.ckbControlarEstoque.Dock = System.Windows.Forms.DockStyle.Left;
             this.ckbControlarEstoque.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ckbControlarEstoque.Location = new System.Drawing.Point(2, 466);
-            this.ckbControlarEstoque.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ckbControlarEstoque.Margin = new System.Windows.Forms.Padding(2);
             this.ckbControlarEstoque.Name = "ckbControlarEstoque";
             this.ckbControlarEstoque.Size = new System.Drawing.Size(145, 32);
             this.ckbControlarEstoque.TabIndex = 11;
@@ -555,7 +554,7 @@
             this.ckbBalanca.Dock = System.Windows.Forms.DockStyle.Left;
             this.ckbBalanca.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ckbBalanca.Location = new System.Drawing.Point(179, 404);
-            this.ckbBalanca.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ckbBalanca.Margin = new System.Windows.Forms.Padding(2);
             this.ckbBalanca.Name = "ckbBalanca";
             this.ckbBalanca.Size = new System.Drawing.Size(128, 36);
             this.ckbBalanca.TabIndex = 10;
@@ -570,7 +569,7 @@
             this.cbbUnidade.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbUnidade.FormattingEnabled = true;
             this.cbbUnidade.Location = new System.Drawing.Point(2, 375);
-            this.cbbUnidade.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbbUnidade.Margin = new System.Windows.Forms.Padding(2);
             this.cbbUnidade.Name = "cbbUnidade";
             this.cbbUnidade.Size = new System.Drawing.Size(350, 25);
             this.cbbUnidade.TabIndex = 8;
@@ -605,7 +604,7 @@
             this.txtCEAN.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtCEAN.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCEAN.Location = new System.Drawing.Point(356, 24);
-            this.txtCEAN.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCEAN.Margin = new System.Windows.Forms.Padding(2);
             this.txtCEAN.MaxLength = 13;
             this.txtCEAN.Name = "txtCEAN";
             this.txtCEAN.Size = new System.Drawing.Size(352, 25);
@@ -618,7 +617,7 @@
             this.ckbCobrarTaxa.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbCobrarTaxa.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ckbCobrarTaxa.Location = new System.Drawing.Point(533, 404);
-            this.ckbCobrarTaxa.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ckbCobrarTaxa.Margin = new System.Windows.Forms.Padding(2);
             this.ckbCobrarTaxa.Name = "ckbCobrarTaxa";
             this.ckbCobrarTaxa.Size = new System.Drawing.Size(175, 36);
             this.ckbCobrarTaxa.TabIndex = 12;
@@ -688,9 +687,9 @@
             this.tabCategorias.Controls.Add(this.cbbCategoriasProduto);
             this.tabCategorias.Controls.Add(this.btnAdicionarCategoria);
             this.tabCategorias.Location = new System.Drawing.Point(4, 26);
-            this.tabCategorias.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabCategorias.Margin = new System.Windows.Forms.Padding(2);
             this.tabCategorias.Name = "tabCategorias";
-            this.tabCategorias.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabCategorias.Padding = new System.Windows.Forms.Padding(2);
             this.tabCategorias.Size = new System.Drawing.Size(714, 504);
             this.tabCategorias.TabIndex = 4;
             this.tabCategorias.Text = "Categorias";
@@ -737,7 +736,7 @@
             this.dgvCategoriasProduto.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCategoriasProduto.EnableHeadersVisualStyles = false;
             this.dgvCategoriasProduto.Location = new System.Drawing.Point(5, 34);
-            this.dgvCategoriasProduto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvCategoriasProduto.Margin = new System.Windows.Forms.Padding(2);
             this.dgvCategoriasProduto.Name = "dgvCategoriasProduto";
             this.dgvCategoriasProduto.ReadOnly = true;
             this.dgvCategoriasProduto.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -802,7 +801,7 @@
             this.cbbCategoriasProduto.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbCategoriasProduto.FormattingEnabled = true;
             this.cbbCategoriasProduto.Location = new System.Drawing.Point(5, 5);
-            this.cbbCategoriasProduto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbbCategoriasProduto.Margin = new System.Windows.Forms.Padding(2);
             this.cbbCategoriasProduto.Name = "cbbCategoriasProduto";
             this.cbbCategoriasProduto.Size = new System.Drawing.Size(705, 25);
             this.cbbCategoriasProduto.TabIndex = 0;
@@ -813,7 +812,7 @@
             // 
             this.btnAdicionarCategoria.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdicionarCategoria.Location = new System.Drawing.Point(524, 4);
-            this.btnAdicionarCategoria.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAdicionarCategoria.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdicionarCategoria.Name = "btnAdicionarCategoria";
             this.btnAdicionarCategoria.Size = new System.Drawing.Size(81, 25);
             this.btnAdicionarCategoria.TabIndex = 1;
@@ -829,9 +828,9 @@
             this.tabModificacoes.Controls.Add(this.cbbPainelModificacao);
             this.tabModificacoes.Controls.Add(this.btnAdicionarPainel);
             this.tabModificacoes.Location = new System.Drawing.Point(4, 26);
-            this.tabModificacoes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabModificacoes.Margin = new System.Windows.Forms.Padding(2);
             this.tabModificacoes.Name = "tabModificacoes";
-            this.tabModificacoes.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabModificacoes.Padding = new System.Windows.Forms.Padding(2);
             this.tabModificacoes.Size = new System.Drawing.Size(714, 504);
             this.tabModificacoes.TabIndex = 1;
             this.tabModificacoes.Text = "Modificações";
@@ -880,7 +879,7 @@
             this.dgvPainelModificacao.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvPainelModificacao.EnableHeadersVisualStyles = false;
             this.dgvPainelModificacao.Location = new System.Drawing.Point(5, 34);
-            this.dgvPainelModificacao.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvPainelModificacao.Margin = new System.Windows.Forms.Padding(2);
             this.dgvPainelModificacao.Name = "dgvPainelModificacao";
             this.dgvPainelModificacao.ReadOnly = true;
             this.dgvPainelModificacao.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -965,7 +964,7 @@
             this.cbbPainelModificacao.Font = new System.Drawing.Font("Arial", 11.25F);
             this.cbbPainelModificacao.FormattingEnabled = true;
             this.cbbPainelModificacao.Location = new System.Drawing.Point(5, 5);
-            this.cbbPainelModificacao.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbbPainelModificacao.Margin = new System.Windows.Forms.Padding(2);
             this.cbbPainelModificacao.Name = "cbbPainelModificacao";
             this.cbbPainelModificacao.Size = new System.Drawing.Size(705, 25);
             this.cbbPainelModificacao.TabIndex = 0;
@@ -976,7 +975,7 @@
             // 
             this.btnAdicionarPainel.Font = new System.Drawing.Font("Arial", 11.25F);
             this.btnAdicionarPainel.Location = new System.Drawing.Point(524, 4);
-            this.btnAdicionarPainel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAdicionarPainel.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdicionarPainel.Name = "btnAdicionarPainel";
             this.btnAdicionarPainel.Size = new System.Drawing.Size(81, 25);
             this.btnAdicionarPainel.TabIndex = 1;
@@ -991,9 +990,9 @@
             this.tabAreaProducao.Controls.Add(this.cbbAreaProducao);
             this.tabAreaProducao.Controls.Add(this.dgvAreaProducao);
             this.tabAreaProducao.Location = new System.Drawing.Point(4, 26);
-            this.tabAreaProducao.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabAreaProducao.Margin = new System.Windows.Forms.Padding(2);
             this.tabAreaProducao.Name = "tabAreaProducao";
-            this.tabAreaProducao.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabAreaProducao.Padding = new System.Windows.Forms.Padding(2);
             this.tabAreaProducao.Size = new System.Drawing.Size(714, 504);
             this.tabAreaProducao.TabIndex = 8;
             this.tabAreaProducao.Text = "Área de Produção";
@@ -1005,7 +1004,7 @@
             this.cbbAreaProducao.Font = new System.Drawing.Font("Arial", 11.25F);
             this.cbbAreaProducao.FormattingEnabled = true;
             this.cbbAreaProducao.Location = new System.Drawing.Point(5, 5);
-            this.cbbAreaProducao.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbbAreaProducao.Margin = new System.Windows.Forms.Padding(2);
             this.cbbAreaProducao.Name = "cbbAreaProducao";
             this.cbbAreaProducao.Size = new System.Drawing.Size(705, 25);
             this.cbbAreaProducao.TabIndex = 9;
@@ -1057,7 +1056,7 @@
             this.dgvAreaProducao.DefaultCellStyle = dataGridViewCellStyle13;
             this.dgvAreaProducao.EnableHeadersVisualStyles = false;
             this.dgvAreaProducao.Location = new System.Drawing.Point(5, 34);
-            this.dgvAreaProducao.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvAreaProducao.Margin = new System.Windows.Forms.Padding(2);
             this.dgvAreaProducao.Name = "dgvAreaProducao";
             this.dgvAreaProducao.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -1115,7 +1114,7 @@
             this.tabTraducao.Controls.Add(this.btnAdicionarTraducao);
             this.tabTraducao.Controls.Add(this.dgvTraducao);
             this.tabTraducao.Location = new System.Drawing.Point(4, 26);
-            this.tabTraducao.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabTraducao.Margin = new System.Windows.Forms.Padding(2);
             this.tabTraducao.Name = "tabTraducao";
             this.tabTraducao.Size = new System.Drawing.Size(714, 504);
             this.tabTraducao.TabIndex = 5;
@@ -1128,7 +1127,7 @@
             this.cbbIdioma.Font = new System.Drawing.Font("Arial", 11.25F);
             this.cbbIdioma.FormattingEnabled = true;
             this.cbbIdioma.Location = new System.Drawing.Point(5, 5);
-            this.cbbIdioma.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbbIdioma.Margin = new System.Windows.Forms.Padding(2);
             this.cbbIdioma.Name = "cbbIdioma";
             this.cbbIdioma.Size = new System.Drawing.Size(622, 25);
             this.cbbIdioma.TabIndex = 0;
@@ -1138,7 +1137,7 @@
             // 
             this.btnAdicionarTraducao.Font = new System.Drawing.Font("Arial", 11.25F);
             this.btnAdicionarTraducao.Location = new System.Drawing.Point(631, 5);
-            this.btnAdicionarTraducao.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAdicionarTraducao.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdicionarTraducao.Name = "btnAdicionarTraducao";
             this.btnAdicionarTraducao.Size = new System.Drawing.Size(81, 25);
             this.btnAdicionarTraducao.TabIndex = 1;
@@ -1190,7 +1189,7 @@
             this.dgvTraducao.DefaultCellStyle = dataGridViewCellStyle18;
             this.dgvTraducao.EnableHeadersVisualStyles = false;
             this.dgvTraducao.Location = new System.Drawing.Point(5, 34);
-            this.dgvTraducao.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvTraducao.Margin = new System.Windows.Forms.Padding(2);
             this.dgvTraducao.Name = "dgvTraducao";
             this.dgvTraducao.ReadOnly = true;
             this.dgvTraducao.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -1268,7 +1267,7 @@
             this.tabImagem.BackColor = System.Drawing.SystemColors.Control;
             this.tabImagem.Controls.Add(this.tableLayoutPanel2);
             this.tabImagem.Location = new System.Drawing.Point(4, 26);
-            this.tabImagem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabImagem.Margin = new System.Windows.Forms.Padding(2);
             this.tabImagem.Name = "tabImagem";
             this.tabImagem.Size = new System.Drawing.Size(714, 504);
             this.tabImagem.TabIndex = 2;
@@ -1300,7 +1299,7 @@
             this.picImagemProduto.ContextMenuStrip = this.contextMenuStrip1;
             this.picImagemProduto.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picImagemProduto.Location = new System.Drawing.Point(2, 38);
-            this.picImagemProduto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picImagemProduto.Margin = new System.Windows.Forms.Padding(2);
             this.picImagemProduto.Name = "picImagemProduto";
             this.picImagemProduto.Size = new System.Drawing.Size(704, 362);
             this.picImagemProduto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1328,7 +1327,7 @@
             this.btnRemoverImagem.Enabled = false;
             this.btnRemoverImagem.Font = new System.Drawing.Font("Arial", 11.25F);
             this.btnRemoverImagem.Location = new System.Drawing.Point(533, 2);
-            this.btnRemoverImagem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRemoverImagem.Margin = new System.Windows.Forms.Padding(2);
             this.btnRemoverImagem.Name = "btnRemoverImagem";
             this.btnRemoverImagem.Size = new System.Drawing.Size(173, 32);
             this.btnRemoverImagem.TabIndex = 2;
@@ -1342,7 +1341,7 @@
             this.btnSelecionarImagem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSelecionarImagem.Font = new System.Drawing.Font("Arial", 11.25F);
             this.btnSelecionarImagem.Location = new System.Drawing.Point(2, 2);
-            this.btnSelecionarImagem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSelecionarImagem.Margin = new System.Windows.Forms.Padding(2);
             this.btnSelecionarImagem.Name = "btnSelecionarImagem";
             this.btnSelecionarImagem.Size = new System.Drawing.Size(527, 32);
             this.btnSelecionarImagem.TabIndex = 1;
@@ -1356,9 +1355,9 @@
             this.tabReceita.Controls.Add(this.lblMsgSalvarReceita);
             this.tabReceita.Controls.Add(this.pnlReceita);
             this.tabReceita.Location = new System.Drawing.Point(4, 26);
-            this.tabReceita.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabReceita.Margin = new System.Windows.Forms.Padding(2);
             this.tabReceita.Name = "tabReceita";
-            this.tabReceita.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabReceita.Padding = new System.Windows.Forms.Padding(2);
             this.tabReceita.Size = new System.Drawing.Size(714, 504);
             this.tabReceita.TabIndex = 6;
             this.tabReceita.Text = "Receita";
@@ -1390,18 +1389,19 @@
             this.btnProcurarProdutoReceita.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnProcurarProdutoReceita.Font = new System.Drawing.Font("Arial", 11.25F);
             this.btnProcurarProdutoReceita.Location = new System.Drawing.Point(627, 1);
-            this.btnProcurarProdutoReceita.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnProcurarProdutoReceita.Margin = new System.Windows.Forms.Padding(2);
             this.btnProcurarProdutoReceita.Name = "btnProcurarProdutoReceita";
             this.btnProcurarProdutoReceita.Size = new System.Drawing.Size(81, 25);
             this.btnProcurarProdutoReceita.TabIndex = 12;
             this.btnProcurarProdutoReceita.Text = "Procurar...";
             this.btnProcurarProdutoReceita.UseVisualStyleBackColor = true;
+            this.btnProcurarProdutoReceita.Click += new System.EventHandler(this.btnProcurarProdutoReceita_Click);
             // 
             // txtProdutoReceita
             // 
             this.txtProdutoReceita.Font = new System.Drawing.Font("Arial", 11.25F);
             this.txtProdutoReceita.Location = new System.Drawing.Point(2, 1);
-            this.txtProdutoReceita.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtProdutoReceita.Margin = new System.Windows.Forms.Padding(2);
             this.txtProdutoReceita.Name = "txtProdutoReceita";
             this.txtProdutoReceita.Size = new System.Drawing.Size(621, 25);
             this.txtProdutoReceita.TabIndex = 11;
@@ -1453,7 +1453,7 @@
             this.dgvReceita.DefaultCellStyle = dataGridViewCellStyle23;
             this.dgvReceita.EnableHeadersVisualStyles = false;
             this.dgvReceita.Location = new System.Drawing.Point(3, 31);
-            this.dgvReceita.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvReceita.Margin = new System.Windows.Forms.Padding(2);
             this.dgvReceita.Name = "dgvReceita";
             this.dgvReceita.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -1473,6 +1473,8 @@
             this.dgvReceita.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvReceita.Size = new System.Drawing.Size(705, 466);
             this.dgvReceita.TabIndex = 10;
+            this.dgvReceita.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReceita_CellContentClick);
+            this.dgvReceita.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReceita_CellValueChanged);
             // 
             // dataGridViewImageColumn8
             // 
@@ -1522,7 +1524,7 @@
             this.tabTags.Controls.Add(this.pnlTags);
             this.tabTags.Location = new System.Drawing.Point(4, 26);
             this.tabTags.Name = "tabTags";
-            this.tabTags.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabTags.Padding = new System.Windows.Forms.Padding(3);
             this.tabTags.Size = new System.Drawing.Size(714, 504);
             this.tabTags.TabIndex = 9;
             this.tabTags.Text = "TAGs";
@@ -1558,7 +1560,7 @@
             // 
             this.btnTagCancelar.Font = new System.Drawing.Font("Arial", 11.25F);
             this.btnTagCancelar.Location = new System.Drawing.Point(493, 23);
-            this.btnTagCancelar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTagCancelar.Margin = new System.Windows.Forms.Padding(2);
             this.btnTagCancelar.Name = "btnTagCancelar";
             this.btnTagCancelar.Size = new System.Drawing.Size(81, 25);
             this.btnTagCancelar.TabIndex = 33;
@@ -1582,7 +1584,7 @@
             // 
             this.txtTagValor.Font = new System.Drawing.Font("Arial", 11.25F);
             this.txtTagValor.Location = new System.Drawing.Point(207, 22);
-            this.txtTagValor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTagValor.Margin = new System.Windows.Forms.Padding(2);
             this.txtTagValor.Name = "txtTagValor";
             this.txtTagValor.Size = new System.Drawing.Size(197, 25);
             this.txtTagValor.TabIndex = 31;
@@ -1603,7 +1605,7 @@
             // 
             this.btnTagAdicionar.Font = new System.Drawing.Font("Arial", 11.25F);
             this.btnTagAdicionar.Location = new System.Drawing.Point(408, 23);
-            this.btnTagAdicionar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTagAdicionar.Margin = new System.Windows.Forms.Padding(2);
             this.btnTagAdicionar.Name = "btnTagAdicionar";
             this.btnTagAdicionar.Size = new System.Drawing.Size(81, 25);
             this.btnTagAdicionar.TabIndex = 32;
@@ -1653,7 +1655,7 @@
             this.dgvTags.DefaultCellStyle = dataGridViewCellStyle28;
             this.dgvTags.EnableHeadersVisualStyles = false;
             this.dgvTags.Location = new System.Drawing.Point(2, 52);
-            this.dgvTags.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvTags.Margin = new System.Windows.Forms.Padding(2);
             this.dgvTags.Name = "dgvTags";
             this.dgvTags.ReadOnly = true;
             this.dgvTags.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -1717,7 +1719,7 @@
             this.cbbTagChave.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbTagChave.FormattingEnabled = true;
             this.cbbTagChave.Location = new System.Drawing.Point(2, 23);
-            this.cbbTagChave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbbTagChave.Margin = new System.Windows.Forms.Padding(2);
             this.cbbTagChave.Name = "cbbTagChave";
             this.cbbTagChave.Size = new System.Drawing.Size(201, 25);
             this.cbbTagChave.TabIndex = 29;
@@ -1728,7 +1730,7 @@
             // 
             this.txtTagChave.Font = new System.Drawing.Font("Arial", 11.25F);
             this.txtTagChave.Location = new System.Drawing.Point(2, 22);
-            this.txtTagChave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTagChave.Margin = new System.Windows.Forms.Padding(2);
             this.txtTagChave.Name = "txtTagChave";
             this.txtTagChave.Size = new System.Drawing.Size(201, 25);
             this.txtTagChave.TabIndex = 30;
@@ -1802,8 +1804,8 @@
             // 
             this.btnSalvarEFechar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSalvarEFechar.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalvarEFechar.Location = new System.Drawing.Point(94, 549);
-            this.btnSalvarEFechar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSalvarEFechar.Location = new System.Drawing.Point(93, 552);
+            this.btnSalvarEFechar.Margin = new System.Windows.Forms.Padding(2);
             this.btnSalvarEFechar.Name = "btnSalvarEFechar";
             this.btnSalvarEFechar.Size = new System.Drawing.Size(125, 36);
             this.btnSalvarEFechar.TabIndex = 2;
@@ -1817,7 +1819,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(736, 573);
+            this.ClientSize = new System.Drawing.Size(736, 601);
             this.Controls.Add(this.btnSalvarEFechar);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnCancelar);
