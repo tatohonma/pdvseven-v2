@@ -27,6 +27,14 @@ namespace a7D.PDV.BLL
             return obj;
         }
 
+        public static EstadoInformation Carregar(String nome)
+        {
+            EstadoInformation obj = new EstadoInformation { Nome = nome };
+            obj = (EstadoInformation)CRUD.Carregar(obj);
+
+            return obj;
+        }
+
         public static void Salvar(EstadoInformation obj)
         {
             CRUD.Salvar(obj);

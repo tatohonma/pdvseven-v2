@@ -86,7 +86,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
         //    }
         //}
 
-        private void AdicionarPedido(Model.Orders.DataInformation pedidoApi)
+        private void AdicionarPedido(Model.Orders.DataInformation pedidoApi, Model.Orders.AttributesAddessInformation endereco)
         {
             PedidoInformation pedido = new PedidoInformation();
             string voucherDesconto;
@@ -100,7 +100,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 return;
             }
 
-            pedido.Cliente = AdicionarCliente(pedidoApi);
+            pedido.Cliente = AdicionarCliente(pedidoApi, endereco);
             pedido.Observacoes += "Cliente: " + pedido.Cliente.NomeCompleto + "\r\n\r\n";
             pedido.Observacoes += "Endereço: " + pedido.Cliente.EnderecoCompleto + "\r\n\r\n";
 
@@ -205,6 +205,12 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             Int32 idTipoPagamento = Convert.ToInt32(pedidoApi.attributes.payment);
             AdicionarPedidoPagamento(pedido.IDPedido.Value, idTipoPagamento, pedido.ValorTotal.Value);
 
+            if (!String.IsNullOrEmpty(pedidoApi.attributes.comment))
+            {
+                pedido.Observacoes += "\r\nOBSERVAÇÔES: " + pedidoApi.attributes.comment;
+                pedido.ObservacaoCupom += "\r\nOBSERVAÇÔES: " + pedidoApi.attributes.comment;
+            }
+
             CRUD.Salvar(pedido);
 
             if (ConfigDO.ConfirmacaoAutomatica == true)
@@ -233,7 +239,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             }
         }
 
-        private ClienteInformation AdicionarCliente(Model.Orders.DataInformation pedidoApi)
+        private ClienteInformation AdicionarCliente(Model.Orders.DataInformation pedidoApi, Model.Orders.AttributesAddessInformation endereco)
         {
             bool novoCliente = false;
             ClienteInformation cliente = CarregarCliente(pedidoApi.attributes.customer_id);
@@ -247,41 +253,14 @@ namespace a7D.PDV.Integracao.DeliveryOnline
 
             cliente.NomeCompleto = pedidoApi.attributes.first_name;
             cliente.Telefone1Numero = Convert.ToInt32(pedidoApi.attributes.telephone.Substring(2));
-            //cliente.Documento1 = orderDetails.customer.documentNumber;
 
             if (pedidoApi.attributes.order_type == "delivery")
             {
-                var location = APILocations.GetLocations(pedidoApi.attributes.location_id).data;
-
-                cliente.Endereco = location.attributes.location_address_1;
-                cliente.EnderecoNumero = location.attributes.location_address_2;
-                //cliente.Complemento = location.attributes.;
-                //cliente.Bairro = location.attributes.;
-                cliente.Cidade = location.attributes.location_city;
-                //cliente.Estado = location.attributes.location_state;
-                cliente.CEP = Convert.ToInt32(location.attributes.location_postcode);
-                //cliente.EnderecoReferencia = location.attributes.;
+                cliente.Endereco = endereco.address_1;
+                cliente.Complemento = endereco.address_2;
+                cliente.Cidade = endereco.city;
             }
-            //    else if (orderDetails.orderType == "TAKEOUT")
-            //    {
-            //        cliente.Endereco = "RETIRADA";
-            //        cliente.EnderecoNumero = "";
-            //        cliente.Complemento = "";
-            //        cliente.Bairro = "";
-            //        cliente.Cidade = "";
-            //        cliente.CEP = 0;
-            //        cliente.EnderecoReferencia = "";
-            //    }
-            //    else if (orderDetails.orderType == "INDOOR")
-            //    {
-            //        cliente.Endereco = "PEDIDO NA MESA " + orderDetails.indoor.table;
-            //        cliente.EnderecoNumero = "";
-            //        cliente.Complemento = "";
-            //        cliente.Bairro = "";
-            //        cliente.Cidade = "";
-            //        cliente.CEP = 0;
-            //        cliente.EnderecoReferencia = "";
-            //    }
+
             cliente.Bloqueado = false;
 
             CRUD.Salvar(cliente);

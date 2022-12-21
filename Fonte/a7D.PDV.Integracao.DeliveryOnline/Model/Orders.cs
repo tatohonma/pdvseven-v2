@@ -5,16 +5,36 @@ namespace a7D.PDV.Integracao.DeliveryOnline.Model.Orders
     public class OrdersInformation
     {
         public DataInformation[] data;
+        public IncludedInformation[] included;
     }
 
     public class DataInformation
     {
         public string type;
         public string id;
-        public AttributesInformation attributes;
+        public AttributesOrderInformation attributes;
     }
 
-    public class AttributesInformation
+    public class IncludedInformation
+    {
+        public string type;
+        public string id;
+        public AttributesAddessInformation attributes;
+    }
+
+    public class AttributesAddessInformation
+    {
+        public int address_id;
+        public int customer_id;
+        public string address_1;
+        public string address_2;
+        public string city;
+        public string state;
+        public string postcode;
+        public int country_id;
+    }
+
+    public class AttributesOrderInformation
     {
         public Int32 customer_id;
         public string first_name;
@@ -22,6 +42,8 @@ namespace a7D.PDV.Integracao.DeliveryOnline.Model.Orders
         public string email;
         public string telephone;
         public Int32 location_id;
+        public Int32 address_id;
+        public string comment;
         public string payment;
         public string order_type;
         //...
