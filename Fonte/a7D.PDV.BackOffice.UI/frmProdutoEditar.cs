@@ -1039,7 +1039,7 @@ namespace a7D.PDV.BackOffice.UI
             Produtos = Produtos
                             .Where(p => p.Excluido == false)
                             .Where(p => p.Ativo == true)
-                            .Where(p => p.TipoProduto.IDTipoProduto.Value != 20)
+                            .Where(p => p.TipoProduto.IDTipoProduto.Value == 40)
                             .Where(p => p.IDProduto != Produto1.IDProduto)
                             .OrderBy(p => p.Nome)
                             .ToList();
