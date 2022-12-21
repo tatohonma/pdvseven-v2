@@ -234,7 +234,8 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 {
                     foreach (var pedido in pedidos.data)
                     {
-                        AdicionarPedido(pedido);
+                        var endereco = pedidos.included.FirstOrDefault(include => include.type == "addresses" && include.id == pedido.attributes.address_id.ToString());
+                        AdicionarPedido(pedido, endereco.attributes);
                         qtdPedidos++;
                     }
                 }
