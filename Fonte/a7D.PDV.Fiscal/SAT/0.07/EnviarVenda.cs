@@ -24,7 +24,7 @@ namespace a7D.PDV.Fiscal.SAT._007
         public EnviarVenda(PedidoInformation pedido, bool cpfNaNota, int idPdv, int idUsuario)
         {
             _pedido = pedido;
-            _processamentoSat = ProcessamentoSAT.Carregar(_pedido.GUIDMovimentacao, ETipoSolicitacaoSAT.ENVIAR_DADOS_VENDA);
+            _processamentoSat = ProcessamentoSAT.Carregar(_pedido.GUIDIdentificacao, ETipoSolicitacaoSAT.ENVIAR_DADOS_VENDA);
             _idPdv = idPdv;
             _idUsuario = idUsuario;
             _cpfNaNota = cpfNaNota;
@@ -86,7 +86,7 @@ namespace a7D.PDV.Fiscal.SAT._007
                     {
                         _processamentoSat = new ProcessamentoSATInformation
                         {
-                            GUID = _pedido.GUIDMovimentacao,
+                            GUID = _pedido.GUIDIdentificacao,
                             DataSolicitacao = DateTime.Now,
                             IDTipoSolicitacaoSAT = (int)ETipoSolicitacaoSAT.ENVIAR_DADOS_VENDA,
                             IDStatusProcessamentoSAT = (int)EStatusProcessamentoSAT.NAO_INICIADO,
