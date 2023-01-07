@@ -19,73 +19,6 @@ namespace a7D.PDV.Integracao.DeliveryOnline
 {
     public partial class IntegraDeliveryOnline
     {
-        //private void ConfirmarCancelamentoPedido(Model.Order.Event evento)
-        //{
-        //    PedidoInformation pedido = CarregarPedidoPorOrderId(evento.orderId);
-        //    if (pedido != null && pedido.IDPedido != null)
-        //    {
-        //        AlterarStatusPedido(pedido.IDPedido.Value, EStatusPedido.Cancelado);
-        //    }
-        //    else
-        //    {
-        //        AddLog("Pedido " + evento.orderId + " não encontrado!");
-        //    }
-        //}
-
-        //private void CancelarPedido(Model.Order.Event evento)
-        //{
-        //    PedidoInformation pedido = CarregarPedidoPorOrderId(evento.orderId);
-
-        //    if (pedido != null && pedido.IDPedido != null)
-        //    {
-        //        if (pedido.StatusPedido.StatusPedido == EStatusPedido.Aberto)
-        //        {
-        //            AlterarStatusPedido(pedido.IDPedido.Value, EStatusPedido.EmCancelamento);
-        //        }
-        //        else
-        //        {
-        //            AlterarStatusPedido(pedido.IDPedido.Value, EStatusPedido.Cancelado);
-        //        }
-
-        //        TagInformation tagStatus = new TagInformation();
-        //        tagStatus.GUIDIdentificacao = pedido.GUIDIdentificacao;
-        //        tagStatus.Chave = "ifood-status";
-        //        CRUD.Carregar(tagStatus);
-
-        //        tagStatus.Valor = evento.code;
-        //        CRUD.Alterar(tagStatus);
-        //    }
-        //    else
-        //    {
-        //        AddLog("Pedido " + evento.orderId + " não encontrado!");
-        //    }
-        //}
-
-        //private void FinalizarPedido(Model.Order.Event evento)
-        //{
-        //    PedidoInformation pedido = CarregarPedidoPorOrderId(evento.orderId);
-
-        //    if (pedido != null && pedido.IDPedido != null)
-        //    {
-        //        if (ConfigIFood.FinalizacaoAutomatica)
-        //        {
-        //            AlterarStatusPedido(pedido.IDPedido.Value, EStatusPedido.Finalizado);
-        //        }
-
-        //        TagInformation tagStatus = new TagInformation();
-        //        tagStatus.GUIDIdentificacao = pedido.GUIDIdentificacao;
-        //        tagStatus.Chave = "ifood-status";
-        //        CRUD.Carregar(tagStatus);
-
-        //        tagStatus.Valor = "CON";
-        //        CRUD.Alterar(tagStatus);
-        //    }
-        //    else
-        //    {
-        //        AddLog("Pedido " + evento.orderId + " não encontrado!");
-        //    }
-        //}
-
         private void AdicionarPedido(Model.Orders.DataInformation pedidoApi, Model.Orders.AttributesAddessInformation endereco)
         {
             PedidoInformation pedido = new PedidoInformation();
@@ -113,6 +46,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             pedido.OrigemPedido = new OrigemPedidoInformation();
             pedido.OrigemPedido.IDOrigemPedido = (int)EOrigemPedido.deliveryOnline;
 
+            pedido.GUIDMovimentacao = Guid.NewGuid().ToString();
             pedido.GUIDIdentificacao = Guid.NewGuid().ToString();
             pedido.DtPedido = DateTime.Now;
             pedido.PermitirAlterar = false;
