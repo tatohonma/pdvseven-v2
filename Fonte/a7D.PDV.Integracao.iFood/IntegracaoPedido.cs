@@ -475,7 +475,6 @@ namespace a7D.PDV.Integracao.iFood
             else
             {
                 tipoPagamento = PagamentoIFood;
-                tipoPagamento.MeioPagamentoSAT = new MeioPagamentoSATInformation { IDMeioPagamentoSAT = 10 };
             }
 
             return tipoPagamento;
