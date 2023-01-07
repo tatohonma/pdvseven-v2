@@ -207,8 +207,8 @@ namespace a7D.PDV.Caixa.UI
                  && Pedido1.Cliente != null
                  && !frmPrincipal.ModoContingencia
                  && frmPrincipal.ContaCliente)
-                 // A testar!!! Só emite SAT quando há liquidação onde é verificado se houve credito
-                 // && Pedido1.ListaProduto.Any(p => p.Produto.TipoProduto.TipoProduto == ETipoProduto.Credito))
+                // A testar!!! Só emite SAT quando há liquidação onde é verificado se houve credito
+                // && Pedido1.ListaProduto.Any(p => p.Produto.TipoProduto.TipoProduto == ETipoProduto.Credito))
                 {
                     // Se houve creditos/debitos tenta emitir SAT dos pedidos liquidados caso existam
                     EmiteDebitosSAT(Pedido1.Cliente.IDCliente.Value, imprimir);
@@ -249,16 +249,14 @@ namespace a7D.PDV.Caixa.UI
                 {
                     ExceptionPDV exPDV = new ExceptionPDV(CodigoErro.E501, frmSAT.Exception);
 
-                    var tentarNovamente = MessageBox.Show(exPDV.Message + "\n" +
-          "\nTentar conectar novamente?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    var tentarNovamente = MessageBox.Show(exPDV.Message + "\n" + "\nTentar conectar novamente?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                     if (tentarNovamente == DialogResult.Yes)
                     {
                         continue;
                     }
                     else
                     {
-                        var modocontingencia = MessageBox.Show(
-  "Deseja entrar em modo de contingência?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        var modocontingencia = MessageBox.Show("Deseja entrar em modo de contingência?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
                         if (modocontingencia == DialogResult.Yes)
                         {
