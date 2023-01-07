@@ -68,7 +68,7 @@ Lista das últimas versões e FIX
 ===============================================================================
 
 2.24.4.2 ======================================================================
-    Correção: Erro na emissão do SAT quando pedido iFood
+    Correção: Correção dos cancelamentos automáticos do SAT nos pedidos iFood e DeliveryOnline
 
 2.24.4.1 ======================================================================
     Correção: Importar endereço de entrega no Delivery Online

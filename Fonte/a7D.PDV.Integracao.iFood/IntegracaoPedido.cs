@@ -111,6 +111,7 @@ namespace a7D.PDV.Integracao.iFood
 
             pedido.Caixa = CaixaIFood;
 
+            pedido.GUIDMovimentacao = Guid.NewGuid().ToString();
             pedido.GUIDIdentificacao = Guid.NewGuid().ToString();
             pedido.DocumentoCliente = orderDetails.customer.documentNumber;
             pedido.DtPedido = DateTime.Now;
