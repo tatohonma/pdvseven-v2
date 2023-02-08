@@ -29,6 +29,7 @@ namespace a7D.PDV.Caixa.UI
 
         private void frmCancelarSAT_Load(object sender, EventArgs e)
         {
+            //teste atualizacao branch otimizacao_cancelamento_sat
             GA.Post(this);
             PopularDataGridView();
         }
