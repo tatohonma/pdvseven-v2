@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2022")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.24.4.2")]
+[assembly: AssemblyVersion("2.24.5.0")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -66,6 +66,13 @@ Lista das últimas versões e FIX
 
 ===============================================================================
 ===============================================================================
+
+2.24.5.0 ======================================================================
+    Melhoria: Otimização tela de cancelamento de cupom fiscal
+    Melhoria: Otimização monitor de pedidos
+    Melhoria: Otimização fechamento de pedido
+    Melhoria: Otimização transferencia de produtos
+    Melhoria: Otimização adicionar produto
 
 2.24.4.2 ======================================================================
     Correção: Correção dos cancelamentos automáticos do SAT nos pedidos iFood e DeliveryOnline
