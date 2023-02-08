@@ -94,6 +94,12 @@ namespace a7D.PDV.Integracao.iFood
             var orderDetails = APIOrder.OrderDetails(evento.orderId);
             AddLog("  >> " + JsonConvert.SerializeObject(orderDetails));
 
+            if (Tag.CarregarPorChaveValor("ifood-orderId", orderDetails.id) != null)
+            {
+                AddLog("Pedido " + orderDetails.id + "duplicado");
+                return;
+            }
+
             pedido.Cliente = AdicionarCliente(orderDetails);
             pedido.Observacoes += "Cliente: " + pedido.Cliente.NomeCompleto + "\r\n\r\n";
             pedido.Observacoes += "Endereço: " + pedido.Cliente.EnderecoCompleto + "\r\n\r\n";
