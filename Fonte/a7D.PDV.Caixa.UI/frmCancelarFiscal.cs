@@ -30,30 +30,12 @@ namespace a7D.PDV.Caixa.UI
 
         private void frmCancelarSAT_Load(object sender, EventArgs e)
         {
-            //teste atualizacao branch otimizacao_cancelamento_sat
             GA.Post(this);
             PopularDataGridView();
         }
 
         private void PopularDataGridView()
         {
-            //var finalizadosUltimaHora = Pedido.ListarFinalizadosUltimaHora();
-            //finalizadosUltimaHora = finalizadosUltimaHora.Where(f => f.RetornoSAT_venda != null).ToList();
-
-            //listaRetornoSat = RetornoSAT.Listar();
-            //listaRetornoSat = listaRetornoSat.Where(r => r.EEEEE == "06000").ToList();
-            //listaRetornoSat = listaRetornoSat.Where(r => r.RetornoSATCancelamento == null).ToList();
-            //var horaConsultaUTC3 = DateTime.UtcNow.AddMinutes(-25);
-            //listaRetornoSat = listaRetornoSat.Where(r => DateTime.ParseExact(r.timeStamp, _formatoData, _cultureInfo).ToUniversalTime() > horaConsultaUTC3).ToList();
-
-            //var lista = listaRetornoSat.Select(r =>
-            //    new DadosGridViewCancelamento(r,
-            //    finalizadosUltimaHora.FirstOrDefault(p => p.RetornoSAT_venda != null && p.RetornoSAT_venda.IDRetornoSAT == r.IDRetornoSAT))
-            //);
-
-            //dgvPrincipal.DataSource = lista.ToArray();
-            //dgvPrincipal.ClearSelection();
-
             var pedidos = RetornoSATDAL.ListarPedidosParaCancelamento();
 
             dgvPrincipal.DataSource = pedidos;
