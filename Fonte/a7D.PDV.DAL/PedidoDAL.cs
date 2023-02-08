@@ -730,20 +730,5 @@ ORDER BY p.IDPedido ASC";
                 return null;
             }
         }
-
-        public static String[] LerTags(Int32 idPedido)
-        {
-            return null;
-        }
-
-        public static Boolean AdicionarTag(Int32 idPedido, String tag)
-        {
-            return true;
-        }
-
-        public static Boolean ExcluirTag(Int32 idPedido, String tag)
-        {
-            return true;
-        }
     }
 }
