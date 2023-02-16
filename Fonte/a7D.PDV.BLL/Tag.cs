@@ -20,6 +20,16 @@ namespace a7D.PDV.BLL
             return tag;
         }
 
+        public static TagInformation CarregarPorChaveValor(string chave, string valor)
+        {
+            TagInformation tag = new TagInformation();
+            tag.Chave = chave;
+            tag.Valor = valor;
+            CRUD.Carregar(tag);
+
+            return tag;
+        }
+
         public static TagInformation Adicionar(string guidIdentificacao, string chave, string valor)
         {
             TagInformation tag = new TagInformation();

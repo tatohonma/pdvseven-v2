@@ -9,6 +9,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using a7D.PDV.Componentes;
+using a7D.PDV.DAL;
 
 namespace a7D.PDV.Caixa.UI
 {
@@ -35,21 +36,9 @@ namespace a7D.PDV.Caixa.UI
 
         private void PopularDataGridView()
         {
-            var finalizadosUltimaHora = Pedido.ListarFinalizadosUltimaHora();
-            finalizadosUltimaHora = finalizadosUltimaHora.Where(f => f.RetornoSAT_venda != null).ToList();
+            var pedidos = RetornoSATDAL.ListarPedidosParaCancelamento();
 
-            listaRetornoSat = RetornoSAT.Listar();
-            listaRetornoSat = listaRetornoSat.Where(r => r.EEEEE == "06000").ToList();
-            listaRetornoSat = listaRetornoSat.Where(r => r.RetornoSATCancelamento == null).ToList();
-            var horaConsultaUTC3 = DateTime.UtcNow.AddMinutes(-25);
-            listaRetornoSat = listaRetornoSat.Where(r => DateTime.ParseExact(r.timeStamp, _formatoData, _cultureInfo).ToUniversalTime() > horaConsultaUTC3).ToList();
-
-            var lista = listaRetornoSat.Select(r =>
-                new DadosGridViewCancelamento(r,
-                finalizadosUltimaHora.FirstOrDefault(p => p.RetornoSAT_venda != null && p.RetornoSAT_venda.IDRetornoSAT == r.IDRetornoSAT))
-            );
-
-            dgvPrincipal.DataSource = lista.ToArray();
+            dgvPrincipal.DataSource = pedidos;
             dgvPrincipal.ClearSelection();
         }
 
@@ -68,7 +57,7 @@ namespace a7D.PDV.Caixa.UI
                         var row = dgvPrincipal.SelectedRows[0];
                         var retornoSat = RetornoSAT.Carregar(Convert.ToInt32(row.Cells["IDRetornoSAT"].Value));
                         var dataSat = DateTime.ParseExact(retornoSat.timeStamp, _formatoData, _cultureInfo).ToUniversalTime();
-                        if (dataSat < DateTime.UtcNow.AddMinutes(-25))
+                        if (dataSat < DateTime.UtcNow.AddMinutes(-27))
                         {
                             MessageBox.Show("Esse pedido não pode ser mais cancelado, finalizado a mais de 30 minutos", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             PopularDataGridView();

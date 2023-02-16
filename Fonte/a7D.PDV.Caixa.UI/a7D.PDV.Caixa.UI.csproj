@@ -719,6 +719,10 @@
       <Project>{06274b88-cf73-4e1f-80b1-1cb73b3930d6}</Project>
       <Name>a7D.PDV.Componentes</Name>
     </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.DAL\a7D.PDV.DAL.csproj">
+      <Project>{A4B2AB32-5D8E-4AE9-8350-CB75759A9B11}</Project>
+      <Name>a7D.PDV.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\a7D.PDV.EF\a7D.PDV.EF.csproj">
       <Project>{75ef9713-861a-4c6b-8f7f-1343fdcbbffb}</Project>
       <Name>a7D.PDV.EF</Name>

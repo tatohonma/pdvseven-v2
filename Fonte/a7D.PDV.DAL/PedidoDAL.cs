@@ -9,6 +9,36 @@ namespace a7D.PDV.DAL
 {
     public class PedidoDAL
     {
+        public static Int32? RetornarIDPedido(String guidIdentificacao)
+        {
+            Int32? idPedido = null;
+            SqlDataAdapter da;
+            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
+
+            String query = @"
+                SELECT 
+                    TOP 1
+	                IDPedido
+                FROM 
+	                tbPedido (nolock)
+                WHERE 
+	                GUIDIdentificacao=@guidIdentificacao
+                    AND 
+	                (IDStatusPedido=10 OR IDStatusPedido=20 OR IDStatusPedido=60 OR IDStatusPedido=70) 
+            ";
+
+            da = new SqlDataAdapter(query, DB.ConnectionString);
+            da.SelectCommand.Parameters.AddWithValue("@guidIdentificacao", guidIdentificacao);
+
+            da.Fill(ds);
+            dt = ds.Tables[0];
+
+            if (dt.Rows.Count > 0)
+                idPedido = Convert.ToInt32(dt.Rows[0]["IDPedido"]);
+
+            return idPedido;
+        }
         public static PedidoInformation CarregarUltimoPedido(String guidIdentificacao)
         {
             PedidoInformation pedido = null;
@@ -17,12 +47,27 @@ namespace a7D.PDV.DAL
             DataSet ds = new DataSet();
             DataTable dt = new DataTable();
 
-            String query = @"SELECT TOP 1 p.IDPedido, p.IDStatusPedido, tp.Nome, p.IDTipoPedido, p.IDCliente, p.GUIDIdentificacao, p.GUIDAgrupamentoPedido, p.IDCaixa
-FROM tbPedido p (nolock)
-    inner join tbTipoPedido tp (nolock) on tp.IDTipoPedido = p.IDTipoPedido
-    WHERE p.GUIDIdentificacao=@guidIdentificacao
-    AND p.IDStatusPedido IN (10, 20, 60, 70) 
-    ORDER BY p.IDPedido DESC";
+            String query = @"
+                SELECT 
+	                TOP 1 
+	                p.IDPedido, 
+	                p.IDStatusPedido, 
+	                -- tp.Nome, 
+	                p.IDTipoPedido, 
+	                p.IDCliente, 
+	                p.GUIDIdentificacao, 
+	                p.GUIDAgrupamentoPedido, 
+	                p.IDCaixa
+                FROM 
+	                tbPedido p (nolock)
+                    -- LEFT JOIN tbTipoPedido tp (nolock) on tp.IDTipoPedido = p.IDTipoPedido
+                WHERE 
+	                p.GUIDIdentificacao=@guidIdentificacao
+                    AND 
+	                p.IDStatusPedido IN (10, 20, 60, 70) 
+--                ORDER BY 
+--	                p.IDPedido DESC
+            ";
 
             da = new SqlDataAdapter(query, DB.ConnectionString);
             da.SelectCommand.Parameters.AddWithValue("@guidIdentificacao", guidIdentificacao);
@@ -36,8 +81,9 @@ FROM tbPedido p (nolock)
                 pedido.StatusPedido = new StatusPedidoInformation { IDStatusPedido = Convert.ToInt32(dt.Rows[0]["IDStatusPedido"]) };
                 pedido.TipoPedido = new TipoPedidoInformation
                 {
-                    IDTipoPedido = Convert.ToInt32(dt.Rows[0]["IDTipoPedido"]),
-                    Nome = Convert.ToString(dt.Rows[0]["Nome"])
+                    IDTipoPedido = Convert.ToInt32(dt.Rows[0]["IDTipoPedido"])
+                    //,
+                    //Nome = Convert.ToString(dt.Rows[0]["Nome"])
                 };
 
                 if (dt.Rows[0]["GUIDIdentificacao"] != DBNull.Value)
@@ -729,21 +775,6 @@ ORDER BY p.IDPedido ASC";
             {
                 return null;
             }
-        }
-
-        public static String[] LerTags(Int32 idPedido)
-        {
-            return null;
-        }
-
-        public static Boolean AdicionarTag(Int32 idPedido, String tag)
-        {
-            return true;
-        }
-
-        public static Boolean ExcluirTag(Int32 idPedido, String tag)
-        {
-            return true;
         }
     }
 }

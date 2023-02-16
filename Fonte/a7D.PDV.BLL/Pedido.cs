@@ -487,13 +487,16 @@ namespace a7D.PDV.BLL
         }
         public static PedidoInformation CarregarUltimoPedido(string guidIdentificacao)
         {
+            Int32? idPedido = null;
             PedidoInformation pedido = null;
 
             if (!string.IsNullOrWhiteSpace(guidIdentificacao))
-                pedido = PedidoDAL.CarregarUltimoPedido(guidIdentificacao);
+                idPedido = PedidoDAL.RetornarIDPedido(guidIdentificacao);
 
-            if (pedido != null)
-                pedido = CarregarCompleto(pedido.IDPedido.Value);
+            if (idPedido != null)
+            {
+                pedido = CarregarCompleto(idPedido.Value);
+            }
             else
             {
                 pedido = new PedidoInformation();
@@ -709,7 +712,7 @@ ORDER BY p.DtPedidoFechamento";
                 new SqlParameter("dataMin", de),
                 new SqlParameter("dataMax", ate));
         }
-        
+
         public static List<PedidoInformation> ListarFinalizadosNoIntervalo(DateTime de, DateTime ate, int idCliente, int skip, int limit, CancellationToken ct)
         {
             var lista = PedidoDAL.ListarFinalizadosNoIntervalo(de, ate, idCliente, skip, limit).ToList();
@@ -729,7 +732,7 @@ ORDER BY p.DtPedidoFechamento";
             }
             return lista;
         }
-        
+
         public static int CountFinalizadosNoIntervalo(DateTime dtFechamentoMin, DateTime dtFechamentoMax, int idCliente)
         {
             var lista = PedidoDAL.ListarFinalizadosAPartirDe(dtFechamentoMin).Where(p => p.DtPedidoFechamento <= dtFechamentoMax);
@@ -852,7 +855,7 @@ ORDER BY p.DtPedidoFechamento";
                     pedido.ListaProduto.Remove(servico);
             }
         }
-        
+
         public static void AdicionarProdutoTaxaEntrega(PedidoInformation pedido, bool incluirTaxaEntrega, PDVInformation pdv, UsuarioInformation usuario)
         {
             var taxaEntrega = pedido.ListaProduto.FirstOrDefault(p => p.Produto.IDProduto == 164170145);
@@ -884,7 +887,7 @@ ORDER BY p.DtPedidoFechamento";
                     pedido.ListaProduto.Remove(taxaEntrega);
             }
         }
-        
+
         public static void AdicionarProdutoConsumacaoMinima(PedidoInformation pedido, PDVInformation pdv, UsuarioInformation usuario, decimal? valorConsumacaoMinima = null)
         {
             if (pedido.TipoPedido.TipoPedido != ETipoPedido.Comanda)
@@ -1016,7 +1019,7 @@ ORDER BY p.DtPedidoFechamento";
         public static bool ContemAlcoolico(Int32 idPedido)
         {
             string categoriasAlcoolicas = ConfiguracoesSistema.Valores.CategoriasAlcoolicas;
-            
+
             if (String.IsNullOrEmpty(categoriasAlcoolicas))
                 return false;
 

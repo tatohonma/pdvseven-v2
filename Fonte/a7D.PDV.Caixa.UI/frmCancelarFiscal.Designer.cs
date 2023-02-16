@@ -34,14 +34,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvPrincipal = new System.Windows.Forms.DataGridView();
-            this.IDRetornoSAT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumeroSessao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IDPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IDMesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DataSAT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CPFCNPJ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnCancelarSAT = new System.Windows.Forms.Button();
+            this.IDRetornoSAT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DtPedidoFechamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DocumentoCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ValorTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrincipal)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,12 +71,9 @@
             this.dgvPrincipal.ColumnHeadersHeight = 40;
             this.dgvPrincipal.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IDRetornoSAT,
-            this.NumeroSessao,
-            this.IDPedido,
-            this.IDMesa,
-            this.DataSAT,
-            this.CPFCNPJ,
-            this.Valor});
+            this.DtPedidoFechamento,
+            this.DocumentoCliente,
+            this.ValorTotal});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 11F);
@@ -111,64 +105,6 @@
             this.dgvPrincipal.Size = new System.Drawing.Size(1000, 448);
             this.dgvPrincipal.TabIndex = 1;
             // 
-            // IDRetornoSAT
-            // 
-            this.IDRetornoSAT.DataPropertyName = "IDRetornoSAT";
-            this.IDRetornoSAT.HeaderText = "IDRetornoSAT";
-            this.IDRetornoSAT.Name = "IDRetornoSAT";
-            this.IDRetornoSAT.ReadOnly = true;
-            this.IDRetornoSAT.Visible = false;
-            // 
-            // NumeroSessao
-            // 
-            this.NumeroSessao.DataPropertyName = "NumeroSessao";
-            this.NumeroSessao.HeaderText = "NumeroSessao";
-            this.NumeroSessao.Name = "NumeroSessao";
-            this.NumeroSessao.ReadOnly = true;
-            this.NumeroSessao.Visible = false;
-            // 
-            // IDPedido
-            // 
-            this.IDPedido.DataPropertyName = "IDPedido";
-            this.IDPedido.HeaderText = "IDPedido";
-            this.IDPedido.Name = "IDPedido";
-            this.IDPedido.ReadOnly = true;
-            this.IDPedido.Visible = false;
-            // 
-            // IDMesa
-            // 
-            this.IDMesa.DataPropertyName = "IDMesa";
-            this.IDMesa.HeaderText = "IDMesa";
-            this.IDMesa.Name = "IDMesa";
-            this.IDMesa.ReadOnly = true;
-            this.IDMesa.Visible = false;
-            // 
-            // DataSAT
-            // 
-            this.DataSAT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.DataSAT.DataPropertyName = "DataSAT";
-            this.DataSAT.HeaderText = "Data Pedido";
-            this.DataSAT.Name = "DataSAT";
-            this.DataSAT.ReadOnly = true;
-            this.DataSAT.Width = 121;
-            // 
-            // CPFCNPJ
-            // 
-            this.CPFCNPJ.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CPFCNPJ.DataPropertyName = "CPFCNPJ";
-            this.CPFCNPJ.HeaderText = "CPF/CNPJ";
-            this.CPFCNPJ.Name = "CPFCNPJ";
-            this.CPFCNPJ.ReadOnly = true;
-            // 
-            // Valor
-            // 
-            this.Valor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Valor.DataPropertyName = "Valor";
-            this.Valor.HeaderText = "Valor (R$)";
-            this.Valor.Name = "Valor";
-            this.Valor.ReadOnly = true;
-            this.Valor.Width = 106;
-            // 
             // btnCancelarSAT
             // 
             this.btnCancelarSAT.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -186,6 +122,40 @@
             this.btnCancelarSAT.Text = "CANCELAR";
             this.btnCancelarSAT.UseVisualStyleBackColor = false;
             this.btnCancelarSAT.Click += new System.EventHandler(this.btnCancelarSat_Click);
+            // 
+            // IDRetornoSAT
+            // 
+            this.IDRetornoSAT.DataPropertyName = "IDRetornoSAT";
+            this.IDRetornoSAT.HeaderText = "IDRetornoSAT";
+            this.IDRetornoSAT.Name = "IDRetornoSAT";
+            this.IDRetornoSAT.ReadOnly = true;
+            this.IDRetornoSAT.Visible = false;
+            // 
+            // DtPedidoFechamento
+            // 
+            this.DtPedidoFechamento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.DtPedidoFechamento.DataPropertyName = "DtPedidoFechamento";
+            this.DtPedidoFechamento.HeaderText = "Data Pedido";
+            this.DtPedidoFechamento.Name = "DtPedidoFechamento";
+            this.DtPedidoFechamento.ReadOnly = true;
+            this.DtPedidoFechamento.Width = 121;
+            // 
+            // DocumentoCliente
+            // 
+            this.DocumentoCliente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.DocumentoCliente.DataPropertyName = "DocumentoCliente";
+            this.DocumentoCliente.HeaderText = "CPF/CNPJ";
+            this.DocumentoCliente.Name = "DocumentoCliente";
+            this.DocumentoCliente.ReadOnly = true;
+            // 
+            // ValorTotal
+            // 
+            this.ValorTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ValorTotal.DataPropertyName = "ValorTotal";
+            this.ValorTotal.HeaderText = "Valor (R$)";
+            this.ValorTotal.Name = "ValorTotal";
+            this.ValorTotal.ReadOnly = true;
+            this.ValorTotal.Width = 106;
             // 
             // frmCancelarFiscal
             // 
@@ -211,12 +181,9 @@
         #endregion
         private System.Windows.Forms.DataGridView dgvPrincipal;
         private System.Windows.Forms.Button btnCancelarSAT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Valor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CPFCNPJ;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DataSAT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IDMesa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IDPedido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NumeroSessao;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDRetornoSAT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DtPedidoFechamento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DocumentoCliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ValorTotal;
     }
 }
