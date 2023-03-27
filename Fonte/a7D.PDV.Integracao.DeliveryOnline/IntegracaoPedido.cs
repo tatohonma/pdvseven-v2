@@ -181,6 +181,8 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             if (cliente.IDCliente == null)
             {
                 novoCliente = true;
+
+                cliente.Bloqueado = false;
                 cliente.GUIDIdentificacao = Guid.NewGuid().ToString();
                 cliente.DtInclusao = DateTime.Now;
             }
@@ -193,9 +195,13 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 cliente.Endereco = endereco.address_1;
                 cliente.Complemento = endereco.address_2;
                 cliente.Cidade = endereco.city;
-            }
+                cliente.Bairro = endereco.state;
 
-            cliente.Bloqueado = false;
+                if (endereco.postcode != "")
+                    cliente.CEP = Convert.ToInt32(endereco.postcode.Replace("-", ""));
+                else
+                    cliente.CEP = null;
+            }
 
             CRUD.Salvar(cliente);
 
