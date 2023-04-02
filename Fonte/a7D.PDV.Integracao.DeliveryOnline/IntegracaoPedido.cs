@@ -197,8 +197,13 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 cliente.Cidade = endereco.city;
                 cliente.Bairro = endereco.state;
 
-                if (endereco.postcode != "")
-                    cliente.CEP = Convert.ToInt32(endereco.postcode.Replace("-", ""));
+                int cep;
+                if (endereco.postcode != null && 
+                    endereco.postcode != "" && 
+                    int.TryParse(endereco.postcode.Replace("-", ""), out cep))
+                {
+                    cliente.CEP = cep;
+                }
                 else
                     cliente.CEP = null;
             }
