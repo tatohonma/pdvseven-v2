@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2022")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.24.5.3")]
+[assembly: AssemblyVersion("2.24.5.4")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -66,6 +66,9 @@ Lista das últimas versões e FIX
 
 ===============================================================================
 ===============================================================================
+
+2.24.5.4 ======================================================================
+    Correção: No Delivery Online, tratamento do campo telefone
 
 2.24.5.3 ======================================================================
     Correção: Gerava erro no Delivery Online quando o cliente enviava texto no CEP
