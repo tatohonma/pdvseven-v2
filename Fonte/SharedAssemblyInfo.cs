@@ -68,8 +68,9 @@ Lista das últimas versões e FIX
 ===============================================================================
 
 2.24.6.0 ======================================================================
-    Correção: No Delivery Online, tratamento do campo telefone
     Melhoria: Identificação dos pedidos do Delivery-On
+    Melhoria: O sistema mantém o estado da lista de pedidos de Delivery
+    Correção: No Delivery Online, tratamento do campo telefone
 
 2.24.5.3 ======================================================================
     Correção: Gerava erro no Delivery Online quando o cliente enviava texto no CEP
