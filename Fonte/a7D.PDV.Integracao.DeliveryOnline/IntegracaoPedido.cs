@@ -12,6 +12,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -187,25 +188,51 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 cliente.DtInclusao = DateTime.Now;
             }
 
-            cliente.NomeCompleto = pedidoApi.attributes.first_name;
-            cliente.Telefone1Numero = Convert.ToInt32(pedidoApi.attributes.telephone.Substring(2));
+            cliente.NomeCompleto = pedidoApi.attributes.first_name.PadLeft(50).Trim();
+
+            int telefone;
+            if (pedidoApi.attributes.telephone != null &&
+                pedidoApi.attributes.telephone != "" &&
+                int.TryParse(pedidoApi.attributes.telephone.Substring(3), out telefone))
+            {
+                if (pedidoApi.attributes.telephone.Substring(3).Length == 8 ||
+                    pedidoApi.attributes.telephone.Substring(3).Length == 9)
+                {
+                    cliente.Telefone1DDD = 0;
+                    cliente.Telefone1Numero = Convert.ToInt32(pedidoApi.attributes.telephone.Substring(3));
+                }
+                else if (pedidoApi.attributes.telephone.Substring(3).Length == 10 &&
+                    pedidoApi.attributes.telephone.Substring(3).Length == 11)
+                {
+                    cliente.Telefone1DDD = Convert.ToInt32(pedidoApi.attributes.telephone.Substring(3, 2));
+                    cliente.Telefone1Numero = Convert.ToInt32(pedidoApi.attributes.telephone.Substring(5));
+                }
+            }
+            else
+            {
+                cliente.Telefone1DDD = 0;
+                cliente.Telefone1Numero = Convert.ToInt32(pedidoApi.attributes.customer_id);
+            }
 
             if (pedidoApi.attributes.order_type == "delivery")
             {
-                cliente.Endereco = endereco.address_1;
-                cliente.Complemento = endereco.address_2;
-                cliente.Cidade = endereco.city;
-                cliente.Bairro = endereco.state;
+                cliente.Endereco = endereco.address_1.PadLeft(500).Trim();
+                cliente.Complemento = endereco.address_2.PadLeft(500).Trim(); ;
+                cliente.Cidade = endereco.city.PadLeft(500).Trim();
+                cliente.Bairro = endereco.state.PadLeft(500).Trim();
 
                 int cep;
-                if (endereco.postcode != null && 
-                    endereco.postcode != "" && 
+                if (endereco.postcode != null &&
+                    endereco.postcode != "" &&
+                    endereco.postcode.Replace("-", "").Length == 8 &&
                     int.TryParse(endereco.postcode.Replace("-", ""), out cep))
                 {
                     cliente.CEP = cep;
                 }
                 else
-                    cliente.CEP = null;
+                {
+                    cliente.CEP = 0;
+                }
             }
 
             CRUD.Salvar(cliente);
