@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "PDVSeven"
-!define PRODUCT_VERSION "2.24.5.4"
+!define PRODUCT_VERSION "2.24.6.0"
 !define PRODUCT_PUBLISHER "PDVSeven Automação Comercial"
 !define PRODUCT_WEB_SITE "http://www.pdvseven.com.br"
 !define PRODUCT_DIR_REGKEY "Software\PDV7\${PRODUCT_NAME}"
