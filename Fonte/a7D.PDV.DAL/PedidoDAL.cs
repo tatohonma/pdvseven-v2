@@ -208,16 +208,16 @@ SELECT
     ,op.Nome as OrigemPedido_Nome
     ,PermitirAlterar
 FROM 
-	tbPedido p (NOLOCK)
-	INNER JOIN tbStatusPedido sp (NOLOCK) ON sp.IDStatusPedido=p.IDStatusPedido
-    INNER JOIN tbTipoPedido tp (NOLOCK) ON tp.IDTipoPedido=p.IDTipoPedido
-	LEFT JOIN tbComanda comanda (NOLOCK) ON p.GUIDIdentificacao=comanda.GUIDIdentificacao
-	LEFT JOIN tbMesa mesa (NOLOCK) ON p.GUIDIdentificacao=mesa.GUIDIdentificacao
-	LEFT JOIN tbCliente c (NOLOCK) ON c.idCliente=p.idCliente
-	LEFT JOIN tbTipoEntrada te (NOLOCK) ON te.IDTipoEntrada=p.IDTipoEntrada
-    LEFT JOIN tbCaixa cx (NOLOCK) on cx.IDCaixa = p.IDCaixa
-    LEFT JOIN tbTipoDesconto td (NOLOCK) on td.IDTipoDesconto = p.IDTipoDesconto
-    LEFT JOIN tbOrigemPedido op (NOLOCK) on op.IDOrigemPedido= p.IDOrigemPedido
+	tbPedido p
+	INNER JOIN tbStatusPedido sp ON sp.IDStatusPedido=p.IDStatusPedido
+    INNER JOIN tbTipoPedido tp ON tp.IDTipoPedido=p.IDTipoPedido
+	LEFT JOIN tbComanda comanda ON p.GUIDIdentificacao=comanda.GUIDIdentificacao
+	LEFT JOIN tbMesa mesa ON p.GUIDIdentificacao=mesa.GUIDIdentificacao
+	LEFT JOIN tbCliente c ON c.idCliente=p.idCliente
+	LEFT JOIN tbTipoEntrada te ON te.IDTipoEntrada=p.IDTipoEntrada
+    LEFT JOIN tbCaixa cx on cx.IDCaixa = p.IDCaixa
+    LEFT JOIN tbTipoDesconto td on td.IDTipoDesconto = p.IDTipoDesconto
+    LEFT JOIN tbOrigemPedido op on op.IDOrigemPedido= p.IDOrigemPedido
 WHERE
 	p.IDPedido=@idPedido
             ";

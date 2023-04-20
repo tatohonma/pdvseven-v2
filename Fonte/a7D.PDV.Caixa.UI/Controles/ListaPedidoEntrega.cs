@@ -11,6 +11,7 @@ using a7D.PDV.EF.Enum;
 using a7D.PDV.Caixa.UI.Properties;
 using a7D.PDV.Componentes;
 using a7D.PDV.Model;
+using System.ComponentModel;
 
 namespace a7D.PDV.Caixa.UI.Controles
 {
@@ -37,6 +38,13 @@ namespace a7D.PDV.Caixa.UI.Controles
 
         private void ExibirLista()
         {
+            // Suspender atualização visual do DataGridView
+            dgvEntregas.SuspendLayout();
+
+            // Salvar ordenação atual
+            DataGridViewColumn colunaOrdenada = dgvEntregas.SortedColumn;
+            SortOrder ordemOrdenada = dgvEntregas.SortOrder;
+
             string chave = txtPesquisarEntrega.Text.ToLower();
             Object[] row;
 
@@ -62,9 +70,26 @@ namespace a7D.PDV.Caixa.UI.Controles
                            Cidade = l.Field<string>("Cidade"),
                            IDOrigemPedido = l.Field<int?>("IDOrigemPedido")
                        };
+
+            // Converter SortOrder em ListSortDirection
+            ListSortDirection ordem;
+            switch (dgvEntregas.SortOrder)
+            {
+                case SortOrder.Ascending:
+                    ordem = ListSortDirection.Ascending;
+                    break;
+                case SortOrder.Descending:
+                    ordem = ListSortDirection.Descending;
+                    break;
+                default:
+                    ordem = ListSortDirection.Ascending; // Valor padrão
+                    break;
+            }
+
             var saveRow = -1;
             if (dgvEntregas.Rows.Count > 0)
                 saveRow = dgvEntregas.FirstDisplayedCell.RowIndex;
+
             dgvEntregas.Rows.Clear();
             foreach (var item in list)
             {
@@ -95,6 +120,13 @@ namespace a7D.PDV.Caixa.UI.Controles
 
                 }
             }
+
+            // Restaurar ordenação
+            if (colunaOrdenada != null)
+                dgvEntregas.Sort(colunaOrdenada, ordem);
+        
+            // Retomar atualização visual do DataGridView
+                    dgvEntregas.ResumeLayout();
         }
 
         private static string ObterStatus(int idStatusPedido, string status, DateTime dataPedido, DateTime? dataEnvio)
