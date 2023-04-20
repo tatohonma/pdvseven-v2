@@ -703,6 +703,7 @@
     <None Include="Resources\bg-Titulo.png" />
     <None Include="Resources\bg-Titulo2.png" />
     <None Include="Resources\ico anotacao.png" />
+    <None Include="Resources\ico-pdv7.png" />
     <Content Include="Resources\spinner.gif" />
     <Content Include="Resources\logo2_baixa.png" />
   </ItemGroup>

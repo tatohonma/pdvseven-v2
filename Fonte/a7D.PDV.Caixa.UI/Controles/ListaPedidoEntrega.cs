@@ -137,9 +137,14 @@ namespace a7D.PDV.Caixa.UI.Controles
 
                 DataGridViewImageCell icone = (DataGridViewImageCell)item.Cells["Icone"];
                 icone.Value = Resources.semImagem;
-                if (Convert.ToInt32(item.Cells["IDOrigemPedido"].Value) == (int)EOrigemPedido.ifood)
+                switch (Convert.ToInt32(item.Cells["IDOrigemPedido"].Value))
                 {
-                    icone.Value = Resources.ifood;
+                    case (int)EOrigemPedido.ifood:
+                        icone.Value = Resources.ifood;
+                        break;
+                    case (int)EOrigemPedido.deliveryOnline:
+                        icone.Value = Resources.ico_pdv7;
+                        break;
                 }
 
                 if (Convert.ToInt32(item.Cells["IDStatusPedido"].Value) == (int)EStatusPedido.NaoConfirmado)
