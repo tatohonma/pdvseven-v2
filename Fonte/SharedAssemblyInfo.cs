@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2022")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.24.6.0")]
+[assembly: AssemblyVersion("2.24.6.1")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -66,6 +66,9 @@ Lista das últimas versões e FIX
 
 ===============================================================================
 ===============================================================================
+
+2.24.6.1 ======================================================================
+    Correção: Ajuste na importacao do meio de pagamento do Delivery On! pelo Range
 
 2.24.6.0 ======================================================================
     Melhoria: Identificação dos pedidos do Delivery-On
