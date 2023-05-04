@@ -27,6 +27,12 @@ namespace a7D.PDV.Integracao.DeliveryOnline
         TipoDescontoInformation TipoDescontoDO;
         ProdutoInformation TaxaAdicional;
 
+        TipoPagamentoInformation PagamentoDinheiro;
+        TipoPagamentoInformation PagamentoCredito;
+        TipoPagamentoInformation PagamentoDebito;
+        TipoPagamentoInformation PagamentoRefeicao;
+        TipoPagamentoInformation PagamentoOutros;
+
         API.Orders APIOrders;
         API.Locations APILocations;
 
@@ -118,6 +124,50 @@ namespace a7D.PDV.Integracao.DeliveryOnline
 
                 CRUD.Adicionar(TaxaAdicional);
                 AddLog("Produto com o nome 'Serviço Delivery Online' cadastrado!");
+            }
+
+            var listaPagamentos = TipoPagamento.Listar().OrderByDescending(p => p.Ativo);
+
+            PagamentoRefeicao = listaPagamentos.FirstOrDefault(p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Refeicao));
+            if (PagamentoRefeicao == null)
+            {
+                PagamentoRefeicao = new TipoPagamentoInformation();
+                PagamentoRefeicao.Nome = "Vale Refeição";
+                PagamentoRefeicao.CodigoImpressoraFiscal = "0";
+                PagamentoRefeicao.RegistrarValores = true;
+                PagamentoRefeicao.Ativo = true;
+                PagamentoRefeicao.MeioPagamentoSAT = new MeioPagamentoSATInformation { IDMeioPagamentoSAT = 7 };
+
+                CRUD.Adicionar(PagamentoRefeicao);
+                AddLog("Pagamento 'Vale Refeição' cadastrado!");
+            }
+
+            PagamentoDinheiro = listaPagamentos.FirstOrDefault(p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Dinheiro));
+            if (PagamentoDinheiro == null)
+            {
+                AddLog("Não há um meio de pagamento 'Dinheiro' disponível cadastrado no Backoffice");
+                configurado = false;
+            }
+
+            PagamentoDebito = listaPagamentos.FirstOrDefault(p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Debito));
+            if (PagamentoDebito == null)
+            {
+                AddLog("Não há um meio de pagamento 'Cartão de Débito' disponível cadastrado no Backoffice");
+                configurado = false;
+            }
+
+            PagamentoCredito = listaPagamentos.FirstOrDefault(p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Credito));
+            if (PagamentoCredito == null)
+            {
+                AddLog("Não há um meio de pagamento 'Cartão de Credito' disponível cadastrado no Backoffice");
+                configurado = false;
+            }
+
+            PagamentoOutros = listaPagamentos.FirstOrDefault(p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Outros));
+            if (PagamentoOutros == null)
+            {
+                AddLog("Não há um meio de pagamento 'Outros' disponível cadastrado no Backoffice");
+                configurado = false;
             }
 
             try

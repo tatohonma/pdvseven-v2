@@ -137,8 +137,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 }
             }
 
-            Int32 idTipoPagamento = Convert.ToInt32(pedidoApi.attributes.payment);
-            AdicionarPedidoPagamento(pedido.IDPedido.Value, idTipoPagamento, pedido.ValorTotal.Value);
+            AdicionarPedidoPagamento(pedido.IDPedido.Value, pedidoApi.attributes.payment, pedido.ValorTotal.Value);
 
             if (!String.IsNullOrEmpty(pedidoApi.attributes.comment))
             {
@@ -340,11 +339,11 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             }
         }
 
-        private void AdicionarPedidoPagamento(Int32 idPedido, Int32 idTipoPagamento, Decimal valor)
+        private void AdicionarPedidoPagamento(Int32 idPedido, String tipoPagamento, Decimal valor)
         {
             PedidoPagamentoInformation pedidoPagamento = new PedidoPagamentoInformation();
 
-            pedidoPagamento.TipoPagamento = TipoPagamento.Carregar(idTipoPagamento);
+            pedidoPagamento.TipoPagamento = CarregarTipoPagamento(tipoPagamento);
 
             pedidoPagamento.Pedido = new PedidoInformation();
             pedidoPagamento.Pedido.IDPedido = idPedido;
@@ -357,10 +356,37 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             pedidoPagamento.MeioPagamentoSAT = pedidoPagamento.TipoPagamento.MeioPagamentoSAT;
             pedidoPagamento.IDGateway = (int?)pedidoPagamento.TipoPagamento.Gateway;
 
-            //if (paymentMethod.method == "CASH" && paymentMethod.cash.changeFor > 0)
-            //    pedidoPagamento.Valor = paymentMethod.cash.changeFor;
-
             CRUD.Adicionar(pedidoPagamento);
+        }
+
+        private TipoPagamentoInformation CarregarTipoPagamento(string tipoPagamento)
+        {
+            Int32 IntTipoPagamento;
+            if (!int.TryParse(tipoPagamento, out IntTipoPagamento))
+            {
+                return PagamentoOutros;
+            }
+
+            IntTipoPagamento = Convert.ToInt32(tipoPagamento);
+
+            if (IntTipoPagamento >= 100 && IntTipoPagamento <= 199)
+            {
+                return PagamentoDinheiro;
+            }
+            else if (IntTipoPagamento >= 200 && IntTipoPagamento <= 299)
+            {
+                return PagamentoCredito;
+            }
+            else if (IntTipoPagamento >= 300 && IntTipoPagamento <= 399)
+            {
+                return PagamentoDebito;
+            }
+            else if (IntTipoPagamento >= 400 && IntTipoPagamento <= 499)
+            {
+                return PagamentoRefeicao;
+            }
+            else
+                return PagamentoOutros;
         }
 
         private void AlterarStatusPedidoSistema(int idPedido, EStatusPedido statusPedido)

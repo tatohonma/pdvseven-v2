@@ -429,17 +429,17 @@ namespace a7D.PDV.Caixa.UI
                     {
                         TagInformation tagDisplayId = BLL.Tag.Carregar(pedido.GUIDIdentificacao, "ifood-displayId");
 
-                        lblIdentificacao.Text = "IFOOD " + tagDisplayId.Valor;
+                        lblIdentificacao.Text = "IFood " + tagDisplayId.Valor;
                     }
                     else if (pedido.OrigemPedido != null && pedido.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.deliveryOnline)
                     {
                         TagInformation tagId = BLL.Tag.Carregar(pedido.GUIDIdentificacao, "DeliveryOnline-order_id");
 
-                        lblIdentificacao.Text = "Delivery Online " + tagId.Valor;
+                        lblIdentificacao.Text = "Delivery On! " + tagId.Valor;
                     }
                     else
                     {
-                        lblIdentificacao.Text = "DELIVERY " + pedido.IDPedido;
+                        lblIdentificacao.Text = "Delivery " + pedido.IDPedido;
                     }
                 }
 
