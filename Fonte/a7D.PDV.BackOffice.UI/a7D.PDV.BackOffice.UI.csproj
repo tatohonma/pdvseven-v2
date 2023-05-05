@@ -1362,9 +1362,6 @@
     <PackageReference Include="numeral.languages">
       <Version>2.0.4</Version>
     </PackageReference>
-    <PackageReference Include="Unofficial.Microsoft.mshtml">
-      <Version>7.0.3300</Version>
-    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
