@@ -21,7 +21,7 @@ namespace a7D.PDV.BackOffice.UI
                     Force = true;
             }
 
-            SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
+            //SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
