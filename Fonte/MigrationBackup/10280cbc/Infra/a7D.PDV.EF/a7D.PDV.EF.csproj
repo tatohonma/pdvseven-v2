@@ -426,6 +426,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="Resources\Outros.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -511,11 +512,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Relatorio_Lista_Produtos_Impostos.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="EntityFramework">
-      <Version>6.2.0</Version>
-    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
