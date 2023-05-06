@@ -140,7 +140,7 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Humanizer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Humanizer.Core.2.2.0\lib\netstandard1.0\Humanizer.dll</HintPath>
+      <HintPath>..\packages\Humanizer.Core.2.14.1\lib\netstandard2.0\Humanizer.dll</HintPath>
     </Reference>
     <Reference Include="NFe.Classes, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\NFe.Classes.dll</HintPath>

@@ -72,7 +72,7 @@
       <HintPath>..\..\Componentes\MessagingToolkit.QRCode.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -145,6 +145,7 @@
     <Compile Include="Dashboard.cs" />
     <Compile Include="Extension\ImpressaoExtensions.cs" />
     <Compile Include="GA.cs" />
+    <Compile Include="MoreLinq\MoreEnumerable.DistinctBy.cs" />
     <Compile Include="Tag.cs" />
     <Compile Include="ValueObject\SaldoClientes.cs" />
     <Compile Include="ValueObject\ImpressaoOrdemProducao.cs" />
@@ -171,7 +172,6 @@
     <Compile Include="InventarioProdutos.cs" />
     <Compile Include="JWT.cs" />
     <Compile Include="MeioPagamentoSAT.cs" />
-    <Compile Include="MoreLinq\MoreEnumerable.DistinctBy.cs" />
     <Compile Include="Movimentacao.cs" />
     <Compile Include="MovimentacaoProdutos.cs" />
     <Compile Include="MudarIdioma.cs" />
