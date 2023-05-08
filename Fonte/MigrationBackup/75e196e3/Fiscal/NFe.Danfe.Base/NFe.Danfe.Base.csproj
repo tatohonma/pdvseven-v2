@@ -32,10 +32,28 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DFe.Classes, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\DFe.Classes.dll</HintPath>
+    </Reference>
+    <Reference Include="DFe.Utils, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\DFe.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="DFe.Wsdl, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\DFe.Wsdl.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Classes, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\NFe.Classes.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Servicos, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\NFe.Servicos.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Utils, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\NFe.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="NFe.Wsdl, Version=1.0.0.742, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Zeus.Net.NFe.NFCe.1.0.1.828\lib\net40\NFe.Wsdl.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -78,9 +96,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Zeus.Net.NFe.NFCe">
-      <Version>1.0.1.828</Version>
-    </PackageReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
