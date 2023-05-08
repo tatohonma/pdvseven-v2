@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8EE48AAD-6620-4CE6-91F8-51F0416F7174}</ProjectGuid>
+    <ProjectGuid>{546A83D6-ECD2-4FD5-920C-DD9763033FC5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>a7D.PDV.BigData.Shared</RootNamespace>
-    <AssemblyName>a7D.PDV.BigData.Shared</AssemblyName>
+    <RootNamespace>a7D.PDV.Integracao.API2.Client</RootNamespace>
+    <AssemblyName>a7D.PDV.Integracao.API2.Client</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,14 +29,15 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,17 +49,29 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Model\bdTipoPagamento.cs" />
-    <Compile Include="Model\bdPedido.cs" />
-    <Compile Include="Model\bdPedidoPagamento.cs" />
-    <Compile Include="Model\bdPedidoProduto.cs" />
-    <Compile Include="Model\bdCliente.cs" />
-    <Compile Include="Model\bdEntidade.cs" />
-    <Compile Include="Model\bdUsuario.cs" />
-    <Compile Include="ValueObject\bdAlteracaoInfo.cs" />
-    <Compile Include="ValueObject\bdEstoque.cs" />
-    <Compile Include="Model\bdProduto.cs" />
+    <Compile Include="ClienteWS.cs" />
+    <Compile Include="AutenticacaoAPI.cs" />
+    <Compile Include="ExceptionAPI.cs" />
+    <Compile Include="Configuracao.cs" />
+    <Compile Include="ExtenderAPI.cs" />
+    <Compile Include="ClienteAPI.cs" />
+    <Compile Include="NetworkUtil.cs" />
+    <Compile Include="TemaAPI.cs" />
+    <Compile Include="PainelMesasAPI.cs" />
+    <Compile Include="PedidoAPI.cs" />
+    <Compile Include="ImpressaoAPI.cs" />
+    <Compile Include="ProdutoAPI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UDPClient.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\a7D.PDV.Integracao.API2.Model\a7D.PDV.Integracao.API2.Model.csproj">
+      <Project>{f24c813d-011c-4665-a36c-75f4080f0f7b}</Project>
+      <Name>a7D.PDV.Integracao.API2.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
