@@ -1,21 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{58D334DC-CEC5-4D6F-BB01-73E13FECAB63}</ProjectGuid>
+    <ProjectGuid>{87060C34-EE0A-4DCD-BCF1-6A213C4D371E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>a7D.PDV.Terminal.UI</RootNamespace>
-    <AssemblyName>a7D.PDV.Terminal.UI</AssemblyName>
+    <RootNamespace>a7D.PDV.Configurador.UI</RootNamespace>
+    <AssemblyName>a7D.PDV.Configurador.UI</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,13 +26,12 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -42,7 +39,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <Prefer32Bit>true</Prefer32Bit>
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
@@ -56,9 +53,6 @@
     <Prefer32Bit>false</Prefer32Bit>
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>Terminal.ico</ApplicationIcon>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
@@ -67,6 +61,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -79,12 +74,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <OutputPath>bin\Release\</OutputPath>
@@ -95,18 +91,20 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationIcon>Configurdor.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -121,23 +119,29 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="frmDetalhesPedidoProduto.cs">
+    <Compile Include="frmConfiguracoes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDetalhesPedidoProduto.Designer.cs">
-      <DependentUpon>frmDetalhesPedidoProduto.cs</DependentUpon>
+    <Compile Include="frmConfiguracoes.Designer.cs">
+      <DependentUpon>frmConfiguracoes.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmIdentificacao.cs">
+    <Compile Include="frmConfiguracoesFiscal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmIdentificacao.Designer.cs">
-      <DependentUpon>frmIdentificacao.cs</DependentUpon>
+    <Compile Include="frmConfiguracoesFiscal.Designer.cs">
+      <DependentUpon>frmConfiguracoesFiscal.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPedidoProdutoCancelamento.cs">
+    <Compile Include="frmConfigurarFechamento.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPedidoProdutoCancelamento.Designer.cs">
-      <DependentUpon>frmPedidoProdutoCancelamento.cs</DependentUpon>
+    <Compile Include="frmConfigurarFechamento.Designer.cs">
+      <DependentUpon>frmConfigurarFechamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConfigurarLicenca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfigurarLicenca.Designer.cs">
+      <DependentUpon>frmConfigurarLicenca.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPrincipal.cs">
       <SubType>Form</SubType>
@@ -145,20 +149,32 @@
     <Compile Include="frmPrincipal.Designer.cs">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmValidacaoOffline.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmValidacaoOffline.Designer.cs">
+      <DependentUpon>frmValidacaoOffline.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PDVExibicao.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TerminalEventArgs.cs" />
-    <EmbeddedResource Include="frmDetalhesPedidoProduto.resx">
-      <DependentUpon>frmDetalhesPedidoProduto.cs</DependentUpon>
+    <EmbeddedResource Include="frmConfiguracoes.resx">
+      <DependentUpon>frmConfiguracoes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmIdentificacao.resx">
-      <DependentUpon>frmIdentificacao.cs</DependentUpon>
+    <EmbeddedResource Include="frmConfiguracoesFiscal.resx">
+      <DependentUpon>frmConfiguracoesFiscal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPedidoProdutoCancelamento.resx">
-      <DependentUpon>frmPedidoProdutoCancelamento.cs</DependentUpon>
+    <EmbeddedResource Include="frmConfigurarFechamento.resx">
+      <DependentUpon>frmConfigurarFechamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfigurarLicenca.resx">
+      <DependentUpon>frmConfigurarLicenca.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmValidacaoOffline.resx">
+      <DependentUpon>frmValidacaoOffline.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -185,10 +201,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\a7D.PDV.Balanca\a7D.PDV.Integracao.Balanca.csproj">
-      <Project>{3511148b-317b-4b99-873a-9b328b771410}</Project>
-      <Name>a7D.PDV.Integracao.Balanca</Name>
-    </ProjectReference>
     <ProjectReference Include="..\a7D.PDV.BLL\a7D.PDV.BLL.csproj">
       <Project>{1B8AD873-6B0A-45D6-803E-E6CC104BCE81}</Project>
       <Name>a7D.PDV.BLL</Name>
@@ -197,28 +209,27 @@
       <Project>{06274b88-cf73-4e1f-80b1-1cb73b3930d6}</Project>
       <Name>a7D.PDV.Componentes</Name>
     </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.DAL\a7D.PDV.DAL.csproj">
+      <Project>{A4B2AB32-5D8E-4AE9-8350-CB75759A9B11}</Project>
+      <Name>a7D.PDV.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\a7D.PDV.EF\a7D.PDV.EF.csproj">
       <Project>{75ef9713-861a-4c6b-8f7f-1343fdcbbffb}</Project>
       <Name>a7D.PDV.EF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\a7D.PDV.Impressora\a7D.PDV.Impressora.csproj">
-      <Project>{86d34513-7e1d-4dd1-ab22-6a2ac809ea93}</Project>
-      <Name>a7D.PDV.Impressora</Name>
+    <ProjectReference Include="..\a7D.PDV.LocalizadorBalanca.UI\a7D.PDV.LocalizadorBalanca.UI.csproj">
+      <Project>{6B2D5C51-4F3E-49F8-9F0A-B682A709BE81}</Project>
+      <Name>a7D.PDV.LocalizadorBalanca.UI</Name>
     </ProjectReference>
     <ProjectReference Include="..\a7D.PDV.Model\a7D.PDV.Model.csproj">
-      <Project>{22BA05B8-59D7-4E09-8471-7C8012F1B100}</Project>
+      <Project>{22ba05b8-59d7-4e09-8471-7c8012f1b100}</Project>
       <Name>a7D.PDV.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\btnExcluir1.png" />
-    <Content Include="Terminal.ico" />
-    <Content Include="Terminal.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.6.2">
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.6.2 %28x86 and x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -226,16 +237,17 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configurdor.ico" />
+    <Content Include="Configurdor.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>Este projeto faz referência a pacotes do NuGet que não estão presentes neste computador. Use a Restauração de Pacotes do NuGet para baixá-los.  Para obter mais informações, consulte http://go.microsoft.com/fwlink/?LinkID=322105. O arquivo ausente é {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
-  </Target>
-  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
