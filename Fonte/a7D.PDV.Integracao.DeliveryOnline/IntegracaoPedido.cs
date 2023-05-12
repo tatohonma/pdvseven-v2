@@ -189,10 +189,10 @@ namespace a7D.PDV.Integracao.DeliveryOnline
 
             cliente.NomeCompleto = pedidoApi.attributes.first_name.PadLeft(50).Trim();
 
-            int telefone;
+            long telefone;
             if (pedidoApi.attributes.telephone != null &&
                 pedidoApi.attributes.telephone != "" &&
-                int.TryParse(pedidoApi.attributes.telephone.Substring(3), out telefone))
+                long.TryParse(pedidoApi.attributes.telephone.Substring(3), out telefone))
             {
                 if (pedidoApi.attributes.telephone.Substring(3).Length == 8 ||
                     pedidoApi.attributes.telephone.Substring(3).Length == 9)
@@ -200,14 +200,19 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                     cliente.Telefone1DDD = 0;
                     cliente.Telefone1Numero = Convert.ToInt32(pedidoApi.attributes.telephone.Substring(3));
                 }
-                else if (pedidoApi.attributes.telephone.Substring(3).Length == 10 &&
+                else if (pedidoApi.attributes.telephone.Substring(3).Length == 10 ||
                     pedidoApi.attributes.telephone.Substring(3).Length == 11)
                 {
                     cliente.Telefone1DDD = Convert.ToInt32(pedidoApi.attributes.telephone.Substring(3, 2));
                     cliente.Telefone1Numero = Convert.ToInt32(pedidoApi.attributes.telephone.Substring(5));
                 }
+                else if (cliente.Telefone1Numero == null)
+                {
+                    cliente.Telefone1DDD = 0;
+                    cliente.Telefone1Numero = Convert.ToInt32(pedidoApi.attributes.customer_id);
+                }
             }
-            else
+            else if(cliente.Telefone1Numero == null)
             {
                 cliente.Telefone1DDD = 0;
                 cliente.Telefone1Numero = Convert.ToInt32(pedidoApi.attributes.customer_id);
