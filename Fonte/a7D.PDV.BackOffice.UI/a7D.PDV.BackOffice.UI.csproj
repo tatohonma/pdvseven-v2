@@ -1311,10 +1311,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="cef.redist.x64">
-      <Version>3.3578.1870</Version>
+      <Version>3.2987.1601</Version>
     </PackageReference>
     <PackageReference Include="cef.redist.x86">
-      <Version>3.3578.1870</Version>
+      <Version>3.2987.1601</Version>
     </PackageReference>
     <PackageReference Include="CefSharp.WinForms">
       <Version>57.0.0</Version>

@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DD62C276-E6C2-4C5A-B752-F31A83C039E4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>a7D.PDV.AutoAtendimento.UI</RootNamespace>
+    <AssemblyName>a7D.PDV.AutoAtendimento.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>..\..\publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Publish\AutoAtendimento\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>a7D.PDV.AutoAtendimento.UI.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>AutoAtendimento.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>C5770F0E600F995D9C598527AFE410D78BBB68B0</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>a7D.PDV.AutoAtendimento.UI_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Controles\PedidoCredito.xaml.cs">
+      <DependentUpon>PedidoCredito.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\Pedido2.xaml.cs">
+      <DependentUpon>Pedido2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\Pedido1.xaml.cs">
+      <DependentUpon>Pedido1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\Produto2.xaml.cs">
+      <DependentUpon>Produto2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\Produto1.xaml.cs">
+      <DependentUpon>Produto1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\TecladoAlfanumerico.xaml.cs">
+      <DependentUpon>TecladoAlfanumerico.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\ClienteEntradaPage.xaml.cs">
+      <DependentUpon>ClienteEntradaPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\ClienteCreditoPage.xaml.cs">
+      <DependentUpon>ClienteCreditoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\ComandaClienteCreditoValorPage.xaml.cs">
+      <DependentUpon>ComandaClienteCreditoValorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\VendaCPFPage.xaml.cs">
+      <DependentUpon>VendaCPFPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\ComandaClienteCreditoPage.xaml.cs">
+      <DependentUpon>ComandaClienteCreditoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\ComandaClienteCPFPage.xaml.cs">
+      <DependentUpon>ComandaClienteCPFPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\ComandaClienteNovoPage.xaml.cs">
+      <DependentUpon>ComandaClienteNovoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\ComandaConfirmacaoPage.xaml.cs">
+      <DependentUpon>ComandaConfirmacaoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\ComandaExtratoPage.xaml.cs">
+      <DependentUpon>ComandaExtratoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\ComandaClienteConfirmacaoPage.xaml.cs">
+      <DependentUpon>ComandaClienteConfirmacaoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\ComandaMenuPage.xaml.cs">
+      <DependentUpon>ComandaMenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\ClienteCPFPage.xaml.cs">
+      <DependentUpon>ClienteCPFPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\ClienteCheckinPage.xaml.cs">
+      <DependentUpon>ClienteCheckinPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\ClienteCreditoValorPage.xaml.cs">
+      <DependentUpon>ClienteCreditoValorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\ComandaLeitoraPage.xaml.cs">
+      <DependentUpon>ComandaLeitoraPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\InformeCPFPage.xaml.cs">
+      <DependentUpon>InformeCPFPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\ComandaNumeroPage.xaml.cs">
+      <DependentUpon>ComandaNumeroPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\FimPage.xaml.cs">
+      <DependentUpon>FimPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\SairPage.xaml.cs">
+      <DependentUpon>SairPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\VendaResumoPage.xaml.cs">
+      <DependentUpon>VendaResumoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\VendaCategoriaProdutoPage.xaml.cs">
+      <DependentUpon>VendaCategoriaProdutoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\Teclado.xaml.cs">
+      <DependentUpon>Teclado.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\TecladoBox.xaml.cs">
+      <DependentUpon>TecladoBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\VendaModificacaoProdutoPage.xaml.cs">
+      <DependentUpon>VendaModificacaoProdutoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\BarCodeServices.cs" />
+    <Compile Include="Services\EventLogServices.cs" />
+    <Compile Include="Services\LayoutCreditoServices.cs" />
+    <Compile Include="Services\LayoutProdutoServices.cs" />
+    <Compile Include="Services\LayoutCategoriaServices.cs" />
+    <Compile Include="Services\LayoutServices.cs" />
+    <Compile Include="Services\PdvServices.cs" />
+    <Compile Include="Services\Extensions.cs" />
+    <Compile Include="Services\PedidoServicesPagamento.cs" />
+    <Compile Include="Telas\ModalTEFWindow.xaml.cs">
+      <DependentUpon>ModalTEFWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Telas\ModalSimNaoWindow.xaml.cs">
+      <DependentUpon>ModalSimNaoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\InicialPage.xaml.cs">
+      <DependentUpon>InicialPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\PagamentoServices.cs" />
+    <Compile Include="Services\ImpressoraServices.cs" />
+    <Compile Include="Services\VendaItem.cs" />
+    <Page Include="Controles\PedidoCredito.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controles\Pedido2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controles\Pedido1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\Produto2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controles\Produto1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\Teclado.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\TecladoAlfanumerico.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\TecladoBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Paginas\ClienteEntradaPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Paginas\ClienteCreditoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Paginas\ComandaClienteCreditoValorPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Paginas\VendaCPFPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Paginas\ComandaClienteCreditoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Paginas\ComandaClienteCPFPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Paginas\ComandaClienteNovoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Paginas\ComandaConfirmacaoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Paginas\ComandaExtratoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Paginas\ComandaClienteConfirmacaoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Paginas\ComandaMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Paginas\ClienteCPFPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Paginas\ClienteCheckinPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Paginas\ClienteCreditoValorPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Paginas\ComandaLeitoraPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Paginas\InformeCPFPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Paginas\ComandaNumeroPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Paginas\FimPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Paginas\SairPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Paginas\VendaResumoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Paginas\VendaCategoriaProdutoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Paginas\VendaModificacaoProdutoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Telas\ModalTEFWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Telas\ModalSimNaoWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Telas\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Telas\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Paginas\InicialPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\StyleButtons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Services\PedidoServices.cs" />
+    <Compile Include="Services\ProdutoServices.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="certificado.crt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\a7D.PDV.BLL\a7D.PDV.BLL.csproj">
+      <Project>{1b8ad873-6b0a-45d6-803e-e6cc104bce81}</Project>
+      <Name>a7D.PDV.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.EF\a7D.PDV.EF.csproj">
+      <Project>{75EF9713-861A-4C6B-8F7F-1343FDCBBFFB}</Project>
+      <Name>a7D.PDV.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.API2.Client\a7D.PDV.Integracao.API2.Client.csproj">
+      <Project>{546a83d6-ecd2-4fd5-920c-dd9763033fc5}</Project>
+      <Name>a7D.PDV.Integracao.API2.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.API2.Model\a7D.PDV.Integracao.API2.Model.csproj">
+      <Project>{f24c813d-011c-4665-a36c-75f4080f0f7b}</Project>
+      <Name>a7D.PDV.Integracao.API2.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.Pagamento\a7D.PDV.Integracao.Pagamento.csproj">
+      <Project>{26083fd7-642b-4f53-bab3-1c8f0ac8eabf}</Project>
+      <Name>a7D.PDV.Integracao.Pagamento</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Model\a7D.PDV.Model.csproj">
+      <Project>{22BA05B8-59D7-4E09-8471-7C8012F1B100}</Project>
+      <Name>a7D.PDV.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MuxxLib\MuxxLib.csproj">
+      <Project>{61a3b8e0-67eb-4e70-93e1-795468bd4904}</Project>
+      <Name>MuxxLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Paginas\btnDescer.png" />
+    <Resource Include="Paginas\btnSubir.png" />
+    <Resource Include="AutoAtendimento.ico" />
+    <Resource Include="Telas\pdv7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PGWebLib.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 e x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="..\a7D.PDV.Atualizacao.Shared\a7D.PDV.Atualizacao.Shared.projitems" Label="Shared" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
