@@ -180,8 +180,6 @@ namespace a7D.PDV.Integracao.iFood
             Tag.Adicionar(pedido.GUIDIdentificacao, "ifood-orderType", orderDetails.orderType);
             Tag.Adicionar(pedido.GUIDIdentificacao, "ifood-status", "PLC");
 
-
-
             if (orderDetails.total.additionalFees > 0)
             {
                 pedido.Observacoes += "TAXAS ADICIONAIS\r\n";
