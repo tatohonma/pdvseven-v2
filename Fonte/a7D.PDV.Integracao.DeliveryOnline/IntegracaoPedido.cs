@@ -390,6 +390,10 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             {
                 return PagamentoRefeicao;
             }
+            else if (IntTipoPagamento >= 500 && IntTipoPagamento <= 599)
+            {
+                return PagamentoPagSplit;
+            }
             else
                 return PagamentoOutros;
         }
