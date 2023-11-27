@@ -27,6 +27,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
         TipoDescontoInformation TipoDescontoDO;
         ProdutoInformation TaxaAdicional;
 
+        TipoPagamentoInformation PagamentoPagSplit;
         TipoPagamentoInformation PagamentoDinheiro;
         TipoPagamentoInformation PagamentoCredito;
         TipoPagamentoInformation PagamentoDebito;
@@ -140,6 +141,22 @@ namespace a7D.PDV.Integracao.DeliveryOnline
 
                 CRUD.Adicionar(PagamentoRefeicao);
                 AddLog("Pagamento 'Vale Refeição' cadastrado!");
+            }
+
+            PagamentoPagSplit = listaPagamentos.FirstOrDefault(p => p.IDGateway == (int)EGateway.PagSplit);
+            if (PagamentoPagSplit == null)
+            {
+                PagamentoPagSplit = new TipoPagamentoInformation();
+                PagamentoPagSplit.MeioPagamentoSAT = new MeioPagamentoSATInformation { IDMeioPagamentoSAT = 10 };
+
+                PagamentoPagSplit.Nome = "PagSplit";
+                PagamentoPagSplit.CodigoImpressoraFiscal = "PagSplit";
+                PagamentoPagSplit.Ativo = true;
+                PagamentoPagSplit.RegistrarValores = false;
+                PagamentoPagSplit.IDGateway = (int)EGateway.PagSplit;
+
+                CRUD.Adicionar(PagamentoPagSplit);
+                AddLog("Pagamento com Gateway 'PagSplit' cadastrado!");
             }
 
             PagamentoDinheiro = listaPagamentos.FirstOrDefault(p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Dinheiro));
