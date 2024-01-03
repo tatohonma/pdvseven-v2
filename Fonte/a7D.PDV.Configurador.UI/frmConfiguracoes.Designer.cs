@@ -65,6 +65,8 @@
             this.tableIFood = new System.Windows.Forms.TableLayoutPanel();
             this.tabDeliveryOnline = new System.Windows.Forms.TabPage();
             this.tableDeliveryOnline = new System.Windows.Forms.TableLayoutPanel();
+            this.tabPixConta = new System.Windows.Forms.TabPage();
+            this.tablePixConta = new System.Windows.Forms.TableLayoutPanel();
             this.tabCardapio.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tabComanda.SuspendLayout();
@@ -84,6 +86,7 @@
             this.tabGerenciadorImpressao.SuspendLayout();
             this.tabIFood.SuspendLayout();
             this.tabDeliveryOnline.SuspendLayout();
+            this.tabPixConta.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabCardapio
@@ -334,6 +337,7 @@
             this.tabControl1.Controls.Add(this.tabGerenciadorImpressao);
             this.tabControl1.Controls.Add(this.tabIFood);
             this.tabControl1.Controls.Add(this.tabDeliveryOnline);
+            this.tabControl1.Controls.Add(this.tabPixConta);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -575,6 +579,32 @@
             this.tableDeliveryOnline.Size = new System.Drawing.Size(724, 400);
             this.tableDeliveryOnline.TabIndex = 2;
             // 
+            // tabPixConta
+            // 
+            this.tabPixConta.Controls.Add(this.tablePixConta);
+            this.tabPixConta.Location = new System.Drawing.Point(4, 29);
+            this.tabPixConta.Name = "tabPixConta";
+            this.tabPixConta.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPixConta.Size = new System.Drawing.Size(738, 419);
+            this.tabPixConta.TabIndex = 13;
+            this.tabPixConta.Text = "Pix-Conta";
+            this.tabPixConta.UseVisualStyleBackColor = true;
+            // 
+            // tablePixConta
+            // 
+            this.tablePixConta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tablePixConta.AutoSize = true;
+            this.tablePixConta.BackColor = System.Drawing.Color.Transparent;
+            this.tablePixConta.ColumnCount = 1;
+            this.tablePixConta.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tablePixConta.Location = new System.Drawing.Point(7, 9);
+            this.tablePixConta.Name = "tablePixConta";
+            this.tablePixConta.RowCount = 1;
+            this.tablePixConta.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tablePixConta.Size = new System.Drawing.Size(724, 400);
+            this.tablePixConta.TabIndex = 3;
+            // 
             // frmConfiguracoes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -617,6 +647,8 @@
             this.tabIFood.PerformLayout();
             this.tabDeliveryOnline.ResumeLayout(false);
             this.tabDeliveryOnline.PerformLayout();
+            this.tabPixConta.ResumeLayout(false);
+            this.tabPixConta.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -659,5 +691,7 @@
         private System.Windows.Forms.TableLayoutPanel tableIFood;
         private System.Windows.Forms.TabPage tabDeliveryOnline;
         private System.Windows.Forms.TableLayoutPanel tableDeliveryOnline;
+        private System.Windows.Forms.TabPage tabPixConta;
+        private System.Windows.Forms.TableLayoutPanel tablePixConta;
     }
 }
