@@ -392,7 +392,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
             }
             else if (IntTipoPagamento >= 500 && IntTipoPagamento <= 599)
             {
-                return PagamentoPagSplit;
+                return PagamentoPixConta;
             }
             else
                 return PagamentoOutros;

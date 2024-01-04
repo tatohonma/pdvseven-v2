@@ -8,7 +8,7 @@ namespace a7D.PDV.EF.Enum
         [Description("NTK TEF Pay&Go")] NTKTEF = 1,
         [Description("NTK POS Integrado")] NTKPOS = 3,
         [Description("iFood")] iFood = 4,
-        [Description("PagSplit")] PagSplit = 5,
+        [Description("PixConta")] PixConta = 5,
         [Description("Stone TEF")] StoneTEF = 9,
         [Description("Stone POS Integrado")] StonePOS = 10,
         [Description("Conta de Cliente")] ContaCliente = 15,

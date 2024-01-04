@@ -68,8 +68,11 @@ Lista das últimas versões e FIX
 ===============================================================================
 
 2.25.0.0 ======================================================================
-    Novo: Aba Pix-Conta no Configurador
-
+    Novo: Pix-Conta
+        Aba Pix-Conta no Configurador
+        Aba Pix-Conta no Integrador
+        Impressão Ticket Pix
+    Melhoria: Alteração do nome do Gateway de Pagamento de PagSplit para PixConta
 
 2.24.8.0 ======================================================================
     Melhoria: Criação do Gateway de pagamento PagSplit
