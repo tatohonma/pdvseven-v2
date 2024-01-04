@@ -71,6 +71,11 @@
             this.lvStatus = new System.Windows.Forms.ListView();
             this.imgs = new System.Windows.Forms.ImageList(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tabPixConta = new System.Windows.Forms.TabPage();
+            this.pbPixConta = new System.Windows.Forms.PictureBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtStatusPixConta = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbServer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDeliveryOnline)).BeginInit();
@@ -86,10 +91,14 @@
             this.mnu.SuspendLayout();
             this.st.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.tabPixConta.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPixConta)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.pbPixConta);
+            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.pbServer);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.pbDeliveryOnline);
@@ -246,6 +255,7 @@
             this.tabServicos.Controls.Add(this.tabPOS);
             this.tabServicos.Controls.Add(this.tabIFood);
             this.tabServicos.Controls.Add(this.tabDeliveryOnline);
+            this.tabServicos.Controls.Add(this.tabPixConta);
             this.tabServicos.Location = new System.Drawing.Point(256, 12);
             this.tabServicos.Multiline = true;
             this.tabServicos.Name = "tabServicos";
@@ -259,7 +269,7 @@
             this.tabServidor.Controls.Add(this.txtStatusServer);
             this.tabServidor.Location = new System.Drawing.Point(4, 22);
             this.tabServidor.Name = "tabServidor";
-            this.tabServidor.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabServidor.Padding = new System.Windows.Forms.Padding(3);
             this.tabServidor.Size = new System.Drawing.Size(627, 373);
             this.tabServidor.TabIndex = 7;
             this.tabServidor.Text = "Servidor PDV7";
@@ -294,7 +304,7 @@
             this.tabImpressao.Controls.Add(this.txtStatusImpressao);
             this.tabImpressao.Location = new System.Drawing.Point(4, 22);
             this.tabImpressao.Name = "tabImpressao";
-            this.tabImpressao.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabImpressao.Padding = new System.Windows.Forms.Padding(3);
             this.tabImpressao.Size = new System.Drawing.Size(627, 373);
             this.tabImpressao.TabIndex = 3;
             this.tabImpressao.Text = "Ordem de Impressão";
@@ -329,7 +339,7 @@
             this.tabIFood.Controls.Add(this.txtIFood);
             this.tabIFood.Location = new System.Drawing.Point(4, 22);
             this.tabIFood.Name = "tabIFood";
-            this.tabIFood.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabIFood.Padding = new System.Windows.Forms.Padding(3);
             this.tabIFood.Size = new System.Drawing.Size(627, 373);
             this.tabIFood.TabIndex = 5;
             this.tabIFood.Text = "iFood";
@@ -364,7 +374,7 @@
             this.tabDeliveryOnline.Controls.Add(this.txtStatusDeliveryOnline);
             this.tabDeliveryOnline.Location = new System.Drawing.Point(4, 22);
             this.tabDeliveryOnline.Name = "tabDeliveryOnline";
-            this.tabDeliveryOnline.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabDeliveryOnline.Padding = new System.Windows.Forms.Padding(3);
             this.tabDeliveryOnline.Size = new System.Drawing.Size(627, 373);
             this.tabDeliveryOnline.TabIndex = 6;
             this.tabDeliveryOnline.Text = "Delivery Online";
@@ -499,6 +509,59 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Áreas de Impressão";
             // 
+            // tabPixConta
+            // 
+            this.tabPixConta.Controls.Add(this.label8);
+            this.tabPixConta.Controls.Add(this.txtStatusPixConta);
+            this.tabPixConta.Location = new System.Drawing.Point(4, 22);
+            this.tabPixConta.Name = "tabPixConta";
+            this.tabPixConta.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPixConta.Size = new System.Drawing.Size(627, 373);
+            this.tabPixConta.TabIndex = 8;
+            this.tabPixConta.Text = "Pix-Conta";
+            this.tabPixConta.UseVisualStyleBackColor = true;
+            // 
+            // pbPixConta
+            // 
+            this.pbPixConta.BackColor = System.Drawing.Color.Silver;
+            this.pbPixConta.Location = new System.Drawing.Point(9, 157);
+            this.pbPixConta.Name = "pbPixConta";
+            this.pbPixConta.Size = new System.Drawing.Size(23, 20);
+            this.pbPixConta.TabIndex = 17;
+            this.pbPixConta.TabStop = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(38, 157);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(68, 17);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Pix-Conta";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(8, 9);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(28, 13);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "Log:";
+            // 
+            // txtStatusPixConta
+            // 
+            this.txtStatusPixConta.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtStatusPixConta.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStatusPixConta.Location = new System.Drawing.Point(11, 27);
+            this.txtStatusPixConta.Multiline = true;
+            this.txtStatusPixConta.Name = "txtStatusPixConta";
+            this.txtStatusPixConta.ReadOnly = true;
+            this.txtStatusPixConta.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtStatusPixConta.Size = new System.Drawing.Size(607, 336);
+            this.txtStatusPixConta.TabIndex = 10;
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -539,6 +602,9 @@
             this.st.ResumeLayout(false);
             this.st.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.tabPixConta.ResumeLayout(false);
+            this.tabPixConta.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPixConta)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -583,5 +649,10 @@
         private System.Windows.Forms.ListView lvStatus;
         private System.Windows.Forms.ImageList imgs;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.PictureBox pbPixConta;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TabPage tabPixConta;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtStatusPixConta;
     }
 }

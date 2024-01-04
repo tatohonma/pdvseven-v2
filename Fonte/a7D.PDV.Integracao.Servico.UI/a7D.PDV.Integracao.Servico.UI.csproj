@@ -164,6 +164,10 @@
       <Project>{26083fd7-642b-4f53-bab3-1c8f0ac8eabf}</Project>
       <Name>a7D.PDV.Integracao.Pagamento</Name>
     </ProjectReference>
+    <ProjectReference Include="..\a7D.PDV.Integracao.PixConta\a7D.PDV.Integracao.PixConta.csproj">
+      <Project>{62E45865-C331-4BE3-96D8-3D213C4CD5D4}</Project>
+      <Name>a7D.PDV.Integracao.PixConta</Name>
+    </ProjectReference>
     <ProjectReference Include="..\a7D.PDV.Integracao.Server\a7D.PDV.Integracao.Server.csproj">
       <Project>{7A68F400-0913-4550-B0AE-DD322F200F27}</Project>
       <Name>a7D.PDV.Integracao.Server</Name>
