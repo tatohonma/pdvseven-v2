@@ -19,6 +19,6 @@ namespace a7D.PDV.BLL
         public string Token_IUGU { get; set; }
 
         [Config("Ativar Conta-Cliente", ETipoPDV.PIX_CONTA, Valor = "0", ValoresAceitos = "0|1", Obrigatorio = true)]
-        public bool ContaClienteAtiva{ get; set; }
+        public bool ContaCliente{ get; set; }
     }
 }
