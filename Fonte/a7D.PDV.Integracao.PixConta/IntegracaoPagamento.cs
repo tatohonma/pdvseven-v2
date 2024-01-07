@@ -1,6 +1,7 @@
 ﻿using a7D.Fmk.CRUD.DAL;
 using a7D.PDV.BLL;
 using a7D.PDV.DAL;
+using a7D.PDV.EF.Enum;
 using a7D.PDV.Integracao.PixConta.Model;
 using a7D.PDV.Model;
 using System;
@@ -18,7 +19,7 @@ namespace a7D.PDV.Integracao.PixConta
             foreach (var pedido in pedidos)
             {
                 Int32 idPedido = Convert.ToInt32(((DataRow)pedido)["IDPedido"]);
-                string guidIdentificacao = ((DataRow)pedido)["GUIDIdentificacao"].ToString();
+                string guidMovimentacao = ((DataRow)pedido)["guidMovimentacao"].ToString();
                 string fatura = ((DataRow)pedido)["fatura"].ToString();
 
                 Model.InvoiceInformation invoice = APIInvoice.ConsultarStatus(fatura);
@@ -27,25 +28,33 @@ namespace a7D.PDV.Integracao.PixConta
                 switch (invoice.status)
                 {
                     case "paid":
-                    case "paid_external":                        
+                    case "paid_external":
                         RegistrarPagamento(idPedido, valorDecimal);
-                        Tag.Alterar(guidIdentificacao, "FaturaPixConta_ContaCliente_Status", "pago");
+                        Tag.Alterar(guidMovimentacao, "FaturaPixConta_ContaCliente_Status", "pago");
+
+                        if (Pedido.TotalPago(idPedido))
+                            FecharPedido(idPedido);
                         break;
                     case "pending":
-                        VerificarValidadeFatura(idPedido, invoice);
+                        VerificarValidadeFatura(idPedido, guidMovimentacao, valorDecimal);
                         break;
                 }
             }
         }
 
-        private void VerificarValidadeFatura(int idPedido, InvoiceInformation invoice)
+        private void VerificarValidadeFatura(int idPedido, string guidMovimentacao, decimal valorFatura)
         {
-            //Se pedido já finalizado
             //Se valor pendente do pedido diferente do valor da fatura
+            if(Pedido.ValorPendente(idPedido) != valorFatura)
+            {
+                //Chama API cancelando a fatura
 
-            //Chama API cancelando a fatura
-            //Exclui TAG FaturaPixConta_ContaCliente_ID
-            //Exclui TAG FaturaPixConta_ContaCliente_Status
+
+                Int32 idTag_fatura = Tag.Carregar(guidMovimentacao, "FaturaPixConta_ContaCliente_ID").IDTag.Value;
+                Int32 idTag_status = Tag.Carregar(guidMovimentacao, "FaturaPixConta_ContaCliente_Status").IDTag.Value;
+                Tag.Excluir(idTag_fatura);
+                Tag.Excluir(idTag_status);
+            }
         }
 
         private void RegistrarPagamento(int idPedido, decimal valor)
@@ -72,37 +81,53 @@ namespace a7D.PDV.Integracao.PixConta
             pedidoPagamento.IDGateway = 5;
 
             CRUD.Adicionar(pedidoPagamento);
-
-            //Verificar se pedido está 100% pago e Finalizar Pedido
         }
 
+        private void FecharPedido(int idPedido)
+        {
+            PedidoInformation pedido = Pedido.CarregarCompleto(idPedido);
+            CaixaInformation caixa = new CaixaInformation();
+            caixa.IDCaixa = 1;
+
+            Int32 idUsuario = 1;
+
+            Pedido.FecharVendaDB(pedido, caixa, idUsuario);
+            switch (pedido.TipoPedido.TipoPedido)
+            {
+                case ETipoPedido.Mesa:
+                    var mesa = Mesa.CarregarPorGUID(pedido.GUIDIdentificacao);
+                    Mesa.AlterarStatus(pedido.GUIDIdentificacao, EStatusMesa.Liberada);
+                    break;
+                case ETipoPedido.Comanda:
+                    var comanda = Comanda.CarregarPorGUID(pedido.GUIDIdentificacao);
+                    Comanda.AlterarStatus(pedido.GUIDIdentificacao, EStatusComanda.Liberada);
+                    break;
+            }
+        }
 
         private DataRowCollection ListarPedidosFaturaPendente()
         {
             SqlDataAdapter da;
             DataSet ds = new DataSet();
-            DataTable dt = new DataTable();
 
             String querySql = @"
             SELECT
                 p.IDPedido,
-            	p.GUIDIdentificacao,
+            	p.GUIDMovimentacao,
 	            status.Valor as status,
-	            (SELECT Valor FROM tbTag fatura WHERE fatura.GUIDIdentificacao = p.GUIDIdentificacao AND fatura.Chave = 'FaturaPixConta_ContaCliente_ID') as fatura
+	            (SELECT Valor FROM tbTag fatura WHERE fatura.GUIDIdentificacao = p.GUIDMovimentacao AND fatura.Chave = 'FaturaPixConta_ContaCliente_ID') as fatura
             FROM
                 tbPedido p
-                LEFT JOIN tbTag status ON status.GUIDIdentificacao = p.GUIDIdentificacao AND status.Chave = 'FaturaPixConta_ContaCliente_Status'
+                LEFT JOIN tbTag status ON status.GUIDIdentificacao = p.GUIDMovimentacao AND status.Chave = 'FaturaPixConta_ContaCliente_Status'
             WHERE
 
                 status.Valor = 'pendente'
             ";
 
             da = new SqlDataAdapter(querySql, DB.ConnectionString);
-
             da.Fill(ds);
-            dt = ds.Tables[0];
 
-            return dt.Rows;
+            return ds.Tables[0].Rows;
         }
     }
 }

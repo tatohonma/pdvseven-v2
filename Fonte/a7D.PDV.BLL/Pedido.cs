@@ -23,6 +23,17 @@ namespace a7D.PDV.BLL
             return PedidoProdutoInformation.SomaValorTotal(listaPedidoProduto);
         }
 
+        public static bool TotalPago(Int32 idPedido)
+        {
+            //TODO: 
+            return true;
+        }
+
+        public static Decimal ValorPendente(Int32 idPedido)
+        {
+            return 0;
+        }
+
         public static PedidoInformation PreparaConta(int id, int pessoas)
         {
             var pedido = BLL.Pedido.CarregarCompleto(id);

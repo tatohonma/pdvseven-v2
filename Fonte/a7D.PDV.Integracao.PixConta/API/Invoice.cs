@@ -15,9 +15,7 @@ namespace a7D.PDV.Integracao.PixConta.API
 
         public Model.InvoiceInformation ConsultarStatus(string id) => Get<Model.InvoiceInformation>($"/v1/invoices/{id}");
 
-        public void CancelarFatura(string id)
-        {
+        public void CancelarFatura(string id) => Put<Model.InvoiceInformation>($"/v1/invoices/{id}/cancel");
 
-        }
     }
 }

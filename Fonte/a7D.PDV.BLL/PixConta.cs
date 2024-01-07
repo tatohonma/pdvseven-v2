@@ -22,8 +22,8 @@ namespace a7D.PDV.BLL
 
             FaturaInformation fatura = JsonConvert.DeserializeObject<FaturaInformation>(resultado);
 
-            Tag.Adicionar(pedido.GUIDIdentificacao, "FaturaPixConta_ContaCliente_ID", fatura.id);
-            Tag.Adicionar(pedido.GUIDIdentificacao, "FaturaPixConta_ContaCliente_Status", "pendente");
+            Tag.Adicionar(pedido.GUIDMovimentacao, "FaturaPixConta_ContaCliente_ID", fatura.id);
+            Tag.Adicionar(pedido.GUIDMovimentacao, "FaturaPixConta_ContaCliente_Status", "pendente");
 
             string qrcodeText = fatura.pix.qrcode_text;
             return qrcodeText;
