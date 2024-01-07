@@ -6,15 +6,15 @@
 //using Newtonsoft.Json;
 using a7D.PDV.Integracao.Servico.Core;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+using a7D.PDV.BLL;
 
 namespace a7D.PDV.Integracao.PixConta
 {
     public partial class IntegraPixConta : IntegracaoTask
     {
         public override string Nome => "Pix-Conta";
+        ConfiguracoesPixConta ConfigPixConta;
+        API.Invoice APIInvoice;
 
         public override void Executar()
         {
@@ -31,6 +31,20 @@ namespace a7D.PDV.Integracao.PixConta
         {
             Boolean configurado = true;
 
+            ConfigPixConta = new ConfiguracoesPixConta();
+
+            if(!ConfigPixConta.ContaCliente)
+            {
+                AddLog("Integração Pix-Conta Conta-Cliente desligada no Configurador");
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(ConfigPixConta.Token_IUGU))
+            {
+                AddLog("Falta configurar o Token IUGU no Configurador");
+                return false;
+            }
+
             return configurado;
         }
 
@@ -42,8 +56,13 @@ namespace a7D.PDV.Integracao.PixConta
 
                 while (Executando)
                 {
-                    AddLog("Verificando Faturas");
-                    Sleep(60);
+                    if (APIInvoice == null)
+                        APIInvoice = new API.Invoice(ConfigPixConta.Token_IUGU);
+
+                    AddLog("Verificar Pagamentos");
+                    VerificarPagamentosPendentes();
+
+                    Sleep(30);
                 }
             }
             catch (Exception ex)
