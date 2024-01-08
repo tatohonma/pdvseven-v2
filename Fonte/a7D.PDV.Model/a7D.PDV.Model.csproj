@@ -99,6 +99,7 @@
     <Compile Include="DTO\InformacoesCancelamento.cs" />
     <Compile Include="EntradaSaidaInformation.cs" />
     <Compile Include="EntregadorInformation.cs" />
+    <Compile Include="FaturaPixContaInformation.cs" />
     <Compile Include="IdiomaInformation.cs" />
     <Compile Include="ImagemInformation.cs" />
     <Compile Include="ImagemTemaInformation.cs" />

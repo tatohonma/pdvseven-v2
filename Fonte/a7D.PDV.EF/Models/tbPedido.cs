@@ -71,5 +71,6 @@ namespace a7D.PDV.EF.Models
         public virtual ICollection<tbPedidoProduto> tbPedidoProdutoes { get; set; }
         public virtual ICollection<tbPedidoPagamento> tbPedidoPagamentoes { get; set; }
         public virtual ICollection<tbSaldo> Saldos { get; set; }
+        public virtual ICollection<tbFaturaPixConta> FaturasPixConta { get; set; }
     }
 }

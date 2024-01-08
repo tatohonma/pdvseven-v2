@@ -62,6 +62,8 @@ namespace a7D.PDV.Integracao.PixConta
                     AddLog("Verificar Pagamentos");
                     VerificarPagamentosPendentes();
 
+                    CancelarFaturas();
+
                     Sleep(30);
                 }
             }

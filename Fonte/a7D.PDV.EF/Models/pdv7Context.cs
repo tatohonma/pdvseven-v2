@@ -263,6 +263,7 @@ namespace a7D.PDV.EF.Models
         public DbSet<tbTipoIntegracao> TipoIntegracoes { get; set; }
         public DbSet<tbTag> Tags { get; set; }
         public DbSet<tbOrigemPedido> OrigemPedidos { get; set; }
+        public DbSet<tbFaturaPixConta> FaturasPixConta { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -342,6 +343,7 @@ namespace a7D.PDV.EF.Models
             modelBuilder.Configurations.Add(new tbHorarioDeliveryMap());
             modelBuilder.Configurations.Add(new tbTagMap());
             modelBuilder.Configurations.Add(new tbOrigemPedidoMap());
+            modelBuilder.Configurations.Add(new tbFaturaPixContaMap());
         }
     }
 }

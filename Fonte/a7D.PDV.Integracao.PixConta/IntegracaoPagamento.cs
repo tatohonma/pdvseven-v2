@@ -19,45 +19,66 @@ namespace a7D.PDV.Integracao.PixConta
             foreach (var pedido in pedidos)
             {
                 Int32 idPedido = Convert.ToInt32(((DataRow)pedido)["IDPedido"]);
-                string guidMovimentacao = ((DataRow)pedido)["guidMovimentacao"].ToString();
-                string fatura = ((DataRow)pedido)["fatura"].ToString();
+                string codigoFatura = ((DataRow)pedido)["CodigoFatura"].ToString();
+                decimal valorFatura = Convert.ToDecimal(((DataRow)pedido)["Valor"]);
 
-                Model.InvoiceInformation invoice = APIInvoice.ConsultarStatus(fatura);
-                decimal valorDecimal = (decimal)invoice.total_cents / 100;
+                Model.InvoiceInformation invoice = APIInvoice.ConsultarStatus(codigoFatura);
 
                 switch (invoice.status)
                 {
                     case "paid":
                     case "paid_external":
-                        RegistrarPagamento(idPedido, valorDecimal);
-                        Tag.Alterar(guidMovimentacao, "FaturaPixConta_ContaCliente_Status", "pago");
+                        RegistrarPagamento(idPedido, codigoFatura, valorFatura);
 
                         if (Pedido.TotalPago(idPedido))
                             FecharPedido(idPedido);
+
                         break;
                     case "pending":
-                        VerificarValidadeFatura(idPedido, guidMovimentacao, valorDecimal);
+                        VerificarValidadeFatura(idPedido, codigoFatura, valorFatura);
                         break;
                 }
             }
         }
 
-        private void VerificarValidadeFatura(int idPedido, string guidMovimentacao, decimal valorFatura)
+        private void CancelarFaturas()
+        {
+            var pedidos = ListarPedidosFaturaCancelamento();
+
+            foreach (var pedido in pedidos)
+            {
+                string codigoFatura = ((DataRow)pedido)["CodigoFatura"].ToString();
+
+                APIInvoice.CancelarFatura(codigoFatura);
+
+                FaturaPixContaInformation faturaPixConta = new FaturaPixContaInformation();
+                faturaPixConta.CodigoFatura = codigoFatura;
+
+                faturaPixConta = (FaturaPixContaInformation)CRUD.Carregar(faturaPixConta);
+                faturaPixConta.Status = "cancelada";
+                faturaPixConta.DtUltimaAlteracao = DateTime.Now;
+
+                CRUD.Alterar(faturaPixConta);
+            }
+        }
+
+        private void VerificarValidadeFatura(int idPedido, string codigoFatura, decimal valorFatura)
         {
             //Se valor pendente do pedido diferente do valor da fatura
             if(Pedido.ValorPendente(idPedido) != valorFatura)
             {
-                //Chama API cancelando a fatura
+                FaturaPixContaInformation faturaPixConta = new FaturaPixContaInformation();
+                faturaPixConta.CodigoFatura = codigoFatura;
 
+                faturaPixConta = (FaturaPixContaInformation)CRUD.Carregar(faturaPixConta);
+                faturaPixConta.Status = "cancelar";
+                faturaPixConta.DtUltimaAlteracao = DateTime.Now;
 
-                Int32 idTag_fatura = Tag.Carregar(guidMovimentacao, "FaturaPixConta_ContaCliente_ID").IDTag.Value;
-                Int32 idTag_status = Tag.Carregar(guidMovimentacao, "FaturaPixConta_ContaCliente_Status").IDTag.Value;
-                Tag.Excluir(idTag_fatura);
-                Tag.Excluir(idTag_status);
+                CRUD.Alterar(faturaPixConta);
             }
         }
 
-        private void RegistrarPagamento(int idPedido, decimal valor)
+        private void RegistrarPagamento(int idPedido, string codigoFatura, decimal valor)
         {
             PedidoPagamentoInformation pedidoPagamento = new PedidoPagamentoInformation();
 
@@ -81,6 +102,16 @@ namespace a7D.PDV.Integracao.PixConta
             pedidoPagamento.IDGateway = 5;
 
             CRUD.Adicionar(pedidoPagamento);
+
+
+            FaturaPixContaInformation faturaPixConta = new FaturaPixContaInformation();
+            faturaPixConta.CodigoFatura = codigoFatura;
+
+            faturaPixConta = (FaturaPixContaInformation)CRUD.Carregar(faturaPixConta);
+            faturaPixConta.Status = "pago";
+            faturaPixConta.DtUltimaAlteracao = DateTime.Now;
+
+            CRUD.Alterar(faturaPixConta);
         }
 
         private void FecharPedido(int idPedido)
@@ -110,19 +141,20 @@ namespace a7D.PDV.Integracao.PixConta
             SqlDataAdapter da;
             DataSet ds = new DataSet();
 
-            String querySql = @"
-            SELECT
-                p.IDPedido,
-            	p.GUIDMovimentacao,
-	            status.Valor as status,
-	            (SELECT Valor FROM tbTag fatura WHERE fatura.GUIDIdentificacao = p.GUIDMovimentacao AND fatura.Chave = 'FaturaPixConta_ContaCliente_ID') as fatura
-            FROM
-                tbPedido p
-                LEFT JOIN tbTag status ON status.GUIDIdentificacao = p.GUIDMovimentacao AND status.Chave = 'FaturaPixConta_ContaCliente_Status'
-            WHERE
+            String querySql = "SELECT * FROM tbFaturaPixConta WHERE Status='pendente'";
 
-                status.Valor = 'pendente'
-            ";
+            da = new SqlDataAdapter(querySql, DB.ConnectionString);
+            da.Fill(ds);
+
+            return ds.Tables[0].Rows;
+        }
+
+        private DataRowCollection ListarPedidosFaturaCancelamento()
+        {
+            SqlDataAdapter da;
+            DataSet ds = new DataSet();
+
+            String querySql = "SELECT * FROM tbFaturaPixConta WHERE Status='cancelar'";
 
             da = new SqlDataAdapter(querySql, DB.ConnectionString);
             da.Fill(ds);

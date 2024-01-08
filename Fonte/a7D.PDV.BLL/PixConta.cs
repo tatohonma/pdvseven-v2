@@ -1,4 +1,5 @@
-﻿using a7D.PDV.BLL.Utils;
+﻿using a7D.Fmk.CRUD.DAL;
+using a7D.PDV.BLL.Utils;
 using a7D.PDV.Model;
 using Newtonsoft.Json;
 using System;
@@ -17,32 +18,44 @@ namespace a7D.PDV.BLL
             string token = ConfiguracoesPixConta.BuscarConfiguracao("Token_IUGU").Valor;
             //string token = "ODk3OTA0MDM1NUYwODhENEM5RkU0MDJDRTBBNDJERDQ3ODE3NUQ5QzcxNEJENThDMDBGNDA3MTVCNERDMkY3MDo="; // Substitua pelo seu token Bearer
             string apiUrl = "https://api.iugu.com/v1/invoices";
+            decimal valorPendente = Pedido.ValorPendente(pedido.IDPedido.Value);
 
-            string resultado = await ApiClient.PostJsonAsync(apiUrl, CriarJson(pedido), token);
+            FaturaPixContaInformation faturaPixConta = new FaturaPixContaInformation();
+            faturaPixConta.Pedido = new PedidoInformation { IDPedido = pedido.IDPedido };
+            faturaPixConta.Status = "pendente";
 
-            FaturaInformation fatura = JsonConvert.DeserializeObject<FaturaInformation>(resultado);
+            FaturaPixContaInformation faturaPixContaGerada = (FaturaPixContaInformation)CRUD.Carregar(faturaPixConta);
 
-            Tag.Adicionar(pedido.GUIDMovimentacao, "FaturaPixConta_ContaCliente_ID", fatura.id);
-            Tag.Adicionar(pedido.GUIDMovimentacao, "FaturaPixConta_ContaCliente_Status", "pendente");
+            if (faturaPixContaGerada != null && faturaPixContaGerada.IDFaturaPixConta != null && faturaPixContaGerada.Status == "pendente")
+            {
+                if (faturaPixContaGerada.Valor == valorPendente)
+                {
+                    return faturaPixContaGerada.ChavePix;
+                }
+                else
+                {
+                    faturaPixContaGerada.Status = "cancelar";
+                    faturaPixContaGerada.DtUltimaAlteracao = DateTime.Now;
 
-            string qrcodeText = fatura.pix.qrcode_text;
-            return qrcodeText;
+                    CRUD.Alterar(faturaPixContaGerada);
+                }
+            }
+            string resultado = await ApiClient.PostJsonAsync(apiUrl, CriarJson(valorPendente), token);
+            FaturaIuguInformation faturaIugu = JsonConvert.DeserializeObject<FaturaIuguInformation>(resultado);
+
+            faturaPixConta.CodigoFatura = faturaIugu.id;
+            faturaPixConta.ChavePix = faturaIugu.pix.qrcode_text;
+            faturaPixConta.Status = "pendente";
+            faturaPixConta.Valor = valorPendente;
+            faturaPixConta.DtInclusao = DateTime.Now;
+            faturaPixConta.DtUltimaAlteracao = DateTime.Now;
+            CRUD.Adicionar(faturaPixConta);
+
+            return faturaIugu.pix.qrcode_text;
         }
 
-        private static string CriarJson(PedidoInformation pedido)
+        private static string CriarJson(decimal valorPendente)
         {
-            var valorTotalProdutosServicos = pedido.ValorTotalProdutosServicos + (pedido.ValorEntrega.HasValue ? pedido.ValorEntrega.Value : 0);
-            decimal totalJaPago = 0;
-            foreach (var pagamento in pedido?.ListaPagamento.Where(p => p.Status != StatusModel.Excluido))
-                totalJaPago += pagamento.Valor.Value;
-
-            decimal totalApagar;
-            if (pedido.ValorDesconto.HasValue && pedido.ValorDesconto > 0)
-                totalApagar = valorTotalProdutosServicos - pedido.ValorDesconto.Value - totalJaPago;
-            else
-                totalApagar = valorTotalProdutosServicos - totalJaPago;
-
-            // Criar o JSON diretamente no código
             string json = @"
                 {
                     ""ensure_workday_due_date"": false,
@@ -51,7 +64,7 @@ namespace a7D.PDV.BLL
                         {
                             ""description"": ""Pedido PDV7"",
                             ""quantity"": 1,
-                            ""price_cents"": " + (totalApagar * 100).ToString("F0") + @"
+                            ""price_cents"": " + (valorPendente * 100).ToString("F0") + @"
                         }
                     ],
                     ""email"": ""suporte@pdvseven.com.br"",
@@ -61,7 +74,7 @@ namespace a7D.PDV.BLL
             return json;
         }
 
-        public class FaturaInformation
+        public class FaturaIuguInformation
         {
             public string id { get; set; }
             public Pix pix { get; set; }
