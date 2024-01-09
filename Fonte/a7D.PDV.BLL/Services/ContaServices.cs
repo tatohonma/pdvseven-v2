@@ -17,13 +17,14 @@ namespace a7D.PDV.BLL.Services
     {
         public static string NomeTaxaServico = "Serviço";
 
-        public static void ImprimirConta(string nomeImpressoraWindows, PedidoInformation pedido)
+        public static void ImprimirConta(string nomeImpressoraWindows, PedidoInformation pedido, bool imprimirTicketPixConta = true)
         {
             Task.Run(async () =>
             {
                 bool contaCliente = (ConfiguracoesPixConta.BuscarConfiguracao("ContaCliente").Valor == "1");
+                bool totalPago = Pedido.TotalPago(pedido.IDPedido.Value);
 
-                if (contaCliente)
+                if (contaCliente && imprimirTicketPixConta)
                 {
                     try
                     {

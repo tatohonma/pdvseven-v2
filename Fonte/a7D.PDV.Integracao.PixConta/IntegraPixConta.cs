@@ -7,13 +7,22 @@
 using a7D.PDV.Integracao.Servico.Core;
 using System;
 using a7D.PDV.BLL;
+using a7D.PDV.Model;
+using System.Linq;
+using a7D.PDV.EF.Enum;
+using a7D.Fmk.CRUD.DAL;
 
 namespace a7D.PDV.Integracao.PixConta
 {
     public partial class IntegraPixConta : IntegracaoTask
     {
         public override string Nome => "Pix-Conta";
+        
         ConfiguracoesPixConta ConfigPixConta;
+        UsuarioInformation UsuarioPixConta;
+        PDVInformation PDVPixConta;
+        TipoPagamentoInformation TipoPagamentoPixConta;
+
         API.Invoice APIInvoice;
 
         public override void Executar()
@@ -41,8 +50,53 @@ namespace a7D.PDV.Integracao.PixConta
 
             if (string.IsNullOrEmpty(ConfigPixConta.Token_IUGU))
             {
-                AddLog("Falta configurar o Token IUGU no Configurador");
+                AddLog("Falta configurar o Token da API do IUGU no Configurador");
                 return false;
+            }
+
+            var listaUsuario = Usuario.Listar();
+            UsuarioPixConta = listaUsuario.FirstOrDefault(u => u.Nome == "PixConta");
+            if(UsuarioPixConta == null)
+            {
+                UsuarioPixConta = new UsuarioInformation();
+
+                UsuarioPixConta.Nome = "PixConta";
+                UsuarioPixConta.Ativo = true;
+                UsuarioPixConta.DtUltimaAlteracao = DateTime.Now;
+
+                UsuarioPixConta.PermissaoAdm = false;
+                UsuarioPixConta.PermissaoCaixa = false;
+                UsuarioPixConta.PermissaoGarcom = false;
+                UsuarioPixConta.PermissaoGerente = false;
+                UsuarioPixConta.Excluido = false;
+
+                CRUD.Adicionar(UsuarioPixConta);
+                AddLog("Usuario 'PixConta' cadastrado!");
+            }
+
+            var listaPagamentos = TipoPagamento.Listar().OrderByDescending(p => p.Ativo);
+            TipoPagamentoPixConta = listaPagamentos.FirstOrDefault(p => p.IDGateway == (int)EGateway.PixConta);
+            if (TipoPagamentoPixConta == null)
+            {
+                TipoPagamentoPixConta = new TipoPagamentoInformation();
+                TipoPagamentoPixConta.MeioPagamentoSAT = new MeioPagamentoSATInformation { IDMeioPagamentoSAT = 10 };
+
+                TipoPagamentoPixConta.Nome = "PixConta";
+                TipoPagamentoPixConta.CodigoImpressoraFiscal = "PixConta";
+                TipoPagamentoPixConta.Ativo = true;
+                TipoPagamentoPixConta.RegistrarValores = false;
+                TipoPagamentoPixConta.IDGateway = (int)EGateway.PixConta;
+
+                CRUD.Adicionar(TipoPagamentoPixConta);
+                AddLog("Tipo Pagamento com Gateway 'PixConta' cadastrado!");
+            }
+
+            var pdvs = BLL.PDV.Listar();
+            PDVPixConta = pdvs.FirstOrDefault(p => p.IDPDV == ConfigPixConta.IDPDV && p.TipoPDV.Tipo == ETipoPDV.CAIXA);
+            if (PDVPixConta == null)
+            {
+                AddLog($"ID PDV do Caixa: {ConfigPixConta.IDPDV} inválido!");
+                configurado = false;
             }
 
             return configurado;

@@ -22,19 +22,24 @@ namespace a7D.PDV.Integracao.PixConta
                 string codigoFatura = ((DataRow)pedido)["CodigoFatura"].ToString();
                 decimal valorFatura = Convert.ToDecimal(((DataRow)pedido)["Valor"]);
 
+                AddLog("Consultar fatura " + codigoFatura);
                 Model.InvoiceInformation invoice = APIInvoice.ConsultarStatus(codigoFatura);
 
                 switch (invoice.status)
                 {
                     case "paid":
                     case "paid_external":
+                        AddLog("Registrar pagamento pedido " + idPedido + " fatura " + codigoFatura);
                         RegistrarPagamento(idPedido, codigoFatura, valorFatura);
 
                         if (Pedido.TotalPago(idPedido))
+                        {
+                            AddLog("Fechar pedido " + idPedido);
                             FecharPedido(idPedido);
-
+                        }
                         break;
                     case "pending":
+                        AddLog("Verificar validade fatura pedido " + idPedido + " fatura " + codigoFatura);
                         VerificarValidadeFatura(idPedido, codigoFatura, valorFatura);
                         break;
                 }
@@ -67,6 +72,8 @@ namespace a7D.PDV.Integracao.PixConta
             //Se valor pendente do pedido diferente do valor da fatura
             if(Pedido.ValorPendente(idPedido) != valorFatura)
             {
+                AddLog("Cancelar fatura pedido " + idPedido + " fatura " + codigoFatura);
+
                 FaturaPixContaInformation faturaPixConta = new FaturaPixContaInformation();
                 faturaPixConta.CodigoFatura = codigoFatura;
 
@@ -82,24 +89,18 @@ namespace a7D.PDV.Integracao.PixConta
         {
             PedidoPagamentoInformation pedidoPagamento = new PedidoPagamentoInformation();
 
-            pedidoPagamento.TipoPagamento = new TipoPagamentoInformation();
-            pedidoPagamento.TipoPagamento.IDTipoPagamento = 6;
-
             pedidoPagamento.Pedido = new PedidoInformation();
             pedidoPagamento.Pedido.IDPedido = idPedido;
 
-            pedidoPagamento.UsuarioPagamento = new UsuarioInformation();
-            pedidoPagamento.UsuarioPagamento.IDUsuario = 1;
+            pedidoPagamento.TipoPagamento = TipoPagamentoPixConta;
+            pedidoPagamento.UsuarioPagamento = UsuarioPixConta;
+            pedidoPagamento.MeioPagamentoSAT = TipoPagamentoPixConta.MeioPagamentoSAT;
 
             pedidoPagamento.Valor = valor;
             pedidoPagamento.DataPagamento = DateTime.Now;
-
             pedidoPagamento.Excluido = false;
 
-            pedidoPagamento.MeioPagamentoSAT = new MeioPagamentoSATInformation();
-            pedidoPagamento.MeioPagamentoSAT.IDMeioPagamentoSAT = 1;
-
-            pedidoPagamento.IDGateway = 5;
+            pedidoPagamento.IDGateway = (int)EGateway.PixConta;
 
             CRUD.Adicionar(pedidoPagamento);
 
@@ -116,11 +117,11 @@ namespace a7D.PDV.Integracao.PixConta
 
         private void FecharPedido(int idPedido)
         {
-            PedidoInformation pedido = Pedido.CarregarCompleto(idPedido);
-            CaixaInformation caixa = new CaixaInformation();
-            caixa.IDCaixa = 1;
+            Int32 idPDV = PDVPixConta.IDPDV.Value;
+            Int32 idUsuario = UsuarioPixConta.IDUsuario.Value;
 
-            Int32 idUsuario = 1;
+            PedidoInformation pedido = Pedido.CarregarCompleto(idPedido);
+            CaixaInformation caixa = Caixa.UsaOuAbre(idPDV, idUsuario);
 
             Pedido.FecharVendaDB(pedido, caixa, idUsuario);
             switch (pedido.TipoPedido.TipoPedido)

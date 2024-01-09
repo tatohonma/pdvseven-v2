@@ -20,5 +20,8 @@ namespace a7D.PDV.BLL
 
         [Config("Ativar Conta-Cliente", ETipoPDV.PIX_CONTA, Valor = "0", ValoresAceitos = "0|1", Obrigatorio = true)]
         public bool ContaCliente{ get; set; }
+
+        [Config("ID PDV para o Caixa do PixConta", ETipoPDV.PIX_CONTA, Valor = "", Obrigatorio = true)]
+        public Int32 IDPDV { get; set; }
     }
 }

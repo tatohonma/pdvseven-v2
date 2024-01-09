@@ -69,9 +69,11 @@ Lista das últimas versões e FIX
 
 2.25.0.0 ======================================================================
     Novo: Pix-Conta
+        Criação da tabela tbFaturaPixConta
         Aba Pix-Conta no Configurador
         Aba Pix-Conta no Integrador
-        Impressão Ticket Pix
+        Impressão Ticket PixConta na Conta do Cliente
+        Geração e Cancelamento de Fatura no Iugu
     Melhoria: Alteração do nome do Gateway de Pagamento de PagSplit para PixConta
 
 2.24.8.0 ======================================================================
