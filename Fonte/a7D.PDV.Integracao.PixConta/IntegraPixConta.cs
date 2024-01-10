@@ -83,7 +83,7 @@ namespace a7D.PDV.Integracao.PixConta
 
                 TipoPagamentoPixConta.Nome = "PixConta";
                 TipoPagamentoPixConta.CodigoImpressoraFiscal = "PixConta";
-                TipoPagamentoPixConta.Ativo = true;
+                TipoPagamentoPixConta.Ativo = false;
                 TipoPagamentoPixConta.RegistrarValores = false;
                 TipoPagamentoPixConta.IDGateway = (int)EGateway.PixConta;
 
