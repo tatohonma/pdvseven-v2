@@ -27,7 +27,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
         TipoDescontoInformation TipoDescontoDO;
         ProdutoInformation TaxaAdicional;
 
-        TipoPagamentoInformation PagamentoPagSplit;
+        TipoPagamentoInformation PagamentoPixConta;
         TipoPagamentoInformation PagamentoDinheiro;
         TipoPagamentoInformation PagamentoCredito;
         TipoPagamentoInformation PagamentoDebito;
@@ -143,20 +143,20 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 AddLog("Pagamento 'Vale Refeição' cadastrado!");
             }
 
-            PagamentoPagSplit = listaPagamentos.FirstOrDefault(p => p.IDGateway == (int)EGateway.PagSplit);
-            if (PagamentoPagSplit == null)
+            PagamentoPixConta = listaPagamentos.FirstOrDefault(p => p.IDGateway == (int)EGateway.PixConta);
+            if (PagamentoPixConta == null)
             {
-                PagamentoPagSplit = new TipoPagamentoInformation();
-                PagamentoPagSplit.MeioPagamentoSAT = new MeioPagamentoSATInformation { IDMeioPagamentoSAT = 10 };
+                PagamentoPixConta = new TipoPagamentoInformation();
+                PagamentoPixConta.MeioPagamentoSAT = new MeioPagamentoSATInformation { IDMeioPagamentoSAT = 10 };
 
-                PagamentoPagSplit.Nome = "PagSplit";
-                PagamentoPagSplit.CodigoImpressoraFiscal = "PagSplit";
-                PagamentoPagSplit.Ativo = true;
-                PagamentoPagSplit.RegistrarValores = false;
-                PagamentoPagSplit.IDGateway = (int)EGateway.PagSplit;
+                PagamentoPixConta.Nome = "PixConta";
+                PagamentoPixConta.CodigoImpressoraFiscal = "PixConta";
+                PagamentoPixConta.Ativo = true;
+                PagamentoPixConta.RegistrarValores = false;
+                PagamentoPixConta.IDGateway = (int)EGateway.PixConta;
 
-                CRUD.Adicionar(PagamentoPagSplit);
-                AddLog("Pagamento com Gateway 'PagSplit' cadastrado!");
+                CRUD.Adicionar(PagamentoPixConta);
+                AddLog("Pagamento com Gateway 'PixConta' cadastrado!");
             }
 
             PagamentoDinheiro = listaPagamentos.FirstOrDefault(p => p.MeioPagamentoSAT != null && p.MeioPagamentoSAT.IDMeioPagamentoSAT.Value == (int)(EMetodoPagamento.Dinheiro));

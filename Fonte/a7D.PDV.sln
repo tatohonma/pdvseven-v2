@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.32112.339
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34301.259
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a7D.PDV.Caixa.UI", "a7D.PDV.Caixa.UI\a7D.PDV.Caixa.UI.csproj", "{125BD11C-AC02-4973-9C2D-0720FE1C5C46}"
 EndProject
@@ -104,7 +104,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a7D.PDV.SATService", "a7D.P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a7D.PDV.Integracao.DeliveryOnline", "a7D.PDV.Integracao.DeliveryOnline\a7D.PDV.Integracao.DeliveryOnline.csproj", "{B4334C06-09BD-463F-9908-27C19D475940}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a7D.PDV.Integracao.PixConta", "a7D.PDV.Integracao.PixConta\a7D.PDV.Integracao.PixConta.csproj", "{62E45865-C331-4BE3-96D8-3D213C4CD5D4}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		a7D.PDV.Atualizacao.Shared\a7D.PDV.Atualizacao.Shared.projitems*{06274b88-cf73-4e1f-80b1-1cb73b3930d6}*SharedItemsImports = 4
+		a7D.PDV.Atualizacao.Shared\a7D.PDV.Atualizacao.Shared.projitems*{89d587a3-5f46-4d89-b842-bb35a121e4bf}*SharedItemsImports = 13
+		a7D.PDV.Atualizacao.Shared\a7D.PDV.Atualizacao.Shared.projitems*{beb539fb-c093-4333-8828-9f78bb6adce7}*SharedItemsImports = 4
+		a7D.PDV.Atualizacao.Shared\a7D.PDV.Atualizacao.Shared.projitems*{dd62c276-e6c2-4c5a-b752-f31a83c039e4}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -1000,6 +1008,30 @@ Global
 		{B4334C06-09BD-463F-9908-27C19D475940}.Release|x64.Build.0 = Release|Any CPU
 		{B4334C06-09BD-463F-9908-27C19D475940}.Release|x86.ActiveCfg = Release|Any CPU
 		{B4334C06-09BD-463F-9908-27C19D475940}.Release|x86.Build.0 = Release|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Debug|x64.Build.0 = Debug|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Debug|x86.Build.0 = Debug|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Development|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Development|Mixed Platforms.Build.0 = Debug|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Development|x64.ActiveCfg = Debug|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Development|x64.Build.0 = Debug|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Development|x86.ActiveCfg = Debug|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Development|x86.Build.0 = Debug|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Release|x64.ActiveCfg = Release|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Release|x64.Build.0 = Release|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Release|x86.ActiveCfg = Release|Any CPU
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1043,14 +1075,9 @@ Global
 		{D557076F-5384-48D9-B483-35C911E46D30} = {14EF9757-8481-46A9-A59D-5063056FC2F3}
 		{4FE1FC58-F73F-4716-A2DE-0262921ED15D} = {5F48B3D5-BFC8-43CE-A2DA-5D86F359C05B}
 		{B4334C06-09BD-463F-9908-27C19D475940} = {423323A3-9205-471F-A172-FB297DA447D3}
+		{62E45865-C331-4BE3-96D8-3D213C4CD5D4} = {423323A3-9205-471F-A172-FB297DA447D3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {40D86C67-35D1-4C86-90C0-0B3718969E6E}
-	EndGlobalSection
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		a7D.PDV.Atualizacao.Shared\a7D.PDV.Atualizacao.Shared.projitems*{06274b88-cf73-4e1f-80b1-1cb73b3930d6}*SharedItemsImports = 4
-		a7D.PDV.Atualizacao.Shared\a7D.PDV.Atualizacao.Shared.projitems*{89d587a3-5f46-4d89-b842-bb35a121e4bf}*SharedItemsImports = 13
-		a7D.PDV.Atualizacao.Shared\a7D.PDV.Atualizacao.Shared.projitems*{beb539fb-c093-4333-8828-9f78bb6adce7}*SharedItemsImports = 4
-		a7D.PDV.Atualizacao.Shared\a7D.PDV.Atualizacao.Shared.projitems*{dd62c276-e6c2-4c5a-b752-f31a83c039e4}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal

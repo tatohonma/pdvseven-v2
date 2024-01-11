@@ -167,12 +167,18 @@
     <Compile Include="Migrations\202210191910567_2_24_GuidIdentificacao-Produto.designer.cs">
       <DependentUpon>202210191910567_2_24_GuidIdentificacao-Produto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202401081432571_2_25_tbFaturaPixConta.cs" />
+    <Compile Include="Migrations\202401081432571_2_25_tbFaturaPixConta.designer.cs">
+      <DependentUpon>202401081432571_2_25_tbFaturaPixConta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mapping\tbFaturaPixContaMap.cs" />
     <Compile Include="Models\Mapping\tbOrigemPedidoMap.cs" />
     <Compile Include="Models\Mapping\tbTagMap.cs" />
     <Compile Include="Models\tbBandeira.cs" />
     <Compile Include="Models\Mapping\tbBandeiraMap.cs" />
     <Compile Include="Models\Mapping\tbTamanhoPacoteMAP.cs" />
     <Compile Include="Models\Mapping\tbHorarioDeliveryMap.cs" />
+    <Compile Include="Models\tbFaturaPixConta.cs" />
     <Compile Include="Models\tbOrigemPedido.cs" />
     <Compile Include="Models\tbTag.cs" />
     <Compile Include="Models\tbTicket.cs" />
@@ -420,6 +426,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202210191910567_2_24_GuidIdentificacao-Produto.resx">
       <DependentUpon>202210191910567_2_24_GuidIdentificacao-Produto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401081432571_2_25_tbFaturaPixConta.resx">
+      <DependentUpon>202401081432571_2_25_tbFaturaPixConta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -80,6 +80,26 @@ namespace a7D.PDV.Integracao.Servico.Core
             throw new Exception(erro.GetMessage());
         }
 
+        #region PUT
+        public TResult Put<TResult>(string query, object dado = null) where TResult : class
+        {
+            try
+            {
+                LastResult = null;
+
+                var response = SendAsync(query, dado, "PUT").Result;
+
+                return MakeResponse<TResult>(response);
+            }
+            catch (Exception exAPI)
+            {
+                exAPI.Data.Add("LastRequest", LastRequest);
+                exAPI.Data.Add("LastResult", LastResult);
+                throw exAPI;
+            }
+        }
+        #endregion
+
         #region GET
 
         public TResult Get<TResult>(string query) where TResult : class

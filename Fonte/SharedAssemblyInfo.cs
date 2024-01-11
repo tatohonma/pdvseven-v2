@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2022")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.24.8.0")]
+[assembly: AssemblyVersion("2.25.0.0")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -66,6 +66,15 @@ Lista das últimas versões e FIX
 
 ===============================================================================
 ===============================================================================
+
+2.25.0.0 ======================================================================
+    Novo: Pix-Conta
+        Criação da tabela tbFaturaPixConta
+        Aba Pix-Conta no Configurador
+        Aba Pix-Conta no Integrador
+        Impressão Ticket PixConta na Conta do Cliente
+        Geração e Cancelamento de Fatura no Iugu
+    Melhoria: Alteração do nome do Gateway de Pagamento de PagSplit para PixConta
 
 2.24.8.0 ======================================================================
     Melhoria: Criação do Gateway de pagamento PagSplit

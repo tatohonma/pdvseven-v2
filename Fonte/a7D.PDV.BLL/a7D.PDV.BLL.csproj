@@ -107,6 +107,7 @@
     <Compile Include="CategoriaImposto.cs" />
     <Compile Include="Configuracao\ConfiguracaoBD.cs" />
     <Compile Include="Configuracao\ConfiguracoesComumPedidos.cs" />
+    <Compile Include="Configuracao\ConfiguracoesPixConta.cs" />
     <Compile Include="Configuracao\ConfiguracoesDeliveryOnline.cs" />
     <Compile Include="Configuracao\ConfiguracoesEasyChopp.cs" />
     <Compile Include="Configuracao\ConfiguracoesLoggi.cs" />
@@ -135,7 +136,9 @@
     <Compile Include="Dashboard.cs" />
     <Compile Include="Extension\ImpressaoExtensions.cs" />
     <Compile Include="GA.cs" />
+    <Compile Include="PixConta.cs" />
     <Compile Include="Tag.cs" />
+    <Compile Include="Utils\ApiClient.cs" />
     <Compile Include="ValueObject\SaldoClientes.cs" />
     <Compile Include="ValueObject\ImpressaoOrdemProducao.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

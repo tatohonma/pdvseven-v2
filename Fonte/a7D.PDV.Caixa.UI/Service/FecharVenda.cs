@@ -135,7 +135,7 @@ namespace a7D.PDV.Caixa.UI
                             if (imprimir)
                             {
                                 // Pedido1.NumeroCupom = frmPrincipal.Impressora1.GerarCupom(Pedido1, true);
-                                ContaServices.ImprimirConta(ConfiguracoesCaixa.Valores.ModeloImpressora, Pedido1);
+                                ContaServices.ImprimirConta(ConfiguracoesCaixa.Valores.ModeloImpressora, Pedido1, false);
                             }
                             break;
                         case ETipoGerenciadorImpressao.ACBr: //ECF - ACbr
@@ -161,7 +161,7 @@ namespace a7D.PDV.Caixa.UI
                         case ETipoGerenciadorImpressao.ImpressoraWindows:
                         case ETipoGerenciadorImpressao.SAT:
                             if (imprimir)
-                                ContaServices.ImprimirConta(ConfiguracoesCaixa.Valores.ModeloImpressora, Pedido1);
+                                ContaServices.ImprimirConta(ConfiguracoesCaixa.Valores.ModeloImpressora, Pedido1, false);
                             break;
                         default:
                             Pedido1.NumeroCupom = frmPrincipal.Impressora1.GerarCupom(Pedido1, false);
@@ -229,7 +229,7 @@ namespace a7D.PDV.Caixa.UI
             {
                 if (imprimir)
                     //Pedido1.NumeroCupom = frmPrincipal.Impressora1.GerarCupom(Pedido1, true);
-                    ContaServices.ImprimirConta(ConfiguracoesCaixa.Valores.ModeloImpressora, Pedido1);
+                    ContaServices.ImprimirConta(ConfiguracoesCaixa.Valores.ModeloImpressora, Pedido1, false);
 
                 return true;
             }
@@ -268,7 +268,7 @@ namespace a7D.PDV.Caixa.UI
                             frmPrincipal.ModoContingencia = true;
 
                             if (imprimir)
-                                ContaServices.ImprimirConta(ConfiguracoesCaixa.Valores.ModeloImpressora, Pedido1);
+                                ContaServices.ImprimirConta(ConfiguracoesCaixa.Valores.ModeloImpressora, Pedido1, false);
                         }
                         else
                             return false;
