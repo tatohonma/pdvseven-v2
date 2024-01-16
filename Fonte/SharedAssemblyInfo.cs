@@ -69,6 +69,7 @@ Lista das últimas versões e FIX
 
 2.25.0.1 ======================================================================
     Correção: Tentativas de reinicialização eterna do serviço de integração Pix-Conta
+    Correção: Baixando pedidos com faturas do Pix-Conta com "pagamento externo" (externally_paid)
 
 2.25.0.0 ======================================================================
     Novo: Pix-Conta
