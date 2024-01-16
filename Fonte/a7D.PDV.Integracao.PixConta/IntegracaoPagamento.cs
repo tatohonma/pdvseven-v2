@@ -28,7 +28,7 @@ namespace a7D.PDV.Integracao.PixConta
                 switch (invoice.status)
                 {
                     case "paid":
-                    case "paid_external":
+                    case "externally_paid":
                         AddLog("Registrar pagamento pedido " + idPedido + " fatura " + codigoFatura);
                         RegistrarPagamento(idPedido, codigoFatura, valorFatura);
 
