@@ -117,7 +117,7 @@ namespace a7D.PDV.Integracao.PixConta
 
                     CancelarFaturas();
 
-                    Sleep(30);
+                    Sleep(10);
                 }
             }
             catch (Exception ex)
