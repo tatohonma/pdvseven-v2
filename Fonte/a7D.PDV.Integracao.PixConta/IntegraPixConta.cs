@@ -17,7 +17,7 @@ namespace a7D.PDV.Integracao.PixConta
     public partial class IntegraPixConta : IntegracaoTask
     {
         public override string Nome => "Pix-Conta";
-        
+
         ConfiguracoesPixConta ConfigPixConta;
         UsuarioInformation UsuarioPixConta;
         PDVInformation PDVPixConta;
@@ -27,8 +27,7 @@ namespace a7D.PDV.Integracao.PixConta
 
         public override void Executar()
         {
-            //if (!ValidarLicenca())'
-            //    return;
+            ParaNunca = true;
 
             if (!ValidarConfiguracoes())
                 return;
@@ -118,7 +117,7 @@ namespace a7D.PDV.Integracao.PixConta
 
                     CancelarFaturas();
 
-                    Sleep(30);
+                    Sleep(10);
                 }
             }
             catch (Exception ex)

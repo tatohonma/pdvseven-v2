@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2022")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.25.0.0")]
+[assembly: AssemblyVersion("2.25.0.2")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -66,6 +66,13 @@ Lista das últimas versões e FIX
 
 ===============================================================================
 ===============================================================================
+
+2.25.0.2 ======================================================================
+    Correção: Ajuste do tempo de leitura do status da fatura para 10 segundos
+
+2.25.0.1 ======================================================================
+    Correção: Tentativas de reinicialização eterna do serviço de integração Pix-Conta
+    Correção: Baixando pedidos com faturas do Pix-Conta com "pagamento externo" (externally_paid)
 
 2.25.0.0 ======================================================================
     Novo: Pix-Conta

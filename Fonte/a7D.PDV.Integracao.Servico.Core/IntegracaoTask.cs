@@ -13,6 +13,8 @@ namespace a7D.PDV.Integracao.Servico.Core
         private Action Acao;
 
         public abstract string Nome { get; }
+        public Boolean ParaNunca { get; set; }
+
         public bool Executando { get; set; }
         public bool Disponivel { get; set; }
         public bool Configurado { get; set; }
@@ -25,13 +27,14 @@ namespace a7D.PDV.Integracao.Servico.Core
         private string BasePath;
         private string Integracao;
 
-        private Int32 qtdTentativas = 0;
+        public Int32 qtdTentativas = 0;
 
         public IntegracaoTask()
         {
             var fi = new FileInfo(Assembly.GetEntryAssembly().Location);
             BasePath = fi.Directory.FullName;
             Integracao = GetType().Name;
+            ParaNunca = false;
         }
 
         public void AddLog(string info)
@@ -84,10 +87,19 @@ namespace a7D.PDV.Integracao.Servico.Core
                 Executando = false;
                 AddLog("Finalizando " + Nome);
 
-                if(qtdTentativas < 5)
+                if (ParaNunca || qtdTentativas < 5)
                 {
                     qtdTentativas++;
-                    AddLog("Reiniciando " + Nome + "... Tentativa " + qtdTentativas + " de 5");
+                    if (ParaNunca)
+                    {
+                        AddLog("Reiniciando " + Nome + " em 30 segundas... Tentativa " + qtdTentativas + " de tentativas eternas...");
+                    }
+                    else
+                    {
+                        AddLog("Reiniciando " + Nome + " em 30 segundas... Tentativa " + qtdTentativas + " de 5");
+                    }
+
+                    Sleep(30000);
 
                     Executando = true;
                     this.Executar();
