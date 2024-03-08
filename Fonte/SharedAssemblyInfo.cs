@@ -86,6 +86,9 @@ Lista das últimas versões e FIX
         Geração e Cancelamento de Fatura no Iugu
     Melhoria: Alteração do nome do Gateway de Pagamento de PagSplit para PixConta
 
+2.24.8.1 ======================================================================
+    Correção: Ajuste no auto-atendimento para não direcionar para o compra de crédito
+
 2.24.8.0 ======================================================================
     Melhoria: Criação do Gateway de pagamento PagSplit
     Melhoria: Importação de pedidos do Delivery On com pagamento online
