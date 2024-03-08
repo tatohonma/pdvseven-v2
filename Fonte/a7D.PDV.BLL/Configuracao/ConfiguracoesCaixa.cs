@@ -84,7 +84,7 @@ namespace a7D.PDV.BLL
         public int TipoGerenciadorImpressao { get; protected set; }
         public ETipoGerenciadorImpressao GerenciadorImpressao => (ETipoGerenciadorImpressao)TipoGerenciadorImpressao;
 
-        [Config("Tipo de pedido Padrão", ETipoPDV.CAIXA, Valor = "10", ValoresAceitos = "10:Mesa|20:Comanda|30:Delivery|40:Balcão|50:Retirada", Obrigatorio = true)]
+        [Config("Tipo de pedido Padrão", ETipoPDV.CAIXA, Valor = "10", ValoresAceitos = "10:Mesa|20:Comanda|30:Delivery|40:Balcão", Obrigatorio = true)]
         public int TipoPedidoPadrao { get; protected set; }
 
         [Config("Velocidade da Impressora", ETipoPDV.CAIXA, Valor = "115200", ValoresAceitos = "9600:Serial|115200:USB", Obrigatorio = true)]
@@ -101,9 +101,6 @@ namespace a7D.PDV.BLL
 
         [Config("Habilitar Tipo de Pedido Mesa", ETipoPDV.CAIXA, Valor = "1", ValoresAceitos = "0|1", Obrigatorio = true)]
         public bool TipoPedidoMesa { get; protected set; }
-
-        [Config("Habilitar Tipo de Pedido Retirada", ETipoPDV.CAIXA, Valor = "1", ValoresAceitos = "0|1", Obrigatorio = true)]
-        public bool TipoPedidoRetirada { get; protected set; }
 
         [Config("Exibir confirmação de Pedido Delivery (ifood)", ETipoPDV.CAIXA, Valor = "1", ValoresAceitos = "0|1", Obrigatorio = true)]
         public bool ConfirmarDelivery { get; protected set; }

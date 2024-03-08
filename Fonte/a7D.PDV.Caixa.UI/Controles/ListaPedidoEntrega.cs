@@ -339,34 +339,5 @@ namespace a7D.PDV.Caixa.UI.Controles
                 }
             }
         }
-
-        private void dgvEntregas_SelectionChanged(object sender, EventArgs e)
-        {
-            //Cursor = Cursors.WaitCursor;
-            //Refresh();
-            //if (dgvEntregas.SelectedRows.Count >= 0)
-            //{
-            //    try
-            //    {
-            //        GUIDIdentificacao_selecionado = dgvEntregas.SelectedRows[0].Cells["GUIDIdentificacao"].Value.ToString();
-            //        AtualizarStatus();
-            //        PedidoSelecionado(sender, e);
-            //    }
-            //    catch { }
-            //}
-
-            //Cursor = Cursors.Default;
-            //Refresh();
-        }
-
-        private void btnNovoPedidoRetirada_Click(object sender, EventArgs e)
-        {
-            using (var frm = frmNovoDelivery.NovoPedidoDelivery())
-            {
-                frm.ShowDialog();
-            }
-
-            AtualizarLista();
-        }
     }
 }

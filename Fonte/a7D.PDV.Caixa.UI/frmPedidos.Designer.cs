@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPedidos));
             this.tmrPedidos = new System.Windows.Forms.Timer(this.components);
             this.btnAdicionarProduto = new System.Windows.Forms.Button();
@@ -96,15 +96,14 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnAdicionarCreditos = new System.Windows.Forms.Button();
             this.spContainer = new System.Windows.Forms.SplitContainer();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.tbMenuTop = new System.Windows.Forms.TableLayoutPanel();
-            this.rdbRetirada = new System.Windows.Forms.RadioButton();
-            this.btnBalcao = new System.Windows.Forms.Button();
-            this.menuTEFcancelarTransacao = new System.Windows.Forms.ToolStripMenuItem();
             this.listaPedidoEntrega1 = new a7D.PDV.Caixa.UI.Controles.ListaPedidoEntrega();
             this.listaPedidoMesa1 = new a7D.PDV.Caixa.UI.Controles.ListaPedidoMesa();
             this.listaPedidoComandaSemCheckin1 = new a7D.PDV.Caixa.UI.Controles.ListaPedidoComandaSemCheckin();
             this.listaPedidoComanda1 = new a7D.PDV.Caixa.UI.Controles.ListaPedidoComanda();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbMenuTop = new System.Windows.Forms.TableLayoutPanel();
+            this.btnBalcao = new System.Windows.Forms.Button();
+            this.menuTEFcancelarTransacao = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -194,8 +193,8 @@
             this.dgvItens.AllowUserToAddRows = false;
             this.dgvItens.AllowUserToDeleteRows = false;
             this.dgvItens.AllowUserToResizeRows = false;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
-            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
+            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvItens.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvItens.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvItens.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
@@ -203,28 +202,28 @@
             this.dgvItens.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgvItens.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvItens.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(193)))), ((int)(((byte)(207)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvItens.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(193)))), ((int)(((byte)(207)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvItens.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvItens.ColumnHeadersHeight = 40;
             this.dgvItens.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.descricao,
             this.qtd});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvItens.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvItens.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvItens.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvItens.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvItens.EnableHeadersVisualStyles = false;
@@ -232,18 +231,18 @@
             this.dgvItens.Margin = new System.Windows.Forms.Padding(0);
             this.dgvItens.Name = "dgvItens";
             this.dgvItens.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvItens.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvItens.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvItens.RowHeadersVisible = false;
             this.dgvItens.RowHeadersWidth = 62;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(231)))), ((int)(((byte)(234)))));
-            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(5);
-            this.dgvItens.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(231)))), ((int)(((byte)(234)))));
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(5);
+            this.dgvItens.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvItens.RowTemplate.DividerHeight = 1;
             this.dgvItens.RowTemplate.Height = 36;
             this.dgvItens.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -835,90 +834,6 @@
             this.spContainer.TabIndex = 40;
             this.spContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.spContainer_SplitterMoved);
             // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 1;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.dgvItens, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(449, 221);
-            this.tableLayoutPanel3.TabIndex = 83;
-            // 
-            // tbMenuTop
-            // 
-            this.tbMenuTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbMenuTop.ColumnCount = 5;
-            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tbMenuTop.Controls.Add(this.rdbMesas, 0, 0);
-            this.tbMenuTop.Controls.Add(this.rdbComandas, 1, 0);
-            this.tbMenuTop.Controls.Add(this.rdbEntrega, 2, 0);
-            this.tbMenuTop.Controls.Add(this.rdbRetirada, 3, 0);
-            this.tbMenuTop.Controls.Add(this.btnBalcao, 4, 0);
-            this.tbMenuTop.Location = new System.Drawing.Point(0, 143);
-            this.tbMenuTop.Name = "tbMenuTop";
-            this.tbMenuTop.RowCount = 1;
-            this.tbMenuTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tbMenuTop.Size = new System.Drawing.Size(1021, 50);
-            this.tbMenuTop.TabIndex = 40;
-            // 
-            // rdbRetirada
-            // 
-            this.rdbRetirada.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdbRetirada.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.rdbRetirada.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rdbRetirada.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rdbRetirada.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbRetirada.ForeColor = System.Drawing.Color.White;
-            this.rdbRetirada.Location = new System.Drawing.Point(612, 3);
-            this.rdbRetirada.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.rdbRetirada.Name = "rdbRetirada";
-            this.rdbRetirada.Size = new System.Drawing.Size(200, 44);
-            this.rdbRetirada.TabIndex = 3;
-            this.rdbRetirada.Text = "&RETIRADA";
-            this.rdbRetirada.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rdbRetirada.UseVisualStyleBackColor = false;
-            this.rdbRetirada.Visible = false;
-            this.rdbRetirada.CheckedChanged += new System.EventHandler(this.rdbRetirada_CheckedChanged);
-            // 
-            // btnBalcao
-            // 
-            this.btnBalcao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnBalcao.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnBalcao.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnBalcao.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBalcao.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBalcao.ForeColor = System.Drawing.Color.White;
-            this.btnBalcao.Location = new System.Drawing.Point(815, 3);
-            this.btnBalcao.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.btnBalcao.Name = "btnBalcao";
-            this.btnBalcao.Size = new System.Drawing.Size(206, 44);
-            this.btnBalcao.TabIndex = 4;
-            this.btnBalcao.Text = "&BALCÃO";
-            this.btnBalcao.UseVisualStyleBackColor = false;
-            this.btnBalcao.Visible = false;
-            this.btnBalcao.Click += new System.EventHandler(this.btnBalcao_Click);
-            // 
-            // menuTEFcancelarTransacao
-            // 
-            this.menuTEFcancelarTransacao.Name = "menuTEFcancelarTransacao";
-            this.menuTEFcancelarTransacao.Size = new System.Drawing.Size(32, 19);
-            // 
             // listaPedidoEntrega1
             // 
             this.listaPedidoEntrega1.BackColor = System.Drawing.Color.White;
@@ -966,6 +881,70 @@
             this.listaPedidoComanda1.Size = new System.Drawing.Size(557, 221);
             this.listaPedidoComanda1.TabIndex = 89;
             this.listaPedidoComanda1.Visible = false;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.dgvItens, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(449, 221);
+            this.tableLayoutPanel3.TabIndex = 83;
+            // 
+            // tbMenuTop
+            // 
+            this.tbMenuTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbMenuTop.ColumnCount = 5;
+            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tbMenuTop.Controls.Add(this.rdbMesas, 0, 0);
+            this.tbMenuTop.Controls.Add(this.rdbComandas, 1, 0);
+            this.tbMenuTop.Controls.Add(this.rdbEntrega, 2, 0);
+            this.tbMenuTop.Controls.Add(this.btnBalcao, 4, 0);
+            this.tbMenuTop.Location = new System.Drawing.Point(0, 143);
+            this.tbMenuTop.Name = "tbMenuTop";
+            this.tbMenuTop.RowCount = 1;
+            this.tbMenuTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tbMenuTop.Size = new System.Drawing.Size(1021, 50);
+            this.tbMenuTop.TabIndex = 40;
+            // 
+            // btnBalcao
+            // 
+            this.btnBalcao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnBalcao.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnBalcao.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnBalcao.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBalcao.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBalcao.ForeColor = System.Drawing.Color.White;
+            this.btnBalcao.Location = new System.Drawing.Point(612, 3);
+            this.btnBalcao.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.btnBalcao.Name = "btnBalcao";
+            this.btnBalcao.Size = new System.Drawing.Size(409, 44);
+            this.btnBalcao.TabIndex = 4;
+            this.btnBalcao.Text = "&BALCÃO";
+            this.btnBalcao.UseVisualStyleBackColor = false;
+            this.btnBalcao.Visible = false;
+            this.btnBalcao.Click += new System.EventHandler(this.btnBalcao_Click);
+            // 
+            // menuTEFcancelarTransacao
+            // 
+            this.menuTEFcancelarTransacao.Name = "menuTEFcancelarTransacao";
+            this.menuTEFcancelarTransacao.Size = new System.Drawing.Size(32, 19);
             // 
             // frmPedidos
             // 
@@ -1079,6 +1058,5 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.ToolStripMenuItem menuTEFcancelarTransacao;
         private System.Windows.Forms.Button btnBalcao;
-        private System.Windows.Forms.RadioButton rdbRetirada;
     }
 }

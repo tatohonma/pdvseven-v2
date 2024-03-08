@@ -24,7 +24,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline.Model.Orders
 
     public class AttributesAddessInformation
     {
-        public int address_id;
+        public int? address_id;
         public int customer_id;
         public string address_1;
         public string address_2;
@@ -36,13 +36,13 @@ namespace a7D.PDV.Integracao.DeliveryOnline.Model.Orders
 
     public class AttributesOrderInformation
     {
-        public Int32 customer_id;
+        public int customer_id;
         public string first_name;
         public string last_name;
         public string email;
         public string telephone;
-        public Int32 location_id;
-        public Int32 address_id;
+        public int location_id;
+        public int? address_id;
         public string comment;
         public string payment;
         public string order_type;
