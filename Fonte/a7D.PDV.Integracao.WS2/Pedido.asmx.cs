@@ -160,11 +160,10 @@ namespace a7D.PDV.Integracao.WS
                 xmlRetorno += "    <referenciaLocalizacao>" + pedido.ReferenciaLocalizacao + "</referenciaLocalizacao>";
                 xmlRetorno += $"    <checkin>{(retorno.ComCheckin ? "1" : "0")}</checkin>";
 
-                xmlRetorno += "    <cliente></cliente>";
-                //if (pedido.Cliente != null)
-                //    xmlRetorno += "    <cliente>" + pedido.Cliente.NomeCompleto + "</cliente>";
-                //else
-                //    xmlRetorno += "    <cliente></cliente>";
+                if (pedido.Cliente != null)
+                    xmlRetorno += "    <cliente>" + pedido.Cliente.NomeCompleto + "</cliente>";
+                else
+                    xmlRetorno += "    <cliente></cliente>";
 
                 xmlRetorno += "    <valorProdutos>" + pedido.ValorTotalProdutos.ToString() + "</valorProdutos>";
                 xmlRetorno += "    <valorServico>" + pedido.ValorServicoTemp.ToString() + "</valorServico>";

@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2022")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.25.0.2")]
+[assembly: AssemblyVersion("2.25.0.3")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -67,6 +67,9 @@ Lista das últimas versões e FIX
 ===============================================================================
 ===============================================================================
 
+2.25.0.3 ======================================================================
+    Correção: Exibição do nome do cliente na Comanda/Terminal
+
 2.25.0.2 ======================================================================
     Correção: Ajuste do tempo de leitura do status da fatura para 10 segundos
 
@@ -82,6 +85,9 @@ Lista das últimas versões e FIX
         Impressão Ticket PixConta na Conta do Cliente
         Geração e Cancelamento de Fatura no Iugu
     Melhoria: Alteração do nome do Gateway de Pagamento de PagSplit para PixConta
+
+2.24.8.1 ======================================================================
+    Correção: Ajuste no auto-atendimento para não direcionar para o compra de crédito
 
 2.24.8.0 ======================================================================
     Melhoria: Criação do Gateway de pagamento PagSplit
