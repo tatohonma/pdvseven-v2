@@ -99,7 +99,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Serviços", "Serviços", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aplicações-server", "Aplicações-server", "{AF0D5231-1CB1-4699-B05C-488202139302}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integrações", "Integrações", "{CA98F9AF-8E68-4423-B376-C54CE55E7ABC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integrações-sistemas", "Integrações-sistemas", "{CA98F9AF-8E68-4423-B376-C54CE55E7ABC}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
