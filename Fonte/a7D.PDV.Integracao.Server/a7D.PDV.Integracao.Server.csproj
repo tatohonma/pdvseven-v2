@@ -56,9 +56,6 @@
     <Compile Include="Ativador.cs" />
     <Compile Include="Atualizacao.cs" />
     <Compile Include="Backup.cs" />
-    <Compile Include="BigData\DTO.cs" />
-    <Compile Include="BigData\BigDataServices.cs" />
-    <Compile Include="BigData\IBigDataAPI.cs" />
     <Compile Include="IntegraServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UDPServer.cs" />
@@ -67,10 +64,6 @@
     <ProjectReference Include="..\A7D.PDV.Ativacao.Shared\a7D.PDV.Ativacao.Shared.csproj">
       <Project>{D22EC4D8-FF56-4A5D-9505-033FC072D291}</Project>
       <Name>a7D.PDV.Ativacao.Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\a7D.PDV.BigData.Shared\a7D.PDV.BigData.Shared.csproj">
-      <Project>{8ee48aad-6620-4ce6-91f8-51f0416f7174}</Project>
-      <Name>a7D.PDV.BigData.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\a7D.PDV.BLL\a7D.PDV.BLL.csproj">
       <Project>{1B8AD873-6B0A-45D6-803E-E6CC104BCE81}</Project>
