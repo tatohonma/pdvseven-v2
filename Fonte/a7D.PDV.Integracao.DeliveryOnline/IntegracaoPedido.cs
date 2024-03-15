@@ -54,8 +54,15 @@ namespace a7D.PDV.Integracao.DeliveryOnline
 
             pedido.TaxaEntrega = new TaxaEntregaInformation();
             pedido.TaxaEntrega = TaxaEntregaDO;
-            string taxaEntrega = pedidoApi.attributes.order_totals.FirstOrDefault(total => total.code == "delivery").value;
-            pedido.ValorEntrega = Convert.ToDecimal(taxaEntrega, new CultureInfo("en-us"));
+            if (pedidoApi.attributes.order_type == "delivery")
+            {
+                string taxaEntrega = pedidoApi.attributes.order_totals.FirstOrDefault(total => total.code == "delivery").value;
+                pedido.ValorEntrega = Convert.ToDecimal(taxaEntrega, new CultureInfo("en-us"));
+            }
+            else
+            {
+                pedido.ValorEntrega = 0;
+            }
             pedido.TaxaServicoPadrao = 0;
 
             var cupom = pedidoApi.attributes.order_totals.FirstOrDefault(total => total.code == "coupon");
@@ -237,6 +244,15 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 {
                     cliente.CEP = 0;
                 }
+            } else
+            {
+                cliente.Endereco = "RETIRADA";
+                cliente.EnderecoNumero = "";
+                cliente.Complemento = "";
+                cliente.Bairro = "";
+                cliente.Cidade = "";
+                cliente.CEP = 0;
+                cliente.EnderecoReferencia = "";
             }
 
             CRUD.Salvar(cliente);

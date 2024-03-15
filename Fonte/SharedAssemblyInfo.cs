@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2022")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.25.0.3")]
+[assembly: AssemblyVersion("2.25.1.0")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -66,6 +66,9 @@ Lista das últimas versões e FIX
 
 ===============================================================================
 ===============================================================================
+
+2.25.1.0 ======================================================================
+    Novo: Implementação da opção "Retirada" para a integração do Delivery-On
 
 2.25.0.3 ======================================================================
     Correção: Exibição do nome do cliente na Comanda/Terminal
