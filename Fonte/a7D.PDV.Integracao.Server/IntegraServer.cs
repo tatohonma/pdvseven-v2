@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using System.Threading;
 using a7D.PDV.Componentes.Services;
 using Newtonsoft.Json.Linq;
-using a7D.PDV.Integracao.Server.BigData;
 using a7D.PDV.Shared.Atualizacao;
 
 namespace a7D.PDV.Integracao.Server
@@ -36,9 +35,7 @@ namespace a7D.PDV.Integracao.Server
         }
 
         private DateTime dtLicSync = DateTime.MinValue;
-        private DateTime dtIaagoSync = DateTime.MinValue;
         private UDPServer udp;
-        private BigDataServices BigData;
 
         public override void Executar()
         {
