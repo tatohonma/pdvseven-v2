@@ -19,12 +19,12 @@ namespace a7D.PDV.AutoAtendimento.UI.Paginas
             App.StatusBar = PdvServices.PDVNome; // Na página inicial apenas mostra o nome do PDV
 
             // Se tiver modulo de venda
-            if (VendaCategoriaProduto.Visibility != Visibility.Visible)
-                return;
+            //if (VendaCategoriaProduto.Visibility != Visibility.Visible)
+            //    return;
 
-            VendaCategoriaProduto.IsEnabled = false;
+            //VendaCategoriaProduto.IsEnabled = false;
             produtosEnable = await App.Produtos.SyncProdutos();
-            VendaCategoriaProduto.IsEnabled = true;
+            //VendaCategoriaProduto.IsEnabled = true;
         }
 
         public void ComandaNumero_Click(object sender, RoutedEventArgs e)
