@@ -183,7 +183,13 @@ namespace a7D.PDV.Integracao.DeliveryOnline
         private ClienteInformation AdicionarCliente(Model.Orders.DataInformation pedidoApi, Model.Orders.AttributesAddessInformation endereco)
         {
             bool novoCliente = false;
-            ClienteInformation cliente = CarregarCliente(pedidoApi.attributes.customer_id);
+
+            ClienteInformation cliente;
+
+            if (pedidoApi.attributes.customer_id != null)
+                cliente = CarregarCliente(pedidoApi.attributes.customer_id.Value);
+            else
+                cliente = CarregarClientePorTelefone(pedidoApi.attributes.telephone);
 
             if (cliente.IDCliente == null)
             {
@@ -219,7 +225,7 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                     cliente.Telefone1Numero = Convert.ToInt32(pedidoApi.attributes.customer_id);
                 }
             }
-            else if(cliente.Telefone1Numero == null)
+            else if (cliente.Telefone1Numero == null)
             {
                 cliente.Telefone1DDD = 0;
                 cliente.Telefone1Numero = Convert.ToInt32(pedidoApi.attributes.customer_id);
@@ -244,7 +250,8 @@ namespace a7D.PDV.Integracao.DeliveryOnline
                 {
                     cliente.CEP = 0;
                 }
-            } else
+            }
+            else
             {
                 cliente.Endereco = "RETIRADA";
                 cliente.EnderecoNumero = "";
@@ -286,6 +293,38 @@ namespace a7D.PDV.Integracao.DeliveryOnline
 
             da = new SqlDataAdapter(querySql, DB.ConnectionString);
             da.SelectCommand.Parameters.AddWithValue("@customer_id", customer_id);
+
+            da.Fill(ds);
+            dt = ds.Tables[0];
+
+            if (dt.Rows.Count > 0)
+            {
+                cliente.IDCliente = Convert.ToInt32(dt.Rows[0]["IDCliente"]);
+                CRUD.Carregar(cliente);
+            }
+
+            return cliente;
+        }
+
+        private ClienteInformation CarregarClientePorTelefone(string telefone)
+        {
+            ClienteInformation cliente = new ClienteInformation();
+
+            SqlDataAdapter da;
+            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
+
+            String querySql = @"
+                    SELECT 
+                        IDCliente
+                    FROM
+                        tbCliente c
+                    WHERE
+                        Telefone1Numero=@telefone
+                ";
+
+            da = new SqlDataAdapter(querySql, DB.ConnectionString);
+            da.SelectCommand.Parameters.AddWithValue("@telefone", telefone.Substring(5));
 
             da.Fill(ds);
             dt = ds.Tables[0];
