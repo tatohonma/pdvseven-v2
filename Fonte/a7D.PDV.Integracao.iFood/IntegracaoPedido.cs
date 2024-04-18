@@ -401,7 +401,7 @@ namespace a7D.PDV.Integracao.iFood
             {
                 idProduto = 1;
                 observacaoProduto = $"(sem código: {nome})";
-                //    log += $"\r\n{idPdod}: {notaProduto}";
+                return;
             }
 
             ProdutoInformation produto = Produto.Carregar(Convert.ToInt32(externalCode));
