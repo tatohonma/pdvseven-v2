@@ -42,8 +42,12 @@ namespace a7D.PDV.AutoAtendimento.UI.Paginas
             //var pedido = App.Pedido.LerPedido(6060);
             //TicketServices.Imprime(pedido);
             if (produtosEnable)
+            {
+                // TODO: fluxo autoatendimento
                 //App.Navigate<ComandaClienteCreditoPage>();
-                App.Navigate<ComandaLeitoraPage>();
+                //App.Navigate<ComandaLeitoraPage>();
+                App.Navigate<VendaCategoriaProdutoPage>();
+            }
             else
                 App.Navigate<InicialPage>();
         }
