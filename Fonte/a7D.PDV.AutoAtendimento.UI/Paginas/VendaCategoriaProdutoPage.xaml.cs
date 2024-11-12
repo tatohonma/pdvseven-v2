@@ -19,7 +19,9 @@ namespace a7D.PDV.AutoAtendimento.UI.Paginas
         public void Page_Loaded(object sender, RoutedEventArgs e)
         {
             // Redireciona diretamente para a tela de leitura de comanda
-            App.Navigate<ComandaLeitoraPage>();
+
+            // TODO: fluxo autoatendimento
+            //App.Navigate<ComandaLeitoraPage>();
 
             try
             {
