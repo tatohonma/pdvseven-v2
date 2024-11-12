@@ -52,10 +52,6 @@
     <Compile Include="API\Merchant.cs" />
     <Compile Include="API\OAuth.cs" />
     <Compile Include="API\Order.cs" />
-    <Compile Include="DAL\Caixa.cs" />
-    <Compile Include="DAL\Cliente.cs" />
-    <Compile Include="DAL\Pedido.cs" />
-    <Compile Include="DAL\Produto.cs" />
     <Compile Include="IntegraIFood.cs" />
     <Compile Include="IntegracaoEstabelecimento.cs" />
     <Compile Include="IntegracaoPedido.cs" />

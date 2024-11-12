@@ -66,6 +66,7 @@ namespace a7D.PDV.Caixa.UI
         private Controles.PedidoProduto controlePedidoProduto => pedidoProduto1;
         private decimal TotalProdutos => PedidoProdutoInformation.SomaValorTotal(controlePedidoProduto.ListaPedidoProduto);
         private decimal ValorServico => ckbTaxaServico.Checked ? TotalProdutos * (TaxaServico / 100) : 0;
+        //TODO: 
         private decimal TotalEntrega => TotalProdutos + (AppDelivery ? (Pedido1.ValorEntrega ?? 0) : (Pedido1.TaxaEntrega != null ? (Pedido1.TaxaEntrega.Valor ?? 0) : 0));
         private decimal ValorPago => Pedido1.ListaPagamento.Where(p => p.Status != StatusModel.Excluido).Sum(p => p.Valor.Value);
 
@@ -201,18 +202,21 @@ namespace a7D.PDV.Caixa.UI
             cbbEstado.DataSource = Estado.Listar().OrderBy(l => l.Sigla).ToList();
             cbbEstado.SelectedValue = 25;
 
-            TaxasEntrega = TaxaEntrega.ListarAtivos();
-            bool possuiTaxaEntrega = TaxasEntrega.Count != 0;
-            if (!possuiTaxaEntrega || AppDelivery)
-            {
-                rb3.Enabled = false;
-                gbResumoTaxaEntrega.Visible = false;
-            }
-            else
-            {
-                dgvTaxaEntrega.DataSource = TaxasEntrega.Select(t => new { t.IDTaxaEntrega, t.Nome, t.Valor }).ToArray();
-                dgvTaxaEntrega.ClearSelection();
-            }
+            //TODO: 
+            bool possuiTaxaEntrega = true;
+
+            //TaxasEntrega = TaxaEntrega.ListarAtivos();
+            //bool possuiTaxaEntrega = TaxasEntrega.Count != 0;
+            //if (!possuiTaxaEntrega || AppDelivery)
+            //{
+            //    rb3.Enabled = false;
+            //    gbResumoTaxaEntrega.Visible = false;
+            //}
+            //else
+            //{
+            //    dgvTaxaEntrega.DataSource = TaxasEntrega.Select(t => new { t.IDTaxaEntrega, t.Nome, t.Valor }).ToArray();
+            //    dgvTaxaEntrega.ClearSelection();
+            //}
 
             controlePedidoProduto.ProdutoAdicionado = (PedidoProdutoInformation pedidoProduto) =>
             {
@@ -398,7 +402,6 @@ namespace a7D.PDV.Caixa.UI
                         false;
 
                     rb8.Enabled = false;
-                    LoggiOrcamento();
                     break;
                 case EstadoDelivery.Finalizar:
                     DefinirEntregador(Pedido1.Entregador);
@@ -463,9 +466,6 @@ namespace a7D.PDV.Caixa.UI
                 };
                 dgvEntregador.Rows.Add(row);
             }
-
-            if (_estado == EstadoDelivery.Entregador)
-                LoggiOrcamento();
 
             txtCPF.Text = Pedido1.DocumentoCliente;
             if (string.IsNullOrEmpty(Pedido1.DocumentoCliente))
@@ -1428,37 +1428,6 @@ namespace a7D.PDV.Caixa.UI
             }
         }
 
-        private void LoggiOrcamento()
-        {
-            if (!BLL.PDV.PossuiLoggi()
-             //|| loggiTask != null // Se ja estiver em execução, ão faz nada
-             || dgvEntregador.SelectedRows.Count == 0
-             || Pedido1.IDPedido == null
-             || Pedido1.Cliente == null
-             //|| loggiOrcamento != null
-             || !(Pedido1.TaxaEntrega?.IDTamanhoPacote > 0))
-                return;
-
-            var idEntregador = Convert.ToInt32(dgvEntregador.SelectedRows[0].Cells[nameof(cellIDEntregador)].Value);
-            var entregador = Entregadores.First(et => et.IDEntregador == idEntregador);
-
-            Pedido1.Entregador = entregador;
-            Pedido1.DtEnvio = DateTime.Now;
-
-            //loggiTask = Task.Run(() =>
-            //{
-            //    lIgnorado = false;
-
-            //    loggiOrcamento = LoggiDelivery.Orcamento(
-            //        Pedido1.TaxaEntrega.IDTamanhoPacote.Value,
-            //        (Pedido1.Cliente.CEP > 0 ? Pedido1.Cliente.CEP.Value.ToString("00000000") : Pedido1.Cliente.Endereco) + ", " + Pedido1.Cliente.EnderecoNumero + " " + Pedido1.Cliente.Complemento,
-            //        "Retirar pedido #" + Pedido1.IDPedido,
-            //        "Entregar para " + Pedido1.Cliente.NomeCompleto);
-
-            //    loggiTask = null;
-            //});
-        }
-
         private void PesquisarCliente()
         {
             using (var frmPesquisarCliente = new frmPesquisarCliente())
@@ -1616,60 +1585,6 @@ namespace a7D.PDV.Caixa.UI
                 msg += "Selecione a taxa de entrega\n";
                 rb3.ImageIndex = 2;
             }
-            //            else if (_estado == EstadoDelivery.Entregador && Pedido1.Entregador?.IDGateway == (int)EGateway.Loggi)
-            //            {
-            //                if (loggiOrcamento == null)
-            //                {
-            //                    LoggiOrcamento();
-            //                    loggiTask?.Wait(5000);
-            //                }
-
-            //                if (loggiOrcamento == null)
-            //                    msg += "Sem resposta da Loggi\r\n";
-
-            //                else if (string.IsNullOrEmpty(loggiOrcamento.id))
-            //                    msg += "Loggi ERRO: " + loggiOrcamento.ToString() + "\r\n";
-
-            //                else if (loggiOrcamento.waypoints.Length == 2
-            //                    && loggiOrcamento.waypoints[0]?.address_data.formatted_address != null
-            //                    && loggiOrcamento.waypoints[1]?.address_data.formatted_address != null)
-            //                {
-            //                    string info = $@"Confirma entrega via Loggi?
-
-            //Origem:
-            //{loggiOrcamento.waypoints[0].address_data.formatted_address}
-
-            //Destino:
-            //{loggiOrcamento.waypoints[1].address_data.formatted_address}";
-
-            //                    rb1.Checked = true;
-            //                    AlterarVisibilidade();
-            //                    Application.DoEvents();
-
-            //                    if (MessageBox.Show(info, "Loggi", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) != DialogResult.Yes)
-            //                        msg += "Loggi: Não foi confirmado";
-            //                    else
-            //                    {
-            //                        var result = LoggiDelivery.Confirmar(loggiOrcamento.id);
-
-            //                        if (result.errors != null)
-            //                            msg = result.errors.ToString();
-
-            //                        if (result.error_message != null)
-            //                            msg += " " + result.error_message;
-
-            //                        if (result.id == 0)
-            //                        {
-            //                            Logs.Erro(CodigoErro.EE21, result.last_request + "\r\n" + result.last_result, loggiOrcamento.ToString());
-            //                            msg = "Não foi possível realizar o pedido na Loggi\r\n" + msg;
-            //                        }
-            //                        else
-            //                            MessageBox.Show("Pedido Loggi #" + result.id + " criado", "Loggi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //                    }
-            //                }
-            //                else
-            //                    msg += "Loggi ERRO: Não foi possível obter os endereços de origem e destino da entrega";
-            //            }
             #endregion
 
             var existemProdutos = controlePedidoProduto.ListaPedidoProduto.Count != 0;
@@ -1690,7 +1605,6 @@ namespace a7D.PDV.Caixa.UI
                 msg += "Existem valores pendentes\n";
                 rb5.ImageIndex = 2;
             }
-
             #endregion
 
             if (!string.IsNullOrWhiteSpace(msg))
@@ -1901,7 +1815,7 @@ namespace a7D.PDV.Caixa.UI
             if (_estado != EstadoDelivery.Finalizar)
             {
                 Pedido.AdicionarProduto(ETipoPedido.Delivery, Pedido1.GUIDIdentificacao, AC.Usuario.IDUsuario.Value, AC.PDV.IDPDV.Value, controlePedidoProduto.ListaPedidoProduto.Where(pp => pp.Status == StatusModel.Novo).ToList());
-                Pedido.AdicionarProdutoTaxaEntrega(Pedido1, true, AC.PDV, AC.Usuario);
+                //Pedido.AdicionarProdutoTaxaEntrega(Pedido1, true, AC.PDV, AC.Usuario);
                 List<PedidoProdutoInformation> listaProdutoProduzir;
 
                 if (_estado == EstadoDelivery.NaoConfirmado)
@@ -1960,29 +1874,12 @@ namespace a7D.PDV.Caixa.UI
         }
 
         bool lPesquisando = false;
-        bool lIgnorado = false;
-        private async void txtEnderecoNumero_TextChanged(object sender, EventArgs e)
+        private void txtEnderecoNumero_TextChanged(object sender, EventArgs e)
         {
             if (lPesquisando)
             {
-                lIgnorado = true;
                 return;
             }
-
-            //if (BLL.PDV.PossuiLoggi()
-            // && !string.IsNullOrEmpty(txtEndereco.Text)
-            // && !string.IsNullOrEmpty(txtEnderecoNumero.Text))
-            //{
-            //    lPesquisando = true;
-            //    loggiOrcamento = null;
-            //    lblLoggiEstimativa.Text = await LoggiDelivery.EstimarAsync((txtCEP.Text.Length == 8 ? txtCEP.Text : txtEndereco.Text) + ", " + txtEnderecoNumero.Text + " " + txtComplemento.Text);
-            //    lPesquisando = false;
-            //    if (lIgnorado)
-            //    {
-            //        lIgnorado = false;
-            //        txtEnderecoNumero_TextChanged(null, null);
-            //    }
-            //}
         }
     }
 }

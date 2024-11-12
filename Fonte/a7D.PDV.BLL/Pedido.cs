@@ -267,11 +267,13 @@ namespace a7D.PDV.BLL
                     {
                         // pedido.Cliente?.Limite?.Value ?? 
                         int limiteComanda = ConfiguracoesSistema.Valores.LimiteComanda;
-                        if (valorTotalPedido == 0 && listaNovosProdutos.Count == 1) // Primeiro item apenas
-#pragma warning disable CS0642 // Possible mistaken empty statement
-                            ;
-#pragma warning restore CS0642 // Possible mistaken empty statement
-                        else if ((valorTotalPedido + valorNovosItens + taxaServico) > limiteComanda)
+//                        if (valorTotalPedido == 0 && listaNovosProdutos.Count == 1) // Primeiro item apenas
+//#pragma warning disable CS0642 // Possible mistaken empty statement
+//                            ;
+//#pragma warning restore CS0642 // Possible mistaken empty statement
+//                        else 
+
+                        if ((valorTotalPedido + valorNovosItens + taxaServico) > limiteComanda)
                             throw new ExceptionPDV(CodigoErro.AA30, limiteComanda.ToString("C"));
                     }
                 }
@@ -458,23 +460,6 @@ namespace a7D.PDV.BLL
                     PedidoProduto.Salvar(modificacao);
                 }
             }
-        }
-
-        private static void SalvarModificacao(PedidoProdutoInformation modificacao, int idUsuario, int idPDV, PedidoInformation pedido, PedidoProdutoInformation item, PedidoProdutoInformation pedidoProduto_new, decimal? valor = null, decimal quantidade = 1)
-        {
-            modificacao.Produto = Produto.Carregar(modificacao.Produto.IDProduto.Value);
-            modificacao.CodigoAliquota = item.CodigoAliquota;
-            modificacao.Pedido = pedido;
-            modificacao.PedidoProdutoPai = pedidoProduto_new;
-            modificacao.Quantidade = quantidade;
-            modificacao.IDPedidoProduto = null;
-            modificacao.Pedido = pedido;
-            modificacao.Usuario = new UsuarioInformation { IDUsuario = idUsuario };
-            modificacao.PDV = new PDVInformation { IDPDV = idPDV };
-            if (valor.HasValue)
-                modificacao.ValorUnitario = valor;
-
-            PedidoProduto.Salvar(modificacao);
         }
 
         public static PedidoInformation Carregar(int idPedido)

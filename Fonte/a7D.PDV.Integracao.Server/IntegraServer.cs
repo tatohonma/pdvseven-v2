@@ -27,7 +27,6 @@ namespace a7D.PDV.Integracao.Server
         public const string okEtapa3 = "OK Etapa 3";
 
         private volatile bool ProcessandoMensagem = false;
-        private bool CheckBigData = false;
 
         public void ShowInfo(string info)
         {
