@@ -218,18 +218,18 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn101 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.llFinalizarAlterarPagamento = new System.Windows.Forms.LinkLabel();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.lblFinalizarTotalProdutos = new System.Windows.Forms.Label();
-            this.dgvFinalizarProdutos = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.lblFinalizarTaxaEntrega = new System.Windows.Forms.Label();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.lblFinalizarObs = new System.Windows.Forms.Label();
             this.lblFinalizarTelefone = new System.Windows.Forms.Label();
             this.lblFinalizarNome = new System.Windows.Forms.Label();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.lblFinalizarTotalProdutos = new System.Windows.Forms.Label();
+            this.dgvFinalizarProdutos = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lnkVoltar = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.gb2.SuspendLayout();
@@ -266,10 +266,10 @@
             this.groupBox17.SuspendLayout();
             this.groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFinalizarPagamento)).BeginInit();
-            this.groupBox10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFinalizarProdutos)).BeginInit();
             this.groupBox11.SuspendLayout();
             this.groupBox12.SuspendLayout();
+            this.groupBox10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFinalizarProdutos)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -2670,6 +2670,70 @@
             this.llFinalizarAlterarPagamento.VisitedLinkColor = System.Drawing.Color.Blue;
             this.llFinalizarAlterarPagamento.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llFinalizarAlterarPagamento_LinkClicked);
             // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.lblFinalizarTaxaEntrega);
+            this.groupBox11.Location = new System.Drawing.Point(13, 422);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(288, 88);
+            this.groupBox11.TabIndex = 10;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "Taxa de entrega";
+            // 
+            // lblFinalizarTaxaEntrega
+            // 
+            this.lblFinalizarTaxaEntrega.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFinalizarTaxaEntrega.Location = new System.Drawing.Point(5, 38);
+            this.lblFinalizarTaxaEntrega.MaximumSize = new System.Drawing.Size(435, 35);
+            this.lblFinalizarTaxaEntrega.Name = "lblFinalizarTaxaEntrega";
+            this.lblFinalizarTaxaEntrega.Size = new System.Drawing.Size(276, 29);
+            this.lblFinalizarTaxaEntrega.TabIndex = 10;
+            this.lblFinalizarTaxaEntrega.Text = "R$ 0,00";
+            this.lblFinalizarTaxaEntrega.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.lblFinalizarObs);
+            this.groupBox12.Controls.Add(this.lblFinalizarTelefone);
+            this.groupBox12.Controls.Add(this.lblFinalizarNome);
+            this.groupBox12.Location = new System.Drawing.Point(13, 24);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(288, 314);
+            this.groupBox12.TabIndex = 7;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "Cliente";
+            // 
+            // lblFinalizarObs
+            // 
+            this.lblFinalizarObs.AutoSize = true;
+            this.lblFinalizarObs.Location = new System.Drawing.Point(8, 112);
+            this.lblFinalizarObs.MaximumSize = new System.Drawing.Size(444, 0);
+            this.lblFinalizarObs.Name = "lblFinalizarObs";
+            this.lblFinalizarObs.Size = new System.Drawing.Size(171, 17);
+            this.lblFinalizarObs.TabIndex = 7;
+            this.lblFinalizarObs.Text = "Endereço e observações";
+            // 
+            // lblFinalizarTelefone
+            // 
+            this.lblFinalizarTelefone.AutoSize = true;
+            this.lblFinalizarTelefone.Location = new System.Drawing.Point(5, 86);
+            this.lblFinalizarTelefone.MaximumSize = new System.Drawing.Size(444, 0);
+            this.lblFinalizarTelefone.Name = "lblFinalizarTelefone";
+            this.lblFinalizarTelefone.Size = new System.Drawing.Size(131, 17);
+            this.lblFinalizarTelefone.TabIndex = 6;
+            this.lblFinalizarTelefone.Text = "Telefone do Cliente";
+            // 
+            // lblFinalizarNome
+            // 
+            this.lblFinalizarNome.AutoSize = true;
+            this.lblFinalizarNome.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFinalizarNome.Location = new System.Drawing.Point(5, 47);
+            this.lblFinalizarNome.MaximumSize = new System.Drawing.Size(435, 35);
+            this.lblFinalizarNome.Name = "lblFinalizarNome";
+            this.lblFinalizarNome.Size = new System.Drawing.Size(203, 29);
+            this.lblFinalizarNome.TabIndex = 5;
+            this.lblFinalizarNome.Text = "Nome do Cliente";
+            // 
             // groupBox10
             // 
             this.groupBox10.Controls.Add(this.label24);
@@ -2765,70 +2829,6 @@
             this.dataGridViewTextBoxColumn8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.dataGridViewTextBoxColumn8.Width = 5;
             // 
-            // groupBox11
-            // 
-            this.groupBox11.Controls.Add(this.lblFinalizarTaxaEntrega);
-            this.groupBox11.Location = new System.Drawing.Point(13, 422);
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(288, 88);
-            this.groupBox11.TabIndex = 10;
-            this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "Taxa de entrega";
-            // 
-            // lblFinalizarTaxaEntrega
-            // 
-            this.lblFinalizarTaxaEntrega.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFinalizarTaxaEntrega.Location = new System.Drawing.Point(5, 38);
-            this.lblFinalizarTaxaEntrega.MaximumSize = new System.Drawing.Size(435, 35);
-            this.lblFinalizarTaxaEntrega.Name = "lblFinalizarTaxaEntrega";
-            this.lblFinalizarTaxaEntrega.Size = new System.Drawing.Size(276, 29);
-            this.lblFinalizarTaxaEntrega.TabIndex = 10;
-            this.lblFinalizarTaxaEntrega.Text = "R$ 0,00";
-            this.lblFinalizarTaxaEntrega.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // groupBox12
-            // 
-            this.groupBox12.Controls.Add(this.lblFinalizarObs);
-            this.groupBox12.Controls.Add(this.lblFinalizarTelefone);
-            this.groupBox12.Controls.Add(this.lblFinalizarNome);
-            this.groupBox12.Location = new System.Drawing.Point(13, 24);
-            this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(288, 314);
-            this.groupBox12.TabIndex = 7;
-            this.groupBox12.TabStop = false;
-            this.groupBox12.Text = "Cliente";
-            // 
-            // lblFinalizarObs
-            // 
-            this.lblFinalizarObs.AutoSize = true;
-            this.lblFinalizarObs.Location = new System.Drawing.Point(8, 112);
-            this.lblFinalizarObs.MaximumSize = new System.Drawing.Size(444, 0);
-            this.lblFinalizarObs.Name = "lblFinalizarObs";
-            this.lblFinalizarObs.Size = new System.Drawing.Size(171, 17);
-            this.lblFinalizarObs.TabIndex = 7;
-            this.lblFinalizarObs.Text = "Endereço e observações";
-            // 
-            // lblFinalizarTelefone
-            // 
-            this.lblFinalizarTelefone.AutoSize = true;
-            this.lblFinalizarTelefone.Location = new System.Drawing.Point(5, 86);
-            this.lblFinalizarTelefone.MaximumSize = new System.Drawing.Size(444, 0);
-            this.lblFinalizarTelefone.Name = "lblFinalizarTelefone";
-            this.lblFinalizarTelefone.Size = new System.Drawing.Size(131, 17);
-            this.lblFinalizarTelefone.TabIndex = 6;
-            this.lblFinalizarTelefone.Text = "Telefone do Cliente";
-            // 
-            // lblFinalizarNome
-            // 
-            this.lblFinalizarNome.AutoSize = true;
-            this.lblFinalizarNome.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFinalizarNome.Location = new System.Drawing.Point(5, 47);
-            this.lblFinalizarNome.MaximumSize = new System.Drawing.Size(435, 35);
-            this.lblFinalizarNome.Name = "lblFinalizarNome";
-            this.lblFinalizarNome.Size = new System.Drawing.Size(203, 29);
-            this.lblFinalizarNome.TabIndex = 5;
-            this.lblFinalizarNome.Text = "Nome do Cliente";
-            // 
             // lnkVoltar
             // 
             this.lnkVoltar.AutoSize = true;
@@ -2853,14 +2853,14 @@
             this.Controls.Add(this.lblTotalPedido);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.gb6);
-            this.Controls.Add(this.gb5);
             this.Controls.Add(this.gb2);
             this.Controls.Add(this.gb3);
             this.Controls.Add(this.gb8);
             this.Controls.Add(this.gb4);
             this.Controls.Add(this.gb7);
             this.Controls.Add(this.gb1);
+            this.Controls.Add(this.gb6);
+            this.Controls.Add(this.gb5);
             this.Font = new System.Drawing.Font("Arial", 11.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -2926,11 +2926,11 @@
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFinalizarPagamento)).EndInit();
-            this.groupBox10.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFinalizarProdutos)).EndInit();
             this.groupBox11.ResumeLayout(false);
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
+            this.groupBox10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFinalizarProdutos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
