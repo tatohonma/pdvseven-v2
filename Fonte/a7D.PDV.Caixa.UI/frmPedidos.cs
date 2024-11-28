@@ -427,6 +427,12 @@ namespace a7D.PDV.Caixa.UI
 
                         lblIdentificacao.Text = "Delivery On! " + tagId.Valor;
                     }
+                    else if (pedido.OrigemPedido != null && pedido.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.deliveryOnline)
+                    {
+                        TagInformation tagId = BLL.Tag.Carregar(pedido.GUIDIdentificacao, "anotaai-_order_id");
+
+                        lblIdentificacao.Text = "Anota-ai " + tagId.Valor;
+                    }
                     else
                     {
                         lblIdentificacao.Text = "Delivery " + pedido.IDPedido;
