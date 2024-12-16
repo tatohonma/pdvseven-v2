@@ -79,6 +79,8 @@ namespace a7D.PDV.Configurador.UI
                 FillConfig(ETipoPDV.DELIVERY_ONLINE, null, tableDeliveryOnline);
             else if (selectedTab == tabPixConta)
                 FillConfig(ETipoPDV.PIX_CONTA, null, tablePixConta);
+            else if (selectedTab == tabAnotaAi)
+                FillConfig(ETipoPDV.ANOTA_AI, null, tableAnotaAi);
         }
 
         delegate void CallBackFillConfig(ETipoPDV tipo, ComboBox ddl, TableLayoutPanel table, object sender = null);
