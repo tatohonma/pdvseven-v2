@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2024")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.25.3.2")]
+[assembly: AssemblyVersion("2.25.4.0")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -66,6 +66,14 @@ Lista das últimas versões e FIX
 
 ===============================================================================
 ===============================================================================
+
+2.25.4.0 ======================================================================
+    Novo:     Integração com o app Anota Ai
+    Correção: Ajuste no calculo nos pedidos do delivery com taxa de entrega, serviço e cupom de desconto
+    Correção: Inclusão dos valores corretos na tela fechamento do pedido no delivery, com taxa entrega e desconto
+    Melhoria: Refatoração do módulo de delivery
+    Melhoria: Ajuste do projeto
+    Melhoria: Ajuste do repositório e recuperação dos commits
 
 2.25.3.2 ======================================================================
     Correção: Ajuste autoatendimento para venda de produtos por ticket
