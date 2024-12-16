@@ -25,15 +25,25 @@ namespace a7D.PDV.Caixa.UI
             if (ConfiguracoesCaixa.Valores.NotificarDelivery == "AUDIO")
                 ((frmPedidos)Owner).Player.Play();
 
+            TagInformation tagDisplayId;
             switch (Pedido.OrigemPedido.IDOrigemPedido)
             {
                 case 2:
-                    TagInformation tagDisplayId = BLL.Tag.Carregar(Pedido.GUIDIdentificacao, "ifood-displayId");
+                    tagDisplayId = BLL.Tag.Carregar(Pedido.GUIDIdentificacao, "ifood-displayId");
                     Text = $"Pedido {Pedido.IDPedido} iFood {tagDisplayId.Valor}";
                     break;
                 case 3:
-                    TagInformation tagId = BLL.Tag.Carregar(Pedido.GUIDIdentificacao, "DeliveryOnline-order_id");
-                    Text = $"Pedido {Pedido.IDPedido} DeliveryOnline {tagId.Valor}";
+                    tagDisplayId = BLL.Tag.Carregar(Pedido.GUIDIdentificacao, "DeliveryOnline-order_id");
+                    Text = $"Pedido {Pedido.IDPedido} DeliveryOnline {tagDisplayId.Valor}";
+                    break;
+                case 4:
+                    tagDisplayId = BLL.Tag.Carregar(Pedido.GUIDIdentificacao, "anotaai-shortReference");
+                    Text = $"Pedido {Pedido.IDPedido} Anota-Ai {tagDisplayId.Valor}";
+
+                    ConfiguracoesAnotaAi configAnotaAi = new ConfiguracoesAnotaAi();
+                    if (configAnotaAi.AceitarAutomatico)
+                        ConfirmarPedido();
+
                     break;
             }
 
@@ -62,6 +72,11 @@ namespace a7D.PDV.Caixa.UI
         }
 
         private void btnConfirmar_Click(object sender, EventArgs e)
+        {
+            ConfirmarPedido();
+        }
+
+        private void ConfirmarPedido()
         {
             tmrWait.Stop();
             DialogResult = DialogResult.OK;
