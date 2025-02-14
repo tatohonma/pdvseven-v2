@@ -40,6 +40,10 @@ namespace a7D.PDV.Caixa.UI
                     tagDisplayId = BLL.Tag.Carregar(Pedido.GUIDIdentificacao, "anotaai-shortReference");
                     Text = $"Pedido {Pedido.IDPedido} Anota-Ai {tagDisplayId.Valor}";
 
+                    TagInformation tagStatus = BLL.Tag.Carregar(Pedido.GUIDIdentificacao, "anotaai-status");
+                    if(tagStatus.Valor == "em-producao")
+                        ConfirmarPedido();
+
                     ConfiguracoesAnotaAi configAnotaAi = new ConfiguracoesAnotaAi();
                     if (configAnotaAi.AceitarAutomatico)
                         ConfirmarPedido();
