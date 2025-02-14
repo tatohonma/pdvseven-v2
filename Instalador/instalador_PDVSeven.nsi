@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "PDVSeven"
-!define PRODUCT_VERSION "2.25.4.0"
+!define PRODUCT_VERSION "2.25.4.1"
 !define PRODUCT_PUBLISHER "PDVSeven Automação Comercial"
 !define PRODUCT_WEB_SITE "http://www.pdvseven.com.br"
 !define PRODUCT_DIR_REGKEY "Software\PDV7\${PRODUCT_NAME}"
@@ -81,9 +81,6 @@ SectionGroup /e "Servidor"
 
 		SetOutPath "$INSTDIR\WebServices\www2"
 		File /r /x *vshost*.* "..\Publish\www2\*"
-
-		SetOutPath "$INSTDIR\WebServices\www2\Release"
-		File /r "..\Publish\Mobile\*"
 
 		CreateShortCut "$SMPROGRAMS\PDVSeven\Integração.lnk" "$INSTDIR\a7D.PDV.Integracao.Servico.UI.exe"
 		CreateShortCut "$DESKTOP\Integração.lnk" "$INSTDIR\a7D.PDV.Integracao.Servico.UI.exe"
