@@ -24,6 +24,7 @@ namespace a7D.PDV.BLL
                 typeof(ConfiguracoesIFood),                 // 150
                 typeof(ConfiguracoesDeliveryOnline),        // 250
                 typeof(ConfiguracoesPixConta),              // 260
+                typeof(ConfiguracoesAnotaAi),              // 270
             };
         }
 

@@ -4,6 +4,7 @@
     {
         sistema = 1,
         ifood = 2,
-        deliveryOnline = 3
+        deliveryOnline = 3,
+        anotaai = 4
     }
 }
