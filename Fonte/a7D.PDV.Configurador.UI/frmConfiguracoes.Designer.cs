@@ -67,6 +67,8 @@
             this.tableDeliveryOnline = new System.Windows.Forms.TableLayoutPanel();
             this.tabPixConta = new System.Windows.Forms.TabPage();
             this.tablePixConta = new System.Windows.Forms.TableLayoutPanel();
+            this.tabAnotaAi = new System.Windows.Forms.TabPage();
+            this.tableAnotaAi = new System.Windows.Forms.TableLayoutPanel();
             this.tabCardapio.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tabComanda.SuspendLayout();
@@ -87,6 +89,7 @@
             this.tabIFood.SuspendLayout();
             this.tabDeliveryOnline.SuspendLayout();
             this.tabPixConta.SuspendLayout();
+            this.tabAnotaAi.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabCardapio
@@ -338,6 +341,7 @@
             this.tabControl1.Controls.Add(this.tabIFood);
             this.tabControl1.Controls.Add(this.tabDeliveryOnline);
             this.tabControl1.Controls.Add(this.tabPixConta);
+            this.tabControl1.Controls.Add(this.tabAnotaAi);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -605,6 +609,31 @@
             this.tablePixConta.Size = new System.Drawing.Size(724, 400);
             this.tablePixConta.TabIndex = 3;
             // 
+            // tabAnotaAi
+            // 
+            this.tabAnotaAi.Controls.Add(this.tableAnotaAi);
+            this.tabAnotaAi.Location = new System.Drawing.Point(4, 29);
+            this.tabAnotaAi.Name = "tabAnotaAi";
+            this.tabAnotaAi.Size = new System.Drawing.Size(738, 419);
+            this.tabAnotaAi.TabIndex = 14;
+            this.tabAnotaAi.Text = "Anota-ai";
+            this.tabAnotaAi.UseVisualStyleBackColor = true;
+            // 
+            // tableAnotaAi
+            // 
+            this.tableAnotaAi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableAnotaAi.AutoSize = true;
+            this.tableAnotaAi.BackColor = System.Drawing.Color.Transparent;
+            this.tableAnotaAi.ColumnCount = 1;
+            this.tableAnotaAi.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableAnotaAi.Location = new System.Drawing.Point(7, 9);
+            this.tableAnotaAi.Name = "tableAnotaAi";
+            this.tableAnotaAi.RowCount = 1;
+            this.tableAnotaAi.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableAnotaAi.Size = new System.Drawing.Size(724, 400);
+            this.tableAnotaAi.TabIndex = 4;
+            // 
             // frmConfiguracoes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -649,6 +678,8 @@
             this.tabDeliveryOnline.PerformLayout();
             this.tabPixConta.ResumeLayout(false);
             this.tabPixConta.PerformLayout();
+            this.tabAnotaAi.ResumeLayout(false);
+            this.tabAnotaAi.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -693,5 +724,7 @@
         private System.Windows.Forms.TableLayoutPanel tableDeliveryOnline;
         private System.Windows.Forms.TabPage tabPixConta;
         private System.Windows.Forms.TableLayoutPanel tablePixConta;
+        private System.Windows.Forms.TabPage tabAnotaAi;
+        private System.Windows.Forms.TableLayoutPanel tableAnotaAi;
     }
 }

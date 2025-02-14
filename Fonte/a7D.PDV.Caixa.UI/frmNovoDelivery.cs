@@ -40,11 +40,9 @@ namespace a7D.PDV.Caixa.UI
         #region Variáveis
 
         private PedidoInformation Pedido1 { get; set; }
-        //private OrcamentoResponse loggiOrcamento = null;
-        //private Task loggiTask = null;
         private List<TaxaEntregaInformation> TaxasEntrega { get; set; }
         private List<EntregadorInformation> Entregadores { get; set; }
-        private List<PedidoPagamentoInformation> Pagamentos { get; set; }
+        //private List<PedidoPagamentoInformation> Pagamentos { get; set; }
         private Dictionary<int, InformacoesCancelamento?> InformacoesCancelamento { get; set; }
         private bool TaxaSelecionada { get; set; }
         private bool ClienteSelecionado { get; set; }
@@ -67,7 +65,7 @@ namespace a7D.PDV.Caixa.UI
         private decimal TotalProdutos => PedidoProdutoInformation.SomaValorTotal(controlePedidoProduto.ListaPedidoProduto);
         private decimal ValorServico => ckbTaxaServico.Checked ? TotalProdutos * (TaxaServico / 100) : 0;
         //TODO: 
-        private decimal TotalEntrega => TotalProdutos + (AppDelivery ? (Pedido1.ValorEntrega ?? 0) : (Pedido1.TaxaEntrega != null ? (Pedido1.TaxaEntrega.Valor ?? 0) : 0));
+        private decimal TotalComEntrega => TotalProdutos + (AppDelivery ? (Pedido1.ValorEntrega ?? 0) : (Pedido1.TaxaEntrega != null ? (Pedido1.TaxaEntrega.Valor ?? 0) : 0));
         private decimal ValorPago => Pedido1.ListaPagamento.Where(p => p.Status != StatusModel.Excluido).Sum(p => p.Valor.Value);
 
         #endregion
@@ -109,12 +107,9 @@ namespace a7D.PDV.Caixa.UI
         {
             Pedido1 = Pedido.CarregarUltimoPedido(guidIdentificacao);
 
-            if (Pedido1.OrigemPedido != null &&
-                (Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.ifood ||
-                Pedido1.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.deliveryOnline))
+            if (Pedido1.OrigemPedido != null && Pedido1.OrigemPedido.IDOrigemPedido != (int)EOrigemPedido.sistema)
             {
                 AppDelivery = true;
-
                 controlePedidoProduto.BloqueiaEdicao();
             }
 
@@ -203,20 +198,18 @@ namespace a7D.PDV.Caixa.UI
             cbbEstado.SelectedValue = 25;
 
             //TODO: 
-            bool possuiTaxaEntrega = true;
-
-            //TaxasEntrega = TaxaEntrega.ListarAtivos();
-            //bool possuiTaxaEntrega = TaxasEntrega.Count != 0;
-            //if (!possuiTaxaEntrega || AppDelivery)
-            //{
-            //    rb3.Enabled = false;
-            //    gbResumoTaxaEntrega.Visible = false;
-            //}
-            //else
-            //{
-            //    dgvTaxaEntrega.DataSource = TaxasEntrega.Select(t => new { t.IDTaxaEntrega, t.Nome, t.Valor }).ToArray();
-            //    dgvTaxaEntrega.ClearSelection();
-            //}
+            TaxasEntrega = TaxaEntrega.ListarAtivos();
+            bool possuiTaxaEntrega = TaxasEntrega.Count != 0;
+            if (!possuiTaxaEntrega || AppDelivery)
+            {
+                rb3.Enabled = false;
+                gbResumoTaxaEntrega.Visible = false;
+            }
+            else
+            {
+                dgvTaxaEntrega.DataSource = TaxasEntrega.Select(t => new { t.IDTaxaEntrega, t.Nome, t.Valor }).ToArray();
+                dgvTaxaEntrega.ClearSelection();
+            }
 
             controlePedidoProduto.ProdutoAdicionado = (PedidoProdutoInformation pedidoProduto) =>
             {
@@ -869,7 +862,7 @@ namespace a7D.PDV.Caixa.UI
         private void btnConfirmarPagamento_Click_1(object sender, EventArgs e)
         {
             var valorPago = Pedido1.ListaPagamento.Sum(l => l.Valor.Value);
-            var valorPendente = TotalEntrega + ValorServico - valorPago - (Pedido1.ValorDesconto ?? 0);
+            var valorPendente = TotalComEntrega + ValorServico - valorPago - (Pedido1.ValorDesconto ?? 0);
 
             if (valorPendente > 0)
             {
@@ -1195,29 +1188,10 @@ namespace a7D.PDV.Caixa.UI
             #endregion
 
             #region taxa entrega
-            //if (AppDelivery && Pedido1.ValorEntrega > 0 && Pedido1.OrigemPedido.IDOrigemPedido == (Int32)EOrigemPedido.ifood)
-            //{
-            //    var stringValor = Pedido1.ValorEntrega.Value.ToString("R$ #,##0.00", _provider);
-            //    rb3.Text = $"Taxa de Entrega\n{stringValor}";
-            //    lblTaxaEntrega.Text = $"iFood: {stringValor}";
-            //    lblResumoTaxaEntrega.Text = lblFinalizarTaxaEntrega.Text = stringValor;
-            //    lblTaxaEntrega.Visible = true;
-            //    llConfirmacaoAlterarTaxaEntrega.Visible = false;
-            //    TaxaSelecionada = true;
-            //}
-            //else if (AppDelivery && Pedido1.ValorEntrega > 0 && Pedido1.OrigemPedido.IDOrigemPedido == (Int32)EOrigemPedido.deliveryOnline)
-            //{
-            //    var stringValor = Pedido1.ValorEntrega.Value.ToString("R$ #,##0.00", _provider);
-            //    rb3.Text = $"Taxa de Entrega\n{stringValor}";
-            //    lblTaxaEntrega.Text = $"iFood: {stringValor}";
-            //    lblResumoTaxaEntrega.Text = lblFinalizarTaxaEntrega.Text = stringValor;
-            //    lblTaxaEntrega.Visible = true;
-            //    llConfirmacaoAlterarTaxaEntrega.Visible = false;
-            //    TaxaSelecionada = true;
-            //}
             if (Pedido1.TaxaEntrega != null)
             {
-                var stringValor = Pedido1.TaxaEntrega.Valor.Value.ToString("R$ #,##0.00", _provider);
+                decimal taxaEntrega = AppDelivery ? (Pedido1.ValorEntrega != null ? Pedido1.ValorEntrega.Value : 0) : Pedido1.TaxaEntrega.Valor.Value;
+                var stringValor = taxaEntrega.ToString("R$ #,##0.00", _provider);
                 rb3.Text = $"Taxa de Entrega\n{stringValor}";
                 lblTaxaEntrega.Text = $"{Pedido1.TaxaEntrega.Nome}: {stringValor}";
                 lblResumoTaxaEntrega.Text = lblFinalizarTaxaEntrega.Text = stringValor;
@@ -1270,7 +1244,7 @@ namespace a7D.PDV.Caixa.UI
 
             #region total
 
-            var totalGeral = TotalEntrega + ValorServico;
+            var totalGeral = TotalComEntrega + ValorServico;
             totalGeral = totalGeral - Pedido1.ValorDesconto.Value;
 
             lblTotalPedido.Text = totalGeral.ToString("R$ #,##0.00", _provider);
@@ -1471,7 +1445,7 @@ namespace a7D.PDV.Caixa.UI
 
             if (txtValorPagamento.Text == "")
             {
-                pagamento.Valor = TotalEntrega + ValorServico - Pedido1.ValorDesconto.Value - valorPago;
+                pagamento.Valor = TotalComEntrega + ValorServico - Pedido1.ValorDesconto.Value - valorPago;
             }
             else
             {
@@ -1485,7 +1459,7 @@ namespace a7D.PDV.Caixa.UI
             if (pagamento.TipoPagamento.IDTipoPagamento == 1)
                 valorPagoDinheiro += pagamento.Valor.Value;
 
-            var valorPendente = TotalEntrega + ValorServico - valorPago;
+            var valorPendente = TotalComEntrega + ValorServico - valorPago;
 
             if ((valorPagoDinheiro + valorPendente) < 0)
             {
@@ -1508,7 +1482,7 @@ namespace a7D.PDV.Caixa.UI
         private void AtualizarPainel()
         {
             lblPagamentoValorProdutos.Text = TotalProdutos.ToString("#,##0.00", _provider);
-            var total = TotalEntrega + ValorServico - Pedido1.ValorDesconto.Value;
+            var total = TotalComEntrega + ValorServico - Pedido1.ValorDesconto.Value;
             var valorPendente = total - ValorPago;
 
             lblPagamentoValorTotal.Text = total.ToString("#,##0.00", _provider);
@@ -1600,7 +1574,7 @@ namespace a7D.PDV.Caixa.UI
             #region validação pagamentos
             var pagamentos = Pedido1.ListaPagamento.Where(p => p.Status != StatusModel.Excluido).ToList();
 
-            if (existemProdutos && ValorPago < (TotalEntrega + ValorServico - (Pedido1.ValorDesconto ?? 0)))
+            if (existemProdutos && ValorPago < (TotalComEntrega + ValorServico - (Pedido1.ValorDesconto ?? 0)))
             {
                 msg += "Existem valores pendentes\n";
                 rb5.ImageIndex = 2;
@@ -1626,11 +1600,11 @@ namespace a7D.PDV.Caixa.UI
 
             if (descontoPercentual < 100)
             {
-                descontoReais = (TotalEntrega + ValorServico) * descontoPercentual / 100m;
+                descontoReais = (TotalComEntrega + ValorServico) * descontoPercentual / 100m;
             }
             else
             {
-                descontoReais = (TotalEntrega + ValorServico);
+                descontoReais = (TotalComEntrega + ValorServico);
             }
 
             descontoReais = Math.Truncate(descontoReais * 100m) / 100m;
@@ -1646,11 +1620,11 @@ namespace a7D.PDV.Caixa.UI
             if (!string.IsNullOrWhiteSpace(txtDescontoReais.Text))
                 descontoReais = Convert.ToDecimal(txtDescontoReais.Text);
 
-            if (descontoReais < (TotalEntrega + ValorServico))
-                descontoPercentual = descontoReais * 100m / (TotalEntrega + ValorServico);
+            if (descontoReais < (TotalComEntrega + ValorServico))
+                descontoPercentual = descontoReais * 100m / (TotalComEntrega + ValorServico);
             else
             {
-                descontoReais = (TotalEntrega + ValorServico);
+                descontoReais = (TotalComEntrega + ValorServico);
                 descontoPercentual = 100;
             }
 

@@ -177,6 +177,9 @@ namespace a7D.PDV.Caixa.UI.Controles
                     case (int)EOrigemPedido.deliveryOnline:
                         icone.Value = Resources.ico_pdv7;
                         break;
+                    case (int)EOrigemPedido.anotaai:
+                        icone.Value = Resources.anotaai;
+                        break;
                 }
 
                 if (Convert.ToInt32(item.Cells["IDStatusPedido"].Value) == (int)EStatusPedido.NaoConfirmado)

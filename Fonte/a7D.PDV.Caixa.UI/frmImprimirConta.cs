@@ -43,6 +43,7 @@ namespace a7D.PDV.Caixa.UI
                 Quantidade = Pedido1.NumeroPessoas.Value;
                 txtQuantidade.Text = Quantidade.ToString();
             }
+
             txtAcrescimoPorcentagem.Text = Pedido1.TaxaServicoPadrao.Value.ToString(_formatoNumero, _provider);
             txtAcrescimoReais.Text = Pedido1.ValorServicoTemp.ToString(_formatoNumero, _provider);
 
@@ -279,7 +280,7 @@ namespace a7D.PDV.Caixa.UI
 
         private void AtualizarPainel()
         {
-            var total = Pedido1.ValorTotalProdutos - (Pedido1.ValorDesconto ?? 0) + Pedido1.ValorServico.Value;
+            var total = Pedido1.ValorTotalProdutos - (Pedido1.ValorDesconto ?? 0) + (Pedido1.ValorServico ?? 0) + (Pedido1.ValorEntrega ?? 0);
             lblTotal.Text = total.ToString(_formatoNumero, _provider);
         }
 
