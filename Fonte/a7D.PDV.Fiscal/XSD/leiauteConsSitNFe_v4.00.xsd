@@ -15,8 +15,8 @@
 			<xs:element name="tpAmb" type="TAmb">
 				<xs:annotation>
 					<xs:documentation>Identificação do Ambiente:
-1 - Produção
-2 - Homologação</xs:documentation>
+						1 - Produção
+						2 - Homologação</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="xServ">
@@ -45,8 +45,8 @@
 			<xs:element name="tpAmb" type="TAmb">
 				<xs:annotation>
 					<xs:documentation>Identificação do Ambiente:
-1 - Produção
-2 - Homologação</xs:documentation>
+						1 - Produção
+						2 - Homologação</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="verAplic" type="TVerAplic">
@@ -111,8 +111,8 @@
 						<xs:element name="tpAmb" type="TAmb">
 							<xs:annotation>
 								<xs:documentation>Identificação do Ambiente:
-1 - Produção
-2 - Homologação</xs:documentation>
+									1 - Produção
+									2 - Homologação</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="verAplic" type="TVerAplic">
@@ -172,8 +172,8 @@
 						<xs:element name="tpAmb" type="TAmb">
 							<xs:annotation>
 								<xs:documentation>Identificação do Ambiente:
-1 - Produção
-2 - Homologação</xs:documentation>
+									1 - Produção
+									2 - Homologação</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="verAplic" type="TVerAplic">
@@ -235,8 +235,8 @@
 						<xs:element name="tpAmb" type="TAmb">
 							<xs:annotation>
 								<xs:documentation>Identificação do Ambiente:
-1 - Produção
-2 - Homologação</xs:documentation>
+									1 - Produção
+									2 - Homologação</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:choice>
@@ -311,7 +311,7 @@
 					<xs:attribute name="Id" use="required">
 						<xs:annotation>
 							<xs:documentation>Identificador da TAG a ser assinada, a regra de formação do Id é:
-“ID” + tpEvento +  chave da NF-e + nSeqEvento</xs:documentation>
+								“ID” + tpEvento +  chave da NF-e + nSeqEvento</xs:documentation>
 						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:ID">
@@ -336,8 +336,8 @@
 						<xs:element name="tpAmb" type="TAmb">
 							<xs:annotation>
 								<xs:documentation>Identificação do Ambiente:
-1 - Produção
-2 - Homologação</xs:documentation>
+									1 - Produção
+									2 - Homologação</xs:documentation>
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="verAplic" type="TVerAplic">
