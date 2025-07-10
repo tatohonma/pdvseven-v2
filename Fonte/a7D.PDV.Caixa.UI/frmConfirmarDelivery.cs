@@ -41,7 +41,7 @@ namespace a7D.PDV.Caixa.UI
                     Text = $"Pedido {Pedido.IDPedido} Anota-Ai {tagDisplayId.Valor}";
 
                     TagInformation tagStatus = BLL.Tag.Carregar(Pedido.GUIDIdentificacao, "anotaai-status");
-                    if(tagStatus.Valor == "em-producao")
+                    if(tagStatus.Valor == "1")
                         ConfirmarPedido();
 
                     ConfiguracoesAnotaAi configAnotaAi = new ConfiguracoesAnotaAi();
