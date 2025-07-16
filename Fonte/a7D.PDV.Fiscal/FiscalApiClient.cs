@@ -23,7 +23,7 @@ namespace a7D.PDV.Fiscal
         private Task<HttpResponseMessage> request;
         private HttpClient _client;
         private string codigoDeAtivacao;
-
+Q
         public FiscalApiClient(string endereco)
         {
             _client = new HttpClient
