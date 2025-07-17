@@ -106,7 +106,7 @@ namespace a7D.PDV.Fiscal.NFCe
                     Quantidade = g.Sum(x => x.Quantidade ?? 0)
                 };
 
-            var totalAgrupado = listaProdutoAgrupado.Sum(p => p.ValorTotal);
+            var totalAgrupado = listaProdutoAgrupado.Sum(p => p.ValorTotal + pedido.ValorEntrega);
             var totalSemAgrupar = listaProduto.Sum(p => p.ValorTotal);
 
             if (totalAgrupado != totalSemAgrupar)
@@ -125,7 +125,7 @@ namespace a7D.PDV.Fiscal.NFCe
 
             nfe.infNFe.det = new List<det>();
 
-            var totalProdutos = listaProdutoAgrupado.Sum(p => p.ValorTotal);
+            var totalProdutos = listaProdutoAgrupado.Sum(p => p.ValorTotal + pedido.ValorEntrega);
 
             var descontoPorItem = (pedido.ValorDesconto ?? 0) / totalProdutos;
 
@@ -148,8 +148,10 @@ namespace a7D.PDV.Fiscal.NFCe
                 //produto.ProdutoImposto = ProdutoImposto.Carregar(produto.ProdutoImposto.IDProdutoImposto.Value);
                 var pedidoproduto = listaProdutoAgrupado.ElementAt(i);
 
+                // pedidoproduto.ValorTotal += pedido.ValorEntrega; 
+
                 decimal? descontoDiluido = descontoPorItem > 0 ? descontoPorItem * pedidoproduto.ValorTotal : default(decimal?);
-                decimal? freteDiluido = fretePorItem > 0 ? fretePorItem * pedidoproduto.ValorTotal : default(decimal?);
+                // decimal? freteDiluido = fretePorItem > 0 ? fretePorItem * pedidoproduto.ValorTotal : default(decimal?);
 
                 nfe.infNFe.det.Add(new det());
                 nfe.infNFe.det[i].nItem = numeroItem;
@@ -173,9 +175,9 @@ namespace a7D.PDV.Fiscal.NFCe
                     vUnCom = pedidoproduto.ValorUnitario,
                     vUnTrib = pedidoproduto.ValorUnitario,
 
-                    vProd = pedidoproduto.ValorTotal, // Valor total bruto!
+                    vProd = pedidoproduto.ValorTotal , // Valor total bruto!
                     vDesc = descontoDiluido,
-                    vFrete = freteDiluido
+                    vFrete = pedido.ValorEntrega
                 };
 
                 if (string.IsNullOrEmpty(produto.ClassificacaoFiscal.TipoTributacao.CFOP))
@@ -443,6 +445,7 @@ namespace a7D.PDV.Fiscal.NFCe
             {
                 vProd = produtos.Sum(p => p.prod.vProd),
                 vDesc = produtos.Sum(p => p.prod.vDesc ?? 0),
+                vFrete = produtos.Sum(p => p.prod.vFrete ?? 0),
                 vTotTrib = produtos.Sum(p => p.imposto.vTotTrib ?? 0),
                 vICMSDeson = 0,
                 vFCPUFDest = 0,
