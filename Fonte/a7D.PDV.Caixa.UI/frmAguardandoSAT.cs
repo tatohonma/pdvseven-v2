@@ -60,7 +60,7 @@ namespace a7D.PDV.Caixa.UI
         {
             try
             {
-                status = "Peparando cupom fiscal...";
+                status = "Preparando cupom fiscal...";
                 var venda = FiscalServices.Venda(Pedido1, GerarNf, idPdv, idUsuario);
 
                 if (ConfiguracoesSistema.Valores.Fiscal == "NFCe")

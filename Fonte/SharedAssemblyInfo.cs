@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2025")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.25.4.2")]
+[assembly: AssemblyVersion("2.25.5.0")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -66,6 +66,9 @@ Lista das últimas versões e FIX
 
 ===============================================================================
 ===============================================================================
+
+2.25.5.0 ======================================================================
+    Novo: Integração NFc-e
 
 2.25.4.2 ======================================================================
     Correção: Ajuste das formas de pagamento que chegam do Anota Ai
