@@ -106,7 +106,7 @@ namespace a7D.PDV.Fiscal.NFCe
                     Quantidade = g.Sum(x => x.Quantidade ?? 0)
                 };
 
-            var totalAgrupado = listaProdutoAgrupado.Sum(p => p.ValorTotal + pedido.ValorEntrega);
+            var totalAgrupado = listaProdutoAgrupado.Sum(p => p.ValorTotal);
             var totalSemAgrupar = listaProduto.Sum(p => p.ValorTotal);
 
             if (totalAgrupado != totalSemAgrupar)
@@ -125,7 +125,7 @@ namespace a7D.PDV.Fiscal.NFCe
 
             nfe.infNFe.det = new List<det>();
 
-            var totalProdutos = listaProdutoAgrupado.Sum(p => p.ValorTotal + pedido.ValorEntrega);
+            var totalProdutos = listaProdutoAgrupado.Sum(p => p.ValorTotal);
 
             var descontoPorItem = (pedido.ValorDesconto ?? 0) / totalProdutos;
 
@@ -151,7 +151,7 @@ namespace a7D.PDV.Fiscal.NFCe
                 // pedidoproduto.ValorTotal += pedido.ValorEntrega; 
 
                 decimal? descontoDiluido = descontoPorItem > 0 ? descontoPorItem * pedidoproduto.ValorTotal : default(decimal?);
-                // decimal? freteDiluido = fretePorItem > 0 ? fretePorItem * pedidoproduto.ValorTotal : default(decimal?);
+                decimal? freteDiluido = fretePorItem > 0 ? fretePorItem * pedidoproduto.ValorTotal : default(decimal?);
 
                 nfe.infNFe.det.Add(new det());
                 nfe.infNFe.det[i].nItem = numeroItem;
@@ -177,7 +177,7 @@ namespace a7D.PDV.Fiscal.NFCe
 
                     vProd = pedidoproduto.ValorTotal , // Valor total bruto!
                     vDesc = descontoDiluido,
-                    vFrete = pedido.ValorEntrega
+                    vFrete = freteDiluido
                 };
 
                 if (string.IsNullOrEmpty(produto.ClassificacaoFiscal.TipoTributacao.CFOP))
