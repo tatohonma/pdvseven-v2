@@ -67,7 +67,7 @@ namespace a7D.PDV.Fiscal.NFCe
                         break;
                 }
             }
-
+            
             var listaProduto = new List<PedidoProdutoInformation>();
             ProdutoInformation produto;
             Int32 numeroItem = 0;

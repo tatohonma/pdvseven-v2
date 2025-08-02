@@ -62,12 +62,11 @@ namespace a7D.PDV.BLL
 
         public static bool ServicoComoProduto(ProdutoInformation produto)
         {
-            if (produto.IDProduto != ProdutoInformation.IDProdutoServico)
-                return true;
-            else if (ConfiguracoesSistema.Valores.ServicoComoItem)
-                return true;
+            //Retirada do item serviço da nota fiscal
+            if (produto?.TipoProduto?.IDTipoProduto == (int)ETipoProduto.Servico)
+                return false;
 
-            return false;
+            return true;
         }
 
         public static void SalvarDisponibilidade(int idProduto, Boolean disponibilidade)
