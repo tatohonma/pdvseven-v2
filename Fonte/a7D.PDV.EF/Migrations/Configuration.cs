@@ -105,6 +105,7 @@ namespace a7D.PDV.EF.Migrations
             AjustesVersao2_20_3_0(context, versao);
             AjustesVersao2_24_3_0(context, versao);
             AjustesVersao2_25_4_3(context, versao);
+            AjustesVersao2_25_5_3(context, versao);
 
             // Limpeza iFood e ERP: Remover futuramente
             if (versao != null && versao.ToVersion() < new Version("2.17.16.6"))
@@ -253,6 +254,22 @@ namespace a7D.PDV.EF.Migrations
                 );
 
                 log.AppendLine("AjustesVersao2_25_4_3: Meios de pagamento SAT adicionados/atualizados.");
+            }
+        }
+
+        void AjustesVersao2_25_5_3(pdv7Context context, tbVersao versao)
+        {
+            if (versao == null || versao.ToVersion() < new Version("2.25.5.3"))
+            {
+                context.Database.ExecuteSqlCommand(@"
+                    UPDATE tbTipoTributacao SET CFOP = '5405' WHERE IDTipoTributacao = 1;
+                    UPDATE tbTipoTributacao SET CFOP = '5102' WHERE IDTipoTributacao = 2;
+                    UPDATE tbClassificacaoFiscal SET NCM = '0000.00.00' WHERE IDClassificacaoFiscal IN (2, 13);
+                ");
+                
+                // ALTER TABLE tbProduto ALTER COLUMN Nome VARCHAR(120);
+
+                log.AppendLine("Ajuste versão 2.25.4.4: CFOPs e NCM atualizados. E alteração do tamanho do nome dos produtos");
             }
         }
     }

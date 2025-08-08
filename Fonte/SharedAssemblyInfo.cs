@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2025")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.25.5.1")]
+[assembly: AssemblyVersion("2.25.5.3")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -1151,5 +1151,10 @@ Lista das últimas versões e FIX
     
 2.17.11.1
     BUG: Erro ao ler configurações do caixa iDPDV
+    
+    
+2.25.5.3
+    alteração do valores da NCM da tabela TipoTributação
+    
 
 */
