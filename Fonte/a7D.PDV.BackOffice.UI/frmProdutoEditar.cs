@@ -623,7 +623,10 @@ namespace a7D.PDV.BackOffice.UI
 
             if (txtNome.Text.TemCaracteresEspeciais())
                 msg += "Há algum caracter não permitido no nome do produto, verifique os acentos, simbolos e espaços em branco";
-
+            if (txtNome.Text.Length > 120)
+            {
+                msg += "O nome do produto não pode ter mais de 120 caracteres";
+            }
             if (txtDescricao.Text.TemCaracteresEspeciais())
                 msg += "Há algum caracter não permitido na descrição do produto, verifique os acentos, simbolos e espaços em branco";
 

@@ -268,7 +268,7 @@
             this.txtNome.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNome.Location = new System.Drawing.Point(2, 126);
             this.txtNome.Margin = new System.Windows.Forms.Padding(2);
-            this.txtNome.MaxLength = 100;
+            this.txtNome.MaxLength = 120;
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(706, 25);
             this.txtNome.TabIndex = 3;
@@ -358,8 +358,7 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabDadosPrincipais);
             this.tabControl1.Controls.Add(this.tabCategorias);
             this.tabControl1.Controls.Add(this.tabModificacoes);
@@ -720,11 +719,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvCategoriasProduto.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCategoriasProduto.ColumnHeadersHeight = 40;
-            this.dgvCategoriasProduto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IDProdutoCategoriaProduto,
-            this.colIDCategoriaProduto,
-            this.Categoria,
-            this.RemoverCategoria});
+            this.dgvCategoriasProduto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.IDProdutoCategoriaProduto, this.colIDCategoriaProduto, this.Categoria, this.RemoverCategoria });
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 11.25F);
@@ -861,13 +856,7 @@
             dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvPainelModificacao.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvPainelModificacao.ColumnHeadersHeight = 40;
-            this.dgvPainelModificacao.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IDProdutoPainelModificacao,
-            this.colIDPainelModificacao,
-            this.Painel,
-            this.Subir,
-            this.Descer,
-            this.Remover});
+            this.dgvPainelModificacao.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.IDProdutoPainelModificacao, this.colIDPainelModificacao, this.Painel, this.Subir, this.Descer, this.Remover });
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 11.25F);
@@ -1020,9 +1009,7 @@
             dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
             dataGridViewCellStyle11.Font = new System.Drawing.Font("Arial", 11.25F);
             this.dgvAreaProducao.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
-            this.dgvAreaProducao.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvAreaProducao.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvAreaProducao.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAreaProducao.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvAreaProducao.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
@@ -1040,11 +1027,7 @@
             dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvAreaProducao.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dgvAreaProducao.ColumnHeadersHeight = 40;
-            this.dgvAreaProducao.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewImageColumn7,
-            this.colIDAreaImpressao,
-            this.colIDMapAreaImpressaoProduto,
-            this.colNomeAreaImpressao});
+            this.dgvAreaProducao.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.dataGridViewImageColumn7, this.colIDAreaImpressao, this.colIDMapAreaImpressaoProduto, this.colNomeAreaImpressao });
             dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle13.Font = new System.Drawing.Font("Arial", 11.25F);
@@ -1171,13 +1154,7 @@
             dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvTraducao.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.dgvTraducao.ColumnHeadersHeight = 40;
-            this.dgvTraducao.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IDProdutoTraducao,
-            this.dataGridViewTextBoxColumn2,
-            this.Nome,
-            this.Descricao,
-            this.EditarTraducao,
-            this.RemoverTraducao});
+            this.dgvTraducao.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.IDProdutoTraducao, this.dataGridViewTextBoxColumn2, this.Nome, this.Descricao, this.EditarTraducao, this.RemoverTraducao });
             dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle18.Font = new System.Drawing.Font("Arial", 11.25F);
@@ -1275,9 +1252,7 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -1309,8 +1284,7 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.salvarImagemToolStripMenuItem});
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.salvarImagemToolStripMenuItem });
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(153, 26);
             // 
@@ -1416,9 +1390,7 @@
             dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
             dataGridViewCellStyle21.Font = new System.Drawing.Font("Arial", 11.25F);
             this.dgvReceita.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
-            this.dgvReceita.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvReceita.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvReceita.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvReceita.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvReceita.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
@@ -1436,12 +1408,7 @@
             dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvReceita.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.dgvReceita.ColumnHeadersHeight = 40;
-            this.dgvReceita.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewImageColumn8,
-            this.IDProdutoReceita,
-            this.colProduto,
-            this.colUnidade,
-            this.Quantidade});
+            this.dgvReceita.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.dataGridViewImageColumn8, this.IDProdutoReceita, this.colProduto, this.colUnidade, this.Quantidade });
             dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle23.Font = new System.Drawing.Font("Arial", 11.25F);
@@ -1639,11 +1606,7 @@
             dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvTags.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle27;
             this.dgvTags.ColumnHeadersHeight = 40;
-            this.dgvTags.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IDTag,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.excluir});
+            this.dgvTags.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.IDTag, this.dataGridViewTextBoxColumn3, this.dataGridViewTextBoxColumn4, this.excluir });
             dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle28.Font = new System.Drawing.Font("Arial", 11.25F);
@@ -1860,7 +1823,6 @@
             this.pnlTags.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTags)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         #endregion
