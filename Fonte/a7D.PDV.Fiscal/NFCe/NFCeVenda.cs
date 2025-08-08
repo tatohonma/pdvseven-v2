@@ -159,7 +159,7 @@ namespace a7D.PDV.Fiscal.NFCe
                 {
                     indTot = IndicadorTotal.ValorDoItemCompoeTotalNF,
                     cProd = pedidoproduto.IDProduto.ToString(),
-                    xProd = produto.Nome,
+                    xProd = RemoveInvalidCharacters(produto.Nome),
 
                     NCM = string.IsNullOrEmpty(produto.ClassificacaoFiscal.NCM) ? string.Empty : produto.ClassificacaoFiscal.NCM.Replace(".", string.Empty),
                     CEST = string.IsNullOrEmpty(produto.ClassificacaoFiscal.CEST) ? null : produto.ClassificacaoFiscal.CEST.Replace(".", string.Empty),
@@ -208,6 +208,30 @@ namespace a7D.PDV.Fiscal.NFCe
             }
 
             return new NFCe { nfe = nfe };
+        }
+        static string RemoveInvalidCharacters(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return "Produto sem nome";
+            }
+
+            // Substitui caracteres invisíveis comuns
+            string value = input
+                .Replace("\u00A0", " ")
+                .Replace("\u200B", "")
+                .Replace("\uFEFF", "")
+                .Replace("\t", " ")
+                .Replace("\n", " ")
+                .Replace("\r", " ");
+
+            value = System.Text.RegularExpressions.Regex.Replace(value, @"\s+", " ");
+
+            value = System.Text.RegularExpressions.Regex.Replace(value, @"[^0-9A-Za-zÀ-ÿ\s\.,;:/()%+]", "");
+
+            value = value.Trim();
+
+            return value;
         }
 
         private static imposto ImpostoProduto(TipoTributacaoInformation tributacao, decimal vProd)
@@ -502,4 +526,6 @@ namespace a7D.PDV.Fiscal.NFCe
             return t;
         }
     }
+    
+ 
 }
