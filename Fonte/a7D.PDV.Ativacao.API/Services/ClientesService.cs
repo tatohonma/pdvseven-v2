@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace a7D.PDV.Ativacao.API.Services
+﻿namespace a7D.PDV.Ativacao.API.Services
 {
     public static class ClientesService
     {

@@ -1,281 +1,290 @@
-﻿using a7D.PDV.Ativacao.API.Filters;
-using a7D.PDV.Ativacao.API.Services;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Globalization;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
+﻿using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using a7D.PDV.Ativacao.API.Data;
+using a7D.PDV.Ativacao.API.Repository;
+using a7D.PDV.Ativacao.API.Model;
 
-namespace a7D.PDV.Ativacao.API.Controllers
+namespace a7D.PDV.Ativacao.API.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+[Authorize]
+public class ActivationsController : BaseSecureApiController
 {
+    private static readonly CultureInfo CulturePtBr = new("pt-BR");
+    private static readonly TimeZoneInfo BrazilTz = GetBrazilTz();
 
-    public class AtivacoesController : BaseSecureApiController
+    public ActivationsController(ApplicationDbContext db, UsuariosRepository usuarios)
+        : base(db, usuarios) { }
+
+    public class Filter
     {
-        private static readonly CultureInfo _cultureInfo = new CultureInfo("pt-BR");
-        private static readonly TimeZoneInfo _brasiliaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time");
+        public string? Client { get; set; }
+        public string? ActivationKey { get; set; }
+        public string? IsActive { get; set; }
+        public string? ReactivatedBySupport { get; set; }
+        public string? IsDuplicate { get; set; }
+        public string? Notes { get; set; }
+    }
 
-        public class Filter
+    // GET: api/activations
+    [HttpGet]
+    public async Task<IActionResult> GetActivations(
+        [FromQuery] int page = 0,
+        [FromQuery] int count = 0,
+        [FromQuery] Filter? filter = null,
+        CancellationToken ct = default)
+    {
+        IQueryable<Activation> query = Db.Activations
+            .AsNoTracking()
+            .Include(a => a.Client)
+            .Include(a => a.PDVs)
+            .OrderBy(a => a.Client.Name);
+
+        if (filter is not null)
         {
-            public string Cliente { get; set; }
-            public string ChaveAtivacao { get; set; }
-            public string Ativo { get; set; }
-            public string ReativadoSuporte { get; set; }
-            public string Duplicidade { get; set; }
-            public string Observacao { get; set; }
+            if (!string.IsNullOrWhiteSpace(filter.Client))
+                query = query.Where(a => a.Client.Name.Contains(filter.Client));
+
+            if (!string.IsNullOrWhiteSpace(filter.ActivationKey))
+                query = query.Where(a => a.ActivationKey.Contains(filter.ActivationKey));
+
+            if (!string.IsNullOrWhiteSpace(filter.IsActive))
+                query = query.Where(a => a.IsActive == (filter.IsActive == "1"));
+
+            if (!string.IsNullOrWhiteSpace(filter.IsDuplicate))
+                query = query.Where(a => a.IsDuplicate == (filter.IsDuplicate == "1"));
+
+            if (!string.IsNullOrWhiteSpace(filter.Notes))
+                query = query.Where(a => a.Notes!.Contains(filter.Notes));
+
+            if (!string.IsNullOrWhiteSpace(filter.ReactivatedBySupport))
+                query = query.Where(a => a.ReactivatedBySupport == (filter.ReactivatedBySupport == "1"));
         }
 
-        // GET: api/Ativacoes
-        [CustomHeaderFilter]
-        [ApiAuth(requerAdm: false)]
-        public IHttpActionResult GetAtivacoes([FromUri]int page = 0, [FromUri]int count = 0, [FromUri]Filter filter = null)
+        var total = await query.CountAsync(ct);
+
+        if (page > 0 && count > 0)
+            query = query.Skip((page - 1) * count);
+        if (count > 0)
+            query = query.Take(count);
+
+        var result = await query.ToListAsync(ct);
+
+        // Ajuste de fuso horário
+        foreach (var a in result)
         {
-            try
+            a.LastCheckedAt = ConvertUtcToTz(a.LastCheckedAt, BrazilTz);
+
+            if (a.PDVs is not null)
             {
-                IQueryable<Entities.Ativacao> query;
-                query = db.Ativacoes
-                        .OrderBy(a => a.Cliente.Nome);
-
-                if (filter != null)
-                {
-                    if (!string.IsNullOrWhiteSpace(filter.Cliente))
-                        query = query.Where(a => a.Cliente.Nome.Contains(filter.Cliente));
-                    if (!string.IsNullOrWhiteSpace(filter.ChaveAtivacao))
-                        query = query.Where(a => a.ChaveAtivacao.Contains(filter.ChaveAtivacao));
-                    if (!string.IsNullOrWhiteSpace(filter.Ativo))
-                        query = query.Where(a => a.Ativo == (filter.Ativo == "1"));
-                    if (!string.IsNullOrWhiteSpace(filter.Duplicidade))
-                        query = query.Where(a => a.Duplicidade == (filter.Duplicidade == "1"));
-                    if (!string.IsNullOrWhiteSpace(filter.Observacao))
-                        query = query.Where(a => a.Observacao.Contains(filter.Observacao));
-                    if (!string.IsNullOrWhiteSpace(filter.ReativadoSuporte))
-                        query = query.Where(a => a.ReativadoSuporte == (filter.ReativadoSuporte == "1"));
-                }
-
-                var total = query.ToList().Count();
-                Request.Properties["count"] = total.ToString();
-
-                if (page > 0)
-                    query = query.Skip((page - 1) * count);
-                if (count > 0)
-                    query = query.Take(count);
-                var result = query.ToList();
-
-                result.ForEach(a =>
-                {
-                    a.DtUltimaVerificacao = a.DtUltimaVerificacao.HasValue ? TimeZoneInfo.ConvertTimeFromUtc(a.DtUltimaVerificacao.Value, _brasiliaTimeZone) : null as DateTime?;
-                });
-
-                var resultUnproxed = new List<Entities.Ativacao>();
-
-                result.ForEach(a =>
-                {
-                    var unproxed = db.UnProxy(a);
-                    unproxed.Cliente = db.UnProxy(db.Clientes.Find(unproxed.IDCliente));
-                    unproxed.PDVs = db.UnProxy(a.PDVs.ToList()).ToList();
-                    resultUnproxed.Add(unproxed);
-                });
-
-                resultUnproxed.ForEach(a =>
-                {
-                    a.Cliente = db.UnProxy(db.Clientes.Find(a.IDCliente));
-                });
-
-                if (!IsAdminRequest())
-                {
-                    resultUnproxed.ForEach(a =>
-                    {
-                        a.DataAtivacao = null;
-                        a.PDVs = null;
-                        a.Observacao = null;
-                        a.Licencas = null;
-                        a.DiasValidadeAtivacao = -1;
-                    });
-                }
-
-                //return Json(new { status = HttpStatusCode.OK, ativacoes = result });
-                var response = Request.CreateResponse(HttpStatusCode.OK, resultUnproxed);
-                return ResponseMessage(response);
-            }
-            catch (Exception ex)
-            {
-                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message, ex));
+                foreach (var pdv in a.PDVs)
+                    pdv.UpdatedAt = ConvertUtcToTz(pdv.UpdatedAt, BrazilTz);
             }
         }
 
-        // GET: api/Ativacoes/5
-        [ResponseType(typeof(Entities.Ativacao))]
-        [ApiAuth]
-        public IHttpActionResult GetAtivacao(int id)
+        if (!IsAdminRequest())
         {
-            Entities.Ativacao ativacao = db.Ativacoes.Find(id);
-            if (ativacao == null)
+            foreach (var a in result)
             {
+                a.ActivatedAt = null;
+                a.PDVs = null;
+                a.Notes = null;
+                a.LicensesHtml = null!;
+                a.ValidityDays = -1;
+            }
+        }
+
+        Response.Headers["X-Total-Count"] = total.ToString(CulturePtBr);
+        return Ok(result);
+    }
+
+    // GET: api/activations/5
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetActivation([FromRoute] int id, CancellationToken ct = default)
+    {
+        var activation = await Db.Activations
+            .Include(a => a.PDVs)
+            .Include(a => a.Client)
+            .FirstOrDefaultAsync(a => a.Id == id, ct);
+
+        if (activation is null)
+            return NotFound();
+
+        activation.LastCheckedAt = ConvertUtcToTz(activation.LastCheckedAt, BrazilTz);
+
+        if (activation.PDVs is not null)
+        {
+            activation.PDVs = activation.PDVs
+                .OrderBy(p => p.PdvTypeId)
+                .ToList();
+
+            foreach (var pdv in activation.PDVs)
+                pdv.UpdatedAt = ConvertUtcToTz(pdv.UpdatedAt, BrazilTz);
+        }
+
+        return Ok(activation);
+    }
+
+    // GET: api/activations/client/{key}
+    [HttpGet("client/{key}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetActivationByKey([FromRoute] string key, CancellationToken ct = default)
+    {
+        var activation = await Db.Activations
+            .AsNoTracking()
+            .Include(a => a.Client)
+            .FirstOrDefaultAsync(a => a.ActivationKey == key, ct);
+
+        if (activation is null)
+            return NotFound();
+
+        var client = new
+        {
+            Establishment = activation.Client.Name,
+            activation.Client.CompanyName,
+            TaxId = (activation.Client.TaxId ?? string.Empty)
+                .Replace(".", string.Empty)
+                .Replace(",", string.Empty),
+        };
+
+        return Ok(client);
+    }
+
+    // PUT: api/activations/5
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> PutActivation([FromRoute] int id, [FromBody] Activation payload, CancellationToken ct = default)
+    {
+        if (!ModelState.IsValid || payload is null)
+            return ValidationProblem(ModelState);
+
+        if (id != payload.Id)
+            return BadRequest("Route id differs from body id.");
+
+        Db.Attach(payload);
+
+        if (!payload.ReactivatedBySupport)
+        {
+            payload.SupportReactivatedAt = null;
+            payload.ProvisionalValidityUntil = null;
+        }
+        else
+        {
+            var now = DateTime.UtcNow;
+            payload.IsActive = false;
+            payload.SupportReactivatedAt = now;
+            payload.ProvisionalValidityUntil = now.AddDays(3);
+        }
+
+        if (payload.PDVs is not null)
+        {
+            foreach (var pdv in payload.PDVs.Where(p => p.Id == 0))
+                Db.Entry(pdv).State = EntityState.Added;
+
+            foreach (var pdv in payload.PDVs.Where(p => p.Id != 0))
+            {
+                if (payload.SiteAdmin == null)
+                    pdv.UpdatedAt = DateTime.UtcNow;
+
+                Db.Entry(pdv).State = EntityState.Modified;
+            }
+        }
+
+        Db.Entry(payload).State = EntityState.Modified;
+
+        UpdateInstallationIds(payload);
+
+        try
+        {
+            await Db.SaveChangesAsync(ct);
+            return Ok(payload);
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            var exists = await Db.Activations.AnyAsync(a => a.Id == id, ct);
+            if (!exists)
                 return NotFound();
-            }
 
-            ativacao.DtUltimaVerificacao = ativacao.DtUltimaVerificacao.HasValue ? TimeZoneInfo.ConvertTimeFromUtc(ativacao.DtUltimaVerificacao.Value, _brasiliaTimeZone) : null as DateTime?;
-
-            db.Entry(ativacao).Collection(a => a.PDVs).Load();
-            ativacao.PDVs = ativacao.PDVs
-                    .OrderBy(pdv => pdv.IDTipoPDV)
-                    //.OrderBy(pdv => pdv.IDPDV_instalacao)
-                    //.OrderBy(pdv => pdv.Ativo)
-                    .ToList();
-            ativacao.PDVs.ForEach(pdv =>
-            {
-                pdv.DtUltimaAlteracao = pdv.DtUltimaAlteracao.HasValue ? TimeZoneInfo.ConvertTimeFromUtc(pdv.DtUltimaAlteracao.Value, _brasiliaTimeZone) : null as DateTime?;
-            });
-            return Ok(ativacao);
+            return Problem(
+                title: "Concurrency conflict while saving activation",
+                detail: ex.ToString(),
+                statusCode: StatusCodes.Status500InternalServerError);
         }
-
-        // GET: api/ativacoes/cliente/001-06079-14
-        [Route("api/ativacoes/cliente/{chave}")]
-        public IHttpActionResult GetAtivacaoPorChave(string chave)
+        catch (Exception ex)
         {
-            var ativacao = db.Ativacoes.FirstOrDefault(a => a.ChaveAtivacao == chave);
-            if (ativacao == null)
-            {
-                return NotFound();
-            }
-            dynamic cliente = new
-            {
-                Estabelecimento = ativacao.Cliente.Nome,
-                ativacao.Cliente.RazaoSocial,
-                CNPJ = ativacao.Cliente.CNPJCPF
-                        .ToString()
-                        .Replace(".", string.Empty)
-                        .Replace(",", string.Empty),
-            };
-            return Json(cliente);
-        }
-
-        // PUT: api/Ativacoes/5
-        [ResponseType(typeof(void))]
-        [HttpPut]
-        [ApiAuth]
-        public IHttpActionResult PutAtivacao(int id, Entities.Ativacao ativacaoRecebida)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != ativacaoRecebida.IDAtivacao)
-            {
-                return BadRequest();
-            }
-
-            if (ativacaoRecebida.ReativadoSuporte == false)
-            {
-                ativacaoRecebida.DataReativacaoSuporte = null;
-                ativacaoRecebida.DataValidadeProvisoria = null;
-            }
-            else
-            {
-                var agora = DateTime.Now;
-                ativacaoRecebida.Ativo = false;
-                ativacaoRecebida.DataReativacaoSuporte = agora;
-                ativacaoRecebida.DataValidadeProvisoria = agora.AdicionarDiasUteis(3);
-            }
-
-            //ativacaoRecebida.PDVs.Where(pdv => pdv.Deletado && pdv.IDPDV != 0).ToList().ForEach(pdv => db.Entry(pdv).State = EntityState.Deleted);
-            ativacaoRecebida.PDVs.Where(pdv => pdv.IDPDV == 0).ToList().ForEach(pdv => db.Entry(pdv).State = EntityState.Added);
-            ativacaoRecebida.PDVs.Where(pdv => pdv.IDPDV != 0).ToList().ForEach(pdv =>
-            {
-                if (ativacaoRecebida.SiteAdmin == null)
-                    pdv.DtUltimaAlteracao = DateTime.UtcNow;
-
-                db.Entry(pdv).State = EntityState.Modified;
-            });
-
-            db.Entry(ativacaoRecebida).State = EntityState.Modified;
-
-            AtualizarIDInstalacao(ativacaoRecebida);
-
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                if (!AtivacaoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    //var result = new StatusCodeResult(HttpStatusCode.InternalServerError, this);
-                    //return StatusCode(HttpStatusCode.InternalServerError);
-                    return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message, ex));
-
-                }
-            }
-            catch (Exception ex)
-            {
-                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message, ex));
-            }
-            return Ok(ativacaoRecebida);
-        }
-
-        private void AtualizarIDInstalacao(Entities.Ativacao ativacao)
-        {
-            var qdb = db.PDVs.Where(pdv => pdv.IDAtivacao == ativacao.IDAtivacao && pdv.IDPDV_instalacao.HasValue).ToList();
-            var maxdb = qdb.Count > 0 ? qdb.Max(pdv => pdv.IDPDV_instalacao.Value) : 0;
-            var qrec = ativacao.PDVs.Where(pdv => db.Entry(pdv).State != EntityState.Deleted && pdv.IDPDV_instalacao.HasValue).ToList();
-            var maxrecieved = qrec.Count > 0 ? qrec.Max(pdv => pdv.IDPDV_instalacao.Value) : 0;
-
-            var nextId = Math.Max(maxdb, maxrecieved) + 1;
-
-            ativacao.PDVs.Where(pdv => !pdv.IDPDV_instalacao.HasValue).ToList().ForEach(pdv =>
-            {
-                pdv.IDPDV_instalacao = nextId++;
-            });
-        }
-
-        // POST: api/Ativacoes
-        [ResponseType(typeof(Entities.Ativacao))]
-        [ApiAuth]
-        public IHttpActionResult PostAtivacao(Entities.Ativacao ativacao)
-        {
-            if (!ModelState.IsValid || ativacao == null)
-            {
-                return BadRequest(ModelState);
-            }
-            ativacao.Cliente = db.Clientes.Find(ativacao.IDCliente);
-            db.Ativacoes.Add(ativacao);
-            AtualizarIDInstalacao(ativacao);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = ativacao.IDAtivacao }, ativacao);
-        }
-
-        // DELETE: api/Ativacoes/5
-        [ResponseType(typeof(Entities.Ativacao))]
-        [ApiAuth]
-        public IHttpActionResult DeleteAtivacao(int id)
-        {
-            Entities.Ativacao ativacao = db.Ativacoes.Find(id);
-            if (ativacao == null)
-            {
-                return NotFound();
-            }
-
-            db.Ativacoes.Remove(ativacao);
-            db.SaveChanges();
-
-            return Ok(ativacao);
-        }
-
-        private bool AtivacaoExists(int id)
-        {
-            return db.Ativacoes.Count(e => e.IDAtivacao == id) > 0;
+            return Problem(
+                title: "Error while updating activation",
+                detail: ex.ToString(),
+                statusCode: StatusCodes.Status500InternalServerError);
         }
     }
+
+    // POST: api/activations
+    [HttpPost]
+    public async Task<IActionResult> PostActivation([FromBody] Activation activation, CancellationToken ct = default)
+    {
+        if (!ModelState.IsValid || activation is null)
+            return ValidationProblem(ModelState);
+
+        activation.Client = await Db.Clients.FindAsync(new object?[] { activation.ClientId }, ct);
+
+        await Db.Activations.AddAsync(activation, ct);
+        UpdateInstallationIds(activation);
+
+        await Db.SaveChangesAsync(ct);
+
+        return CreatedAtAction(nameof(GetActivation), new { id = activation.Id }, activation);
+    }
+
+    // DELETE: api/activations/5
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> DeleteActivation([FromRoute] int id, CancellationToken ct = default)
+    {
+        var activation = await Db.Activations.FirstOrDefaultAsync(a => a.Id == id, ct);
+        if (activation is null)
+            return NotFound();
+
+        Db.Activations.Remove(activation);
+        await Db.SaveChangesAsync(ct);
+
+        return Ok(activation);
+    }
+
+    // ===== Helpers =====
+
+    void UpdateInstallationIds(Activation activation)
+    {
+        var maxDb = Db.PdVs
+            .Where(p => p.ActivationId == activation.Id && p.InstallationPdvId.HasValue)
+            .Select(p => p.InstallationPdvId!.Value)
+            .DefaultIfEmpty(0)
+            .Max();
+
+        var received = activation.PDVs?
+            .Where(p => Db.Entry(p).State != EntityState.Deleted && p.InstallationPdvId.HasValue)
+            .Select(p => p.InstallationPdvId!.Value)
+            .DefaultIfEmpty(0)
+            .ToList() ?? new List<int>();
+
+        var maxReceived = received.Count > 0 ? received.Max() : 0;
+        var nextId = Math.Max(maxDb, maxReceived) + 1;
+
+        if (activation.PDVs is null) return;
+
+        foreach (var pdv in activation.PDVs.Where(p => !p.InstallationPdvId.HasValue))
+            pdv.InstallationPdvId = nextId++;
+    }
+
+    private static TimeZoneInfo GetBrazilTz()
+    {
+        try { return TimeZoneInfo.FindSystemTimeZoneById("America/Sao_Paulo"); }
+        catch { return TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time"); }
+    }
+
+    private static DateTime? ConvertUtcToTz(DateTime? dtUtc, TimeZoneInfo tz)
+        => dtUtc.HasValue
+            ? TimeZoneInfo.ConvertTimeFromUtc(DateTime.SpecifyKind(dtUtc.Value, DateTimeKind.Utc), tz)
+            : null;
 }

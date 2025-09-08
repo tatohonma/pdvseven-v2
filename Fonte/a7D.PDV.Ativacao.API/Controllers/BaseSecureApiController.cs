@@ -1,91 +1,70 @@
-﻿using a7D.PDV.Ativacao.API.Context;
-using a7D.PDV.Ativacao.API.Entities;
+﻿using System.Security.Claims;
+using a7D.PDV.Ativacao.API.Data;
+using a7D.PDV.Ativacao.API.Model;
 using a7D.PDV.Ativacao.API.Repository;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens;
-using System.Linq;
-using System.ServiceModel.Security.Tokens;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Http;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace a7D.PDV.Ativacao.API.Controllers
+namespace a7D.PDV.Ativacao.API.Controllers;
+
+// Em APIs novas, a rota costuma ser definida nos controllers concretos.
+// Se preferir, você pode manter um Route aqui também.
+[ApiController]
+[Authorize] // Garante que apenas requisições autenticadas acessem controladores que herdam desta base
+public abstract class BaseSecureApiController : ControllerBase
 {
-    public abstract class BaseSecureApiController : ApiController
+    protected readonly ApplicationDbContext Db;
+    protected readonly UsuariosRepository Usuarios;
+
+    protected BaseSecureApiController(ApplicationDbContext db, UsuariosRepository usuarios)
     {
-        protected AtivacaoContext db;
-        protected UsuariosRepository usuarios;
+        Db = db;
+        Usuarios = usuarios;
+    }
 
-        public BaseSecureApiController()
-        {
-            db = new AtivacaoContext();
-            usuarios = new UsuariosRepository(db);
-        }
+    /// <summary>
+    /// Verifica se a requisição possui a claim de "role" com valor "adm".
+    /// Também considera ClaimTypes.Role (caso a lib de emissão mude o type).
+    /// </summary>
+    protected bool IsAdminRequest()
+    {
+        var user = HttpContext?.User;
+        if (user is null || !user.Identity?.IsAuthenticated == true)
+            return false;
 
-        protected bool IsAdminRequest()
-        {
-            var token = ObterTokenRequisicao();
-            return token?.Claims?.Any(c => c.Type == "role" && c.Value == "adm") == true;
-        }
+        return user.IsInRole("adm")
+               || HasClaim(user, "role", "adm")
+               || HasClaim(user, ClaimTypes.Role, "adm");
+    }
 
-        private JwtSecurityToken ObterTokenRequisicao()
-        {
-            try
-            {
-                var auth = Request.Headers.GetValues("x-auth-token").ToList();
-                if (auth != null && auth.Count() > 0)
-                {
-                    var jwt = auth[0];
-                    var tokenHandler = new JwtSecurityTokenHandler();
+    static bool HasClaim(ClaimsPrincipal user, string type, string value)
+        => user.HasClaim(c => c.Type == type && c.Value == value);
 
-                    var securityKey = GetBytes("ThisIsAnImportantStringAndIHaveNoIdeaIfThisIsVerySecureOrNot!");
-                    var validationParameters = new TokenValidationParameters()
-                    {
-                        ValidateAudience = false,
-                        ValidIssuer = "self",
-                        IssuerSigningToken = new BinarySecretSecurityToken(securityKey),
-                        ValidateLifetime = true,
-                        RequireExpirationTime = false
-                    };
-
-                    SecurityToken secureToken;
-                    tokenHandler.ValidateToken(jwt, validationParameters, out secureToken);
-                    var jwtToken = secureToken as JwtSecurityToken;
-                    return jwtToken;
-                }
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+    /// <summary>
+    /// Retorna o usuário associado ao token da requisição, usando o SID (Id) da claim.
+    /// </summary>
+    protected async Task<Usuario?> UsuarioRequisicaoAsync(CancellationToken ct = default)
+    {
+        var id = ObterUsuarioIdDasClaims();
+        if (id is null)
             return null;
-        }
 
-        protected async Task<Usuario> UsuarioRequisicaoAsync()
-        {
-            var token = ObterTokenRequisicao();
-            if (token != null)
-            {
-                return await usuarios.BuscarPorId(Convert.ToInt32(token.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid").Value));
-            }
+        return await Usuarios.GetAsync(id.Value, ct);
+    }
+
+    /// <summary>
+    /// Tenta ler o Id do usuário a partir de ClaimTypes.Sid (ou "sid").
+    /// </summary>
+    protected int? ObterUsuarioIdDasClaims()
+    {
+        var user = HttpContext?.User;
+        if (user is null || !user.Identity?.IsAuthenticated == true)
             return null;
-        }
 
+        var sid = user.FindFirstValue(ClaimTypes.Sid) ?? user.FindFirstValue("sid");
+        if (int.TryParse(sid, out var id))
+            return id;
 
-        static byte[] GetBytes(string str)
-        {
-            byte[] bytes = new byte[str.Length * sizeof(char)];
-            System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
-            return bytes;
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-        }
+        return null;
     }
 }

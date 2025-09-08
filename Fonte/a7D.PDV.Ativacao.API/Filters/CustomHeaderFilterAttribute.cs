@@ -1,16 +1,21 @@
-﻿using System.Web.Http.Filters;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Http;
 
 namespace a7D.PDV.Ativacao.API.Filters
 {
     public class CustomHeaderFilterAttribute : ActionFilterAttribute
     {
-        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
+        public override void OnActionExecuted(ActionExecutedContext context)
         {
-            if (actionExecutedContext.Request.Properties != null && actionExecutedContext.Request.Properties.ContainsKey("count"))
+            if (context.HttpContext.Items.ContainsKey("count"))
             {
-                if (actionExecutedContext.Request.Properties["count"] is string count)
-                    actionExecutedContext.Response.Headers.Add("count", count);
+                if (context.HttpContext.Items["count"] is string count)
+                {
+                    context.HttpContext.Response.Headers.Append("count", count);
+                }
             }
+
+            base.OnActionExecuted(context);
         }
     }
 }

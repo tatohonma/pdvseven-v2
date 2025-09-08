@@ -1,25 +1,21 @@
-﻿using a7D.PDV.Ativacao.API.Context;
-using a7D.PDV.Ativacao.API.Entities;
-using System.Collections.Generic;
-using System.Linq;
+﻿using a7D.PDV.Ativacao.API.Data;
+using a7D.PDV.Ativacao.API.Model;
 
 namespace a7D.PDV.Ativacao.API.Repository
 {
-    public class TipoPDVRepository : BaseRepository<TipoPDV>
+    public class TipoPDVRepository : BaseRepository<PdvType>
     {
-        public static List<TipoPDV> Lista;
+        public static List<PdvType> Lista;
 
-        public TipoPDVRepository(AtivacaoContext context) : base(context)
-        {
-        }
+        public TipoPDVRepository(ApplicationDbContext context) : base(context)
+        { }
 
-        public static void PreencheLista()
+        public static void PreencheLista(IServiceProvider serviceProvider)
         {
-            using (var db = new AtivacaoContext())
-            {
-                var pdv = new TipoPDVRepository(db);
-                Lista = pdv._set.ToList();
-            }
+            using var scope = serviceProvider.CreateScope();
+            var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            var pdv = new TipoPDVRepository(db);
+            Lista = pdv.Set.ToList();
         }
     }
 }

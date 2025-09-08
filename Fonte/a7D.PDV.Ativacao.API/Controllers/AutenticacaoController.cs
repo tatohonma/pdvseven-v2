@@ -1,103 +1,125 @@
-﻿using a7D.PDV.Ativacao.API.Context;
-using a7D.PDV.Ativacao.API.Entities;
-using a7D.PDV.Ativacao.API.Exceptions;
-using a7D.PDV.Ativacao.API.Filters;
-using a7D.PDV.Ativacao.API.Repository;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Protocols.WSTrust;
-using System.IdentityModel.Tokens;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web.Http;
+using a7D.PDV.Ativacao.API.Exceptions;
+using a7D.PDV.Ativacao.API.Model; 
+// using a7D.PDV.Ativacao.API.Repositories; 
+// using a7D.PDV.Ativacao.API.Models;
+using a7D.PDV.Ativacao.API.Repository;
+using a7D.PDV.Ativacao.API.Services; 
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.Data;
+using Microsoft.AspNetCore.Mvc;
 
-namespace a7D.PDV.Ativacao.API.Controllers
+namespace a7D.PDV.Ativacao.API.Controllers;
+
+[ApiController]
+[Route("api/auth")]
+public class AutenticacaoController(
+    ITokenService tokenService,
+    IConfiguration configuration,
+    UserManager<AppUser> userManager,
+    UsuariosRepository usuarios) : ControllerBase
 {
-    public class AutenticacaoController : ApiController
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
     {
-        private UsuariosRepository usuarios;
+        var user = await userManager.FindByNameAsync(loginRequest.Email);
+        if (user == null) return Unauthorized(new {message = "E-mail não encontrado."});
+        
+        var isPasswordValid = await userManager.CheckPasswordAsync(user, loginRequest.Password);
+        if (!isPasswordValid) return Unauthorized(new {message = "Senha incorreta."});
+        
+        var userRoles = await userManager.GetRolesAsync(user);
 
-        public AutenticacaoController()
+        var authClaims = new List<Claim>
         {
-            usuarios = new UsuariosRepository(new AtivacaoContext());
-        }
-
-        public IHttpActionResult PostAutenticacao([FromBody] Usuario usuarioReq)
+            new(ClaimTypes.Name, user.Name!),
+            new(ClaimTypes.Email, user.Email!),
+            new(ClaimTypes.NameIdentifier, user.Id),
+            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+        };
+        
+        foreach (var role in userRoles) authClaims.Add(new Claim(ClaimTypes.Role, role));
+        
+        var token = tokenService.GenerateToken(authClaims, configuration);
+        
+        var refreshToken = tokenService.GenerateRefreshToken();
+        
+        _ = int.TryParse(configuration["Jwt:RefreshTokenLength"], out var refreshTokenValidityInMinutes);
+        
+        user.RefreshToken = refreshToken;
+        user.RefreshTokenExpiresAt = DateTime.UtcNow.AddSeconds(refreshTokenValidityInMinutes);
+        
+        await userManager.UpdateAsync(user);
+        
+        return Ok(new
         {
-            if (usuarioReq == null)
-                return StatusCode(HttpStatusCode.BadRequest);
-
-            Usuario usuario = default(Usuario);
-            try
-            {
-                usuario = usuarios.Autenticar(usuarioReq.Email, usuarioReq.Senha);
-            }
-            catch (CadastroPendenteException)
-            {
-                return StatusCode(HttpStatusCode.Forbidden);
-            }
-            catch (Exception)
-            {
-                return StatusCode(HttpStatusCode.Forbidden);
-            }
-
-            if (usuario != null)
-            {
-                return Ok(new { usuario = usuario, jwt = ObterJwt(usuario) });
-            }
-
-            return StatusCode(HttpStatusCode.Forbidden);
-        }
-
-        internal static string ObterJwt(Usuario usuario)
-        {
-            var securityKey = GetBytes("ThisIsAnImportantStringAndIHaveNoIdeaIfThisIsVerySecureOrNot!");
-            var credentials = new SigningCredentials(
-                    new InMemorySymmetricSecurityKey(securityKey),
-                    "http://www.w3.org/2001/04/xmldsig-more#hmac-sha256",
-                    "http://www.w3.org/2001/04/xmlenc#sha256");
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            // Token Creation
-            var now = DateTime.UtcNow;
-            var claims = new List<Claim>();
-            claims.Add(new Claim(ClaimTypes.Name, usuario.Email));
-            claims.Add(new Claim(ClaimTypes.Sid, usuario.IDUsuario.ToString()));
-
-            if (usuario.Adm)
-                claims.Add(new Claim(ClaimTypes.Role, "adm"));
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                TokenIssuerName = "self",
-                Lifetime = new Lifetime(now, now.AddMinutes(30)),
-                SigningCredentials = credentials,
-
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
-        }
-
-        static byte[] GetBytes(string str)
-        {
-            byte[] bytes = new byte[str.Length * sizeof(char)];
-            System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
-            return bytes;
-
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                usuarios.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+            token = new JwtSecurityTokenHandler().WriteToken(token),
+            RefreshToken = refreshToken,
+            ExpiresAt = user.RefreshTokenExpiresAt,
+        });
     }
+    
+    [HttpPost("refresh-token")]
+    public async Task<IActionResult> RefreshToken(TokenCreateDto? tokenDto)
+    {
+        if (tokenDto == null) return BadRequest("Request invalida");
+
+        var accessToken = tokenDto.AccessToken ?? throw new ArgumentNullException(nameof(tokenDto.AccessToken));
+
+        var refreshToken = tokenDto.RefreshToken ?? throw new ArgumentNullException(nameof(tokenDto.RefreshToken));
+
+        var principal = tokenService.GetPrincipalFromExpiredToken(accessToken, configuration);
+
+        // if (principal == null) return BadRequest("Invalid access token/refresh token");
+
+        var userName = principal.Identity?.Name;
+
+        var user = await userManager.FindByNameAsync(userName!);
+
+        if (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiresAt < DateTime.Now)
+            return BadRequest("Invalid refresh token");
+
+        var newAccessToken = tokenService.GenerateToken(principal.Claims.ToList(), configuration);
+
+        var newRefreshToken = tokenService.GenerateRefreshToken();
+
+        user.RefreshToken = newRefreshToken;
+        await userManager.UpdateAsync(user);
+
+        return new ObjectResult(new
+        {
+            accessToken = new JwtSecurityTokenHandler().WriteToken(newAccessToken),
+            refreshToken = newRefreshToken
+        });
+    }
+    
+    [Authorize]
+    [HttpPost("logout")]
+    public async Task<IActionResult> Logout()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId == null) return Unauthorized();
+
+        var user = await userManager.FindByIdAsync(userId);
+        if (user == null) return NotFound("Usuário não encontrado");
+
+        user.RefreshToken = null;
+        await userManager.UpdateAsync(user);
+
+        return Ok(new { message = "Logout realizado com sucesso" });
+    }
+}
+
+// ===== DTOs enxutos =====
+public sealed class LoginDto
+{
+    public string Email { get; set; } = default!;
+    public string Senha { get; set; } = default!;
+}
+public sealed class TokenCreateDto
+{
+    public string? AccessToken { get; set; }
+    public string? RefreshToken { get; set; }
 }
