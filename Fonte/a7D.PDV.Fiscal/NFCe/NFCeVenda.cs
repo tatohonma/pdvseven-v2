@@ -200,11 +200,31 @@ namespace a7D.PDV.Fiscal.NFCe
             foreach (var item in listapgto)
             {
                 // new pag {tPag = FormaPagamento.fpDinheiro, vPag = valorPagto},
-                nfe.infNFe.pag[0].detPag.Add(new detPag()
+
+                var det = new detPag()
                 {
                     tPag = (FormaPagamento)int.Parse(item.Codigo),
                     vPag = item.Valor,
-                });
+                };
+
+                
+
+                if (det.tPag == FormaPagamento.fpCartaoCredito || det.tPag == FormaPagamento.fpCartaoDebito)
+                {
+                    det.card = new card
+                    {
+                        tpIntegra = TipoIntegracaoPagamento.TipNaoIntegrado,
+                        tBand = BandeiraCartao.bcMasterCard,           
+                    };
+                }
+                
+                // nfe.infNFe.pag[0].detPag.Add(new detPag()
+                // {
+                //     tPag = (FormaPagamento)int.Parse(item.Codigo),
+                //     vPag = item.Valor,
+                // });
+
+                nfe.infNFe.pag[0].detPag.Add(det);
             }
 
             return new NFCe { nfe = nfe };
