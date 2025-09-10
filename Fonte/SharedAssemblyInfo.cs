@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2025")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.25.5.1")]
+[assembly: AssemblyVersion("2.25.5.3")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -67,8 +67,15 @@ Lista das últimas versões e FIX
 ===============================================================================
 ===============================================================================
 
+2.25.5.3 ======================================================================
+    Correção: Remoção de caractres especial no nome do produto do XML da NFC-e
+    Correção: Atualização do NCM de serviço e não classificado para 0000.00.00
+    Correção: Atualização do CFOP para 5102 do simples para o 5405 e feito o inverso no simples ST
+    Correção: Remoção dos espaços em branco no inicio e fim do nome do produto do XML da NFC-e
+    Melhoria: Criação da pasta XML dentro de c:/pdv7 para armazenar os XMLs da NFC-e
+
 2.25.5.2 ======================================================================
-    Correção: Filtro de caractres especial no envio do XML da NFC-e
+    Correção: Remoção de caractres especial da taxa de serviço do XML da NFC-e
 
 2.25.5.1 ======================================================================
     Melhorias: Impressão da Lei da Tranparência Fiscal na NFC-e
