@@ -227,6 +227,26 @@ namespace a7D.PDV.Fiscal.NFCe
                 nfe.infNFe.pag[0].detPag.Add(det);
             }
 
+            decimal totalNF = Math.Round(nfe.infNFe.total.ICMSTot.vNF, 2, MidpointRounding.AwayFromZero);
+
+            var dets = nfe.infNFe.pag[0].detPag;
+
+            decimal totalPagamentos = Math.Round(dets.Sum(p => p.vPag), 2, MidpointRounding.AwayFromZero);
+            decimal totalDinheiro   = Math.Round(
+                dets.Where(p => p.tPag == FormaPagamento.fpDinheiro).Sum(p => p.vPag),
+                2, MidpointRounding.AwayFromZero
+            );
+
+            decimal excedente = totalPagamentos - totalNF;
+            if (excedente > 0 && totalDinheiro > 0)
+            {
+                nfe.infNFe.pag[0].vTroco = Math.Min(excedente, totalDinheiro);
+            }
+            else
+            {
+                nfe.infNFe.pag[0].vTroco = null;
+            }
+
             return new NFCe { nfe = nfe };
         }
         static string RemoveInvalidCharacters(string input)
