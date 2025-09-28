@@ -7,17 +7,17 @@ namespace a7D.PDV.Ativacao.API.Services.EmailService;
 
 public interface IEmailService
 {
-    Task<string> EnviarUsuarioAsync(ETipoEmailUsuario tipoEmail, Usuario usuario);
-    Task<string> EnviarAtivacaoAsync(ETipoEmailAtivacao tipoEmail, Activation ativacao, Usuario usuario);
+    Task<string> SendUserAsync(ETipoEmailUsuario emailType, AppUser user, IDictionary<string, string?>? data = null);
+    Task<string> SendActivationAsync(ETipoEmailAtivacao emailType, Activation activation, AppUser user);
 
-    Task<string> EnviarErroAsync(
-        string errosDestinatarios, string chaveAtivacao, string aplicacao,
-        string versao, int idPdv, string codigo, string erro, string stackTrace, string dados);
+    Task<string> SendErrorAsync(
+        string errorRecipients, string activationKey, string application,
+        string version, int pdvId, string code, string error, string stackTrace, string payload);
 
-    Task<string> EnviarTemplateAsync(
-        string destinatarios, string titulo, string templateHtmlPath,
-        NameValueCollection replacements, Attachment? attach = null);
+    Task<string> SendTemplateAsync(
+        string recipients, string subject, string templateHtmlPath,
+        NameValueCollection replacements, Attachment? attachment = null);
 
-    Task<string> EnviarAsync(string destinatarios, string titulo, string body, Attachment? attach = null, bool html = true);
-    Task<string> EnviarAsync(MailMessage email);
+    Task<string> SendAsync(string recipients, string subject, string body, Attachment? attachment = null, bool html = true);
+    Task<string> SendAsync(MailMessage email);
 }

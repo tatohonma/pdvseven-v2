@@ -27,72 +27,72 @@ public sealed class EmailService : IEmailService
         _logger = logger;
     }
 
-    // --------- API pública
+    // --------- Public API
 
-    public async Task<string> EnviarUsuarioAsync(ETipoEmailUsuario tipoEmail, Usuario usuario)
+    public async Task<string> SendUserAsync(ETipoEmailUsuario emailType, AppUser user, IDictionary<string, string?>? data = null)
     {
-        var assunto = AssuntoUsuario(tipoEmail);
-        var corpo   = CorpoUsuario(tipoEmail, usuario);
+        var subject = SubjectForUser(emailType);
+        var body    = BodyForUser(emailType, user, data);
 
-        return await EnviarAsync(usuario.Email, assunto, corpo);
+        return await SendAsync(user.Email!, subject, body);
     }
 
-    public async Task<string> EnviarAtivacaoAsync(ETipoEmailAtivacao tipoEmail, Activation ativacao, Usuario usuario)
+    public async Task<string> SendActivationAsync(ETipoEmailAtivacao emailType, Activation activation, AppUser user)
     {
-        var destinatarios = DestinatariosAtivacao(tipoEmail);
-        var assunto = AssuntoAtivacao(tipoEmail, ativacao.Client.Name);
-        var corpo   = CorpoAtivacao(tipoEmail, ativacao, usuario);
+        var recipients = RecipientsForActivation(emailType);
+        var subject    = SubjectForActivation(emailType, activation.Client.Name);
+        var body       = BodyForActivation(emailType, activation, user);
 
-        return await EnviarAsync(destinatarios, assunto, corpo);
+        return await SendAsync(recipients, subject, body);
     }
 
-    public async Task<string> EnviarErroAsync(
-        string errosDestinatarios, string chaveAtivacao, string aplicacao,
-        string versao, int idPDV, string codigo, string erro, string stackTrace, string dados)
+    public async Task<string> SendErrorAsync(
+        string errorRecipients, string activationKey, string application,
+        string version, int pdvId, string code, string error, string stackTrace, string payload)
     {
-        string cliente = "?";
-        string pdv = "?";
+        string clientName = "?";
+        string pdvName = "?";
 
         try
         {
-            var ativacao = await _db.Activations
+            var activation = await _db.Activations
                 .Include(a => a.Client)
                 .Include(a => a.PDVs)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(a => a.ActivationKey == chaveAtivacao);
+                .FirstOrDefaultAsync(a => a.ActivationKey == activationKey);
 
-            if (ativacao != null)
+            if (activation != null)
             {
-                cliente = ativacao.Client?.Name ?? "???";
-                pdv = ativacao.PDVs.FirstOrDefault(p => p.InstallationPdvId == idPDV)?.Name ?? "?";
+                clientName = activation.Client?.Name ?? "???";
+                pdvName = activation.PDVs.FirstOrDefault(p => p.InstallationPdvId == pdvId)?.Name ?? "?";
             }
         }
         catch (Exception ex)
         {
-            cliente = $"Não foi possível obter o cliente: {ex.Message}";
-            _logger.LogError(ex, "Falha ao consultar ativação para email de erro");
+            clientName = $"Não foi possível obter o cliente: {ex.Message}";
+            _logger.LogError(ex, "Falha ao consultar ativação para e-mail de erro");
         }
 
-        var titulo = $"[ERRO PDV7] {versao} {erro}".Trim();
+        var subject = $"[ERRO PDV7] {version} {error}".Trim();
         var body = $@"
-                    ERRO: <b>{HtmlEncode(codigo)}</b><br/>
-                    ChaveAtivacao: {HtmlEncode(chaveAtivacao)} <b>{HtmlEncode(cliente)}</b><br/>
-                    Versão: {HtmlEncode(versao)}<br/>
-                    Erro: {HtmlEncode(erro)}</br>
-                    Aplicacao: {HtmlEncode(aplicacao)}<br/>
-                    IDPDV: {idPDV} {HtmlEncode(pdv)}<br/>
-                    StackTrace: <pre>{HtmlEncode(stackTrace)}</pre><br/>
-                    Dados: <pre>{HtmlEncode(dados)}</pre>";
+            ERRO: <b>{HtmlEncode(code)}</b><br/>
+            ChaveAtivacao: {HtmlEncode(activationKey)} <b>{HtmlEncode(clientName)}</b><br/>
+            Versão: {HtmlEncode(version)}<br/>
+            Erro: {HtmlEncode(error)}</br>
+            Aplicação: {HtmlEncode(application)}<br/>
+            IDPDV: {pdvId} {HtmlEncode(pdvName)}<br/>
+            StackTrace: <pre>{HtmlEncode(stackTrace)}</pre><br/>
+            Dados: <pre>{HtmlEncode(payload)}</pre>";
 
-        return await EnviarAsync(errosDestinatarios, titulo, body);
+        return await SendAsync(errorRecipients, subject, body);
     }
 
-    public async Task<string> EnviarTemplateAsync(
-        string destinatarios, string titulo, string templateHtmlPath,
-        NameValueCollection replacements, Attachment? attach = null)
+    public async Task<string> SendTemplateAsync(
+        string recipients, string subject, string templateHtmlPath,
+        NameValueCollection replacements, Attachment? attachment = null)
     {
         if (!File.Exists(templateHtmlPath))
-            return $"Erro arquivo template '{templateHtmlPath}' não existe";
+            return $"Erro: arquivo de template '{templateHtmlPath}' não existe";
 
         string body = await File.ReadAllTextAsync(templateHtmlPath);
         foreach (string key in replacements.Keys)
@@ -100,38 +100,38 @@ public sealed class EmailService : IEmailService
             body = body.Replace(key, replacements[key]?.ToString() ?? string.Empty);
         }
 
-        return await EnviarAsync(destinatarios, titulo, body, attach);
+        return await SendAsync(recipients, subject, body, attachment);
     }
 
-    public async Task<string> EnviarAsync(string destinatarios, string titulo, string body, Attachment? attach = null, bool html = true)
+    public async Task<string> SendAsync(string recipients, string subject, string body, Attachment? attachment = null, bool html = true)
     {
         try
         {
             if (string.IsNullOrWhiteSpace(_opt.From))
                 throw new InvalidOperationException("SMTP.From não configurado");
 
-            if (string.IsNullOrWhiteSpace(destinatarios))
-                throw new ArgumentException("Destinatários não informados", nameof(destinatarios));
+            if (string.IsNullOrWhiteSpace(recipients))
+                throw new ArgumentException("Destinatários não informados", nameof(recipients));
 
-            titulo = SanitizeSubject(titulo, _opt.MaxSubjectLength);
+            subject = SanitizeSubject(subject, _opt.MaxSubjectLength);
 
             using var email = new MailMessage
             {
                 From = new MailAddress(_opt.From),
-                Subject = titulo,
+                Subject = subject,
                 IsBodyHtml = html,
                 SubjectEncoding = Encoding.UTF8,
                 BodyEncoding = Encoding.UTF8,
                 Body = body
             };
 
-            foreach (var dest in SplitEmails(destinatarios))
+            foreach (var dest in SplitEmails(recipients))
                 email.To.Add(dest);
 
-            if (attach != null)
-                email.Attachments.Add(attach);
+            if (attachment != null)
+                email.Attachments.Add(attachment);
 
-            return await EnviarAsync(email);
+            return await SendAsync(email);
         }
         catch (Exception ex)
         {
@@ -140,7 +140,7 @@ public sealed class EmailService : IEmailService
         }
     }
 
-    public async Task<string> EnviarAsync(MailMessage email)
+    public async Task<string> SendAsync(MailMessage email)
     {
         try
         {
@@ -154,6 +154,8 @@ public sealed class EmailService : IEmailService
             return FlattenError(ex);
         }
     }
+
+    // --------- Internals
 
     SmtpClient BuildSmtpClient()
     {
@@ -178,7 +180,7 @@ public sealed class EmailService : IEmailService
     {
         subject ??= string.Empty;
         subject = subject.Replace("\r", " ").Replace("\n", " ").Trim();
-        if (subject.Length > Math.Max(10, maxLen)) // evita truncar demais se config vier baixa
+        if (subject.Length > Math.Max(10, maxLen))
             subject = subject.Substring(0, maxLen) + "...";
         return subject;
     }
@@ -186,55 +188,64 @@ public sealed class EmailService : IEmailService
     static string HtmlEncode(string? s)
         => System.Net.WebUtility.HtmlEncode(s ?? string.Empty);
 
-    string BaseUrlHttp() => $"http://{_opt.BaseUrl}".TrimEnd('/');
-    // se quiser forçar https: $"https://{_opt.BaseUrl}"
+    string BaseHttpUrl() => $"http://{_opt.BaseUrl}".TrimEnd('/');
 
-    // --------- Montagem de Assuntos/Corpos/Destinatários
+    // --------- Subjects/Bodies/Recipients
 
-    private string AssuntoAtivacao(ETipoEmailAtivacao tipo, string cliente)
+    string SubjectForActivation(ETipoEmailAtivacao type, string clientName)
     {
-        var prefixo = tipo switch
+        var prefix = type switch
         {
-            ETipoEmailAtivacao.AtivacaoOffline   => "[Ativação Offline] ",
+            ETipoEmailAtivacao.AtivacaoOffline     => "[Ativação Offline] ",
             ETipoEmailAtivacao.LiberacaoTemporaria => "[Liberação Temporária] ",
-            ETipoEmailAtivacao.Duplicidade       => "[Duplicidade] ",
+            ETipoEmailAtivacao.Duplicidade         => "[Duplicidade] ",
             _ => string.Empty
         };
-        return $"{prefixo}{cliente}";
+        return $"{prefix}{clientName}";
     }
 
-    static string AssuntoUsuario(ETipoEmailUsuario tipo) => tipo switch
+    static string SubjectForUser(ETipoEmailUsuario type) => type switch
     {
         ETipoEmailUsuario.EsqueciASenha => "Recupere sua senha",
         ETipoEmailUsuario.NovoCadastro  => "Complete seu cadastro",
         _ => "Controle de licenças PDVSeven"
     };
 
-    string CorpoUsuario(ETipoEmailUsuario tipo, Usuario usuario) => tipo switch
+    string BodyForUser(ETipoEmailUsuario type, AppUser user, IDictionary<string, string?>? data) => type switch
     {
         ETipoEmailUsuario.EsqueciASenha =>
-            $@"<a href='{BaseUrlHttp()}/#/cadastro/{usuario.HashAlterarSenha}'>Clique aqui para redefinir sua senha</a>",
+            BuildLinkHtml("Clique aqui para redefinir sua senha",
+                BuildRouteWithToken("/#/cadastro/redefinir-senha", data)),
+
         ETipoEmailUsuario.NovoCadastro =>
-            $@"<a href='{BaseUrlHttp()}/#/cadastro/{usuario.HashAlterarSenha}'>Clique aqui para terminar o cadastro</a>",
+            BuildLinkHtml("Clique aqui para terminar o cadastro",
+                BuildRouteWithToken("/#/cadastro/confirmar-email", data)),
+
         _ => string.Empty
     };
 
-    string CorpoAtivacao(ETipoEmailAtivacao tipo, Activation ativacao, Usuario? usuario) => tipo switch
+    string BodyForActivation(ETipoEmailAtivacao type, Activation activation, AppUser? user) => type switch
     {
         ETipoEmailAtivacao.AtivacaoOffline =>
-            $@"{HtmlEncode(usuario?.Nome)} acaba de gerar uma chave de Ativação Offline para <a href='{BaseUrlHttp()}/#/ativacoes/edit/{ativacao.Id}'>{HtmlEncode(ativacao.Client.Name)}</a>",
+            $@"{HtmlEncode(user?.Name)} gerou uma chave de Ativação Offline para
+               <a href='{BaseHttpUrl()}/#/ativacoes/edit/{activation.Id}'>{HtmlEncode(activation.Client.Name)}</a>",
+
         ETipoEmailAtivacao.LiberacaoTemporaria =>
-            $@"{HtmlEncode(usuario?.Nome)} acaba de liberar o cliente <a href='{BaseUrlHttp()}/#/ativacoes/edit/{ativacao.Id}'>{HtmlEncode(ativacao.Client.Name)}</a> por 3 dias úteis.",
+            $@"{HtmlEncode(user?.Name)} liberou temporariamente o cliente
+               <a href='{BaseHttpUrl()}/#/ativacoes/edit/{activation.Id}'>{HtmlEncode(activation.Client.Name)}</a> por 3 dias úteis.",
+
         ETipoEmailAtivacao.Duplicidade =>
-            $@"A Chave {HtmlEncode(ativacao?.ActivationKey)} está em duplicidade <a href='{BaseUrlHttp()}/#/ativacoes/edit/{ativacao.Id}'>{HtmlEncode(ativacao.Client.Name)}</a>.",
+            $@"A Chave {HtmlEncode(activation?.ActivationKey)} está em duplicidade
+               <a href='{BaseHttpUrl()}/#/ativacoes/edit/{activation.Id}'>{HtmlEncode(activation.Client.Name)}</a>.",
+
         _ => string.Empty
     };
 
-    string DestinatariosAtivacao(ETipoEmailAtivacao tipo) => tipo switch
+    string RecipientsForActivation(ETipoEmailAtivacao type) => type switch
     {
-        ETipoEmailAtivacao.AtivacaoOffline    => _opt.Recipients.Offline,
+        ETipoEmailAtivacao.AtivacaoOffline     => _opt.Recipients.Offline,
         ETipoEmailAtivacao.LiberacaoTemporaria => _opt.Recipients.Temporaria,
-        ETipoEmailAtivacao.Duplicidade        => _opt.Recipients.Duplicidade,
+        ETipoEmailAtivacao.Duplicidade         => _opt.Recipients.Duplicidade,
         _ => string.Empty
     };
 
@@ -248,4 +259,26 @@ public sealed class EmailService : IEmailService
         }
         return sb.ToString();
     }
+
+    // --------- Helpers for tokenized links
+
+    string BuildRouteWithToken(string relativePath, IDictionary<string, string?>? data)
+    {
+        var baseUrl = BaseHttpUrl();
+        if (data is null)
+            return $"{baseUrl}{relativePath}";
+
+        var userId = data.TryGetValue("UserId", out var uid) ? uid : null;
+        var token  = data.TryGetValue("Token", out var tk) ? tk : null;
+
+        var qs = new List<string>();
+        if (!string.IsNullOrWhiteSpace(userId)) qs.Add($"userId={WebUtility.UrlEncode(userId)}");
+        if (!string.IsNullOrWhiteSpace(token))  qs.Add($"token={WebUtility.UrlEncode(token)}");
+
+        var query = qs.Count > 0 ? "?" + string.Join("&", qs) : string.Empty;
+        return $"{baseUrl}{relativePath}{query}";
+    }
+
+    static string BuildLinkHtml(string text, string href)
+        => $"<a href='{href}'>{HtmlEncode(text)}</a>";
 }

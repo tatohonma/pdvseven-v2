@@ -58,10 +58,10 @@ namespace a7D.PDV.Ativacao.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PdvTypes",
+                name: "pdv_types",
                 columns: table => new
                 {
-                    IDTipoPDV = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -69,14 +69,14 @@ namespace a7D.PDV.Ativacao.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PdvTypes", x => x.IDTipoPDV);
+                    table.PrimaryKey("PK_pdv_types", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Resellers",
+                name: "resellers",
                 columns: table => new
                 {
-                    IDRevenda = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Code = table.Column<int>(type: "int", nullable: false),
@@ -85,7 +85,7 @@ namespace a7D.PDV.Ativacao.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Resellers", x => x.IDRevenda);
+                    table.PrimaryKey("PK_resellers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -195,7 +195,7 @@ namespace a7D.PDV.Ativacao.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Clients",
+                name: "clients",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -216,17 +216,17 @@ namespace a7D.PDV.Ativacao.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clients", x => x.Id);
+                    table.PrimaryKey("PK_clients", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Clients_Resellers_ResellerId",
+                        name: "FK_clients_resellers_ResellerId",
                         column: x => x.ResellerId,
-                        principalTable: "Resellers",
-                        principalColumn: "IDRevenda",
+                        principalTable: "resellers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "tbActivation",
+                name: "activation",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -241,57 +241,23 @@ namespace a7D.PDV.Ativacao.API.Migrations
                     ReactivatedBySupport = table.Column<bool>(type: "bit", nullable: false),
                     SupportReactivatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ProvisionalValidityUntil = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Duplicidade = table.Column<bool>(type: "bit", nullable: false),
+                    IsDuplicate = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tbActivation", x => x.Id);
+                    table.PrimaryKey("PK_activation", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_tbActivation_Clients_ClientId",
+                        name: "FK_activation_clients_ClientId",
                         column: x => x.ClientId,
-                        principalTable: "Clients",
+                        principalTable: "clients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pdvs",
-                columns: table => new
-                {
-                    IDPDV = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IDAtivacao = table.Column<int>(type: "int", nullable: false),
-                    IDPDV_instalacao = table.Column<int>(type: "int", nullable: true),
-                    IDTipoPDV = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    HardwareKey = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    LastUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    Version = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pdvs", x => x.IDPDV);
-                    table.ForeignKey(
-                        name: "FK_Pdvs_PdvTypes_IDTipoPDV",
-                        column: x => x.IDTipoPDV,
-                        principalTable: "PdvTypes",
-                        principalColumn: "IDTipoPDV",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Pdvs_tbActivation_IDAtivacao",
-                        column: x => x.IDAtivacao,
-                        principalTable: "tbActivation",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "tbMensagem",
+                name: "mensage",
                 columns: table => new
                 {
                     IDMensagem = table.Column<int>(type: "int", nullable: false)
@@ -311,14 +277,53 @@ namespace a7D.PDV.Ativacao.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tbMensagem", x => x.IDMensagem);
+                    table.PrimaryKey("PK_mensage", x => x.IDMensagem);
                     table.ForeignKey(
-                        name: "FK_tbMensagem_tbActivation_IDAtivacao",
+                        name: "FK_mensage_activation_IDAtivacao",
                         column: x => x.IDAtivacao,
-                        principalTable: "tbActivation",
+                        principalTable: "activation",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "pdvs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ActivationId = table.Column<int>(type: "int", nullable: false),
+                    InstallationPdvId = table.Column<int>(type: "int", nullable: true),
+                    PdvTypeId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    HardwareKey = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    LastUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    Version = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pdvs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_pdvs_activation_ActivationId",
+                        column: x => x.ActivationId,
+                        principalTable: "activation",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_pdvs_pdv_types_PdvTypeId",
+                        column: x => x.PdvTypeId,
+                        principalTable: "pdv_types",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_activation_ClientId",
+                table: "activation",
+                column: "ClientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -360,29 +365,24 @@ namespace a7D.PDV.Ativacao.API.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Clients_ResellerId",
-                table: "Clients",
+                name: "IX_clients_ResellerId",
+                table: "clients",
                 column: "ResellerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pdvs_IDAtivacao",
-                table: "Pdvs",
+                name: "IX_mensage_IDAtivacao",
+                table: "mensage",
                 column: "IDAtivacao");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pdvs_IDTipoPDV",
-                table: "Pdvs",
-                column: "IDTipoPDV");
+                name: "IX_pdvs_ActivationId",
+                table: "pdvs",
+                column: "ActivationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tbActivation_ClientId",
-                table: "tbActivation",
-                column: "ClientId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_tbMensagem_IDAtivacao",
-                table: "tbMensagem",
-                column: "IDAtivacao");
+                name: "IX_pdvs_PdvTypeId",
+                table: "pdvs",
+                column: "PdvTypeId");
         }
 
         /// <inheritdoc />
@@ -404,10 +404,10 @@ namespace a7D.PDV.Ativacao.API.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Pdvs");
+                name: "mensage");
 
             migrationBuilder.DropTable(
-                name: "tbMensagem");
+                name: "pdvs");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -416,16 +416,16 @@ namespace a7D.PDV.Ativacao.API.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "PdvTypes");
+                name: "activation");
 
             migrationBuilder.DropTable(
-                name: "tbActivation");
+                name: "pdv_types");
 
             migrationBuilder.DropTable(
-                name: "Clients");
+                name: "clients");
 
             migrationBuilder.DropTable(
-                name: "Resellers");
+                name: "resellers");
         }
     }
 }

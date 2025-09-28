@@ -12,8 +12,8 @@ using a7D.PDV.Ativacao.API.Data;
 namespace a7D.PDV.Ativacao.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250905024143_all_tables")]
-    partial class all_tables
+    [Migration("20250925181119_change_pdv_name_to_nullable")]
+    partial class change_pdv_name_to_nullable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -184,8 +184,7 @@ namespace a7D.PDV.Ativacao.API.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDuplicate")
-                        .HasColumnType("bit")
-                        .HasColumnName("Duplicidade");
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastCheckedAt")
                         .HasColumnType("datetime2");
@@ -212,7 +211,7 @@ namespace a7D.PDV.Ativacao.API.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("tbActivation");
+                    b.ToTable("activation");
                 });
 
             modelBuilder.Entity("a7D.PDV.Ativacao.API.Model.AppUser", b =>
@@ -366,7 +365,7 @@ namespace a7D.PDV.Ativacao.API.Migrations
 
                     b.HasIndex("ResellerId");
 
-                    b.ToTable("Clients");
+                    b.ToTable("clients");
                 });
 
             modelBuilder.Entity("a7D.PDV.Ativacao.API.Model.Mensagem", b =>
@@ -420,21 +419,19 @@ namespace a7D.PDV.Ativacao.API.Migrations
 
                     b.HasIndex("IDAtivacao");
 
-                    b.ToTable("tbMensagem");
+                    b.ToTable("mensage");
                 });
 
             modelBuilder.Entity("a7D.PDV.Ativacao.API.Model.Pdv", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("IDPDV");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ActivationId")
-                        .HasColumnType("int")
-                        .HasColumnName("IDAtivacao");
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -444,8 +441,7 @@ namespace a7D.PDV.Ativacao.API.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<int?>("InstallationPdvId")
-                        .HasColumnType("int")
-                        .HasColumnName("IDPDV_instalacao");
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -454,13 +450,11 @@ namespace a7D.PDV.Ativacao.API.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("PdvTypeId")
-                        .HasColumnType("int")
-                        .HasColumnName("IDTipoPDV");
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -475,15 +469,14 @@ namespace a7D.PDV.Ativacao.API.Migrations
 
                     b.HasIndex("PdvTypeId");
 
-                    b.ToTable("Pdvs");
+                    b.ToTable("pdvs");
                 });
 
             modelBuilder.Entity("a7D.PDV.Ativacao.API.Model.PdvType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("IDTipoPDV");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
@@ -500,15 +493,14 @@ namespace a7D.PDV.Ativacao.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PdvTypes");
+                    b.ToTable("pdv_types");
                 });
 
             modelBuilder.Entity("a7D.PDV.Ativacao.API.Model.Reseller", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("IDRevenda");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
@@ -528,7 +520,7 @@ namespace a7D.PDV.Ativacao.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Resellers");
+                    b.ToTable("resellers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

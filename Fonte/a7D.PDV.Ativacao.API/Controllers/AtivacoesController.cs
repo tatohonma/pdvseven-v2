@@ -5,18 +5,19 @@ using Microsoft.EntityFrameworkCore;
 using a7D.PDV.Ativacao.API.Data;
 using a7D.PDV.Ativacao.API.Repository;
 using a7D.PDV.Ativacao.API.Model;
+using a7D.PDV.Ativacao.API.Repository.User;
 
 namespace a7D.PDV.Ativacao.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/activation")]
 [Authorize]
 public class ActivationsController : BaseSecureApiController
 {
-    private static readonly CultureInfo CulturePtBr = new("pt-BR");
-    private static readonly TimeZoneInfo BrazilTz = GetBrazilTz();
+    readonly static CultureInfo CulturePtBr = new("pt-BR");
+    readonly static TimeZoneInfo BrazilTz = GetBrazilTz();
 
-    public ActivationsController(ApplicationDbContext db, UsuariosRepository usuarios)
+    public ActivationsController(ApplicationDbContext db, IUserRepository usuarios)
         : base(db, usuarios) { }
 
     public class Filter
@@ -145,7 +146,7 @@ public class ActivationsController : BaseSecureApiController
         {
             Establishment = activation.Client.Name,
             activation.Client.CompanyName,
-            TaxId = (activation.Client.TaxId ?? string.Empty)
+            TaxId = (activation.Client.CpfCnpj ?? string.Empty)
                 .Replace(".", string.Empty)
                 .Replace(",", string.Empty),
         };

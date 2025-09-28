@@ -1,36 +1,31 @@
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Text;
 using a7D.PDV.Ativacao.API.Options;
 using a7D.PDV.Ativacao.API.Services.EmailService;
 
-public sealed class ErrorCaptureMiddleware
+public sealed class ErrorCaptureMiddleware : IMiddleware
 {
-    readonly RequestDelegate _next;
     readonly ILogger<ErrorCaptureMiddleware> _logger;
-    readonly IEmailService _email;
+    readonly IEmailService _email;       
     readonly ErrorNotifyOptions _opt;
 
     public ErrorCaptureMiddleware(
-        RequestDelegate next,
         ILogger<ErrorCaptureMiddleware> logger,
         IEmailService email,
         IOptions<ErrorNotifyOptions> opt)
     {
-        _next = next;
         _logger = logger;
         _email = email;
         _opt = opt.Value;
     }
 
-    public async Task Invoke(HttpContext context)
+    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         try
         {
             context.Request.EnableBuffering();
-
-            await _next(context);
+            await next(context);
         }
         catch (Exception ex)
         {
@@ -42,7 +37,7 @@ public sealed class ErrorCaptureMiddleware
             if (_opt.SendEmailOnUnhandled && !string.IsNullOrWhiteSpace(_opt.Recipients))
             {
                 var plain = BuildPlainText(ex, url, body);
-                await _email.EnviarAsync(_opt.Recipients!, "ERRO Ativações", plain, html: false);
+                await _email.SendAsync(_opt.Recipients!, "ERRO Ativações", plain, html: false);
             }
 
             context.Response.StatusCode = StatusCodes.Status500InternalServerError;
@@ -62,23 +57,21 @@ public sealed class ErrorCaptureMiddleware
         while (remaining > 0)
         {
             var toRead = Math.Min(buffer.Length, remaining);
-            var n = await req.Body.ReadAsync(buffer, 0, toRead, ct);
-            if (n <= 0)
-                break;
+            var n = await req.Body.ReadAsync(buffer.AsMemory(0, toRead), ct);
+            if (n <= 0) break;
 
-            await ms.WriteAsync(buffer, 0, n, ct);
+            await ms.WriteAsync(buffer.AsMemory(0, n), ct);
             remaining -= n;
         }
 
         var data = ms.ToArray();
-        var text = Encoding.UTF8.GetString(data, 0, data.Length);
+        var text = Encoding.UTF8.GetString(data);
 
         if (req.Body.CanSeek)
             req.Body.Seek(0, SeekOrigin.Begin);
 
         return text;
     }
-
 
     static string BuildPlainText(Exception ex, string url, string body)
     {

@@ -2,21 +2,20 @@
 using a7D.PDV.Ativacao.API.Data;
 using a7D.PDV.Ativacao.API.Model;
 using a7D.PDV.Ativacao.API.Repository;
+using a7D.PDV.Ativacao.API.Repository.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace a7D.PDV.Ativacao.API.Controllers;
 
-// Em APIs novas, a rota costuma ser definida nos controllers concretos.
-// Se preferir, você pode manter um Route aqui também.
 [ApiController]
-[Authorize] // Garante que apenas requisições autenticadas acessem controladores que herdam desta base
+[Authorize] 
 public abstract class BaseSecureApiController : ControllerBase
 {
     protected readonly ApplicationDbContext Db;
-    protected readonly UsuariosRepository Usuarios;
+    protected readonly IUserRepository Usuarios;
 
-    protected BaseSecureApiController(ApplicationDbContext db, UsuariosRepository usuarios)
+    protected BaseSecureApiController(ApplicationDbContext db, IUserRepository usuarios)
     {
         Db = db;
         Usuarios = usuarios;
@@ -43,14 +42,14 @@ public abstract class BaseSecureApiController : ControllerBase
     /// <summary>
     /// Retorna o usuário associado ao token da requisição, usando o SID (Id) da claim.
     /// </summary>
-    protected async Task<Usuario?> UsuarioRequisicaoAsync(CancellationToken ct = default)
-    {
-        var id = ObterUsuarioIdDasClaims();
-        if (id is null)
-            return null;
-
-        return await Usuarios.GetAsync(id.Value, ct);
-    }
+    // protected async Task<Usuario?> UsuarioRequisicaoAsync(CancellationToken ct = default)
+    // {
+    //     var id = ObterUsuarioIdDasClaims();
+    //     if (id is null)
+    //         return null;
+    //
+    //     return await Usuarios.GetAsync(id.Value, ct);
+    // }
 
     /// <summary>
     /// Tenta ler o Id do usuário a partir de ClaimTypes.Sid (ou "sid").

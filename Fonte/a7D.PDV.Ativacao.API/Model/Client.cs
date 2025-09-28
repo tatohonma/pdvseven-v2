@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace a7D.PDV.Ativacao.API.Model;
 
-[Table("Clients")] // ajuste conforme o nome real da tabela
+[Table("clients")] // ajuste conforme o nome real da tabela
 public class Client : BaseModel
 {
     [Key]
@@ -23,7 +23,7 @@ public class Client : BaseModel
 
     /// <summary>CNPJ or CPF (Brazilian tax id)</summary>
     [MaxLength(20)]
-    public string? TaxId { get; set; }
+    public string? CpfCnpj { get; set; }
 
     [MaxLength(255)]
     public string? Street { get; set; }

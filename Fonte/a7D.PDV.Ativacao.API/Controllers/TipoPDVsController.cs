@@ -1,109 +1,96 @@
-﻿// using System.Net;
-//
-// namespace a7D.PDV.Ativacao.API.Controllers
-// {
-//     [ApiAuth]
-//     public class TipoPDVsController : ApiController
-//     {
-//         private AtivacaoContext db = new AtivacaoContext();
-//
-//         // GET: api/TipoPDVs
-//         public IQueryable<TipoPDV> GetTipoPDVs()
-//         {
-//             return db.TipoPDVs;
-//         }
-//
-//         // GET: api/TipoPDVs/5
-//         [ResponseType(typeof(TipoPDV))]
-//         public IHttpActionResult GetTipoPDV(int id)
-//         {
-//             TipoPDV tipoPDV = db.TipoPDVs.Find(id);
-//             if (tipoPDV == null)
-//             {
-//                 return NotFound();
-//             }
-//
-//             return Ok(tipoPDV);
-//         }
-//
-//         // PUT: api/TipoPDVs/5
-//         [ResponseType(typeof(void))]
-//         public IHttpActionResult PutTipoPDV(int id, TipoPDV tipoPDV)
-//         {
-//             if (!ModelState.IsValid)
-//             {
-//                 return BadRequest(ModelState);
-//             }
-//
-//             if (id != tipoPDV.IDTipoPDV)
-//             {
-//                 return BadRequest();
-//             }
-//
-//             db.Entry(tipoPDV).State = EntityState.Modified;
-//
-//             try
-//             {
-//                 db.SaveChanges();
-//             }
-//             catch (DbUpdateConcurrencyException ex)
-//             {
-//                 if (!TipoPDVExists(id))
-//                 {
-//                     return NotFound();
-//                 }
-//                 else
-//                 {
-//                     return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message, ex));
-//                 }
-//             }
-//
-//             return StatusCode(HttpStatusCode.NoContent);
-//         }
-//
-//         // POST: api/TipoPDVs
-//         [ResponseType(typeof(TipoPDV))]
-//         public IHttpActionResult PostTipoPDV(TipoPDV tipoPDV)
-//         {
-//             if (!ModelState.IsValid)
-//             {
-//                 return BadRequest(ModelState);
-//             }
-//
-//             db.TipoPDVs.Add(tipoPDV);
-//             db.SaveChanges();
-//
-//             return CreatedAtRoute("DefaultApi", new { id = tipoPDV.IDTipoPDV }, tipoPDV);
-//         }
-//
-//         // DELETE: api/TipoPDVs/5
-//         [ResponseType(typeof(TipoPDV))]
-//         public IHttpActionResult DeleteTipoPDV(int id)
-//         {
-//             TipoPDV tipoPDV = db.TipoPDVs.Find(id);
-//             if (tipoPDV == null)
-//             {
-//                 return NotFound();
-//             }
-//
-//             db.TipoPDVs.Remove(tipoPDV);
-//             db.SaveChanges();
-//
-//             return Ok(tipoPDV);
-//         }
-//
-//         protected override void Dispose(bool disposing)
-//         {
-//             if (disposing)
-//             {
-//                 db.Dispose();
-//             }
-//             base.Dispose(disposing);
-//         }
-//
-//         private bool TipoPDVExists(int id)
-//         {
-//             return db.TipoPDVs.Count(e => e.IDTipoPDV == id) > 0;
-//         }
-//     }
-// }
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using a7D.PDV.Ativacao.API.Data;
+using a7D.PDV.Ativacao.API.Model;
+
+namespace a7D.PDV.Ativacao.API.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+// [ApiAuth] // habilite se já tiver portado seu atributo para ASP.NET Core
+public sealed class PdvTypesController : ControllerBase
+{
+    private readonly ApplicationDbContext _db;
+    private readonly ILogger<PdvTypesController> _logger;
+
+    public PdvTypesController(ApplicationDbContext db, ILogger<PdvTypesController> logger)
+    {
+        _db = db;
+        _logger = logger;
+    }
+
+    // GET: api/pdvtypes
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<PdvType>>> GetPdvTypes(CancellationToken ct)
+    {
+        var list = await _db.PdvTypes.AsNoTracking().ToListAsync(ct);
+        return Ok(list);
+    }
+
+    // GET: api/pdvtypes/5
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<PdvType>> GetPdvType([FromRoute] int id, CancellationToken ct)
+    {
+        var item = await _db.PdvTypes.AsNoTracking().FirstOrDefaultAsync(t => t.Id == id, ct);
+        if (item is null)
+            return NotFound();
+
+        return Ok(item);
+    }
+
+    // PUT: api/pdvtypes/5
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> PutPdvType([FromRoute] int id, [FromBody] PdvType pdvType, CancellationToken ct)
+    {
+        if (!ModelState.IsValid)
+            return ValidationProblem(ModelState);
+
+        if (id != pdvType.Id)
+            return BadRequest("Route id doesn't match body id.");
+
+        _db.Entry(pdvType).State = EntityState.Modified;
+
+        try
+        {
+            await _db.SaveChangesAsync(ct);
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            var exists = await _db.PdvTypes.AnyAsync(t => t.Id == id, ct);
+            if (!exists)
+                return NotFound();
+
+            _logger.LogError(ex, "Concurrency error updating PdvType {Id}", id);
+            return Problem(detail: ex.Message, statusCode: StatusCodes.Status500InternalServerError);
+        }
+
+        return NoContent();
+    }
+
+    // POST: api/pdvtypes
+    [HttpPost]
+    public async Task<ActionResult<PdvType>> PostPdvType([FromBody] PdvType pdvType, CancellationToken ct)
+    {
+        if (!ModelState.IsValid)
+            return ValidationProblem(ModelState);
+
+        _db.PdvTypes.Add(pdvType);
+        await _db.SaveChangesAsync(ct);
+
+        return CreatedAtAction(nameof(GetPdvType), new { id = pdvType.Id }, pdvType);
+    }
+
+    // DELETE: api/pdvtypes/5
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> DeletePdvType([FromRoute] int id, CancellationToken ct)
+    {
+        var item = await _db.PdvTypes.FirstOrDefaultAsync(t => t.Id == id, ct);
+        if (item is null)
+            return NotFound();
+
+        _db.PdvTypes.Remove(item);
+        await _db.SaveChangesAsync(ct);
+
+        return NoContent();
+    }
+}

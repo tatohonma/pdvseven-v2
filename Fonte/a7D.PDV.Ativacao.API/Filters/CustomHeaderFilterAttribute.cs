@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Http;
 
 namespace a7D.PDV.Ativacao.API.Filters
 {

@@ -1,195 +1,173 @@
-﻿// using System.Net;
-//
-// namespace a7D.PDV.Ativacao.API.Controllers
-// {
-//     public class UsuariosController : ApiController
-//     {
-//
-//         private UsuariosRepository usuarios;
-//         public UsuariosController()
-//         {
-//             usuarios = new UsuariosRepository(new AtivacaoContext());
-//         }
-//
-//         [Route("api/usuarios/renovar")]
-//         [HttpPost]
-//         public async Task<IHttpActionResult> RenovarSenha([FromBody]string email)
-//         {
-//             try
-//             {
-//                 var hash = await usuarios.SolicitarNovaSenha(email);
-//                 if (hash != null)
-//                 {
-//                     usuarios.EnviarEmailNovaSenha(email);
-//                 }
-//                 return Ok();
-//
-//             }
-//             catch (Exception ex)
-//             {
-//                 return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex));
-//             }
-//         }
-//
-//         [Route("api/usuarios/reenviar")]
-//         [HttpPost]
-//         public async Task<IHttpActionResult> ReenviarEmail([FromBody] string email)
-//         {
-//             try
-//             {
-//                 await usuarios.EnviarEmailCadastro(email);
-//                 return Ok();
-//             }
-//             catch (Exception ex)
-//             {
-//                 return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex));
-//             }
-//         }
-//
-//         [Route("api/usuarios/hash/{hash}")]
-//         [HttpGet]
-//         public async Task<IHttpActionResult> BuscarPorHash([FromUri] string hash)
-//         {
-//             try
-//             {
-//                 var usuario = await usuarios.BuscarPorHash(hash);
-//                 if (usuario == null)
-//                     return NotFound();
-//                 return Ok(usuario);
-//             }
-//             catch (Exception ex)
-//             {
-//                 return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex));
-//             }
-//         }
-//
-//         [Route("api/usuarios/hash/{hash}")]
-//         [HttpPost]
-//         public async Task<IHttpActionResult> AlterarSenha([FromBody]UsuarioDTO usuario, [FromUri]string hash)
-//         {
-//             try
-//             {
-//                 await usuarios.AlterarSenha(hash, usuario.Nome, usuario.Senha);
-//                 return Ok();
-//             }
-//             catch
-//             {
-//                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest));
-//             }
-//         }
-//
-//         [ApiAuth(requerAdm: true)]
-//         [HttpPost]
-//         public async Task<IHttpActionResult> AdicionarUsuario([FromBody]UsuarioDTO usuario)
-//         {
-//             try
-//             {
-//                 var novoUsuario = await usuarios.AdicionarUsuario(usuario.Email, usuario.Nome);
-//                 await usuarios.EnviarEmailCadastro(novoUsuario.Email);
-//                 return Created($"/api/usuarios/{novoUsuario.IDUsuario}", novoUsuario);
-//             }
-//             catch (Exception ex)
-//             {
-//                 return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex));
-//             }
-//         }
-//
-//         [ApiAuth(requerAdm: true)]
-//         [HttpGet]
-//         public async Task<IHttpActionResult> ObterUsuario(int id)
-//         {
-//             try
-//             {
-//                 var usuario = await usuarios.BuscarPorIdLimpo(id);
-//                 if (usuario == null)
-//                     return NotFound();
-//                 return Ok(usuario);
-//             }
-//             catch (Exception ex)
-//             {
-//                 return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex));
-//             }
-//         }
-//
-//         [ApiAuth(requerAdm: true)]
-//         [HttpDelete]
-//         public async Task<IHttpActionResult> RemoverUsuario(int id)
-//         {
-//             try
-//             {
-//                 await usuarios.ExcluirUsuario(id);
-//                 return Ok();
-//             }
-//             catch (Exception ex)
-//             {
-//                 return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex));
-//             }
-//         }
-//
-//         [ApiAuth(requerAdm: true)]
-//         [HttpPut]
-//         public async Task<IHttpActionResult> AlterarUsuario([FromUri]int id, [FromBody]UsuarioDTO usuario)
-//         {
-//             if (id != usuario.IDUsuario.Value)
-//                 return BadRequest();
-//             try
-//             {
-//                 await usuarios.AlterarCadastro(usuario.IDUsuario.Value, usuario.Nome, usuario.Ativo, usuario.Adm);
-//                 return Ok();
-//             }
-//             catch (Exception ex)
-//             {
-//                 return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex));
-//             }
-//         }
-//
-//         [ApiAuth(requerAdm: true)]
-//         [ResponseType(typeof(IEnumerable<Usuario>))]
-//         [CustomHeaderFilter]
-//         [HttpGet]
-//         public IHttpActionResult BuscarUsuario([FromUri]int page = 0, [FromUri]int count = 0, [FromUri]Filter filter = null)
-//         {
-//             try
-//             {
-//                 var result = usuarios.BuscarUsuarios(page, count, filter.Nome, filter.Email, filter.Admin, filter.CadastroPendente, filter.Ativo, filter.Excluido).ToList();
-//                 Request.Properties["count"] = result.Count.ToString();
-//
-//                 return Ok(result);
-//             }
-//             catch (Exception ex)
-//             {
-//                 return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex));
-//             }
-//         }
-//
-//         public class UsuarioDTO
-//         {
-//             public int? IDUsuario { get; set; }
-//             public string Nome { get; set; }
-//             public string Email { get; set; }
-//             public bool? Ativo { get; set; }
-//             public string NovaSenha { get; set; }
-//             public string Senha { get; set; }
-//             public bool? Adm { get; set; }
-//         }
-//
-//         public class Filter
-//         {
-//             public string Nome { get; set; }
-//             public string Email { get; set; }
-//             public string Ativo { get; set; }
-//             public string CadastroPendente { get; set; }
-//             public string Admin { get; set; }
-//             public string Excluido { get; set; }
-//         }
-//
-//         protected override void Dispose(bool disposing)
-//         {
-//             if (disposing)
-//             {
-//                 usuarios.Dispose();
-//             }
-//             base.Dispose(disposing);
-//         }
-//     }
-// }
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using a7D.PDV.Ativacao.API.Model;
+using a7D.PDV.Ativacao.API.Repository.User;
+using Microsoft.AspNetCore.Identity;
+
+namespace a7D.PDV.Ativacao.API.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class UsuariosController(
+    IUserRepository users,
+    ILogger<UsuariosController> logger, 
+    UserManager<AppUser> userManager)
+    : ControllerBase
+{
+    
+    [HttpPost("generate-reset-token")]
+    public async Task<IActionResult> GenerateResetToken([FromBody] string email)
+    {
+        var user = await userManager.FindByEmailAsync(email);
+        if (user == null)
+            return NotFound("Usuário não encontrado");
+
+        var token = await userManager.GeneratePasswordResetTokenAsync(user);
+        return Ok(new { UserId = user.Id, Token = token });
+    }
+
+    
+    
+    [HttpPost("renovar")]
+    public async Task<IActionResult> RenewPassword([FromBody] string email, CancellationToken ct)
+    {
+        if (string.IsNullOrWhiteSpace(email))
+            return BadRequest("E-mail é obrigatório.");
+
+        await users.SendResetPasswordEmailAsync(email, ct);
+        return NoContent();
+    }
+
+    
+    
+    [HttpPost("reenviar")]
+    public async Task<IActionResult> ResendRegistration([FromBody] string email, CancellationToken ct)
+    {
+        if (string.IsNullOrWhiteSpace(email))
+            return BadRequest("E-mail é obrigatório.");
+
+        await users.SendRegistrationEmailAsync(email, ct);
+        return NoContent();
+    }
+
+    
+    
+    [HttpPost("password/reset")]
+    public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDTO? dto, CancellationToken ct)
+    {
+        if (dto is null || string.IsNullOrWhiteSpace(dto.UserId) ||
+          string.IsNullOrWhiteSpace(dto.NewPassword))
+            return BadRequest("UserId, Token e NewPassword são obrigatórios.");
+
+        await users.ResetPasswordAsync(dto.UserId, dto.Token, dto.NewPassword, dto.NewName, ct);
+        return NoContent();
+    }
+
+    
+    [HttpPost]
+    public async Task<ActionResult<AppUser>> AddUser([FromBody] UserDTO user, CancellationToken ct)
+    {
+        if (user is null || string.IsNullOrWhiteSpace(user.Email) || string.IsNullOrWhiteSpace(user.Name))
+            return BadRequest("E-mail e Nome são obrigatórios.");
+
+        var created = await users.AddUserAsync(user.Email, user.Name, tempPassword: null, ct);
+        await users.SendRegistrationEmailAsync(created.Email!, ct);
+
+        
+        return CreatedAtAction(nameof(GetUser), new { id = created.Id }, created);
+    }
+
+    
+    [HttpGet("{id}")]
+    public async Task<ActionResult<AppUser>> GetUser([FromRoute] string id, CancellationToken ct)
+    {
+        var user = await users.GetByIdSafeAsync(id, ct);
+        if (user == null)
+            return NotFound();
+
+        return Ok(user);
+    }
+
+    
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> RemoveUser([FromRoute] string id, CancellationToken ct)
+    {
+        await users.SoftDeleteUserAsync(id, ct);
+        return NoContent();
+    }
+
+    
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateUser([FromRoute] string id, [FromBody] UpdateUserDTO user, CancellationToken ct)
+    {
+        if (user is null || string.IsNullOrWhiteSpace(id) || (user.Id is not null && user.Id != id))
+            return BadRequest("ID do caminho não confere com o ID do corpo.");
+
+        await users.UpdateProfileAsync(id, user.Name, user.IsActive, user.IsAdmin, ct);
+        return NoContent();
+    }
+
+    
+    
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<AppUser>>> QueryUsers(
+        [FromQuery] int page = 0,
+        [FromQuery] int count = 0,
+        [FromQuery] UserFilter filter = null!,
+        CancellationToken ct = default)
+    {
+        filter ??= new UserFilter();
+
+        var list = new List<AppUser>();
+        await foreach (var u in users.QueryUsersAsync(
+            page,
+            count,
+            filter.Name,
+            filter.Email,
+            filter.Admin,
+            filter.PendingRegistration,
+            filter.Active ?? "1",
+            filter.Deleted ?? "0",
+            ct))
+        {
+            list.Add(u);
+        }
+
+        Response.Headers["X-Total-Count"] = list.Count.ToString();
+        return Ok(list);
+    }
+
+    
+    public sealed class ResetPasswordDTO
+    {
+        public string UserId { get; set; } = null!;
+        public string Token { get; set; } = null!;
+        public string NewPassword { get; set; } = null!;
+        public string? NewName { get; set; }
+    }
+
+    public sealed class UserDTO
+    {
+        public string? Id { get; set; }
+        public string Name { get; set; } = null!;
+        public string Email { get; set; } = null!;
+    }
+
+    public sealed class UpdateUserDTO
+    {
+        public string? Id { get; set; }
+        public string? Name { get; set; }
+        public bool? IsActive { get; set; }
+        public bool? IsAdmin { get; set; }
+    }
+
+    public sealed class UserFilter
+    {
+        public string? Name { get; set; }
+        public string? Email { get; set; }
+        public string? Active { get; set; }                
+        public string? PendingRegistration { get; set; }   
+        public string? Admin { get; set; }                 
+        public string? Deleted { get; set; }               
+    }
+}

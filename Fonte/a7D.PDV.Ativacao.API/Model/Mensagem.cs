@@ -5,7 +5,7 @@ using a7D.PDV.Ativacao.Shared.Model;
 
 namespace a7D.PDV.Ativacao.API.Model
 {
-    [Table("tbMensagem")]
+    [Table("mensage")]
     public class Mensagem : MensagemModel
     {
         [Required]

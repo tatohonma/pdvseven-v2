@@ -3,11 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace a7D.PDV.Ativacao.API.Model;
 
-[Table("PdvTypes")] // ajuste se quiser manter "tbTipoPDV"
+[Table("pdv_types")]
 public class PdvType : BaseModel
 {
     [Key]
-    [Column("IDTipoPDV")]
     public int Id { get; set; }
 
     [Required, MaxLength(100)]

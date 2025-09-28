@@ -1,64 +1,78 @@
-﻿// using System.Net;
-// using System.Text;
-// using a7D.PDV.Ativacao.Shared.Services;
-//
-// namespace a7D.PDV.Ativacao.API.Controllers
-// {
-//     [ApiAuth]
-//     public class BaixarLicencaController : ApiController
-//     {
-//         private AtivacaoContext db = new AtivacaoContext();
-//
-//         [HttpGet]
-//         public HttpResponseMessage Index(int id)
-//         {
-//             var ativacao = db.Ativacoes.Find(id);
-//             db.Entry(ativacao).Collection(a => a.PDVs).Load();
-//
-//             if (ativacao.PDVs.Count < 1)
-//                 return new HttpResponseMessage(HttpStatusCode.NotFound);
-//
-//             var sb = new StringBuilder();
-//
-//             sb.AppendLine(string.Format(
-//                 @"DECLARE @chaveAtivacao AS VARCHAR(50)
-//                 SET @chaveAtivacao = '{0}'
-//
-//                 DELETE FROM tbConfiguracao WHERE chave='chaveAtivacao'
-//                 INSERT [dbo].[tbConfiguracao] ([Chave], [Valor]) VALUES (N'chaveAtivacao', @chaveAtivacao)
-//
-//                 DELETE FROM [tbPDV]", ativacao.ChaveAtivacao));
-//
-//             var proximoId = 0;
-//             foreach (var pdv in ativacao.PDVs)
-//                 sb.AppendLine(pdv.Insert(++proximoId));
-//
-//             var lic = CryptMD5.Criptografar(sb.ToString());
-//
-//             var base64string = Convert.ToBase64String(Encoding.UTF8.GetBytes(CryptMD5.Criptografar(sb.ToString())));
-//
-//             var response = new HttpResponseMessage(HttpStatusCode.OK);
-//             response.Content = new StringContent(base64string);
-//             response.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
-//             response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
-//             response.Content.Headers.ContentDisposition.FileName = ativacao.Cliente.Nome.Replace(" ", string.Empty) + ".lic";
-//             return response;
-//         }
-//
-//         private static byte[] GetBytes(string str)
-//         {
-//             byte[] bytes = new byte[str.Length * sizeof(char)];
-//             Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
-//             return bytes;
-//         }
-//
-//         protected override void Dispose(bool disposing)
-//         {
-//             if (disposing)
-//             {
-//                 db.Dispose();
-//             }
-//             base.Dispose(disposing);
-//         }
-//     }
-// }
+﻿using System.Text;
+using a7D.PDV.Ativacao.API.Data;
+using a7D.PDV.Ativacao.Shared.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+// CryptMD5
+// AtivacaoContext (ajuste o namespace real)
+// ApiAuth (se existir versão ASP.NET Core)
+// Suas entidades
+
+namespace a7D.PDV.Ativacao.API.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class BaixarLicencaController : ControllerBase
+{
+    readonly ApplicationDbContext _db;
+    readonly ILogger<BaixarLicencaController> _logger;
+
+    public BaixarLicencaController(ApplicationDbContext db, ILogger<BaixarLicencaController> logger)
+    {
+        _db = db;
+        _logger = logger;
+    }
+
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> Index([FromRoute] int id, CancellationToken ct)
+    {
+        // Carrega ativação e PDVs (e Cliente para nome do arquivo)
+        var ativacao = await _db.Activations
+            .Include(a => a.PDVs)
+            .Include(a => a.Client)
+            .FirstOrDefaultAsync(a => a.Id == id, ct);
+
+        if (ativacao is null)
+            return NotFound();
+
+        if (ativacao.PDVs.Count < 1)
+            return NotFound();
+
+        var sb = new StringBuilder();
+
+        sb.AppendLine(string.Format(
+            @"DECLARE @chaveAtivacao AS VARCHAR(50)
+                SET @chaveAtivacao = '{0}'
+
+                DELETE FROM tbConfiguracao WHERE chave='chaveAtivacao'
+                INSERT [dbo].[tbConfiguracao] ([Chave], [Valor]) VALUES (N'chaveAtivacao', @chaveAtivacao)
+
+                DELETE FROM [tbPDV]",
+                            ativacao.ActivationKey));
+
+        var proximoId = 0;
+        foreach (var pdv in ativacao.PDVs)
+        {
+            // Pressupondo que PDV possui método Insert(int idSequencial) que retorna o SQL
+            sb.AppendLine(pdv.ToInsertScript(++proximoId));
+        }
+
+        // Criptografa e converte para Base64 (mantendo a lógica original)
+        var licCripto = CryptMD5.Criptografar(sb.ToString());
+        var base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(licCripto));
+
+        var nomeCliente = ativacao.Client?.Name ?? "cliente";
+        var safeName = string.Concat(nomeCliente.Where(c => !Path.GetInvalidFileNameChars().Contains(c)))
+            .Replace(" ", string.Empty);
+        if (string.IsNullOrWhiteSpace(safeName))
+            safeName = "licenca";
+
+        var fileName = $"{safeName}.lic";
+
+        // Retorna como arquivo (mesmo conteúdo que você retornava: string Base64 como bytes)
+        var bytes = Encoding.UTF8.GetBytes(base64String);
+        const string contentType = "application/octet-stream";
+
+        return File(bytes, contentType, fileName);
+    }
+}

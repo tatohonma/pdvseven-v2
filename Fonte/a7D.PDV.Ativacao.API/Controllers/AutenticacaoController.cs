@@ -1,10 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using a7D.PDV.Ativacao.API.Exceptions;
 using a7D.PDV.Ativacao.API.Model; 
-// using a7D.PDV.Ativacao.API.Repositories; 
-// using a7D.PDV.Ativacao.API.Models;
-using a7D.PDV.Ativacao.API.Repository;
+using a7D.PDV.Ativacao.API.Repository.User;
 using a7D.PDV.Ativacao.API.Services; 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -19,7 +16,7 @@ public class AutenticacaoController(
     ITokenService tokenService,
     IConfiguration configuration,
     UserManager<AppUser> userManager,
-    UsuariosRepository usuarios) : ControllerBase
+    IUserRepository usuarios) : ControllerBase
 {
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)

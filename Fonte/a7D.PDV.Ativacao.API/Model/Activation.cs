@@ -4,7 +4,7 @@ using System.Text;
 
 namespace a7D.PDV.Ativacao.API.Model;
 
-[Table("tbActivation")]
+[Table("activation")]
 public class Activation : BaseModel
 {
     [Key]
@@ -37,7 +37,6 @@ public class Activation : BaseModel
 
     public DateTime? ProvisionalValidityUntil { get; set; }
 
-    [Column("Duplicidade")]
     public bool IsDuplicate { get; set; }
 
     [NotMapped]

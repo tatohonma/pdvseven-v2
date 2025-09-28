@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
 namespace a7D.PDV.Ativacao.API.Model
 {
 
-    [Table("tbUsuario")]
     [DataContract]
     public class Usuario
     {
