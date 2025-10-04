@@ -8,151 +8,177 @@
         z-index: 9999;
     }
 </style>
-<br />
-<form name="formulario" ng-submit="formulario.$valid && salvar(cliente)" ng-controller="ClienteController" novalidate>
+
+<br/>
+<form name="formulario"
+      ng-submit="formulario.$valid && salvar(cliente)"
+      ng-controller="ClienteController"
+      novalidate>
+
     <div class="form-horizontal">
+        <!-- Alerts -->
         <div class="float-message alert alert-danger" ng-show="mensagemErr">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <strong>Erro!</strong> {{mensagemErr}}
+            <strong>Erro!</strong> {{ mensagemErr }}
         </div>
 
         <div class="float-message alert alert-success" ng-show="mensagem">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <strong>Successo!</strong> {{mensagem}}
+            <strong>Sucesso!</strong> {{ mensagem }}
         </div>
 
+        <!-- Loading -->
         <div class="progress" ng-hide="carregado">
-            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+            <div class="progress-bar progress-bar-striped active"
+                 role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                 style="width:100%">
                 Carregando...
             </div>
         </div>
+
         <div ng-show="carregado">
-            <legend>{{cliente.Nome}}</legend>
-            <div class="form-group" ng-class="{'has-error': !formulario.revenda.$valid && (formulario.revenda.$dirty || formulario.$submitted)}">
-                <label class="control-label col-md-2" for="inputCliente">Revenda</label>
+            <legend>{{ cliente.name || '(novo cliente)' }}</legend>
+
+            <!-- Revenda -->
+            <div class="form-group"
+                 ng-class="{'has-error': !formulario.revenda.$valid && (formulario.revenda.$dirty || formulario.$submitted)}">
+                <label class="control-label col-md-2" for="inputRevenda">Revenda</label>
                 <div class="col-md-10">
-                    <select name="revenda"
-                            id="inputCliente"
-                            ng-model="cliente.IDRevenda"
+                    <select id="inputRevenda"
+                            name="revenda"
                             class="form-control"
                             required
+                            ng-model="cliente.resellerId"
                             ng-controller="RevendasListaController"
-                            ng-options="revenda.IDRevenda as revenda.Nome for revenda in revendas"
+                            ng-options="revenda.id as revenda.name for revenda in revendas"
                             ng-disabled="!carregado || erro">
-                        <option value="" ng-show="!carregado">Escolha uma Revenda</option>
+                        <option value="">Escolha uma Revenda</option>
                     </select>
                 </div>
             </div>
-            <div class="form-group" ng-class="{'has-error': !formulario.nome.$valid && (formulario.nome.$dirty || formulario.$submitted)}">
+
+            <!-- Nome -->
+            <div class="form-group"
+                 ng-class="{'has-error': !formulario.nome.$valid && (formulario.nome.$dirty || formulario.$submitted)}">
                 <label class="control-label col-md-2" for="inputNome">Nome</label>
                 <div class="col-md-10">
-                    <input type="text" required name="nome" id="inputNome" class="form-control" ng-model="cliente.Nome">
+                    <input id="inputNome" name="nome" class="form-control" type="text"
+                           ng-model="cliente.name" required>
                 </div>
             </div>
-            <div class="form-group" ng-class="{'has-error': !formulario.razaosocial.$valid && (formulario.razaosocial.$dirty || formulario.$submitted)}">
-                <label class="control-label col-md-2" for="inputRazaosocial">Razão Social</label>
-                <div class="col-md-10">
-                    <input type="text" name="razaosocial" id="inputRazaosocial" class="form-control" ng-model="cliente.RazaoSocial" />
-                </div>
-            </div>
+
+            <!-- Razão Social -->
             <div class="form-group">
-                <label class="control-label col-md-2" for="inputTCNPJCPF">Tipo de Documento</label>
+                <label class="control-label col-md-2" for="inputRazao">Razão Social</label>
+                <div class="col-md-10">
+                    <input id="inputRazao" name="razao" class="form-control" type="text"
+                           ng-model="cliente.companyName">
+                </div>
+            </div>
+
+            <!-- Tipo Doc -->
+            <div class="form-group">
+                <label class="control-label col-md-2">Tipo de Documento</label>
                 <div class="col-md-10">
                     <label class="radio-inline">
-                        <input type="radio" name="doc" value="CNPJ" ng-checked="doc == 'CNPJ'" ng-model="doc"/> CNPJ
+                        <input type="radio" name="doc" value="CNPJ" ng-model="doc"> CNPJ
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="doc" value="CPF" ng-checked="doc == 'CPF'" ng-model="doc" /> CPF
+                        <input type="radio" name="doc" value="CPF" ng-model="doc"> CPF
                     </label>
                 </div>
             </div>
-            <div class="form-group" ng-class="{'has-error': !formulario.cnpjcpf.$valid && (formulario.cnpjcpf.$dirty || formulario.$submitted)}">
-                <label class="control-label col-md-2" for="inputcnpjcpf">Documento</label>
+
+            <!-- Documento -->
+            <div class="form-group"
+                 ng-class="{'has-error': !formulario.cnpjcpf.$valid && (formulario.cnpjcpf.$dirty || formulario.$submitted)}">
+                <label class="control-label col-md-2" for="inputDoc">Documento</label>
                 <div class="col-md-10">
-                    <input type="text" name="cnpjcpf" id="inputcnpjcpf" class="form-control" ng-attr-ui-mask="{{doc == 'CPF' ? '999.999.999-99' : '99.999.999/9999-99'}}" ng-model="cliente.CNPJCPF" />
+                    <input id="inputDoc" name="cnpjcpf" class="form-control" type="text"
+                           ng-attr-ui-mask="{{ doc == 'CPF' ? '999.999.999-99' : '99.999.999/9999-99' }}"
+                           ng-model="cliente.cpfCnpj" required>
                 </div>
             </div>
-            <div class="form-group" ng-class="{'has-error': !formulario.telefone.$valid && (formulario.telefone.$dirty || formulario.$submitted)}">
+
+            <!-- Telefone -->
+            <div class="form-group">
                 <label class="control-label col-md-2" for="inputTelefone">Telefone</label>
                 <div class="col-md-10">
-                    <input type="text" name="telefone" id="inputTelefone" class="form-control" ng-model="cliente.Telefone">
+                    <input id="inputTelefone" name="telefone" class="form-control" type="text"
+                           ng-model="cliente.phone">
                 </div>
             </div>
+
             <legend>Endereço</legend>
-            <div class="form-group" ng-class="{'has-error': !formulario.logradouro.$valid && (formulario.logradouro.$dirty || formulario.$submitted)}">
-                <label class="control-label col-md-2" for="inputLogradouro">Logradouro (Rua, Avenida, Travessa, etc)</label>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="inputLogradouro">Logradouro</label>
                 <div class="col-md-10">
-                    <input type="text" name="logradouro" id="inputLogradouro" class="form-control" ng-model="cliente.Logradouro" />
+                    <input id="inputLogradouro" name="logradouro" class="form-control" type="text"
+                           ng-model="cliente.street" placeholder="Rua, Av., Travessa...">
                 </div>
             </div>
-            <div class="form-group" ng-class="{'has-error': !formulario.numero.$valid && (formulario.numero.$dirty || formulario.$submitted)}">
+
+            <div class="form-group">
                 <label class="control-label col-md-2" for="inputNumero">Número</label>
                 <div class="col-md-10">
-                    <input type="text" name="numero" id="inputNumero" class="form-control" ng-model="cliente.Numero" />
+                    <input id="inputNumero" name="numero" class="form-control" type="text"
+                           ng-model="cliente.number">
                 </div>
             </div>
-            <div class="form-group" ng-class="{'has-error': !formulario.complemento.$valid && (formulario.complemento.$dirty || formulario.$submitted)}">
-                <label class="control-label col-md-2" for="inputComplemento">Complemento</label>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="inputCompl">Complemento</label>
                 <div class="col-md-10">
-                    <input type="text" name="complemento" id="inputComplemento" class="form-control" ng-model="cliente.Complemento" />
+                    <input id="inputCompl" name="complemento" class="form-control" type="text"
+                           ng-model="cliente.additionalInfo">
                 </div>
             </div>
-            <div class="form-group" ng-class="{'has-error': !formulario.cidade.$valid && (formulario.cidade.$dirty || formulario.$submitted)}">
+
+            <div class="form-group">
                 <label class="control-label col-md-2" for="inputCidade">Cidade</label>
                 <div class="col-md-10">
-                    <input type="text" name="cidade" id="inputCidade" class="form-control" ng-model="cliente.Cidade" />
+                    <input id="inputCidade" name="cidade" class="form-control" type="text"
+                           ng-model="cliente.city">
                 </div>
             </div>
-            <div class="form-group" ng-class="{'has-error': !formulario.tiny.$valid && (formulario.tiny.$dirty || formulario.$submitted)}">
-                <label class="control-label col-md-2" for="inputTiny">ID Tiny</label>
-                <div class="col-md-10">
-                    <input type="text" name="tiny" id="inputTiny" class="form-control" ng-model="cliente.IDTiny" />
-                </div>
-            </div>
-            <div class="form-group" ng-class="{'has-error': !formulario.uf.$valid && (formulario.uf.$dirty || formulario.$submitted)}">
+
+            <!-- UF -->
+            <div class="form-group"
+                 ng-class="{'has-error': !formulario.uf.$valid && (formulario.uf.$dirty || formulario.$submitted)}">
                 <label class="control-label col-md-2" for="inputUF">UF</label>
                 <div class="col-md-10">
-                    <select ng-model="cliente.UF" class="form-control" name="uf" id="inputUf">
+                    <select id="inputUF" name="uf" class="form-control" ng-model="cliente.state" required>
                         <option value="">Selecione</option>
-                        <option value="AC">AC</option>
-                        <option value="AL">AL</option>
-                        <option value="AM">AM</option>
-                        <option value="AP">AP</option>
-                        <option value="BA">BA</option>
-                        <option value="CE">CE</option>
-                        <option value="DF">DF</option>
-                        <option value="ES">ES</option>
-                        <option value="GO">GO</option>
-                        <option value="MA">MA</option>
-                        <option value="MG">MG</option>
-                        <option value="MS">MS</option>
-                        <option value="MT">MT</option>
-                        <option value="PA">PA</option>
-                        <option value="PB">PB</option>
-                        <option value="PE">PE</option>
-                        <option value="PI">PI</option>
-                        <option value="PR">PR</option>
-                        <option value="RJ">RJ</option>
-                        <option value="RN">RN</option>
-                        <option value="RS">RS</option>
-                        <option value="RO">RO</option>
-                        <option value="RR">RR</option>
-                        <option value="SC">SC</option>
-                        <option value="SE">SE</option>
-                        <option value="SP">SP</option>
-                        <option value="TO">TO</option>
+                        <option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option>
+                        <option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option>
+                        <option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option>
+                        <option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option>
+                        <option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option>
+                        <option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option>
+                        <option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option>
+                        <option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option>
+                        <option value="SE">SE</option><option value="SP">SP</option><option value="TO">TO</option>
                     </select>
                 </div>
             </div>
+
+            <!-- Tiny ID -->
+            <div class="form-group">
+                <label class="control-label col-md-2" for="inputTiny">ID Tiny</label>
+                <div class="col-md-10">
+                    <input id="inputTiny" name="tiny" class="form-control" type="text"
+                           ng-model="cliente.tinyId">
+                </div>
+            </div>
+
+            <!-- Actions -->
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" class="btn btn-default" value="Salvar" />
+                    <input type="submit" class="btn btn-primary" value="Salvar">
+                    <a href="#/clientes" class="btn btn-default">Voltar à lista</a>
                 </div>
             </div>
         </div>
     </div>
 </form>
-<div>
-    <a href="#/clientes">Voltar à lista</a>
-</div>
-

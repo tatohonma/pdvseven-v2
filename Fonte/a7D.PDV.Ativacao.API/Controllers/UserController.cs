@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Identity;
 namespace a7D.PDV.Ativacao.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
-public class UsuariosController(
+[Route("api/user")]
+public class UserController(
     IUserRepository users,
-    ILogger<UsuariosController> logger, 
+    ILogger<UserController> logger, 
     UserManager<AppUser> userManager)
     : ControllerBase
 {

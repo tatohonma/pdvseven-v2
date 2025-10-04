@@ -37,13 +37,16 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li mostrar-logado mostrar="true" adm-only="true"><a href="#/usuarios">Usuários</a></li>
-                    <li mostrar-logado mostrar="true" adm-only="true"><a href="#/clientes">Clientes</a></li>
-                    <li mostrar-logado mostrar="true" adm-only="true"><a href="#/mensagens">Mensagens</a></li>
-                    <li mostrar-logado mostrar="true"><a href="#/ativacoes">Ativações</a></li>
-                    <li mostrar-logado mostrar="false"><a href="#/login">Login</a></li>
+                    <li has-access roles="admin"><a href="#/usuarios">Usuários</a></li>
+                    <li has-access roles="admin"><a href="#/clientes">Clientes</a></li>
+                    <li has-access roles="admin"><a href="#/mensagens">Mensagens</a></li>
+
+                    <li has-access ><a href="#/ativacoes">Ativações</a></li>
+
+                    <li has-access invert><a href="#/login">Login</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right" mostrar-logado mostrar="true">
+
+                <ul class="nav navbar-nav navbar-right" has-access>
                     <li class="navbar-right"><a href="#" ng-click="vm.deslogar()">Logout</a></li>
                 </ul>
             </div>

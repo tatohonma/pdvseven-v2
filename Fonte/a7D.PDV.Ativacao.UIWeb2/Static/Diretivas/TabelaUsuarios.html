@@ -1,40 +1,155 @@
 <h1>Usuários</h1>
 <hr />
+
 <div class="row">
-    <div class="col-md-12" style="margin-bottom:20px">
-        <a href="#/usuarios/new" role="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>&nbsp;Usuário</a>
+    <div class="col-md-12 m-b-15">
+        <a href="#/usuarios/new" role="button" class="btn btn-primary">
+            <span class="glyphicon glyphicon-plus"></span>&nbsp;Usuário
+        </a>
     </div>
 </div>
 
 <div class="row" ng-controller="UsuariosController as vm">
     <div class="col-md-12">
-        <div class="table-responsive" loading-container="vm.tableparams.settings().$loading" ng-hide="vm.mensagem" style="position:relative">
-            <table ng-table="vm.tableParams" class="table table-hover">
+
+        <!-- ===== Filtro Superior ===== -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Filtros</strong>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" ng-submit="vm.applyFilters()">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="control-label">E-mail</label>
+                            <input class="form-control" ng-model="vm.filters.email" placeholder="usuario@dominio.com" type="text">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label">Nome</label>
+                            <input class="form-control" ng-model="vm.filters.name" placeholder="Nome do usuário" type="text">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="control-label">Ativo</label>
+                            <select class="form-control" ng-model="vm.filters.active"
+                                    ng-options="f.id as f.title for f in vm.boolFilter">
+                                <option value="">— Todos —</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="control-label">Admin</label>
+                            <select class="form-control" ng-model="vm.filters.admin"
+                                    ng-options="f.id as f.title for f in vm.boolFilter">
+                                <option value="">— Todos —</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row m-t-10">
+                        <div class="col-md-3">
+                            <label class="control-label">Cadastro Pendente</label>
+                            <select class="form-control" ng-model="vm.filters.pendingRegistration"
+                                    ng-options="f.id as f.title for f in vm.boolFilter">
+                                <option value="">— Todos —</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="control-label">Excluído</label>
+                            <select class="form-control" ng-model="vm.filters.deleted"
+                                    ng-options="f.id as f.title for f in vm.boolFilter">
+                                <option value="">— Todos —</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 text-right m-t-25">
+                            <button class="btn btn-primary" type="submit">
+                                <span class="glyphicon glyphicon-search"></span> Pesquisar
+                            </button>
+                            <button class="btn btn-default" ng-click="vm.clearFilters()" type="button">
+                                Limpar
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <!-- ===== /Filtro Superior ===== -->
+
+        <div class="table-responsive pretty-table"
+             loading-container="vm.tableParams.settings().$loading"
+             ng-hide="vm.mensagem"
+             style="position:relative">
+
+            <table ng-table="vm.tableParams"
+                   class="table table-hover table-striped table-bordered">
                 <tr ng-repeat="usuario in $data">
-                    <td>
-                        <a ng-href="/#/usuarios/edit/{{usuario.IDUsuario}}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+
+                    <!-- Ações -->
+                    <td class="w-min">
+                        <a ng-href="/#/usuarios/edit/{{usuario.id}}"
+                           class="btn btn-default btn-xs" title="Editar">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
                     </td>
-                    <td>
-                      <button ng-click="vm.deletar(usuario)" class="btn btn-default btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                    <td class="w-min">
+                        <button ng-click="vm.deletar(usuario)"
+                                class="btn btn-danger btn-xs" title="Excluir">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
                     </td>
-                    <td>
-                      <button ng-click="vm.resetarSenha(usuario)" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-lock"></span>
+                    <td class="w-min">
+                        <button ng-click="vm.resetarSenha(usuario)"
+                                class="btn btn-default btn-xs" title="Resetar senha">
+                            <span class="glyphicon glyphicon-lock"></span>
+                        </button>
                     </td>
-                    <td>
-                      <button ng-click="vm.reenviarEmail(usuario)" ng-if="usuario.CadastroPendente" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-send"></span>
+                    <td class="w-min">
+                        <button ng-click="vm.reenviarEmail(usuario)"
+                                ng-if="usuario.pendingRegistration"
+                                class="btn btn-default btn-xs" title="Reenviar e-mail">
+                            <span class="glyphicon glyphicon-send"></span>
+                        </button>
                     </td>
-                    <td data-title="'E-mail'" filter="{email: 'text'}" >{{usuario.Email}}</td>
-                    <td data-title="'Nome'" filter="{nome: 'text'}">{{usuario.Nome}}</td>
-                    <td data-title="'Ativo'" filter="{ativo:'select'}" filter-data="vm.ativofilter"><span class="glyphicon" ng-class="{'glyphicon-ok-sign success' : usuario.Ativo, 'danger glyphicon-remove-sign' : !usuario.Ativo}"></span></td>
-                    <td data-title="'Admin'" filter="{admin:'select'}" filter-data="vm.ativofilter"><span class="glyphicon" ng-class="{'glyphicon-ok-sign success' : usuario.Adm, 'danger glyphicon-remove-sign' : !usuario.Adm}"></span></td>
-                    <td data-title="'Cadastro Pendente'" filter="{cadastroPendente:'select'}" filter-data="vm.ativofilter"><span class="glyphicon" ng-class="{'glyphicon-ok-sign success' : usuario.CadastroPendente, 'danger glyphicon-remove-sign' : !usuario.CadastroPendente}"></span></td>
-                    <td data-title="'Excluido'" filter="{excluido:'select'}" filter-data="vm.ativofilter"><span class="glyphicon" ng-class="{'glyphicon-ok-sign success' : usuario.Excluido, 'danger glyphicon-remove-sign' : !usuario.Excluido}"></span></td>
+
+                    <!-- Dados -->
+                    <td data-title="'E-mail'">{{ usuario.email }}</td>
+                    <td data-title="'Nome'">{{ usuario.name }}</td>
+
+                    <td data-title="'Ativo'">
+            <span class="glyphicon"
+                  ng-class="{'glyphicon-ok-sign text-success': usuario.active,
+                             'glyphicon-remove-sign text-danger': !usuario.active}">
+            </span>
+                    </td>
+
+                    <td data-title="'Admin'">
+            <span class="glyphicon"
+                  ng-class="{'glyphicon-ok-sign text-success': usuario.admin,
+                             'glyphicon-remove-sign text-danger': !usuario.admin}">
+            </span>
+                    </td>
+
+                    <td data-title="'Cadastro Pendente'">
+            <span class="glyphicon"
+                  ng-class="{'glyphicon-ok-sign text-warning': usuario.pendingRegistration,
+                             'glyphicon-remove-sign text-muted': !usuario.pendingRegistration}">
+            </span>
+                    </td>
+
+                    <td data-title="'Excluído'">
+            <span class="glyphicon"
+                  ng-class="{'glyphicon-ok-sign text-danger': usuario.deleted,
+                             'glyphicon-remove-sign text-success': !usuario.deleted}">
+            </span>
+                    </td>
                 </tr>
             </table>
         </div>
+
         <div class="alert alert-danger" ng-show="vm.mensagem">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <strong>Erro!</strong> {{vm.mensagem}}
+            <strong>Erro!</strong> {{ vm.mensagem }}
         </div>
     </div>
 </div>

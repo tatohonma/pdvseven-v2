@@ -11,13 +11,13 @@ using Microsoft.EntityFrameworkCore;
 namespace a7D.PDV.Ativacao.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
-public class BaixarLicencaController : ControllerBase
+[Route("api/download-license")]
+public class DownloadLicenseController : ControllerBase
 {
     readonly ApplicationDbContext _db;
-    readonly ILogger<BaixarLicencaController> _logger;
+    readonly ILogger<DownloadLicenseController> _logger;
 
-    public BaixarLicencaController(ApplicationDbContext db, ILogger<BaixarLicencaController> logger)
+    public DownloadLicenseController(ApplicationDbContext db, ILogger<DownloadLicenseController> logger)
     {
         _db = db;
         _logger = logger;

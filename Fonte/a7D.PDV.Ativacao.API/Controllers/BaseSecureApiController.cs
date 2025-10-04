@@ -31,9 +31,9 @@ public abstract class BaseSecureApiController : ControllerBase
         if (user is null || !user.Identity?.IsAuthenticated == true)
             return false;
 
-        return user.IsInRole("adm")
-               || HasClaim(user, "role", "adm")
-               || HasClaim(user, ClaimTypes.Role, "adm");
+        return user.IsInRole("admin")
+               || HasClaim(user, "role", "admin")
+               || HasClaim(user, ClaimTypes.Role, "admin");
     }
 
     static bool HasClaim(ClaimsPrincipal user, string type, string value)

@@ -1,85 +1,286 @@
-﻿
-<h1>Ativações</h1>
-<hr />
+﻿<h1>Ativações</h1>
+<hr/>
+
 <div ng-controller="AtivacoesController as vm">
-    <div ng-if="vm.adm" class="row">
-        <div class="col-md-12" style="margin-bottom:20px">
-            <a href="#/ativacoes/new" role="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>&nbsp;Ativação</a>
+
+    <!-- topo com ação -->
+    <div class="row" ng-if="vm.isAdmin">
+        <div class="col-md-12 m-b-15">
+            <a class="btn btn-primary" href="#/ativacoes/new">
+                <span class="glyphicon glyphicon-plus"></span>&nbsp;Ativação
+            </a>
         </div>
     </div>
+
+    <!-- ===== Filtro Superior ===== -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>Filtros</strong>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" ng-submit="vm.applyFilters()">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="control-label">Cliente</label>
+                        <input class="form-control" ng-model="vm.filters.cliente" placeholder="Razão/Nome do cliente"
+                               type="text">
+                    </div>
+
+                    <div class="col-md-2">
+                        <label class="control-label">UF</label>
+                        <input class="form-control" ng-model="vm.filters.uf" placeholder="SP, AM, AL..." type="text">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="control-label">CNPJ/CPF</label>
+                        <input class="form-control" ng-model="vm.filters.cnpj" placeholder="00.000.000/0000-00"
+                               type="text">
+                    </div>
+
+                    <div class="col-md-3" ng-if="vm.isAdmin">
+                        <label class="control-label">Chave de Ativação</label>
+                        <input class="form-control" ng-model="vm.filters.activationKey" placeholder="001-XXXX-YY"
+                               type="text">
+                    </div>
+                </div>
+
+                <div class="row m-t-10">
+                    <div class="col-md-3">
+                        <label class="control-label">Ativo</label>
+                        <select class="form-control" ng-model="vm.filters.isActive"
+                                ng-options="f.id as f.title for f in vm.ativofilter">
+                            <option value="">— Todos —</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3" ng-if="vm.isAdmin">
+                        <label class="control-label">Duplicidade</label>
+                        <select class="form-control" ng-model="vm.filters.isDuplicate"
+                                ng-options="f.id as f.title for f in vm.duplicidadeFilter">
+                            <option value="">— Todos —</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="control-label">Reativado Suporte</label>
+                        <select class="form-control" ng-model="vm.filters.reactivatedBySupport"
+                                ng-options="f.id as f.title for f in vm.reativadoFilter">
+                            <option value="">— Todos —</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="control-label">Validade</label>
+                        <select class="form-control" ng-model="vm.filters.validityDays">
+                            <option value="">— Todas —</option>
+                            <option value="-1">Perpétua</option>
+                            <option value="0">Expirada</option>
+                            <option value="30">30 dias</option>
+                            <option value="365">12 meses</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row m-t-10">
+                    <div class="col-md-3" ng-if="vm.isAdmin">
+                        <label class="control-label">Criado de</label>
+                        <input class="form-control" ng-model="vm.filters.createdFrom" type="date">
+                    </div>
+                    <div class="col-md-3" ng-if="vm.isAdmin">
+                        <label class="control-label">Criado até</label>
+                        <input class="form-control" ng-model="vm.filters.createdTo" type="date">
+                    </div>
+
+                    <div class="col-md-6 text-right m-t-25">
+                        <button class="btn btn-primary" type="submit">
+                            <span class="glyphicon glyphicon-search"></span> Pesquisar
+                        </button>
+                        <button class="btn btn-default" ng-click="vm.clearFilters()" type="button">
+                            Limpar
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <!-- ===== /Filtro Superior ===== -->
+
     <div class="row">
         <div class="col-md-12">
-            <div class="table-responsive" loading-container="vm.tableparams.settings().$loading" ng-hide="vm.mensagem" style="position:relative">
-                <table ng-table="vm.tableParams" class="table table-hover">
+            <div class="table-responsive pretty-table"
+                 loading-container="vm.tableParams.settings().$loading"
+                 ng-hide="vm.mensagem"
+                 style="position:relative">
+
+                <table class="table table-hover table-striped table-bordered" ng-table="vm.tableParams">
                     <tr ng-repeat="ativacao in $data">
-                        <td ng-if="!vm.adm">
-                            <button class="btn btn-default btn-xs" type="button" ng-click="vm.acoes(ativacao)">
+
+                        <!-- ações -->
+                        <td class="w-min" ng-if="!vm.isAdmin">
+                            <button class="btn btn-default btn-xs" ng-click="vm.acoes(ativacao)">
                                 <span class="glyphicon glyphicon-modal-window"></span>
                             </button>
                         </td>
-                        <td ng-if="vm.adm">
-                            <a ng-href="/#/ativacoes/edit/{{ativacao.IDAtivacao}}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+
+                        <td class="w-min" ng-if="vm.isAdmin">
+                            <a class="btn btn-default btn-xs" ng-href="#/ativacoes/edit/{{ativacao.id}}">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
                         </td>
-                        <td ng-if="vm.adm">
-                            <button type="button" data-target="#modal-info" data-toggle="modal" data-dados="{{ ativacao.Licencas }}" data-titulo="{{ ativacao.ChaveAtivacao }}" class="btn btn-default btn-xs">
+
+                        <td class="w-min" ng-if="vm.isAdmin">
+                            <button class="btn btn-default btn-xs"
+                                    data-dados="{{ ativacao.licensesHtml }}"
+                                    data-target="#modal-info"
+                                    data-titulo="{{ ativacao.activationKey }}"
+                                    data-toggle="modal">
                                 <span class="glyphicon glyphicon-th-list"></span>
                             </button>
                         </td>
-                        <td ng-if="vm.adm">
-                            <ativacao-offline ativacao="{{ ativacao.ChaveAtivacao }}"></ativacao-offline>
+
+                        <td class="w-min" ng-if="vm.isAdmin">
+                            <ativacao-offline ativacao="{{ ativacao.activationKey }}"></ativacao-offline>
                         </td>
-                        <td ng-if="vm.adm">
-                            <licenca-download id="{{ativacao.IDAtivacao}}" arquivo="{{ativacao.Cliente.Nome | lowercase | removerEspacos}}.lic"></licenca-download>
+
+                        <td class="w-min" ng-if="vm.isAdmin">
+                            <licenca-download
+                                    arquivo="{{ ((ativacao.client||{}).name || 'cliente') | lowercase | removerEspacos }}.lic"
+                                    id="{{ativacao.id}}">
+                            </licenca-download>
                         </td>
-                        <td data-title="'Cliente'" filter="{cliente: 'text'}">
+
+                        <td class="w-min" ng-if="vm.isAdmin">
+                            <button class="btn btn-info btn-xs"
+                                    ng-disabled="!ativacao.notes"
+                                    data-dados="{{ ativacao.notes }}"
+                                    data-target="#modal-info"
+                                    data-titulo="Observações — {{ ((ativacao.client||{}).name) || '(sem nome)' }}"
+                                    data-toggle="modal"
+                                    title="Ver observações">
+                                <span class="glyphicon glyphicon-comment"></span>
+                            </button>
+                        </td>
+
+                        <!-- dados -->
+                        <td data-title="'Cliente'">
                             <nobr>
-                                <a ng-if="vm.adm" ng-href="/#/clientes/edit/{{ativacao.Cliente.IDCliente}}">{{ativacao.Cliente.Nome}}</a>
-                                <span ng-if="!vm.adm">{{ ativacao.Cliente.Nome }}</span>
+                                <a ng-href="/#/clientes/edit/{{(ativacao.client||{}).id}}" ng-if="vm.isAdmin">
+                                    {{ ((ativacao.client||{}).name) || '(sem nome)' }}
+                                </a>
+                                <span ng-if="!vm.isAdmin">{{ ((ativacao.client||{}).name) || '(sem nome)' }}</span>
                             </nobr>
                         </td>
-                        <td ng-if="vm.adm" data-title="'Chave Ativação'" filter="{chaveAtivacao:'text'}"><nobr>{{ ativacao.ChaveAtivacao }}</nobr></td>
-                        <td ng-if="vm.adm" data-title="'Última Verificação'"><nobr>{{ ativacao.DtUltimaVerificacao | date: 'dd/MM/yyyy HH:mm:ss' }}</nobr></td>
-                        <td ng-if="vm.adm" data-title="'Dias de Validade'"><nobr>{{ ativacao.DiasValidadeAtivacao }}</nobr></td>
-                        <td data-title="'  Ativo  '" filter="{ativo:'select'}" filter-data="vm.ativofilter"><span class="glyphicon" ng-class="{'glyphicon-ok-sign success' : ativacao.Ativo, 'danger glyphicon-remove-sign' : !ativacao.Ativo}"></span></td>
-                        <td ng-if="vm.adm" data-title="'Duplicidade'" filter="{duplicidade:'select'}" filter-data="vm.duplicidadeFilter"><span class="glyphicon" ng-class="{'glyphicon-ok-sign success' : ativacao.Duplicidade, 'danger glyphicon-remove-sign' : !ativacao.Duplicidade}"></span></td>
-                        <td data-title="'Reativado Suporte'" filter="{reativadoSuporte: 'select'}" filter-data="vm.reativadoFilter"><span class="glyphicon" ng-class="{'glyphicon-ok-sign success' : ativacao.ReativadoSuporte, 'danger glyphicon-remove-sign' : !ativacao.ReativadoSuporte}"></span></td>
-                        <td ng-if="vm.adm" data-title="'Observações'" filter="{observacao: 'text'}">{{ ativacao.Observacao }}</td>
+
+                        <td data-title="'UF'"><span>{{ ((ativacao.client||{}).state) || '-' }}</span></td>
+                        <td data-title="'CNPJ'">
+                            <nobr>{{ ((ativacao.client||{}).cpfCnpj) || '-' }}</nobr>
+                        </td>
+
+                        <td data-title="'Chave Ativação'" ng-if="vm.isAdmin">
+                            <nobr>{{ ativacao.activationKey }}</nobr>
+                        </td>
+
+                        <td data-title="'Última Verificação'" ng-if="vm.isAdmin">
+                            <nobr>{{ ativacao.lastCheckedAt | date:'dd/MM/yyyy HH:mm:ss' }}</nobr>
+                        </td>
+
+                        <td data-title="'Ativado em'" ng-if="vm.isAdmin">
+                            <nobr>{{ ativacao.activatedAt ? (ativacao.activatedAt | date:'dd/MM/yyyy HH:mm') : '—' }}
+                            </nobr>
+                        </td>
+
+                        <td data-title="'Validade'">
+                          <span class="label"
+                                ng-class="{'label-success': ativacao.validityDays === -1, 'label-default': ativacao.validityDays !== -1}">
+                            {{ ativacao.validityDays === -1 ? 'Perpétua' : (ativacao.validityDays + ' dia(s)') }}
+                          </span>
+                        </td>
+
+                        <td data-title="'Provisória até'">
+                            <nobr>{{ ativacao.provisionalValidityUntil ? (ativacao.provisionalValidityUntil |
+                                date:'dd/MM/yyyy HH:mm') : '—' }}
+                            </nobr>
+                        </td>
+
+                        <td data-title="'Ativo'">
+                          <span class="glyphicon"
+                                ng-class="{'glyphicon-ok-sign text-success' : ativacao.isActive, 'glyphicon-remove-sign text-danger' : !ativacao.isActive}">
+                          </span>
+                        </td>
+
+                        <td data-title="'Duplicidade'" ng-if="vm.isAdmin">
+                          <span class="glyphicon"
+                                ng-class="{'glyphicon-ok-sign text-warning' : ativacao.isDuplicate, 'glyphicon-remove-sign text-muted' : !ativacao.isDuplicate}">
+                          </span>
+                        </td>
+
+                        <td data-title="'Reativado Suporte'">
+                          <span class="glyphicon"
+                                ng-class="{'glyphicon-ok-sign text-info' : ativacao.reactivatedBySupport, 'glyphicon-remove-sign text-muted' : !ativacao.reactivatedBySupport}">
+                          </span>
+                        </td>
+
+                        <td data-title="'Criado em'" ng-if="vm.isAdmin">
+                            <nobr>{{ ativacao.createdAt | date:'dd/MM/yyyy HH:mm' }}</nobr>
+                        </td>
+                        <td data-title="'Atualizado em'" ng-if="vm.isAdmin">
+                            <nobr>{{ ativacao.updatedAt | date:'dd/MM/yyyy HH:mm' }}</nobr>
+                        </td>
                     </tr>
                 </table>
             </div>
+
             <div class="alert alert-danger" ng-show="vm.mensagem">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <button aria-hidden="true" class="close" data-dismiss="alert" type="button">&times;</button>
                 <strong>Erro!</strong> {{vm.mensagem}}
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modal-info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-        <div class="modal-dialog" role="document">
+
+    <div aria-labelledby="exampleModalLabel" class="modal fade" id="modal-info" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button aria-label="Close" class="close" data-dismiss="modal"><span>&times;</span></button>
                     <h4 class="modal-title" id="exampleModalLabel">Licenças</h4>
                 </div>
-                <div class="modal-body">
-                    <span></span>
-                </div>
+                <div class="modal-body"><span></span></div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button class="btn btn-default" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script type="text/javascript">
+
+<script>
     $(function () {
         $('#modal-info').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
-            var titulo = button.data('titulo');
-            var dados = button.data('dados');
-            var modal = $(this)
+            var titulo = button.data('titulo') || 'Informações';
+            var dados  = button.data('dados') || '';
+
+            var isHtml = /<\/?[a-z][\s\S]*>/i.test(dados);
+
+            var modal = $(this);
             modal.find('.modal-title').text(titulo);
-            modal.find('.modal-body span').empty();
-            modal.find('.modal-body span').append(unescape(dados));
+
+            var $container = modal.find('.modal-body span').empty();
+
+            if (!dados) {
+                $container.html('<em>Sem observações</em>');
+                return;
+            }
+
+            if (isHtml) {
+                $container.html(dados);
+            } else {
+                var escaped = $('<div/>').text(dados).html();
+                $container.html(escaped.replace(/\r?\n/g, '<br>'));
+            }
         });
     });
 </script>
+

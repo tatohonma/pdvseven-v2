@@ -6,7 +6,7 @@ using a7D.PDV.Ativacao.API.Model;
 namespace a7D.PDV.Ativacao.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/pdvs")]
 // [ApiAuth] // habilite se você já portou esse atributo para ASP.NET Core
 public sealed class PdvsController : ControllerBase
 {

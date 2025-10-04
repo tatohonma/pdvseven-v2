@@ -5,7 +5,7 @@ using a7D.PDV.Ativacao.API.Repository.User;
 namespace a7D.PDV.Ativacao.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/emails")]
 // [ApiAuth(requerAdm: true)] // Se você já portou esse atributo para Core, descomente.
 // [Authorize(Policy = "AdminOnly")] // alternativa via policy/role.
 public sealed class EmailsController : ControllerBase

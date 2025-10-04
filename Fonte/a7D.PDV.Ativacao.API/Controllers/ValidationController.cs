@@ -10,19 +10,19 @@ using a7D.PDV.Ativacao.API.Services.EmailService;
 namespace a7D.PDV.Ativacao.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
-public sealed class ValidadeController : ControllerBase
+[Route("api/validation")]
+public sealed class ValidationController : ControllerBase
 {
     readonly ApplicationDbContext _db;
     readonly IEmailService _email;
     readonly UserManager<AppUser> _userManager;
-    readonly ILogger<ValidadeController> _logger;
+    readonly ILogger<ValidationController> _logger;
 
-    public ValidadeController(
+    public ValidationController(
         ApplicationDbContext db,
         IEmailService email,
         UserManager<AppUser> userManager,
-        ILogger<ValidadeController> logger)
+        ILogger<ValidationController> logger)
     {
         _db = db;
         _email = email;

@@ -21,7 +21,6 @@ public class Client : BaseModel
     [MaxLength(200)]
     public string? CompanyName { get; set; }
 
-    /// <summary>CNPJ or CPF (Brazilian tax id)</summary>
     [MaxLength(20)]
     public string? CpfCnpj { get; set; }
 
@@ -43,7 +42,6 @@ public class Client : BaseModel
     [MaxLength(30)]
     public string? Phone { get; set; }
 
-    /// <summary>ID used to sync with Tiny ERP</summary>
     [MaxLength(50)]
     public string? TinyId { get; set; }
 }

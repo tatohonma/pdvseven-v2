@@ -6,7 +6,7 @@ using a7D.PDV.Ativacao.API.Model;
 namespace a7D.PDV.Ativacao.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/ressellers")]
 // [ApiAuth] // habilite se você já portou o atributo para ASP.NET Core
 public sealed class ResellersController : ControllerBase
 {

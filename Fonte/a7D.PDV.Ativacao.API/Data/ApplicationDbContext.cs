@@ -38,18 +38,19 @@ public class ApplicationDbContext(
 
     public override int SaveChanges()
     {
-        var entires = ChangeTracker
-            .Entries()
-            .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
+        var now = DateTime.UtcNow;
 
-
-        foreach (var entire in entires)
+        foreach (var entry in ChangeTracker.Entries<BaseModel>())
         {
-            ((BaseModel)entire.Entity).CreatedAt = DateTime.Now;
-
-            if (entire.State == EntityState.Modified)
+            if (entry.State == EntityState.Added)
             {
-                ((BaseModel)entire.Entity).UpdatedAt = DateTime.Now;
+                entry.Entity.CreatedAt = now;
+                entry.Entity.UpdatedAt = now;
+            }
+            else if (entry.State == EntityState.Modified)
+            {
+                entry.Property(x => x.CreatedAt).IsModified = false;
+                entry.Entity.UpdatedAt = now;
             }
         }
         return base.SaveChanges();

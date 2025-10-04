@@ -9,7 +9,7 @@ using a7D.PDV.Ativacao.API.Model;
 namespace a7D.PDV.Ativacao.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/licenses")]
 public sealed class LicensesController : ControllerBase
 {
     readonly ApplicationDbContext _db;
@@ -49,7 +49,6 @@ public sealed class LicensesController : ControllerBase
 
             foreach (var dto in items)
             {
-                // 1) Localiza a ativação pela ActivationKey
                 var activation = await _db.Activations
                     .Include(a => a.PDVs)
                     .FirstOrDefaultAsync(a => a.ActivationKey == dto.ActivationKey, ct);
@@ -57,19 +56,15 @@ public sealed class LicensesController : ControllerBase
                 if (activation is null)
                     throw new InvalidOperationException("Invalid activation key.");
 
-                // 2) Atualiza momento da verificação
                 activation.LastCheckedAt = DateTime.UtcNow;
 
-                // 3) Busca PDV existente por InstallationPdvId
                 var existing = activation.PDVs.FirstOrDefault(p => p.InstallationPdvId == dto.PdvId);
 
-                // Normaliza timestamps (truncando para segundos, como no legado)
                 var dtoTs = Truncate(dto.LastUpdatedAt, TruncateStep);
                 var existingTs = Truncate(existing?.LastUpdatedAt, TruncateStep);
 
                 if (existing is not null)
                 {
-                    // 3a) Detecção de duplicidade (dto < existente && ativação ativa)
                     if (dtoTs is not null && existingTs is not null &&
                         dtoTs < existingTs && activation.IsActive)
                     {
@@ -77,7 +72,6 @@ public sealed class LicensesController : ControllerBase
                         {
                             activation.IsDuplicate = true;
 
-                            // Acrescenta nota
                             var stamp = DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.GetCultureInfo("pt-BR"));
                             activation.Notes = (activation.Notes ?? string.Empty) + $"\nDuplicidade detectada em {stamp}";
 

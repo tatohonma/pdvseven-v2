@@ -1,31 +1,137 @@
 ﻿<h1>Clientes</h1>
-<hr />
-<div class="row">
-    <div class="col-md-12" style="margin-bottom:20px">
-        <a href="#/clientes/new" role="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>&nbsp;Cliente</a>
-    </div>
-</div>
+<hr/>
 
 <div class="row" ng-controller="ClientesController as vm">
-    <div class="col-md-12">
-
-        <div class="table-responsive" loading-container="vm.tableparams.settings().$loading" ng-hide="vm.mensagem" style="position:relative">
-            <table ng-table="vm.tableParams" class="table table-hover">
-                <tr ng-repeat="cliente in $data">
-                    <td>
-                        <a ng-href="/#/clientes/edit/{{cliente.IDCliente}}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
-                    </td>
-                    <td data-title="'Revenda'" filter="{revenda: 'select'}" filter-data="vm.revendas">{{cliente.Revenda.Nome}}</td>
-                    <td data-title="'Nome'" filter="{nome: 'text'}">{{cliente.Nome}}</td>
-                    <td data-title="'Razão Social'" filter="{razaoSocial: 'text'}">{{cliente.RazaoSocial}}</td>
-                    <td data-title="'Documento'" filter="{documento: 'text'}">{{cliente.CNPJCPF}}</td>
-                    <td data-title="'Telefone'" filter="{telefone: 'text'}">{{cliente.Telefone}}</td>
-                </tr>
-            </table>
+    <!-- topo com ação -->
+    <div class="row" ng-if="vm.isAdmin">
+        <div class="col-md-12 m-b-15">
+            <a class="btn btn-primary" href="#/clientes/new">
+                <span class="glyphicon glyphicon-plus"></span>&nbsp;Cliente
+            </a>
         </div>
-        <div class="alert alert-danger" ng-show="vm.mensagem">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <strong>Erro!</strong> {{vm.mensagem}}
+    </div>
+
+    <!-- ===== Filtro Superior ===== -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>Filtros</strong>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" ng-submit="vm.applyFilters()">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="control-label">Nome</label>
+                        <input class="form-control" ng-model="vm.filters.name" placeholder="Nome fantasia" type="text">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="control-label">Razão Social</label>
+                        <input class="form-control" ng-model="vm.filters.companyName" placeholder="Razão social" type="text">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="control-label">CNPJ/CPF</label>
+                        <input class="form-control" ng-model="vm.filters.cpfCnpj" placeholder="00.000.000/0000-00" type="text">
+                    </div>
+                </div>
+
+                <div class="row m-t-10">
+                    <div class="col-md-2">
+                        <label class="control-label">UF</label>
+                        <input class="form-control" ng-model="vm.filters.state" placeholder="SP, RJ..." type="text">
+                    </div>
+
+                    <div class="col-md-5">
+                        <label class="control-label">Revenda</label>
+                        <input class="form-control" ng-model="vm.filters.resellerName" placeholder="Nome da revenda" type="text">
+                    </div>
+
+                    <div class="col-md-5">
+                        <label class="control-label">Telefone</label>
+                        <input class="form-control" ng-model="vm.filters.phone" placeholder="(00) 0000-0000" type="text">
+                    </div>
+                </div>
+
+                <div class="row m-t-10" ng-if="vm.isAdmin">
+                    <div class="col-md-3">
+                        <label class="control-label">Criado de</label>
+                        <input class="form-control" ng-model="vm.filters.createdFrom" type="date">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label">Criado até</label>
+                        <input class="form-control" ng-model="vm.filters.createdTo" type="date">
+                    </div>
+
+                    <div class="col-md-6 text-right m-t-25">
+                        <button class="btn btn-primary" type="submit">
+                            <span class="glyphicon glyphicon-search"></span> Pesquisar
+                        </button>
+                        <button class="btn btn-default" ng-click="vm.clearFilters()" type="button">Limpar</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="table-responsive pretty-table"
+                 loading-container="vm.tableParams.settings().$loading"
+                 ng-hide="vm.mensagem"
+                 style="position:relative">
+
+                <table class="table table-hover table-striped table-bordered" ng-table="vm.tableParams">
+                    <tr ng-repeat="cliente in $data">
+                        <td class="w-min" ng-if="vm.isAdmin">
+                            <a class="btn btn-default btn-xs" ng-href="/#/clientes/edit/{{cliente.id}}">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                        </td>
+
+                        <td data-title="'Revenda'">
+                            <nobr>
+                                {{ (cliente.reseller && cliente.reseller.name) || cliente.resellerName || cliente.resellerId || '—' }}
+                            </nobr>
+                        </td>
+
+                        <td data-title="'Nome'">
+                            <nobr>{{ cliente.name || '—' }}</nobr>
+                        </td>
+
+                        <td data-title="'Razão Social'">
+                            <nobr>{{ cliente.companyName || '—' }}</nobr>
+                        </td>
+
+                        <td data-title="'Documento'">
+                            <nobr>{{ cliente.cpfCnpj || '—' }}</nobr>
+                        </td>
+
+                        <td data-title="'UF'">
+                            <nobr>{{ cliente.state || '—' }}</nobr>
+                        </td>
+
+                        <td data-title="'Telefone'">
+                            <nobr>{{ cliente.phone || '—' }}</nobr>
+                        </td>
+
+                        <td data-title="'Criado em'" ng-if="vm.isAdmin">
+                            <nobr>{{ cliente.createdAt | date:'dd/MM/yyyy HH:mm' }}</nobr>
+                        </td>
+
+                        <td data-title="'Atualizado em'" ng-if="vm.isAdmin">
+                            <nobr>{{ cliente.updatedAt | date:'dd/MM/yyyy HH:mm' }}</nobr>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="alert alert-danger" ng-show="vm.mensagem">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Erro!</strong> {{ vm.mensagem }}
+            </div>
         </div>
     </div>
 </div>

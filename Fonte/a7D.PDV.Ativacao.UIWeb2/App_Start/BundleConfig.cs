@@ -12,6 +12,9 @@ namespace a7D.PDV.Ativacao.UIWeb2
         public static void RegisterBundles(BundleCollection bundles)
         {
             BundleTable.EnableOptimizations = true;
+            
+            bundles.UseCdn = false;
+            BundleTable.EnableOptimizations = false;
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/site.css"));

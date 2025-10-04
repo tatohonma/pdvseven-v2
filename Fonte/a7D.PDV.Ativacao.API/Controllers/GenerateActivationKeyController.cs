@@ -6,7 +6,7 @@ using a7D.PDV.Ativacao.API.Data;
 namespace a7D.PDV.Ativacao.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/generate-activation-key")]
 // [ApiAuth] // habilite se já tiver portado para ASP.NET Core
 public sealed class GenerateActivationKeyController : ControllerBase
 {

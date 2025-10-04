@@ -10,20 +10,20 @@ using a7D.PDV.Ativacao.Shared.Services;
 namespace a7D.PDV.Ativacao.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/offline-validation")]
 // [ApiAuth(requerAdm: false)] // habilite se você já portou esse atributo para ASP.NET Core
-public sealed class ValidacaoOfflineController : ControllerBase
+public sealed class OfflineControllerValidation : ControllerBase
 {
     private readonly ApplicationDbContext _db;
     private readonly IEmailService _email;
     private readonly UserManager<AppUser> _userManager;
-    private readonly ILogger<ValidacaoOfflineController> _logger;
+    private readonly ILogger<OfflineControllerValidation> _logger;
 
-    public ValidacaoOfflineController(
+    public OfflineControllerValidation(
         ApplicationDbContext db,
         IEmailService email,
         UserManager<AppUser> userManager,
-        ILogger<ValidacaoOfflineController> logger)
+        ILogger<OfflineControllerValidation> logger)
     {
         _db = db;
         _email = email;

@@ -1,29 +1,52 @@
 ;(function () {
-  'use strict'
-  angular
-    .module('AtivacaoApp')
-    .controller('RevendasListaController', ['$scope', '$rootScope', 'recursoRevendas', 'AuthenticationService', function ($scope, $rootScope, recursoRevendas, AuthenticationService) {
-      
-      var adm = $rootScope.globals.currentUser.adm === true
+    'use strict';
 
-      if(!adm) {
-        return
-      }
+    angular
+        .module('AtivacaoApp')
+        .controller('RevendasListaController', RevendasListaController);
 
-      $scope.revendas = []
-      $scope.error = false
-      $scope.carregado = false
-      $scope.revenda = {}
-      recursoRevendas.query(function (revendas) {
-        $scope.carregado = true
-        $scope.revendas = revendas
-      }, function (err) {
-        if (err.status === 401) {
-          AuthenticationService.ClearCredentials()
+    RevendasListaController.$inject = [
+        '$scope', '$rootScope',
+        'recursoRevendas', 'AuthenticationService', 'AccountContext'
+    ];
+
+    function RevendasListaController ($scope, $rootScope, recursoRevendas, AuthenticationService, AccountContext) {
+        $scope.revendas  = [];
+        $scope.revenda   = null;
+        $scope.carregado = false;
+        $scope.error     = false;
+
+        function carregar() {
+            if (!AccountContext.hasRole('admin')) {
+                $scope.carregado = true;
+                $scope.revendas  = [];
+                return;
+            }
+
+            recursoRevendas.query().$promise
+                .then(function (revendas) {
+                    console.log(revendas);
+                    $scope.revendas  = revendas || [];
+                    $scope.carregado = true;
+                    $scope.error     = false;
+                })
+                .catch(function (err) {
+                    if (err && err.status === 401) {
+                        AuthenticationService.ClearCredentials();
+                    }
+                    $scope.error     = true;
+                    $scope.carregado = true;
+                    console.error(err);
+                });
         }
-        $scope.error = true
-        console.error(err)
-      })
+
+        var offLogado   = $rootScope.$on('logado', carregar);
+        var offDeslogado= $rootScope.$on('deslogado', carregar);
+        $scope.$on('$destroy', function () {
+            offLogado && offLogado();
+            offDeslogado && offDeslogado();
+        });
+
+        carregar();
     }
-    ])
-})()
+})();
