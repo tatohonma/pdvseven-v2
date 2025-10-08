@@ -204,8 +204,26 @@ namespace a7D.PDV.Fiscal.NFCe
                     vPag = item.Valor,
                 });
             }
+            
+            decimal vNF = Math.Round(nfe.infNFe.total.ICMSTot.vNF, 2, MidpointRounding.AwayFromZero);
+            decimal somaPagamentos = Math.Round(nfe.infNFe.pag[0].detPag.Sum(p => p.vPag), 2, MidpointRounding.AwayFromZero);
+            decimal diferenca = Math.Round(somaPagamentos - vNF, 2, MidpointRounding.AwayFromZero);
+
+            if (diferenca != 0)
+            {
+                var ultimo = nfe.infNFe.pag.Last().detPag.Last();
+                ultimo.vPag = Math.Round(ultimo.vPag - diferenca, 2, MidpointRounding.AwayFromZero);
+
+                nfe.infNFe.pag[0].vTroco = null;
+            }
+            else
+            {
+                nfe.infNFe.pag[0].vTroco = null;
+            }
 
             return new NFCe { nfe = nfe };
+
+            // return new NFCe { nfe = nfe };
         }
 
         private static imposto ImpostoProduto(TipoTributacaoInformation tributacao, decimal vProd)
