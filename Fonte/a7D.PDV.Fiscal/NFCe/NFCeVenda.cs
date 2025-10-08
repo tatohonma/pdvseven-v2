@@ -227,25 +227,32 @@ namespace a7D.PDV.Fiscal.NFCe
                 nfe.infNFe.pag[0].detPag.Add(det);
             }
 
-            decimal totalNF = Math.Round(nfe.infNFe.total.ICMSTot.vNF, 2, MidpointRounding.AwayFromZero);
+            // decimal totalNF = Math.Round(nfe.infNFe.total.ICMSTot.vNF, 2, MidpointRounding.AwayFromZero);
+            //
+            // var dets = nfe.infNFe.pag[0].detPag;
 
-            var dets = nfe.infNFe.pag[0].detPag;
+            // decimal totalPagamentos = Math.Round(dets.Sum(p => p.vPag), 2, MidpointRounding.AwayFromZero);
+            // decimal totalDinheiro   = Math.Round(
+            //     dets.Where(p => p.tPag == FormaPagamento.fpDinheiro).Sum(p => p.vPag),
+            //     2, MidpointRounding.AwayFromZero
+            // );
 
-            decimal totalPagamentos = Math.Round(dets.Sum(p => p.vPag), 2, MidpointRounding.AwayFromZero);
-            decimal totalDinheiro   = Math.Round(
-                dets.Where(p => p.tPag == FormaPagamento.fpDinheiro).Sum(p => p.vPag),
-                2, MidpointRounding.AwayFromZero
-            );
+            decimal vNF = Math.Round(nfe.infNFe.total.ICMSTot.vNF, 2, MidpointRounding.AwayFromZero);
+            decimal somaPagamentos = Math.Round(nfe.infNFe.pag[0].detPag.Sum(p => p.vPag), 2, MidpointRounding.AwayFromZero);
+            decimal diferenca = Math.Round(somaPagamentos - vNF, 2, MidpointRounding.AwayFromZero);
 
-            decimal excedente = totalPagamentos - totalNF;
-            if (excedente > 0 && totalDinheiro > 0)
+            if (diferenca != 0)
             {
-                nfe.infNFe.pag[0].vTroco = Math.Min(excedente, totalDinheiro);
+                var ultimo = nfe.infNFe.pag.Last().detPag.Last();
+                ultimo.vPag = Math.Round(ultimo.vPag - diferenca, 2, MidpointRounding.AwayFromZero);
+
+                nfe.infNFe.pag[0].vTroco = null;
             }
             else
             {
                 nfe.infNFe.pag[0].vTroco = null;
             }
+
 
             return new NFCe { nfe = nfe };
         }
