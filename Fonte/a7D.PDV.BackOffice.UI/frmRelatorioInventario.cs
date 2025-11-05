@@ -43,7 +43,7 @@ namespace a7D.PDV.BackOffice.UI
         {
             var agora = DateTime.Now;
             reportViewer1.LocalReport.DataSources.Clear();
-            reportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WinForms.ReportDataSource("Inventario", EntradaSaida.RelatorioInventario(idInventario)));
+            // reportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WinForms.ReportDataSource("Inventario", EntradaSaida.RelatorioInventario(idInventario)));
             //reportViewer1.LocalReport.SetParameters(new Microsoft.Reporting.WinForms.ReportParameter("DataRelatorio", data.ToString("dd/MM/yyyy")));
             //reportViewer1.LocalReport.SetParameters(new Microsoft.Reporting.WinForms.ReportParameter("DataImpressao", agora.ToString("dd/MM/yyyy HH:mm:ss")));
             reportViewer1.LocalReport.DisplayName = "RelatorioInventario_" + idInventario + "_" + agora.ToString("yyyyMMddHHmmss");

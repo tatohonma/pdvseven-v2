@@ -28,10 +28,10 @@ namespace a7D.PDV.BackOffice.UI
             GA.Post(this);
             var agora = DateTime.Now;
             reportViewer1.LocalReport.DataSources.Clear();
-            reportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WinForms.ReportDataSource("DetalhesMovimentacaoDiaria", EntradaSaida.HistoricoPorDia(data, idProduto)));
-            reportViewer1.LocalReport.SetParameters(new Microsoft.Reporting.WinForms.ReportParameter("DataRelatorio", data.ToString("dd/MM/yyyy")));
-            reportViewer1.LocalReport.SetParameters(new Microsoft.Reporting.WinForms.ReportParameter("DataImpressao", agora.ToString("dd/MM/yyyy HH:mm:ss")));
-            reportViewer1.LocalReport.SetParameters(new Microsoft.Reporting.WinForms.ReportParameter("Produto", Produto.Carregar(idProduto).Nome));
+            // reportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WinForms.ReportDataSource("DetalhesMovimentacaoDiaria", EntradaSaida.HistoricoPorDia(data, idProduto)));
+            // reportViewer1.LocalReport.SetParameters(new Microsoft.Reporting.WinForms.ReportParameter("DataRelatorio", data.ToString("dd/MM/yyyy")));
+            // reportViewer1.LocalReport.SetParameters(new Microsoft.Reporting.WinForms.ReportParameter("DataImpressao", agora.ToString("dd/MM/yyyy HH:mm:ss")));
+            // reportViewer1.LocalReport.SetParameters(new Microsoft.Reporting.WinForms.ReportParameter("Produto", Produto.Carregar(idProduto).Nome));
             reportViewer1.LocalReport.DisplayName = "DetalhesMovimentacaoDiaria" + data.ToString("yyyyMMdd") + "_" + agora.ToString("yyyyMMddHHmmss");
             var setup = reportViewer1.GetPageSettings();
             setup.Margins = new System.Drawing.Printing.Margins(1, 1, 1, 1);

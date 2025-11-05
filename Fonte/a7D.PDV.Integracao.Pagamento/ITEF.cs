@@ -28,6 +28,7 @@ namespace a7D.PDV.Integracao.Pagamento
     {
         Selecione = -1,
         Debito = 0,
-        Credito = 1
+        Credito = 1,
+        VoucherVR  = 2
     }
 }

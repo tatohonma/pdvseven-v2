@@ -77,7 +77,7 @@ namespace a7D.PDV.BackOffice.UI
             }
 
             reportViewer1.LocalReport.DataSources.Clear();
-            reportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WinForms.ReportDataSource("FichaInventario", DtRelatorio));
+            // reportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WinForms.ReportDataSource("FichaInventario", DtRelatorio));
             //reportViewer1.LocalReport.SetParameters(new Microsoft.Reporting.WinForms.ReportParameter("DataRelatorio", data.ToString("dd/MM/yyyy")));
             //reportViewer1.LocalReport.SetParameters(new Microsoft.Reporting.WinForms.ReportParameter("DataImpressao", agora.ToString("dd/MM/yyyy HH:mm:ss")));
             reportViewer1.LocalReport.DisplayName = "FichaInventario_" + DateTime.Now.ToString("yyyyMMdd");

@@ -13,6 +13,7 @@ namespace a7D.PDV.Integracao.Pagamento.StoneTEF
         public string Bandeira { get; private set; }
         public string Adquirente { get; private set; }
         public bool Debito { get; private set; }
+        public bool Voucher { get; private set; }
         public string ViaEstabelecimento { get; private set; }
         public string ViaCliente { get; private set; }
         public decimal Valor { get; private set; }
@@ -62,7 +63,8 @@ namespace a7D.PDV.Integracao.Pagamento.StoneTEF
 
         public void DefinirMetodoPagamento(MetodoPagamento metodo, int parcelas)
         {
-            Debito = metodo == MetodoPagamento.Debito;
+            Voucher = (metodo == MetodoPagamento.VoucherVR);
+            Debito  = (metodo == MetodoPagamento.Debito || Voucher); 
         }
 
         private void AddLog(string info)

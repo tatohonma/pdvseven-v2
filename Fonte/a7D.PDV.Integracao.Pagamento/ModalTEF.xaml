@@ -13,21 +13,45 @@
         Background="#60ffffff"
         Topmost="True"
         Loaded="Window_Loaded">
-    <Border Name="borderMain" BorderBrush="Black" BorderThickness="2" Height="auto" Width="500" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+    <Border Name="borderMain" BorderBrush="Black" BorderThickness="2"
+            Height="auto" Width="500" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid Name="gridMain" Background="White">
+            <!-- AGORA SÃO 4 COLUNAS -->
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <TextBlock Name="txtStatus" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Processando" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20px" Margin="20" />
-            <Button Name="btnDebito" Grid.Row="1" Grid.Column="0" Click="btnSaveData_Click" Content="Debito" Margin="20" FontSize="20px" />
-            <Button Name="btnCredito" Grid.Row="1" Grid.Column="1" Click="btnSaveData_Click" Content="Crédito"  Margin="20" FontSize="20px"/>
-            <Button Name="btnCancelar" Grid.Row="1" Grid.Column="2" Click="btnCancelar_Click" Content="Cancelar"  Margin="20" FontSize="20px"/>
+
+            <TextBlock Name="txtStatus"
+                       Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"
+                       Text="Processando" TextWrapping="Wrap"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       FontSize="20px" Margin="20"/>
+
+            <Button Name="btnDebito"   Grid.Row="1" Grid.Column="0"
+                    Click="btnSaveData_Click" Content="Debito"
+                    Margin="20" FontSize="20px"/>
+
+            <Button Name="btnCredito"  Grid.Row="1" Grid.Column="1"
+                    Click="btnSaveData_Click" Content="Crédito"
+                    Margin="20" FontSize="20px"/>
+
+            <!-- NOVO: VR/Débito -->
+            <Button Name="btnVrDebito" Grid.Row="1" Grid.Column="2"
+                    Click="btnSaveData_Click" Content="VR/Debito"
+                    Margin="20" FontSize="20px"/>
+
+            <!-- Cancelar vai para a 4ª coluna -->
+            <Button Name="btnCancelar" Grid.Row="1" Grid.Column="3"
+                    Click="btnCancelar_Click" Content="Cancelar"
+                    Margin="20" FontSize="20px"/>
         </Grid>
     </Border>
 </Window>

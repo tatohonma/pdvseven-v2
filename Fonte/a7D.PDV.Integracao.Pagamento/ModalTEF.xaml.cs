@@ -51,7 +51,7 @@ namespace a7D.PDV.Integracao.Pagamento
 
         private void IniciaProcessamento()
         {
-            btnCredito.Visibility = btnDebito.Visibility = Visibility.Collapsed;
+            btnCredito.Visibility = btnDebito.Visibility = btnVrDebito.Visibility = Visibility.Collapsed;
             txtStatus.Text = "Processando...";
 
             timer = new DispatcherTimer();
@@ -121,6 +121,8 @@ namespace a7D.PDV.Integracao.Pagamento
             Button btn = (Button)sender;
             if (btn.Name == btnDebito.Name)
                 tef.DefinirMetodoPagamento(MetodoPagamento.Debito, 1);
+            else if(btn.Name == btnVrDebito.Name)
+                tef.DefinirMetodoPagamento(MetodoPagamento.VoucherVR, 1);
             else if (btn.Name == btnCredito.Name)
                 tef.DefinirMetodoPagamento(MetodoPagamento.Credito, parcelas);
 
