@@ -42,7 +42,7 @@ namespace a7D.PDV.Caixa.UI
         static a7D.PDV.Integracao.Pagamento.StoneTEF.AutoTefClient _autoTefClient;
         static bool _autoTefActivated;
         static string _autoTefBaseUrl;
-        static string _autoTefConnectionName;
+        static string _autoTefPartnerName;
         static string _stoneCode;
 
         public frmPrincipal()
@@ -50,7 +50,7 @@ namespace a7D.PDV.Caixa.UI
             InitializeComponent();
         }
         
-        private static a7D.PDV.Integracao.Pagamento.StoneTEF.AutoTefClient GetAutoTefClient()
+        static a7D.PDV.Integracao.Pagamento.StoneTEF.AutoTefClient GetAutoTefClient()
         {
             if (_autoTefClient == null)
             {
@@ -60,12 +60,12 @@ namespace a7D.PDV.Caixa.UI
             return _autoTefClient;
         }
 
-        private static async Task EnsureAutoTefActivatedAsync()
+        static async Task EnsureAutoTefActivatedAsync()
         {
             if (_autoTefActivated) return;
 
             var client = GetAutoTefClient();
-            var resp = await client.ActivateAsync(_stoneCode, _autoTefConnectionName);
+            var resp = await client.ActivateAsync(_stoneCode, _autoTefPartnerName);
             if (!resp.IsSuccessStatusCode)
             {
                 var body = await resp.Content.ReadAsStringAsync();
@@ -74,7 +74,7 @@ namespace a7D.PDV.Caixa.UI
             _autoTefActivated = true;
         }
 
-        private void MensagemCarregando(string msg)
+        void MensagemCarregando(string msg)
         {
             try
             {
@@ -609,7 +609,8 @@ Deseja realizar o fechamento do caixa mesmo assim?", "ATENÇÃO", MessageBoxButt
             OrdemProducaoServices.IDAreaViaExpedicao = ConfiguracoesCaixa.Valores.IDAreaViaExpedicao;
 
 
-            _stoneCode = ConfiguracoesSistema.Valores.StoneCode; 
+            _stoneCode = ConfiguracoesSistema.Valores.StoneCode;
+            _autoTefPartnerName = "Delivery On Sistemas de Pagamento LTDA";
             _autoTefBaseUrl = "http://localhost:8000/";
             // _autoTefConnectionName = ConfiguracoesSistema.Valores.AutoTefConnectionName; // se necessário no Linux
 
