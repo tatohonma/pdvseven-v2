@@ -45,7 +45,7 @@
 
             <!-- NOVO: VR/Débito -->
             <Button Name="btnVrDebito" Grid.Row="1" Grid.Column="2"
-                    Click="btnSaveData_Click" Content="VR/Debito"
+                    Click="btnSaveData_Click" Content="VR"
                     Margin="20" FontSize="20px"/>
 
             <!-- Cancelar vai para a 4ª coluna -->

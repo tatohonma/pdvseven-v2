@@ -10,7 +10,7 @@ namespace a7D.PDV.Integracao.NTK.UI
         {
             InitializeComponent();
             GranitoLogin.Decript("001-06079-14", "wDJ66i2jK18PMwi2Mvbr7lFvls2YdSXXewLtOA0PBPE=");
-            Pagamento.StoneTEF.PinpadStoneTEF.StoneCode = "112634281"; // PRODUÇÃO PDVSeven;
+            // Pagamento.StoneTEF.PinpadStoneTEF.StoneCode = "112634281"; // PRODUÇÃO PDVSeven;
         }
 
         private void Pagar_Click(object sender, RoutedEventArgs e)

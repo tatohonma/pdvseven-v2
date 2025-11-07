@@ -19,7 +19,9 @@ using System.IO;
 using System.Linq;
 using System.Printing;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using a7D.PDV.Integracao.Pagamento.StoneTEF;
 
 namespace a7D.PDV.Caixa.UI
 {
@@ -35,10 +37,41 @@ namespace a7D.PDV.Caixa.UI
         public DialogResult dialogRetorno;
         public static CaixaInformation Caixa1;
         private ConfiguracoesGerenciadorImpressao cfgOI;
+        
+        
+        static a7D.PDV.Integracao.Pagamento.StoneTEF.AutoTefClient _autoTefClient;
+        static bool _autoTefActivated;
+        static string _autoTefBaseUrl;
+        static string _autoTefConnectionName;
+        static string _stoneCode;
 
         public frmPrincipal()
         {
             InitializeComponent();
+        }
+        
+        private static a7D.PDV.Integracao.Pagamento.StoneTEF.AutoTefClient GetAutoTefClient()
+        {
+            if (_autoTefClient == null)
+            {
+                var baseUrl = string.IsNullOrWhiteSpace(_autoTefBaseUrl) ? "http://localhost:8000/" : _autoTefBaseUrl;
+                _autoTefClient = new a7D.PDV.Integracao.Pagamento.StoneTEF.AutoTefClient(baseUrl);
+            }
+            return _autoTefClient;
+        }
+
+        private static async Task EnsureAutoTefActivatedAsync()
+        {
+            if (_autoTefActivated) return;
+
+            var client = GetAutoTefClient();
+            var resp = await client.ActivateAsync(_stoneCode, _autoTefConnectionName);
+            if (!resp.IsSuccessStatusCode)
+            {
+                var body = await resp.Content.ReadAsStringAsync();
+                throw new Exception($"Falha ao ativar AutoTEF ({(int)resp.StatusCode}): {body}");
+            }
+            _autoTefActivated = true;
         }
 
         private void MensagemCarregando(string msg)
@@ -575,6 +608,25 @@ Deseja realizar o fechamento do caixa mesmo assim?", "ATENÇÃO", MessageBoxButt
             OrdemProducaoServices.ImprimirViaExpedicao = ConfiguracoesCaixa.Valores.ImprimirViaExpedicao;
             OrdemProducaoServices.IDAreaViaExpedicao = ConfiguracoesCaixa.Valores.IDAreaViaExpedicao;
 
+
+            _stoneCode = ConfiguracoesSistema.Valores.StoneCode; 
+            _autoTefBaseUrl = "http://localhost:8000/";
+            // _autoTefConnectionName = ConfiguracoesSistema.Valores.AutoTefConnectionName; // se necessário no Linux
+
+            AutoTefBridge.Register(
+                getClient: () => GetAutoTefClient(),
+                ensureActivatedAsync: () => EnsureAutoTefActivatedAsync()
+            );
+            
+            try
+            {
+                EnsureAutoTefActivatedAsync().GetAwaiter().GetResult();
+            }
+            catch (Exception ex)
+            {
+                Logs.ErroBox(CodigoErro.A310, ex);
+            }
+            
             SelectIDValor.onSelect += (st, itens) => frmSelecao.Select("SELECIONE", st, itens);
 
             // Precisa ter no integrador e WS2 ou qualquer outro que imprime também!
@@ -873,7 +925,9 @@ Deseja realizar o fechamento do caixa mesmo assim?", "ATENÇÃO", MessageBoxButt
                     MenuStone.Visible = true;
                 }));
                 
-                Integracao.Pagamento.StoneTEF.PinpadStoneTEF.StoneCode = ConfiguracoesSistema.Valores.StoneCode;
+                
+                
+                // Integracao.Pagamento.StoneTEF.PinpadStoneTEF.StoneCode = ConfiguracoesSistema.Valores.StoneCode;
 
                 mensagemOperador = PinpadTEF.Iniciar(TipoTEF.STONE, out viaCliente, out viaEstabelecimento);
 

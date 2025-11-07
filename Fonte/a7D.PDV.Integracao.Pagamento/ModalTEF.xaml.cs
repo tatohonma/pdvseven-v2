@@ -8,11 +8,11 @@ namespace a7D.PDV.Integracao.Pagamento
 {
     public partial class ModalTEF : Window, IModalTEF
     {
-        private DispatcherTimer timer;
-        private ITEF tef;
-        private int etapa;
-        private int parcelas;
-        private bool SempreAtivo;
+        DispatcherTimer timer;
+        ITEF tef;
+        int etapa;
+        int parcelas;
+        bool SempreAtivo;
 
         public ModalTEF()
         {
@@ -39,7 +39,7 @@ namespace a7D.PDV.Integracao.Pagamento
             borderMain.Visibility =  Visibility.Visible;
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        void Window_Loaded(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Maximized;
 
@@ -49,7 +49,7 @@ namespace a7D.PDV.Integracao.Pagamento
                 IniciaProcessamento();
         }
 
-        private void IniciaProcessamento()
+        void IniciaProcessamento()
         {
             btnCredito.Visibility = btnDebito.Visibility = btnVrDebito.Visibility = Visibility.Collapsed;
             txtStatus.Text = "Processando...";
@@ -63,7 +63,7 @@ namespace a7D.PDV.Integracao.Pagamento
         public Action ConfirmarPagamento { get; set; }
         public Action FecharPedido { get; set; }
 
-        private void DispatcherTimer_Tick(object sender, System.EventArgs e)
+        void DispatcherTimer_Tick(object sender, System.EventArgs e)
         {
             try
             {
@@ -116,7 +116,7 @@ namespace a7D.PDV.Integracao.Pagamento
             }
         }
 
-        private void btnSaveData_Click(object sender, RoutedEventArgs e)
+        void btnSaveData_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
             if (btn.Name == btnDebito.Name)
@@ -129,7 +129,7 @@ namespace a7D.PDV.Integracao.Pagamento
             IniciaProcessamento();
         }
 
-        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
             try
             {

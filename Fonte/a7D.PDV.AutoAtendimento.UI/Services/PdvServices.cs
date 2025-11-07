@@ -2,7 +2,9 @@
 using a7D.PDV.Integracao.Pagamento.GranitoTEF;
 using System;
 using System.Management;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using a7D.PDV.Integracao.Pagamento.StoneTEF;
 
 namespace a7D.PDV.AutoAtendimento.UI.Services
 {
@@ -25,9 +27,17 @@ namespace a7D.PDV.AutoAtendimento.UI.Services
         internal static bool ComandaComCredito { get; private set; }
         internal static int IDCategoriaProduto_Credito { get; private set; }
         internal static int IDProduto_NovaComanda { get; private set; }
+        
+        
+        internal static string AutoTefBaseUrl { get; private set; }
+        internal static string StoneCode { get; private set; }
+        internal static string AutoTefConnectionName { get; private set; }
+        
+        static AutoTefClient _autoTefClient;
+        static bool _autoTefActivated;
 
-        private AutenticacaoAPI autenticacao;
-        private ConfiguracaoAPI config;
+        AutenticacaoAPI autenticacao;
+        ConfiguracaoAPI config;
 
         internal PdvServices(ClienteWS ws)
         {
@@ -35,11 +45,35 @@ namespace a7D.PDV.AutoAtendimento.UI.Services
             config = ws.Configuracao();
         }
 
-        private string RetornarSerialHD()
+        string RetornarSerialHD()
         {
             var disk = new ManagementObject("win32_logicaldisk.deviceid=\"c:\"");
             disk.Get();
             return disk["VolumeSerialNumber"].ToString();
+        }
+
+
+        internal static AutoTefClient GetAutoTefClient()
+        {
+            if (_autoTefClient == null)
+                _autoTefClient = new AutoTefClient(AutoTefBaseUrl ?? "http://localhost:8000/");
+            return _autoTefClient;
+        }
+
+        internal static async Task EnsureAutoTefActivatedAsync()
+        {
+            if (_autoTefActivated) return;
+            
+            var client = GetAutoTefClient();
+            var resp = await client.ActivateAsync(StoneCode, AutoTefConnectionName);
+
+            if (!resp.IsSuccessStatusCode)
+            {
+                var body = await resp.Content.ReadAsStringAsync();
+                throw new Exception($"Falha ao ativar AutoTEF ({(int)resp.StatusCode}): {body}");
+            }
+            
+            _autoTefActivated = true;
         }
 
         internal string ValidarPDV()
@@ -82,6 +116,19 @@ namespace a7D.PDV.AutoAtendimento.UI.Services
             VerificarDisponibilidade = int.Parse(config.Chave("VerificarDisponibilidade", PDVID, idTipoPDV) ?? "10");
             MeioPagamento = config.Chave("MeioPagamento", PDVID, idTipoPDV); // NTKDLL, PAGODLL, nenhum
             ComandaComCredito = config.Chave("ComandaComCredito") == "1";
+            AutoTefBaseUrl = config.Chave("AutoTefBaseUrl", PDVID, idTipoPDV);
+
+            if (string.IsNullOrEmpty(AutoTefBaseUrl))
+                AutoTefBaseUrl = "http://localhost:8000/";
+            StoneCode = config.Chave("StoneCode");
+            AutoTefConnectionName = "PDVSeven";
+            
+            AutoTefBridge.Register(
+                getClient: () => GetAutoTefClient(),
+                ensureActivatedAsync: () => EnsureAutoTefActivatedAsync()
+            );
+            
+            EnsureAutoTefActivatedAsync().GetAwaiter().GetResult();
 
             if (int.TryParse(config.Chave("IDCategoriaProduto_Credito", PDVID, idTipoPDV), out int catCredito))
                 IDCategoriaProduto_Credito = catCredito;
@@ -91,8 +138,10 @@ namespace a7D.PDV.AutoAtendimento.UI.Services
 
             ImpressoraServices.Left = int.Parse(config.Chave("MargemImpressaoWindows", PDVID, idTipoPDV) ?? "0");
             ImpressoraServices.Width = int.Parse(config.Chave("LarguraImpressaoWindows", PDVID, idTipoPDV) ?? "280");
-
-            Integracao.Pagamento.StoneTEF.PinpadStoneTEF.StoneCode = config.Chave("StoneCode");
+            
+            
+            //TODO SDK antigo 
+            // Integracao.Pagamento.StoneTEF.PinpadStoneTEF.StoneCode = config.Chave("StoneCode");
 
             string granitoIdPdvString = config.Chave("GranitoIDPDV", PdvServices.PDVID);
 

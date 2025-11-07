@@ -3,6 +3,7 @@ using a7D.PDV.Integracao.Pagamento;
 using MuxxLib;
 using System;
 using System.Windows;
+using a7D.PDV.Integracao.Pagamento.StoneTEF;
 
 namespace a7D.PDV.AutoAtendimento.UI.Services
 {
@@ -34,7 +35,11 @@ namespace a7D.PDV.AutoAtendimento.UI.Services
             else if (PdvServices.MeioPagamento == "STONE")
             {
                 bool contemAlcoolico = BLL.Pedido.ContemAlcoolico(pedidoID);
-                TEF = new Integracao.Pagamento.StoneTEF.PinpadStoneTEF(pedidoID, total, null, contemAlcoolico);
+                // TEF = new Integracao.Pagamento.StoneTEF.PinpadStoneTEF(pedidoID, total, null, contemAlcoolico);
+                PdvServices.EnsureAutoTefActivatedAsync().GetAwaiter().GetResult();
+
+                var client = PdvServices.GetAutoTefClient();
+                TEF = new AutoTefApiTEF(client, pedidoID,total,contemAlcoolico);
             }
             else if (PdvServices.MeioPagamento == "NTKPayGo")
             {

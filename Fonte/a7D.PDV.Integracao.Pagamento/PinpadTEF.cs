@@ -2,6 +2,7 @@
 using a7D.PDV.Integracao.Pagamento.NTKTEFDLL;
 using a7D.PDV.Integracao.Pagamento.GranitoTEF;
 using System;
+using a7D.PDV.Integracao.Pagamento.StoneTEF;
 
 namespace a7D.PDV.Integracao.Pagamento
 {
@@ -9,6 +10,8 @@ namespace a7D.PDV.Integracao.Pagamento
 
     public static class PinpadTEF
     {
+        
+        
         public static string Iniciar(TipoTEF tipo, out string viaCliente, out string viaEstabelecimento)
         {
             ITEF tef = null;
@@ -66,8 +69,11 @@ namespace a7D.PDV.Integracao.Pagamento
 
                 case TipoTEF.STONE:
                     factory = new FactoryWPF(false);
-                    tef = new StoneTEF.PinpadStoneTEF(pedido, valor, null, contemAlcoolicos);
-
+                    // tef = new StoneTEF.PinpadStoneTEF(pedido, valor, null, contemAlcoolicos);
+                    
+                    AutoTefBridge.EnsureActivatedAsync().GetAwaiter().GetResult();
+                    var client = AutoTefBridge.GetClient();
+                    tef = new StoneTEF.AutoTefApiTEF(client, pedido, valor, contemAlcoolicos);
                     break;
 
             }
@@ -96,7 +102,7 @@ namespace a7D.PDV.Integracao.Pagamento
             {
                 case TipoTEF.STONE:
                     factory = new FactoryWPF(false);
-                    tef = new StoneTEF.PinpadStoneTEF(0, 0, autorizacaoCancelamento, false);
+                    // tef = new StoneTEF.PinpadStoneTEF(0, 0, autorizacaoCancelamento, false);
 
                     break;
 
