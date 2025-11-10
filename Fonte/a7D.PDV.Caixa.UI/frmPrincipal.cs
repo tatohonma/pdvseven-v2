@@ -610,7 +610,7 @@ Deseja realizar o fechamento do caixa mesmo assim?", "ATENÇÃO", MessageBoxButt
 
 
             _stoneCode = ConfiguracoesSistema.Valores.StoneCode;
-            _autoTefPartnerName = "Delivery On Sistemas de Pagamento LTDA";
+            _autoTefPartnerName = "PDVSeven";
             _autoTefBaseUrl = "http://localhost:8000/";
             // _autoTefConnectionName = ConfiguracoesSistema.Valores.AutoTefConnectionName; // se necessário no Linux
 
@@ -632,6 +632,7 @@ Deseja realizar o fechamento do caixa mesmo assim?", "ATENÇÃO", MessageBoxButt
 
             // Precisa ter no integrador e WS2 ou qualquer outro que imprime também!
             var nomeServico = EF.Repositorio.Carregar<tbProduto>(p => p.IDProduto == ProdutoInformation.IDProdutoServico)?.Nome;
+            
             if (nomeServico != null && nomeServico != " * Serviço")
                 CupomSATService.NomeTaxaServico = ContaServices.NomeTaxaServico = nomeServico;
 

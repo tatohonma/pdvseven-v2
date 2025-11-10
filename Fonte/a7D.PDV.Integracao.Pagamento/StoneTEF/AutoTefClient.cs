@@ -21,12 +21,12 @@ namespace a7D.PDV.Integracao.Pagamento.StoneTEF
         public class ActivateRequest
         {
             public string stoneCode { get; set; }
-            public string connectionName { get; set; } 
+            public string partnerName { get; set; } 
             public ActivateRequest() { }
-            public ActivateRequest(string stoneCode, string connectionName = null)
+            public ActivateRequest(string stoneCode, string partnerName = null)
             {
                 this.stoneCode = stoneCode;
-                this.connectionName = connectionName;
+                this.partnerName = partnerName;
             }
         }
 
@@ -70,9 +70,9 @@ namespace a7D.PDV.Integracao.Pagamento.StoneTEF
             return new StringContent(json, Encoding.UTF8, "application/json");
         }
 
-        public Task<HttpResponseMessage> ActivateAsync(string stoneCode, string connectionName = null, CancellationToken ct = default(CancellationToken))
+        public Task<HttpResponseMessage> ActivateAsync(string stoneCode, string partnerName = null, CancellationToken ct = default(CancellationToken))
         {
-            var body = new ActivateRequest(stoneCode, connectionName);
+            var body = new ActivateRequest(stoneCode, partnerName);
             return _http.PostAsync("api/Activate", AsJson(body), ct);
         }
 
