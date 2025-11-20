@@ -172,6 +172,7 @@
     <Compile Include="Migrations\202401081432571_2_25_tbFaturaPixConta.designer.cs">
       <DependentUpon>202401081432571_2_25_tbFaturaPixConta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202511171826289_2_27_tbControleNumeracaoFiscal.cs" />
     <Compile Include="Models\Mapping\tbFaturaPixContaMap.cs" />
     <Compile Include="Models\Mapping\tbOrigemPedidoMap.cs" />
     <Compile Include="Models\Mapping\tbTagMap.cs" />

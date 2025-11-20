@@ -7,6 +7,7 @@ using NFe.Utils;
 using System;
 using System.IO;
 using System.Text;
+using a7D.PDV.BLL.Services;
 
 namespace a7D.PDV.Fiscal.NFCe
 {
@@ -43,6 +44,8 @@ namespace a7D.PDV.Fiscal.NFCe
                         IDStatusProcessamentoSAT = (int)EStatusProcessamentoSAT.NAO_INICIADO,
                         XMLEnvio = ""
                     };
+                    int numeroFiscal = NumeroFiscalService.ObterProximoNumero("NFCE");
+                    _processamentoSat.NumeroFiscalSequencial = numeroFiscal;
                     ProcessamentoSAT.Salvar(_processamentoSat);
                 }
                 else if (_processamentoSat.IDStatusProcessamentoSAT == (int)EStatusProcessamentoSAT.SUCESSO)
@@ -57,7 +60,7 @@ namespace a7D.PDV.Fiscal.NFCe
                     _processamentoSat.IDStatusProcessamentoSAT = (int)EStatusProcessamentoSAT.NAO_INICIADO;
                 }
 
-                nfce = NFCeVenda.CarregarCFe(_pedido, _processamentoSat.IDProcessamentoSAT.Value, _cpfNaNota);
+                nfce = NFCeVenda.CarregarCFe(_pedido, _processamentoSat.NumeroFiscalSequencial.Value, _cpfNaNota);
 
                 if (ConfiguracaoServico.Instancia.tpAmb == DFe.Classes.Flags.TipoAmbiente.Homologacao)
                 {

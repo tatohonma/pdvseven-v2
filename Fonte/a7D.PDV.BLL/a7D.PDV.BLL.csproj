@@ -138,6 +138,7 @@
     <Compile Include="Extension\ImpressaoExtensions.cs" />
     <Compile Include="GA.cs" />
     <Compile Include="PixConta.cs" />
+    <Compile Include="Services\NumeroFiscalService.cs" />
     <Compile Include="Tag.cs" />
     <Compile Include="Utils\ApiClient.cs" />
     <Compile Include="ValueObject\SaldoClientes.cs" />

@@ -34,5 +34,8 @@ namespace a7D.PDV.Model
 
         [CRUDParameterDAL(false, "DataSolicitacao")]
         public DateTime? DataSolicitacao { get; set; }
+        
+        [CRUDParameterDAL(false, "NumeroFiscalSequencial")]
+        public int? NumeroFiscalSequencial { get; set; }
     }
 }

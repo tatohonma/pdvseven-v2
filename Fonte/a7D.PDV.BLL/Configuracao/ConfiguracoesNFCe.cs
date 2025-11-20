@@ -83,5 +83,8 @@ namespace a7D.PDV.BLL
 
         [Config("Pasta a cravar XML ", Valor = "")]
         public string NFCe_SalvarXML { get; protected set; }
+        
+        [Config("Sequencia atual da nota fiscal", Valor = "")]
+        public string NFCe_AtualNotaFiscal { get; protected set; }
     }
 }
