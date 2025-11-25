@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2025")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.25.6.0")]
+[assembly: AssemblyVersion("2.25.6.1")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -66,6 +66,8 @@ Lista das últimas versões e FIX
 
 ===============================================================================
 ===============================================================================
+2.25.6.1 ======================================================================
+    Correção: Corrrção do número sequencial da NFC-e e série.
 
 2.25.6.0 ======================================================================
     Novo: Integração Autotef Stone com Vale Refeição e PIX
