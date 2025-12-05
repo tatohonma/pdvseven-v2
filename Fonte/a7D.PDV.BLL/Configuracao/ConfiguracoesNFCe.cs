@@ -7,6 +7,9 @@ namespace a7D.PDV.BLL
         public ConfiguracoesNFCe() : base(null, null)
         {
         }
+        
+        [Config("Ambiente", Valor = "1", ValoresAceitos = "1:Produção|2:Homologação",  Obrigatorio = true)]
+        public string NFCe_Ambiente { get; protected set; }
 
         [Config("Certificado A1 Arquivo (caminho completo do arquivo .PFX)", Valor = "", Obrigatorio = true)]
         public string NFCe_CertificadoArquivo { get; protected set; }
@@ -43,6 +46,8 @@ namespace a7D.PDV.BLL
 
         [Config("Regime Tributário", Valor = "1", ValoresAceitos = "1:Simples Nacional|2:Simples Nacional Excesso Sublimite|3:Regime Normal", Obrigatorio = true)]
         public int NFCe_CRT { get; protected set; }
+        
+       
 
         [Config("Logradouro (nem número)", Valor = "", Obrigatorio = true)]
         public string NFCe_Logradouro { get; protected set; }
@@ -86,5 +91,7 @@ namespace a7D.PDV.BLL
         
         [Config("Sequencia atual da nota fiscal", Valor = "")]
         public string NFCe_AtualNotaFiscal { get; protected set; }
+        
+
     }
 }

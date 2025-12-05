@@ -106,6 +106,7 @@ namespace a7D.PDV.EF.Migrations
             AjustesVersao2_24_3_0(context, versao);
             AjustesVersao2_25_4_3(context, versao);
             AjustesVersao2_25_5_3(context, versao);
+            AjusteVersao2_26_2(context, versao);
 
             // Limpeza iFood e ERP: Remover futuramente
             if (versao != null && versao.ToVersion() < new Version("2.17.16.6"))
@@ -272,5 +273,24 @@ namespace a7D.PDV.EF.Migrations
                 log.AppendLine("Ajuste versão 2.25.4.4: CFOPs e NCM atualizados. E alteração do tamanho do nome dos produtos");
             }
         }
+
+        void AjusteVersao2_26_2(pdv7Context context, tbVersao versao)
+        {
+            if (versao == null || versao.ToVersion() < new Version("2.26.2"))
+            {
+                context.tbConfiguracoesBD.AddOrUpdate(c => c.Chave == "NFCe_Ambiente",
+                    new tbConfiguracaoBD
+                    {
+                        Chave = "NFCe_Ambiente",
+                        Valor = "1",
+                        ValoresAceitos = "1:Produção|2:Homologação",
+                        Obrigatorio = true
+                    }
+                );
+
+                log.AppendLine($"AjusteVersao2_26_2: Configuração 'NFCe_Ambiente' inserida ).");
+            }
+        }
+
     }
 }

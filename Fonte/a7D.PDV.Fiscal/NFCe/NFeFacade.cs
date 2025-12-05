@@ -92,8 +92,10 @@ namespace a7D.PDV.Fiscal.NFCe
             ConfiguracaoServico.Instancia.TimeOut = 1000 * Config.NFCe_Timeout;
             ConfiguracaoServico.Instancia.tpEmis = TipoEmissao.teNormal;
             ConfiguracaoServico.Instancia.ProtocoloDeSeguranca = System.Net.SecurityProtocolType.Tls12;
-
-            if (!string.IsNullOrEmpty(HomologacaoNFCe) && Boolean.TryParse(HomologacaoNFCe, out bool homolog) && homolog)
+            var ambiente= Config.NFCe_Ambiente;
+            // 1 Produção
+            // 2 Homologação
+            if (!string.IsNullOrEmpty(ambiente) && ambiente.Equals("2"))
                 ConfiguracaoServico.Instancia.tpAmb = DFe.Classes.Flags.TipoAmbiente.Homologacao;
             else
                 ConfiguracaoServico.Instancia.tpAmb = DFe.Classes.Flags.TipoAmbiente.Producao;

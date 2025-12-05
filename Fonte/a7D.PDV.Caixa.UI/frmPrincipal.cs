@@ -62,15 +62,17 @@ namespace a7D.PDV.Caixa.UI
 
         static async Task EnsureAutoTefActivatedAsync()
         {
-            if (_autoTefActivated) return;
+            if (_autoTefActivated ) return;
 
             var client = GetAutoTefClient();
             var resp = await client.ActivateAsync(_stoneCode, _autoTefPartnerName);
+            
             if (!resp.IsSuccessStatusCode)
             {
                 var body = await resp.Content.ReadAsStringAsync();
                 throw new Exception($"Falha ao ativar AutoTEF ({(int)resp.StatusCode}): {body}");
             }
+            
             _autoTefActivated = true;
         }
 
@@ -614,19 +616,24 @@ Deseja realizar o fechamento do caixa mesmo assim?", "ATENÇÃO", MessageBoxButt
             _autoTefBaseUrl = "http://localhost:8000/";
             // _autoTefConnectionName = ConfiguracoesSistema.Valores.AutoTefConnectionName; // se necessário no Linux
 
-            AutoTefBridge.Register(
-                getClient: () => GetAutoTefClient(),
-                ensureActivatedAsync: () => EnsureAutoTefActivatedAsync()
-            );
+
+            if (!String.IsNullOrEmpty(_stoneCode))
+            {
+                AutoTefBridge.Register(
+                    getClient: () => GetAutoTefClient(),
+                    ensureActivatedAsync: () => EnsureAutoTefActivatedAsync()
+                );
             
-            try
-            {
-                EnsureAutoTefActivatedAsync().GetAwaiter().GetResult();
+                try
+                {
+                    EnsureAutoTefActivatedAsync().GetAwaiter().GetResult();
+                }
+                catch (Exception ex)
+                {
+                    Logs.ErroBox(CodigoErro.A310, ex);
+                } 
             }
-            catch (Exception ex)
-            {
-                Logs.ErroBox(CodigoErro.A310, ex);
-            }
+          
             
             SelectIDValor.onSelect += (st, itens) => frmSelecao.Select("SELECIONE", st, itens);
 
