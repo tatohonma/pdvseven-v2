@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2025")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.25.0.0")]
+[assembly: AssemblyVersion("2.25.7.0")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -66,6 +66,11 @@ Lista das últimas versões e FIX
 
 ===============================================================================
 ===============================================================================
+
+2.25.7.0 ======================================================================
+    Correção: Ativação do TEF Stone apenas se tiver Stone Code Cadastrado.
+    Novo: Integração NFC-e com o ambiente de homologação da Sefaz.
+
 2.25.6.1 ======================================================================
     Correção: Corrrção do número sequencial da NFC-e e série.
 
