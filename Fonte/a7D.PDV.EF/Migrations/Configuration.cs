@@ -276,9 +276,9 @@ namespace a7D.PDV.EF.Migrations
 
         void AjusteVersao2_26_2(pdv7Context context, tbVersao versao)
         {
-            if (versao == null || versao.ToVersion() < new Version("2.26.2"))
+            if (versao == null || versao.ToVersion() < new Version("2.25.6.2"))
             {
-                context.tbConfiguracoesBD.AddOrUpdate(c => c.Chave == "NFCe_Ambiente",
+                context.tbConfiguracoesBD.AddOrUpdate(c => c.Chave,
                     new tbConfiguracaoBD
                     {
                         Chave = "NFCe_Ambiente",
