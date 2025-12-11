@@ -120,6 +120,11 @@
             this.label35 = new System.Windows.Forms.Label();
             this.btnSalvar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.txtICMS60_Orig = new System.Windows.Forms.TextBox();
+            this.labelICMS60_Orig = new System.Windows.Forms.Label();
+            this.txtICMS60_CST = new System.Windows.Forms.TextBox();
+            this.labelICMS60_CST = new System.Windows.Forms.Label();
+
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -222,7 +227,9 @@
             this.label1.Size = new System.Drawing.Size(50, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "CFOP";
-            // 
+           
+            
+             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.txtICMSSN900_CSOSN);
@@ -233,6 +240,10 @@
             this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.txtICMSSN102_CSOSN);
             this.tabPage2.Controls.Add(this.label11);
+            this.tabPage2.Controls.Add(this.txtICMS60_CST);
+            this.tabPage2.Controls.Add(this.labelICMS60_CST);
+            this.tabPage2.Controls.Add(this.txtICMS60_Orig);
+            this.tabPage2.Controls.Add(this.labelICMS60_Orig);
             this.tabPage2.Controls.Add(this.txtICMS40_CST);
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.txtICMSSN102_Orig);
@@ -252,149 +263,14 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "ICMS";
             // 
-            // txtICMSSN900_CSOSN
+            // label4 - ICMS00_Orig
             // 
-            this.txtICMSSN900_CSOSN.Location = new System.Drawing.Point(10, 219);
-            this.txtICMSSN900_CSOSN.Name = "txtICMSSN900_CSOSN";
-            this.txtICMSSN900_CSOSN.Size = new System.Drawing.Size(199, 25);
-            this.txtICMSSN900_CSOSN.TabIndex = 19;
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(6, 194);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(148, 17);
-            this.label40.TabIndex = 18;
-            this.label40.Text = "ICMSSN900_CSOSN";
-            // 
-            // txtICMSSN900_pICMS
-            // 
-            this.txtICMSSN900_pICMS.Location = new System.Drawing.Point(526, 219);
-            this.txtICMSSN900_pICMS.Name = "txtICMSSN900_pICMS";
-            this.txtICMSSN900_pICMS.Size = new System.Drawing.Size(199, 25);
-            this.txtICMSSN900_pICMS.TabIndex = 17;
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(522, 194);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(138, 17);
-            this.label36.TabIndex = 16;
-            this.label36.Text = "ICMSSN900_pICMS";
-            // 
-            // txtICMSSN900_Orig
-            // 
-            this.txtICMSSN900_Orig.Location = new System.Drawing.Point(268, 219);
-            this.txtICMSSN900_Orig.Name = "txtICMSSN900_Orig";
-            this.txtICMSSN900_Orig.Size = new System.Drawing.Size(199, 25);
-            this.txtICMSSN900_Orig.TabIndex = 15;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(264, 194);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(123, 17);
-            this.label10.TabIndex = 14;
-            this.label10.Text = "ICMSSN900_Orig";
-            // 
-            // txtICMSSN102_CSOSN
-            // 
-            this.txtICMSSN102_CSOSN.Location = new System.Drawing.Point(268, 162);
-            this.txtICMSSN102_CSOSN.Name = "txtICMSSN102_CSOSN";
-            this.txtICMSSN102_CSOSN.Size = new System.Drawing.Size(199, 25);
-            this.txtICMSSN102_CSOSN.TabIndex = 13;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(264, 137);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(148, 17);
-            this.label11.TabIndex = 12;
-            this.label11.Text = "ICMSSN102_CSOSN";
-            // 
-            // txtICMS40_CST
-            // 
-            this.txtICMS40_CST.Location = new System.Drawing.Point(268, 105);
-            this.txtICMS40_CST.Name = "txtICMS40_CST";
-            this.txtICMS40_CST.Size = new System.Drawing.Size(199, 25);
-            this.txtICMS40_CST.TabIndex = 11;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(264, 80);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(97, 17);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "ICMS40_CST";
-            // 
-            // txtICMSSN102_Orig
-            // 
-            this.txtICMSSN102_Orig.Location = new System.Drawing.Point(10, 162);
-            this.txtICMSSN102_Orig.Name = "txtICMSSN102_Orig";
-            this.txtICMSSN102_Orig.Size = new System.Drawing.Size(199, 25);
-            this.txtICMSSN102_Orig.TabIndex = 9;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 137);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(123, 17);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "ICMSSN102_Orig";
-            // 
-            // txtICMS40_Orig
-            // 
-            this.txtICMS40_Orig.Location = new System.Drawing.Point(10, 105);
-            this.txtICMS40_Orig.Name = "txtICMS40_Orig";
-            this.txtICMS40_Orig.Size = new System.Drawing.Size(199, 25);
-            this.txtICMS40_Orig.TabIndex = 7;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 80);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(95, 17);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "ICMS40_Orig";
-            // 
-            // txtICMS00_pICMS
-            // 
-            this.txtICMS00_pICMS.Location = new System.Drawing.Point(507, 48);
-            this.txtICMS00_pICMS.Name = "txtICMS00_pICMS";
-            this.txtICMS00_pICMS.Size = new System.Drawing.Size(199, 25);
-            this.txtICMS00_pICMS.TabIndex = 5;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(503, 23);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(110, 17);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "ICMS00_pICMS";
-            // 
-            // txtICMS00_CST
-            // 
-            this.txtICMS00_CST.Location = new System.Drawing.Point(268, 48);
-            this.txtICMS00_CST.Name = "txtICMS00_CST";
-            this.txtICMS00_CST.Size = new System.Drawing.Size(199, 25);
-            this.txtICMS00_CST.TabIndex = 3;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(264, 23);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(97, 17);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "ICMS00_CST";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 23);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(95, 17);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "ICMS00_Orig";
             // 
             // txtICMS00_Orig
             // 
@@ -403,14 +279,184 @@
             this.txtICMS00_Orig.Size = new System.Drawing.Size(199, 25);
             this.txtICMS00_Orig.TabIndex = 1;
             // 
-            // label4
+            // label5 - ICMS00_CST
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 23);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(95, 17);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "ICMS00_Orig";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(264, 23);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(97, 17);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "ICMS00_CST";
+            // 
+            // txtICMS00_CST
+            // 
+            this.txtICMS00_CST.Location = new System.Drawing.Point(268, 48);
+            this.txtICMS00_CST.Name = "txtICMS00_CST";
+            this.txtICMS00_CST.Size = new System.Drawing.Size(199, 25);
+            this.txtICMS00_CST.TabIndex = 3;
+            // 
+            // label7 - ICMS00_pICMS
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(503, 23);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(110, 17);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "ICMS00_pICMS";
+            // 
+            // txtICMS00_pICMS
+            // 
+            this.txtICMS00_pICMS.Location = new System.Drawing.Point(507, 48);
+            this.txtICMS00_pICMS.Name = "txtICMS00_pICMS";
+            this.txtICMS00_pICMS.Size = new System.Drawing.Size(199, 25);
+            this.txtICMS00_pICMS.TabIndex = 5;
+            // 
+            // label6 - ICMS40_Orig
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 80);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(95, 17);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "ICMS40_Orig";
+            // 
+            // txtICMS40_Orig
+            // 
+            this.txtICMS40_Orig.Location = new System.Drawing.Point(10, 105);
+            this.txtICMS40_Orig.Name = "txtICMS40_Orig";
+            this.txtICMS40_Orig.Size = new System.Drawing.Size(199, 25);
+            this.txtICMS40_Orig.TabIndex = 7;
+            // 
+            // label8 - ICMS40_CST
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(264, 80);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(97, 17);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "ICMS40_CST";
+            // 
+            // txtICMS40_CST
+            // 
+            this.txtICMS40_CST.Location = new System.Drawing.Point(268, 105);
+            this.txtICMS40_CST.Name = "txtICMS40_CST";
+            this.txtICMS40_CST.Size = new System.Drawing.Size(199, 25);
+            this.txtICMS40_CST.TabIndex = 11;
+            // 
+            // labelICMS60_Orig
+            // 
+            this.labelICMS60_Orig.AutoSize = true;
+            this.labelICMS60_Orig.Location = new System.Drawing.Point(6, 137);
+            this.labelICMS60_Orig.Name = "labelICMS60_Orig";
+            this.labelICMS60_Orig.Size = new System.Drawing.Size(104, 17);
+            this.labelICMS60_Orig.TabIndex = 20;
+            this.labelICMS60_Orig.Text = "ICMS60_Orig";
+            // 
+            // txtICMS60_Orig
+            // 
+            this.txtICMS60_Orig.Location = new System.Drawing.Point(10, 162);
+            this.txtICMS60_Orig.Name = "txtICMS60_Orig";
+            this.txtICMS60_Orig.Size = new System.Drawing.Size(199, 25);
+            this.txtICMS60_Orig.TabIndex = 21;
+            // 
+            // labelICMS60_CST
+            // 
+            this.labelICMS60_CST.AutoSize = true;
+            this.labelICMS60_CST.Location = new System.Drawing.Point(264, 137);
+            this.labelICMS60_CST.Name = "labelICMS60_CST";
+            this.labelICMS60_CST.Size = new System.Drawing.Size(106, 17);
+            this.labelICMS60_CST.TabIndex = 22;
+            this.labelICMS60_CST.Text = "ICMS60_CST";
+            // 
+            // txtICMS60_CST
+            // 
+            this.txtICMS60_CST.Location = new System.Drawing.Point(268, 162);
+            this.txtICMS60_CST.Name = "txtICMS60_CST";
+            this.txtICMS60_CST.Size = new System.Drawing.Size(199, 25);
+            this.txtICMS60_CST.TabIndex = 23;
+            // 
+            // label9 - ICMSSN102_Orig
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 194);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(123, 17);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "ICMSSN102_Orig";
+            // 
+            // txtICMSSN102_Orig
+            // 
+            this.txtICMSSN102_Orig.Location = new System.Drawing.Point(10, 219);
+            this.txtICMSSN102_Orig.Name = "txtICMSSN102_Orig";
+            this.txtICMSSN102_Orig.Size = new System.Drawing.Size(199, 25);
+            this.txtICMSSN102_Orig.TabIndex = 9;
+            // 
+            // label11 - ICMSSN102_CSOSN
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(264, 194);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(148, 17);
+            this.label11.TabIndex = 12;
+            this.label11.Text = "ICMSSN102_CSOSN";
+            // 
+            // txtICMSSN102_CSOSN
+            // 
+            this.txtICMSSN102_CSOSN.Location = new System.Drawing.Point(268, 219);
+            this.txtICMSSN102_CSOSN.Name = "txtICMSSN102_CSOSN";
+            this.txtICMSSN102_CSOSN.Size = new System.Drawing.Size(199, 25);
+            this.txtICMSSN102_CSOSN.TabIndex = 13;
+            // 
+            // label10 - ICMSSN900_Orig
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(264, 251);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(123, 17);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "ICMSSN900_Orig";
+            // 
+            // txtICMSSN900_Orig
+            // 
+            this.txtICMSSN900_Orig.Location = new System.Drawing.Point(268, 276);
+            this.txtICMSSN900_Orig.Name = "txtICMSSN900_Orig";
+            this.txtICMSSN900_Orig.Size = new System.Drawing.Size(199, 25);
+            this.txtICMSSN900_Orig.TabIndex = 15;
+            // 
+            // label36 - ICMSSN900_pICMS
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(522, 251);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(138, 17);
+            this.label36.TabIndex = 16;
+            this.label36.Text = "ICMSSN900_pICMS";
+            // 
+            // txtICMSSN900_pICMS
+            // 
+            this.txtICMSSN900_pICMS.Location = new System.Drawing.Point(526, 276);
+            this.txtICMSSN900_pICMS.Name = "txtICMSSN900_pICMS";
+            this.txtICMSSN900_pICMS.Size = new System.Drawing.Size(199, 25);
+            this.txtICMSSN900_pICMS.TabIndex = 17;
+            // 
+            // label40 - ICMSSN900_CSOSN
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(6, 251);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(148, 17);
+            this.label40.TabIndex = 18;
+            this.label40.Text = "ICMSSN900_CSOSN";
+            // 
+            // txtICMSSN900_CSOSN
+            // 
+            this.txtICMSSN900_CSOSN.Location = new System.Drawing.Point(10, 276);
+            this.txtICMSSN900_CSOSN.Name = "txtICMSSN900_CSOSN";
+            this.txtICMSSN900_CSOSN.Size = new System.Drawing.Size(199, 25);
+            this.txtICMSSN900_CSOSN.TabIndex = 19;
+
+            
+            
             // 
             // tabPage3
             // 
@@ -1090,5 +1136,10 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Button btnSalvar;
         private System.Windows.Forms.Button btnCancelar;
+        
+        private System.Windows.Forms.TextBox txtICMS60_Orig;
+        private System.Windows.Forms.Label labelICMS60_Orig;
+        private System.Windows.Forms.TextBox txtICMS60_CST;
+        private System.Windows.Forms.Label labelICMS60_CST;
     }
 }

@@ -52,6 +52,8 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using DFe.Classes.Flags;
+using Estado = DFe.Classes.Entidades.Estado;
 
 namespace a7D.PDV.Fiscal.NFCe
 {
@@ -106,23 +108,23 @@ namespace a7D.PDV.Fiscal.NFCe
             ConfiguracaoServico.Instancia.Certificado.Senha = Config.NFCe_CertificadoSenha;
             ConfiguracaoServico.Instancia.Certificado.ManterDadosEmCache = true;
 
-            var versaoNFe = VersaoServico.ve400;
+            var versaoNFe = VersaoServico.Versao400;
             ConfiguracaoServico.Instancia.VersaoLayout = versaoNFe;
             ConfiguracaoServico.Instancia.VersaoRecepcaoEventoCceCancelamento = versaoNFe;
-            ConfiguracaoServico.Instancia.VersaoRecepcaoEventoEpec = VersaoServico.ve100;
-            ConfiguracaoServico.Instancia.VersaoRecepcaoEventoManifestacaoDestinatario = VersaoServico.ve100;
-            ConfiguracaoServico.Instancia.VersaoNfeRecepcao = VersaoServico.ve100;
-            ConfiguracaoServico.Instancia.VersaoNfeRetRecepcao = VersaoServico.ve100;
-            ConfiguracaoServico.Instancia.VersaoNfeConsultaCadastro = VersaoServico.ve100;
+            ConfiguracaoServico.Instancia.VersaoRecepcaoEventoEpec = VersaoServico.Versao100;
+            ConfiguracaoServico.Instancia.VersaoRecepcaoEventoManifestacaoDestinatario = VersaoServico.Versao100;
+            ConfiguracaoServico.Instancia.VersaoNfeRecepcao = VersaoServico.Versao100;
+            ConfiguracaoServico.Instancia.VersaoNfeRetRecepcao = VersaoServico.Versao100;
+            ConfiguracaoServico.Instancia.VersaoNfeConsultaCadastro = VersaoServico.Versao100;
             ConfiguracaoServico.Instancia.VersaoNfeInutilizacao = versaoNFe;
             ConfiguracaoServico.Instancia.VersaoNfeConsultaProtocolo = versaoNFe;
             ConfiguracaoServico.Instancia.VersaoNfeStatusServico = versaoNFe;
             ConfiguracaoServico.Instancia.VersaoNFeAutorizacao = versaoNFe;
             ConfiguracaoServico.Instancia.VersaoNFeRetAutorizacao = versaoNFe;
-            ConfiguracaoServico.Instancia.VersaoNFeDistribuicaoDFe = VersaoServico.ve100;
-            ConfiguracaoServico.Instancia.VersaoNfeConsultaDest = VersaoServico.ve100;
-            ConfiguracaoServico.Instancia.VersaoNfeDownloadNF = VersaoServico.ve310;
-            ConfiguracaoServico.Instancia.VersaoNfceAministracaoCSC = VersaoServico.ve100;
+            ConfiguracaoServico.Instancia.VersaoNFeDistribuicaoDFe = VersaoServico.Versao100;
+            ConfiguracaoServico.Instancia.VersaoNfeConsultaDest = VersaoServico.Versao100;
+            ConfiguracaoServico.Instancia.VersaoNfeDownloadNF = VersaoServico.Versao310;
+            ConfiguracaoServico.Instancia.VersaoNfceAministracaoCSC = VersaoServico.Versao100;
 
             configuracaoDanfeNFCe = new ConfiguracaoDanfeNfce(NFe.Danfe.Base.NfceDetalheVendaNormal.UmaLinha, NFe.Danfe.Base.NfceDetalheVendaContigencia.UmaLinha);
             //using (var ms = new MemoryStream())
@@ -412,7 +414,7 @@ namespace a7D.PDV.Fiscal.NFCe
                 xBairro = Config.NFCe_Bairro,
                 cMun = Config.NFCe_MuninipioIBGE,
                 xMun = Config.NFCe_Municipio,
-                UF = Config.xNFCe_UF,
+                UF = Config.xNFCe_UF.ToEnum<DFe.Classes.Entidades.Estado>(),
                 CEP = Config.NFCe_CEP.ToString().PadLeft(8, '0'),
                 fone = Config.NFCe_Telefone,
                 cPais = 1058,

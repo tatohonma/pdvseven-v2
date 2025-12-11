@@ -138,7 +138,7 @@ namespace a7D.PDV.EF.Models.Mapping
 
             this.Property(t => t.vItem12741)
                 .HasMaxLength(50);
-
+            
             // Table & Column Mappings
             this.ToTable("tbTipoTributacao");
             this.Property(t => t.IDTipoTributacao).HasColumnName("IDTipoTributacao");

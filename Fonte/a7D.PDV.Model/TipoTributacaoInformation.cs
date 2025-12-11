@@ -33,7 +33,13 @@ namespace a7D.PDV.Model
 
         [CRUDParameterDAL(false, "ICMS40_CST")]
         public string ICMS40_CST { get; set; }
-
+        
+        [CRUDParameterDAL(false, "ICMS60_Orig")]
+        public string ICMS60_Orig { get; set; }
+        
+        [CRUDParameterDAL(false, "ICMS60_CST")]
+        public string ICMS60_CST { get; set; }
+        
         [CRUDParameterDAL(false, "ICMSSN102_Orig")]
         public string ICMSSN102_Orig { get; set; }
 

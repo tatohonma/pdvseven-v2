@@ -41,6 +41,7 @@ namespace a7D.PDV.BackOffice.UI
 
                 txtICMS00_Orig.Text = txtICMS00_CST.Text = txtICMS00_pICMS.Text = string.Empty;
                 txtICMS40_Orig.Text = txtICMS40_CST.Text = string.Empty;
+                txtICMS60_Orig.Text = txtICMS60_CST.Text = string.Empty;
                 txtICMSSN102_Orig.Text = txtICMSSN102_CSOSN.Text = string.Empty;
                 txtICMSSN900_CSOSN.Text = txtICMSSN900_Orig.Text = txtICMSSN900_pICMS.Text = string.Empty;
 
@@ -81,6 +82,8 @@ namespace a7D.PDV.BackOffice.UI
             txtICMS00_pICMS.Text = TipoTributacao1.ICMS00_pICMS;
             txtICMS40_Orig.Text = TipoTributacao1.ICMS40_Orig;
             txtICMS40_CST.Text = TipoTributacao1.ICMS40_CST;
+            txtICMS60_Orig.Text = TipoTributacao1.ICMS60_Orig;
+            txtICMS60_CST.Text = TipoTributacao1.ICMS60_CST;
             txtICMSSN102_Orig.Text = TipoTributacao1.ICMSSN102_Orig;
             txtICMSSN102_CSOSN.Text = TipoTributacao1.ICMSSN102_CSOSN;
             txtICMSSN900_CSOSN.Text = TipoTributacao1.ICMSSN900_CSOSN;
@@ -167,6 +170,8 @@ namespace a7D.PDV.BackOffice.UI
                 TipoTributacao1.ICMS00_pICMS = txtICMS00_pICMS.Text;
                 TipoTributacao1.ICMS40_Orig = txtICMS40_Orig.Text;
                 TipoTributacao1.ICMS40_CST = txtICMS40_CST.Text;
+                TipoTributacao1.ICMS60_Orig = txtICMS60_Orig.Text;
+                TipoTributacao1.ICMS60_CST = txtICMS60_CST.Text;
                 TipoTributacao1.ICMSSN102_Orig = txtICMSSN102_Orig.Text;
                 TipoTributacao1.ICMSSN102_CSOSN = txtICMSSN102_CSOSN.Text;
                 TipoTributacao1.ICMSSN900_CSOSN = txtICMSSN900_CSOSN.Text;

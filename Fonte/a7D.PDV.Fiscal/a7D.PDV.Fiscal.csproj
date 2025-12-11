@@ -213,7 +213,7 @@
       <Version>13.0.3</Version>
     </PackageReference>
     <PackageReference Include="Zeus.Net.NFe.NFCe">
-      <Version>1.0.1.828</Version>
+      <Version>2025.12.8.2030</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

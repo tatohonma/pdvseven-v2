@@ -19,6 +19,8 @@ namespace a7D.PDV.EF.Models
         public string ICMS00_pICMS { get; set; }
         public string ICMS40_Orig { get; set; }
         public string ICMS40_CST { get; set; }
+        public string ICMS60_Orig { get; set; }
+        public string ICMS60_CST { get; set; }
         public string ICMSSN102_Orig { get; set; }
         public string ICMSSN102_CSOSN { get; set; }
         public string ICMSSN900_Orig { get; set; }

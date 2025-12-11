@@ -493,7 +493,8 @@ namespace NFe.Danfe.Nativo.NFCe
             {
                 StringBuilder mensagemTributosTotais =
                     new StringBuilder("Tributos Totais Incidentes (Lei Federal 12.741/2012): R$");
-                mensagemTributosTotais.Append(tributosIncidentes.ToString("N2"));
+                mensagemTributosTotais.Append(Convert.ToDecimal(tributosIncidentes).ToString("N2"));
+
 
                 AdicionarTexto tributosTotais = new AdicionarTexto(g, mensagemTributosTotais.ToString(), 7);
                 int tributosTotaisX = (larguraLinha - tributosTotais.Medida.Largura) / 2;

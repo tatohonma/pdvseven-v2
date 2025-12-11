@@ -16,6 +16,7 @@ using NFe.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DFe.Classes.Flags;
 
 namespace a7D.PDV.Fiscal.NFCe
 {
@@ -313,6 +314,30 @@ namespace a7D.PDV.Fiscal.NFCe
                     CST = tributacao.ICMS40_CST.ToEnum<Csticms>()
                 };
             }
+
+            if (!string.IsNullOrEmpty(tributacao.ICMS60_Orig)
+                && !string.IsNullOrEmpty(tributacao.ICMS60_CST))
+            {
+                if (imposto.ICMS == null)
+                    imposto.ICMS = new ICMS();
+
+                var origem = tributacao.ICMS60_Orig.ToEnum<OrigemMercadoria>();
+
+                Csticms cst;
+                var cstStr = tributacao.ICMS60_CST.Trim();
+
+                if (cstStr == "60")
+                    cst = Csticms.Cst60;
+                else
+                    cst = cstStr.ToEnum<Csticms>();
+
+                imposto.ICMS.TipoICMS = new ICMS60
+                {
+                    orig = origem,
+                    CST  = cst
+                };
+            }
+
 
             if (!string.IsNullOrEmpty(tributacao.ICMSSN102_Orig)
              && !string.IsNullOrEmpty(tributacao.ICMSSN102_CSOSN))
