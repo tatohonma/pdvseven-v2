@@ -315,10 +315,10 @@ namespace a7D.PDV.Fiscal.NFCe
             {
                 if (imposto.ICMS == null) imposto.ICMS = new ICMS();
 
-                imposto.ICMS.TipoICMS = new ICMS40()
+                imposto.ICMS.TipoICMS = new ICMS40
                 {
                     orig = tributacao.ICMS40_Orig.ToEnum<OrigemMercadoria>(),
-                    CST = tributacao.ICMS40_CST.ToEnum<Csticms>()
+                    CST  = tributacao.ICMS40_CST.ToZeusEnum<Csticms>()
                 };
             }
 
@@ -328,21 +328,12 @@ namespace a7D.PDV.Fiscal.NFCe
                 if (imposto.ICMS == null)
                     imposto.ICMS = new ICMS();
 
-                var origem = tributacao.ICMS60_Orig.ToEnum<OrigemMercadoria>();
-
-                Csticms cst;
-                var cstStr = tributacao.ICMS60_CST.Trim();
-
-                if (cstStr == "60")
-                    cst = Csticms.Cst60;
-                else
-                    cst = cstStr.ToEnum<Csticms>();
-
                 imposto.ICMS.TipoICMS = new ICMS60
                 {
-                    orig = origem,
-                    CST  = cst
+                    orig = tributacao.ICMS60_Orig.ToEnum<OrigemMercadoria>(),
+                    CST  = tributacao.ICMS60_CST.ToZeusEnum<Csticms>()
                 };
+
             }
 
 
