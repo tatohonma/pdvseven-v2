@@ -295,7 +295,7 @@ namespace a7D.PDV.Fiscal.NFCe
                 if (imposto.ICMS == null) imposto.ICMS = new ICMS();
 
                 var vBC = vProd;
-                var pICMS = tributacao.ICMS00_pICMS.ToDecimal();
+                var pICMS = tributacao.ICMS00_pICMS.ToAliquota();
                 
                 var vICMS = Math.Round(vBC * pICMS/ 100m, 2, MidpointRounding.AwayFromZero);
                 
@@ -304,7 +304,7 @@ namespace a7D.PDV.Fiscal.NFCe
                 {
                     orig = tributacao.ICMS00_Orig.ToEnum<OrigemMercadoria>(),
                     CST = tributacao.ICMS00_CST.ToEnum<Csticms>(),
-                    pICMS = tributacao.ICMS00_pICMS.ToDecimal(),
+                    pICMS = pICMS,
                     vBC = vProd,
                     vICMS = vICMS,
                 };
@@ -375,14 +375,14 @@ namespace a7D.PDV.Fiscal.NFCe
                 if (imposto.ICMS == null) imposto.ICMS = new ICMS();
                 
                 var vBC = vProd;
-                var pICMS = tributacao.ICMSSN900_pICMS.ToDecimal();
+                var pICMS = tributacao.ICMSSN900_pICMS.ToAliquota();
                 var vICMS = Math.Round(vBC * pICMS / 100m, 2, MidpointRounding.AwayFromZero);
 
                 imposto.ICMS.TipoICMS = new ICMSSN900()
                 {
                     orig = tributacao.ICMSSN900_Orig.ToEnum<OrigemMercadoria>(),
                     CSOSN = tributacao.ICMSSN900_CSOSN.ToEnum<Csosnicms>(),
-                    pICMS = tributacao.ICMSSN900_pICMS.ToDecimal(),
+                    pICMS = pICMS,
                     vBC = vBC,
                     vICMS = vICMS,
                 };

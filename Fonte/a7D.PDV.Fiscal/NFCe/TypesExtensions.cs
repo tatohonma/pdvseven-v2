@@ -1,5 +1,6 @@
 ﻿using NFe.Classes.Informacoes.Detalhe.Tributacao.Estadual.Tipos;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Serialization;
@@ -40,6 +41,19 @@ namespace a7D.PDV.Fiscal.NFCe
             throw new ArgumentException(
                 $"Valor '{value}' não corresponde a nenhum XmlEnum em {typeof(T).Name}"
             );
+        }
+        
+        public static decimal ToAliquota(this string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                return 0m;
+
+            var dec = decimal.Parse(value, CultureInfo.InvariantCulture);
+
+            if (dec > 100m)
+                dec /= 100m;
+
+            return dec;
         }
     }
 }
