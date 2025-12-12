@@ -537,5 +537,10 @@
       <Version>6.4.4</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\insert_regime_normal.sql" />
+    <Content Include="Resources\insert_regime_normal_servico.sql" />
+    <Content Include="Resources\insert_regime_normal_ST.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
