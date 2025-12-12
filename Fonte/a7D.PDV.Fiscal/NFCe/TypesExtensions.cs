@@ -1,5 +1,4 @@
-﻿using NFe.Classes.Informacoes.Detalhe.Tributacao.Estadual.Tipos;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -13,14 +12,27 @@ namespace a7D.PDV.Fiscal.NFCe
         {
             return (T)Enum.Parse(typeof(T), value);
         }
-        
-
 
         public static decimal ToDecimal(this string value)
         {
-            return decimal.Parse(value);
+            if (string.IsNullOrWhiteSpace(value))
+                return 0m;
+
+            var raw = value.Trim();
+
+            // primeiro tenta interpretar como "4.00", "0.65", "3.00" (ponto como decimal)
+            if (decimal.TryParse(raw, NumberStyles.Any, CultureInfo.InvariantCulture, out var result))
+                return result;
+
+            // fallback: cultura atual (caso em algum lugar venha "4,00")
+            return decimal.Parse(raw, NumberStyles.Any, CultureInfo.CurrentCulture);
         }
-        
+
+        public static decimal ToAliquota(this string value)
+        {
+            return value.ToDecimal();
+        }
+
         public static T ToZeusEnum<T>(this string value) where T : struct, Enum
         {
             if (string.IsNullOrWhiteSpace(value))
@@ -41,19 +53,6 @@ namespace a7D.PDV.Fiscal.NFCe
             throw new ArgumentException(
                 $"Valor '{value}' não corresponde a nenhum XmlEnum em {typeof(T).Name}"
             );
-        }
-        
-        public static decimal ToAliquota(this string value)
-        {
-            if (string.IsNullOrWhiteSpace(value))
-                return 0m;
-
-            var dec = decimal.Parse(value, CultureInfo.InvariantCulture);
-
-            if (dec > 100m)
-                dec /= 100m;
-
-            return dec;
         }
     }
 }

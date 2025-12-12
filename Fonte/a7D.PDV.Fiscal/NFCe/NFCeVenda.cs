@@ -264,7 +264,6 @@ namespace a7D.PDV.Fiscal.NFCe
                 return "Produto sem nome";
             }
 
-            // Substitui caracteres invisíveis comuns
             string value = input
                 .Replace("\u00A0", " ")
                 .Replace("\u200B", "")
@@ -283,261 +282,210 @@ namespace a7D.PDV.Fiscal.NFCe
         }
 
         private static imposto ImpostoProduto(TipoTributacaoInformation tributacao, decimal vProd)
+{
+    var imposto = new imposto();
+
+    
+    if (!string.IsNullOrEmpty(tributacao.ICMS00_Orig)
+     && !string.IsNullOrEmpty(tributacao.ICMS00_CST)
+     && !string.IsNullOrEmpty(tributacao.ICMS00_pICMS))
+    {
+        if (imposto.ICMS == null) imposto.ICMS = new ICMS();
+
+        var vBC = vProd;
+        var pICMS = tributacao.ICMS00_pICMS.ToAliquota(); // CORRIGIDO
+        var vICMS = Math.Round(vBC * pICMS / 100m, 2, MidpointRounding.AwayFromZero);
+
+        imposto.ICMS.TipoICMS = new ICMS00()
         {
-            var imposto = new imposto();
+            orig  = tributacao.ICMS00_Orig.ToEnum<OrigemMercadoria>(),
+            CST   = tributacao.ICMS00_CST.ToZeusEnum<Csticms>(),
+            vBC   = vBC,
+            pICMS = pICMS,
+            vICMS = vICMS
+        };
+    }
 
-            // ICMS
+    if (!string.IsNullOrEmpty(tributacao.ICMS40_Orig)
+     && !string.IsNullOrEmpty(tributacao.ICMS40_CST))
+    {
+        if (imposto.ICMS == null) imposto.ICMS = new ICMS();
 
-            if (!string.IsNullOrEmpty(tributacao.ICMS00_Orig)
-             && !string.IsNullOrEmpty(tributacao.ICMS00_CST)
-             && !string.IsNullOrEmpty(tributacao.ICMS00_pICMS))
+        imposto.ICMS.TipoICMS = new ICMS40()
+        {
+            orig = tributacao.ICMS40_Orig.ToEnum<OrigemMercadoria>(),
+            CST  = tributacao.ICMS40_CST.ToZeusEnum<Csticms>()  
+        };
+    }
+
+    if (!string.IsNullOrEmpty(tributacao.ICMS60_Orig)
+     && !string.IsNullOrEmpty(tributacao.ICMS60_CST))
+    {
+        if (imposto.ICMS == null) imposto.ICMS = new ICMS();
+
+        imposto.ICMS.TipoICMS = new ICMS60()
+        {
+            orig = tributacao.ICMS60_Orig.ToEnum<OrigemMercadoria>(),
+            CST  = tributacao.ICMS60_CST.ToZeusEnum<Csticms>()  
+        };
+    }
+
+    if (!string.IsNullOrEmpty(tributacao.ICMSSN102_Orig)
+     && !string.IsNullOrEmpty(tributacao.ICMSSN102_CSOSN))
+    {
+        if (imposto.ICMS == null) imposto.ICMS = new ICMS();
+
+        var csosn = tributacao.ICMSSN102_CSOSN.ToEnum<Csosnicms>();
+
+        if (csosn == Csosnicms.Csosn500)
+        {
+            imposto.ICMS.TipoICMS = new ICMSSN500()
             {
-                if (imposto.ICMS == null) imposto.ICMS = new ICMS();
-
-                var vBC = vProd;
-                var pICMS = tributacao.ICMS00_pICMS.ToAliquota();
-                
-                var vICMS = Math.Round(vBC * pICMS/ 100m, 2, MidpointRounding.AwayFromZero);
-                
-
-                imposto.ICMS.TipoICMS = new ICMS00()
-                {
-                    orig = tributacao.ICMS00_Orig.ToEnum<OrigemMercadoria>(),
-                    CST = tributacao.ICMS00_CST.ToEnum<Csticms>(),
-                    pICMS = pICMS,
-                    vBC = vProd,
-                    vICMS = vICMS,
-                };
-            }
-
-            if (!string.IsNullOrEmpty(tributacao.ICMS40_Orig)
-             && !string.IsNullOrEmpty(tributacao.ICMS40_CST))
-            {
-                if (imposto.ICMS == null) imposto.ICMS = new ICMS();
-
-                imposto.ICMS.TipoICMS = new ICMS40
-                {
-                    orig = tributacao.ICMS40_Orig.ToEnum<OrigemMercadoria>(),
-                    CST  = tributacao.ICMS40_CST.ToZeusEnum<Csticms>()
-                };
-            }
-
-            if (!string.IsNullOrEmpty(tributacao.ICMS60_Orig)
-                && !string.IsNullOrEmpty(tributacao.ICMS60_CST))
-            {
-                if (imposto.ICMS == null)
-                    imposto.ICMS = new ICMS();
-
-                imposto.ICMS.TipoICMS = new ICMS60
-                {
-                    orig = tributacao.ICMS60_Orig.ToEnum<OrigemMercadoria>(),
-                    CST  = tributacao.ICMS60_CST.ToZeusEnum<Csticms>()
-                };
-
-            }
-
-
-            if (!string.IsNullOrEmpty(tributacao.ICMSSN102_Orig)
-             && !string.IsNullOrEmpty(tributacao.ICMSSN102_CSOSN))
-            {
-                if (imposto.ICMS == null) imposto.ICMS = new ICMS();
-
-                if (tributacao.ICMSSN102_CSOSN == "500")
-                {
-                    imposto.ICMS.TipoICMS = new ICMSSN500()
-                    {
-                        CSOSN = tributacao.ICMSSN102_CSOSN.ToEnum<Csosnicms>(),
-                        orig = tributacao.ICMSSN102_Orig.ToEnum<OrigemMercadoria>(),
-                    };
-                }
-                else if (tributacao.ICMSSN102_CSOSN == "900")
-                {
-                    imposto.ICMS.TipoICMS = new ICMSSN900()
-                    {
-                        CSOSN = tributacao.ICMSSN102_CSOSN.ToEnum<Csosnicms>(),
-                        orig = tributacao.ICMSSN102_Orig.ToEnum<OrigemMercadoria>(),
-                    };
-                }
-                else
-                {
-                    imposto.ICMS.TipoICMS = new ICMSSN102()
-                    {
-                        orig = tributacao.ICMSSN102_Orig.ToEnum<OrigemMercadoria>(),
-                        CSOSN = tributacao.ICMSSN102_CSOSN.ToEnum<Csosnicms>()
-                    };
-                }
-            }
-
-            if (!string.IsNullOrEmpty(tributacao.ICMSSN900_Orig)
-             && !string.IsNullOrEmpty(tributacao.ICMSSN900_CSOSN)
-             && !string.IsNullOrEmpty(tributacao.ICMSSN900_pICMS))
-            {
-                if (imposto.ICMS == null) imposto.ICMS = new ICMS();
-                
-                var vBC = vProd;
-                var pICMS = tributacao.ICMSSN900_pICMS.ToAliquota();
-                var vICMS = Math.Round(vBC * pICMS / 100m, 2, MidpointRounding.AwayFromZero);
-
-                imposto.ICMS.TipoICMS = new ICMSSN900()
-                {
-                    orig = tributacao.ICMSSN900_Orig.ToEnum<OrigemMercadoria>(),
-                    CSOSN = tributacao.ICMSSN900_CSOSN.ToEnum<Csosnicms>(),
-                    pICMS = pICMS,
-                    vBC = vBC,
-                    vICMS = vICMS,
-                };
-            }
-
-            // PIS
-
-            if (!string.IsNullOrEmpty(tributacao.PISAliq_CST)
-             && !string.IsNullOrEmpty(tributacao.PISAliq_pPIS))
-            {
-                if (imposto.PIS == null) imposto.PIS = new PIS();
-
-                imposto.PIS.TipoPIS = new PISAliq()
-                {
-                    CST = tributacao.PISAliq_CST.ToEnum<CSTPIS>(),
-                    pPIS = tributacao.PISAliq_pPIS.ToDecimal(),
-                    vBC = vProd
-                };
-            }
-
-            if (!string.IsNullOrEmpty(tributacao.PISQtde_CST)
-             && !string.IsNullOrEmpty(tributacao.PISQtde_vAliqProd))
-            {
-                if (imposto.PIS == null) imposto.PIS = new PIS();
-
-                imposto.PIS.TipoPIS = new PISQtde()
-                {
-                    CST = tributacao.PISQtde_CST.ToEnum<CSTPIS>(),
-                    vAliqProd = tributacao.PISQtde_vAliqProd.ToDecimal(),
-                };
-            }
-
-            if (!string.IsNullOrEmpty(tributacao.PISNT_CST))
-            {
-                if (imposto.PIS == null) imposto.PIS = new PIS();
-
-                imposto.PIS.TipoPIS = new PISNT()
-                {
-                    CST = tributacao.PISNT_CST.ToEnum<CSTPIS>(),
-                };
-            }
-
-            if (!string.IsNullOrEmpty(tributacao.PISOutr_CST)
-             && !string.IsNullOrEmpty(tributacao.PISOutr_pPIS)
-             && !string.IsNullOrEmpty(tributacao.PISOutr_vAliqProd))
-            {
-                if (imposto.PIS == null) imposto.PIS = new PIS();
-
-                imposto.PIS.TipoPIS = new PISOutr()
-                {
-                    CST = tributacao.PISOutr_CST.ToEnum<CSTPIS>(),
-                    pPIS = tributacao.PISOutr_pPIS.ToDecimal(),
-                    vAliqProd = tributacao.PISOutr_vAliqProd.ToDecimal(),
-                    vBC = vProd
-                };
-            }
-
-            if (!string.IsNullOrEmpty(tributacao.PISST_pPIS)
-             && !string.IsNullOrEmpty(tributacao.PISST_vAliqProd))
-            {
-                imposto.PISST = new PISST()
-                {
-                    pPIS = tributacao.PISST_pPIS.ToDecimal(),
-                    vAliqProd = tributacao.PISST_vAliqProd.ToDecimal(),
-                    vBC = vProd
-                };
-            }
-
-            //if (!string.IsNullOrEmpty(tributacao.PISSN_CST)) throw new NotImplementedException();
-
-            // COFINS
-
-            if (!string.IsNullOrEmpty(tributacao.COFINSAliq_CST)
-             && !string.IsNullOrEmpty(tributacao.COFINSAliq_pCOFINS))
-            {
-                if (imposto.COFINS == null) imposto.COFINS = new COFINS();
-
-                imposto.COFINS.TipoCOFINS = new COFINSAliq()
-                {
-                    CST = tributacao.COFINSAliq_CST.ToEnum<CSTCOFINS>(),
-                    pCOFINS = tributacao.COFINSAliq_pCOFINS.ToDecimal(),
-                    vBC = vProd
-                };
-            }
-
-            if (!string.IsNullOrEmpty(tributacao.COFINSQtde_CST)
-             && !string.IsNullOrEmpty(tributacao.COFINSQtde_vAliqProd))
-            {
-                if (imposto.COFINS == null) imposto.COFINS = new COFINS();
-
-                imposto.COFINS.TipoCOFINS = new COFINSQtde()
-                {
-                    CST = tributacao.COFINSQtde_CST.ToEnum<CSTCOFINS>(),
-                    vAliqProd = tributacao.COFINSQtde_vAliqProd.ToDecimal(),
-                };
-            }
-
-            if (!string.IsNullOrEmpty(tributacao.COFINSOutr_CST)
-             && !string.IsNullOrEmpty(tributacao.COFINSOutr_pCOFINS)
-             && !string.IsNullOrEmpty(tributacao.COFINSOutr_vAliqProd))
-            {
-                if (imposto.COFINS == null) imposto.COFINS = new COFINS();
-
-                imposto.COFINS.TipoCOFINS = new COFINSOutr()
-                {
-                    CST = tributacao.COFINSOutr_CST.ToEnum<CSTCOFINS>(),
-                    pCOFINS = tributacao.COFINSOutr_pCOFINS.ToDecimal(),
-                    vAliqProd = tributacao.COFINSOutr_vAliqProd.ToDecimal(),
-                    vBC = vProd
-                };
-            }
-
-            if (!string.IsNullOrEmpty(tributacao.COFINSNT_CST))
-            {
-                if (imposto.COFINS == null) imposto.COFINS = new COFINS();
-
-                imposto.COFINS.TipoCOFINS = new COFINSNT()
-                {
-                    CST = tributacao.COFINSNT_CST.ToEnum<CSTCOFINS>(),
-                };
-            }
-
-            if (!string.IsNullOrEmpty(tributacao.COFINSST_pCOFINS)
-             && !string.IsNullOrEmpty(tributacao.COFINSST_vAliqProd))
-            {
-                imposto.COFINSST = new COFINSST()
-                {
-                    vAliqProd = tributacao.COFINSST_vAliqProd.ToDecimal(),
-                    vBC = vProd
-                };
-            }
-
-            //if (!string.IsNullOrEmpty(tributacao.COFINSSN_CST)) throw new NotImplementedException();
-
-            // ISSQN
-
-            //if (!string.IsNullOrEmpty(tributacao.ISSQN_vDeducISSQN)
-            // && !string.IsNullOrEmpty(tributacao.ISSQN_vAliq)
-            // && !string.IsNullOrEmpty(tributacao.ISSQN_cListServ)
-            // //&& !string.IsNullOrEmpty(tributacao.ISSQN_cServTribMun)
-            // //&& !string.IsNullOrEmpty(tributacao.ISSQN_cNatOp)
-            // && !string.IsNullOrEmpty(tributacao.ISSQN_indIncFisc))
-            //{
-            //    imposto.ISSQN = new ISSQN()
-            //    {
-            //        vDeducao = tributacao.ISSQN_vDeducISSQN.ToPercentual(),
-            //        vAliq = tributacao.ISSQN_vAliq.ToPercentual(),
-            //        cServico = tributacao.ISSQN_cListServ,
-            //        indISS = tributacao.ISSQN_indIncFisc.ToEnum<IndicadorISS>(),
-            //        vBC = vProd
-            //    };
-            //}
-
-            return imposto;
+                CSOSN = csosn,
+                orig = tributacao.ICMSSN102_Orig.ToEnum<OrigemMercadoria>()
+            };
         }
+        else if (csosn == Csosnicms.Csosn900)
+        {
+            imposto.ICMS.TipoICMS = new ICMSSN900()
+            {
+                CSOSN = csosn,
+                orig = tributacao.ICMSSN102_Orig.ToEnum<OrigemMercadoria>()
+            };
+        }
+        else
+        {
+            imposto.ICMS.TipoICMS = new ICMSSN102()
+            {
+                CSOSN = csosn,
+                orig = tributacao.ICMSSN102_Orig.ToEnum<OrigemMercadoria>()
+            };
+        }
+    }
+
+    if (!string.IsNullOrEmpty(tributacao.ICMSSN900_Orig)
+     && !string.IsNullOrEmpty(tributacao.ICMSSN900_CSOSN)
+     && !string.IsNullOrEmpty(tributacao.ICMSSN900_pICMS))
+    {
+        if (imposto.ICMS == null) imposto.ICMS = new ICMS();
+
+        var vBC = vProd;
+        var pICMS = tributacao.ICMSSN900_pICMS.ToAliquota();
+        var vICMS = Math.Round(vBC * pICMS / 100m, 2, MidpointRounding.AwayFromZero);
+
+        imposto.ICMS.TipoICMS = new ICMSSN900()
+        {
+            orig  = tributacao.ICMSSN900_Orig.ToEnum<OrigemMercadoria>(),
+            CSOSN = tributacao.ICMSSN900_CSOSN.ToEnum<Csosnicms>(),
+            vBC   = vBC,
+            pICMS = pICMS,
+            vICMS = vICMS
+        };
+    }
+
+    if (!string.IsNullOrEmpty(tributacao.PISAliq_CST)
+     && !string.IsNullOrEmpty(tributacao.PISAliq_pPIS))
+    {
+        if (imposto.PIS == null) imposto.PIS = new PIS();
+
+        imposto.PIS.TipoPIS = new PISAliq()
+        {
+            CST = tributacao.PISAliq_CST.ToEnum<CSTPIS>(),
+            pPIS = tributacao.PISAliq_pPIS.ToAliquota(),  
+            vBC = vProd
+        };
+    }
+
+    if (!string.IsNullOrEmpty(tributacao.PISQtde_CST)
+     && !string.IsNullOrEmpty(tributacao.PISQtde_vAliqProd))
+    {
+        if (imposto.PIS == null) imposto.PIS = new PIS();
+
+        imposto.PIS.TipoPIS = new PISQtde()
+        {
+            CST = tributacao.PISQtde_CST.ToEnum<CSTPIS>(),
+            vAliqProd = tributacao.PISQtde_vAliqProd.ToDecimal()
+        };
+    }
+
+    if (!string.IsNullOrEmpty(tributacao.PISNT_CST))
+    {
+        if (imposto.PIS == null) imposto.PIS = new PIS();
+
+        imposto.PIS.TipoPIS = new PISNT()
+        {
+            CST = tributacao.PISNT_CST.ToEnum<CSTPIS>()
+        };
+    }
+
+    if (!string.IsNullOrEmpty(tributacao.PISOutr_CST)
+     && !string.IsNullOrEmpty(tributacao.PISOutr_pPIS)
+     && !string.IsNullOrEmpty(tributacao.PISOutr_vAliqProd))
+    {
+        if (imposto.PIS == null) imposto.PIS = new PIS();
+
+        imposto.PIS.TipoPIS = new PISOutr()
+        {
+            CST = tributacao.PISOutr_CST.ToEnum<CSTPIS>(),
+            pPIS = tributacao.PISOutr_pPIS.ToAliquota(),     
+            vAliqProd = tributacao.PISOutr_vAliqProd.ToDecimal(),
+            vBC = vProd
+        };
+    }
+
+    if (!string.IsNullOrEmpty(tributacao.COFINSAliq_CST)
+     && !string.IsNullOrEmpty(tributacao.COFINSAliq_pCOFINS))
+    {
+        if (imposto.COFINS == null) imposto.COFINS = new COFINS();
+
+        imposto.COFINS.TipoCOFINS = new COFINSAliq()
+        {
+            CST = tributacao.COFINSAliq_CST.ToEnum<CSTCOFINS>(),
+            pCOFINS = tributacao.COFINSAliq_pCOFINS.ToAliquota(), 
+            vBC = vProd
+        };
+    }
+
+    if (!string.IsNullOrEmpty(tributacao.COFINSQtde_CST)
+     && !string.IsNullOrEmpty(tributacao.COFINSQtde_vAliqProd))
+    {
+        if (imposto.COFINS == null) imposto.COFINS = new COFINS();
+
+        imposto.COFINS.TipoCOFINS = new COFINSQtde()
+        {
+            CST = tributacao.COFINSQtde_CST.ToEnum<CSTCOFINS>(),
+            vAliqProd = tributacao.COFINSQtde_vAliqProd.ToDecimal()
+        };
+    }
+
+    if (!string.IsNullOrEmpty(tributacao.COFINSOutr_CST)
+     && !string.IsNullOrEmpty(tributacao.COFINSOutr_pCOFINS)
+     && !string.IsNullOrEmpty(tributacao.COFINSOutr_vAliqProd))
+    {
+        if (imposto.COFINS == null) imposto.COFINS = new COFINS();
+
+        imposto.COFINS.TipoCOFINS = new COFINSOutr()
+        {
+            CST = tributacao.COFINSOutr_CST.ToEnum<CSTCOFINS>(),
+            pCOFINS = tributacao.COFINSOutr_pCOFINS.ToAliquota(),   
+            vAliqProd = tributacao.COFINSOutr_vAliqProd.ToDecimal(),
+            vBC = vProd
+        };
+    }
+
+    if (!string.IsNullOrEmpty(tributacao.COFINSNT_CST))
+    {
+        if (imposto.COFINS == null) imposto.COFINS = new COFINS();
+
+        imposto.COFINS.TipoCOFINS = new COFINSNT()
+        {
+            CST = tributacao.COFINSNT_CST.ToEnum<CSTCOFINS>()
+        };
+    }
+
+    return imposto;
+}
+
 
         private static total GetTotal(VersaoServico versao, List<det> produtos)
         {
