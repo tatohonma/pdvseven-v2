@@ -67,6 +67,9 @@ Lista das últimas versões e FIX
 ===============================================================================
 ===============================================================================
 
+2.25.7.1 ======================================================================
+    Novo: Integração NFC-e com regime tributário Normal (Lucro Real e Presumido)
+
 2.25.7.0 ======================================================================
     Correção: Ativação do TEF Stone apenas se tiver Stone Code Cadastrado.
     Novo: Integração NFC-e com o ambiente de homologação da Sefaz.
