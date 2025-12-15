@@ -41,7 +41,7 @@ namespace a7D.PDV.Fiscal.NFCe
             if (cpfNaNota && !string.IsNullOrEmpty(pedido.DocumentoCliente))
             {
                 nfe.infNFe.dest = new dest(versao);
-
+    
                 if (pedido.Cliente != null)
                 {
                     nfe.infNFe.dest.xNome = pedido.Cliente.NomeCompleto;

@@ -322,7 +322,6 @@ namespace a7D.PDV.EF.Migrations
                         , [ISSQN_cNatOp]
                         , [ISSQN_indIncFisc]
                         , [vItem12741]
-                        , [ICMS60]
                         , [ICMS60_Orig]
                         , [ICMS60_CST]
                     ) VALUES (
@@ -352,7 +351,6 @@ namespace a7D.PDV.EF.Migrations
                         , ''
                         , '01'
                         , '3.00'
-                        , ''
                         , ''
                         , ''
                         , ''
@@ -416,7 +414,6 @@ namespace a7D.PDV.EF.Migrations
                         , [ISSQN_cNatOp]
                         , [ISSQN_indIncFisc]
                         , [vItem12741]
-                        , [ICMS60]
                         , [ICMS60_Orig]
                         , [ICMS60_CST]
                     ) VALUES (
@@ -446,7 +443,6 @@ namespace a7D.PDV.EF.Migrations
                         , ''
                         , '01'
                         , '3.00'
-                        , ''
                         , ''
                         , ''
                         , ''
@@ -510,7 +506,6 @@ namespace a7D.PDV.EF.Migrations
                         , [ISSQN_cNatOp]
                         , [ISSQN_indIncFisc]
                         , [vItem12741]
-                        , [ICMS60]
                         , [ICMS60_Orig]
                         , [ICMS60_CST]
                     ) VALUES (
@@ -540,7 +535,6 @@ namespace a7D.PDV.EF.Migrations
                         , ''
                         , '01'
                         , '3.00'
-                        , ''
                         , ''
                         , ''
                         , ''
