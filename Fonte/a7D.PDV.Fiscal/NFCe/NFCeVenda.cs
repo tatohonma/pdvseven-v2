@@ -44,7 +44,9 @@ namespace a7D.PDV.Fiscal.NFCe
     
                 if (pedido.Cliente != null)
                 {
-                    nfe.infNFe.dest.xNome = pedido.Cliente.NomeCompleto;
+                    
+                    
+                    nfe.infNFe.dest.xNome =   pedido.Cliente.NomeCompleto.TrimEnd().TrimStart();
                     if (nfe.infNFe.dest.xNome.Length < 2)
                         nfe.infNFe.dest.xNome = nfe.infNFe.dest.xNome.PadRight(2, '.');
                 }
