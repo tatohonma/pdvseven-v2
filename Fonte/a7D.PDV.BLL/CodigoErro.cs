@@ -78,6 +78,7 @@ namespace a7D.PDV.BLL
         [Description("Erro na emisão online da NFCe: {0}")] E517,
         [Description("Erro na assinatura digital: {0}")] E518,
         [Description("Erro na validação XDS: {0}")] E519,
+        [Description("Erro na inutilização")] E520,
 
         // Estoque
         [Description("Ocorreu um erro na movimentação de estoque!")] E600,

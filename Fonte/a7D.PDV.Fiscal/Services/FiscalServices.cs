@@ -92,5 +92,15 @@ namespace a7D.PDV.Fiscal.Services
                 return new NFCe.EnviarCancelamento(retornoSat, idPdv, idUsuario);
             }
         }
+
+
+        public static IEnviarInutilizacao Inutilizacao(int serie, int numeroInicial, int numeroFinal, string motivo, int idPdv, int idUsuario)
+        {
+            if (ConfiguracoesSistema.Valores.Fiscal == "SAT")
+            {
+                throw new ExceptionPDV(CodigoErro.E520,"Inutilização de numeração não é suportada quando o fiscal está configurado como SAT.");
+            }
+            return new NFCe.EnviarInutilizacao(serie, numeroInicial, numeroFinal, motivo, idPdv, idUsuario);
+        }
     }
 }

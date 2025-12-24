@@ -107,6 +107,7 @@ namespace a7D.PDV.EF.Migrations
             AjustesVersao2_25_4_3(context, versao);
             AjustesVersao2_25_5_3(context, versao);
             AjusteVersao2_25_6_3(context, versao);
+            Ajuste2_25_7_0(context, versao);
 
             // Limpeza iFood e ERP: Remover futuramente
             if (versao != null && versao.ToVersion() < new Version("2.17.16.6"))
@@ -257,6 +258,8 @@ namespace a7D.PDV.EF.Migrations
                 log.AppendLine("AjustesVersao2_25_4_3: Meios de pagamento SAT adicionados/atualizados.");
             }
         }
+        
+      
 
         void AjustesVersao2_25_5_3(pdv7Context context, tbVersao versao)
         {
@@ -559,6 +562,22 @@ namespace a7D.PDV.EF.Migrations
                 log.AppendLine("Ajuste versão 2.25.6.3: inserção dos valores para o regime normal");
             }
         }
+        
+        
+        private void Ajuste2_25_7_0(pdv7Context context, tbVersao versao)
+        {
+            if (versao == null || versao.ToVersion() < new Version("2.25.7.0"))
+            {
+                context.tbTipoSolicitacaoSATs.AddOrUpdate(p => p.IDTipoSolicitacaoSAT,
+                    new tbTipoSolicitacaoSAT {IDTipoSolicitacaoSAT = 3 , Nome = "InutilizarVenda"}
+                );
+                
+                log.AppendLine("AjustesVersao2_25_7_0: Adição do tipo de solicitação inutilizar sequencia .");
+
+            }
+        }
+
+      
 
     }
 }

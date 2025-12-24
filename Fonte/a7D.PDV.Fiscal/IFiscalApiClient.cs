@@ -11,5 +11,8 @@ namespace a7D.PDV.Fiscal
         IFiscalApiClient VendaClient(string codigoDeAtivacao, ICFeVenda cfe, int numeroSessao);
         IFiscalApiClient CancelamentoClient(string codigoDeAtivacao, int numeroSessao, string chave, string dadosCancelamento);
         IFiscalApiClient ConsultaClient(string codigoDeAtivacao, int numeroSessao);
+
+        IFiscalApiClient InutilizacaoClient(int serie, int numeroInicial, int numeroFinal, string justificativa, int numeroSessao);
+
     }
 }

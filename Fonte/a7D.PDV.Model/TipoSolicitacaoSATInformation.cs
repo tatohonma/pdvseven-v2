@@ -28,6 +28,7 @@ namespace a7D.PDV.Model
     {
         SEM_TIPO,
         ENVIAR_DADOS_VENDA = 1,
-        CANCELAR_VENDA = 2
+        CANCELAR_VENDA = 2,
+        INUTILIZAR_NUMERACAO = 3    
     }
 }

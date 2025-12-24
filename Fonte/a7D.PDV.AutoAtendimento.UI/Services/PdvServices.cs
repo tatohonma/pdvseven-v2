@@ -118,17 +118,17 @@ namespace a7D.PDV.AutoAtendimento.UI.Services
             ComandaComCredito = config.Chave("ComandaComCredito") == "1";
             AutoTefBaseUrl = config.Chave("AutoTefBaseUrl", PDVID, idTipoPDV);
 
-            if (string.IsNullOrEmpty(AutoTefBaseUrl))
-                AutoTefBaseUrl = "http://localhost:8000/";
-            StoneCode = config.Chave("StoneCode");
-            AutoTefConnectionName = "PDVSeven";
+            // if (string.IsNullOrEmpty(AutoTefBaseUrl))
+            //     AutoTefBaseUrl = "http://localhost:8000/";
+            // StoneCode = config.Chave("StoneCode");
+            // AutoTefConnectionName = "PDVSeven";
+            //
+            // AutoTefBridge.Register(
+            //     getClient: () => GetAutoTefClient(),
+            //     ensureActivatedAsync: () => EnsureAutoTefActivatedAsync()
+            // );
             
-            AutoTefBridge.Register(
-                getClient: () => GetAutoTefClient(),
-                ensureActivatedAsync: () => EnsureAutoTefActivatedAsync()
-            );
-            
-            EnsureAutoTefActivatedAsync().GetAwaiter().GetResult();
+            // EnsureAutoTefActivatedAsync().GetAwaiter().GetResult();
 
             if (int.TryParse(config.Chave("IDCategoriaProduto_Credito", PDVID, idTipoPDV), out int catCredito))
                 IDCategoriaProduto_Credito = catCredito;

@@ -110,10 +110,10 @@ namespace a7D.PDV.AutoAtendimento.UI
                         Status.Text = "Tempo encerrado";
                         return;
                     }
-#if TESTE
-                    etapa = 1;
-                    return;
-#endif
+                    #if TESTE
+                        etapa = 1;
+                        return;
+                    #endif
                     if (!tef.Processando())
                     {
                         if (tef.PagamentoConfirmado == true)

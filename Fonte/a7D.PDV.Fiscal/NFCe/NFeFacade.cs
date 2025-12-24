@@ -294,6 +294,22 @@ namespace a7D.PDV.Fiscal.NFCe
             var servicoNFe = new ServicosNFe(ConfiguracaoServico.Instancia);
             return servicoNFe.NfeInutilizacao(cnpj, Convert.ToInt16(ano.ToString().Substring(2, 2)), ConfiguracaoServico.Instancia.ModeloDocumento, Convert.ToInt16(serie), Convert.ToInt32(numeroInicial), Convert.ToInt32(numeroFinal), justificativa);
         }
+        
+        public static string InutilizarNumeracaoToString(int serie, int numeroInicial, int numeroFinal, string justificativa)
+        {
+            var ano = DateTime.Now.Year;
+
+            var retorno = InutilizarNumeracao(
+                ano: ano,
+                cnpj: Config.NFCe_CNPJ,
+                justificativa: justificativa,
+                numeroInicial: numeroInicial,
+                numeroFinal: numeroFinal,
+                serie: serie
+            );
+
+            return retorno.RetornoCompletoStr;
+        }
 
         /// <summary>
         /// Imprime em um JPEG o NFC-e relacionado a um xml.

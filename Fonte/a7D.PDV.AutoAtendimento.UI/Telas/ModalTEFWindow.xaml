@@ -24,6 +24,8 @@
             <TextBlock Name="Status" Text="Selecione" TextAlignment="Center" TextWrapping="Wrap"/>
             <Button Name="Debito" Click="btnSaveData_Click"/>
             <Button Name="Credito" Click="btnSaveData_Click"/>
+            <Button Name="Vr" Click="btnSaveData_Click"/>
+            <Button Name="Pix" Click="btnSaveData_Click"/>
             <Button Name="Cancelar" Click="btnCancelar_Click"/>
             <Button Name="Cancelar2" Click="btnCancelar_Click"/>
             <Grid Name="ImagemTef" />

@@ -81,6 +81,7 @@
             this.reimprimirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.cancelarPedidoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.invalidarNotaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem(); // <-- ADICIONADO
             this.abrirGavetaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.integracaoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.iFoodMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -212,9 +213,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvItens.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvItens.ColumnHeadersHeight = 40;
-            this.dgvItens.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.descricao,
-            this.qtd});
+            this.dgvItens.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.descricao, this.qtd });
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -455,8 +454,7 @@
             // 
             // panel3
             // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.Color.Black;
             this.panel3.Controls.Add(this.lblModoContingencia);
             this.panel3.Controls.Add(this.btnFechar);
@@ -467,8 +465,7 @@
             // 
             // lblModoContingencia
             // 
-            this.lblModoContingencia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblModoContingencia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.lblModoContingencia.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblModoContingencia.ForeColor = System.Drawing.Color.Tomato;
             this.lblModoContingencia.Location = new System.Drawing.Point(68, 6);
@@ -496,15 +493,7 @@
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mesasToolStripMenuItem,
-            this.geralToolStripMenuItem,
-            this.comandasToolStripMenuItem,
-            this.informarPerdaToolStripMenuItem,
-            this.clientesMenu,
-            this.fiscalMenuItem,
-            this.abrirGavetaToolStripMenuItem,
-            this.integracaoMenu});
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.mesasToolStripMenuItem, this.geralToolStripMenuItem, this.comandasToolStripMenuItem, this.informarPerdaToolStripMenuItem, this.clientesMenu, this.fiscalMenuItem, this.abrirGavetaToolStripMenuItem, this.integracaoMenu });
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
@@ -514,9 +503,7 @@
             // 
             // mesasToolStripMenuItem
             // 
-            this.mesasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cancelarSolicitaçãoDeContaToolStripMenuItem,
-            this.pagamentoParcialMesaToolStripMenuItem});
+            this.mesasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.cancelarSolicitaçãoDeContaToolStripMenuItem, this.pagamentoParcialMesaToolStripMenuItem });
             this.mesasToolStripMenuItem.Name = "mesasToolStripMenuItem";
             this.mesasToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.mesasToolStripMenuItem.Text = "M&esas";
@@ -537,8 +524,7 @@
             // 
             // geralToolStripMenuItem
             // 
-            this.geralToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.alterarDisponibilidadeDeProdutosToolStripMenuItem});
+            this.geralToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.alterarDisponibilidadeDeProdutosToolStripMenuItem });
             this.geralToolStripMenuItem.Name = "geralToolStripMenuItem";
             this.geralToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.geralToolStripMenuItem.Text = "Geral";
@@ -552,12 +538,7 @@
             // 
             // comandasToolStripMenuItem
             // 
-            this.comandasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.alterarTipoDeEntradaToolStripMenuItem,
-            this.bloquearLiberarComandaToolStripMenuItem,
-            this.juntarComandasToolStripMenuItem,
-            this.cancelarSolicitaçãoDeContaToolStripMenuItem1,
-            this.pagamentoParcialComandaToolStripMenuItem});
+            this.comandasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.alterarTipoDeEntradaToolStripMenuItem, this.bloquearLiberarComandaToolStripMenuItem, this.juntarComandasToolStripMenuItem, this.cancelarSolicitaçãoDeContaToolStripMenuItem1, this.pagamentoParcialComandaToolStripMenuItem });
             this.comandasToolStripMenuItem.Name = "comandasToolStripMenuItem";
             this.comandasToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.comandasToolStripMenuItem.Text = "C&omandas";
@@ -607,9 +588,7 @@
             // 
             // clientesMenu
             // 
-            this.clientesMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clientesMenuCadastro,
-            this.clientesMenuSaldos});
+            this.clientesMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.clientesMenuCadastro, this.clientesMenuSaldos });
             this.clientesMenu.Name = "clientesMenu";
             this.clientesMenu.Size = new System.Drawing.Size(61, 20);
             this.clientesMenu.Text = "Clientes";
@@ -632,9 +611,11 @@
             // fiscalMenuItem
             // 
             this.fiscalMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.reimprimirToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.cancelarPedidoToolStripMenuItem});
+                this.reimprimirToolStripMenuItem,
+                this.toolStripSeparator1,
+                this.cancelarPedidoToolStripMenuItem,
+                this.invalidarNotaToolStripMenuItem // <-- ADICIONADO
+            });
             this.fiscalMenuItem.Name = "fiscalMenuItem";
             this.fiscalMenuItem.Size = new System.Drawing.Size(59, 20);
             this.fiscalMenuItem.Text = "Cupom";
@@ -658,6 +639,13 @@
             this.cancelarPedidoToolStripMenuItem.Text = "Cancelar Cupom";
             this.cancelarPedidoToolStripMenuItem.Click += new System.EventHandler(this.cancelarPedidoToolStripMenuItem_Click);
             // 
+            // invalidarNotaToolStripMenuItem
+            // 
+            this.invalidarNotaToolStripMenuItem.Name = "invalidarNotaToolStripMenuItem";
+            this.invalidarNotaToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.invalidarNotaToolStripMenuItem.Text = "Invalidar Nota";
+            this.invalidarNotaToolStripMenuItem.Click += new System.EventHandler(this.invalidarNotaToolStripMenuItem_Click);
+            // 
             // abrirGavetaToolStripMenuItem
             // 
             this.abrirGavetaToolStripMenuItem.Name = "abrirGavetaToolStripMenuItem";
@@ -667,17 +655,14 @@
             // 
             // integracaoMenu
             // 
-            this.integracaoMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.iFoodMenu});
+            this.integracaoMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.iFoodMenu });
             this.integracaoMenu.Name = "integracaoMenu";
             this.integracaoMenu.Size = new System.Drawing.Size(80, 20);
             this.integracaoMenu.Text = "Integrações";
             // 
             // iFoodMenu
             // 
-            this.iFoodMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.iFoodHabilitado,
-            this.iFoodAprovacao});
+            this.iFoodMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.iFoodHabilitado, this.iFoodAprovacao });
             this.iFoodMenu.Name = "iFoodMenu";
             this.iFoodMenu.Size = new System.Drawing.Size(104, 22);
             this.iFoodMenu.Text = "iFood";
@@ -709,9 +694,7 @@
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.BackgroundImage = global::a7D.PDV.Caixa.UI.Properties.Resources.bg_Titulo2;
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel2.Controls.Add(this.lblTituloForm);
             this.panel2.Location = new System.Drawing.Point(0, 71);
@@ -721,8 +704,7 @@
             // 
             // lblTituloForm
             // 
-            this.lblTituloForm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTituloForm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTituloForm.BackColor = System.Drawing.Color.Transparent;
             this.lblTituloForm.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTituloForm.ForeColor = System.Drawing.Color.White;
@@ -811,9 +793,7 @@
             // 
             // spContainer
             // 
-            this.spContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.spContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.spContainer.Location = new System.Drawing.Point(5, 196);
             this.spContainer.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.spContainer.Name = "spContainer";
@@ -899,8 +879,7 @@
             // 
             // tbMenuTop
             // 
-            this.tbMenuTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbMenuTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.tbMenuTop.ColumnCount = 5;
             this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tbMenuTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -984,7 +963,6 @@
             this.tbMenuTop.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
@@ -1026,6 +1004,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn qtd;
         private System.Windows.Forms.ToolStripMenuItem fiscalMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cancelarPedidoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem invalidarNotaToolStripMenuItem; // <-- ADICIONADO
         private System.Windows.Forms.ToolStripMenuItem informarPerdaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reimprimirToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

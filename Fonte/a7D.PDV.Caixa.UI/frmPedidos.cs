@@ -651,6 +651,17 @@ namespace a7D.PDV.Caixa.UI
                 }
             }
         }
+        
+        private void invalidarNotaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (NormalOuTouch.Autenticacao(false, true, false, false, out UsuarioInformation usuario) == DialogResult.OK)
+            {
+                using (var frmInvalidarNota = new frmInvalidarNotaFiscal(usuario.IDUsuario.Value, AC.PDV.IDPDV.Value))
+                {
+                    frmInvalidarNota.ShowDialog();
+                }
+            }
+        }
 
         private void informarPerdaToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -830,6 +841,8 @@ namespace a7D.PDV.Caixa.UI
 
             ConfiguracaoBD.DefinirValorPadraoTipoPDV(EConfig._PedidoSpliterSize, ETipoPDV.CAIXA, AC.PDV.IDPDV.Value, spContainer.SplitterDistance.ToString());
         }
+        
+        
 
         private void btnAdicionarCreditos_Click(object sender, EventArgs e)
         {
