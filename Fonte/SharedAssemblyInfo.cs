@@ -69,6 +69,7 @@ Lista das últimas versões e FIX
 
 2.25.7.2 ======================================================================
     Correção: Correção do seed no migration, não estava cadastrando o ICMS60 na tabela tbTipoTributacao.
+    Correção: Removido os espaçoes em branco no começo e final do nome do cliente no envio do XML da NFC-e.
 
 2.25.7.1 ======================================================================
     Novo: Integração NFC-e com regime tributário Normal (Lucro Real e Presumido)

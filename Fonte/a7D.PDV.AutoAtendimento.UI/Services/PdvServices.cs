@@ -65,7 +65,7 @@ namespace a7D.PDV.AutoAtendimento.UI.Services
             if (_autoTefActivated) return;
             
             var client = GetAutoTefClient();
-            var resp = await client.ActivateAsync(StoneCode, AutoTefConnectionName);
+             var resp = await client.ActivateAsync(StoneCode, AutoTefConnectionName);
 
             if (!resp.IsSuccessStatusCode)
             {
