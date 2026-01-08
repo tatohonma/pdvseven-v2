@@ -58,7 +58,7 @@ namespace a7D.PDV.Caixa.UI
                     .Inutilizacao(Serie, NumeroInicial, NumeroFinal, Motivo, _idPDV, _idUsuario)
                     .Enviar();
 
-                RetornoSAT.Salvar(retornoInut);
+                // RetornoSAT.Salvar(retornoInut);
 
                 MessageBox.Show(
                     retornoInut.mensagem ?? "Inutilização concluída.",

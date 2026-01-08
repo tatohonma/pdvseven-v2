@@ -176,6 +176,10 @@
     <Compile Include="Migrations\202511262211021__2_27_tbControleNumeracaoFiscal.Designer.cs">
       <DependentUpon>202511262211021__2_27_tbControleNumeracaoFiscal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202601081813227__2_28_FixSequenciaNFCe.cs" />
+    <Compile Include="Migrations\202601081813227__2_28_FixSequenciaNFCe.Designer.cs">
+      <DependentUpon>202601081813227__2_28_FixSequenciaNFCe.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Mapping\tbFaturaPixContaMap.cs" />
     <Compile Include="Models\Mapping\tbOrigemPedidoMap.cs" />
     <Compile Include="Models\Mapping\tbTagMap.cs" />
@@ -437,6 +441,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202511262211021__2_27_tbControleNumeracaoFiscal.resx">
       <DependentUpon>202511262211021__2_27_tbControleNumeracaoFiscal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202601081813227__2_28_FixSequenciaNFCe.resx">
+      <DependentUpon>202601081813227__2_28_FixSequenciaNFCe.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

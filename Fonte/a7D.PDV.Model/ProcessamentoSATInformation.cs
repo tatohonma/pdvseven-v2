@@ -37,5 +37,8 @@ namespace a7D.PDV.Model
         
         [CRUDParameterDAL(false, "NumeroFiscalSequencial")]
         public int? NumeroFiscalSequencial { get; set; }
+        
+        [CRUDParameterDAL(false, "SerieFiscal")]
+        public int? SerieFiscal { get; set; }
     }
 }

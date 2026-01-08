@@ -4,7 +4,6 @@ using a7D.PDV.Fiscal.Services;
 using a7D.PDV.Model;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -17,9 +16,9 @@ namespace a7D.PDV.Caixa.UI
     {
         internal static readonly string _formatoData = "yyyyMMddHHmmss";
         internal static readonly IFormatProvider _cultureInfo = new CultureInfo("pt-BR");
-        private List<RetornoSATInformation> listaRetornoSat;
-        private int idUsuario;
-        private int idPDV;
+
+        readonly int idUsuario;
+        readonly int idPDV;
 
         public frmCancelarFiscal(int idUsuario, int idPDV)
         {
@@ -28,126 +27,123 @@ namespace a7D.PDV.Caixa.UI
             InitializeComponent();
         }
 
-        private void frmCancelarSAT_Load(object sender, EventArgs e)
+        void frmCancelarSAT_Load(object sender, EventArgs e)
         {
             GA.Post(this);
             PopularDataGridView();
         }
 
-        private void PopularDataGridView()
+        void PopularDataGridView()
         {
             var pedidos = RetornoSATDAL.ListarPedidosParaCancelamento();
-
             dgvPrincipal.DataSource = pedidos;
             dgvPrincipal.ClearSelection();
         }
 
-        private void btnCancelarSat_Click(object sender, EventArgs e)
+        void btnCancelarSat_Click(object sender, EventArgs e)
         {
-            if (dgvPrincipal.SelectedRows.Count > 0)
+            if (dgvPrincipal.SelectedRows.Count <= 0)
             {
-                var resp = MessageBox.Show("Deseja realmente cancelar o pedido selecionado?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                MessageBox.Show("Selecione o pedido a ser cancelado", "Atenção",
+                    MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
 
-                if (resp == DialogResult.Yes)
+            var resp = MessageBox.Show("Deseja realmente cancelar o pedido selecionado?",
+                "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resp != DialogResult.Yes)
+                return;
+
+            dgvPrincipal.UseWaitCursor = true;
+            btnCancelarSAT.Enabled = false;
+
+            try
+            {
+                var row = dgvPrincipal.SelectedRows[0];
+
+                if (row.Cells["IDRetornoSAT"]?.Value == null)
                 {
-                    dgvPrincipal.UseWaitCursor = true;
-                    btnCancelarSAT.Enabled = false;
-                    try
-                    {
-                        var row = dgvPrincipal.SelectedRows[0];
-                        var retornoSat = RetornoSAT.Carregar(Convert.ToInt32(row.Cells["IDRetornoSAT"].Value));
-                        var dataSat = DateTime.ParseExact(retornoSat.timeStamp, _formatoData, _cultureInfo).ToUniversalTime();
-                        if (dataSat < DateTime.UtcNow.AddMinutes(-27))
-                        {
-                            MessageBox.Show("Esse pedido não pode ser mais cancelado, finalizado a mais de 30 minutos", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            PopularDataGridView();
-                            return;
-                        }
-                        var retornoCancSat = FiscalServices
-                            .Cancelamento(retornoSat, idPDV, idUsuario)
-                            .Enviar(out PedidoInformation pedido);
-
-                        if (pedido != null)
-                            Pedido.SalvarRetornoSATCancelamento(pedido.IDPedido.Value, retornoCancSat.IDRetornoSAT.Value);
-
-                        if (retornoCancSat.EEEEE == "07000" || retornoCancSat.EEEEE == "07007")
-                        {
-                            if (pedido != null)
-                            {
-                                Pedido.AlterarStatus(pedido.IDPedido.Value, EStatusPedido.Cancelado);
-                                PedidoPagamento.CancelarPorPedido(pedido.IDPedido.Value, idUsuario);
-                                var listaPedidoProduto = PedidoProduto.ListarPorPedido(pedido.IDPedido.Value);
-                                // TODO: remover o false do cancelamento com SAT
-                                foreach (var pedidoProduto in listaPedidoProduto.Where(pp => pp.Cancelado == false).ToList())
-                                    Pedido.CancelarProduto(idPDV, idUsuario, pedidoProduto.IDPedidoProduto.Value, -1, null, false);
-                            }
-                            retornoSat.RetornoSATCancelamento = retornoCancSat;
-                            RetornoSAT.Salvar(retornoSat);
-                        }
-
-                        MessageBox.Show(retornoCancSat.mensagem, retornoCancSat.EEEEE, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        PopularDataGridView();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    finally
-                    {
-                        dgvPrincipal.UseWaitCursor = false;
-                        btnCancelarSAT.Enabled = true;
-                    }
+                    MessageBox.Show("Registro inválido: sem IDRetornoSAT.", "Erro",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
+
+                var retornoSat = RetornoSAT.Carregar(Convert.ToInt32(row.Cells["IDRetornoSAT"].Value));
+                if (retornoSat == null || !retornoSat.IDRetornoSAT.HasValue)
+                {
+                    MessageBox.Show("Não foi possível carregar o retorno fiscal da venda.", "Erro",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (retornoSat.RetornoSATCancelamento != null && retornoSat.RetornoSATCancelamento.IDRetornoSAT.HasValue)
+                {
+                    MessageBox.Show("Este pedido já possui cancelamento registrado.", "Atenção",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    PopularDataGridView();
+                    return;
+                }
+
+                DateTime dataSatUtc;
+                try
+                {
+                    dataSatUtc = DateTime.ParseExact(retornoSat.timeStamp, _formatoData, _cultureInfo).ToUniversalTime();
+                }
+                catch
+                {
+                    MessageBox.Show("Timestamp fiscal inválido para validação do prazo.", "Atenção",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    PopularDataGridView();
+                    return;
+                }
+
+                if (dataSatUtc < DateTime.UtcNow.AddMinutes(-27))
+                {
+                    MessageBox.Show("Esse pedido não pode mais ser cancelado (prazo expirado).", "Atenção",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    PopularDataGridView();
+                    return;
+                }
+
+                var retornoCancSat = FiscalServices
+                    .Cancelamento(retornoSat, idPDV, idUsuario)
+                    .Enviar(out PedidoInformation pedido);
+
+                if (pedido != null && retornoCancSat?.IDRetornoSAT.HasValue == true)
+                    Pedido.SalvarRetornoSATCancelamento(pedido.IDPedido.Value, retornoCancSat.IDRetornoSAT.Value);
+
+                if (retornoCancSat != null && (retornoCancSat.EEEEE == "07000" || retornoCancSat.EEEEE == "07007"))
+                {
+                    if (pedido != null)
+                    {
+                        Pedido.AlterarStatus(pedido.IDPedido.Value, EStatusPedido.Cancelado);
+                        PedidoPagamento.CancelarPorPedido(pedido.IDPedido.Value, idUsuario);
+
+                        var listaPedidoProduto = PedidoProduto.ListarPorPedido(pedido.IDPedido.Value);
+                        foreach (var pedidoProduto in listaPedidoProduto.Where(pp => pp.Cancelado == false).ToList())
+                            Pedido.CancelarProduto(idPDV, idUsuario, pedidoProduto.IDPedidoProduto.Value, -1, null, false);
+                    }
+
+                    retornoSat.RetornoSATCancelamento = retornoCancSat;
+                    RetornoSAT.Salvar(retornoSat);
+                }
+
+                MessageBox.Show(retornoCancSat?.mensagem ?? "Operação concluída.",
+                    retornoCancSat?.EEEEE ?? "OK",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                PopularDataGridView();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Selecione o pedido a ser cancelado", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                dgvPrincipal.UseWaitCursor = false;
+                btnCancelarSAT.Enabled = true;
             }
         }
-    }
-
-    class DadosGridViewCancelamento
-    {
-
-        public DadosGridViewCancelamento(RetornoSATInformation retornoSat, PedidoInformation pedido)
-        {
-            if (pedido != null)
-            {
-                IDPedido = pedido.IDPedido.Value;
-                Origem = OrigemPedido(pedido);
-            }
-
-            Selecione = false;
-            IDRetornoSAT = retornoSat.IDRetornoSAT.Value;
-            NumeroSessao = retornoSat.numeroSessao;
-            DataSAT = pedido != null ? pedido.DtPedidoFechamento.Value.ToString("dd/MM/yyyy HH:mm:ss") : DateTime.ParseExact(retornoSat.timeStamp, frmCancelarFiscal._formatoData, frmCancelarFiscal._cultureInfo).ToString("dd/MM/yyyy HH:mm:ss");
-            CPFCNPJ = string.IsNullOrWhiteSpace(retornoSat.CPFCNPJValue) ? "Não informado" : retornoSat.CPFCNPJValue;
-            Valor = retornoSat.valorTotalCFe;
-        }
-
-        public string OrigemPedido(PedidoInformation pedido)
-        {
-            switch (pedido.TipoPedido.TipoPedido)
-            {
-                case ETipoPedido.Mesa:
-                    return "Mesa " + Mesa.CarregarPorGUID(pedido.GUIDIdentificacao).Numero.Value.ToString();
-                case ETipoPedido.Comanda:
-                    return "Comanda " + Comanda.CarregarPorGUID(pedido.GUIDIdentificacao).Numero.Value.ToString();
-                case ETipoPedido.Delivery:
-                    return "Delivery";
-                case ETipoPedido.Balcao:
-                    return "Balcão";
-            }
-            return "";
-        }
-
-        public bool Selecione { get; set; }
-        public int IDRetornoSAT { get; set; }
-        public string NumeroSessao { get; set; }
-        public int IDPedido { get; set; }
-        public string Origem { get; set; }
-        public string DataSAT { get; set; }
-        public string CPFCNPJ { get; set; }
-        public string Valor { get; set; }
     }
 }

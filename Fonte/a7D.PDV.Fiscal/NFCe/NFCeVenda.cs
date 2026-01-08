@@ -389,12 +389,17 @@ namespace a7D.PDV.Fiscal.NFCe
      && !string.IsNullOrEmpty(tributacao.PISAliq_pPIS))
     {
         if (imposto.PIS == null) imposto.PIS = new PIS();
+        
+        var pPIS = tributacao.PISAliq_pPIS.ToAliquota();
+        var vBC = vProd;
+        var vPIS = Math.Round(vBC * pPIS / 100m, 2, MidpointRounding.AwayFromZero);
 
         imposto.PIS.TipoPIS = new PISAliq()
         {
             CST = tributacao.PISAliq_CST.ToEnum<CSTPIS>(),
-            pPIS = tributacao.PISAliq_pPIS.ToAliquota(),  
-            vBC = vProd
+            vBC = vBC,
+            pPIS = pPIS,
+            vPIS = vPIS
         };
     }
 
@@ -438,13 +443,18 @@ namespace a7D.PDV.Fiscal.NFCe
     if (!string.IsNullOrEmpty(tributacao.COFINSAliq_CST)
      && !string.IsNullOrEmpty(tributacao.COFINSAliq_pCOFINS))
     {
-        if (imposto.COFINS == null) imposto.COFINS = new COFINS();
+         if (imposto.COFINS == null) imposto.COFINS = new COFINS();
+
+        var pCOFINS = tributacao.COFINSAliq_pCOFINS.ToAliquota();
+        var vBC = vProd;
+        var vCOFINS = Math.Round(vBC * pCOFINS / 100m, 2, MidpointRounding.AwayFromZero);
 
         imposto.COFINS.TipoCOFINS = new COFINSAliq()
         {
             CST = tributacao.COFINSAliq_CST.ToEnum<CSTCOFINS>(),
-            pCOFINS = tributacao.COFINSAliq_pCOFINS.ToAliquota(), 
-            vBC = vProd
+            vBC = vBC,
+            pCOFINS = pCOFINS,
+            vCOFINS = vCOFINS
         };
     }
 
@@ -507,23 +517,36 @@ namespace a7D.PDV.Fiscal.NFCe
                 vIPIDevol = 0,
             };
 
-            foreach (var produto in produtos)
+            foreach (var produto  in produtos)
             {
                 if (produto.imposto.IPI != null && produto.imposto.IPI.TipoIPI.GetType() == typeof(IPITrib))
                 {
                     icmsTot.vIPI = icmsTot.vIPI + ((IPITrib)produto.imposto.IPI.TipoIPI).vIPI ?? 0;
                 }
 
-                if (produto.imposto.ICMS.TipoICMS is ICMS00 icms00)
+                if (produto.imposto.ICMS?.TipoICMS is ICMS00 icms00)
                 {
                     icmsTot.vBC += icms00.vBC;
                     icmsTot.vICMS += icms00.vICMS;
                 }
-                else if (produto.imposto.ICMS.TipoICMS is ICMS20 icms20)
+                else if (produto.imposto.ICMS?.TipoICMS is ICMS20 icms20)
                 {
                     icmsTot.vBC += icms20.vBC;
                     icmsTot.vICMS += icms20.vICMS;
                 }
+                
+                if (produto.imposto.PIS?.TipoPIS is PISAliq pisAliq)
+                    icmsTot.vPIS += pisAliq.vPIS ;
+                else if (produto.imposto.PIS?.TipoPIS is PISOutr pisOutr)
+                    icmsTot.vPIS += pisOutr.vPIS ?? 0m;
+
+
+                // COFINS
+                if (produto.imposto.COFINS?.TipoCOFINS is COFINSAliq cofAliq)
+                    icmsTot.vCOFINS += cofAliq.vCOFINS;
+                else if (produto.imposto.COFINS?.TipoCOFINS is COFINSOutr cofOutr)
+                    icmsTot.vCOFINS += cofOutr.vCOFINS ?? 0;
+                
                 //Outros Ifs aqui, caso vá usar as classes ICMS00, ICMS10 para totalizar
             }
 
