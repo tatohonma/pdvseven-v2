@@ -14,8 +14,9 @@ namespace a7D.PDV.Fiscal.NFCe
     public class EnviarVenda : IEnviarVenda
     {
         private const string fonte = "PDV-SAT|EnviarVenda";
-        private PedidoInformation _pedido;
-        private bool _cpfNaNota;
+        private readonly PedidoInformation _pedido;
+        private readonly bool _cpfNaNota;
+
         private NFCe nfce;
         private ProcessamentoSATInformation _processamentoSat;
         private string retornoSAT;
@@ -25,40 +26,54 @@ namespace a7D.PDV.Fiscal.NFCe
         {
             _pedido = pedido;
             _cpfNaNota = cpfNaNota;
-            PrepararDados();
+
+            GarantirProcessamentoSat();
+        }
+
+        private void GarantirProcessamentoSat()
+        {
+            _processamentoSat = ProcessamentoSAT.Carregar(_pedido.GUIDMovimentacao, ETipoSolicitacaoSAT.ENVIAR_DADOS_VENDA);
+
+            if (_processamentoSat == null)
+            {
+                _processamentoSat = new ProcessamentoSATInformation
+                {
+                    GUID = _pedido.GUIDMovimentacao,
+                    DataSolicitacao = DateTime.Now,
+                    IDTipoSolicitacaoSAT = (int)ETipoSolicitacaoSAT.ENVIAR_DADOS_VENDA,
+                    IDStatusProcessamentoSAT = (int)EStatusProcessamentoSAT.NAO_INICIADO,
+                    XMLEnvio = "",
+                    NumeroFiscalSequencial = null,
+                    SerieFiscal = null
+                };
+
+                ProcessamentoSAT.Salvar(_processamentoSat);
+                return;
+            }
+
+            if (_processamentoSat.IDStatusProcessamentoSAT == (int)EStatusProcessamentoSAT.SUCESSO)
+                return;
+
+            _processamentoSat.DataSolicitacao = DateTime.Now;
+            _processamentoSat.IDStatusProcessamentoSAT = (int)EStatusProcessamentoSAT.NAO_INICIADO;
+            ProcessamentoSAT.Salvar(_processamentoSat);
         }
 
         private void PrepararDados()
         {
             string xml = null;
+
             try
             {
-                _processamentoSat = ProcessamentoSAT.Carregar(_pedido.GUIDMovimentacao, ETipoSolicitacaoSAT.ENVIAR_DADOS_VENDA);
-                if (_processamentoSat == null)
+                GarantirProcessamentoSat();
+
+                if (_processamentoSat.IDStatusProcessamentoSAT == (int)EStatusProcessamentoSAT.SUCESSO)
                 {
-                    _processamentoSat = new ProcessamentoSATInformation
-                    {
-                        GUID = _pedido.GUIDMovimentacao,
-                        DataSolicitacao = DateTime.Now,
-                        IDTipoSolicitacaoSAT = (int)ETipoSolicitacaoSAT.ENVIAR_DADOS_VENDA,
-                        IDStatusProcessamentoSAT = (int)EStatusProcessamentoSAT.NAO_INICIADO,
-                        XMLEnvio = ""
-                    };
-                    int numeroFiscal = NumeroFiscalService.ObterProximoNumero("NFCE");
-                    _processamentoSat.NumeroFiscalSequencial = numeroFiscal;
-                    ProcessamentoSAT.Salvar(_processamentoSat);
-                }
-                else if (_processamentoSat.IDStatusProcessamentoSAT == (int)EStatusProcessamentoSAT.SUCESSO)
-                {
-                    // TODO: Cancelar? ou reemitir? Validar se houve alterações
                     retornoSAT = null;
                     return;
                 }
-                else
-                {
-                    _processamentoSat.DataSolicitacao = DateTime.Now;
-                    _processamentoSat.IDStatusProcessamentoSAT = (int)EStatusProcessamentoSAT.NAO_INICIADO;
-                }
+
+                ReservarNumeracaoSeNecessario();
 
                 nfce = NFCeVenda.CarregarCFe(_pedido, _processamentoSat.NumeroFiscalSequencial.Value, _cpfNaNota);
 
@@ -77,6 +92,7 @@ namespace a7D.PDV.Fiscal.NFCe
                 }
                 catch (Exception ex)
                 {
+                    LiberarNumeracaoPreEnvio();
                     throw new ExceptionPDV(CodigoErro.E518, ex);
                 }
 
@@ -88,6 +104,7 @@ namespace a7D.PDV.Fiscal.NFCe
                 }
                 catch (Exception ex)
                 {
+                    LiberarNumeracaoPreEnvio();
                     throw new ExceptionPDV(CodigoErro.E519, ex);
                 }
 
@@ -99,12 +116,16 @@ namespace a7D.PDV.Fiscal.NFCe
 
                 if (!string.IsNullOrEmpty(NFeFacade.Config.NFCe_SalvarXML))
                 {
-                    File.WriteAllText(Path.Combine(NFeFacade.Config.NFCe_SalvarXML, "NFCe-" + nfce.nfe.infNFe.ide.nNF + ".xml"), xml);
+                    File.WriteAllText(
+                        Path.Combine(NFeFacade.Config.NFCe_SalvarXML, "NFCe-" + nfce.nfe.infNFe.ide.nNF + ".xml"),
+                        xml
+                    );
                 }
 
                 string xMotivo;
                 string mensagem;
-                RetornoNFeAutorizacao retorno = null;
+                RetornoNFeAutorizacao retorno;
+
                 try
                 {
                     retorno = NFeFacade.Enviar(nfce.nfe);
@@ -113,45 +134,55 @@ namespace a7D.PDV.Fiscal.NFCe
                 }
                 catch (Exception ex)
                 {
-                    throw new ExceptionPDV(CodigoErro.E517, ex.Message);
-                    //xml = NFeFacade.EmitirOffline(nfce.nfe, ex.Message);
-                    //xMotivo = "offline";
-                    //mensagem = "Offline: " + ex.Message;
-                }
-
-                if (retorno != null)
-                {
-                    var proc = new nfeProc
+                    // se for erro de rede/local, libera a numeração
+                    if (EhErroLocalDeRede(ex))
                     {
-                        NFe = nfce.nfe,
-                        protNFe = retorno.Retorno.protNFe,
-                        versao = nfce.nfe.infNFe.versao
-                    };
+                        LiberarNumeracaoPreEnvio();
 
-                    protCod = proc.protNFe.infProt.nProt;
-                    xMotivo = proc.protNFe.infProt.xMotivo;
-                    if (protCod == null)
+                        // opcional: limpa também o XML pra não ficar "processando" com nNF definido
+                        _processamentoSat.XMLEnvio = "";
+                        _processamentoSat.IDStatusProcessamentoSAT = (int)EStatusProcessamentoSAT.NAO_INICIADO;
+                        ProcessamentoSAT.Salvar(_processamentoSat);
+                    }
+                    else
                     {
+                        // se não dá pra afirmar que não chegou na SEFAZ, mantém número reservado
                         _processamentoSat.IDStatusProcessamentoSAT = (int)EStatusProcessamentoSAT.ERRO;
                         ProcessamentoSAT.Salvar(_processamentoSat);
-                        throw new ExceptionPDV(CodigoErro.E516, xMotivo);
                     }
 
-                    xml = proc.ObterXmlString();
+                    throw new ExceptionPDV(CodigoErro.E517, ex.Message);
+                }
+                var proc = new nfeProc
+                {
+                    NFe = nfce.nfe,
+                    protNFe = retorno.Retorno.protNFe,
+                    versao = nfce.nfe.infNFe.versao
+                };
+
+                protCod = proc.protNFe.infProt.nProt;
+                xMotivo = proc.protNFe.infProt.xMotivo;
+
+                if (string.IsNullOrEmpty(protCod))
+                {
+                    _processamentoSat.IDStatusProcessamentoSAT = (int)EStatusProcessamentoSAT.ERRO;
+                    ProcessamentoSAT.Salvar(_processamentoSat);
+                    throw new ExceptionPDV(CodigoErro.E516, xMotivo);
                 }
 
-                // numeroSessao|EEEEE|CCCC|mensagem|cod|mensagemSEFAZ|arquivoCFeBase64|timeS tamp|chaveConsulta|valorTotalCFe|CPFCNPJValue|assinaturaQRCODE
+                xml = proc.ObterXmlString();
+
                 var b64xml = Convert.ToBase64String(UTF8Encoding.UTF8.GetBytes(xml));
-                retornoSAT = $"0|06000|CCCC|{xMotivo}|{protCod}|{mensagem}|{b64xml}|{DateTime.Now.ToString("yyyyMMddHHmmss")}|{nfce.nfe.infNFe.Id.Substring(3)}|{nfce.nfe.infNFe.total.ICMSTot.vNF}|{_pedido.DocumentoCliente}|{nfce.nfe.infNFeSupl.qrCode}";
+                retornoSAT =
+                    $"0|06000|CCCC|{xMotivo}|{protCod}|{mensagem}|{b64xml}|{DateTime.Now:yyyyMMddHHmmss}|{nfce.nfe.infNFe.Id.Substring(3)}|{nfce.nfe.infNFe.total.ICMSTot.vNF}|{_pedido.DocumentoCliente}|{nfce.nfe.infNFeSupl.qrCode}";
 
                 _processamentoSat.IDStatusProcessamentoSAT = (int)EStatusProcessamentoSAT.SUCESSO;
                 ProcessamentoSAT.Salvar(_processamentoSat);
             }
             catch (ExceptionPDV ex)
             {
-                // https://jsonformatter.org/xml-formatter
                 ex.Data.Add("xml", xml);
-                throw ex;
+                throw;
             }
             catch (Exception ex)
             {
@@ -160,19 +191,50 @@ namespace a7D.PDV.Fiscal.NFCe
             }
         }
 
+        private void ReservarNumeracaoSeNecessario()
+        {
+            if (_processamentoSat.NumeroFiscalSequencial.HasValue)
+                return;
+
+            int numeroFiscal = NumeroFiscalService.ObterProximoNumero("NFCE");
+            _processamentoSat.NumeroFiscalSequencial = numeroFiscal;
+
+            _processamentoSat.SerieFiscal = int.TryParse(
+                ConfiguracaoBD.BuscarConfiguracao("NFCe_Serie").Valor,
+                out var serie
+            ) ? serie : (int?)null;
+
+            ProcessamentoSAT.Salvar(_processamentoSat);
+        }
+
+        private void LiberarNumeracaoPreEnvio()
+        {
+            if (_processamentoSat?.IDProcessamentoSAT == null)
+                return;
+
+            _processamentoSat.NumeroFiscalSequencial = null;
+            _processamentoSat.SerieFiscal = null;
+            _processamentoSat.IDStatusProcessamentoSAT = (int)EStatusProcessamentoSAT.ERRO;
+            ProcessamentoSAT.Salvar(_processamentoSat);
+        }
+
         public RetornoSATInformation Enviar()
         {
-            ProcessamentoSAT.AlterarStatus(_processamentoSat.IDProcessamentoSAT.Value, EStatusProcessamentoSAT.PROCESSANDO);
+            PrepararDados();
+
+            // ProcessamentoSAT.AlterarStatus(_processamentoSat.IDProcessamentoSAT.Value, EStatusProcessamentoSAT.PROCESSANDO);
+
             try
             {
                 if (retornoSAT == null)
-                {
                     return RetornoSAT.Carregar(_processamentoSat.IDRetornoSAT.Value);
-                }
+
                 var result = RetornoSatFactory.GerarRetornoVenda(retornoSAT, true);
+
                 _processamentoSat.IDRetornoSAT = result.IDRetornoSAT;
                 _processamentoSat.IDStatusProcessamentoSAT = (int)EStatusProcessamentoSAT.SUCESSO;
                 ProcessamentoSAT.Salvar(_processamentoSat);
+
                 return result;
             }
             catch (Exception ex)
@@ -182,5 +244,29 @@ namespace a7D.PDV.Fiscal.NFCe
                 throw new ExceptionPDV(CodigoErro.E512, ex);
             }
         }
+        
+        static bool EhErroLocalDeRede(Exception ex)
+        {
+            if (ex is System.Net.WebException) return true;
+            if (ex is System.Net.Http.HttpRequestException) return true;
+
+            var inner = ex.InnerException;
+            while (inner != null)
+            {
+                if (inner is System.Net.Sockets.SocketException) return true;
+                if (inner is System.IO.IOException) return true;
+                inner = inner.InnerException;
+            }
+
+            var msg = (ex.Message ?? "").ToLowerInvariant();
+            return msg.Contains("name resolution") ||
+                   msg.Contains("could not resolve") ||
+                   msg.Contains("timed out") ||
+                   msg.Contains("timeout") ||
+                   msg.Contains("forcibly closed") ||
+                   msg.Contains("conex") ||
+                   msg.Contains("internet");
+        }
+
     }
 }
