@@ -70,11 +70,20 @@ namespace a7D.PDV.Integracao.Pagamento.StoneTEF
             return new StringContent(json, Encoding.UTF8, "application/json");
         }
 
-        public Task<HttpResponseMessage> ActivateAsync(string stoneCode, string partnerName = null, CancellationToken ct = default(CancellationToken))
+        public async Task<HttpResponseMessage> ActivateAsync(string stoneCode, string partnerName = null, CancellationToken ct = default)
         {
-            var body = new ActivateRequest(stoneCode, partnerName);
-            return _http.PostAsync("api/Activate", AsJson(body), ct);
+            try
+            {
+                var body = new ActivateRequest(stoneCode, partnerName);
+                var resp = await _http.PostAsync("api/Activate", AsJson(body), ct).ConfigureAwait(false);
+                return resp;
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Falha ao ativar AutoTEF ({e})");
+            }
         }
+
 
         public Task<HttpResponseMessage> PayAsync(PayRequest req, CancellationToken ct = default(CancellationToken))
         {

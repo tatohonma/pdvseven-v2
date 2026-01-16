@@ -2,8 +2,10 @@
 using a7D.PDV.Integracao.Pagamento.GranitoTEF;
 using System;
 using System.Management;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using a7D.PDV.BLL;
 using a7D.PDV.Integracao.Pagamento.StoneTEF;
 
 namespace a7D.PDV.AutoAtendimento.UI.Services
@@ -39,6 +41,8 @@ namespace a7D.PDV.AutoAtendimento.UI.Services
         AutenticacaoAPI autenticacao;
         ConfiguracaoAPI config;
 
+        static readonly SemaphoreSlim _activateLock = new SemaphoreSlim(1, 1);
+        
         internal PdvServices(ClienteWS ws)
         {
             autenticacao = ws.Autenticacao();
@@ -60,21 +64,33 @@ namespace a7D.PDV.AutoAtendimento.UI.Services
             return _autoTefClient;
         }
 
+
         internal static async Task EnsureAutoTefActivatedAsync()
         {
             if (_autoTefActivated) return;
-            
-            var client = GetAutoTefClient();
-             var resp = await client.ActivateAsync(StoneCode, AutoTefConnectionName);
 
-            if (!resp.IsSuccessStatusCode)
+            await _activateLock.WaitAsync().ConfigureAwait(false);
+            try
             {
-                var body = await resp.Content.ReadAsStringAsync();
-                throw new Exception($"Falha ao ativar AutoTEF ({(int)resp.StatusCode}): {body}");
+                if (_autoTefActivated) return;
+
+                var client = GetAutoTefClient();
+                var resp = await client.ActivateAsync(StoneCode, AutoTefConnectionName).ConfigureAwait(false);
+
+                if (!resp.IsSuccessStatusCode)
+                {
+                    var body = await resp.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    throw new Exception($"Falha ao ativar AutoTEF ({(int)resp.StatusCode}): {body}");
+                }
+
+                _autoTefActivated = true;
             }
-            
-            _autoTefActivated = true;
+            finally
+            {
+                _activateLock.Release();
+            }
         }
+
 
         internal string ValidarPDV()
         {
@@ -90,7 +106,7 @@ namespace a7D.PDV.AutoAtendimento.UI.Services
                 throw new Exception(result.Mensagem);
         }
 
-        internal void LerConfiguracoes()
+        internal async void LerConfiguracoes()
         {
             ChaveUsuario = config.Chave("ChaveUsuario", PDVID, idTipoPDV);
             ImpressaoLocal = config.Chave("ImpressaoLocal", PDVID, idTipoPDV);
@@ -118,17 +134,27 @@ namespace a7D.PDV.AutoAtendimento.UI.Services
             ComandaComCredito = config.Chave("ComandaComCredito") == "1";
             AutoTefBaseUrl = config.Chave("AutoTefBaseUrl", PDVID, idTipoPDV);
 
-            // if (string.IsNullOrEmpty(AutoTefBaseUrl))
-            //     AutoTefBaseUrl = "http://localhost:8000/";
-            // StoneCode = config.Chave("StoneCode");
-            // AutoTefConnectionName = "PDVSeven";
-            //
-            // AutoTefBridge.Register(
-            //     getClient: () => GetAutoTefClient(),
-            //     ensureActivatedAsync: () => EnsureAutoTefActivatedAsync()
-            // );
+            AutoTefBaseUrl = "http://localhost:8000/";
+            StoneCode = config.Chave("StoneCode");
+            AutoTefConnectionName = "PDVSeven";
             
-            // EnsureAutoTefActivatedAsync().GetAwaiter().GetResult();
+            
+            if (!string.IsNullOrEmpty(StoneCode))
+            {
+                AutoTefBridge.Register(
+                    getClient: () => GetAutoTefClient(),
+                    ensureActivatedAsync: () => EnsureAutoTefActivatedAsync()
+                );
+
+                try
+                {
+                    await EnsureAutoTefActivatedAsync();
+                }
+                catch (Exception ex)
+                {
+                    Logs.ErroBox(CodigoErro.A310, ex);
+                }
+            }
 
             if (int.TryParse(config.Chave("IDCategoriaProduto_Credito", PDVID, idTipoPDV), out int catCredito))
                 IDCategoriaProduto_Credito = catCredito;
