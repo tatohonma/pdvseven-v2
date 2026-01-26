@@ -126,7 +126,7 @@ namespace a7D.PDV.AutoAtendimento.UI.Services
             SenhaSaida = int.Parse(cSenhaSaida);
             ExibirMouse = config.Chave("ExibirMouse", PDVID, idTipoPDV) == "1";
             OrdemImpressao = config.Chave("OrdemImpressao", PDVID, idTipoPDV) == "1";
-            Fiscal = config.Chave("Fiscal") == "SAT";
+            Fiscal = config.Chave("Fiscal") == "NFCe";
             TimeoutInativo = int.Parse(config.Chave("TimeoutInativo", PDVID, idTipoPDV) ?? "120");
             TimeoutAlerta = int.Parse(config.Chave("TimeoutAlerta", PDVID, idTipoPDV) ?? "60");
             VerificarDisponibilidade = int.Parse(config.Chave("VerificarDisponibilidade", PDVID, idTipoPDV) ?? "10");
