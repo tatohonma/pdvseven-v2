@@ -100,30 +100,31 @@ namespace a7D.PDV.Fiscal.NFCe
 
             var listaProdutoAgrupado =
                 from l in listaProduto
-                group l by new { l.Produto.IDProduto, l.ValorUnitario, l.ValorTotal } into g
+                group l by new { IDProduto = l.Produto.IDProduto, ValorUnitario = (l.ValorUnitario ?? 0m) } into g
                 select new
                 {
-                    g.Key.IDProduto,
-                    ValorUnitario = g.Key.ValorUnitario ?? 0,
-                    g.Key.ValorTotal,
-                    Quantidade = g.Sum(x => x.Quantidade ?? 0)
+                    IDProduto = g.Key.IDProduto,
+                    ValorUnitario = g.Key.ValorUnitario,
+                    Quantidade = g.Sum(x => x.Quantidade ?? 0m),
+                    // vProd do item agrupado deve ser q * vUn (arredondado)
+                    ValorTotal = Math.Round(g.Sum(x => (x.Quantidade ?? 0m) * (x.ValorUnitario ?? 0m)), 2, MidpointRounding.AwayFromZero)
                 };
-
+            
             var totalAgrupado = listaProdutoAgrupado.Sum(p => p.ValorTotal);
             var totalSemAgrupar = listaProduto.Sum(p => p.ValorTotal);
 
             if (totalAgrupado != totalSemAgrupar)
             {
                 // Não pode agrupar para não dar divergencia de valor
-                listaProdutoAgrupado =
-                    from l in listaProduto
-                    select new
-                    {
-                        l.Produto.IDProduto,
-                        ValorUnitario = l.ValorUnitario ?? 0,
-                        l.ValorTotal,
-                        Quantidade = l.Quantidade ?? 0
-                    };
+                // listaProdutoAgrupado =
+                //     from l in listaProduto
+                //     select new
+                //     {
+                //         l.Produto.IDProduto,
+                //         ValorUnitario = l.ValorUnitario ?? 0,
+                //         l.ValorTotal,
+                //         Quantidade = l.Quantidade ?? 0
+                //     };
             }
 
             nfe.infNFe.det = new List<det>();
@@ -178,7 +179,7 @@ namespace a7D.PDV.Fiscal.NFCe
                     vUnCom = pedidoproduto.ValorUnitario,
                     vUnTrib = pedidoproduto.ValorUnitario,
 
-                    vProd = pedidoproduto.ValorTotal , // Valor total bruto!
+                    vProd = pedidoproduto.ValorTotal ,
                     vDesc = descontoDiluido,
                     vFrete = freteDiluido
                 };
@@ -284,7 +285,7 @@ namespace a7D.PDV.Fiscal.NFCe
         }
 
         private static imposto ImpostoProduto(TipoTributacaoInformation tributacao, decimal vProd)
-{
+    {
     var imposto = new imposto();
 
     
