@@ -75,8 +75,8 @@ namespace a7D.PDV.Fiscal.NFCe
             ProdutoInformation produto;
             Int32 numeroItem = 0;
 
-            if (!ConfiguracoesSistema.Valores.ServicoComoItem)
-                throw new ExceptionPDV(CodigoErro.E515);
+            // if (!ConfiguracoesSistema.Valores.ServicoComoItem)
+            //     throw new ExceptionPDV(CodigoErro.E515);
 
             foreach (var item in pedido.ListaProduto)
             {
@@ -131,12 +131,17 @@ namespace a7D.PDV.Fiscal.NFCe
 
             var totalProdutos = listaProdutoAgrupado.Sum(p => p.ValorTotal);
 
+            decimal taxaServicoTotal = (pedido.ValorServico ?? 0m);
+            var acrescimoPorItem = taxaServicoTotal / totalProdutos;
+            
             var descontoPorItem = (pedido.ValorDesconto ?? 0) / totalProdutos;
 
             var fretePorItem = (pedido.ValorEntrega ?? 0) / totalProdutos;
 
             for (int i = 0; i < listaProdutoAgrupado.Count(); i++)
             {
+                
+                
                 numeroItem++;
                 produto = Produto.Carregar(listaProdutoAgrupado.ElementAt(i).IDProduto.Value);
 
@@ -154,9 +159,14 @@ namespace a7D.PDV.Fiscal.NFCe
 
                 // pedidoproduto.ValorTotal += pedido.ValorEntrega; 
 
-                decimal? descontoDiluido = descontoPorItem > 0 ? descontoPorItem * pedidoproduto.ValorTotal : default(decimal?);
-                decimal? freteDiluido = fretePorItem > 0 ? fretePorItem * pedidoproduto.ValorTotal : default(decimal?);
+                decimal? descontoDiluido = descontoPorItem > 0 ? descontoPorItem * pedidoproduto.ValorTotal : (decimal?)null;
+                decimal? freteDiluido    = fretePorItem > 0    ? fretePorItem    * pedidoproduto.ValorTotal : (decimal?)null;
 
+
+                decimal? acrescimoDiluido = acrescimoPorItem != 0
+                    ? Math.Round(acrescimoPorItem * pedidoproduto.ValorTotal, 2, MidpointRounding.AwayFromZero)
+                    : (decimal?)null;
+                
                 nfe.infNFe.det.Add(new det());
                 nfe.infNFe.det[i].nItem = numeroItem;
                 nfe.infNFe.det[i].prod = new prod
@@ -181,7 +191,8 @@ namespace a7D.PDV.Fiscal.NFCe
 
                     vProd = pedidoproduto.ValorTotal ,
                     vDesc = descontoDiluido,
-                    vFrete = freteDiluido
+                    vFrete = freteDiluido,
+                    vOutro = acrescimoDiluido
                 };
 
                 if (string.IsNullOrEmpty(produto.ClassificacaoFiscal.TipoTributacao.CFOP))
@@ -193,6 +204,18 @@ namespace a7D.PDV.Fiscal.NFCe
                     throw new Exception("Campo uCom do produto " + produto.Nome + " não pode estar vazio.");
 
                 nfe.infNFe.det[i].imposto = ImpostoProduto(produto.ClassificacaoFiscal.TipoTributacao, nfe.infNFe.det[i].prod.vProd);
+            }
+
+            if (taxaServicoTotal != 0m)
+            {
+                var somaVOutro = nfe.infNFe.det.Sum(d => d.prod.vOutro ?? 0m);
+                var diff = Math.Round(taxaServicoTotal - somaVOutro, 2, MidpointRounding.AwayFromZero);
+
+                if (diff != 0m)
+                {
+                    var last = nfe.infNFe.det.Last();
+                    last.prod.vOutro = Math.Round((last.prod.vOutro ?? 0m) + diff, 2, MidpointRounding.AwayFromZero);
+                }
             }
 
             nfe.infNFe.total = GetTotal(versao, nfe.infNFe.det);
@@ -507,6 +530,7 @@ namespace a7D.PDV.Fiscal.NFCe
                 vProd = produtos.Sum(p => p.prod.vProd),
                 vDesc = produtos.Sum(p => p.prod.vDesc ?? 0),
                 vFrete = produtos.Sum(p => p.prod.vFrete ?? 0),
+                vOutro = produtos.Sum(p => p.prod.vOutro ?? 0),
                 vTotTrib = produtos.Sum(p => p.imposto.vTotTrib ?? 0),
                 vICMSDeson = 0,
                 vFCPUFDest = 0,
