@@ -130,8 +130,10 @@ namespace a7D.PDV.Fiscal.NFCe
             nfe.infNFe.det = new List<det>();
 
             var totalProdutos = listaProdutoAgrupado.Sum(p => p.ValorTotal);
+            
+            bool servicoComoItem = ConfiguracoesSistema.Valores.ServicoComoItem;
 
-            decimal taxaServicoTotal = (pedido.ValorServico ?? 0m);
+            decimal taxaServicoTotal = servicoComoItem ? 0m : (pedido.ValorServico ?? 0m);
             var acrescimoPorItem = taxaServicoTotal / totalProdutos;
             
             var descontoPorItem = (pedido.ValorDesconto ?? 0) / totalProdutos;
@@ -140,8 +142,6 @@ namespace a7D.PDV.Fiscal.NFCe
 
             for (int i = 0; i < listaProdutoAgrupado.Count(); i++)
             {
-                
-                
                 numeroItem++;
                 produto = Produto.Carregar(listaProdutoAgrupado.ElementAt(i).IDProduto.Value);
 
@@ -206,7 +206,7 @@ namespace a7D.PDV.Fiscal.NFCe
                 nfe.infNFe.det[i].imposto = ImpostoProduto(produto.ClassificacaoFiscal.TipoTributacao, nfe.infNFe.det[i].prod.vProd);
             }
 
-            if (taxaServicoTotal != 0m)
+            if (taxaServicoTotal != 0m && !servicoComoItem)
             {
                 var somaVOutro = nfe.infNFe.det.Sum(d => d.prod.vOutro ?? 0m);
                 var diff = Math.Round(taxaServicoTotal - somaVOutro, 2, MidpointRounding.AwayFromZero);
