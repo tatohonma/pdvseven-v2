@@ -43,7 +43,7 @@ namespace a7D.PDV.AutoAtendimento.UI
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LayoutServices.Bind(this);
-            ImagemTef.Visibility = ReciboTef.Visibility = Visibility.Collapsed;
+            ImagemTef.Visibility = ReciboTef.Visibility =Visibility.Collapsed;
             WindowState = WindowState.Maximized;
         }
 
@@ -69,6 +69,8 @@ namespace a7D.PDV.AutoAtendimento.UI
                 tef.DefinirMetodoPagamento(MetodoPagamento.Debito, 1);
             else if (btn.Name == Credito.Name)
                 tef.DefinirMetodoPagamento(MetodoPagamento.Credito, 1);
+            else if (btn.Name == Vr.Name)
+                tef.DefinirMetodoPagamento(MetodoPagamento.VoucherVR, 1);
             else
                 return;
 
@@ -77,7 +79,7 @@ namespace a7D.PDV.AutoAtendimento.UI
 
         private void IniciaProcessamento()
         {
-            Debito.Visibility = Credito.Visibility = Visibility.Collapsed;
+            Debito.Visibility = Credito.Visibility = Vr.Visibility=  Visibility.Collapsed;
             ImagemTef.Visibility = Visibility.Visible;
 
             dtStart = DateTime.Now;
