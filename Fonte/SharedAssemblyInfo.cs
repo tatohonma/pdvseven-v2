@@ -2,9 +2,9 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyCompany("PDV7")]
-[assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2025")]
+[assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2026")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.25.8.1")]
+[assembly: AssemblyVersion("2.25.8.2")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -65,7 +65,12 @@ Lista das últimas versões e FIX
     Especificar o tipo de cada alteração feita: Novo, Melhoria, Correção, TDD, Atualização
 
 ===============================================================================
-===============================================================================
+
+2.25.8.2 ======================================================================
+    Melhoria: Agrupamento dos itens no XML da NFC-e.
+    Melhoria: Envio da taxa de serviço como acréscimo no XML da NFC-e.
+    Correção: Impressão do cupom fiscal da NFC-e no autoatendimento.
+
 2.25.8.1 ======================================================================
     Correção: Ajuste no calculo do PIS e COFINS no XML da NFC-e.
     Correção: Fix no sequencial da numeração da NFC-e, grava o sequencial apenas nas nota emitidas com sucesso.
