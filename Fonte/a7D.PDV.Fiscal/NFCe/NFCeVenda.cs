@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DFe.Classes.Flags;
+using Shared.NFe.Classes.Informacoes.InfRespTec;
 
 namespace a7D.PDV.Fiscal.NFCe
 {
@@ -193,6 +194,15 @@ namespace a7D.PDV.Fiscal.NFCe
                     vDesc = descontoDiluido,
                     vFrete = freteDiluido,
                     vOutro = acrescimoDiluido
+                };
+                
+                
+                nfe.infNFe.infRespTec = new infRespTec()
+                {
+                    CNPJ = "51603516000161",
+                    xContato = "PdvSeven",
+                    email = "teste@teste",
+                    fone = "93992198198"
                 };
 
                 if (string.IsNullOrEmpty(produto.ClassificacaoFiscal.TipoTributacao.CFOP))

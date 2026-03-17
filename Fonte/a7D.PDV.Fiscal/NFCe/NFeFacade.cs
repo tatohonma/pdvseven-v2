@@ -90,7 +90,7 @@ namespace a7D.PDV.Fiscal.NFCe
             ConfiguracaoServico.Instancia.cUF = (DFe.Classes.Entidades.Estado)Config.NFCe_UF;
             Config.xNFCe_UF = ConfiguracaoServico.Instancia.cUF.ToString();
 
-            ConfiguracaoServico.Instancia.ModeloDocumento = DFe.Classes.Flags.ModeloDocumento.NFCe;
+            ConfiguracaoServico.Instancia.ModeloDocumento = ModeloDocumento.NFCe;
             ConfiguracaoServico.Instancia.TimeOut = 1000 * Config.NFCe_Timeout;
             ConfiguracaoServico.Instancia.tpEmis = TipoEmissao.teNormal;
             ConfiguracaoServico.Instancia.ProtocoloDeSeguranca = System.Net.SecurityProtocolType.Tls12;
@@ -98,9 +98,9 @@ namespace a7D.PDV.Fiscal.NFCe
             // 1 Produção
             // 2 Homologação
             if (!string.IsNullOrEmpty(ambiente) && ambiente.Equals("2"))
-                ConfiguracaoServico.Instancia.tpAmb = DFe.Classes.Flags.TipoAmbiente.Homologacao;
+                ConfiguracaoServico.Instancia.tpAmb = TipoAmbiente.Homologacao;
             else
-                ConfiguracaoServico.Instancia.tpAmb = DFe.Classes.Flags.TipoAmbiente.Producao;
+                ConfiguracaoServico.Instancia.tpAmb = TipoAmbiente.Producao;
 
             // Certificado!
             ConfiguracaoServico.Instancia.Certificado.TipoCertificado = TipoCertificado.A1Arquivo;
@@ -355,6 +355,45 @@ namespace a7D.PDV.Fiscal.NFCe
             }
         }
 
+
+        static string GerarCNF(int nNF)
+        {
+            var rand = new Random();
+            string cnf;
+            string nnf8 = nNF.ToString().PadLeft(8, '0');
+
+
+            do
+            {
+                cnf = rand.Next(0, 99999999).ToString("D8");
+            }
+            while (
+                cnf == nnf8 ||
+                cnf == "00000000" ||
+                cnf == "11111111" ||
+                cnf == "22222222" ||
+                cnf == "33333333" ||
+                cnf == "44444444" ||
+                cnf == "55555555" ||
+                cnf == "66666666" ||
+                cnf == "77777777" ||
+                cnf == "88888888" ||
+                cnf == "99999999" ||
+                cnf == "12345678" ||
+                cnf == "23456789" ||
+                cnf == "34567890" ||
+                cnf == "45678901" ||
+                cnf == "56789012" ||
+                cnf == "67890123" ||
+                cnf == "78901234" ||
+                cnf == "89012345" ||
+                cnf == "90123456" ||
+                cnf == "01234567"
+            );
+
+            return cnf;
+        }
+
         public static ide GetIdentificacao(int numero)
         {
             var ide = new ide
@@ -368,7 +407,7 @@ namespace a7D.PDV.Fiscal.NFCe
                 cMunFG = Config.NFCe_MuninipioIBGE,
                 tpEmis = ConfiguracaoServico.Instancia.tpEmis,
                 tpImp = TipoImpressao.tiNFCe,
-                cNF = numero.ToString(),
+                cNF = GerarCNF(numero),
                 tpAmb = ConfiguracaoServico.Instancia.tpAmb,
                 finNFe = FinalidadeNFe.fnNormal,
                 verProc = "3.4.5.6",
