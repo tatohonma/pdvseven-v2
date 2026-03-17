@@ -70,6 +70,7 @@ Lista das últimas versões e FIX
     Melhoria: Agrupamento dos itens no XML da NFC-e.
     Melhoria: Envio da taxa de serviço como acréscimo no XML da NFC-e.
     Correção: Impressão do cupom fiscal da NFC-e no autoatendimento.
+    Novo: Implementação do Autotef Stone.
 
 2.25.8.1 ======================================================================
     Correção: Ajuste no calculo do PIS e COFINS no XML da NFC-e.
