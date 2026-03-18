@@ -42,33 +42,47 @@ namespace a7D.PDV.Fiscal.NFCe
             if (cpfNaNota && !string.IsNullOrEmpty(pedido.DocumentoCliente))
             {
                 nfe.infNFe.dest = new dest(versao);
-    
-                if (pedido.Cliente != null)
+
+                // Nome do destinatário
+                if (pedido.Cliente != null && !string.IsNullOrEmpty(pedido.Cliente.NomeCompleto))
                 {
-                    
-                    
-                    nfe.infNFe.dest.xNome =   pedido.Cliente.NomeCompleto.TrimEnd().TrimStart();
+                    nfe.infNFe.dest.xNome = pedido.Cliente.NomeCompleto.Trim();
+
                     if (nfe.infNFe.dest.xNome.Length < 2)
                         nfe.infNFe.dest.xNome = nfe.infNFe.dest.xNome.PadRight(2, '.');
                 }
                 else
                 {
-                    nfe.infNFe.dest.xNome = "SEM NOME";
-                    //nfe.infNFe.dest.enderDest = NFeFacade.GetEnderecoDestinatario();
+                    nfe.infNFe.dest.xNome = "CONSUMIDOR FINAL";
+                    // nfe.infNFe.dest.enderDest = NFeFacade.GetEnderecoDestinatario();
                 }
 
-                // NFCe: Tem que ser não contribuinte
+                // NFC-e: sempre não contribuinte
                 nfe.infNFe.dest.indIEDest = indIEDest.NaoContribuinte;
 
-                switch (pedido.DocumentoCliente.Length)
+                // Documento (CPF/CNPJ)
+                if (cpfNaNota && !string.IsNullOrEmpty(pedido.DocumentoCliente))
                 {
-                    case 11:
-                        nfe.infNFe.dest.CPF = pedido.DocumentoCliente;
-                        break;
+                    switch (pedido.DocumentoCliente.Length)
+                    {
+                        case 11:
+                            nfe.infNFe.dest.CPF = pedido.DocumentoCliente;
+                            break;
 
-                    case 14:
-                        nfe.infNFe.dest.CNPJ = pedido.DocumentoCliente;
-                        break;
+                        case 14:
+                            nfe.infNFe.dest.CNPJ = pedido.DocumentoCliente;
+                            break;
+
+                        default:
+                            // Documento inválido → trata como consumidor padrão
+                            nfe.infNFe.dest.CPF = "00000000000";
+                            break;
+                    }
+                }
+                else
+                {
+                    // Sem documento → padrão seguro para NFC-e
+                    nfe.infNFe.dest.CPF = "00000000000";
                 }
             }
             
@@ -200,9 +214,9 @@ namespace a7D.PDV.Fiscal.NFCe
                 nfe.infNFe.infRespTec = new infRespTec()
                 {
                     CNPJ = "51603516000161",
-                    xContato = "PdvSeven",
-                    email = "teste@teste",
-                    fone = "93992198198"
+                    xContato = "PDVSeven",
+                    email = "suporte@pdvseven.com.br",
+                    fone = "1142100122"
                 };
 
                 if (string.IsNullOrEmpty(produto.ClassificacaoFiscal.TipoTributacao.CFOP))

@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2026")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.25.8.2")]
+[assembly: AssemblyVersion("2.25.8.3")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -65,6 +65,9 @@ Lista das últimas versões e FIX
     Especificar o tipo de cada alteração feita: Novo, Melhoria, Correção, TDD, Atualização
 
 ===============================================================================
+
+2.25.8.3 ======================================================================
+    Novo: Integração NFC-e estado de Pernambuco.
 
 2.25.8.2 ======================================================================
     Melhoria: Agrupamento dos itens no XML da NFC-e.
