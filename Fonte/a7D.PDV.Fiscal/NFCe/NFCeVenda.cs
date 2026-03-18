@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DFe.Classes.Flags;
 using Shared.NFe.Classes.Informacoes.InfRespTec;
+using Estado = DFe.Classes.Entidades.Estado;
 
 namespace a7D.PDV.Fiscal.NFCe
 {
@@ -121,8 +122,7 @@ namespace a7D.PDV.Fiscal.NFCe
                     IDProduto = g.Key.IDProduto,
                     ValorUnitario = g.Key.ValorUnitario,
                     Quantidade = g.Sum(x => x.Quantidade ?? 0m),
-                    // vProd do item agrupado deve ser q * vUn (arredondado)
-                    ValorTotal = Math.Round(g.Sum(x => (x.Quantidade ?? 0m) * (x.ValorUnitario ?? 0m)), 2, MidpointRounding.AwayFromZero)
+                    ValorTotal = Math.Round(g.Sum(x => x.ValorTotal), 2, MidpointRounding.AwayFromZero)
                 };
             
             var totalAgrupado = listaProdutoAgrupado.Sum(p => p.ValorTotal);
@@ -209,15 +209,19 @@ namespace a7D.PDV.Fiscal.NFCe
                     vFrete = freteDiluido,
                     vOutro = acrescimoDiluido
                 };
-                
-                
-                nfe.infNFe.infRespTec = new infRespTec()
+
+                if (ConfiguracaoServico.Instancia.cUF == Estado.PE)
                 {
-                    CNPJ = "51603516000161",
-                    xContato = "PDVSeven",
-                    email = "suporte@pdvseven.com.br",
-                    fone = "1142100122"
-                };
+                    nfe.infNFe.infRespTec = new infRespTec()
+                    {
+                        CNPJ = "51603516000161",
+                        xContato = "PDVSeven",
+                        email = "suporte@pdvseven.com.br",
+                        fone = "1142100122"
+                    };
+                }
+
+               
 
                 if (string.IsNullOrEmpty(produto.ClassificacaoFiscal.TipoTributacao.CFOP))
                     throw new Exception("Campo CFOP do produto " + produto.Nome + " não pode estar vazio.");
