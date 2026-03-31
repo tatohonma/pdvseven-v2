@@ -180,6 +180,9 @@ namespace a7D.PDV.Caixa.UI.Controles
                     case (int)EOrigemPedido.anotaai:
                         icone.Value = Resources.anotaai;
                         break;
+                    case (int)EOrigemPedido.keeta:
+                        icone.Value = Resources.ico_keeta;
+                        break;
                 }
 
                 if (Convert.ToInt32(item.Cells["IDStatusPedido"].Value) == (int)EStatusPedido.NaoConfirmado)

@@ -5,6 +5,7 @@
         sistema = 1,
         ifood = 2,
         deliveryOnline = 3,
-        anotaai = 4
+        anotaai = 4,
+        keeta = 5
     }
 }

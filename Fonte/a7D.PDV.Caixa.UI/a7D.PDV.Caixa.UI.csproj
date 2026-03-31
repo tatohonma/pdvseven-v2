@@ -256,6 +256,11 @@
     <Compile Include="frmPedidoProdutosTouch.Designer.cs">
       <DependentUpon>frmPedidoProdutosTouch.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Service\ComandaUtil.cs" />
     <Compile Include="Service\Extenders.cs" />
     <Compile Include="Service\FecharVenda.cs" />
@@ -461,11 +466,6 @@
     <Compile Include="Service\PagamentoVenda.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Content Include="Caixa.ico" />
     <Content Include="Caixa.png" />
     <None Include="Resources\keyboard-icon2.png" />
@@ -622,8 +622,8 @@
       <DependentUpon>frmPedidoProdutosModificacoes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="App.config">
@@ -684,6 +684,7 @@
     <None Include="Resources\ico anotacao.png" />
     <None Include="Resources\ico-pdv7.png" />
     <None Include="Resources\anotaai.png" />
+    <Content Include="Resources\ico-keeta.png" />
     <Content Include="Resources\spinner.gif" />
     <Content Include="Resources\logo2_baixa.png" />
   </ItemGroup>
