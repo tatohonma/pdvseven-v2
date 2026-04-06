@@ -266,6 +266,12 @@ namespace a7D.PDV.Fiscal.NFCe
                     vPag = item.Valor,
                 };
 
+
+                if (det.tPag == FormaPagamento.fpOutro)
+                {
+                    det.xPag = "Pagamento com o PIX";
+                }
+
                 
 
                 if (det.tPag == FormaPagamento.fpCartaoCredito || det.tPag == FormaPagamento.fpCartaoDebito)
