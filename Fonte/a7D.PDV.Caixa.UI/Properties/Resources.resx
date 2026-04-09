@@ -124,6 +124,9 @@
   <data name="ico anotacao" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ico anotacao.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ifood" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ifood.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="bg-Titulo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bg-Titulo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -159,14 +162,5 @@
   </data>
   <data name="anotaai" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\anotaai.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="keeta" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\anotaai.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ifood" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ifood.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ico-keeta" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ico-keeta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

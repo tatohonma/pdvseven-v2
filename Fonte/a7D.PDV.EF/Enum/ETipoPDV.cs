@@ -32,6 +32,5 @@ namespace a7D.PDV.EF.Enum
         [Description("Delivery Online")] DELIVERY_ONLINE = 250,
         [Description("Pix-Conta")] PIX_CONTA = 260,
         [Description("Anota-Ai")] ANOTA_AI = 270,
-        [Description("Keeta")]  KEETA = 280
     }
 }
