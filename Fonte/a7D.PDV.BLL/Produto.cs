@@ -60,26 +60,26 @@ namespace a7D.PDV.BLL
             return produto;
         }
 
-        public static bool ServicoComoProduto(ProdutoInformation produto)
-        {
-            if (produto == null)
-                return false;
-
-            if (produto.TipoProduto?.IDTipoProduto == (int)ETipoProduto.Servico)
-                return ConfiguracoesSistema.Valores.ServicoComoItem;
-
-            return true;
-        }
-        
         // public static bool ServicoComoProduto(ProdutoInformation produto)
         // {
-        //     if (produto.IDProduto != ProdutoInformation.IDProdutoServico)
-        //         return true;
-        //     else if (ConfiguracoesSistema.Valores.ServicoComoItem)
-        //         return true;
+        //     if (produto == null)
+        //         return false;
         //
-        //     return false;
+        //     if (produto.TipoProduto?.IDTipoProduto == (int)ETipoProduto.Servico)
+        //         return ConfiguracoesSistema.Valores.ServicoComoItem;
+        //
+        //     return true;
         // }
+        
+        public static bool ServicoComoProduto(ProdutoInformation produto)
+        {
+            if (produto.IDProduto != ProdutoInformation.IDProdutoServico)
+                return true;
+            else if (ConfiguracoesSistema.Valores.ServicoComoItem)
+                return true;
+        
+            return false;
+        }
 
         public static void SalvarDisponibilidade(int idProduto, Boolean disponibilidade)
         {

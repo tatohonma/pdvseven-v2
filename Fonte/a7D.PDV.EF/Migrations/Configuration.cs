@@ -108,6 +108,7 @@ namespace a7D.PDV.EF.Migrations
             AjustesVersao2_25_5_3(context, versao);
             AjusteVersao2_25_6_3(context, versao);
             Ajuste2_25_8_0(context, versao);
+            Ajuste2_25_9_1(context, versao);
 
             // Limpeza iFood e ERP: Remover futuramente
             if (versao != null && versao.ToVersion() < new Version("2.17.16.6"))
@@ -577,7 +578,20 @@ namespace a7D.PDV.EF.Migrations
             }
         }
 
-      
+        void Ajuste2_25_9_1(pdv7Context context, tbVersao versao)
+        {
+            if (versao == null || versao.ToVersion() < new Version("2.25.8.1"))
+            {
+                context.tbMeioPagamentoSATs.AddOrUpdate(p => p.IDMeioPagamentoSAT,
+                    new tbMeioPagamento
+                    {
+                        IDMeioPagamentoSAT = 14,
+                        Codigo = "20",
+                        Descricao = "Pagamento Instantâneo (PIX)"
+                    }
+                );
+            }
+        }
 
     }
 }

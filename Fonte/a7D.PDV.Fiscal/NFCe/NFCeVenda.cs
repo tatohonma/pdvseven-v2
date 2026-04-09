@@ -182,6 +182,10 @@ namespace a7D.PDV.Fiscal.NFCe
                     ? Math.Round(acrescimoPorItem * pedidoproduto.ValorTotal, 2, MidpointRounding.AwayFromZero)
                     : (decimal?)null;
                 
+                decimal valorUnitarioFiscal = pedidoproduto.Quantidade > 0
+                    ? Math.Round(pedidoproduto.ValorTotal / pedidoproduto.Quantidade, 10, MidpointRounding.AwayFromZero)
+                    : pedidoproduto.ValorUnitario;
+                
                 nfe.infNFe.det.Add(new det());
                 nfe.infNFe.det[i].nItem = numeroItem;
                 nfe.infNFe.det[i].prod = new prod
@@ -201,10 +205,10 @@ namespace a7D.PDV.Fiscal.NFCe
                     qCom = pedidoproduto.Quantidade,
                     qTrib = pedidoproduto.Quantidade,
 
-                    vUnCom = pedidoproduto.ValorUnitario,
-                    vUnTrib = pedidoproduto.ValorUnitario,
+                    vUnCom = valorUnitarioFiscal,
+                    vUnTrib = valorUnitarioFiscal,
 
-                    vProd = pedidoproduto.ValorTotal ,
+                    vProd = Math.Round(pedidoproduto.ValorTotal, 2, MidpointRounding.AwayFromZero),
                     vDesc = descontoDiluido,
                     vFrete = freteDiluido,
                     vOutro = acrescimoDiluido
@@ -261,6 +265,12 @@ namespace a7D.PDV.Fiscal.NFCe
                     tPag = (FormaPagamento)int.Parse(item.Codigo),
                     vPag = item.Valor,
                 };
+
+
+                if (det.tPag == FormaPagamento.fpOutro)
+                {
+                    det.xPag = "Pagamento com o PIX";
+                }
 
                 
 
