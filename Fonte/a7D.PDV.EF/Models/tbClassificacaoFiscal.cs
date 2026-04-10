@@ -23,6 +23,7 @@ namespace a7D.PDV.EF.Models
         public decimal? COFINS { get; set; }
         public decimal? ICMS { get; set; }
         public decimal? ISS { get; set; }
+        public string CBENEF {get; set;}
         public virtual tbTipoTributacao tbTipoTributacao { get; set; }
         public virtual ICollection<tbProduto> tbProdutoes { get; set; }
     }

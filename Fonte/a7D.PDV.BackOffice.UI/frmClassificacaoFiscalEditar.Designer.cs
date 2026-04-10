@@ -30,6 +30,8 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtCBenef = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.txtCEST = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.txtNCM = new System.Windows.Forms.TextBox();
@@ -76,6 +78,8 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.txtCBenef);
+            this.tabPage1.Controls.Add(this.label13);
             this.tabPage1.Controls.Add(this.txtCEST);
             this.tabPage1.Controls.Add(this.label12);
             this.tabPage1.Controls.Add(this.txtNCM);
@@ -93,6 +97,24 @@
             this.tabPage1.Size = new System.Drawing.Size(397, 433);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Informações";
+            // 
+            // txtCBenef
+            // 
+            this.txtCBenef.Location = new System.Drawing.Point(5, 120);
+            this.txtCBenef.Margin = new System.Windows.Forms.Padding(2);
+            this.txtCBenef.Name = "txtCBenef";
+            this.txtCBenef.Size = new System.Drawing.Size(185, 25);
+            this.txtCBenef.TabIndex = 37;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(5, 100);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(60, 17);
+            this.label13.TabIndex = 36;
+            this.label13.Text = "CBenef";
             // 
             // txtCEST
             // 
@@ -132,7 +154,7 @@
             // 
             // txtDescricao
             // 
-            this.txtDescricao.Location = new System.Drawing.Point(5, 193);
+            this.txtDescricao.Location = new System.Drawing.Point(5, 225);
             this.txtDescricao.Margin = new System.Windows.Forms.Padding(2);
             this.txtDescricao.Multiline = true;
             this.txtDescricao.Name = "txtDescricao";
@@ -142,7 +164,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 173);
+            this.label3.Location = new System.Drawing.Point(5, 205);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 17);
@@ -171,7 +193,7 @@
             // 
             // txtNome
             // 
-            this.txtNome.Location = new System.Drawing.Point(5, 135);
+            this.txtNome.Location = new System.Drawing.Point(5, 175);
             this.txtNome.Margin = new System.Windows.Forms.Padding(2);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(385, 25);
@@ -180,7 +202,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 115);
+            this.label1.Location = new System.Drawing.Point(5, 155);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 17);
@@ -392,7 +414,6 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
-
         }
 
         #endregion
@@ -426,5 +447,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtCEST;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtCBenef;
+        private System.Windows.Forms.Label label13;
     }
 }

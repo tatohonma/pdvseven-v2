@@ -52,6 +52,7 @@ namespace a7D.PDV.BackOffice.UI
                 txtNCM.Text = ClassificacaoFiscal1.NCM;
                 txtCEST.Text = ClassificacaoFiscal1.CEST;
                 txtNome.Text = ClassificacaoFiscal1.Nome;
+                txtCBenef.Text = ClassificacaoFiscal1.CBENEF;
                 txtDescricao.Text = ClassificacaoFiscal1.Descricao;
 
                 txtICMS.Text = ClassificacaoFiscal1.ICMS?.ToString("#,##0.00");
@@ -70,6 +71,7 @@ namespace a7D.PDV.BackOffice.UI
             txtNCM.Text = string.Empty;
             txtCEST.Text = string.Empty;
             txtNome.Text = string.Empty;
+            txtCBenef.Text = string.Empty;
             txtDescricao.Text = string.Empty;
 
             txtICMS.Text = string.Empty;
@@ -96,6 +98,7 @@ namespace a7D.PDV.BackOffice.UI
                     ClassificacaoFiscal1.NCM = txtNCM.Text;
                     ClassificacaoFiscal1.CEST = txtCEST.Text;
                     ClassificacaoFiscal1.Nome = txtNome.Text;
+                    ClassificacaoFiscal1.CBENEF = txtCBenef.Text;
                     ClassificacaoFiscal1.Descricao = txtDescricao.Text;
 
                     if (!string.IsNullOrWhiteSpace(txtICMS.Text))

@@ -46,6 +46,9 @@ namespace a7D.PDV.Model
 
         [CRUDParameterDAL(false, "ISS")]
         public decimal? ISS { get; set; }
+        
+        [CRUDParameterDAL(false, "CBENEF")]
+        public string CBENEF { get; set; }
 
 
         public static ClassificacaoFiscalInformation ConverterObjeto(object obj)
