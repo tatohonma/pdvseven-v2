@@ -198,6 +198,7 @@ namespace a7D.PDV.Fiscal.NFCe
                     CEST = string.IsNullOrEmpty(produto.ClassificacaoFiscal.CEST) ? null : produto.ClassificacaoFiscal.CEST.Replace(".", string.Empty),
                     cEAN = string.IsNullOrEmpty(produto.cEAN) ? "SEM GTIN" : produto.cEAN,
                     cEANTrib = string.IsNullOrEmpty(produto.cEAN) ? "SEM GTIN" : produto.cEAN,
+                    cBenef = string.IsNullOrEmpty(produto.ClassificacaoFiscal.CBENEF) ? null : produto.ClassificacaoFiscal.CBENEF.Replace(".", string.Empty),
 
                     uCom = produto.Unidade.Simbolo,
                     uTrib = produto.Unidade.Simbolo,
@@ -224,6 +225,8 @@ namespace a7D.PDV.Fiscal.NFCe
                         fone = "1142100122"
                     };
                 }
+                
+                
 
                
 
