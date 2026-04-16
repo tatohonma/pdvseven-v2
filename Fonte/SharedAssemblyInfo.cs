@@ -66,6 +66,12 @@ Lista das últimas versões e FIX
 
 ===============================================================================
 
+2.25.9.1 ======================================================================
+    Novo: Integração Keeta.
+    Correção: Arredondamento do valor na NFC-e quando a venda é por peso com balança integrada.
+    Correção: Envio do CPF:000000000 na NFC-e de PE e dos dados da SH
+    Correção: Meio de pagamenti PIX e Outros, agora enviamos o complemento obrigatório.
+
 2.25.8.3 ======================================================================
     Novo: Integração NFC-e estado de Pernambuco.
 
