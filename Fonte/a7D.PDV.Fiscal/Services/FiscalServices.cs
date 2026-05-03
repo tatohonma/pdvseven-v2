@@ -67,10 +67,9 @@ namespace a7D.PDV.Fiscal.Services
                         throw new CFeException();
                 }
             }
-            else
-            {
-                return new NFCe.EnviarVenda(pedido, cpfNaNota, idPdv, idUsuario);
-            }
+            
+            
+            return new NFCe.EnviarVenda(pedido, cpfNaNota, idPdv, idUsuario, ConfigNFCe.NFCe_CPF_Contabilidade);
         }
 
         public static IEnviarCancelamento Cancelamento(RetornoSATInformation retornoSat, int idPdv, int idUsuario)

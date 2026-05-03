@@ -25,7 +25,7 @@ namespace a7D.PDV.Fiscal.NFCe
     public class NFCeVenda
     {
         // http://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=URCYvjVMIzI=
-        public static NFCe CarregarCFe(PedidoInformation pedido, int idNF, bool cpfNaNota)
+        public static NFCe CarregarCFe(PedidoInformation pedido, int idNF, bool cpfNaNota, string contabilidadeCpfCnpj)
         {
             var versao = ConfiguracaoServico.Instancia.VersaoLayout;
 
@@ -225,10 +225,9 @@ namespace a7D.PDV.Fiscal.NFCe
                         fone = "1142100122"
                     };
                 }
-                
-                
 
-               
+
+             
 
                 if (string.IsNullOrEmpty(produto.ClassificacaoFiscal.TipoTributacao.CFOP))
                     throw new Exception("Campo CFOP do produto " + produto.Nome + " não pode estar vazio.");
@@ -258,6 +257,9 @@ namespace a7D.PDV.Fiscal.NFCe
             nfe.infNFe.pag = new List<pag>() { new pag() { detPag = new List<detPag>() } };
 
             var listapgto = PedidoPagamento.ListaSAT(pedido);
+            
+            AdicionarAutXmlContabilidade(nfe, contabilidadeCpfCnpj);
+            
 
             foreach (var item in listapgto)
             {
@@ -324,6 +326,52 @@ namespace a7D.PDV.Fiscal.NFCe
 
             return new NFCe { nfe = nfe };
         }
+        
+        static void AdicionarAutXmlContabilidade(NFe.Classes.NFe nfe, string contabilidadeCpfCnpj)
+        {
+            var documentoContabilidade = SomenteNumeros(contabilidadeCpfCnpj);
+
+            // Se não informou CPF/CNPJ da contabilidade, não adiciona autXML
+            if (string.IsNullOrEmpty(documentoContabilidade))
+                return;
+
+            if (documentoContabilidade.Length != 11 && documentoContabilidade.Length != 14)
+            {
+                throw new InvalidOperationException(
+                    "O CPF/CNPJ da contabilidade deve conter 11 dígitos para CPF ou 14 dígitos para CNPJ."
+                );
+            }
+
+            if (nfe.infNFe.autXML == null)
+                nfe.infNFe.autXML = new List<autXML>();
+
+            if (documentoContabilidade.Length == 14)
+            {
+                nfe.infNFe.autXML.Add(new autXML
+                {
+                    CNPJ = documentoContabilidade
+                });
+            }
+            else
+            {
+                nfe.infNFe.autXML.Add(new autXML
+                {
+                    CPF = documentoContabilidade
+                });
+            }
+        }
+        
+        static string SomenteNumeros(string valor)
+        {
+            if (string.IsNullOrWhiteSpace(valor))
+                return string.Empty;
+
+            return new string(valor.Where(char.IsDigit).ToArray());
+        }
+        
+        
+        
+        
         static string RemoveInvalidCharacters(string input)
         {
             if (string.IsNullOrWhiteSpace(input))

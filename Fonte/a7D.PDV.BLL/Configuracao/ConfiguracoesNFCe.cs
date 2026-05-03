@@ -47,8 +47,6 @@ namespace a7D.PDV.BLL
         [Config("Regime Tributário", Valor = "1", ValoresAceitos = "1:Simples Nacional|2:Simples Nacional Excesso Sublimite|3:Regime Normal", Obrigatorio = true)]
         public int NFCe_CRT { get; protected set; }
         
-       
-
         [Config("Logradouro (nem número)", Valor = "", Obrigatorio = true)]
         public string NFCe_Logradouro { get; protected set; }
 
@@ -91,6 +89,9 @@ namespace a7D.PDV.BLL
         
         [Config("Sequencia atual da nota fiscal", Valor = "")]
         public string NFCe_AtualNotaFiscal { get; protected set; }
+        
+        [Config("CNPJ ou CPF da contabilidade", Valor = "")]
+        public string NFCe_CPF_Contabilidade { get; protected set; }
         
 
     }

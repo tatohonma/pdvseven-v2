@@ -16,16 +16,18 @@ namespace a7D.PDV.Fiscal.NFCe
         private const string fonte = "PDV-SAT|EnviarVenda";
         private readonly PedidoInformation _pedido;
         private readonly bool _cpfNaNota;
+        readonly string _contabilidadeCpfCnpj;
 
         private NFCe nfce;
         private ProcessamentoSATInformation _processamentoSat;
         private string retornoSAT;
         private string protCod;
 
-        public EnviarVenda(PedidoInformation pedido, bool cpfNaNota, int idPdv, int idUsuario)
+        public EnviarVenda(PedidoInformation pedido, bool cpfNaNota, int idPdv, int idUsuario, string contabilidadeCpfCnpj)
         {
             _pedido = pedido;
             _cpfNaNota = cpfNaNota;
+            _contabilidadeCpfCnpj = contabilidadeCpfCnpj;
 
             GarantirProcessamentoSat();
         }
@@ -75,7 +77,7 @@ namespace a7D.PDV.Fiscal.NFCe
 
                 ReservarNumeracaoSeNecessario();
 
-                nfce = NFCeVenda.CarregarCFe(_pedido, _processamentoSat.NumeroFiscalSequencial.Value, _cpfNaNota);
+                nfce = NFCeVenda.CarregarCFe(_pedido, _processamentoSat.NumeroFiscalSequencial.Value, _cpfNaNota, _contabilidadeCpfCnpj);
 
                 if (ConfiguracaoServico.Instancia.tpAmb == DFe.Classes.Flags.TipoAmbiente.Homologacao)
                 {
