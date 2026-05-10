@@ -44,11 +44,10 @@ namespace a7D.PDV.Fiscal.Services
                 var retornoSAT = RetornoSAT.Carregar(pedido.RetornoSAT_venda.IDRetornoSAT.Value);
                 return ImprimirCupomVenda(retornoSAT.arquivoCFeSAT, pedido, null, out Exception mensagemErro, out image, true, width);
             }
-            else
-            {
-                image = null;
-                return false;
-            }
+            
+            
+            image = null;
+            return false;
         }
 
         public static string ObterAssinaturaQRCODE(string arquivoCFeSAT)
@@ -118,7 +117,24 @@ namespace a7D.PDV.Fiscal.Services
 
                 if (ConfiguracoesSistema.Valores.Fiscal == "NFCe") //arquivo.StartsWith("<nfeProc") || arquivo.StartsWith("<NFe"))
                 {
-                    return NFeFacade.Imprimir(arquivo, modeloImpressora, out mensagemErro, out image, makeImage, totalWidth);
+                    var sucesso = NFeFacade.Imprimir(arquivo, modeloImpressora, out mensagemErro, out image, makeImage, totalWidth);
+
+                    if (!sucesso) return false;
+
+                    if (makeImage && image != null)
+                    {
+                        int.TryParse(ConfiguracaoBD.BuscarConfiguracao("AutoReferenciaMesa").Valor, out var resultReferencia);
+
+                        if (resultReferencia == 1 && !string.IsNullOrWhiteSpace(pedido?.ReferenciaLocalizacao))
+                        {
+                            image = AdicionarReferenciaMesaNaImagemNFCe(
+                                image,
+                                $"MESA {pedido.ReferenciaLocalizacao.Trim()}"
+                            );
+                        }
+                    }
+
+                    return true;
                 }
 
                 sbLogInfo.AppendLine("Codificação concluída");
@@ -662,6 +678,57 @@ namespace a7D.PDV.Fiscal.Services
                 mensagemErro.Data.Add("sbLogInfo", sbLogInfo.ToString());
 
                 return false;
+            }
+        }
+        
+        private static byte[] AdicionarReferenciaMesaNaImagemNFCe(byte[] imagemOriginal, string texto)
+        {
+            using (var input = new MemoryStream(imagemOriginal))
+            using (var imagem = Image.FromStream(input))
+            using (var original = new Bitmap(imagem))
+            {
+                int largura = original.Width;
+                int alturaExtra = 45;
+                int alturaFinal = original.Height + alturaExtra;
+
+                using (var final = new Bitmap(largura, alturaFinal))
+                using (var g = Graphics.FromImage(final))
+                {
+                    g.Clear(Color.White);
+
+                    // Desenha a NFC-e original
+                    g.DrawImage(original, 0, 0, largura, original.Height);
+
+                    // Área onde vai aparecer a referência da mesa
+                    var areaTexto = new RectangleF(
+                        0,
+                        original.Height,
+                        largura,
+                        alturaExtra
+                    );
+
+                    using (var fonteMesa = new Font("Arial", 16, FontStyle.Bold))
+                    using (var brush = new SolidBrush(Color.Black))
+                    using (var formato = new StringFormat())
+                    {
+                        formato.Alignment = StringAlignment.Center;
+                        formato.LineAlignment = StringAlignment.Center;
+
+                        g.DrawString(
+                            texto,
+                            fonteMesa,
+                            brush,
+                            areaTexto,
+                            formato
+                        );
+                    }
+
+                    using (var output = new MemoryStream())
+                    {
+                        final.Save(output, System.Drawing.Imaging.ImageFormat.Png);
+                        return output.ToArray();
+                    }
+                }
             }
         }
 

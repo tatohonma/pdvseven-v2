@@ -16,6 +16,7 @@
     </Page.Resources>
     <Canvas>
         <Controles:Pedido1 x:Name="Pedido"/>
+        <TextBlock Name="ReferenciaMesa" Text="" FontSize="36" FontWeight="Bold" Foreground="#2E0038" TextAlignment="Center" />
         <TextBlock Name="TotalPedido" >Total R$ 0,00</TextBlock>
         <Button Name="Cancelar" Click="Cancelar_Click"/>
         <Button Name="Confirmar" Click="Confirmar_Click"/>

@@ -20,6 +20,7 @@
         FonteNomeImpressaoWindows,
         FonteTamanhoImpressaoWindows,
         ComandaCodigoHEX, GranitoIDPDV,
+        AutoReferenciaMesa,
 
         // Campos ocultos
         _VersaoServidor,

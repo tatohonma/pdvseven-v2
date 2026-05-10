@@ -59,6 +59,7 @@ namespace a7D.PDV.Integracao.API2.Model
         }
         [DataMember(Name = "NumeroComanda", EmitDefaultValue = true)]
         public string NumeroComanda { get; set; }
+        
         [DataMember(Name = "NumeroMesa", EmitDefaultValue = true)]
         public string NumeroMesa { get; set; }
 

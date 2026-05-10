@@ -152,6 +152,7 @@ namespace a7D.PDV.BLL
         public static ConfiguracaoBDInformation BuscarConfiguracao(string chave, int? idTipoPDV = null, int? idPDV = null)
         {
             var objFiltro = new ConfiguracaoBDInformation { Chave = chave };
+            
             if (idTipoPDV.HasValue)
                 objFiltro.TipoPDV = new TipoPDVInformation { IDTipoPDV = idTipoPDV.Value };
             if (idPDV.HasValue)

@@ -124,6 +124,9 @@
     <Compile Include="Paginas\ComandaClienteCreditoValorPage.xaml.cs">
       <DependentUpon>ComandaClienteCreditoValorPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Paginas\ReferenciaMesaPage.xaml.cs">
+      <DependentUpon>ReferenciaMesaPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Paginas\VendaCPFPage.xaml.cs">
       <DependentUpon>VendaCPFPage.xaml</DependentUpon>
     </Compile>
@@ -252,6 +255,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Paginas\ReferenciaMesaPage.xaml" />
     <Page Include="Paginas\VendaCPFPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

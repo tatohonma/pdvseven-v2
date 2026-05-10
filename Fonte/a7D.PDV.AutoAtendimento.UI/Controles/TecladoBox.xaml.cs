@@ -17,6 +17,7 @@ namespace a7D.PDV.AutoAtendimento.UI.Controles
         public bool MoneyFormat { get; set; } = false;
 
         public bool Cancelado { get; private set; }
+        public bool Confirmado { get; private set; }
 
         public event TextChangedEventHandler onChange;
 
@@ -51,7 +52,9 @@ namespace a7D.PDV.AutoAtendimento.UI.Controles
         public void Clear()
         {
             Cancelado = false;
+            Confirmado = false;
             Text = "";
+            Texto.Text = "";
             AtualizaTexto();
         }
 
@@ -76,6 +79,8 @@ namespace a7D.PDV.AutoAtendimento.UI.Controles
         {
             MaxLength = 6;
             Cancelado = false;
+            Confirmado = false;
+            
             InitializeComponent();
             Text = Texto.Text = "";
             teclado.onClick += TecladoKeyPress;
@@ -96,6 +101,9 @@ namespace a7D.PDV.AutoAtendimento.UI.Controles
 
                 else if (Text.Length < MaxLength)
                 {
+                    Confirmado = false;
+                    Cancelado = false;
+
                     Text += key;
                     AtualizaTexto();
                 }
@@ -123,13 +131,17 @@ namespace a7D.PDV.AutoAtendimento.UI.Controles
 
         private void Cancel_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            Text = "";
+            Texto.Text = "";
             Cancelado = true;
-            Clear();
+
             onChange?.Invoke(this, null);
         }
 
         private void Enter_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            Confirmado = true;
+            Cancelado = false;
             onChange?.Invoke(this, null);
         }
 

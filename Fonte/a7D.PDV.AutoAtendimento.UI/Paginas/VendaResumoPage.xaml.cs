@@ -18,6 +18,11 @@ namespace a7D.PDV.AutoAtendimento.UI.Paginas
             {
                 App.Pedido.Bind(TotalPedido, null, null);
                 App.Pedido.Bind(Confirmar);
+
+                if (!string.IsNullOrWhiteSpace(App.Pedido.ReferenciaMesa))
+                    ReferenciaMesa.Text = $"MESA: {App.Pedido.ReferenciaMesa}";
+                else
+                    ReferenciaMesa.Text = "";
             }
             catch (Exception ex)
             {

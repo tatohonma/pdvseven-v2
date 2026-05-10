@@ -75,6 +75,9 @@ namespace a7D.PDV.BLL
         public string PagoChave { get; protected set; }
         [Config("ID PDV Granito (TEF)", ETipoPDV.AUTOATENDIMENTO)]
         public string GranitoIDPDV { get; protected set; }
+        
+        [Config("Solicitar referencia da mesa", ETipoPDV.AUTOATENDIMENTO, EConfig.AutoReferenciaMesa,Valor = "0", ValoresAceitos = "0|1")]
+        public bool AutoReferenciaMesa { get; set; }
 
     }
 }

@@ -23,7 +23,7 @@ namespace a7D.PDV.Integracao.API2.Model
         /// <param name="IDUsuario">ID do usuário que está solicitando esta adição de produtos.</param>
         /// <param name="IDPDV">ID do PDV que está solicitando está adição de produtos.</param>
         /// <param name="Itens">Itens.</param>
-        public AdicionarProdutos(string GUIDISolicitacao, int IDTipoPedido, object Numero, int? IDUsuario = default(int?), int? IDPDV = default(int?), List<Item> Itens = default(List<Item>))
+        public AdicionarProdutos(string GUIDISolicitacao, int IDTipoPedido, object Numero, int? IDUsuario = default(int?), int? IDPDV = default(int?), List<Item> Itens = default(List<Item>), string referenciaLocalizacao = default(string))
         {
             this.GUIDSolicitacao = GUIDISolicitacao;
             this.IDTipoPedido = IDTipoPedido;
@@ -31,6 +31,7 @@ namespace a7D.PDV.Integracao.API2.Model
             this.IDUsuario = IDUsuario;
             this.IDPDV = IDPDV;
             this.Itens = Itens;
+            this.ReferenciaLocalizacao = referenciaLocalizacao;
         }
 
         /// <summary>
@@ -80,5 +81,8 @@ namespace a7D.PDV.Integracao.API2.Model
         /// </summary>
         [DataMember(Name = "ValidarLimite", EmitDefaultValue = false)]
         public bool? ValidarLimite { get; set; }
+        
+        [DataMember(Name = "ReferenciaLocalizacao", EmitDefaultValue = false)]
+        public string ReferenciaLocalizacao { get; set; }
     }
 }

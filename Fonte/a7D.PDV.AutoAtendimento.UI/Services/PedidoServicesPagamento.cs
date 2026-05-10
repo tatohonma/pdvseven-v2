@@ -106,7 +106,8 @@ namespace a7D.PDV.AutoAtendimento.UI.Services
                 IDPDV = PdvServices.PDVID,
                 IDTipoPedido = TipoPedido,
                 IDUsuario = PdvServices.UsuarioID,
-                GerarOrdemProducao = false // ATENÇÃO: A ordem de produção é fechado apos concluir o pagamento
+                GerarOrdemProducao = false, // ATENÇÃO: A ordem de produção é fechado apos concluir o pagamento
+                ReferenciaLocalizacao = ReferenciaMesa
             };
 
             if (TipoPedido == 20)

@@ -270,8 +270,7 @@ namespace a7D.PDV.Integracao.WS2.Controllers
                 {
                     ProdutoInformation produto = BLL.Produto.ObterProduto(item.IDProduto.Value);
 
-                    PedidoProdutoInformation pedidoProduto = ObterPedidoProduto(
-                        adicionarProdutos.GUIDSolicitacao, pdv, usuario, item.Notas, produto, item.Qtd.Value, item.Preco ?? produto.ValorUnitario.Value);
+                    PedidoProdutoInformation pedidoProduto = ObterPedidoProduto(adicionarProdutos.GUIDSolicitacao, pdv, usuario, item.Notas, produto, item.Qtd.Value, item.Preco ?? produto.ValorUnitario.Value);
 
                     pedidoProduto.IDPedidoProduto = nSeq--;
 
@@ -298,6 +297,13 @@ namespace a7D.PDV.Integracao.WS2.Controllers
                     adicionarProdutos.ValidarLimite = pdv.TipoPDV.Tipo != ETipoPDV.EASYCHOPP;
 
                 var pedido = BLL.Pedido.AdicionarProduto(tipoPedido, guidIdentificacao, usuario.IDUsuario.Value, pdv.IDPDV.Value, listaPedidoProduto, adicionarProdutos.ValidarLimite.Value, cliente);
+
+                if (!string.IsNullOrWhiteSpace(adicionarProdutos.ReferenciaLocalizacao))
+                {
+                    pedido = BLL.Pedido.Carregar(pedido.IDPedido.Value);
+                    pedido.ReferenciaLocalizacao = adicionarProdutos.ReferenciaLocalizacao;
+                    BLL.Pedido.Salvar(pedido);
+                }
 
                 BLL.GA.PostEvento(pdv, "Pedido: " + tipoPedido, usuario: usuario);
 

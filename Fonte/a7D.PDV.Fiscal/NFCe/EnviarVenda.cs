@@ -201,10 +201,7 @@ namespace a7D.PDV.Fiscal.NFCe
             int numeroFiscal = NumeroFiscalService.ObterProximoNumero("NFCE");
             _processamentoSat.NumeroFiscalSequencial = numeroFiscal;
 
-            _processamentoSat.SerieFiscal = int.TryParse(
-                ConfiguracaoBD.BuscarConfiguracao("NFCe_Serie").Valor,
-                out var serie
-            ) ? serie : (int?)null;
+            _processamentoSat.SerieFiscal = int.TryParse(ConfiguracaoBD.BuscarConfiguracao("NFCe_Serie").Valor, out var serie) ? serie : (int?)null;
 
             ProcessamentoSAT.Salvar(_processamentoSat);
         }

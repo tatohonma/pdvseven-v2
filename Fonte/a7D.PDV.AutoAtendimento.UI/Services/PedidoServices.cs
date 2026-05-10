@@ -58,6 +58,9 @@ namespace a7D.PDV.AutoAtendimento.UI.Services
         public string Comanda_ClienteDocumento { get; set; }
         public string Comanda_ClienteNome { get; internal set; }
         public string Comanda_ClienteTelefone { get; internal set; }
+        
+        //Campos novos para a referencia da mesa no autoatendimento 
+        public string ReferenciaMesa { get; internal set; }
 
         internal void ItemCancelar()
         {

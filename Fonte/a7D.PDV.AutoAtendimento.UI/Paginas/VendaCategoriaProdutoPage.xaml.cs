@@ -1,16 +1,18 @@
 ﻿using a7D.PDV.AutoAtendimento.UI.Services;
-using a7D.PDV.Integracao.API2.Model;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using a7D.PDV.BLL;
+using Produto = a7D.PDV.Integracao.API2.Model.Produto;
 
 namespace a7D.PDV.AutoAtendimento.UI.Paginas
 {
     public partial class VendaCategoriaProdutoPage : Page, INavPageClick
     {
         private static bool RequestToBottom = false;
+        
         public VendaCategoriaProdutoPage()
         {
             InitializeComponent();
@@ -83,7 +85,18 @@ namespace a7D.PDV.AutoAtendimento.UI.Paginas
 
         public void Confirmar_Click(object sender, RoutedEventArgs e)
         {
-            App.Navigate<VendaResumoPage>();
+            int.TryParse(ConfiguracaoBD.BuscarConfiguracao("AutoReferenciaMesa").Valor, out var result);
+
+            if (result == 0)
+            {
+                App.Navigate<VendaResumoPage>();
+            }
+            else
+            {
+                App.Navigate<ReferenciaMesaPage>();
+            }
+            
+
         }
 
         private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
