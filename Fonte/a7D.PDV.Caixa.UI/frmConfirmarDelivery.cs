@@ -47,7 +47,14 @@ namespace a7D.PDV.Caixa.UI
                     ConfiguracoesAnotaAi configAnotaAi = new ConfiguracoesAnotaAi();
                     if (configAnotaAi.AceitarAutomatico)
                         ConfirmarPedido();
+                    break;
+                case 5:
+                    tagDisplayId = BLL.Tag.Carregar(Pedido.GUIDIdentificacao, "keeta-shortReference");
+                    Text = $"Pedido {Pedido.IDPedido} Keeta {tagDisplayId.Valor}";
 
+                    ConfiguracoesKeeta configKeeta = new ConfiguracoesKeeta();
+                    if (configKeeta.AceitarAutomatico)
+                        ConfirmarPedido();
                     break;
             }
 

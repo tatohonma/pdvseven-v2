@@ -90,6 +90,7 @@
             this.tabDeliveryOnline.SuspendLayout();
             this.tabPixConta.SuspendLayout();
             this.tabAnotaAi.SuspendLayout();
+            this.tabKeeta.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabCardapio
@@ -342,6 +343,7 @@
             this.tabControl1.Controls.Add(this.tabDeliveryOnline);
             this.tabControl1.Controls.Add(this.tabPixConta);
             this.tabControl1.Controls.Add(this.tabAnotaAi);
+            this.tabControl1.Controls.Add(this.tabKeeta);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -634,6 +636,32 @@
             this.tableAnotaAi.Size = new System.Drawing.Size(724, 400);
             this.tableAnotaAi.TabIndex = 4;
             // 
+            // tabKeeta
+            // 
+            this.tabKeeta.Controls.Add(this.tableKeeta);
+            this.tabKeeta.Location = new System.Drawing.Point(4, 29);
+            this.tabKeeta.Name = "tabKeeta";
+            this.tabKeeta.Size = new System.Drawing.Size(738, 419);
+            this.tabKeeta.TabIndex = 15;
+            this.tabKeeta.Text = "Keeta";
+            this.tabKeeta.UseVisualStyleBackColor = true;
+            // 
+            // tableKeeta
+            // 
+            this.tableKeeta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableKeeta.AutoSize = true;
+            this.tableKeeta.BackColor = System.Drawing.Color.Transparent;
+            this.tableKeeta.ColumnCount = 1;
+            this.tableKeeta.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableKeeta.Location = new System.Drawing.Point(7, 9);
+            this.tableKeeta.Name = "tableKeeta";
+            this.tableKeeta.RowCount = 1;
+            this.tableKeeta.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableKeeta.Size = new System.Drawing.Size(724, 400);
+            this.tableKeeta.TabIndex = 5;
+            // 
+            // 
             // frmConfiguracoes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -680,6 +708,8 @@
             this.tabPixConta.PerformLayout();
             this.tabAnotaAi.ResumeLayout(false);
             this.tabAnotaAi.PerformLayout();
+            this.tabKeeta.ResumeLayout(false);
+            this.tabKeeta.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -726,5 +756,7 @@
         private System.Windows.Forms.TableLayoutPanel tablePixConta;
         private System.Windows.Forms.TabPage tabAnotaAi;
         private System.Windows.Forms.TableLayoutPanel tableAnotaAi;
+        private System.Windows.Forms.TabPage tabKeeta;
+        private System.Windows.Forms.TableLayoutPanel tableKeeta;
     }
 }
