@@ -69,6 +69,8 @@
             this.tablePixConta = new System.Windows.Forms.TableLayoutPanel();
             this.tabAnotaAi = new System.Windows.Forms.TabPage();
             this.tableAnotaAi = new System.Windows.Forms.TableLayoutPanel();
+            this.tabKeeta = new System.Windows.Forms.TabPage();
+            this.tableKeeta = new System.Windows.Forms.TableLayoutPanel();
             this.tabCardapio.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tabComanda.SuspendLayout();
