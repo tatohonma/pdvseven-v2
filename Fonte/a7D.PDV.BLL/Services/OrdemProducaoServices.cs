@@ -168,7 +168,6 @@ namespace a7D.PDV.BLL
                     case ETipoPedido.Balcao:
 
                         conteudo.Append("BALCÃO");
-                        var teste = !string.IsNullOrEmpty(pedido.ReferenciaLocalizacao);
 
                         if (!string.IsNullOrEmpty(pedido.ReferenciaLocalizacao))
                         {
