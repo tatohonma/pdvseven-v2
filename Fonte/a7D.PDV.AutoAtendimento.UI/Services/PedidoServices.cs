@@ -1,4 +1,5 @@
-﻿using a7D.PDV.Integracao.API2.Client;
+﻿using a7D.PDV.AutoAtendimento.UI.Paginas;
+using a7D.PDV.Integracao.API2.Client;
 using a7D.PDV.Integracao.API2.Model;
 using System;
 using System.Collections.ObjectModel;

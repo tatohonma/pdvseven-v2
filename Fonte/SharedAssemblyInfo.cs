@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2026")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.25.10.0")]
+[assembly: AssemblyVersion("2.25.10.2")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -65,15 +65,20 @@ Lista das últimas versões e FIX
     Especificar o tipo de cada alteração feita: Novo, Melhoria, Correção, TDD, Atualização
 
 ===============================================================================
-2.25.10.0 ======================================================================
+
+2.25.10.2 ======================================================================
     Novo: Referencia de mesa no autoatendimento.
+
+2.25.10.1 ======================================================================
+    Novo: Integração Keeta.
+    Novo: Inclusão do ícone da Keeta no caixa.
+    Novo: Inserido as configuração da Keeta para aceite automático dos pedidos campo IDPDV do caixa responsável por contabilizar as vendas da Keeta.
 
 2.25.9.2 ======================================================================
     Novo: Inclusão do campo Cbenef na classificação fiscal para ser preenchido e enviado na NFC-e.
     Novo: Inclusão do campo responsável contábil no configurador, para informar o CPF/CNPJ do responsável contábil da empresa.
 
 2.25.9.1 ======================================================================
-    Novo: Integração Keeta.
     Correção: Arredondamento do valor na NFC-e quando a venda é por peso com balança integrada.
     Correção: Envio do CPF:000000000 na NFC-e de PE e dos dados da SH
     Correção: Meio de pagamenti PIX e Outros, agora enviamos o complemento obrigatório.

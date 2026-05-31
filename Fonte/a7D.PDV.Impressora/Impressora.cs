@@ -352,6 +352,7 @@ namespace a7D.PDV.Impressora
                 {
                     case 10:
                         identificacao += "MESA " + Mesa.CarregarPorGUID(pedido.GUIDIdentificacao).Numero;
+
                         break;
                     case 20:
                         identificacao += "COMANDA " + Comanda.CarregarPorGUID(pedido.GUIDIdentificacao).Numero;

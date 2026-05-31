@@ -161,13 +161,23 @@ namespace a7D.PDV.BLL
                             conteudo
                                 .Append("Tel:")
                                 .Append(pedido.Cliente.Telefone1Numero);
+
                         }
                         break;
 
                     case ETipoPedido.Balcao:
 
                         conteudo.Append("BALCÃO");
-                        break;
+                        var teste = !string.IsNullOrEmpty(pedido.ReferenciaLocalizacao);
+
+                        if (!string.IsNullOrEmpty(pedido.ReferenciaLocalizacao))
+                        {
+                            conteudo
+                                .Append("<Ref: ")
+                                .Append(pedido.ReferenciaLocalizacao)
+                                .Append(">");
+                        }
+                      break;
                 }
 
                 conteudo
