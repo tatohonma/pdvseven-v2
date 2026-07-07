@@ -105,7 +105,7 @@ namespace a7D.PDV.AutoAtendimento.UI.Services
                 App.StatusBar = "Atualizando produtos";
                 await Task.Factory.StartNew(() =>
                 {
-                    produtos = api.ListaProdutos(ativo: true);
+                    produtos = api.ListaProdutos();
                     modificacoes = api.ListaProdutos(disponivel: true, tipo: 20);
                     produtos.ForEach(p => ResolveProdutoImage(p));
                 });
