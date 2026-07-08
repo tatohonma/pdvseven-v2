@@ -183,6 +183,9 @@ namespace a7D.PDV.Caixa.UI.Controles
                     case (int)EOrigemPedido.keeta:
                         icone.Value = Resources.keeta;
                         break;
+                     case (int)EOrigemPedido.food99:
+                        icone.Value = Resources.food99;
+                        break;
                 }
 
                 if (Convert.ToInt32(item.Cells["IDStatusPedido"].Value) == (int)EStatusPedido.NaoConfirmado)

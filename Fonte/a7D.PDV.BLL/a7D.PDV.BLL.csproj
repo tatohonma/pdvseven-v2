@@ -99,6 +99,7 @@
     <Compile Include="ClassificacaoFiscal.cs" />
     <Compile Include="CodigoInfo.cs" />
     <Compile Include="CodigoErro.cs" />
+    <Compile Include="Configuracao\ConfiguracoesFood99.cs" />
     <Compile Include="Configuracao\ConfiguracoesKeeta.cs" />
     <Compile Include="Configuracao\Configuracao.cs" />
     <Compile Include="AreaImpressao.cs" />
