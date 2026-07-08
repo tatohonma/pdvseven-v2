@@ -33,6 +33,5 @@ namespace a7D.PDV.EF.Enum
         [Description("Pix-Conta")] PIX_CONTA = 260,
         [Description("Anota-Ai")] ANOTA_AI = 270,
         [Description("Keeta")] KEETA = 280,
-        [Description("Food99")] FOOD99 = 290,
     }
 }

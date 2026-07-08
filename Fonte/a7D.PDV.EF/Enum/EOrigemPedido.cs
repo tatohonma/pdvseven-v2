@@ -6,7 +6,6 @@
         ifood = 2,
         deliveryOnline = 3,
         anotaai = 4,
-        keeta = 5,
-        food99 = 6
+        keeta = 5
     }
 }

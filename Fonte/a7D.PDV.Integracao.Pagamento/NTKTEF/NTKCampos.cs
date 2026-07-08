@@ -208,7 +208,7 @@
         /// n..12 - Valor correspondente à taxa de serviço cobrada adicionalmente aos produtos adquiridos, tipicamente no setor de alimentação (gorjeta), em centavos da moeda informada no campo 004-000. 
         /// Este valor é incluído no valor total informado no campo 003-000.
         /// </summary>
-        ///TaxaServico = 727,
+        TaxaServico = 727,
 
         /// <summary>
         /// Operação

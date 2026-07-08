@@ -433,20 +433,7 @@ namespace a7D.PDV.Caixa.UI
 
                         lblIdentificacao.Text = "Anota-ai " + tagId.Valor;
                     }
-                    else if (pedido.OrigemPedido != null && pedido.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.keeta)
-                    {
-                        TagInformation tagId = BLL.Tag.Carregar(pedido.GUIDIdentificacao, "keeta-shortReference");
-
-                        lblIdentificacao.Text = "Keeta " + tagId.Valor;
-                    }
-                    else if (pedido.OrigemPedido != null && pedido.OrigemPedido.IDOrigemPedido == (int)EOrigemPedido.food99)
-                    {
-                        TagInformation tagId = BLL.Tag.Carregar(pedido.GUIDIdentificacao, "food99-shortReference");
-
-                        lblIdentificacao.Text = "Food99 " + tagId.Valor;
-                    }
                     else
-
                     {
                         lblIdentificacao.Text = "Delivery " + pedido.IDPedido;
                     }
