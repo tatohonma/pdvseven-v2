@@ -56,7 +56,17 @@ namespace a7D.PDV.Caixa.UI
                     if (configKeeta.AceitarAutomatico)
                         ConfirmarPedido();
                     break;
+                case 6:
+                    tagDisplayId = BLL.Tag.Carregar(Pedido.GUIDIdentificacao, "food99-shortReference");
+                    Text = $"Pedido {Pedido.IDPedido} Food99 {tagDisplayId.Valor}";
+
+                    ConfiguracoesFood99 configFood99 = new ConfiguracoesFood99();
+                    if (configFood99.AceitarAutomatico)
+                        ConfirmarPedido();
+                    break;
             }
+
+
 
             txtPedido.Text = Pedido.Observacoes;
             lblResumo.Text =

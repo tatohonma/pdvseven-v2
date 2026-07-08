@@ -143,6 +143,16 @@ namespace a7D.PDV.Caixa.UI.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap food99 {
+            get {
+                object obj = ResourceManager.GetObject("food99", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ico_anotacao {
             get {
                 object obj = ResourceManager.GetObject("ico anotacao", resourceCulture);

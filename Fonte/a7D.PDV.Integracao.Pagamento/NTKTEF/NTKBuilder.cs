@@ -107,7 +107,7 @@ namespace a7D.PDV.Integracao.Pagamento.NTKTEF
                 .Com(NTKCampos.DocumentoFiscal, documento)
                 .Com(NTKCampos.ValorTotal, valorTotal)
                 .Com(NTKCampos.Moeda, 0)
-                .Com(NTKCampos.TaxaServico, valorServico)
+                //.Com(NTKCampos.TaxaServico, valorServico)
                 .Com(NTKCampos.CodigoEstabelecimento, estabelecimento)
                 .Com(NTKCampos.NumeroLogicoTerminal, terminal)
                 .Com(NTKCampos.CapacidadesAutomacao, "255")
