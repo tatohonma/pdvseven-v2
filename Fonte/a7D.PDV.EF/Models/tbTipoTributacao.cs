@@ -55,6 +55,16 @@ namespace a7D.PDV.EF.Models
         public string ISSQN_cNatOp { get; set; }
         public string ISSQN_indIncFisc { get; set; }
         public string vItem12741 { get; set; }
+        public string IBSCBS_CST { get; set; }
+        public string IBSCBS_cClassTrib { get; set; }
+        public string IBSCBS_vBC { get; set; }
+        public string IBSCBS_pAliqIBSUF { get; set; }
+        public string IBSCBS_vIBSUF { get; set; }
+        public string IBSCBS_pAliqIBSMun { get; set; }
+        public string IBSCBS_vIBSMun { get; set; }
+        public string IBSCBS_vIBS { get; set; }
+        public string IBSCBS_pCBS { get; set; }
+        public string IBSCBS_vCBS { get; set; }
         public virtual ICollection<tbClassificacaoFiscal> tbClassificacaoFiscals { get; set; }
     }
 }

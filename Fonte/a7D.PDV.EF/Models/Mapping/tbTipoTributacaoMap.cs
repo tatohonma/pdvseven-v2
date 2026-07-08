@@ -138,6 +138,36 @@ namespace a7D.PDV.EF.Models.Mapping
 
             this.Property(t => t.vItem12741)
                 .HasMaxLength(50);
+
+            this.Property(t => t.IBSCBS_CST)
+                .HasMaxLength(50);
+
+            this.Property(t => t.IBSCBS_cClassTrib)
+                .HasMaxLength(50);
+
+            this.Property(t => t.IBSCBS_vBC)
+                .HasMaxLength(50);
+
+            this.Property(t => t.IBSCBS_pAliqIBSUF)
+                .HasMaxLength(50);
+
+            this.Property(t => t.IBSCBS_vIBSUF)
+                .HasMaxLength(50);
+
+            this.Property(t => t.IBSCBS_pAliqIBSMun)
+                .HasMaxLength(50);
+
+            this.Property(t => t.IBSCBS_vIBSMun)
+                .HasMaxLength(50);
+
+            this.Property(t => t.IBSCBS_vIBS)
+                .HasMaxLength(50);
+
+            this.Property(t => t.IBSCBS_pCBS)
+                .HasMaxLength(50);
+
+            this.Property(t => t.IBSCBS_vCBS)
+                .HasMaxLength(50);
             
             // Table & Column Mappings
             this.ToTable("tbTipoTributacao");
@@ -184,6 +214,16 @@ namespace a7D.PDV.EF.Models.Mapping
             this.Property(t => t.ISSQN_cNatOp).HasColumnName("ISSQN_cNatOp");
             this.Property(t => t.ISSQN_indIncFisc).HasColumnName("ISSQN_indIncFisc");
             this.Property(t => t.vItem12741).HasColumnName("vItem12741");
+            this.Property(t => t.IBSCBS_CST).HasColumnName("IBSCBS_CST");
+            this.Property(t => t.IBSCBS_cClassTrib).HasColumnName("IBSCBS_cClassTrib");
+            this.Property(t => t.IBSCBS_vBC).HasColumnName("IBSCBS_vBC");
+            this.Property(t => t.IBSCBS_pAliqIBSUF).HasColumnName("IBSCBS_pAliqIBSUF");
+            this.Property(t => t.IBSCBS_vIBSUF).HasColumnName("IBSCBS_vIBSUF");
+            this.Property(t => t.IBSCBS_pAliqIBSMun).HasColumnName("IBSCBS_pAliqIBSMun");
+            this.Property(t => t.IBSCBS_vIBSMun).HasColumnName("IBSCBS_vIBSMun");
+            this.Property(t => t.IBSCBS_vIBS).HasColumnName("IBSCBS_vIBS");
+            this.Property(t => t.IBSCBS_pCBS).HasColumnName("IBSCBS_pCBS");
+            this.Property(t => t.IBSCBS_vCBS).HasColumnName("IBSCBS_vCBS");
         }
     }
 }
