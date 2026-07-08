@@ -141,6 +141,36 @@ namespace a7D.PDV.Model
 
         [CRUDParameterDAL(false, "vItem12741")]
         public string vItem12741 { get; set; }
+        
+        [CRUDParameterDAL(false, "IBSCBS_CST")]
+        public string IBSCBS_CST { get; set; }
+
+        [CRUDParameterDAL(false, "IBSCBS_cClassTrib")]
+        public string IBSCBS_cClassTrib { get; set; }
+
+        [CRUDParameterDAL(false, "IBSCBS_vBC")]
+        public string IBSCBS_vBC { get; set; }
+
+        [CRUDParameterDAL(false, "IBSCBS_pAliqIBSUF")]
+        public string IBSCBS_pAliqIBSUF { get; set; }
+
+        [CRUDParameterDAL(false, "IBSCBS_vIBSUF")]
+        public string IBSCBS_vIBSUF { get; set; }
+
+        [CRUDParameterDAL(false, "IBSCBS_pAliqIBSMun")]
+        public string IBSCBS_pAliqIBSMun { get; set; }
+
+        [CRUDParameterDAL(false, "IBSCBS_vIBSMun")]
+        public string IBSCBS_vIBSMun { get; set; }
+
+        [CRUDParameterDAL(false, "IBSCBS_vIBS")]
+        public string IBSCBS_vIBS { get; set; }
+
+        [CRUDParameterDAL(false, "IBSCBS_pCBS")]
+        public string IBSCBS_pCBS { get; set; }
+
+        [CRUDParameterDAL(false, "IBSCBS_vCBS")]
+        public string IBSCBS_vCBS { get; set; }
 
         public static TipoTributacaoInformation ConverterObjeto(object obj)
         {

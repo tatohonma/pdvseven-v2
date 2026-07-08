@@ -62,6 +62,9 @@ namespace a7D.PDV.BackOffice.UI
                 txtISSQN_cListServ.Text = txtISSQN_cNatOp.Text = string.Empty;
                 txtISSQN_cServTribMun.Text = txtISSQN_indIncFisc.Text = string.Empty;
                 txtISSQN_vAliq.Text = txtISSQN_vDeducISSQN.Text = string.Empty;
+                txtIBSCBS_CST.Text = txtIBSCBS_cClassTrib.Text = txtIBSCBS_vBC.Text = string.Empty;
+                txtIBSCBS_pAliqIBSUF.Text = txtIBSCBS_vIBSUF.Text = txtIBSCBS_pAliqIBSMun.Text = string.Empty;
+                txtIBSCBS_vIBSMun.Text = txtIBSCBS_vIBS.Text = txtIBSCBS_pCBS.Text = txtIBSCBS_vCBS.Text = string.Empty;
 
                 return;
             }
@@ -132,6 +135,21 @@ namespace a7D.PDV.BackOffice.UI
             txtISSQN_indIncFisc.Text = TipoTributacao1.ISSQN_indIncFisc;
             txtISSQN_vAliq.Text = TipoTributacao1.ISSQN_vAliq;
             txtISSQN_vDeducISSQN.Text = TipoTributacao1.ISSQN_vDeducISSQN;
+
+            #endregion
+
+            #region IBS CBS
+
+            txtIBSCBS_CST.Text = TipoTributacao1.IBSCBS_CST;
+            txtIBSCBS_cClassTrib.Text = TipoTributacao1.IBSCBS_cClassTrib;
+            txtIBSCBS_vBC.Text = TipoTributacao1.IBSCBS_vBC;
+            txtIBSCBS_pAliqIBSUF.Text = TipoTributacao1.IBSCBS_pAliqIBSUF;
+            txtIBSCBS_vIBSUF.Text = TipoTributacao1.IBSCBS_vIBSUF;
+            txtIBSCBS_pAliqIBSMun.Text = TipoTributacao1.IBSCBS_pAliqIBSMun;
+            txtIBSCBS_vIBSMun.Text = TipoTributacao1.IBSCBS_vIBSMun;
+            txtIBSCBS_vIBS.Text = TipoTributacao1.IBSCBS_vIBS;
+            txtIBSCBS_pCBS.Text = TipoTributacao1.IBSCBS_pCBS;
+            txtIBSCBS_vCBS.Text = TipoTributacao1.IBSCBS_vCBS;
 
             #endregion
         }
@@ -220,6 +238,21 @@ namespace a7D.PDV.BackOffice.UI
                 TipoTributacao1.ISSQN_indIncFisc = txtISSQN_indIncFisc.Text;
                 TipoTributacao1.ISSQN_vAliq = txtISSQN_vAliq.Text;
                 TipoTributacao1.ISSQN_vDeducISSQN = txtISSQN_vDeducISSQN.Text;
+
+                #endregion
+
+                #region IBS CBS
+
+                TipoTributacao1.IBSCBS_CST = txtIBSCBS_CST.Text;
+                TipoTributacao1.IBSCBS_cClassTrib = txtIBSCBS_cClassTrib.Text;
+                TipoTributacao1.IBSCBS_vBC = txtIBSCBS_vBC.Text;
+                TipoTributacao1.IBSCBS_pAliqIBSUF = txtIBSCBS_pAliqIBSUF.Text;
+                TipoTributacao1.IBSCBS_vIBSUF = txtIBSCBS_vIBSUF.Text;
+                TipoTributacao1.IBSCBS_pAliqIBSMun = txtIBSCBS_pAliqIBSMun.Text;
+                TipoTributacao1.IBSCBS_vIBSMun = txtIBSCBS_vIBSMun.Text;
+                TipoTributacao1.IBSCBS_vIBS = txtIBSCBS_vIBS.Text;
+                TipoTributacao1.IBSCBS_pCBS = txtIBSCBS_pCBS.Text;
+                TipoTributacao1.IBSCBS_vCBS = txtIBSCBS_vCBS.Text;
 
                 #endregion
 
