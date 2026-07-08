@@ -106,6 +106,27 @@
             this.txtCOFINSAliq_CST = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.txtIBSCBS_CST = new System.Windows.Forms.TextBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.txtIBSCBS_cClassTrib = new System.Windows.Forms.TextBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.txtIBSCBS_vBC = new System.Windows.Forms.TextBox();
+            this.label46 = new System.Windows.Forms.Label();
+            this.txtIBSCBS_pAliqIBSUF = new System.Windows.Forms.TextBox();
+            this.label47 = new System.Windows.Forms.Label();
+            this.txtIBSCBS_vIBSUF = new System.Windows.Forms.TextBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.txtIBSCBS_pAliqIBSMun = new System.Windows.Forms.TextBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.txtIBSCBS_vIBSMun = new System.Windows.Forms.TextBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.txtIBSCBS_vIBS = new System.Windows.Forms.TextBox();
+            this.label51 = new System.Windows.Forms.Label();
+            this.txtIBSCBS_pCBS = new System.Windows.Forms.TextBox();
+            this.label52 = new System.Windows.Forms.Label();
+            this.txtIBSCBS_vCBS = new System.Windows.Forms.TextBox();
+            this.label53 = new System.Windows.Forms.Label();
             this.txtISSQN_vDeducISSQN = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.txtISSQN_vAliq = new System.Windows.Forms.TextBox();
@@ -131,6 +152,7 @@
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.tabPage6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -140,6 +162,7 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -989,6 +1012,196 @@
             this.label35.TabIndex = 16;
             this.label35.Text = "ISSQN_cListServ";
             // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.txtIBSCBS_vCBS);
+            this.tabPage6.Controls.Add(this.label53);
+            this.tabPage6.Controls.Add(this.txtIBSCBS_pCBS);
+            this.tabPage6.Controls.Add(this.label52);
+            this.tabPage6.Controls.Add(this.txtIBSCBS_vIBS);
+            this.tabPage6.Controls.Add(this.label51);
+            this.tabPage6.Controls.Add(this.txtIBSCBS_vIBSMun);
+            this.tabPage6.Controls.Add(this.label50);
+            this.tabPage6.Controls.Add(this.txtIBSCBS_pAliqIBSMun);
+            this.tabPage6.Controls.Add(this.label49);
+            this.tabPage6.Controls.Add(this.txtIBSCBS_vIBSUF);
+            this.tabPage6.Controls.Add(this.label48);
+            this.tabPage6.Controls.Add(this.txtIBSCBS_pAliqIBSUF);
+            this.tabPage6.Controls.Add(this.label47);
+            this.tabPage6.Controls.Add(this.txtIBSCBS_vBC);
+            this.tabPage6.Controls.Add(this.label46);
+            this.tabPage6.Controls.Add(this.txtIBSCBS_cClassTrib);
+            this.tabPage6.Controls.Add(this.label45);
+            this.tabPage6.Controls.Add(this.txtIBSCBS_CST);
+            this.tabPage6.Controls.Add(this.label44);
+            this.tabPage6.Location = new System.Drawing.Point(4, 26);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(854, 410);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "IBS/CBS";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(6, 20);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(83, 17);
+            this.label44.TabIndex = 0;
+            this.label44.Text = "IBSCBS_CST";
+            // 
+            // txtIBSCBS_CST
+            // 
+            this.txtIBSCBS_CST.Location = new System.Drawing.Point(10, 45);
+            this.txtIBSCBS_CST.Name = "txtIBSCBS_CST";
+            this.txtIBSCBS_CST.Size = new System.Drawing.Size(199, 25);
+            this.txtIBSCBS_CST.TabIndex = 1;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(264, 20);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(136, 17);
+            this.label45.TabIndex = 2;
+            this.label45.Text = "IBSCBS_cClassTrib";
+            // 
+            // txtIBSCBS_cClassTrib
+            // 
+            this.txtIBSCBS_cClassTrib.Location = new System.Drawing.Point(268, 45);
+            this.txtIBSCBS_cClassTrib.Name = "txtIBSCBS_cClassTrib";
+            this.txtIBSCBS_cClassTrib.Size = new System.Drawing.Size(199, 25);
+            this.txtIBSCBS_cClassTrib.TabIndex = 3;
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(522, 20);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(81, 17);
+            this.label46.TabIndex = 4;
+            this.label46.Text = "IBSCBS_vBC";
+            // 
+            // txtIBSCBS_vBC
+            // 
+            this.txtIBSCBS_vBC.Location = new System.Drawing.Point(526, 45);
+            this.txtIBSCBS_vBC.Name = "txtIBSCBS_vBC";
+            this.txtIBSCBS_vBC.Size = new System.Drawing.Size(199, 25);
+            this.txtIBSCBS_vBC.TabIndex = 5;
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(6, 77);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(137, 17);
+            this.label47.TabIndex = 6;
+            this.label47.Text = "IBSCBS_pAliqIBSUF";
+            // 
+            // txtIBSCBS_pAliqIBSUF
+            // 
+            this.txtIBSCBS_pAliqIBSUF.Location = new System.Drawing.Point(10, 102);
+            this.txtIBSCBS_pAliqIBSUF.Name = "txtIBSCBS_pAliqIBSUF";
+            this.txtIBSCBS_pAliqIBSUF.Size = new System.Drawing.Size(199, 25);
+            this.txtIBSCBS_pAliqIBSUF.TabIndex = 7;
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(264, 77);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(111, 17);
+            this.label48.TabIndex = 8;
+            this.label48.Text = "IBSCBS_vIBSUF";
+            // 
+            // txtIBSCBS_vIBSUF
+            // 
+            this.txtIBSCBS_vIBSUF.Location = new System.Drawing.Point(268, 102);
+            this.txtIBSCBS_vIBSUF.Name = "txtIBSCBS_vIBSUF";
+            this.txtIBSCBS_vIBSUF.Size = new System.Drawing.Size(199, 25);
+            this.txtIBSCBS_vIBSUF.TabIndex = 9;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(522, 77);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(152, 17);
+            this.label49.TabIndex = 10;
+            this.label49.Text = "IBSCBS_pAliqIBSMun";
+            // 
+            // txtIBSCBS_pAliqIBSMun
+            // 
+            this.txtIBSCBS_pAliqIBSMun.Location = new System.Drawing.Point(526, 102);
+            this.txtIBSCBS_pAliqIBSMun.Name = "txtIBSCBS_pAliqIBSMun";
+            this.txtIBSCBS_pAliqIBSMun.Size = new System.Drawing.Size(199, 25);
+            this.txtIBSCBS_pAliqIBSMun.TabIndex = 11;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(6, 134);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(126, 17);
+            this.label50.TabIndex = 12;
+            this.label50.Text = "IBSCBS_vIBSMun";
+            // 
+            // txtIBSCBS_vIBSMun
+            // 
+            this.txtIBSCBS_vIBSMun.Location = new System.Drawing.Point(10, 159);
+            this.txtIBSCBS_vIBSMun.Name = "txtIBSCBS_vIBSMun";
+            this.txtIBSCBS_vIBSMun.Size = new System.Drawing.Size(199, 25);
+            this.txtIBSCBS_vIBSMun.TabIndex = 13;
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(264, 134);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(83, 17);
+            this.label51.TabIndex = 14;
+            this.label51.Text = "IBSCBS_vIBS";
+            // 
+            // txtIBSCBS_vIBS
+            // 
+            this.txtIBSCBS_vIBS.Location = new System.Drawing.Point(268, 159);
+            this.txtIBSCBS_vIBS.Name = "txtIBSCBS_vIBS";
+            this.txtIBSCBS_vIBS.Size = new System.Drawing.Size(199, 25);
+            this.txtIBSCBS_vIBS.TabIndex = 15;
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(522, 134);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(83, 17);
+            this.label52.TabIndex = 16;
+            this.label52.Text = "IBSCBS_pCBS";
+            // 
+            // txtIBSCBS_pCBS
+            // 
+            this.txtIBSCBS_pCBS.Location = new System.Drawing.Point(526, 159);
+            this.txtIBSCBS_pCBS.Name = "txtIBSCBS_pCBS";
+            this.txtIBSCBS_pCBS.Size = new System.Drawing.Size(199, 25);
+            this.txtIBSCBS_pCBS.TabIndex = 17;
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(6, 191);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(83, 17);
+            this.label53.TabIndex = 18;
+            this.label53.Text = "IBSCBS_vCBS";
+            // 
+            // txtIBSCBS_vCBS
+            // 
+            this.txtIBSCBS_vCBS.Location = new System.Drawing.Point(10, 216);
+            this.txtIBSCBS_vCBS.Name = "txtIBSCBS_vCBS";
+            this.txtIBSCBS_vCBS.Size = new System.Drawing.Size(199, 25);
+            this.txtIBSCBS_vCBS.TabIndex = 19;
+            // 
             // btnSalvar
             // 
             this.btnSalvar.Location = new System.Drawing.Point(12, 458);
@@ -1038,6 +1251,8 @@
             this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1134,6 +1349,27 @@
         private System.Windows.Forms.TextBox txtCOFINSST_pCOFINS;
         private System.Windows.Forms.TextBox txtvItem12741;
         private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TextBox txtIBSCBS_CST;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.TextBox txtIBSCBS_cClassTrib;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.TextBox txtIBSCBS_vBC;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.TextBox txtIBSCBS_pAliqIBSUF;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.TextBox txtIBSCBS_vIBSUF;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.TextBox txtIBSCBS_pAliqIBSMun;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.TextBox txtIBSCBS_vIBSMun;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.TextBox txtIBSCBS_vIBS;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.TextBox txtIBSCBS_pCBS;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.TextBox txtIBSCBS_vCBS;
+        private System.Windows.Forms.Label label53;
         private System.Windows.Forms.Button btnSalvar;
         private System.Windows.Forms.Button btnCancelar;
         
