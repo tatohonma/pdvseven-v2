@@ -83,6 +83,8 @@ namespace a7D.PDV.Configurador.UI
                 FillConfig(ETipoPDV.ANOTA_AI, null, tableAnotaAi);
             else if (selectedTab == tabKeeta)
                 FillConfig(ETipoPDV.KEETA, null, tableKeeta);
+            else if (selectedTab == tabFood99)
+                FillConfig(ETipoPDV.FOOD99, null, tableFood99);
         }
 
         delegate void CallBackFillConfig(ETipoPDV tipo, ComboBox ddl, TableLayoutPanel table, object sender = null);

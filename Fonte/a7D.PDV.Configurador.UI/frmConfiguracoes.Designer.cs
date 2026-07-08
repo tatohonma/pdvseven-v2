@@ -71,6 +71,8 @@
             this.tableAnotaAi = new System.Windows.Forms.TableLayoutPanel();
             this.tabKeeta = new System.Windows.Forms.TabPage();
             this.tableKeeta = new System.Windows.Forms.TableLayoutPanel();
+            this.tabFood99 = new System.Windows.Forms.TabPage();
+            this.tableFood99 = new System.Windows.Forms.TableLayoutPanel();
             this.tabCardapio.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tabComanda.SuspendLayout();
@@ -93,6 +95,7 @@
             this.tabPixConta.SuspendLayout();
             this.tabAnotaAi.SuspendLayout();
             this.tabKeeta.SuspendLayout();
+            this.tabFood99.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabCardapio
@@ -346,6 +349,7 @@
             this.tabControl1.Controls.Add(this.tabPixConta);
             this.tabControl1.Controls.Add(this.tabAnotaAi);
             this.tabControl1.Controls.Add(this.tabKeeta);
+            this.tabControl1.Controls.Add(this.tabFood99);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -663,6 +667,30 @@
             this.tableKeeta.Size = new System.Drawing.Size(724, 400);
             this.tableKeeta.TabIndex = 5;
             // 
+            // tabFood99
+            // 
+            this.tabFood99.Controls.Add(this.tableFood99);
+            this.tabFood99.Location = new System.Drawing.Point(4, 29);
+            this.tabFood99.Name = "tabFood99";
+            this.tabFood99.Size = new System.Drawing.Size(738, 419);
+            this.tabFood99.TabIndex = 15;
+            this.tabFood99.Text = "Food99";
+            this.tabFood99.UseVisualStyleBackColor = true;
+            // 
+            // tableFood99
+            // 
+            this.tableFood99.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableFood99.AutoSize = true;
+            this.tableFood99.BackColor = System.Drawing.Color.Transparent;
+            this.tableFood99.ColumnCount = 1;
+            this.tableFood99.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableFood99.Location = new System.Drawing.Point(7, 9);
+            this.tableFood99.Name = "tableFood99";
+            this.tableFood99.RowCount = 1;
+            this.tableFood99.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableFood99.Size = new System.Drawing.Size(724, 400);
+            this.tableFood99.TabIndex = 5;
             // 
             // frmConfiguracoes
             // 
@@ -712,6 +740,8 @@
             this.tabAnotaAi.PerformLayout();
             this.tabKeeta.ResumeLayout(false);
             this.tabKeeta.PerformLayout();
+            this.tabFood99.ResumeLayout(false);
+            this.tabFood99.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -760,5 +790,7 @@
         private System.Windows.Forms.TableLayoutPanel tableAnotaAi;
         private System.Windows.Forms.TabPage tabKeeta;
         private System.Windows.Forms.TableLayoutPanel tableKeeta;
+        private System.Windows.Forms.TabPage tabFood99;
+        private System.Windows.Forms.TableLayoutPanel tableFood99;
     }
 }
