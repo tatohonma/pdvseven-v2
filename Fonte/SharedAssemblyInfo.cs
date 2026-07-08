@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2026")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.25.11.1")]
+[assembly: AssemblyVersion("2.25.11.2")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -65,6 +65,9 @@ Lista das últimas versões e FIX
     Especificar o tipo de cada alteração feita: Novo, Melhoria, Correção, TDD, Atualização
 
 ===============================================================================
+
+2.25.11.2 ======================================================================
+    Correção: Adicação dos campos IBS E CBS no Regime Normal.
 
 2.25.11.1 ======================================================================
     Correção: Remoção com campo 727-000 no envio do CRT do TEF PayGo, o envio do mesmo geracava o erro de Taxa de Embarque na Cielo.
