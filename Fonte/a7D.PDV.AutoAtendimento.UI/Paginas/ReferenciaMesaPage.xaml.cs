@@ -20,6 +20,11 @@ namespace a7D.PDV.AutoAtendimento.UI.Paginas
             LayoutServices.Bind(Teclado);
         }
 
+        private void BtnParaViagem_Click(object sender, RoutedEventArgs e)
+        {
+            ConfirmarReferencia("**PEDIDO PARA VIAGEM**");
+        }
+
         void MesaNumero_Change(object sender, TextChangedEventArgs e)
         {
             if (Teclado.Cancelado)
@@ -45,9 +50,14 @@ namespace a7D.PDV.AutoAtendimento.UI.Paginas
                 return;
             }
 
+            ConfirmarReferencia(Teclado.Text);
+        }
+
+        void ConfirmarReferencia(string referencia)
+        {
             try
             {
-                App.Pedido.ReferenciaMesa = Teclado.Text;
+                App.Pedido.ReferenciaMesa = referencia;
 
                 App.Navigate<VendaResumoPage>();
             }

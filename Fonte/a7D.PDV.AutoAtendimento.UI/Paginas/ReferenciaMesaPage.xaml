@@ -46,6 +46,11 @@
             Margin="0,30,0,0" 
             onChange="MesaNumero_Change" />
 
+       <Button
+            x:Name="ParaViagem"
+            Content="PARA VIAGEM"
+            Click="BtnParaViagem_Click" />
+
         <Button Name="Home" Click="Home_Click"/>
 
     </Canvas>
