@@ -425,9 +425,9 @@ namespace a7D.PDV.Fiscal.Services
             #endregion
 
             texto.AppendLine();
-            texto.AppendLine(Center("*************** PDVSeven ***************", colunas));
+            texto.AppendLine(Center("*************** Zolv ***************", colunas));
             texto.AppendLine(Center("*  SISTEMAS PARA RESTAURANTES E BARES  *", colunas));
-            texto.AppendLine(Center("www.pdvseven.com.br", colunas));
+            texto.AppendLine(Center("www.usezolv.com", colunas));
 
             return texto.ToString();
         }

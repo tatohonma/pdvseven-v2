@@ -1020,7 +1020,7 @@ namespace a7D.PDV.Impressora
 
             linha = "\n\n";
             linha += "*****************************************\n";
-            linha += "***** PDVSeven  www.pdvseven.com.br *****\n";
+            linha += "***** Zolv  www.usezolv.com *****\n";
             linha += "*****************************************\n";
 
             Cupom.Add(linha);
@@ -1497,7 +1497,7 @@ namespace a7D.PDV.Impressora
             Cupom.Add(linha);
 
             linha = "\n*********************************\n";
-            linha += "* PDVSeven  www.pdvseven.com.br *\n";
+            linha += "* Zolv  www.usezolv.com *\n";
             linha += "*********************************\n";
             Cupom.Add(linha);
 

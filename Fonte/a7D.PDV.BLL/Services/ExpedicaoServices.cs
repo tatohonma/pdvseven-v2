@@ -248,8 +248,11 @@ namespace a7D.PDV.BLL.Services
             Point p = new Point(0, 0);
             var img = ImageUtil.LogoPDV7_Horizontal_PB();
 
-            p.X = totalWidth / 2 - img.Width / 2;
+            int deslocamentoDireita = 12; // Ajuste conforme necessário
+
+            p.X = totalWidth / 2 - img.Width / 2 + deslocamentoDireita;
             g.DrawImage(img, p);
+
             p.Y += img.Height + espaco;
 
             if (!string.IsNullOrEmpty(dados.NomeFantasia))
@@ -301,7 +304,7 @@ namespace a7D.PDV.BLL.Services
             g.DrawString($"Abertura pedido: {dados.DataEmissao}\nEmissão: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}", fNormal, Brushes.Black, new Rectangle(p, new Size(totalWidth, 40)), new StringFormat() { Alignment = StringAlignment.Center });
             p.Y += 40;
             p.Y += g.DrawSeparador(p.Y, totalWidth);
-            p.Y += g.DrawCenter(fNormal, "PDVSeven www.pdvseven.com.br", p.Y, totalWidth);
+            p.Y += g.DrawCenter(fNormal, "Zolv www.usezolv.com", p.Y, totalWidth);
 
             return p.Y;
         }

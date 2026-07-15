@@ -378,9 +378,9 @@ namespace a7D.PDV.BLL.Services
             TotaisFill(pedido, h);
 
             h.plain.AppendLine();
-            h.plain.AppendLine("*************** PDVSeven ***************");
+            h.plain.AppendLine("*************** Zolv ***************");
             h.plain.AppendLine("*  SISTEMAS PARA RESTAURANTES E BARES  *");
-            h.plain.AppendLine("          www.pdvseven.com.br           ");
+            h.plain.AppendLine("          www.usezolv.com           ");
 
             return h;
         }
@@ -525,8 +525,11 @@ namespace a7D.PDV.BLL.Services
             Point p = new Point(0, 0);
             var img = ImageUtil.LogoPDV7_Horizontal_PB();
 
-            p.X = totalWidth / 2 - img.Width / 2;
+            int deslocamentoDireita = 12; // Ajuste conforme necessário
+
+            p.X = totalWidth / 2 - img.Width / 2 + deslocamentoDireita;
             g.DrawImage(img, p);
+
             p.Y += img.Height + espaco;
 
             if (!string.IsNullOrEmpty(dados.NomeFantasia))
@@ -573,7 +576,7 @@ namespace a7D.PDV.BLL.Services
             }
 
             p.Y += g.DrawSeparador(p.Y, totalWidth);
-            p.Y += g.DrawCenter(fNormal, "PDVSeven www.pdvseven.com.br", p.Y, totalWidth);
+            p.Y += g.DrawCenter(fNormal, "ZOLV www.usezolv.com", p.Y, totalWidth);
 
             return p.Y;
         }

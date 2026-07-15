@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2026")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.25.11.2")]
+[assembly: AssemblyVersion("2.25.11.3")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -65,18 +65,23 @@ Lista das últimas versões e FIX
     Especificar o tipo de cada alteração feita: Novo, Melhoria, Correção, TDD, Atualização
 
 ===============================================================================
+2.25.11.3 ======================================================================
+    Novo: Pedido para viagem no Autoatendimento.
+    Melhoria: Alteração da impressão www.pdvseven.com.br para www.usezolv.com nas impressões do sistema.
+    Melhoria: Alteração do ícone da PDVSeven para Zolv nas impressões do sistema.
 
 2.25.11.2 ======================================================================
-    Correção: Adicação dos campos IBS E CBS no Regime Normal.
+    Correção: Adição dos campos IBS E CBS no Regime Normal.
 
 2.25.11.1 ======================================================================
-    Correção: Remoção com campo 727-000 no envio do CRT do TEF PayGo, o envio do mesmo geracava o erro de Taxa de Embarque na Cielo.
+    Correção: Remoção com campo 727-000 no envio do CRT do TEF PayGo, o envio dele gerava o erro de Taxa de Embarque na Cielo.
+    Correção: Ajustado para não mostrar no Autoatendimento os itens inativos e excluídos no BackOffice.
 
 2.25.11.0 ======================================================================
     Novo: Integração 99Food
 
 2.25.10.2 ======================================================================
-    Novo: Referencia de mesa no autoatendimento.
+    Novo: Referência de mesa no autoatendimento.
 
 2.25.10.1 ======================================================================
     Novo: Integração Keeta.
@@ -90,7 +95,7 @@ Lista das últimas versões e FIX
 2.25.9.1 ======================================================================
     Correção: Arredondamento do valor na NFC-e quando a venda é por peso com balança integrada.
     Correção: Envio do CPF:000000000 na NFC-e de PE e dos dados da SH
-    Correção: Meio de pagamenti PIX e Outros, agora enviamos o complemento obrigatório.
+    Correção: Meio de pagamento PIX e Outros, agora enviamos o complemento obrigatório.
 
 2.25.8.3 ======================================================================
     Novo: Integração NFC-e estado de Pernambuco.

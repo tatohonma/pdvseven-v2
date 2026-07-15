@@ -891,7 +891,7 @@ namespace a7D.PDV.Fiscal.Services
                 p.Y += dados.QRCODE.Height + espaco;
             }
 
-            p.Y += g.DrawCenter(fNormal, "PDVSeven www.pdvseven.com.br", p.Y, totalWidth);
+            p.Y += g.DrawCenter(fNormal, "Zolv  www.usezolv.com", p.Y, totalWidth);
             return p.Y;
         }
 

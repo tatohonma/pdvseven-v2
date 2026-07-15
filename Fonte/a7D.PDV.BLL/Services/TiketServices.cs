@@ -55,7 +55,7 @@ namespace a7D.PDV.BLL.Services
             relatorio.Add("");
 
             relatorio.Add("***********************************");
-            relatorio.Add("** PDVSeven  www.pdvseven.com.br **");
+            relatorio.Add("** Zolv  www.usezolv.com **");
             relatorio.Add("***********************************");
 
             return relatorio;
@@ -360,7 +360,7 @@ namespace a7D.PDV.BLL.Services
             // (Linha e Copyrights)
             g.DrawLine(Pens.Black, 0, rc.Top - 5, rc.Width, rc.Top - 5);
 
-            var copyrights = "* PDVSeven - www.pdvseven.com.br *\nSistemas para Restaurantes e Bares";
+            var copyrights = "* Zolv - www.usezolv.com *\nSistemas para Restaurantes e Bares";
 
             g.DrawString(copyrights, fntPDV, Brushes.Black, rc,
                 new StringFormat() { Alignment = StringAlignment.Center });

@@ -76,7 +76,7 @@ namespace a7D.PDV.BLL
         [Config("Limite de gastos para Comanda", Valor = "300", Obrigatorio = true)]
         public int LimiteComanda { get; protected set; }
 
-        [Config("Mensagem do Cupom Fiscal", Valor = "Sistema PDV7  www.pdvseven.com.br", Obrigatorio = true)]
+        [Config("Mensagem do Cupom Fiscal", Valor = "Zolv  www.usezolv.com", Obrigatorio = true)]
         public string MsgCupom { get; protected set; }
 
         [Config("Permitir Pedidos com Modificações Inválidas no Caixa", Valor = "0", ValoresAceitos = "0|1", Obrigatorio = true)]

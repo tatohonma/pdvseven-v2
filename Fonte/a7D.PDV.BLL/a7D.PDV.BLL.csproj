@@ -310,9 +310,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\PDV7_horizontal_PB.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\ViagemSacola.png" />
   </ItemGroup>
   <ItemGroup>
@@ -328,6 +325,9 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.3</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\PDV7_horizontal_PB.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
