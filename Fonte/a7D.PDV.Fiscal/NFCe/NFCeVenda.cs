@@ -581,7 +581,7 @@ namespace a7D.PDV.Fiscal.NFCe
                 };
             }
 
-            if (!string.IsNullOrEmpty(tributacao.IBSCBS_CST) && !string.IsNullOrEmpty(tributacao.IBSCBS_cClassTrib))
+            if (NFeFacade.Config.NFCe_CRT != 1 && !string.IsNullOrEmpty(tributacao.IBSCBS_CST) && !string.IsNullOrEmpty(tributacao.IBSCBS_cClassTrib))
             {
                 var vBC = !string.IsNullOrEmpty(tributacao.IBSCBS_vBC)
                     ? tributacao.IBSCBS_vBC.ToDecimal()
