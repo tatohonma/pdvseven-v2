@@ -28,6 +28,11 @@ namespace a7D.PDV.BackOffice.UI
         private PedidosCFe[] pedidos;
         private bool running = false;
 
+        // Evita uma sequência contínua de milhares de requisições à SEFAZ.
+        // A emissão continua individual, mas a cada lote há uma pausa antes do próximo.
+        private const int TAMANHO_LOTE_EMISSAO_PENDENTE = 50;
+        private static readonly TimeSpan INTERVALO_ENTRE_LOTES = TimeSpan.FromSeconds(2);
+
         public frmCFE()
         {
             InitializeComponent();
@@ -361,32 +366,57 @@ namespace a7D.PDV.BackOffice.UI
             {
                 MessageBox.Show($"Não há CF-e pendentes nesta lista.", "Emitir CF-e pendentes", MessageBoxButtons.OK);
             }
-            else if (MessageBox.Show($"Deseja emitir os CF-e pendentes?\nTotal de pedidos: {lista.Length}", "Emissão Sat", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            else if (MessageBox.Show(
+                         $"Deseja emitir os CF-e pendentes?\n" +
+                         $"Total de pedidos: {lista.Length}\n\n" +
+                         $"A emissão será feita em lotes de {TAMANHO_LOTE_EMISSAO_PENDENTE}, " +
+                         $"com intervalo de {INTERVALO_ENTRE_LOTES.TotalSeconds:0} segundos.",
+                         "Emissão Sat", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 pnlCarregando.Visible = true;
-                await Task.Run(new Action(() =>
+                var tituloOriginal = Text;
+                var msg = "Operação concluída.\n\n";
+                var msgErros = "";
+                var processados = 0;
+
+                try
                 {
-                    Invoke(new MethodInvoker(delegate
+                    foreach (dynamic itemListaGrid in lista)
                     {
-                        var msg = "Operação concluída.\n\n";
-                        var msgErros = "";
-                        foreach (dynamic itemListaGrid in lista)
+                        string retornoId = itemListaGrid.IDRetornoSAT;
+                        if (!string.IsNullOrEmpty(retornoId))
+                            continue;
+
+                        Text = $"Histórico Fiscal - emitindo {processados + 1} de {lista.Length}";
+                        msgErros += EnviarParaSat(itemListaGrid.IDPedido, true);
+                        processados++;
+
+                        var fimDoLote = processados % TAMANHO_LOTE_EMISSAO_PENDENTE == 0;
+                        var aindaHaPedidos = processados < lista.Length;
+                        if (fimDoLote && aindaHaPedidos)
                         {
-                            string retornoId = itemListaGrid.IDRetornoSAT;
-                            if (string.IsNullOrEmpty(retornoId))
-                                msgErros += EnviarParaSat(itemListaGrid.IDPedido, true);
+                            Text = $"Histórico Fiscal - aguardando {INTERVALO_ENTRE_LOTES.TotalSeconds:0}s " +
+                                   $"após {processados} emissões";
+                            await Task.Delay(INTERVALO_ENTRE_LOTES);
                         }
+                    }
 
-                        if (!string.IsNullOrEmpty(msgErros))
-                            msg += "Não foi possível emitir os seguintes pedidos:\n" + msgErros;
+                    if (!string.IsNullOrEmpty(msgErros))
+                        msg += "Não foi possível emitir os seguintes pedidos:\n" + msgErros;
 
-                        MessageBox.Show(msg, "Emissão de CF-e", MessageBoxButtons.OK);
+                    MessageBox.Show(msg, "Emissão de CF-e", MessageBoxButtons.OK);
+                }
+                catch (Exception ex)
+                {
+                    Logs.ErroBox(CodigoErro.E500, ex);
+                }
+                finally
+                {
+                    Text = tituloOriginal;
+                    pnlCarregando.Visible = false;
+                    Filtrar();
+                }
 
-                    }));
-                }));
-
-                pnlCarregando.Visible = false;
-                Filtrar();
             }
 
             btnEmitirPendentes.Visible = true;

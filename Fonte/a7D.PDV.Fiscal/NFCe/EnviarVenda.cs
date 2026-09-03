@@ -162,14 +162,26 @@ namespace a7D.PDV.Fiscal.NFCe
                     versao = nfce.nfe.infNFe.versao
                 };
 
-                protCod = proc.protNFe.infProt.nProt;
-                xMotivo = proc.protNFe.infProt.xMotivo;
-
-                if (string.IsNullOrEmpty(protCod))
+                if (proc.protNFe?.infProt == null)
                 {
                     _processamentoSat.IDStatusProcessamentoSAT = (int)EStatusProcessamentoSAT.ERRO;
                     ProcessamentoSAT.Salvar(_processamentoSat);
-                    throw new ExceptionPDV(CodigoErro.E516, xMotivo);
+                    throw new ExceptionPDV(CodigoErro.E516, "A SEFAZ não retornou o protocolo da NFC-e.");
+                }
+
+                var infProt = proc.protNFe.infProt;
+                protCod = infProt.nProt;
+                xMotivo = infProt.xMotivo;
+
+                // A presença de nProt não significa autorização. Algumas rejeições,
+                // como duplicidade, também podem trazer esse valor no retorno.
+                // Somente cStat 100 autoriza o uso da NFC-e.
+                if (infProt.cStat != 100 || string.IsNullOrEmpty(protCod))
+                {
+                    _processamentoSat.IDStatusProcessamentoSAT = (int)EStatusProcessamentoSAT.ERRO;
+                    ProcessamentoSAT.Salvar(_processamentoSat);
+                    throw new ExceptionPDV(CodigoErro.E516,
+                        $"SEFAZ cStat {infProt.cStat}: {xMotivo}");
                 }
 
                 xml = proc.ObterXmlString();
