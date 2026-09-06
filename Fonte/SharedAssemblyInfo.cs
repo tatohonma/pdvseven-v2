@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2026")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.25.11.3")]
+[assembly: AssemblyVersion("2.25.11.5")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -65,6 +65,14 @@ Lista das últimas versões e FIX
     Especificar o tipo de cada alteração feita: Novo, Melhoria, Correção, TDD, Atualização
 
 ===============================================================================
+
+2.25.11.5 ======================================================================
+    Correção: Ajuste no envio das vendas de NFC-e no BackOffice
+
+2.25.11.4 ======================================================================
+    Novo: CNPJ e CPF alfanumérico.
+    Correção: Envio dos campos IBS e CBS apenas para quem está no Regime Normal.
+
 2.25.11.3 ======================================================================
     Novo: Pedido para viagem no Autoatendimento.
     Melhoria: Alteração da impressão www.pdvseven.com.br para www.usezolv.com nas impressões do sistema.

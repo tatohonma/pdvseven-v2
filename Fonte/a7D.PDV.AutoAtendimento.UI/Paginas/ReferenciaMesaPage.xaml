@@ -48,7 +48,7 @@
 
        <Button
             x:Name="ParaViagem"
-            Content="PARA VIAGEM"
+            Content=""
             Click="BtnParaViagem_Click" />
 
         <Button Name="Home" Click="Home_Click"/>
