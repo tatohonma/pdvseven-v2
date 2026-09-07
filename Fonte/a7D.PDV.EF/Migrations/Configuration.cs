@@ -580,7 +580,7 @@ namespace a7D.PDV.EF.Migrations
 
         void Ajuste2_25_9_1(pdv7Context context, tbVersao versao)
         {
-            if (versao == null || versao.ToVersion() < new Version("2.25.8.1"))
+            if (versao == null || versao.ToVersion() < new Version("2.25.9.1"))
             {
                 context.tbMeioPagamentoSATs.AddOrUpdate(p => p.IDMeioPagamentoSAT,
                     new tbMeioPagamento
@@ -590,6 +590,8 @@ namespace a7D.PDV.EF.Migrations
                         Descricao = "Pagamento Instantâneo (PIX)"
                     }
                 );
+
+                log.AppendLine("Ajuste2_25_9_1: meio de pagamento PIX adicionado/atualizado.");
             }
         }
 
