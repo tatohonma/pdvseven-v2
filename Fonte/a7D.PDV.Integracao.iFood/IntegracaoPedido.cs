@@ -603,16 +603,29 @@ namespace a7D.PDV.Integracao.iFood
 
         private void AlterarStatusPedido(int idPedido, EStatusPedido statusPedido)
         {
-            var query = @"UPDATE tbPedido set IDStatusPedido=@idStatusPedido, IDCaixa=@idCaixa WHERE idPedido=@idPedido";
+            var query = @"
+                    UPDATE tbPedido
+                    SET
+                        IDStatusPedido = @idStatusPedido,
+                        IDCaixa = @idCaixa,
+                        DtPedidoFechamento =
+                            CASE
+                                WHEN @idStatusPedido = @idStatusFinalizado
+                                THEN COALESCE(DtPedidoFechamento, GETDATE())
+                                ELSE DtPedidoFechamento
+                            END
+                    WHERE IDPedido = @idPedido";
 
             using (var conn = new SqlConnection(DB.ConnectionString))
             {
                 conn.Open();
+
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = query;
                     cmd.Parameters.AddWithValue("@idPedido", idPedido);
                     cmd.Parameters.AddWithValue("@idStatusPedido", (int)statusPedido);
+                    cmd.Parameters.AddWithValue("@idStatusFinalizado", (int)EStatusPedido.Finalizado);
                     cmd.Parameters.AddWithValue("@idCaixa", CaixaIFood.IDCaixa.Value);
 
                     cmd.ExecuteNonQuery();
