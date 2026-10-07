@@ -184,6 +184,10 @@
     <Compile Include="Migrations\202609031900000__2_29_CorrigeReservaNumeroNFCe.Designer.cs">
       <DependentUpon>202609031900000__2_29_CorrigeReservaNumeroNFCe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202609281200000__2_30_PedidoProntoIFood.cs" />
+    <Compile Include="Migrations\202609281200000__2_30_PedidoProntoIFood.Designer.cs">
+      <DependentUpon>202609281200000__2_30_PedidoProntoIFood.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Mapping\tbFaturaPixContaMap.cs" />
     <Compile Include="Models\Mapping\tbOrigemPedidoMap.cs" />
     <Compile Include="Models\Mapping\tbTagMap.cs" />

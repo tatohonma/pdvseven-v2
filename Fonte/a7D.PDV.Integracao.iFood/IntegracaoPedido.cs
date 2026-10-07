@@ -94,6 +94,9 @@ namespace a7D.PDV.Integracao.iFood
             var orderDetails = APIOrder.OrderDetails(evento.orderId);
             AddLog("  >> " + JsonConvert.SerializeObject(orderDetails));
 
+            var entreguePeloIFood = orderDetails.orderType == "DELIVERY" &&
+                string.Equals(orderDetails.delivery?.deliveredBy, "IFOOD", StringComparison.OrdinalIgnoreCase);
+
             TagInformation tagVerificacaoDuplicado = Tag.CarregarPorChaveValor("ifood-orderId", orderDetails.id);
 
             if (tagVerificacaoDuplicado.IDTag != null)
@@ -172,12 +175,19 @@ namespace a7D.PDV.Integracao.iFood
                 pedido.ObservacaoCupom += "FIDELIDADE " + orderDetails.customer.ordersCountOnMerchant.ToString() + "\r\n\r\n";
             }
 
+            if (!string.IsNullOrWhiteSpace(orderDetails.delivery?.pickupCode))
+            {
+                pedido.ObservacaoCupom += "Código de Coleta: " + orderDetails.delivery.pickupCode + "\r\n\r\n";
+            }
+
             CRUD.Adicionar(pedido);
 
             Tag.Adicionar(pedido.GUIDIdentificacao, "ifood-orderId", orderDetails.id);
             Tag.Adicionar(pedido.GUIDIdentificacao, "ifood-displayId", orderDetails.displayId);
             Tag.Adicionar(pedido.GUIDIdentificacao, "ifood-orderTiming", orderDetails.orderTiming);
             Tag.Adicionar(pedido.GUIDIdentificacao, "ifood-orderType", orderDetails.orderType);
+            if (orderDetails.delivery != null && !string.IsNullOrWhiteSpace(orderDetails.delivery.deliveredBy))
+                Tag.Adicionar(pedido.GUIDIdentificacao, "ifood-deliveredBy", orderDetails.delivery.deliveredBy.ToUpperInvariant());
             Tag.Adicionar(pedido.GUIDIdentificacao, "ifood-status", "PLC");
 
             if (orderDetails.total.additionalFees > 0)
@@ -211,7 +221,7 @@ namespace a7D.PDV.Integracao.iFood
 
             foreach (var pagamento in orderDetails.payments.methods)
             {
-                AdicionarPedidoPagamento(pedido.IDPedido.Value, pagamento);
+                AdicionarPedidoPagamento(pedido.IDPedido.Value, pagamento, entreguePeloIFood);
             }
 
             CRUD.Salvar(pedido);
@@ -431,7 +441,7 @@ namespace a7D.PDV.Integracao.iFood
             }
         }
 
-        private void AdicionarPedidoPagamento(Int32 idPedido, Model.Order.PaymentMethod paymentMethod)
+        private void AdicionarPedidoPagamento(Int32 idPedido, Model.Order.PaymentMethod paymentMethod, bool entreguePeloIFood)
         {
             PedidoPagamentoInformation pedidoPagamento = new PedidoPagamentoInformation();
 
@@ -446,9 +456,11 @@ namespace a7D.PDV.Integracao.iFood
             pedidoPagamento.Excluido = false;
 
             pedidoPagamento.MeioPagamentoSAT = pedidoPagamento.TipoPagamento.MeioPagamentoSAT;
-            pedidoPagamento.IDGateway = (int?)pedidoPagamento.TipoPagamento.Gateway;
+            pedidoPagamento.IDGateway = entreguePeloIFood
+                ? (int)EGateway.iFood
+                : (int?)pedidoPagamento.TipoPagamento.Gateway;
 
-            if (paymentMethod.method == "CASH" && paymentMethod.cash.changeFor > 0)
+            if (paymentMethod.method == "CASH" && paymentMethod.cash != null && paymentMethod.cash.changeFor > 0)
                 pedidoPagamento.Valor = paymentMethod.cash.changeFor;
 
             CRUD.Adicionar(pedidoPagamento);
@@ -513,6 +525,8 @@ namespace a7D.PDV.Integracao.iFood
                         TagInformation tagDisplayId = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-displayId");
                         TagInformation tagStatus = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-status");
                         TagInformation tagOrderType = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-orderType");
+                        TagInformation tagDeliveredBy = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-deliveredBy");
+                        var entreguePeloIFood = string.Equals(tagDeliveredBy?.Valor, "IFOOD", StringComparison.OrdinalIgnoreCase);
 
                         if (pedido.IDStatusPedido == (int)EStatusPedido.NaoConfirmado)
                         {
@@ -534,7 +548,27 @@ namespace a7D.PDV.Integracao.iFood
                                 AddLog("  > Erro confirmando envio " + tagDisplayId.Valor + " (DisplayID) (CFM)!");
                             }
                         }
-                        else if (pedido.IDStatusPedido == (int)EStatusPedido.Enviado && tagStatus.Valor != "DSP" && tagOrderType.Valor == "DELIVERY")
+                        else if (entreguePeloIFood &&
+                            (pedido.IDStatusPedido == (int)EStatusPedido.PedidoPronto ||
+                             pedido.IDStatusPedido == (int)EStatusPedido.Enviado ||
+                             pedido.IDStatusPedido == (int)EStatusPedido.Finalizado) &&
+                            tagStatus.Valor != "RTP")
+                        {
+                            ret = APIOrder.ReadyToPickup(tagOrderId.Valor);
+                            qtdConfirmacaoEnviada++;
+
+                            if (ret == null)
+                            {
+                                tagStatus.Valor = "RTP";
+                                CRUD.Alterar(tagStatus);
+                                AddLog("  > Pedido " + tagDisplayId.Valor + " (DisplayID) pronto para coleta (RTP)");
+                            }
+                            else
+                            {
+                                AddLog("  > Erro confirmando pedido pronto para coleta " + tagDisplayId.Valor + " (DisplayID) (RTP)!");
+                            }
+                        }
+                        else if (!entreguePeloIFood && pedido.IDStatusPedido == (int)EStatusPedido.Enviado && tagStatus.Valor != "DSP" && tagOrderType.Valor == "DELIVERY")
                         {
                             ret = APIOrder.Dispatch(tagOrderId.Valor);
                             qtdConfirmacaoEnviada++;

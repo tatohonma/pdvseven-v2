@@ -332,6 +332,26 @@ namespace a7D.PDV.Caixa.UI
                     // Verificar se o pedido é Delivery e Retirada é false
                     if (tipoPedido_selecionado == ETipoPedido.Delivery && pedido.Cliente.Endereco != "RETIRADA")
                     {
+                        var tagDeliveredBy = BLL.Tag.Carregar(pedido.GUIDIdentificacao, "ifood-deliveredBy");
+                        var entregaIFood = pedido.OrigemPedido?.IDOrigemPedido == (int)EOrigemPedido.ifood &&
+                            string.Equals(tagDeliveredBy?.Valor, "IFOOD", StringComparison.OrdinalIgnoreCase);
+
+                        if (entregaIFood && pedido.StatusPedido.StatusPedido == EStatusPedido.Aberto)
+                        {
+                            Pedido.AlterarStatus(pedido.IDPedido.Value, EStatusPedido.PedidoPronto);
+                            AtualizarListaPedidos();
+                            return;
+                        }
+
+                        if (entregaIFood && pedido.StatusPedido.StatusPedido == EStatusPedido.PedidoPronto)
+                        {
+                            pedido.StatusPedido.StatusPedido = EStatusPedido.Enviado;
+                            pedido.DtEnvio = DateTime.Now;
+                            Pedido.Salvar(pedido);
+                            AtualizarListaPedidos();
+                            return;
+                        }
+
                         using (var frmDelivery = frmNovoDelivery.EnviarOuFinalizarPedidoDelivery(GUIDIdentificacao_selecionado))
                         {
                             frmDelivery.ShowDialog();

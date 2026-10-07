@@ -64,7 +64,7 @@ namespace a7D.PDV.DAL
                 WHERE 
 	                p.GUIDIdentificacao=@guidIdentificacao
                     AND 
-	                p.IDStatusPedido IN (10, 20, 60, 70) 
+	                p.IDStatusPedido IN (10, 20, 60, 70, 80)
 --                ORDER BY 
 --	                p.IDPedido DESC
             ";
@@ -135,7 +135,7 @@ namespace a7D.PDV.DAL
                 WHERE
 					p.IDTipoPedido = 30
 					AND
-                    p.IDStatusPedido IN (10, 20, 60, 70)
+                    p.IDStatusPedido IN (10, 20, 60, 70, 80)
             ";
 
             da = new SqlDataAdapter(querySql, DB.ConnectionString);

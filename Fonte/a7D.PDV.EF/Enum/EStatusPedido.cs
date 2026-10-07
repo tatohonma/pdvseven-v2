@@ -13,5 +13,7 @@ namespace a7D.PDV.EF.Enum
         NaoConfirmado = 60, // Quando inserido por aplicativos (iFood) e precisa de ação de operador
         [Description("Cancelamento Solicitado")]
         EmCancelamento = 70, // Quando o cliente de aplicativos (iFood) solicita cancelamento e operador precisa regristrar o cancelamento
+        [Description("Pedido Pronto")]
+        PedidoPronto = 80,
     }
 }

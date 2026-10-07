@@ -85,9 +85,12 @@ namespace a7D.PDV.Integracao.iFood.Model.Order
     public class DeliveryInformation
     {
         public string mode;
+        public string description;
         public string deliveredBy;
         public DeliveryAddress deliveryAddress;
         public string deliveryDateTime;
+        public string observations;
+        public string pickupCode;
     }
 
     public class DigitalWalletInformation

@@ -136,6 +136,8 @@ namespace a7D.PDV.Caixa.UI.Controles
                 texto = "Não Confirmado a " + dataPedido.ToUniversalTime().Humanize(utcDate: true, culture: _culture);
             else if (idStatusPedido == (int)EStatusPedido.Enviado)
                 texto += " " + dataEnvio?.ToUniversalTime().Humanize(utcDate: true, culture: _culture);
+            else if (idStatusPedido == (int)EStatusPedido.PedidoPronto)
+                texto += " " + dataPedido.ToUniversalTime().Humanize(utcDate: true, culture: _culture);
             else
                 texto += " " + dataPedido.ToUniversalTime().Humanize(utcDate: true, culture: _culture);
 
@@ -204,6 +206,15 @@ namespace a7D.PDV.Caixa.UI.Controles
                         item.Cells[i].Style.SelectionForeColor = Color.Black;
                         item.Cells[i].Style.BackColor = Color.LightYellow;
                         item.Cells[i].Style.SelectionBackColor = darkYellow;
+                    }
+                }
+                else if (Convert.ToInt32(item.Cells["IDStatusPedido"].Value) == (int)EStatusPedido.PedidoPronto)
+                {
+                    for (var i = 0; i < item.Cells.Count; i++)
+                    {
+                        item.Cells[i].Style.SelectionForeColor = Color.Black;
+                        item.Cells[i].Style.BackColor = Color.LightGreen;
+                        item.Cells[i].Style.SelectionBackColor = Color.Green;
                     }
                 }
             }
