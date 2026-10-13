@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("PDV7")]
 [assembly: AssemblyCopyright("Copyright © PDVSeven 2014-2026")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.25.11.5")]
+[assembly: AssemblyVersion("2.25.11.6")]
 
 /* CheckList antes de gerar Release!
  *    Verificar se os WS2 (Autoatendimento, Saida, PainelMesaComanda) estão apontando para o "." que é para descoberta automática via UDP
@@ -65,6 +65,12 @@ Lista das últimas versões e FIX
     Especificar o tipo de cada alteração feita: Novo, Melhoria, Correção, TDD, Atualização
 
 ===============================================================================
+2.25.11.6 ======================================================================
+    Novo: Tratamento do novo status do pedido iFood, Pedido Pronto quando utilizado a logística própria do iFood.
+    Melhoria: Sempre que o cliente utilzar logística do iFood, a forma de pagamento será impressa do Gateway do iFood.
+    Melhoria: Criar automaticamente o tipo PDV Food99 e as colunas de aceita automático e IDPDV do caixa responsável por contabilizar as vendas do Food99.
+    Correção: Gravar data e hora quando o pedido do iFood é fechado automaticamente.
+    Correção: Ajuste no envio do cancelamento da NFC-e.
 
 2.25.11.5 ======================================================================
     Correção: Ajuste no envio das vendas de NFC-e no BackOffice

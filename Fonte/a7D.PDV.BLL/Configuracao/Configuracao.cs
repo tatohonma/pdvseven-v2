@@ -26,6 +26,8 @@ namespace a7D.PDV.BLL
                 typeof(ConfiguracoesPixConta),              // 260
                 typeof(ConfiguracoesAnotaAi),               // 270
                 typeof(ConfiguracoesKeeta),                 // 280
+                typeof(ConfiguracoesFood99),                // 290
+
             };
         }
 
