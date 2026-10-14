@@ -367,10 +367,7 @@ namespace a7D.PDV.Integracao.iFood
                     {
                         AddLog("Evento duplicado...");
                         APIOrder.Acknowledgment(new Model.Order.Event[] { evento });
-                    }
-                    else
-                    {
-                        EventosRecebidos.Add(evento.id);
+                        continue;
                     }
 
                     try
@@ -403,7 +400,12 @@ namespace a7D.PDV.Integracao.iFood
 
                             case "CFM":
                                 AddLog("  > Pedido confirmado pelo iFood > " + evento.orderId);
-                                //ConfirmarPedido(evento);
+                                SincronizarStatusPedido(evento, EStatusPedido.Aberto);
+                                break;
+
+                            case "RTP":
+                                AddLog("  > Pedido pronto pelo iFood > " + evento.orderId);
+                                SincronizarStatusPedido(evento, EStatusPedido.PedidoPronto);
                                 break;
 
                             case "RDA":
@@ -412,6 +414,7 @@ namespace a7D.PDV.Integracao.iFood
 
                             case "DSP":
                                 AddLog("  > Despacho confirmado pelo iFood > " + evento.orderId);
+                                SincronizarStatusPedido(evento, EStatusPedido.Enviado);
                                 break;
 
                             default:
@@ -420,6 +423,7 @@ namespace a7D.PDV.Integracao.iFood
                         }
 
                         APIOrder.Acknowledgment(new Model.Order.Event[] { evento });
+                        EventosRecebidos.Add(evento.id);
                     }
                     catch (Exception ex)
                     {

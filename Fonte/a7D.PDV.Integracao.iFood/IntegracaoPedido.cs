@@ -18,6 +18,46 @@ namespace a7D.PDV.Integracao.iFood
 {
     public partial class IntegraIFood
     {
+        private void SincronizarStatusPedido(Model.Order.Event evento, EStatusPedido status)
+        {
+            var pedido = CarregarPedidoPorOrderId(evento.orderId);
+            if (pedido?.IDPedido == null)
+                throw new InvalidOperationException("Pedido " + evento.orderId + " não encontrado para sincronizar status.");
+
+            // As transições são condicionais no banco para preservar mudanças do operador
+            // e impedir que eventos atrasados reabram ou façam o pedido regredir.
+            const string query = @"
+                UPDATE tbPedido
+                SET IDStatusPedido = @status,
+                    DtEnvio = CASE WHEN @status = @enviado THEN COALESCE(DtEnvio, GETDATE()) ELSE DtEnvio END
+                WHERE IDPedido = @idPedido AND (
+                    (@status = @aberto AND IDStatusPedido IN (@naoConfirmado, @aberto)) OR
+                    (@status = @pronto AND IDStatusPedido IN (@naoConfirmado, @aberto, @pronto)) OR
+                    (@status = @enviado AND IDStatusPedido IN (@naoConfirmado, @aberto, @pronto, @enviado)))";
+
+            using (var conn = new SqlConnection(DB.ConnectionString))
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = query;
+                    cmd.Parameters.AddWithValue("@idPedido", pedido.IDPedido.Value);
+                    cmd.Parameters.AddWithValue("@status", (int)status);
+                    cmd.Parameters.AddWithValue("@naoConfirmado", (int)EStatusPedido.NaoConfirmado);
+                    cmd.Parameters.AddWithValue("@aberto", (int)EStatusPedido.Aberto);
+                    cmd.Parameters.AddWithValue("@pronto", (int)EStatusPedido.PedidoPronto);
+                    cmd.Parameters.AddWithValue("@enviado", (int)EStatusPedido.Enviado);
+                    if (cmd.ExecuteNonQuery() == 0)
+                    {
+                        AddLog("  > Status preservado: evento atrasado ou pedido encerrado > " + evento.orderId);
+                        return;
+                    }
+                }
+            }
+
+            Tag.Alterar(pedido.GUIDIdentificacao, "ifood-status", evento.code);
+        }
+
         private void ConfirmarCancelamentoPedido(Model.Order.Event evento)
         {
             PedidoInformation pedido = CarregarPedidoPorOrderId(evento.orderId);
@@ -528,6 +568,10 @@ namespace a7D.PDV.Integracao.iFood
                         TagInformation tagDeliveredBy = Tag.Carregar(pedido.GUIDIdentificacao, "ifood-deliveredBy");
                         var entreguePeloIFood = string.Equals(tagDeliveredBy?.Valor, "IFOOD", StringComparison.OrdinalIgnoreCase);
 
+                        // Não reenviar confirmação ou pronto após despacho/conclusão/cancelamento.
+                        if (tagStatus.Valor == "CON" || tagStatus.Valor == "CAN" || tagStatus.Valor == "CCR")
+                            continue;
+
                         if (pedido.IDStatusPedido == (int)EStatusPedido.NaoConfirmado)
                         {
                             continue;
@@ -552,7 +596,7 @@ namespace a7D.PDV.Integracao.iFood
                             (pedido.IDStatusPedido == (int)EStatusPedido.PedidoPronto ||
                              pedido.IDStatusPedido == (int)EStatusPedido.Enviado ||
                              pedido.IDStatusPedido == (int)EStatusPedido.Finalizado) &&
-                            tagStatus.Valor != "RTP")
+                            tagStatus.Valor != "RTP" && tagStatus.Valor != "DSP")
                         {
                             ret = APIOrder.ReadyToPickup(tagOrderId.Valor);
                             qtdConfirmacaoEnviada++;
